@@ -1,38 +1,34 @@
-import React from 'react';
-// import './App.css';
+import React, { FunctionComponent } from 'react';
 
-interface ICounterProps {
-  value?: number;
-  onIncrement?: any;
-  onDecrement?: any;
-  onIncrementAsync?: any;
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../root/rootReducer';
+import CounterButtons from './components/counterButtons';
+import {
+  incrementAsync,
+  increment,
+  decrement,
+} from './actions';
+
+const Counter: FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const { clicks } = useSelector((state: RootState) => state.count);
+
+  const incrementBy = (page: number) => {
+    dispatch(increment(page));
+  };
+
+  const decrementBy = (page: number) => {
+    dispatch(decrement(page));
+  };
+
+  return (
+    <CounterButtons
+      value={clicks}
+      onIncrement={() => incrementBy(1)}
+      onDecrement={() => decrementBy(1)}
+      onIncrementAsync={() => dispatch(incrementAsync())}
+    />
+  );
 };
-
-const Counter: React.FC<ICounterProps> =	({
-  value,	  
-  onIncrement,	  
-  onDecrement,	  
-  onIncrementAsync,
-	}): JSX.Element => {
-    return (
-      <div>    
-        <button onClick={onIncrementAsync} className="button">
-        Increment after 1 second
-        </button>
-        {' '}   
-        <button onClick={onIncrement} className="button">	        
-        + Increment
-        </button>
-        {' '}
-        <button onClick={onDecrement} className="button">
-          - Decrement
-        </button>
-        <hr />
-        <div>
-          Clicked: {value} times
-        </div>
-      </div>
-    );
-};	
 
 export default Counter;

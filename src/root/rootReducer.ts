@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import clicksReducer from '../counter';
+import clicksReducer from '../counter/reducer';
 
 const clicks = { 
   count: clicksReducer,
