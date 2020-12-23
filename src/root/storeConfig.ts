@@ -3,14 +3,18 @@ import createSagaMiddleware from 'redux-saga';
 import { createInjectorsEnhancer } from 'redux-injectors';
 import createReducer from './rootReducer';
 import rootSaga from './rootSaga';
+import { createBrowserHistory } from 'history';
+
+import { routerMiddleware, connectRouter } from 'connected-react-router';
+
+export const history = createBrowserHistory();
 
 export default function configureAppStore(initialState = {}): Store {
   const reduxSagaMonitorOptions = {};
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
   const { run: runSaga } = sagaMiddleware;
 
-  // sagaMiddleware: Makes redux-sagas work
-  const middlewares = [sagaMiddleware];
+  const middlewares = [sagaMiddleware, routerMiddleware(history)];
   const enhancers = [
     createInjectorsEnhancer({
       createReducer,
@@ -18,8 +22,12 @@ export default function configureAppStore(initialState = {}): Store {
     }),
   ];
 
+  const router = { 
+    router: connectRouter(history),
+  };
+
   const store = configureStore({
-    reducer: createReducer(),
+    reducer: createReducer(router),
     middleware: [
       ...getDefaultMiddleware(),
       ...middlewares
