@@ -1,17 +1,19 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import logo from './logo.svg';
 import Counter from './counter/counter';
 import './App.css';
 
-const App: FunctionComponent = () => {
+interface Props {
+  children: JSX.Element, 
+}
+
+const App = ({
+  children,
+}: Props): JSX.Element  => {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <Counter
-        />
-      </header>
+    <div>
+      {children}
     </div>
   );
 };
