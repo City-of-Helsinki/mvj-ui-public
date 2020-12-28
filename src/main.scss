@@ -1,0 +1,18 @@
+@import "styles/fonts";
+@import "styles/variables";
+@import "styles/mixins";
+
+@import "topNavigation/top-navigation";
+@import "app";
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+
+body {
+  overflow-y: auto;
+  height: calc(100% - 60px);
+  background-color: $body-background;
+}

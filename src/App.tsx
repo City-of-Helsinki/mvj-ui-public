@@ -1,8 +1,8 @@
 import React from 'react';
 
-import logo from './logo.svg';
-import Counter from './counter/counter';
-import './App.css';
+import CounterPage from './counter/counterPage';
+import TopNavigation from './topNavigation/topNavigation';
+import './main.scss';
 
 interface Props {
   children: JSX.Element, 
@@ -12,7 +12,9 @@ const App = ({
   children,
 }: Props): JSX.Element  => {
   return (
-    <div>
+    <div className={'app'}>
+      <TopNavigation/>
+      <CounterPage/>
       {children}
     </div>
   );

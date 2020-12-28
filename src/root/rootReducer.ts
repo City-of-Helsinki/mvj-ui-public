@@ -1,18 +1,18 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import clicksReducer from '../counter/reducer';
+import counterReducer from '../counter/reducer';
 
-const clicks = { 
-  count: clicksReducer,
+const counter = { 
+  count: counterReducer,
 };
 
 export let rootReducer = combineReducers({
-  ...clicks,
+  ...counter,
 });
 
 export default function createReducer(injectedReducers = {}) {
   rootReducer = combineReducers({
-    ...clicks,
+    ...counter,
     ...injectedReducers,
   });
 

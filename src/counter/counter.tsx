@@ -11,7 +11,7 @@ import {
 
 const Counter: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { clicks } = useSelector((state: RootState) => state.count);
+  const { clicks, isCounting} = useSelector((state: RootState) => state.count);
 
   const incrementBy = (page: number) => {
     dispatch(increment(page));
@@ -27,6 +27,7 @@ const Counter: FunctionComponent = () => {
       onIncrement={() => incrementBy(1)}
       onDecrement={() => decrementBy(1)}
       onIncrementAsync={() => dispatch(incrementAsync())}
+      isCounting={isCounting}
     />
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router';
+import { Route, Switch } from 'react-router';
 import App from '../App';
 
 export const Routes = {
@@ -35,8 +35,9 @@ export const getRouteById = (id: string): string => {
 export default
 <App>
   <Switch>
-    <Route exact path="/" render={() => (<div>Etusivu</div>)} />
+    <Route exact path='/' render={() => (<div>Etusivu</div>)} />
     <Route exact path={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)} render={() => (<div>Tonttihaut ja kilpailut</div>)} />
+    <Route exact path={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)} render={() => (<div>muut-kilpailut-ja-haut</div>)} />
     <Route render={() => (<div>ERROR 404 Sivua ei löytynyt</div>)} />
   </Switch>
 </App>;

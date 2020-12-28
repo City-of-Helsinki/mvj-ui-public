@@ -1,24 +1,37 @@
-import React, { Component } from 'react';
-import {withRouter, RouteProps} from 'react-router';
-import {Link} from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {Routes, getRouteById} from '../root/routes';
 
-class TopNavigation {
-  firstLink: any
+const TopNavigation = (): JSX.Element  => {
+  return (
+    <div className='top-navigation'>
+      <Link to={getRouteById(Routes.HOME)}>
+        Helsinki
+      </Link>
+      <Link to={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)}>
+        Tonttihaut ja kilpailut
+      </Link>
+      <Link to={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)}>
+        Muut-kilpailut-ja-haut
+      </Link>
+      <Link to={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)}>
+        Aluehaku
+      </Link>
+      <Link to={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)}>
+        ?
+      </Link>
+      <Link to={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)}>
+        {'<3'}
+      </Link>
+      <Link to={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)}>
+        {'>->o'}
+      </Link>
+      <Link to={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)}>
+        {'FI'}
+      </Link>
+    </div>
+  );
+};
 
-  setLinkRef = (element: any) => {
-    this.firstLink = element;
-  }
-
-  render(){    
-    return (
-      <div className='top-navigation'>
-        <Link ref={this.setLinkRef} to={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)}>
-          Tonttihaut ja kilpailut
-        </Link>
-      </div>
-    )
-  }
-}
- 
-export default TopNavigation;
+export default withRouter(TopNavigation);

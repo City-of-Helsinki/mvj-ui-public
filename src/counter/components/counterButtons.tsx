@@ -1,10 +1,11 @@
 import React from 'react';
 
 interface Props {
-  value?: number;
-  onIncrement: () => void;
-  onDecrement: () => void;
-  onIncrementAsync?(): void;
+  value?: number,
+  onIncrement: () => void,
+  onDecrement: () => void
+  onIncrementAsync: () => void,
+  isCounting: boolean,
 }
 
 const CounterButtons = ({
@@ -12,15 +13,16 @@ const CounterButtons = ({
   onIncrement, 
   onDecrement, 
   onIncrementAsync,
+  isCounting,
 }: Props): JSX.Element => {
   return (
     <div>    
       <button onClick={onIncrementAsync} className='button'>
-      Increment after 1 second
+        Increment after 1 second
       </button>
       {' '}   
       <button onClick={onIncrement} className='button'>	        
-      + Increment
+        + Increment
       </button>
       {' '}
       <button onClick={onDecrement} className='button'>
@@ -28,7 +30,7 @@ const CounterButtons = ({
       </button>
       <hr />
       <div>
-        Clicked: {value} times
+        {isCounting?'Laskee':value}
       </div>
     </div>
   );

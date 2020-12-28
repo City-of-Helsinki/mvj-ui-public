@@ -1,0 +1,22 @@
+@import "styles/variables";
+
+.top-navigation{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 71px;
+  font-family: $tertiary;
+  font-weight: $semibold;
+  a {
+    font-size: 20px;
+    color: $blackOne;
+    text-decoration: none;
+
+    &:visited {
+      color: inherit;
+    }
+    &:hover {
+      color: $blackTwo;
+    }
+  }
+}

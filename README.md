@@ -44,3 +44,8 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+###
+
+For --jsx error in vscode go to the command palette CTRL+Shift+P. Choose "TypeScript: Select a TypeScript Version...". Choose "Use workspace Version". (^4.1.3)

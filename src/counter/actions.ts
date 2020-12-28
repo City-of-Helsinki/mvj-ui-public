@@ -1,18 +1,17 @@
 import * as actionTypes from './types';
 import {createAction} from 'redux-actions';
+import { Action } from 'redux';
 
-export const incrementAsync = (): actionTypes.incrementAsyncAction => ({
-  type: actionTypes.INCREMENT_ASYNC,
-});
+export const incrementAsync = (): Action<string> => createAction(actionTypes.INCREMENT_ASYNC)();
 
 export const increment = (
   payload: number,
-) => createAction(actionTypes.INCREMENT)(payload);
+): Action<string> => createAction(actionTypes.INCREMENT)(payload);
 
 export const decrement = (
   payload: number,
-) => createAction(actionTypes.DECREMENT)(payload);
+): Action<string> => createAction(actionTypes.DECREMENT)(payload);
 
 export const isCounting = (
   payload: boolean,
-) => createAction(actionTypes.IS_COUNTING)(payload);
+): Action<string> => createAction(actionTypes.IS_COUNTING)(payload);
