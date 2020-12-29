@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CounterPage from './counter/counterPage';
 import TopNavigation from './topNavigation/topNavigation';
+import Footer from './footer/footer';
 import './main.scss';
 
 interface Props {
@@ -14,8 +14,8 @@ const App = ({
   return (
     <div className={'app'}>
       <TopNavigation/>
-      <CounterPage/>
       {children}
+      <Footer/>
     </div>
   );
 };

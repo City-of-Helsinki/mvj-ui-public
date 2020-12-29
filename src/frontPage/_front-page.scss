@@ -1,0 +1,35 @@
+@import "styles/variables";
+@import "styles/fonts";
+
+.front-page {
+  .banner {
+    background-color: #9FC9EB;
+    height: 540px;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    h3 {
+      padding: 0 15%;
+      font-family: $primary;
+      font-weight: $semibold;
+      font-size: 70px;
+      color: $white;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .banner-koro {
+      height: 14px;
+      background: url(../assets/images/basic-wave-koro.svg);
+      background-size: 96px 14px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      @include rotate(180deg);
+    }
+  }
+}

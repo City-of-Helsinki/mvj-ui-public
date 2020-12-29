@@ -1,6 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import App from '../App';
+import FrontPage from '../frontPage/frontPage';
+import ErrorPage from '../errorPage/errorPage';
+import CounterPage from '../counter/counterPage';
 
 export const Routes = {
   HOME: 'home',
@@ -11,6 +14,7 @@ export const Routes = {
   LEASES: 'leases',
   APPLICATIONS: 'applications',
   MESSAGES: 'messages',
+  DEBUG: 'debug',
 };
 
 /** 
@@ -27,6 +31,7 @@ export const getRouteById = (id: string): string => {
     [Routes.LEASES]: '/vuokraukset',
     [Routes.APPLICATIONS]: '/hakemukset',
     [Routes.MESSAGES]: '/viestit',
+    [Routes.DEBUG]: '/debug',
   };
 
   return routes[id] ? routes[id] : '';
@@ -35,9 +40,11 @@ export const getRouteById = (id: string): string => {
 export default
 <App>
   <Switch>
-    <Route exact path='/' render={() => (<div>Etusivu</div>)} />
-    <Route exact path={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)} render={() => (<div>Tonttihaut ja kilpailut</div>)} />
-    <Route exact path={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)} render={() => (<div>muut-kilpailut-ja-haut</div>)} />
-    <Route render={() => (<div>ERROR 404 Sivua ei löytynyt</div>)} />
+    <Route exact path='/' component={FrontPage} />
+    <Route exact path={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)} render={() => (<div className={'container'}>Tonttihaut ja kilpailut</div>)} />
+    <Route exact path={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)} render={() => (<div className={'container'}>Muut kilpailut ja haut</div>)} />
+    <Route exact path={getRouteById(Routes.AREA_SEARCH)} render={() => (<div className={'container'}>Aluehaku sivu</div>)} />
+    <Route exact path={getRouteById(Routes.DEBUG)} component={CounterPage} />
+    <Route component={ErrorPage} />
   </Switch>
 </App>;

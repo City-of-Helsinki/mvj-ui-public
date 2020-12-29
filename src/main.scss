@@ -3,6 +3,8 @@
 @import "styles/mixins";
 
 @import "topNavigation/top-navigation";
+@import "frontPage/front-page";
+@import "footer/footer";
 @import "app";
 
 html {
@@ -15,4 +17,9 @@ body {
   overflow-y: auto;
   height: calc(100% - 60px);
   background-color: $body-background;
+}
+
+.container {
+  margin-top: 72px;
+  min-height: 100vh;
 }

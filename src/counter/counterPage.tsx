@@ -34,13 +34,17 @@ class CounterPage extends Component<State & Dispatch> {
   render() {
     const { clicks, incrementAsync, isCounting } = this.props;
 
-    return <CounterButtons
-      value={clicks}
-      onIncrement={() => this.incrementBy(1)}
-      onDecrement={() => this.decrementBy(1)}
-      onIncrementAsync={() => incrementAsync()}
-      isCounting={isCounting}
-    />;
+    return (
+      <div className={'container'}>
+        <CounterButtons
+          value={clicks}
+          onIncrement={() => this.incrementBy(1)}
+          onDecrement={() => this.decrementBy(1)}
+          onIncrementAsync={() => incrementAsync()}
+          isCounting={isCounting}
+        />
+      </div>
+    );
   }
 }
 

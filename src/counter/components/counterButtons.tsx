@@ -17,6 +17,7 @@ const CounterButtons = ({
 }: Props): JSX.Element => {
   return (
     <div>    
+      <p></p>
       <button onClick={onIncrementAsync} className='button'>
         Increment after 1 second
       </button>
@@ -28,7 +29,6 @@ const CounterButtons = ({
       <button onClick={onDecrement} className='button'>
         - Decrement
       </button>
-      <hr />
       <div>
         {isCounting?'Laskee':value}
       </div>
