@@ -1,5 +1,5 @@
 import { increment } from './actions';
-import counterReducer from '../counter/reducer';
+import counterReducer from './reducer';
 
 type CurrentDisplayState = {
   clicks: number,

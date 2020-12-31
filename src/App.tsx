@@ -5,7 +5,7 @@ import Footer from './footer/footer';
 import './main.scss';
 
 interface Props {
-  children: JSX.Element, 
+  children?: JSX.Element, 
 }
 
 const App = ({
