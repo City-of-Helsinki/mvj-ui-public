@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import * as actionTypes from './types';
+import {
+  INCREMENT,
+  DECREMENT,
+  IS_COUNTING,
+} from './types';
 
 type CurrentDisplayState = {
   clicks: number,
@@ -17,13 +21,13 @@ const countSlice = createSlice({
   reducers: {
   },
   extraReducers: {
-    [actionTypes.INCREMENT]: (state, action: PayloadAction<number>) => {
+    [INCREMENT]: (state, action: PayloadAction<number>) => {
       state.clicks += action.payload;
     },
-    [actionTypes.DECREMENT]: (state, action: PayloadAction<number>) => {
+    [DECREMENT]: (state, action: PayloadAction<number>) => {
       state.clicks -= action.payload;
     },
-    [actionTypes.IS_COUNTING]: (state, action: PayloadAction<boolean>) => {
+    [IS_COUNTING]: (state, action: PayloadAction<boolean>) => {
       state.isCounting = action.payload;
     },
   }

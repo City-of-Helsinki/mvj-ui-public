@@ -1,18 +1,20 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 import counterReducer from '../counter/reducer';
+import languageReducer from '../language/reducer';
 
-const counter = { 
+const allReducers = { 
   count: counterReducer,
+  language: languageReducer,
 };
 
 export let rootReducer = combineReducers({
-  ...counter,
+  ...allReducers,
 });
 
 export default function createReducer(injectedReducers = {}) {
   rootReducer = combineReducers({
-    ...counter,
+    ...allReducers,
     ...injectedReducers,
   });
 
