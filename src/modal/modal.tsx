@@ -3,7 +3,7 @@ import CloseButton from '../button/closeButton';
 import classNames from 'classnames';
 
 interface Props {
-  children?: any;
+  children?: JSX.Element[];
   className?: string;
   isOpen: boolean;
   onClose: () => void;
@@ -12,6 +12,7 @@ interface Props {
 }
 
 class Modal extends Component<Props> {
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   component: any
 
   state = {
@@ -19,15 +20,15 @@ class Modal extends Component<Props> {
     isOpening: false,
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     // this.component.addEventListener('transitionend', this.transitionEnds);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     // this.component.removeEventListener('transitionend', this.transitionEnds);
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: Props): void {
     if(!prevProps.isOpen && this.props.isOpen) {
       this.setState({
         isOpening: true,
@@ -39,11 +40,11 @@ class Modal extends Component<Props> {
     }
   }
 
-  setComponentRef = (element: any) => {
+  setComponentRef = (element: unknown): void => {
     this.component = element;
   }
 
-  transitionEnds = () => {
+  transitionEnds = (): void => {
     this.setState({
       isClosing: false,
       isOpening: false,
@@ -72,7 +73,7 @@ class Modal extends Component<Props> {
               <CloseButton
                 className='position-topright'
                 onClick={onClose}
-                title='Sulje'
+                title={closeText}
               />
             </div>
           </div>

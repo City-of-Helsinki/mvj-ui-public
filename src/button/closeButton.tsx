@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 interface Props {
   onClick: () => void;
-  setReference?: (element: any) => void;
+  setReference?: (element: unknown) => void;
   title?: string;
   closeText?: string;
   className?: string;
@@ -20,13 +20,13 @@ const CloseButton = ({
   className,
 }: Props): JSX.Element => {
    
-  const handleSetReference = (element: any): void => {
+  const handleSetReference = (element: unknown): void => {
     if(element && setReference) {
       setReference(element);
     }
   };
 
-  const handleKeyDown = (e: any) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if(e.keyCode === 13) {
       e.preventDefault();
       onClick();

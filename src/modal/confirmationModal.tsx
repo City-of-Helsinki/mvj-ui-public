@@ -7,7 +7,7 @@ interface Props {
   confirmButtonClassName?: string;
   confirmButtonLabel?: string;
   isOpen: boolean;
-  label: any;
+  label: string;
   onCancel: () => void;
   onClose: () => void;
   onSave: () => void;
@@ -15,13 +15,14 @@ interface Props {
 }
 
 class ConfirmationModal extends Component<Props> {
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   cancelButton: any
 
-  setCancelButtonRef = (element: any) => {
+  setCancelButtonRef = (element: unknown): void => {
     this.cancelButton = element;
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: Props): void {
     if(!prevProps.isOpen && this.props.isOpen) {
       if(this.cancelButton) {
         this.cancelButton.focus();
