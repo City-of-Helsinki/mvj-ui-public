@@ -4,9 +4,9 @@ import classNames from 'classnames';
 interface Props {
   className?: string;
   disabled?: boolean;
-  innerRef?: (element: any) => void;
+  innerRef?: (element: unknown) => void;
   onClick: () => void;
-  style?: Object;
+  style?: React.CSSProperties;
   text: string;
   title?: string;
   type?: string;
@@ -20,7 +20,7 @@ const Button = ({
   style, 
   text, 
   title,
-}: Props) => {
+}: Props): JSX.Element => {
   return (
     <button
       ref={innerRef}
