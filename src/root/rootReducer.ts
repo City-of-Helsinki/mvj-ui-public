@@ -12,7 +12,7 @@ export let rootReducer = combineReducers({
   ...allReducers,
 });
 
-export default function createReducer(injectedReducers = {}) {
+export default function createReducer(injectedReducers = {}): typeof rootReducer {
   rootReducer = combineReducers({
     ...allReducers,
     ...injectedReducers,
