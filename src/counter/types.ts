@@ -4,5 +4,5 @@ export const DECREMENT = 'counter/DECREMENT';
 export const IS_COUNTING = 'counter/IS_COUNTING';
 
 export interface incrementAsyncAction {
-  type: typeof INCREMENT_ASYNC;
+  type: typeof INCREMENT_ASYNC,
 }

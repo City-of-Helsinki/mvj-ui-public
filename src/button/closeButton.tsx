@@ -5,11 +5,11 @@ import classNames from 'classnames';
 // import closeIcon from '$assets/icons/icon_close.svg';
 
 interface Props {
-  onClick: () => void;
-  setReference?: (element: unknown) => void;
-  title?: string;
-  closeText?: string;
-  className?: string;
+  onClick: () => void,
+  setReference?: (element: unknown) => void,
+  title?: string,
+  closeText?: string,
+  className?: string,
 }
 
 const CloseButton = ({

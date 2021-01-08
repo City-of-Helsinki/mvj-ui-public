@@ -8,6 +8,9 @@ import {
   changeLang,
 } from '../language/actions';
 import {
+  openLoginModal,
+} from '../login/actions';
+import {
   Language,
 } from '../language/types';
 import translations from './translations';
@@ -18,6 +21,7 @@ interface State {
 
 interface Dispatch {
   changeLang: (lang: Language) => void,
+  openLoginModal: () => void,
 }
 
 interface PathProps {
@@ -45,7 +49,11 @@ class TopNavigation extends Component<State & Dispatch & RouteComponentProps<Pat
   }
 
   render(): JSX.Element {
-    const { currentLanguage } = this.props;
+    const { 
+      currentLanguage, 
+      openLoginModal 
+    } = this.props;
+
     return (
       <div className={'top-navigation'}>
         <div className={'start'}>
@@ -66,11 +74,11 @@ class TopNavigation extends Component<State & Dispatch & RouteComponentProps<Pat
           </Link>
           <Link to={getRouteById(Routes.HOME)} className={'favorite-logo'}>
           </Link>
-          <Link to={getRouteById(Routes.HOME)} className={'profile-logo'}>
+          <Link to={''} className={'profile-logo'} onClick={() => openLoginModal()}>
           </Link>
-          <a className={'language-logo'} onClick={this.changeLanguage}>
+          <Link to={''} className={'language-logo'} onClick={this.changeLanguage}>
             {currentLanguage}
-          </a>
+          </Link>
         </div>
       </div>
     );
@@ -79,6 +87,7 @@ class TopNavigation extends Component<State & Dispatch & RouteComponentProps<Pat
 
 const mapDispatchToProps: Dispatch = {
   changeLang,
+  openLoginModal,
 };
 
 const mapStateToProps = (state: RootState): State => ({

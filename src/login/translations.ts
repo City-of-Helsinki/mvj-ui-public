@@ -4,13 +4,16 @@ import {
 
 const translations = {
   [Language.FI]: {
-    LOGIN_TEXT: 'Login',
+    LOGIN: 'Kirjaudu',
+    CANCEL: 'Peruuta',
   },
   [Language.EN]: {
-    LOGIN_TEXT: 'Kirjaudu',
+    LOGIN: 'Login',
+    CANCEL: 'Cancel',
   },
   [Language.SWE]: {
-    LOGIN_TEXT: 'Logga in',
+    LOGIN: 'Logga in',
+    CANCEL: 'Annullera',
   },
 };
 

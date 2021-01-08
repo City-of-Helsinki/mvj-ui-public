@@ -3,12 +3,12 @@ import CloseButton from '../button/closeButton';
 import classNames from 'classnames';
 
 interface Props {
-  children?: JSX.Element[];
-  className?: string;
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  closeText: string;
+  children?: JSX.Element,
+  className?: string,
+  isOpen: boolean,
+  onClose: () => void,
+  title: string,
+  closeText: string,
 }
 
 class Modal extends Component<Props> {

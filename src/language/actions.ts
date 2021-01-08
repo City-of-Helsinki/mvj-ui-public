@@ -1,4 +1,4 @@
-import {createAction} from 'redux-actions';
+import { createAction } from 'redux-actions';
 import { Action } from 'redux';
 
 import { CHANGE_LANG, Language } from './types';

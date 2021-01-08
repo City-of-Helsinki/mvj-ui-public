@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import Button from '../button/button';
 import Modal from './modal';
@@ -6,6 +6,7 @@ import Modal from './modal';
 interface Props {
   confirmButtonClassName?: string;
   confirmButtonLabel?: string;
+  cancelButtonLabel?: string;
   isOpen: boolean;
   label: string;
   onCancel: () => void;
@@ -34,8 +35,8 @@ class ConfirmationModal extends Component<Props> {
     const {
       confirmButtonClassName,
       confirmButtonLabel = 'Tallenna',
+      cancelButtonLabel = 'Peruut',
       isOpen,
-      label,
       onCancel,
       onClose,
       onSave,
@@ -49,15 +50,13 @@ class ConfirmationModal extends Component<Props> {
           title={title}
           isOpen={isOpen}
           onClose={onClose}
-          closeText={'sulje'}
-        >
-          <p>{label}</p>
+          closeText={'sulje'}>
           <div className='confirmation-modal__footer'>
             <Button
               className={'secondary'}
               innerRef={this.setCancelButtonRef}
               onClick={onCancel}
-              text='Peruuta'
+              text={cancelButtonLabel}
             />
             <Button
               className={confirmButtonClassName || 'success'}

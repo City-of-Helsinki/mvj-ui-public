@@ -1,10 +1,29 @@
 $black: #000000 !default;
 $blackOne: #231F20 !default;
 $blackTwo: #332F3F !default;
+$black-hover: $blackTwo;
 $white: #ffffff !default;
 $grey-border: #EBEDF1 !default;
 $light-brown: #C2A251 !default;
 
+// todo: define color palette
+$red: red;
+$red-hover: yellow;
+$blue: blue;
+$light-blue: teal;
+$blue-hover: $light-blue;
+
+$dark-gray: #666666 !default;
+$medium-dark-gray: #b7b7b7 !default;
+$medium-gray: #d5d5d5 !default;
+$light-gray: #f4f4f4 !default;
+$light-gray-secondary: #e6e6e6 !default;
+$lightest-gray: #fafafa !default;
+$white: #ffffff !default;
+
+
 $body-background: $white !default;
 
 $content-max-width: 1300px !default;
+
+$font-small: 18px !default;

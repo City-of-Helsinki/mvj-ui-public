@@ -2,14 +2,14 @@ import React from 'react';
 import classNames from 'classnames';
 
 interface Props {
-  className?: string;
-  disabled?: boolean;
-  innerRef?: (element: unknown) => void;
-  onClick: () => void;
-  style?: React.CSSProperties;
-  text: string;
-  title?: string;
-  type?: string;
+  className?: string,
+  disabled?: boolean,
+  innerRef?: (element: unknown) => void,
+  onClick: () => void,
+  style?: React.CSSProperties,
+  text: string,
+  title?: string,
+  type?: string,
 }
 
 const Button = ({
