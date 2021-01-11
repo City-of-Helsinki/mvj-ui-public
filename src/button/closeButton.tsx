@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-// import closeIcon from '$assets/icons/icon_close.svg';
+import closeIcon from '../assets/icons/close.svg';
 
 interface Props {
   onClick: () => void,
@@ -43,7 +43,7 @@ const CloseButton = ({
       onClick={onClick}
       onKeyDown={handleKeyDown}
     >
-      {'x'} {/* <img src={closeIcon} alt={closeText} /> */}
+      <img src={closeIcon} alt={closeText} />
     </button>
   );
 };

@@ -33,11 +33,10 @@ class LoginModal extends Component<State & Dispatch> {
         confirmButtonLabel={translations[currentLanguage].LOGIN}
         cancelButtonLabel = {translations[currentLanguage].CANCEL}
         isOpen={isLoginModalOpen} // isLoginModalOpen
-        label={'label'}
         onCancel={() => hideLoginModal()}
         onClose={() => hideLoginModal()}
         onSave={() => console.log('save')}
-        title={'asdf'}
+        title={translations[currentLanguage].LOGIN_TITLE}
       >
         <LoginComponent/>
       </ConfirmationModal>

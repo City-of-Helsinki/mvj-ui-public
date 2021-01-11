@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import CloseButton from '../button/closeButton';
 import classNames from 'classnames';
+import Button from '../button/button';
 
 interface Props {
   children?: JSX.Element,
   className?: string,
   isOpen: boolean,
   onClose: () => void,
+  onCancel: () => void,
+  onSave: () => void,
   title: string,
   closeText: string,
+  confirmButtonClassName?: string,
+  confirmButtonLabel: string,
+  cancelButtonLabel: string,
 }
 
 class Modal extends Component<Props> {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
+  cancelButton: any
   component: any
+
+  setCancelButtonRef = (element: unknown): void => {
+    this.cancelButton = element;
+  }
 
   state = {
     isClosing: false,
@@ -33,6 +44,9 @@ class Modal extends Component<Props> {
       this.setState({
         isOpening: true,
       });
+      if(this.cancelButton) {
+        this.cancelButton.focus();
+      }
     } else if(prevProps.isOpen && !this.props.isOpen) {
       this.setState({
         isClosing: true,
@@ -56,9 +70,14 @@ class Modal extends Component<Props> {
       children,
       className,
       isOpen,
-      onClose,
       title,
       closeText,
+      confirmButtonClassName,
+      confirmButtonLabel,
+      cancelButtonLabel,
+      onCancel,
+      onSave,
+      onClose,
     } = this.props;
     const {isClosing, isOpening} = this.state;
 
@@ -79,6 +98,19 @@ class Modal extends Component<Props> {
           </div>
           <div className='modal__content' hidden={!isOpen && !isClosing && !isOpening}>
             {children}
+          </div>
+          <div className='confirmation-modal__footer' hidden={!isOpen && !isClosing && !isOpening}>
+            <Button
+              className={'secondary'}
+              innerRef={this.setCancelButtonRef}
+              onClick={onCancel}
+              text={cancelButtonLabel}
+            />
+            <Button
+              className={confirmButtonClassName || 'success'}
+              onClick={onSave}
+              text={confirmButtonLabel}
+            />
           </div>
         </div>
       </div>
