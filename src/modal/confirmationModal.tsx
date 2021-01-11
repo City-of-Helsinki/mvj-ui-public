@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import Button from '../button/button';
 import Modal from './modal';
 
 interface Props {
