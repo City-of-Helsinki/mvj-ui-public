@@ -2,13 +2,11 @@
 @import "styles/variables";
 @import "styles/mixins";
 
-@import "topNavigation/top-navigation";
 @import "modal/modal";
 @import "modal/confirmation-modal";
 @import "button/button";
 @import "button/close-button";
 @import "frontPage/front-page";
-@import "footer/footer";
 @import "app";
 
 html {
@@ -24,6 +22,5 @@ body {
 }
 
 .container {
-  margin-top: 72px;
   min-height: 100vh;
 }

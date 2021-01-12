@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import {Routes, getRouteById} from '../root/routes';
+import { Navigation } from 'hds-react';
+import { Routes, getRouteById } from '../root/routes';
 import { RootState } from '../root/rootReducer';
 import {
   changeLang,
@@ -29,58 +30,39 @@ interface PathProps {
 }
 
 class TopNavigation extends Component<State & Dispatch & RouteComponentProps<PathProps>> {
-
-  changeLanguage = () => {
-    const { currentLanguage, changeLang } = this.props;
-    
-    switch (currentLanguage) {
-    case Language.FI:
-      changeLang(Language.EN);
-      break;
-    case Language.EN:
-      changeLang(Language.SWE);
-      break;
-    case Language.SWE:
-      changeLang(Language.FI);
-      break;
-    default:
-      changeLang(Language.FI);
-    }
-  }
-
   render(): JSX.Element {
     const { 
       currentLanguage, 
-      openLoginModal 
+      openLoginModal,
+      changeLang,
     } = this.props;
 
     return (
-      <div className={'top-navigation'}>
-        <div className={'start'}>
-          <Link to={getRouteById(Routes.HOME)} className={'helsinki-logo'}>
-          </Link>
+      <Navigation
+        menuToggleAriaLabel='menu'
+        skipTo='#content' // TODO {getRouteById(Routes.HOME)}
+        skipToContentLabel='Skip to content'
+      >
+        <Navigation.Row variant='inline'>
           <Link to={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)}>
-            {translations[currentLanguage].PLOT_SEARCH_AND_COMPETITIONS}
+            <Navigation.Item label={translations[currentLanguage].PLOT_SEARCH_AND_COMPETITIONS}/>
           </Link>
           <Link to={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)}>
-            {translations[currentLanguage].OTHER_COMPETITIONS_AND_SEARCHES}
+            <Navigation.Item label={translations[currentLanguage].OTHER_COMPETITIONS_AND_SEARCHES}/>
           </Link>
           <Link to={getRouteById(Routes.AREA_SEARCH)}>
-            {translations[currentLanguage].AREA_SEARCH}
+            <Navigation.Item label={translations[currentLanguage].AREA_SEARCH}/>
           </Link>
-        </div>
-        <div className={'end'}>
-          <Link to={getRouteById(Routes.HOME)} className={'about-logo'}>
-          </Link>
-          <Link to={getRouteById(Routes.HOME)} className={'favorite-logo'}>
-          </Link>
-          <Link to={''} className={'profile-logo'} onClick={() => openLoginModal()}>
-          </Link>
-          <Link to={''} className={'language-logo'} onClick={this.changeLanguage}>
-            {currentLanguage}
-          </Link>
-        </div>
-      </div>
+        </Navigation.Row>
+        <Navigation.Actions>
+          <Navigation.User label='Sign in' onSignIn={() => openLoginModal()}/>
+          <Navigation.LanguageSelector label={currentLanguage}>
+            <Navigation.Item label='Suomeksi' onClick={() => changeLang(Language.FI)}/>
+            <Navigation.Item label='På svenska' onClick={() => changeLang(Language.SWE)}/>
+            <Navigation.Item label='In English' onClick={() => changeLang(Language.EN)}/>
+          </Navigation.LanguageSelector>
+        </Navigation.Actions>
+      </Navigation>
     );
   }
 }

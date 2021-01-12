@@ -16,6 +16,8 @@
     "@types/redux-actions": "^2.6.1",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.8.0",
+    "hds-core": "^0.20.0",
+    "hds-react": "^0.20.0",
     "history": "4.10.1",
     "node-sass": "4.14.1",
     "react": "^17.0.1",
