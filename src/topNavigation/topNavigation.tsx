@@ -26,10 +26,18 @@ interface Dispatch {
 }
 
 interface PathProps {
-  history: string,
+  history: undefined,
 }
 
 class TopNavigation extends Component<State & Dispatch & RouteComponentProps<PathProps>> {
+  
+  returnHome = () => {
+    const {
+      history,
+    } = this.props;
+    history.push(getRouteById(Routes.HOME));
+  }
+
   render(): JSX.Element {
     const { 
       currentLanguage, 
@@ -40,8 +48,10 @@ class TopNavigation extends Component<State & Dispatch & RouteComponentProps<Pat
     return (
       <Navigation
         menuToggleAriaLabel='menu'
-        skipTo='#content' // TODO {getRouteById(Routes.HOME)}
+        skipTo='#content'
         skipToContentLabel='Skip to content'
+        onTitleClick={this.returnHome}
+        fixed={true}
       >
         <Navigation.Row variant='inline'>
           <Link to={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)}>

@@ -1,13 +1,14 @@
-@import "styles/fonts";
-@import "styles/variables";
-@import "styles/mixins";
+@import 'styles/fonts';
+@import 'styles/variables';
+@import 'styles/mixins';
 
-@import "modal/modal";
-@import "modal/confirmation-modal";
-@import "button/button";
-@import "button/close-button";
-@import "frontPage/front-page";
-@import "app";
+@import 'modal/modal';
+@import 'modal/confirmation-modal';
+@import 'button/button';
+@import 'button/close-button';
+@import 'frontPage/front-page';
+@import 'login/components/login-component';
+@import 'app';
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -22,5 +23,6 @@ body {
 }
 
 .container {
+  margin-top: 72px;
   min-height: 100vh;
 }

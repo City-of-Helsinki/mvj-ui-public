@@ -18,7 +18,9 @@ const LoginComponent: FunctionComponent = () => {
         placeholder='Kirjoita salasanasi'
         required
       />
-      <div>{'Salasana unohtunut? | Rekisteröidy'}</div>
+      <div className={'cover'}>
+        {'Salasana unohtunut? | Rekisteröidy'}
+      </div>
     </div>
   );
 };

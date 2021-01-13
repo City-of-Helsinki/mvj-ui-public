@@ -1,0 +1,17 @@
+@import "styles/variables";
+@import "styles/fonts";
+
+.login-component {
+  width: 100%;
+  max-width: 400px;
+  h1 {
+    font-size: 32px;
+    line-height: 24px;
+    font-weight: $semibold;
+    color: $black;
+    margin: 25px 0 45px 0;
+  }
+  .cover {
+    margin-top: 45px;
+  }
+}
