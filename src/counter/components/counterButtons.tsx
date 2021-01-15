@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, LoadingSpinner } from 'hds-react';
 
 interface Props {
   value?: number,
@@ -16,21 +17,33 @@ const CounterButtons = ({
   isCounting,
 }: Props): JSX.Element => {
   return (
-    <div>    
-      <p></p>
-      <button onClick={onIncrementAsync} className='button'>
+    <div>
+      <Button 
+        size='small'
+        disabled={isCounting}
+        onClick={onIncrementAsync}   
+        variant='secondary'
+        style={{ color: 'var(--color-black)', borderColor: 'var(--color-black)'}}>
         Increment after 1 second
-      </button>
-      {' '}   
-      <button onClick={onIncrement} className='button'>	        
-        + Increment
-      </button>
+      </Button>
       {' '}
-      <button onClick={onDecrement} className='button'>
+      <Button 
+        disabled={isCounting}
+        size='small'
+        onClick={onIncrement} 
+        theme={'black'}>
+        + Increment    
+      </Button>
+      {' '}
+      <Button 
+        disabled={isCounting}
+        size='small'
+        onClick={onDecrement} 
+        theme={'default'}>
         - Decrement
-      </button>
+      </Button>
       <div>
-        {isCounting?'Laskee':value}
+        {isCounting?<LoadingSpinner small/>:value}
       </div>
     </div>
   );

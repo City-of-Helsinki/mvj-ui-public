@@ -10,8 +10,7 @@ $light-brown: #C2A251 !default;
 $red: red;
 $red-hover: yellow;
 $blue: blue;
-$light-blue: teal;
-$blue-hover: $light-blue;
+$blue-hover: teal;
 
 $dark-gray: #666666 !default;
 $medium-dark-gray: #b7b7b7 !default;
@@ -21,9 +20,36 @@ $light-gray-secondary: #e6e6e6 !default;
 $lightest-gray: #fafafa !default;
 $white: #ffffff !default;
 
+$light-pink: #F6D9E5;
+$light-gray: #231F2020;
+$light-yellow: #FFE977;
+$light-blue: #9FC9EB;
+
+$global-font-size: 100% !default;
 
 $body-background: $white !default;
 
 $content-max-width: 1300px !default;
 
 $font-small: 18px !default;
+
+// breakpoints
+$bp-xsmall: 575px;
+$bp-small: 48em; // 768px
+$bp-medium: 68em; // 1024px
+$bp-large: 85.375em; // 1366px;
+$bp-mlarge: 100em; // 1600px;
+$bp-xlarge: 120em; // 1920px;
+$bp-xxlarge: 160em; // 2560px;
+
+// Media Queries
+$mq-xsmall: "(max-width: #{$bp-xsmall})";
+$mq-small: "(max-width: #{$bp-small})";
+$mq-medium: "(min-width: #{$bp-medium})";
+$mq-medium-max: "(max-width: #{$bp-medium})";
+$mq-large-max: "(max-width: #{$bp-large})";
+$mq-large: "(min-width: #{$bp-large})";
+$mq-mlarge: "(min-width: #{$bp-mlarge})";
+$mq-xlarge: "(min-width: #{$bp-xlarge})";
+$mq-xxlarge: "(min-width: #{$bp-xxlarge})";
+$mq-retina: "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)";

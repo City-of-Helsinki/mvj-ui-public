@@ -7,6 +7,7 @@
 @import 'button/button';
 @import 'button/close-button';
 @import 'frontPage/front-page';
+@import 'frontPage/components/box';
 @import 'login/components/login-component';
 @import 'app';
 
@@ -23,6 +24,9 @@ body {
 }
 
 .container {
-  margin-top: 72px;
   min-height: 100vh;
+  margin-top: 72px;
+  @media #{$mq-xsmall} {
+    margin-top: 65px;
+  }
 }

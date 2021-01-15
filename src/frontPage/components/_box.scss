@@ -1,0 +1,54 @@
+@import "styles/variables";
+@import "styles/fonts";
+
+.box {
+  width: 280px;
+  height: 380px;
+  margin: 10px;
+  padding: 10px;
+  overflow: scroll;
+
+  &.pink {
+    background-color: $light-pink;
+  }
+
+  &.gray {
+    background-color: $light-gray;
+  }
+  
+  &.yellow {
+    background-color: $light-yellow;
+  }
+
+  &.blue {
+    background-color: $light-blue;
+  }
+
+  .top-label {
+    display: flex;
+    align-items: flex-start;
+    font-family: $tertiary;
+  }
+  .image {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #00000022;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 50%;
+    max-height: 100px;
+    height: 50%;
+  }
+  .box-label {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    font-size: 22px;
+    font-family: $tertiary;
+    font-weight: $semibold;
+  }
+  .bottom-text {
+    margin-top: 15px;
+    font-family: $tertiary;
+  }
+}

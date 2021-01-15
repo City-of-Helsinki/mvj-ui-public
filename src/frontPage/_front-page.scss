@@ -5,12 +5,19 @@
   .banner {
     background-color: #9FC9EB;
     height: 540px;
-    background-size: cover;
     position: relative;
     display: flex;
     align-items: center;
     text-align: center;
+    background: url(../assets/images/banner-image.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position-y: 35%;
     z-index: -1;
+    @media #{$mq-medium-max} {
+      background-size: cover !important;
+      background-position-y: 0;
+    }
 
     h3 {
       padding: 0 15%;
@@ -20,6 +27,9 @@
       color: $white;
       margin-left: auto;
       margin-right: auto;
+      @media #{$mq-small} {
+        font-size: 48px;
+      }
     }
 
     .banner-koro {
@@ -31,6 +41,45 @@
       left: 0;
       right: 0;
       @include rotate(180deg);
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h4 {
+      padding: 0 15%;
+      font-family: $tertiary;
+      font-weight: $semibold;
+      font-size: 40px;
+      color: $black;
+      margin-left: auto;
+      margin-right: auto;
+      @media #{$mq-small} {
+        font-size: 28px;
+      }
+    }
+
+    .boxes {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    h5 {
+      margin-top: 50px;
+      font-size: 32px;
+      font-family: $tertiary;
+      font-weight: $semibold;
+      margin-left: auto;
+      margin-right: auto;
+
+      @media #{$mq-small} {
+        font-size: 24px;
+      }
     }
   }
 }
