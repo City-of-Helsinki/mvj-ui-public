@@ -8,8 +8,12 @@
 @import 'button/close-button';
 @import 'frontPage/front-page';
 @import 'frontPage/components/box';
+@import 'topNavigation/topNavigation';
+@import 'tabs/tabs';
 @import 'login/components/login-component';
+@import 'panel/side-panel';
 @import 'app';
+@import 'map/map-view';
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -22,6 +26,7 @@ body {
   height: calc(100% - 60px);
   background-color: $body-background;
 }
+
 
 .container {
   min-height: 100vh;

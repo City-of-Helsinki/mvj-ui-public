@@ -52,8 +52,9 @@ class TopNavigation extends Component<State & Dispatch & RouteComponentProps<Pat
         skipToContentLabel='Skip to content'
         onTitleClick={this.returnHome}
         fixed={true}
+        className={'top-nav'}
       >
-        <Navigation.Row variant='inline'>
+        <Navigation.Row variant='inline' >
           <Link to={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)}>
             <Navigation.Item label={translations[currentLanguage].PLOT_SEARCH_AND_COMPETITIONS}/>
           </Link>

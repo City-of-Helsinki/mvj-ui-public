@@ -4,6 +4,7 @@ import App from '../App';
 import FrontPage from '../frontPage/frontPage';
 import ErrorPage from '../errorPage/errorPage';
 import CounterPage from '../counter/counterPage';
+import PlotSearchAndCompetitionsPage from '../plotSearchAndCompetitionsPage/plotSearchAndCompetitionsPage';
 
 export const Routes = {
   HOME: 'home',
@@ -41,7 +42,7 @@ export default
 <App>
   <Switch>
     <Route exact path='/' component={FrontPage} />
-    <Route exact path={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)} render={() => (<div className={'container'}>Tonttihaut ja kilpailut</div>)} />
+    <Route exact path={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)} component={PlotSearchAndCompetitionsPage} />
     <Route exact path={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)} render={() => (<div className={'container'}>Muut kilpailut ja haut</div>)} />
     <Route exact path={getRouteById(Routes.AREA_SEARCH)} render={() => (<div className={'container'}>Aluehaku sivu</div>)} />
     <Route exact path={getRouteById(Routes.DEBUG)} component={CounterPage} />
