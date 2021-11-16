@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Navigation } from 'hds-react';
-import { Routes, getRouteById } from '../root/routes';
+import { AppRoutes, getRouteById } from '../root/routes';
 import { RootState } from '../root/rootReducer';
 import {
   changeLang,
@@ -15,6 +14,7 @@ import {
   Language,
 } from '../language/types';
 import translations from './translations';
+import {NavigateFunction} from 'react-router';
 
 interface State {
   currentLanguage: Language,
@@ -25,58 +25,57 @@ interface Dispatch {
   openLoginModal: () => void,
 }
 
-interface PathProps {
-  history: undefined,
+interface TopNavigationProps {
+  currentLanguage: string,
+  openLoginModal: () => void,
+  changeLang: (lang: Language) => void,
 }
 
-class TopNavigation extends Component<State & Dispatch & RouteComponentProps<PathProps>> {
-  
-  returnHome = () => {
-    const {
-      history,
-    } = this.props;
-    history.push(getRouteById(Routes.HOME));
-  }
+const TopNavigation = (props: TopNavigationProps): JSX.Element => {
 
-  render(): JSX.Element {
-    const { 
-      currentLanguage, 
-      openLoginModal,
-      changeLang,
-    } = this.props;
+  const returnHome = (navigate: NavigateFunction) => {
+    navigate(getRouteById(AppRoutes.HOME));
+  };
 
-    return (
-      <Navigation
-        menuToggleAriaLabel='menu'
-        skipTo='#content'
-        skipToContentLabel='Skip to content'
-        onTitleClick={this.returnHome}
-        fixed={true}
-        className={'top-nav'}
-      >
-        <Navigation.Row variant='inline' >
-          <Link to={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)}>
-            <Navigation.Item label={translations[currentLanguage].PLOT_SEARCH_AND_COMPETITIONS}/>
-          </Link>
-          <Link to={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)}>
-            <Navigation.Item label={translations[currentLanguage].OTHER_COMPETITIONS_AND_SEARCHES}/>
-          </Link>
-          <Link to={getRouteById(Routes.AREA_SEARCH)}>
-            <Navigation.Item label={translations[currentLanguage].AREA_SEARCH}/>
-          </Link>
-        </Navigation.Row>
-        <Navigation.Actions>
-          <Navigation.User label='Sign in' onSignIn={() => openLoginModal()}/>
-          <Navigation.LanguageSelector label={currentLanguage}>
-            <Navigation.Item label='Suomeksi' onClick={() => changeLang(Language.FI)}/>
-            <Navigation.Item label='På svenska' onClick={() => changeLang(Language.SWE)}/>
-            <Navigation.Item label='In English' onClick={() => changeLang(Language.EN)}/>
-          </Navigation.LanguageSelector>
-        </Navigation.Actions>
-      </Navigation>
-    );
-  }
-}
+  const {
+    currentLanguage,
+    openLoginModal,
+    changeLang,
+  } = props;
+
+  const navigate = useNavigate();
+
+  return (
+    <Navigation
+      menuToggleAriaLabel='menu'
+      skipTo='#content'
+      skipToContentLabel='Skip to content'
+      onTitleClick={() => returnHome(navigate)}
+      fixed={true}
+      className={'top-nav'}
+    >
+      <Navigation.Row variant='inline' >
+        <Link to={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}>
+          <Navigation.Item label={translations[currentLanguage].PLOT_SEARCH_AND_COMPETITIONS}/>
+        </Link>
+        <Link to={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}>
+          <Navigation.Item label={translations[currentLanguage].OTHER_COMPETITIONS_AND_SEARCHES}/>
+        </Link>
+        <Link to={getRouteById(AppRoutes.AREA_SEARCH)}>
+          <Navigation.Item label={translations[currentLanguage].AREA_SEARCH}/>
+        </Link>
+      </Navigation.Row>
+      <Navigation.Actions>
+        <Navigation.User label='Sign in' onSignIn={() => openLoginModal()}/>
+        <Navigation.LanguageSelector label={currentLanguage}>
+          <Navigation.Item label='Suomeksi' onClick={() => changeLang(Language.FI)}/>
+          <Navigation.Item label='På svenska' onClick={() => changeLang(Language.SWE)}/>
+          <Navigation.Item label='In English' onClick={() => changeLang(Language.EN)}/>
+        </Navigation.LanguageSelector>
+      </Navigation.Actions>
+    </Navigation>
+  );
+};
 
 const mapDispatchToProps: Dispatch = {
   changeLang,
@@ -87,4 +86,4 @@ const mapStateToProps = (state: RootState): State => ({
   currentLanguage: state.language.current,
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TopNavigation));
+export default connect(mapStateToProps, mapDispatchToProps)(TopNavigation);

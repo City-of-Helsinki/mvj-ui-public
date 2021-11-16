@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ErrorPage extends Component{
+const ErrorPage = (): JSX.Element => {
 
-  render(): JSX.Element {
-    return (
-      <div className={'container'}>
-        404 Sivua ei löytynyt
-      </div>
-    );
-  }
-}
+  return (
+    <div className={'container'}>
+      404 Sivua ei löytynyt
+    </div>
+  );
+};
 
 export default ErrorPage;

@@ -13,12 +13,14 @@ interface Props {
   tabs: Array<tabProps>,
 }
 
-const Tabs = ({
-  active,
-  className,
-  onTabClick,
-  tabs,
-}: Props): JSX.Element => {
+const Tabs = (props: Props): JSX.Element => {
+  const {
+    active,
+    className,
+    onTabClick,
+    tabs,
+  } = props;
+
   return (
     <div className={classNames('tabs', className)}>
       <div className='tabs__wrapper'>

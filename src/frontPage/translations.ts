@@ -1,8 +1,9 @@
 import {
   Language,
+  Translation
 } from '../language/types';
 
-const translations = {
+const translations: Translation = {
   [Language.FI]: {
     FRONT_PAGE_BANNER_TEXT: 'Helsingin kaupungin tonttien, maan, tilojen ja lorem ipsum vuokraus',
     HOW_CAN_WE_HELP: 'Miten voimme auttaa vuokraustarpeissasi?',

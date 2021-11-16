@@ -4,9 +4,8 @@ interface Props {
   children?: JSX.Element,
 }
 
-const SidePanel = ({
-  children,
-}: Props): JSX.Element => {
+const SidePanel = (props: Props): JSX.Element => {
+  const {children} = props;
   return(
     <div className='side-panel'>
       {children}

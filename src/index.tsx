@@ -1,19 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import configureStore, { history } from './root/storeConfig';
+import configureStore from './root/storeConfig';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
-import routes from './root/routes';
+import SiteRoutes from './root/routes';
 const initialState = {};
 const store = configureStore(initialState);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      {routes}
-    </ConnectedRouter>
+    <SiteRoutes />
   </Provider>,
   document.getElementById('root')
 );

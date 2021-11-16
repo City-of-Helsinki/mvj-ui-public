@@ -1,8 +1,9 @@
 import {
   Language,
+  Translation,
 } from '../language/types';
 
-const translations = {
+const translations: Translation = {
   [Language.FI]: {
     MAP_SEARCH: 'Karttahaku',
     LIST: 'Lista',

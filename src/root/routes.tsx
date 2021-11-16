@@ -1,12 +1,16 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from 'react-router-dom';
 import App from '../App';
 import FrontPage from '../frontPage/frontPage';
 import ErrorPage from '../errorPage/errorPage';
 import CounterPage from '../counter/counterPage';
 import PlotSearchAndCompetitionsPage from '../plotSearchAndCompetitionsPage/plotSearchAndCompetitionsPage';
 
-export const Routes = {
+export const AppRoutes = {
   HOME: 'home',
   ERROR: 'error',
   PLOT_SEARCH_AND_COMPETITIONS: 'plot-search-and-competitions',
@@ -18,34 +22,41 @@ export const Routes = {
   DEBUG: 'debug',
 };
 
-/** 
+/**
  * Get route by id
  * @param {string} string
  * @returns {string}
  */
 export const getRouteById = (id: string): string => {
   const routes = {
-    [Routes.HOME]: '/',
-    [Routes.PLOT_SEARCH_AND_COMPETITIONS]: '/tonttihaut-ja-kilpailut',
-    [Routes.OTHER_COMPETITIONS_AND_SEARCHES]: '/muut-kilpailut-ja-haut',
-    [Routes.AREA_SEARCH]: '/aluehaku',
-    [Routes.LEASES]: '/vuokraukset',
-    [Routes.APPLICATIONS]: '/hakemukset',
-    [Routes.MESSAGES]: '/viestit',
-    [Routes.DEBUG]: '/debug',
+    [AppRoutes.HOME]: '/',
+    [AppRoutes.PLOT_SEARCH_AND_COMPETITIONS]: '/tonttihaut-ja-kilpailut',
+    [AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES]: '/muut-kilpailut-ja-haut',
+    [AppRoutes.AREA_SEARCH]: '/aluehaku',
+    [AppRoutes.LEASES]: '/vuokraukset',
+    [AppRoutes.APPLICATIONS]: '/hakemukset',
+    [AppRoutes.MESSAGES]: '/viestit',
+    [AppRoutes.DEBUG]: '/debug',
   };
 
   return routes[id] ? routes[id] : '';
 };
 
-export default
-<App>
-  <Switch>
-    <Route exact path='/' component={FrontPage} />
-    <Route exact path={getRouteById(Routes.PLOT_SEARCH_AND_COMPETITIONS)} component={PlotSearchAndCompetitionsPage} />
-    <Route exact path={getRouteById(Routes.OTHER_COMPETITIONS_AND_SEARCHES)} render={() => (<div className={'container'}>Muut kilpailut ja haut</div>)} />
-    <Route exact path={getRouteById(Routes.AREA_SEARCH)} render={() => (<div className={'container'}>Aluehaku sivu</div>)} />
-    <Route exact path={getRouteById(Routes.DEBUG)} component={CounterPage} />
-    <Route component={ErrorPage} />
-  </Switch>
-</App>;
+
+const SiteRoutes = (): JSX.Element => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<FrontPage />} />
+        <Route path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)} element={<PlotSearchAndCompetitionsPage />} />
+        <Route path={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)} element={<div className={'container'}>Muut kilpailut ja haut</div>} />
+        <Route path={getRouteById(AppRoutes.AREA_SEARCH)} element={<div className={'container'}>Aluehaku sivu</div>} />
+        <Route path={getRouteById(AppRoutes.DEBUG)} element={<CounterPage />} />
+        <Route path='*' element={<ErrorPage />} />
+      </Routes>
+      <App />
+    </BrowserRouter>
+  );
+};
+
+export default SiteRoutes;

@@ -1,8 +1,9 @@
 import {
   Language,
+  Translation,
 } from '../language/types';
 
-const translations = {
+const translations: Translation = {
   [Language.FI]: {
     PLOT_SEARCH_AND_COMPETITIONS: 'Tonttihaut ja kilpailut',
     OTHER_COMPETITIONS_AND_SEARCHES: 'Muut kilpailut ja haut',

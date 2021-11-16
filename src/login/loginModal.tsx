@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { connect } from 'react-redux';
 import { RootState } from '../root/rootReducer';
@@ -19,30 +19,34 @@ interface Dispatch {
   hideLoginModal: () => void,
 }
 
-class LoginModal extends Component<State & Dispatch> {
-
-  render() {
-    const { 
-      currentLanguage, 
-      hideLoginModal,
-      isLoginModalOpen,
-    } = this.props;
-
-    return (
-      <ConfirmationModal
-        confirmButtonLabel={translations[currentLanguage].LOGIN}
-        cancelButtonLabel = {translations[currentLanguage].CANCEL}
-        isOpen={isLoginModalOpen} // isLoginModalOpen
-        onCancel={() => hideLoginModal()}
-        onClose={() => hideLoginModal()}
-        onSave={() => console.log('save')}
-        title={translations[currentLanguage].LOGIN_TITLE}
-      >
-        <LoginComponent/>
-      </ConfirmationModal>
-    );
-  }
+interface Props {
+  currentLanguage: Language,
+  isLoginModalOpen: boolean,
+  hideLoginModal: () => void,
 }
+
+const LoginModal = (props: Props): JSX.Element => {
+
+  const {
+    currentLanguage,
+    hideLoginModal,
+    isLoginModalOpen,
+  } = props;
+
+  return (
+    <ConfirmationModal
+      confirmButtonLabel={translations[currentLanguage].LOGIN}
+      cancelButtonLabel = {translations[currentLanguage].CANCEL}
+      isOpen={isLoginModalOpen} // isLoginModalOpen
+      onCancel={() => hideLoginModal()}
+      onClose={() => hideLoginModal()}
+      onSave={() => console.log('save')}
+      title={translations[currentLanguage].LOGIN_TITLE}
+    >
+      <LoginComponent/>
+    </ConfirmationModal>
+  );
+};
 
 const mapDispatchToProps: Dispatch = {
   hideLoginModal,

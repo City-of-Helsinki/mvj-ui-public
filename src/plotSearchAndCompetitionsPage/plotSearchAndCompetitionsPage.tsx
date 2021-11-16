@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, {Fragment, useState} from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import { RootState } from '../root/rootReducer';
-//import { Tabs, TabPanel, TabList, Tab } from 'hds-react';
+// import { Tabs, TabPanel, TabList, Tab } from 'hds-react';
 import Tabs from '../tabs/tabs';
 import TabPane from '../tabs/tabPane';
 import TabContent from '../tabs/tabContent';
@@ -18,62 +18,62 @@ interface State {
   currentLanguage: Language,
 }
 
-interface PathProps {
-  history: string,
+interface Props {
+  currentLanguage: string
 }
 
-class PlotSearchAndCompetitionsPage extends Component<State & RouteComponentProps<PathProps>> {
-  state = {
-    activeTab: 0,
-  };
+const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
+  const [activeTab, setActiveTab] = useState<number>(0);
+  const { currentLanguage } = props;
+  const navigate = useNavigate();
 
-  handleTabClick = (tabId: number) => {
-    const {history, location, location: { search }} = this.props;
-    console.log(search);
+  const handleTabClick = (tabId: number, setActiveTab: (tab: number) => void): void => {
+    setActiveTab(tabId);
+    navigate(location.pathname, { state: tabId });
+
+    /*
     this.setState({activeTab: tabId}, () => {
       return history.push({
         ...location,
         search: 'tab=' + tabId,
       });
     });
+
+     */
   };
 
-  render(): JSX.Element {
-    const { currentLanguage } = this.props;
-    const { activeTab } = this.state;
-    
-    return (
-      <div className={'container'}>
-        <Tabs
-          active={activeTab}
-          tabs={[
-            {
-              label: translations[currentLanguage].MAP_SEARCH,
-            },
-            {
-              label: translations[currentLanguage].LIST,
-            },
-          ]}
-          onTabClick={this.handleTabClick}
-        />
-        <TabContent active={activeTab}>
-          <TabPane>
-            <Fragment>
-              <MapSearchComponent/>
-              <MapComponent/>
-            </Fragment>
-          </TabPane>
-          <TabPane>
-            <div>...</div>
-          </TabPane>
-        </TabContent>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={'container'}>
+      <Tabs
+        active={activeTab}
+        tabs={[
+          {
+            label: translations[currentLanguage].MAP_SEARCH,
+          },
+          {
+            label: translations[currentLanguage].LIST,
+          },
+        ]}
+        onTabClick={() => handleTabClick(0, setActiveTab)}
+      />
+      <TabContent active={activeTab}>
+        <TabPane>
+          <Fragment>
+            <MapSearchComponent/>
+            <MapComponent/>
+          </Fragment>
+        </TabPane>
+        <TabPane>
+          <div>...</div>
+        </TabPane>
+      </TabContent>
+    </div>
+  );
+};
+
 
 const mapStateToProps = (state: RootState): State => ({
   currentLanguage: state.language.current,
 });
 
-export default withRouter(connect(mapStateToProps)(PlotSearchAndCompetitionsPage));
+export default connect(mapStateToProps)(PlotSearchAndCompetitionsPage);
