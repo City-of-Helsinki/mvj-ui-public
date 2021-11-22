@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import { connect } from 'react-redux';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { RootState } from '../root/rootReducer';
 // import { Tabs, TabPanel, TabList, Tab } from 'hds-react';
 import Tabs from '../tabs/tabs';
@@ -14,6 +14,7 @@ import {
 } from '../language/types';
 import translations from './translations';
 
+
 interface State {
   currentLanguage: Language,
 }
@@ -23,9 +24,16 @@ interface Props {
 }
 
 const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
-  const [activeTab, setActiveTab] = useState<number>(0);
   const { currentLanguage } = props;
+  const [activeTab, setActiveTab] = useState<number>(0);
   const navigate = useNavigate();
+  const { search } = useLocation();
+  const tab = new URLSearchParams(search).get('tab');
+  const tabId: number = tab !== null ? parseInt(tab) : 0;
+
+  if (tabId != activeTab) {
+    setActiveTab(tabId);
+  }
 
   const handleTabClick = (tabId: number, setActiveTab: (tab: number) => void): void => {
     setActiveTab(tabId);
@@ -33,16 +41,6 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
       pathname: location.pathname,
       search: `?tab=${tabId}`
     });
-
-    /*
-    this.setState({activeTab: tabId}, () => {
-      return history.push({
-        ...location,
-        search: 'tab=' + tabId,
-      });
-    });
-
-     */
   };
 
   return (
