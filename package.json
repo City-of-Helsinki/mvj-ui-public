@@ -39,7 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:coverage": "react-scripts test --coverage --runInBand --watchAll=false"
+    "test:coverage": "react-scripts test --coverage --runInBand --watchAll=false",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -67,7 +68,10 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
+    "husky": "^7.0.4",
     "jest-fetch-mock": "^3.0.3",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.4.1",
     "ts-jest": "^27.0.7"
   },
   "jest": {
@@ -107,6 +111,17 @@
     "testMatch": [
       "<rootDir>/src/**/*.(test).{js,jsx,ts,tsx}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "always",
+    "printWidth": 80
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,scss,md}": [
+      "prettier --write",
+      "git add"
     ]
   }
 }
