@@ -6,21 +6,19 @@ const LoginComponent: FunctionComponent = () => {
     <div className={'login-component'}>
       <h1>{'Kirjaudu sisään'}</h1>
       <TextInput
-        id='username'
-        label='Käyttäjätunnus'
-        placeholder='Kirjoita käyttäjätunnuksesi'
+        id="username"
+        label="Käyttäjätunnus"
+        placeholder="Kirjoita käyttäjätunnuksesi"
         required
       />
       <TextInput
-        type='password'
-        id='password'
-        label='Salasana'
-        placeholder='Kirjoita salasanasi'
+        type="password"
+        id="password"
+        label="Salasana"
+        placeholder="Kirjoita salasanasi"
         required
       />
-      <div className={'cover'}>
-        {'Salasana unohtunut? | Rekisteröidy'}
-      </div>
+      <div className={'cover'}>{'Salasana unohtunut? | Rekisteröidy'}</div>
     </div>
   );
 };

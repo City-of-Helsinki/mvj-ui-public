@@ -6,18 +6,16 @@ import LoginModal from './login/loginModal';
 import './main.scss';
 
 interface Props {
-  children?: JSX.Element, 
+  children?: JSX.Element;
 }
 
-const App = ({
-  children,
-}: Props): JSX.Element => {
+const App = ({ children }: Props): JSX.Element => {
   return (
     <div className={'app'}>
-      <LoginModal/>
-      <TopNavigation/>
+      <LoginModal />
+      <TopNavigation />
       {children}
-      <Footer/>
+      <Footer />
     </div>
   );
 };

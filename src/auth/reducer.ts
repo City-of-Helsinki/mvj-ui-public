@@ -2,9 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FETCH_API_TOKEN, TOKEN_NOT_FOUND, RECEIVE_API_TOKEN } from './types';
 
 type CurrentDisplayState = {
-  apiToken: string,
-  isFetching: boolean,
-}
+  apiToken: string;
+  isFetching: boolean;
+};
 
 const initialState: CurrentDisplayState = {
   apiToken: '',
@@ -14,8 +14,7 @@ const initialState: CurrentDisplayState = {
 const countSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: {
     [FETCH_API_TOKEN]: (state) => {
       state.isFetching = true;
@@ -27,7 +26,7 @@ const countSlice = createSlice({
       state.isFetching = false;
       state.apiToken = action.payload;
     },
-  }
+  },
 });
 
 export default countSlice.reducer;

@@ -2,15 +2,15 @@ import React from 'react';
 import Modal from './modal';
 
 interface Props {
-  children?: JSX.Element,
-  confirmButtonClassName?: string,
-  confirmButtonLabel?: string,
-  cancelButtonLabel?: string,
-  isOpen: boolean,
-  onCancel: () => void,
-  onClose: () => void,
-  onSave: () => void,
-  title: string,
+  children?: JSX.Element;
+  confirmButtonClassName?: string;
+  confirmButtonLabel?: string;
+  cancelButtonLabel?: string;
+  isOpen: boolean;
+  onCancel: () => void;
+  onClose: () => void;
+  onSave: () => void;
+  title: string;
 }
 
 const ConfirmationModal = (props: Props): JSX.Element => {
@@ -27,9 +27,9 @@ const ConfirmationModal = (props: Props): JSX.Element => {
   } = props;
 
   return (
-    <div className='confirmation-modal'>
+    <div className="confirmation-modal">
       <Modal
-        className='modal-small modal-autoheight'
+        className="modal-small modal-autoheight"
         title={title}
         isOpen={isOpen}
         onClose={onClose}

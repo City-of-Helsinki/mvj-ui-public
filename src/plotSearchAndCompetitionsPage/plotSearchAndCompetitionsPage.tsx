@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { RootState } from '../root/rootReducer';
@@ -9,18 +9,15 @@ import TabContent from '../tabs/tabContent';
 import MapSearchComponent from './components/mapSearchComponent';
 import MapComponent from '../map/mapComponent';
 
-import {
-  Language,
-} from '../language/types';
+import { Language } from '../language/types';
 import translations from './translations';
 
-
 interface State {
-  currentLanguage: Language,
+  currentLanguage: Language;
 }
 
 interface Props {
-  currentLanguage: string
+  currentLanguage: string;
 }
 
 const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
@@ -35,11 +32,14 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     setActiveTab(tabId);
   }
 
-  const handleTabClick = (tabId: number, setActiveTab: (tab: number) => void): void => {
+  const handleTabClick = (
+    tabId: number,
+    setActiveTab: (tab: number) => void
+  ): void => {
     setActiveTab(tabId);
     navigate({
       pathname: location.pathname,
-      search: `?tab=${tabId}`
+      search: `?tab=${tabId}`,
     });
   };
 
@@ -60,8 +60,8 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
       <TabContent active={activeTab}>
         <TabPane>
           <Fragment>
-            <MapSearchComponent/>
-            <MapComponent/>
+            <MapSearchComponent />
+            <MapComponent />
           </Fragment>
         </TabPane>
         <TabPane>
@@ -71,7 +71,6 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     </div>
   );
 };
-
 
 const mapStateToProps = (state: RootState): State => ({
   currentLanguage: state.language.current,

@@ -1,7 +1,4 @@
-import {
-  Language,
-  Translation,
-} from '../language/types';
+import { Language, Translation } from '../language/types';
 
 const translations: Translation = {
   [Language.FI]: {
