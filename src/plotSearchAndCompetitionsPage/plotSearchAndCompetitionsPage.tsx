@@ -29,7 +29,10 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
 
   const handleTabClick = (tabId: number, setActiveTab: (tab: number) => void): void => {
     setActiveTab(tabId);
-    navigate(location.pathname, { state: tabId });
+    navigate({
+      pathname: location.pathname,
+      search: `?tab=${tabId}`
+    });
 
     /*
     this.setState({activeTab: tabId}, () => {
@@ -54,7 +57,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
             label: translations[currentLanguage].LIST,
           },
         ]}
-        onTabClick={() => handleTabClick(0, setActiveTab)}
+        onTabClick={(id) => handleTabClick(id, setActiveTab)}
       />
       <TabContent active={activeTab}>
         <TabPane>
