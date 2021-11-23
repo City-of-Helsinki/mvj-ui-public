@@ -22,16 +22,14 @@
     ],
     "rules": {
         "indent": [
-            "warn",
-            2
+            "off"
         ],
         "linebreak-style": [
             "error",
             "unix"
         ],
         "quotes": [
-            "warn",
-            "single"
+            "off"
         ],
         "semi": [
             "error",
