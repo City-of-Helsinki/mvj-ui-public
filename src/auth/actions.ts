@@ -5,7 +5,7 @@ import { Action } from 'redux';
 export const fetchApiToken = (accessToken: string): Action<string> =>
   createAction(FETCH_API_TOKEN)(accessToken);
 
-export const receiveApiToken = (token: Object): Action<string> =>
+export const receiveApiToken = (token: string): Action<string> =>
   createAction(RECEIVE_API_TOKEN)(token);
 
 export const tokenNotFound = (): Action<string> =>

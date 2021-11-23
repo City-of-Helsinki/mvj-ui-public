@@ -11,7 +11,7 @@ const initialState: CurrentDisplayState = {
   isFetching: false,
 };
 
-const countSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
@@ -29,4 +29,4 @@ const countSlice = createSlice({
   },
 });
 
-export default countSlice.reducer;
+export default authSlice.reducer;

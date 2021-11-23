@@ -7,6 +7,7 @@ export function* fetchApiTokenSaga({
 }: ReturnType<typeof fetchApiTokenActionType>): Generator {
   console.log(accessToken);
   yield delay(1000);
+  // TODO: mock!
   yield put(receiveApiToken('123'));
 }
 
