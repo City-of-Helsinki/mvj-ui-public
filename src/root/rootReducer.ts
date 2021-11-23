@@ -1,10 +1,12 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
+import authReducer from '../auth/reducer';
 import counterReducer from '../counter/reducer';
 import languageReducer from '../language/reducer';
 import loginReducer from '../login/reducer';
 
 const allReducers = {
+  auth: authReducer,
   count: counterReducer,
   language: languageReducer,
   login: loginReducer,
