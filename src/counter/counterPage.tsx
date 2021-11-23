@@ -3,21 +3,17 @@ import React, { Component } from 'react';
 import CounterButtons from './components/counterButtons';
 import { connect } from 'react-redux';
 import { RootState } from '../root/rootReducer';
-import {
-  incrementAsync,
-  increment,
-  decrement,
-} from './actions';
+import { incrementAsync, increment, decrement } from './actions';
 
 interface State {
-  clicks: number,
-  isCounting: boolean,
+  clicks: number;
+  isCounting: boolean;
 }
 
 interface Dispatch {
-  increment: (page: number) => void,
-  decrement: (page: number) => void,
-  incrementAsync: () => void,
+  increment: (page: number) => void;
+  decrement: (page: number) => void;
+  incrementAsync: () => void;
 }
 
 class CounterPage extends Component<State & Dispatch> {
@@ -51,7 +47,7 @@ class CounterPage extends Component<State & Dispatch> {
 const mapDispatchToProps: Dispatch = {
   increment,
   decrement,
-  incrementAsync
+  incrementAsync,
 };
 
 const mapStateToProps = (state: RootState): State => ({

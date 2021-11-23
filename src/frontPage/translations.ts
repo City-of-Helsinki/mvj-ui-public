@@ -1,11 +1,9 @@
-import {
-  Language,
-  Translation
-} from '../language/types';
+import { Language, Translation } from '../language/types';
 
 const translations: Translation = {
   [Language.FI]: {
-    FRONT_PAGE_BANNER_TEXT: 'Helsingin kaupungin tonttien, maan, tilojen ja lorem ipsum vuokraus',
+    FRONT_PAGE_BANNER_TEXT:
+      'Helsingin kaupungin tonttien, maan, tilojen ja lorem ipsum vuokraus',
     HOW_CAN_WE_HELP: 'Miten voimme auttaa vuokraustarpeissasi?',
     DO_YOU_WANT_TO: 'Haluan osallistua tonttihakuun tai -kilpailuun',
     PLOTS_FOR: 'Tontit pitkäkestoiseen asumiseen tai teollisuustoimintaan',
@@ -19,7 +17,8 @@ const translations: Translation = {
     QUESTIONS: 'Kysyttävää?',
   },
   [Language.EN]: {
-    FRONT_PAGE_BANNER_TEXT: 'City of Helsinki plot, land, area and lorem ipsum rental',
+    FRONT_PAGE_BANNER_TEXT:
+      'City of Helsinki plot, land, area and lorem ipsum rental',
     HOW_CAN_WE_HELP: 'How can we help with your rental needs?',
     DO_YOU_WANT_TO: 'I want to participate in a plot search or competition',
     PLOTS_FOR: 'Plots for long-term housing or industrial activities',
@@ -33,7 +32,8 @@ const translations: Translation = {
     QUESTIONS: 'Questions?',
   },
   [Language.SWE]: {
-    FRONT_PAGE_BANNER_TEXT: 'Helsingfors stadstomter, mark, lokaler och uthyrning av Lorem ipsum',
+    FRONT_PAGE_BANNER_TEXT:
+      'Helsingfors stadstomter, mark, lokaler och uthyrning av Lorem ipsum',
     HOW_CAN_WE_HELP: 'Hur kan vi hjälpa till med dina hyresbehov?',
     DO_YOU_WANT_TO: 'Jag vill delta i en tomtsökning eller tävling',
     PLOTS_FOR: 'Tomter för långtidsbostäder eller industriell verksamhet',

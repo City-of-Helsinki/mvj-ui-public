@@ -1,6 +1,6 @@
 interface Props {
-  children: JSX.Element[],
-  active: number,
+  children: JSX.Element[];
+  active: number;
 }
 
 const TabContent = (props: Props): JSX.Element => props.children[props.active];

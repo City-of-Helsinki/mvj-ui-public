@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { OPEN_LOGIN_MODAL, HIDE_LOGIN_MODAL } from './types';
 
 type CurrentDisplayState = {
-  isLoginModalOpen: boolean,
-}
+  isLoginModalOpen: boolean;
+};
 
 const initialState: CurrentDisplayState = {
   isLoginModalOpen: false,
@@ -12,8 +12,7 @@ const initialState: CurrentDisplayState = {
 const countSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: {
     [OPEN_LOGIN_MODAL]: (state) => {
       state.isLoginModalOpen = true;
@@ -21,7 +20,7 @@ const countSlice = createSlice({
     [HIDE_LOGIN_MODAL]: (state) => {
       state.isLoginModalOpen = false;
     },
-  }
+  },
 });
 
 export default countSlice.reducer;

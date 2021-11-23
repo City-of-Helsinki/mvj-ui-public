@@ -1,5 +1,5 @@
-@import "styles/variables";
-@import "styles/fonts";
+@import 'styles/variables';
+@import 'styles/fonts';
 
 .box {
   width: 280px;
@@ -15,7 +15,7 @@
   &.gray {
     background-color: $light-gray;
   }
-  
+
   &.yellow {
     background-color: $light-yellow;
   }

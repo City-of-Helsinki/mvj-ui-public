@@ -22,20 +22,17 @@ export default function configureAppStore(initialState = {}): Store {
     }),
   ];
 
-  const router = { 
+  const router = {
     router: connectRouter(history),
   };
 
   const store = configureStore({
     reducer: createReducer(router),
-    middleware: [
-      ...getDefaultMiddleware(),
-      ...middlewares
-    ],
+    middleware: [...getDefaultMiddleware(), ...middlewares],
     preloadedState: initialState,
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,
-  });	
+  });
 
   /* tslint:disable-next-line */
   sagaMiddleware.run(rootSaga);

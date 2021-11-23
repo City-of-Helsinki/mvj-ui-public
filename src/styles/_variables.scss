@@ -1,10 +1,10 @@
 $black: #000000 !default;
-$blackOne: #231F20 !default;
-$blackTwo: #332F3F !default;
+$blackOne: #231f20 !default;
+$blackTwo: #332f3f !default;
 $black-hover: $blackTwo;
 $white: #ffffff !default;
-$grey-border: #EBEDF1 !default;
-$light-brown: #C2A251 !default;
+$grey-border: #ebedf1 !default;
+$light-brown: #c2a251 !default;
 
 // todo: define color palette
 $red: red;
@@ -20,10 +20,10 @@ $light-gray-secondary: #e6e6e6 !default;
 $lightest-gray: #fafafa !default;
 $white: #ffffff !default;
 
-$light-pink: #F6D9E5;
-$light-gray: #231F2020;
-$light-yellow: #FFE977;
-$light-blue: #9FC9EB;
+$light-pink: #f6d9e5;
+$light-gray: #231f2020;
+$light-yellow: #ffe977;
+$light-blue: #9fc9eb;
 
 $global-font-size: 100% !default;
 
@@ -43,13 +43,13 @@ $bp-xlarge: 120em; // 1920px;
 $bp-xxlarge: 160em; // 2560px;
 
 // Media Queries
-$mq-xsmall: "(max-width: #{$bp-xsmall})";
-$mq-small: "(max-width: #{$bp-small})";
-$mq-medium: "(min-width: #{$bp-medium})";
-$mq-medium-max: "(max-width: #{$bp-medium})";
-$mq-large-max: "(max-width: #{$bp-large})";
-$mq-large: "(min-width: #{$bp-large})";
-$mq-mlarge: "(min-width: #{$bp-mlarge})";
-$mq-xlarge: "(min-width: #{$bp-xlarge})";
-$mq-xxlarge: "(min-width: #{$bp-xxlarge})";
-$mq-retina: "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)";
+$mq-xsmall: '(max-width: #{$bp-xsmall})';
+$mq-small: '(max-width: #{$bp-small})';
+$mq-medium: '(min-width: #{$bp-medium})';
+$mq-medium-max: '(max-width: #{$bp-medium})';
+$mq-large-max: '(max-width: #{$bp-large})';
+$mq-large: '(min-width: #{$bp-large})';
+$mq-mlarge: '(min-width: #{$bp-mlarge})';
+$mq-xlarge: '(min-width: #{$bp-xlarge})';
+$mq-xxlarge: '(min-width: #{$bp-xxlarge})';
+$mq-retina: '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)';

@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from '../App';
 import FrontPage from '../frontPage/frontPage';
 import ErrorPage from '../errorPage/errorPage';
@@ -42,17 +38,25 @@ export const getRouteById = (id: string): string => {
   return routes[id] ? routes[id] : '';
 };
 
-
 const SiteRoutes = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<FrontPage />} />
-        <Route path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)} element={<PlotSearchAndCompetitionsPage />} />
-        <Route path={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)} element={<div className={'container'}>Muut kilpailut ja haut</div>} />
-        <Route path={getRouteById(AppRoutes.AREA_SEARCH)} element={<div className={'container'}>Aluehaku sivu</div>} />
+        <Route path="/" element={<FrontPage />} />
+        <Route
+          path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
+          element={<PlotSearchAndCompetitionsPage />}
+        />
+        <Route
+          path={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
+          element={<div className={'container'}>Muut kilpailut ja haut</div>}
+        />
+        <Route
+          path={getRouteById(AppRoutes.AREA_SEARCH)}
+          element={<div className={'container'}>Aluehaku sivu</div>}
+        />
         <Route path={getRouteById(AppRoutes.DEBUG)} element={<CounterPage />} />
-        <Route path='*' element={<ErrorPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
       <App />
     </BrowserRouter>

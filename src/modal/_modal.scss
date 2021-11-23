@@ -1,5 +1,5 @@
-@import "styles/variables";
-@import "styles/fonts";
+@import 'styles/variables';
+@import 'styles/fonts';
 
 .modal {
   &__wrapper {
@@ -21,10 +21,10 @@
     border-bottom: 1px solid $grey-border;
 
     h1.title {
-	    font-size: 22px;
+      font-size: 22px;
       line-height: 24px;
-	    font-weight: $semibold;
-	    color: $black;
+      font-weight: $semibold;
+      color: $black;
       margin: 0;
     }
 
