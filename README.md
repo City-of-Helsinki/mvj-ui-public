@@ -1,51 +1,24 @@
-# Getting Started with Create React App
+# MVJ Public-UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the public user interface that allows citizens and organizations in Helsinki to browse and attend into ongoing
+plot search competitions. This is a part of MVJ ("Maanvuokrausjärjestelmä") which also contains UI for city
+officials to handle ground rental related matters. This public UI and the closed-from-public UI for city 
+officials share the same MVJ-backend.
 
-## Available Scripts
+Based on [React Boilerplate](https://github.com/nordsoftware/react-boilerplate)
 
-In the project directory, you can run:
+## Development Environment
 
-### `yarn start`
+To build up a development environment please follow these steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone this repository from git: `git pull git@github.com:City-of-Helsinki/mvj-ui-public.git`
+2. Start the docker container: `docker-compose up`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Usage w/o docker
 
-### `yarn test`
+1. Check requirements:
+   1. Project runs on node 16
+   2. Yarn needs to be installed
+2. On project root `run yarn` to install packages
+3. Run `yarn start` to run dev server
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-
-###
-
-For --jsx error in vscode go to the command palette CTRL+Shift+P. Choose "TypeScript: Select a TypeScript Version...". Choose "Use workspace Version". (^4.1.3)
