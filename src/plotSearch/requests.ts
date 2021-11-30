@@ -7,3 +7,15 @@ export const fetchPlotSearchesRequest = (
 ): Generator<Effect, ApiCallResult, Response> => {
   return callApi(new Request(createUrl('plot_search/', params)));
 };
+
+export const fetchPlotSearchAttributesRequest = (): Generator<
+  Effect,
+  ApiCallResult,
+  Response
+> => {
+  return callApi(
+    new Request(createUrl('plot_search/'), {
+      method: 'OPTIONS',
+    })
+  );
+};

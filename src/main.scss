@@ -1,3 +1,5 @@
+@import '~hds-design-tokens/lib/all';
+
 @import 'styles/fonts';
 @import 'styles/variables';
 @import 'styles/mixins';
@@ -14,6 +16,7 @@
 @import 'panel/side-panel';
 @import 'app';
 @import 'map/map-view';
+@import 'plotSearchAndCompetitionsPage/components/mapSymbol';
 
 html {
   -webkit-font-smoothing: antialiased;
