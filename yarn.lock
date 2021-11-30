@@ -6375,6 +6375,11 @@ hds-core@1.6.0, hds-core@^1.6.0:
   resolved "https://registry.yarnpkg.com/hds-core/-/hds-core-1.6.0.tgz#7ef6984f0f92f3e837d2234d1d6c9548112b7bb8"
   integrity sha512-1tTYKvXPTgbSal7jF52ZWYRMcibufCxrgh1x3woldxAFOIyh6HJpPadr02yuTAM9Tq+jbqIISS6NuGlIdPVMLQ==
 
+hds-design-tokens@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/hds-design-tokens/-/hds-design-tokens-1.7.1.tgz#272340d2e5b9b79471d64475760d0b7579f9c1cd"
+  integrity sha512-xoYV9NedhGT5gZb0WhA+bljlZMHEUYnzWaQdv5JOHwnAf+WiadjHuR9xUSYPci5PanRj9JYx1tKKWngM3/oMXQ==
+
 hds-react@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/hds-react/-/hds-react-1.6.0.tgz#2b55df1518acacb5494f23ed7dbb56e8149db1e0"
@@ -10427,6 +10432,13 @@ react-fast-compare@^3.0.1:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+
+react-grid-system@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-8.0.1.tgz#ec237aeb951438bd4bb72aa63eb99cf0d1503a23"
+  integrity sha512-2asxMDYCMDf3Ti/4+mdxPayyZkxcgVouBNKNOFBC26vXYGGLNAK6TguRCJUfvziiKbZ6tDSZ9UXUM2c0dreIyw==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
   version "16.13.1"

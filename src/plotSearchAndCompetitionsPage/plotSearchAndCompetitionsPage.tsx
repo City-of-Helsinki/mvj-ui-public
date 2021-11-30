@@ -8,22 +8,36 @@ import TabPane from '../tabs/tabPane';
 import TabContent from '../tabs/tabContent';
 import MapSearchComponent from './components/mapSearchComponent';
 import MapComponent from '../map/mapComponent';
-import { fetchPlotSearches } from '../plotSearch/actions';
+import {
+  fetchPlotSearchAttributes,
+  fetchPlotSearches,
+} from '../plotSearch/actions';
 
 import { Language } from '../language/types';
 import translations from './translations';
 
 interface State {
   currentLanguage: Language;
+  isFetchingPlotSearches: boolean;
+  isFetchingPlotSearchAttributes: boolean;
 }
 
 interface Props {
   currentLanguage: string;
   fetchPlotSearches: () => void;
+  fetchPlotSearchAttributes: () => void;
+  isFetchingPlotSearches: boolean;
+  isFetchingPlotSearchAttributes: boolean;
 }
 
 const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
-  const { currentLanguage, fetchPlotSearches } = props;
+  const {
+    currentLanguage,
+    fetchPlotSearches,
+    fetchPlotSearchAttributes,
+    isFetchingPlotSearches,
+    isFetchingPlotSearchAttributes,
+  } = props;
   const [activeTab, setActiveTab] = useState<number>(0);
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -32,6 +46,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
 
   useEffect(() => {
     fetchPlotSearches();
+    fetchPlotSearchAttributes();
   }, []);
 
   if (tabId != activeTab) {
@@ -48,6 +63,11 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
       search: `?tab=${tabId}`,
     });
   };
+
+  if (isFetchingPlotSearches || isFetchingPlotSearchAttributes) {
+    // TODO: loader
+    return <div />;
+  }
 
   return (
     <div className={'container'}>
@@ -80,8 +100,12 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
 
 const mapStateToProps = (state: RootState): State => ({
   currentLanguage: state.language.current,
+  isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,
+  isFetchingPlotSearchAttributes:
+    state.plotSearch.isFetchingPlotSearchAttributes,
 });
 
 export default connect(mapStateToProps, {
   fetchPlotSearches,
+  fetchPlotSearchAttributes,
 })(PlotSearchAndCompetitionsPage);

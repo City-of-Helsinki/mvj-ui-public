@@ -1,0 +1,37 @@
+.MapSymbol {
+  $symbol-size: 1.5rem;
+
+  border-radius: 50%;
+  display: inline-block;
+  width: $symbol-size;
+  height: $symbol-size;
+  line-height: $symbol-size;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 700;
+
+  &--style-0 {
+    background-color: $color-brick;
+    color: $color-white;
+  }
+  &--style-1 {
+    background-color: $color-coat-of-arms;
+    color: $color-white;
+  }
+  &--style-2 {
+    background-color: $color-tram;
+    color: $color-white;
+  }
+  &--style-3 {
+    background-color: $color-engel;
+    color: $color-black-90;
+  }
+  &--style-4 {
+    background-color: $color-copper;
+    color: $color-black-90;
+  }
+  &--style-5 {
+    background-color: $color-suomenlinna;
+    color: $color-black-90;
+  }
+}
