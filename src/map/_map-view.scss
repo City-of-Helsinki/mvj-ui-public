@@ -1,8 +1,7 @@
 .map-view {
-  background: url(../assets/images/map.jpg);
   background-size: 100%;
   height: 740px;
-  background-repeat: no-repeat;
+  background: url(../assets/images/map.jpg) no-repeat;
 
   @media #{$mq-medium-max} {
     background-size: cover !important;
