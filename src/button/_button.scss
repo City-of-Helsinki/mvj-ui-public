@@ -3,7 +3,7 @@
 
 .mvj-button {
   font-size: $font-small;
-  font-family: $tertiary;
+  font-family: $tertiary-font-family;
   font-weight: 600;
   color: $white;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
@@ -110,7 +110,7 @@
   color: $blue;
   font-size: 14px;
   font-weight: $semibold;
-  font-family: $tertiary;
+  font-family: $tertiary-font-family;
   cursor: pointer;
 
   .icons__sendup {

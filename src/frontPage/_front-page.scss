@@ -21,7 +21,7 @@
 
     h3 {
       padding: 0 15%;
-      font-family: $primary;
+      font-family: $primary-font-family;
       font-weight: $semibold;
       font-size: 70px;
       color: $white;
@@ -51,7 +51,7 @@
 
     h4 {
       padding: 0 15%;
-      font-family: $tertiary;
+      font-family: $tertiary-font-family;
       font-weight: $semibold;
       font-size: 40px;
       color: $black;
@@ -72,7 +72,7 @@
     h5 {
       margin-top: 50px;
       font-size: 32px;
-      font-family: $tertiary;
+      font-family: $tertiary-font-family;
       font-weight: $semibold;
       margin-left: auto;
       margin-right: auto;

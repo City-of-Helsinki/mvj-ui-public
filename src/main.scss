@@ -28,6 +28,7 @@ body {
   overflow-y: auto;
   height: calc(100% - 60px);
   background-color: $body-background;
+  font-family: $primary-font-family;
 }
 
 .container {
