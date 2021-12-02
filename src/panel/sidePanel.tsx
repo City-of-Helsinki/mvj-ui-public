@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import classNames from 'classnames';
 
 interface Props {
-  children?: JSX.Element;
+  children?: ReactNode;
+  className?: string;
 }
 
 const SidePanel = (props: Props): JSX.Element => {
   const { children } = props;
-  return <div className="side-panel">{children}</div>;
+  return (
+    <div className={classNames('side-panel', props.className)}>{children}</div>
+  );
 };
 
 export default SidePanel;
