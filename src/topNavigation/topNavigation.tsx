@@ -62,7 +62,7 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
       </Navigation.Row>
       <Navigation.Actions>
         <Navigation.User label="Sign in" onSignIn={() => openLoginModal()} />
-        <Navigation.LanguageSelector label={currentLanguage}>
+        <Navigation.LanguageSelector label={currentLanguage.toUpperCase()}>
           <Navigation.Item
             label="Suomeksi"
             onClick={() => changeLang(Language.FI)}
