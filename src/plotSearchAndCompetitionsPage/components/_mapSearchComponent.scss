@@ -1,0 +1,82 @@
+.MapSearchComponent {
+  width: 440px;
+
+  &__search-input {
+    padding: 15px;
+    background-color: #48505b;
+  }
+
+  &__accordion {
+    border-top: 1px solid $color-black-20;
+
+    .MapSearchComponent__accordion-heading > * {
+      > * {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .MapSearchComponent__accordion-heading-toggler {
+        padding: 15px 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    &--expanded > .MapSearchComponent__accordion-heading {
+      background-color: $color-black-5;
+    }
+
+    .MapSearchComponent__accordion-body {
+      background-color: $color-black-5;
+    }
+
+    .MapSearchComponent__target {
+      padding: 0 10px;
+    }
+
+    .MapSearchComponent__target-address {
+      hyphens: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .MapSymbol {
+      margin-left: 3px;
+    }
+  }
+
+  &__plot-search-subtype-heading {
+    text-transform: uppercase;
+    font-size: $fontsize-body-l;
+    padding: 10px 10px;
+    margin: 0;
+  }
+
+  &__plot-search-heading {
+    background-color: $color-black-20;
+    padding: 5px 10px;
+  }
+
+  &__list-headings {
+    font-weight: 700;
+    font-size: $fontsize-body-s;
+    padding: 5px 10px;
+  }
+
+  .MapSearchComponent__single-target-view + .MapSearchComponent__list-view {
+    display: none;
+  }
+
+  dl {
+    div {
+      margin: 5px 0;
+    }
+
+    dt {
+      font-weight: bold;
+    }
+  }
+}

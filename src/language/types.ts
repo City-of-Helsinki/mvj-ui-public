@@ -9,7 +9,7 @@ export interface Translation {
 }
 
 export enum Language {
-  FI = 'FI',
-  EN = 'EN',
-  SWE = 'SV',
+  FI = 'fi',
+  EN = 'en',
+  SWE = 'sv',
 }

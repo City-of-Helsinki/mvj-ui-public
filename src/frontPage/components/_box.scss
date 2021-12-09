@@ -27,7 +27,7 @@
   .top-label {
     display: flex;
     align-items: flex-start;
-    font-family: $tertiary;
+    font-family: $tertiary-font-family;
   }
   .image {
     margin-left: auto;
@@ -44,11 +44,11 @@
     margin-right: auto;
     width: 75%;
     font-size: 22px;
-    font-family: $tertiary;
+    font-family: $tertiary-font-family;
     font-weight: $semibold;
   }
   .bottom-text {
     margin-top: 15px;
-    font-family: $tertiary;
+    font-family: $tertiary-font-family;
   }
 }

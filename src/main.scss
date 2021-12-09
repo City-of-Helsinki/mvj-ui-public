@@ -8,15 +8,18 @@
 @import 'modal/confirmation-modal';
 @import 'button/button';
 @import 'button/close-button';
+@import 'button/iconButton';
 @import 'frontPage/front-page';
 @import 'frontPage/components/box';
 @import 'topNavigation/topNavigation';
+@import 'tabs/tabPane';
 @import 'tabs/tabs';
 @import 'login/components/login-component';
 @import 'panel/side-panel';
 @import 'app';
 @import 'map/map-view';
 @import 'plotSearchAndCompetitionsPage/components/mapSymbol';
+@import 'plotSearchAndCompetitionsPage/components/mapSearchComponent';
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -28,6 +31,7 @@ body {
   overflow-y: auto;
   height: calc(100% - 60px);
   background-color: $body-background;
+  font-family: $primary-font-family;
 }
 
 .container {

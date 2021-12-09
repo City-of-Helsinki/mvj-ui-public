@@ -1,3 +1,4 @@
+import { Geometry } from 'geojson';
 import { ApiAttributes } from '../api/types';
 
 export const FETCH_PLOT_SEARCHES = 'plotSearch/FETCH_PLOT_SEARCHES';
@@ -63,11 +64,9 @@ export type Preparer = {
   is_staff: boolean;
 };
 
-// TODO
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PlotSearchTarget = {
   id: number;
-  plan_unit: Record<string, never>;
+  plan_unit: PlanUnit;
   plan_unit_id: number;
   target_type: string;
   master_plan_unit_id: number;
@@ -78,11 +77,36 @@ export type PlotSearchTarget = {
   lease_address: {
     address: string;
   };
+  lease_hitas?: string;
+  lease_financing?: string;
+  lease_management?: string;
   info_links: Array<PlotSearchTargetInfoLink>;
   decisions: Array<{
     lease: number;
   }>;
 };
+export type PlanUnit = {
+  id: number;
+  identifier: string;
+  area?: number;
+  section_area?: number;
+  in_contract: boolean;
+  is_master: boolean;
+  decisions: Array<Decision>;
+  plot_division_identifier: string;
+  plot_division_date_of_approval: string;
+  plot_division_effective_date: string;
+  detailed_plan_identifier: string;
+  detailed_plan_latest_processing_date?: string;
+  detailed_plan_latest_processing_date_note?: string;
+  plot_division_state: number;
+  plan_unit_type: number;
+  plan_unit_state: number;
+  plan_unit_status: string;
+  plan_unit_intended_use: number;
+  geometry: Geometry;
+};
+
 export type PlotSearchTargetInfoLink = {
   id: number;
   url: string;
@@ -133,8 +157,11 @@ export type FormFieldChoice = {
   has_text_input: boolean;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Decision = Record<string, any>;
+// TODO: the public endpoint version of this is incomplete.
+//  This site shouldn't probably care about decisions in any case, so this might be redundant.
+export type Decision = {
+  lease: number;
+};
 
 export type PlotSearch = {
   id: number;

@@ -13,6 +13,7 @@ export type ApiAttribute = {
     type: string;
     children: Record<string, ApiAttribute>;
   };
+  children?: Record<string, ApiAttribute>;
 };
 
 export type ApiAttributes = Record<string, ApiAttribute>;

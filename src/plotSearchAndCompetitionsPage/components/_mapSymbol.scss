@@ -5,6 +5,7 @@
   display: inline-block;
   width: $symbol-size;
   height: $symbol-size;
+  min-width: $symbol-size;
   line-height: $symbol-size;
   text-align: center;
   font-size: 1.125rem;
