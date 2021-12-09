@@ -8,6 +8,7 @@
 @import 'modal/confirmation-modal';
 @import 'button/button';
 @import 'button/close-button';
+@import 'button/iconButton';
 @import 'frontPage/front-page';
 @import 'frontPage/components/box';
 @import 'topNavigation/topNavigation';
@@ -18,6 +19,7 @@
 @import 'app';
 @import 'map/map-view';
 @import 'plotSearchAndCompetitionsPage/components/mapSymbol';
+@import 'plotSearchAndCompetitionsPage/components/mapSearchComponent';
 
 html {
   -webkit-font-smoothing: antialiased;

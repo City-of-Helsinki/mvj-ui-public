@@ -134,7 +134,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
   }
 
   return (
-    <div className={'container'}>
+    <div className="PlotSearchAndCompetitionsPage container">
       <Tabs
         active={activeTab}
         tabs={[
@@ -149,10 +149,19 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
       />
       <TabContent active={activeTab}>
         <TabPane>
-          <Fragment>
-            <MapSearchComponent />
+          <div>
+            <MapSearchComponent
+              categoryOptions={categoryOptions}
+              categoryVisibilities={categoryVisibilities}
+              onToggleVisibility={onToggleCategoryVisibility}
+              plotSearches={plotSearches.filter(
+                (s) => s.search_class === 'plot_search'
+              )}
+              setSelectedTarget={setSelectedTarget}
+              selectedTarget={selectedTarget}
+            />
             <MapComponent />
-          </Fragment>
+          </div>
         </TabPane>
         <TabPane>
           <div>...</div>
