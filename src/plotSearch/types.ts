@@ -77,6 +77,9 @@ export type PlotSearchTarget = {
   lease_address: {
     address: string;
   };
+  lease_hitas?: string;
+  lease_financing?: string;
+  lease_management?: string;
   info_links: Array<PlotSearchTargetInfoLink>;
   decisions: Array<{
     lease: number;
