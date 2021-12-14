@@ -2,18 +2,23 @@ import { all, call, Effect, fork, put, takeLatest } from 'redux-saga/effects';
 import {
   fetchPlotSearchAttributesRequest,
   fetchPlotSearchesRequest,
+  fetchPlotSearchTypesRequest,
 } from './requests';
 import {
   FetchPlotSearchesAction,
   FETCH_PLOT_SEARCHES,
   PlotSearch,
   FETCH_PLOT_SEARCH_ATTRIBUTES,
+  FETCH_PLOT_SEARCH_TYPES,
+  PlotSearchType,
 } from './types';
 import {
   plotSearchAttributesNotFound,
   plotSearchesNotFound,
+  plotSearchTypesNotFound,
   receivePlotSearchAttributes,
   receivePlotSearches,
+  receivePlotSearchTypes,
 } from './actions';
 import { ApiCallResult } from '../api/callApi';
 import { ApiAttributes } from '../api/types';
@@ -71,6 +76,27 @@ function* fetchPlotSearchAttributesSaga(): Generator<
   }
 }
 
+function* fetchPlotSearchTypesSaga(): Generator<Effect, void, ApiCallResult> {
+  try {
+    const { response, bodyAsJson } = yield call(fetchPlotSearchTypesRequest);
+
+    switch (response.status) {
+      case 200:
+        yield put(
+          receivePlotSearchTypes(bodyAsJson?.results as Array<PlotSearchType>)
+        );
+        break;
+      default:
+        yield put(plotSearchTypesNotFound());
+        break;
+    }
+  } catch (e) {
+    console.error(e);
+    yield put(plotSearchTypesNotFound());
+    throw e;
+  }
+}
+
 export default function* plotSearchSaga(): Generator {
   yield all([
     fork(function* (): Generator {
@@ -79,6 +105,7 @@ export default function* plotSearchSaga(): Generator {
         FETCH_PLOT_SEARCH_ATTRIBUTES,
         fetchPlotSearchAttributesSaga
       );
+      yield takeLatest(FETCH_PLOT_SEARCH_TYPES, fetchPlotSearchTypesSaga);
     }),
   ]);
 }

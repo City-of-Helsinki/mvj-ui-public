@@ -149,7 +149,7 @@ const MapSearchComponent = ({
         {plotSearchesByCategory.map((item, index) => {
           return (
             <MapSearchComponentAccordion
-              heading={`${item.category.labelKey} (${item.plotSearches.length})`}
+              heading={`${item.category.name} (${item.plotSearches.length})`}
               symbol={item.category.symbol}
               colorIndex={index}
               key={index}

@@ -1,12 +1,14 @@
+export type ApiAttributeChoice = {
+  display_name: string;
+  value: string | number;
+};
+
 export type ApiAttribute = {
   label: string;
   read_only: boolean;
   required: boolean;
   type: string;
-  choices?: Array<{
-    display_name: string;
-    value: string | number;
-  }>;
+  choices?: Array<ApiAttributeChoice>;
   child?: {
     read_only: boolean;
     required: boolean;

@@ -11,34 +11,46 @@ import MapComponent from '../map/mapComponent';
 import {
   fetchPlotSearchAttributes,
   fetchPlotSearches,
+  fetchPlotSearchTypes,
 } from '../plotSearch/actions';
 
 import { Language } from '../language/types';
 import translations from './translations';
 import { ApiAttributes } from '../api/types';
-import { PlotSearch, PlotSearchTarget } from '../plotSearch/types';
+import {
+  PlotSearch,
+  PlotSearchSubtype,
+  PlotSearchTarget,
+  PlotSearchType,
+} from '../plotSearch/types';
 
 interface State {
   currentLanguage: Language;
   isFetchingPlotSearches: boolean;
   isFetchingPlotSearchAttributes: boolean;
+  isFetchingPlotSearchTypes: boolean;
   plotSearches: Array<PlotSearch>;
   plotSearchAttributes: ApiAttributes;
+  plotSearchTypes: Array<PlotSearchType>;
 }
 
 interface Props {
   currentLanguage: string;
   fetchPlotSearches: () => void;
   fetchPlotSearchAttributes: () => void;
+  fetchPlotSearchTypes: () => void;
   isFetchingPlotSearches: boolean;
   isFetchingPlotSearchAttributes: boolean;
+  isFetchingPlotSearchTypes: boolean;
   plotSearches: Array<PlotSearch>;
   plotSearchAttributes: ApiAttributes;
+  plotSearchTypes: Array<PlotSearchType>;
 }
 
 export type CategoryOptions = Array<{
   id: number;
-  labelKey: string;
+  name: string;
+  subtypes: Array<PlotSearchSubtype>;
   symbol: string;
 }>;
 export type CategoryVisibilities = Record<number, boolean>;
@@ -53,9 +65,11 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     currentLanguage,
     fetchPlotSearches,
     fetchPlotSearchAttributes,
+    fetchPlotSearchTypes,
     isFetchingPlotSearches,
     isFetchingPlotSearchAttributes,
-    plotSearchAttributes,
+    isFetchingPlotSearchTypes,
+    plotSearchTypes,
     plotSearches,
   } = props;
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -71,33 +85,34 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
   useEffect(() => {
     fetchPlotSearches();
     fetchPlotSearchAttributes();
+    fetchPlotSearchTypes();
   }, []);
 
   useEffect(() => {
-    let newOptions = [...(plotSearchAttributes?.type?.choices || [])];
+    let newOptions = [...(plotSearchTypes || [])];
 
     if (newOptions) {
-      newOptions.sort((a, b) => (a.value > b.value ? 1 : -1));
       newOptions = newOptions.filter((option) =>
-        plotSearches.some((plotSearch) => plotSearch.type?.id === option.value)
+        plotSearches.some((plotSearch) => plotSearch.type?.id === option.id)
       );
 
       setCategoryOptions(
         newOptions.map((option, index) => ({
-          id: Number(option.value),
-          labelKey: option.display_name,
+          id: Number(option.id),
+          name: option.name,
+          subtypes: option.subtypes,
           symbol: String.fromCharCode('A'.charCodeAt(0) + index),
         }))
       );
 
       setCategoryVisibilities(
         newOptions.reduce((acc, next) => {
-          acc[Number(next.value)] = true;
+          acc[Number(next.id)] = true;
           return acc;
         }, {} as CategoryVisibilities)
       );
     }
-  }, [plotSearchAttributes, plotSearches]);
+  }, [plotSearchTypes, plotSearches]);
 
   if (tabId != activeTab) {
     setActiveTab(tabId);
@@ -128,7 +143,11 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     );
   };
 
-  if (isFetchingPlotSearches || isFetchingPlotSearchAttributes) {
+  if (
+    isFetchingPlotSearches ||
+    isFetchingPlotSearchAttributes ||
+    isFetchingPlotSearchTypes
+  ) {
     // TODO: loader
     return <div />;
   }
@@ -175,12 +194,15 @@ const mapStateToProps = (state: RootState): State => ({
   currentLanguage: state.language.current,
   plotSearches: state.plotSearch.plotSearches,
   plotSearchAttributes: state.plotSearch.plotSearchAttributes,
+  plotSearchTypes: state.plotSearch.plotSearchTypes,
   isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,
   isFetchingPlotSearchAttributes:
     state.plotSearch.isFetchingPlotSearchAttributes,
+  isFetchingPlotSearchTypes: state.plotSearch.isFetchingPlotSearchTypes,
 });
 
 export default connect(mapStateToProps, {
   fetchPlotSearches,
   fetchPlotSearchAttributes,
+  fetchPlotSearchTypes,
 })(PlotSearchAndCompetitionsPage);

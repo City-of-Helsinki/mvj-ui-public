@@ -14,7 +14,7 @@ const App = ({ children }: Props): JSX.Element => {
     <div className={'app'}>
       <LoginModal />
       <TopNavigation />
-      {children}
+      <main>{children}</main>
       <Footer />
     </div>
   );

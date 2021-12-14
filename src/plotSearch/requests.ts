@@ -19,3 +19,11 @@ export const fetchPlotSearchAttributesRequest = (): Generator<
     })
   );
 };
+
+export const fetchPlotSearchTypesRequest = (): Generator<
+  Effect,
+  ApiCallResult,
+  Response
+> => {
+  return callApi(new Request(createUrl('plot_search_type/')));
+};
