@@ -4,4 +4,13 @@
   display: block;
   overflow: hidden;
   min-height: 100%;
+
+  main {
+    min-height: 100vh;
+    margin-top: 72px;
+    margin-bottom: -50px;
+    @media #{$mq-xsmall} {
+      margin-top: 65px;
+    }
+  }
 }

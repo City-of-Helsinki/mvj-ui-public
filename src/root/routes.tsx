@@ -41,24 +41,28 @@ export const getRouteById = (id: string): string => {
 const SiteRoutes = (): JSX.Element => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<FrontPage />} />
-        <Route
-          path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
-          element={<PlotSearchAndCompetitionsPage />}
-        />
-        <Route
-          path={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
-          element={<div className={'container'}>Muut kilpailut ja haut</div>}
-        />
-        <Route
-          path={getRouteById(AppRoutes.AREA_SEARCH)}
-          element={<div className={'container'}>Aluehaku sivu</div>}
-        />
-        <Route path={getRouteById(AppRoutes.DEBUG)} element={<CounterPage />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-      <App />
+      <App>
+        <Routes>
+          <Route path="/" element={<FrontPage />} />
+          <Route
+            path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
+            element={<PlotSearchAndCompetitionsPage />}
+          />
+          <Route
+            path={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
+            element={<div className={'container'}>Muut kilpailut ja haut</div>}
+          />
+          <Route
+            path={getRouteById(AppRoutes.AREA_SEARCH)}
+            element={<div className={'container'}>Aluehaku sivu</div>}
+          />
+          <Route
+            path={getRouteById(AppRoutes.DEBUG)}
+            element={<CounterPage />}
+          />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </App>
     </BrowserRouter>
   );
 };

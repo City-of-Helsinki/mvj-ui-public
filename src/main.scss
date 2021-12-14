@@ -33,11 +33,3 @@ body {
   background-color: $body-background;
   font-family: $primary-font-family;
 }
-
-.container {
-  min-height: 100vh;
-  margin-top: 72px;
-  @media #{$mq-xsmall} {
-    margin-top: 65px;
-  }
-}
