@@ -1,0 +1,100 @@
+{
+  "common": {
+    "confirmationModal": {
+      "cancel": "Peruuta",
+      "close": "Sulje",
+      "save": "Tallenna"
+    }
+  },
+  "error": {
+    "pageNotFound": "404 Sivua ei löytynyt"
+  },
+  "footer": {
+    "copyright": {
+      "holder": "Copyright",
+      "text": "All rights reserved"
+    }
+  },
+  "frontPage": {
+    "applyChange": {
+      "counter": "Vuokraukset",
+      "explanation": "Kuvaus lorem ipsum dolor sit amet et cetera et cetera.",
+      "label": "Haen muutosta vuokraukseeni"
+    },
+    "areaSearch": {
+      "counter": "Aluehaku",
+      "explanation": "Kuvaus lorem ipsum dolor sit amet et cetera et cetera.",
+      "label": "Haluan vuokrata alueen"
+    },
+    "bannerText": "Helsingin kaupungin tonttien, maan, tilojen ja lorem ipsum vuokraus",
+    "contentHeader": "Miten voimme auttaa vuokraustarpeissasi?",
+    "otherCompetitionsAndSearches": {
+      "counter_one": "Muut kilpailut ja haut: {{count}} kpl",
+      "counter_other": "Muut kilpailut ja haut: {{count}} kpl",
+      "explanation": "Kuvaus lorem ipsum dolor sit amet et cetera et cetera.",
+      "label": "Haluan osallistua muuhun aluehakuun tai kilpailuun"
+    },
+    "plotSearchAndCompetitions": {
+      "counter_one": "Tonttihaut ja kilpailut: {{count}} kpl",
+      "counter_other": "Tonttihaut ja kilpailut: {{count}} kpl",
+      "explanation": "Tontit pitkäkestoiseen asumiseen tai teollisuustoimintaan",
+      "label": "Haluan osallistua tonttihakuun tai -kilpailuun"
+    },
+    "questions": {
+      "explanation": "Kirjaudu palveluun ja ole meihin yhteydessä Viestit-sivun kautta. Vastaamme sinulle mahdollisimman pian.",
+      "heading": "Kysyttävää?"
+    }
+  },
+  "login": {
+    "cancel": "Peruuta",
+    "form": {
+      "forgotPasswordLink": "Salasana unohtunut?",
+      "newAccountLink": "Rekisteröidy",
+      "password": {
+        "label": "Salasana",
+        "placeholder": "Kirjoita salasanasi"
+      },
+      "title": "Kirjaudu sisään",
+      "username": {
+        "label": "Käyttäjätunnus",
+        "placeholder": "Kirjoita käyttäjätunnuksesi"
+      }
+    },
+    "login": "Kirjaudu",
+    "title": "Hakeaksesi tontteja, ole hyvä ja kirjaudu sisään palveluun."
+  },
+  "plotSearchAndCompetitions": {
+    "mapView": {
+      "sidebar": {
+        "sectionApplyBy": "Hakuaika päättyy {{date}}",
+        "singleTarget": {
+          "returnToList": "Takaisin"
+        },
+        "targetHeadings": {
+          "address": "Osoite",
+          "area": "Pinta-ala (m²)",
+          "intendedUse": "Käyttö\u00adtarkoitus",
+          "permittedBuildArea": "Rakennus\u00adoik. (k-m²)",
+          "plotNumber": "Tontti"
+        },
+        "typeHeadings": {
+          "showThisType": "Näytä",
+          "type": "Tyyppi"
+        }
+      }
+    },
+    "tabs": {
+      "list": "Lista",
+      "mapSearch": "Karttahaku"
+    }
+  },
+  "topNavigation": {
+    "signIn": "Kirjaudu sisään",
+    "skipToContent": "Siirry sisältöön",
+    "tabs": {
+      "areaSearch": "Aluehaku",
+      "otherCompetitionsAndSearches": "Muut kilpailut ja haut",
+      "plotSearchAndCompetitions": "Tonttihaut ja -kilpailut"
+    }
+  }
+}

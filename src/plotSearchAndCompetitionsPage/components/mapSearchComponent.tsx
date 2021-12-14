@@ -10,7 +10,6 @@ import {
 } from 'hds-react';
 import { Row, Col, Container } from 'react-grid-system';
 
-import translations from '../translations';
 import SidePanel from '../../panel/sidePanel';
 import MapSymbol from './mapSymbol';
 import {
@@ -23,7 +22,7 @@ import IconButton from '../../button/iconButton';
 import { connect } from 'react-redux';
 import { RootState } from '../../root/rootReducer';
 import { ApiAttributes } from '../../api/types';
-import { Language } from '../../language/types';
+import { useTranslation } from 'react-i18next';
 
 interface MapSearchComponentAccordionProps {
   initiallyOpen?: boolean;
@@ -98,12 +97,10 @@ interface MapSearchComponentProps {
   setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
   plotSearchAttributes: ApiAttributes;
-  currentLanguage: Language;
 }
 
 interface State {
   plotSearchAttributes: ApiAttributes;
-  currentLanguage: Language;
 }
 
 const MapSearchComponent = ({
@@ -113,8 +110,9 @@ const MapSearchComponent = ({
   plotSearches,
   setSelectedTarget,
   selectedTarget,
-  currentLanguage,
 }: MapSearchComponentProps): JSX.Element => {
+  const { t, i18n } = useTranslation();
+
   const renderSelectedTargetSidebar = () => {
     if (!selectedTarget) {
       return null;
@@ -122,7 +120,10 @@ const MapSearchComponent = ({
     return (
       <div className="MapSearchComponent__single-target-view">
         <Button onClick={() => setSelectedTarget(null)}>
-          {translations[currentLanguage].RETURN_TO_LIST}
+          {t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.returnToList',
+            'Return to list'
+          )}
         </Button>
       </div>
     );
@@ -143,8 +144,18 @@ const MapSearchComponent = ({
           gutterWidth={SIDEBAR_GUTTER_WIDTH}
           className="MapSearchComponent__list-headings"
         >
-          <Col xs={2}>{translations[currentLanguage].HEADING_SHOW}</Col>
-          <Col xs={10}>{translations[currentLanguage].HEADING_TYPE}</Col>
+          <Col xs={2}>
+            {t(
+              'plotSearchAndCompetitions.mapView.sidebar.typeHeadings.showThisType',
+              'Show'
+            )}
+          </Col>
+          <Col xs={10}>
+            {t(
+              'plotSearchAndCompetitions.mapView.sidebar.typeHeadings.type',
+              'Type'
+            )}
+          </Col>
         </Row>
         {plotSearchesByCategory.map((item, index) => {
           return (
@@ -230,22 +241,34 @@ const MapSearchComponent = ({
                       className="MapSearchComponent__list-headings"
                     >
                       <Col xs={2}>
-                        {translations[currentLanguage].HEADING_PLOT_NUMBER}
+                        {t(
+                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.plotNumber',
+                          'Plot'
+                        )}
                       </Col>
                       <Col xs={3}>
-                        {translations[currentLanguage].HEADING_PLOT_ADDRESS}
+                        {t(
+                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.address',
+                          'Address'
+                        )}
                       </Col>
                       <Col xs={2} style={{ hyphens: 'auto' }}>
-                        {translations[currentLanguage].HEADING_INTENDED_USE}
+                        {t(
+                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.intendedUse',
+                          'Intended use'
+                        )}
                       </Col>
                       <Col xs={2} style={{ hyphens: 'auto' }}>
-                        {
-                          translations[currentLanguage]
-                            .HEADING_PERMITTED_BUILD_FLOOR_AREA
-                        }
+                        {t(
+                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.permittedBuildArea',
+                          'Permitted build floor area (m²)'
+                        )}
                       </Col>
                       <Col xs={2}>
-                        {translations[currentLanguage].HEADING_AREA}
+                        {t(
+                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.area',
+                          'Area (m²)'
+                        )}
                       </Col>
                       <Col xs={1} />
                     </Row>
@@ -256,13 +279,18 @@ const MapSearchComponent = ({
                             <h4>{section.heading}</h4>
                             {section.headingExtra?.endDate && (
                               <span>
-                                {translations[currentLanguage].HEADING_END_DATE}{' '}
-                                {new Date(
-                                  section.headingExtra.endDate
-                                ).toLocaleString('fi', {
-                                  dateStyle: 'medium',
-                                  timeStyle: 'short',
-                                })}
+                                {t(
+                                  'plotSearchAndCompetitions.mapView.sidebar.sectionApplyBy',
+                                  'Apply by {{date}}',
+                                  {
+                                    date: new Date(
+                                      section.headingExtra.endDate
+                                    ).toLocaleString('fi', {
+                                      dateStyle: 'medium',
+                                      timeStyle: 'short',
+                                    }),
+                                  }
+                                )}
                               </span>
                             )}
                           </div>
@@ -290,7 +318,7 @@ const MapSearchComponent = ({
                                 <Col xs={2}>?</Col>
                                 <Col xs={2}>
                                   {target.data.plan_unit.area?.toLocaleString(
-                                    currentLanguage
+                                    i18n.language
                                   ) || '?'}
                                 </Col>
                                 <Col xs={1}>
@@ -324,7 +352,6 @@ const MapSearchComponent = ({
 
 export default connect(
   (state: RootState): State => ({
-    currentLanguage: state.language.current,
     plotSearchAttributes: state.plotSearch.plotSearchAttributes,
   })
 )(MapSearchComponent);

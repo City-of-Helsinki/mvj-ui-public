@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from './modal';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   children?: JSX.Element;
@@ -14,11 +15,12 @@ interface Props {
 }
 
 const ConfirmationModal = (props: Props): JSX.Element => {
+  const { t } = useTranslation();
   const {
     children,
     confirmButtonClassName,
-    confirmButtonLabel = 'Tallenna',
-    cancelButtonLabel = 'Peruuta',
+    confirmButtonLabel = t('common.confirmationModal.save', 'Save') || '',
+    cancelButtonLabel = t('common.confirmationModal.cancel', 'Cancel') || '',
     isOpen,
     onCancel,
     onClose,
@@ -33,7 +35,7 @@ const ConfirmationModal = (props: Props): JSX.Element => {
         title={title}
         isOpen={isOpen}
         onClose={onClose}
-        closeText={'sulje'}
+        closeText={t('common.confirmationModal.close', 'Close')}
         confirmButtonClassName={confirmButtonClassName}
         confirmButtonLabel={confirmButtonLabel}
         cancelButtonLabel={cancelButtonLabel}

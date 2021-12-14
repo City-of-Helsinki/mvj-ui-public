@@ -3,34 +3,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Navigation } from 'hds-react';
 import { AppRoutes, getRouteById } from '../root/routes';
-import { RootState } from '../root/rootReducer';
-import { changeLang } from '../language/actions';
 import { openLoginModal } from '../login/actions';
-import { Language } from '../language/types';
-import translations from './translations';
+import { Language } from '../i18n/types';
 import { NavigateFunction } from 'react-router';
-
-interface State {
-  currentLanguage: Language;
-}
+import { useTranslation } from 'react-i18next';
 
 interface Dispatch {
-  changeLang: (lang: Language) => void;
   openLoginModal: () => void;
 }
 
 interface TopNavigationProps {
-  currentLanguage: string;
   openLoginModal: () => void;
-  changeLang: (lang: Language) => void;
 }
 
-const TopNavigation = (props: TopNavigationProps): JSX.Element => {
+const TopNavigation = ({ openLoginModal }: TopNavigationProps): JSX.Element => {
   const returnHome = (navigate: NavigateFunction) => {
     navigate(getRouteById(AppRoutes.HOME));
   };
 
-  const { currentLanguage, openLoginModal, changeLang } = props;
+  const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -38,7 +29,7 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
     <Navigation
       menuToggleAriaLabel="menu"
       skipTo="#content"
-      skipToContentLabel="Skip to content"
+      skipToContentLabel={t('topNavigation.skipToContent', 'Skip to content')}
       onTitleClick={() => returnHome(navigate)}
       fixed={true}
       className={'top-nav'}
@@ -46,34 +37,46 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
       <Navigation.Row variant="inline">
         <Link to={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}>
           <Navigation.Item
-            label={translations[currentLanguage].PLOT_SEARCH_AND_COMPETITIONS}
+            label={t(
+              'topNavigation.tabs.plotSearchAndCompetitions',
+              'Plot search and competitions'
+            )}
           />
         </Link>
         <Link to={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}>
           <Navigation.Item
-            label={
-              translations[currentLanguage].OTHER_COMPETITIONS_AND_SEARCHES
-            }
+            label={t(
+              'topNavigation.tabs.otherCompetitionsAndSearches',
+              'Other competitions and searches'
+            )}
           />
         </Link>
         <Link to={getRouteById(AppRoutes.AREA_SEARCH)}>
-          <Navigation.Item label={translations[currentLanguage].AREA_SEARCH} />
+          <Navigation.Item
+            label={t('topNavigation.tabs.areaSearch', 'Area search')}
+          />
         </Link>
       </Navigation.Row>
       <Navigation.Actions>
-        <Navigation.User label="Sign in" onSignIn={() => openLoginModal()} />
-        <Navigation.LanguageSelector label={currentLanguage.toUpperCase()}>
+        <Navigation.User
+          label={t('topNavigation.signIn', 'Sign in')}
+          onSignIn={() => openLoginModal()}
+        />
+        <Navigation.LanguageSelector label={i18n.language.toUpperCase()}>
           <Navigation.Item
             label="Suomeksi"
-            onClick={() => changeLang(Language.FI)}
+            lang="fi"
+            onClick={() => i18n.changeLanguage(Language.FI)}
           />
           <Navigation.Item
             label="På svenska"
-            onClick={() => changeLang(Language.SWE)}
+            lang="sv"
+            onClick={() => i18n.changeLanguage(Language.SV)}
           />
           <Navigation.Item
             label="In English"
-            onClick={() => changeLang(Language.EN)}
+            lang="en"
+            onClick={() => i18n.changeLanguage(Language.EN)}
           />
         </Navigation.LanguageSelector>
       </Navigation.Actions>
@@ -82,12 +85,7 @@ const TopNavigation = (props: TopNavigationProps): JSX.Element => {
 };
 
 const mapDispatchToProps: Dispatch = {
-  changeLang,
   openLoginModal,
 };
 
-const mapStateToProps = (state: RootState): State => ({
-  currentLanguage: state.language.current,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopNavigation);
+export default connect(null, mapDispatchToProps)(TopNavigation);

@@ -1,7 +1,10 @@
 import React from 'react';
 import { Footer } from 'hds-react';
+import { useTranslation } from 'react-i18next';
 
 const FooterComponent = (): JSX.Element => {
+  const { t } = useTranslation();
+
   return (
     <Footer
       title={'Footer lorem ipsum'}
@@ -13,8 +16,8 @@ const FooterComponent = (): JSX.Element => {
       }}
     >
       <Footer.Base
-        copyrightHolder="Copyright"
-        copyrightText="All rights reserved"
+        copyrightHolder={t('footer.copyright.holder', 'Copyright')}
+        copyrightText={t('footer.copyright.text', 'All rights reserved')}
       />
     </Footer>
   );

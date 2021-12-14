@@ -1,0 +1,100 @@
+{
+  "common": {
+    "confirmationModal": {
+      "cancel": "Cancel",
+      "close": "Close",
+      "save": "Save"
+    }
+  },
+  "error": {
+    "pageNotFound": "404 Page not found"
+  },
+  "footer": {
+    "copyright": {
+      "holder": "Copyright",
+      "text": "All rights reserved"
+    }
+  },
+  "frontPage": {
+    "applyChange": {
+      "counter": "Existing leases",
+      "explanation": "Description lorem ipsum dolor sit amet et cetera et cetera.",
+      "label": "I want to apply for a change for my lease"
+    },
+    "areaSearch": {
+      "counter": "Area search",
+      "explanation": "Description lorem ipsum dolor sit amet et cetera et cetera.",
+      "label": "I want to rent an area"
+    },
+    "bannerText": "City of Helsinki plot, land, area and lorem ipsum rental",
+    "contentHeader": "How can we help with your rental needs?",
+    "otherCompetitionsAndSearches": {
+      "counter_one": "Other competitions and searches: {{count}}",
+      "counter_other": "Other competitions and searches: {{count}}",
+      "explanation": "Description lorem ipsum dolor sit amet et cetera et cetera.",
+      "label": "I want to participate in another area search or competition"
+    },
+    "plotSearchAndCompetitions": {
+      "counter_one": "Plot search and competitions: {{count}}",
+      "counter_other": "Plot search and competitions: {{count}}",
+      "explanation": "Plots for long-term housing or industrial activities",
+      "label": "I want to participate in a plot search or competition"
+    },
+    "questions": {
+      "explanation": "Please log in and contact us through the Messages page. We will get back to you as soon as possible.",
+      "heading": "Questions"
+    }
+  },
+  "login": {
+    "cancel": "Cancel",
+    "form": {
+      "forgotPasswordLink": "Forgot your password?",
+      "newAccountLink": "Create an account",
+      "password": {
+        "label": "Password",
+        "placeholder": "Please type your password"
+      },
+      "title": "Log in",
+      "username": {
+        "label": "Username",
+        "placeholder": "Please type your username"
+      }
+    },
+    "login": "Log in",
+    "title": "To search plots, please login to the service."
+  },
+  "plotSearchAndCompetitions": {
+    "mapView": {
+      "sidebar": {
+        "sectionApplyBy": "Apply by {{date}}",
+        "singleTarget": {
+          "returnToList": "Return to list"
+        },
+        "targetHeadings": {
+          "address": "Address",
+          "area": "Area (m²)",
+          "intendedUse": "Intended use",
+          "permittedBuildArea": "Permitted build floor area (m²)",
+          "plotNumber": "Plot"
+        },
+        "typeHeadings": {
+          "showThisType": "Show",
+          "type": "Type"
+        }
+      }
+    },
+    "tabs": {
+      "list": "List",
+      "mapSearch": "Map search"
+    }
+  },
+  "topNavigation": {
+    "signIn": "Sign in",
+    "skipToContent": "Skip to content",
+    "tabs": {
+      "areaSearch": "Area search",
+      "otherCompetitionsAndSearches": "Other competitions and searches",
+      "plotSearchAndCompetitions": "Plot search and competitions"
+    }
+  }
+}

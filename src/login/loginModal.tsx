@@ -3,13 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../root/rootReducer';
 import ConfirmationModal from '../modal/confirmationModal';
-import { Language } from '../language/types';
-import translations from './translations';
 import { hideLoginModal } from './actions';
 import LoginComponent from './components/loginComponent';
+import { useTranslation } from 'react-i18next';
 
 interface State {
-  currentLanguage: Language;
   isLoginModalOpen: boolean;
 }
 
@@ -18,23 +16,23 @@ interface Dispatch {
 }
 
 interface Props {
-  currentLanguage: Language;
   isLoginModalOpen: boolean;
   hideLoginModal: () => void;
 }
 
 const LoginModal = (props: Props): JSX.Element => {
-  const { currentLanguage, hideLoginModal, isLoginModalOpen } = props;
+  const { hideLoginModal, isLoginModalOpen } = props;
+  const { t } = useTranslation();
 
   return (
     <ConfirmationModal
-      confirmButtonLabel={translations[currentLanguage].LOGIN}
-      cancelButtonLabel={translations[currentLanguage].CANCEL}
-      isOpen={isLoginModalOpen} // isLoginModalOpen
+      confirmButtonLabel={t('login.login', 'Log in')}
+      cancelButtonLabel={t('login.cancel', 'Cancel')}
+      isOpen={isLoginModalOpen}
       onCancel={() => hideLoginModal()}
       onClose={() => hideLoginModal()}
       onSave={() => console.log('save')}
-      title={translations[currentLanguage].LOGIN_TITLE}
+      title={t('login.title', 'To search plots, please login to the service.')}
     >
       <LoginComponent />
     </ConfirmationModal>
@@ -46,7 +44,6 @@ const mapDispatchToProps: Dispatch = {
 };
 
 const mapStateToProps = (state: RootState): State => ({
-  currentLanguage: state.language.current,
   isLoginModalOpen: state.login.isLoginModalOpen,
 });
 
