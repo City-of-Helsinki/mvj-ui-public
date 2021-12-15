@@ -12,6 +12,7 @@ const translations: Translation = {
     HEADING_PERMITTED_BUILD_FLOOR_AREA: 'Rakennus\u00adoik. (k-m²)',
     HEADING_AREA: 'Pinta-ala (m²)',
     RETURN_TO_LIST: 'Takaisin',
+    HEADING_END_DATE: 'Hakuaika päättyy',
   },
   [Language.EN]: {
     MAP_SEARCH: 'Map search',
@@ -24,6 +25,7 @@ const translations: Translation = {
     HEADING_PERMITTED_BUILD_FLOOR_AREA: 'Permitted build floor area (m²)',
     HEADING_AREA: 'Area (m²)',
     RETURN_TO_LIST: 'Back',
+    HEADING_END_DATE: 'Apply by',
   },
   [Language.SWE]: {
     MAP_SEARCH: 'Kartsökning',

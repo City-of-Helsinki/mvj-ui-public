@@ -113,6 +113,7 @@ export type PlotSearchTarget = {
   decisions: Array<{
     lease: number;
   }>;
+  district: string;
 };
 export type PlanUnit = {
   id: number;

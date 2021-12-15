@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode } from 'react';
+import React, { ChangeEvent, Fragment, ReactNode } from 'react';
 import classNames from 'classnames';
 import {
   Button,
@@ -18,7 +18,7 @@ import {
   CategoryVisibilities,
   SelectedTarget,
 } from '../plotSearchAndCompetitionsPage';
-import { PlotSearch } from '../../plotSearch/types';
+import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import IconButton from '../../button/iconButton';
 import { connect } from 'react-redux';
 import { RootState } from '../../root/rootReducer';
@@ -158,79 +158,162 @@ const MapSearchComponent = ({
                 onToggleVisibility(item.category.id, isVisible)
               }
             >
-              <h2 className="MapSearchComponent__plot-search-subtype-heading">
-                Alatyyppi (todo)
-              </h2>
-              <Row
-                gutterWidth={SIDEBAR_GUTTER_WIDTH}
-                className="MapSearchComponent__list-headings"
-              >
-                <Col xs={2}>
-                  {translations[currentLanguage].HEADING_PLOT_NUMBER}
-                </Col>
-                <Col xs={3}>
-                  {translations[currentLanguage].HEADING_PLOT_ADDRESS}
-                </Col>
-                <Col xs={2} style={{ hyphens: 'auto' }}>
-                  {translations[currentLanguage].HEADING_INTENDED_USE}
-                </Col>
-                <Col xs={2} style={{ hyphens: 'auto' }}>
-                  {
-                    translations[currentLanguage]
-                      .HEADING_PERMITTED_BUILD_FLOOR_AREA
-                  }
-                </Col>
-                <Col xs={2}>{translations[currentLanguage].HEADING_AREA}</Col>
-                <Col xs={1} />
-              </Row>
-              <div role="list">
-                {item.plotSearches.map((plotSearch) => (
-                  <div key={plotSearch.id} role="listitem">
-                    <h3 className="MapSearchComponent__plot-search-heading">
-                      {plotSearch.name}
+              {item.category.subtypes.map((subtype) => {
+                const matchingPlotSearches = item.plotSearches.filter(
+                  (plotSearch) => plotSearch.subtype.id === subtype.id
+                );
+
+                if (matchingPlotSearches.length === 0) {
+                  return null;
+                }
+
+                type SectionSlice = {
+                  heading: string;
+                  headingExtra?: {
+                    endDate?: string;
+                  };
+                  key: string | number;
+                  targets: Array<{
+                    relatedPlotSearch: PlotSearch;
+                    data: PlotSearchTarget;
+                  }>;
+                };
+                let sections: Array<SectionSlice>;
+
+                if (subtype.show_district) {
+                  const districts = matchingPlotSearches.reduce((acc, next) => {
+                    next.plot_search_targets.forEach((target) => {
+                      if (!acc[target.district]) {
+                        acc[target.district] = {
+                          heading: target.district,
+                          key: target.district,
+                          targets: [],
+                        };
+                      }
+
+                      acc[target.district].targets.push({
+                        relatedPlotSearch: next,
+                        data: target,
+                      });
+                    });
+
+                    return acc;
+                  }, {} as Record<string, SectionSlice>);
+
+                  const districtNames = Object.keys(districts);
+                  districtNames.sort((a, b) => (a > b ? 1 : -1));
+
+                  sections = districtNames.map(
+                    (district) => districts[district]
+                  );
+                } else {
+                  sections = matchingPlotSearches.map((plotSearch) => ({
+                    heading: plotSearch.name,
+                    headingExtra: {
+                      endDate: plotSearch.end_at,
+                    },
+                    key: plotSearch.id,
+                    targets: plotSearch.plot_search_targets.map((target) => ({
+                      relatedPlotSearch: plotSearch,
+                      data: target,
+                    })),
+                  }));
+                }
+
+                return (
+                  <Fragment key={subtype.id}>
+                    <h3 className="MapSearchComponent__plot-search-subtype-heading">
+                      {subtype.name}
                     </h3>
+                    <Row
+                      gutterWidth={SIDEBAR_GUTTER_WIDTH}
+                      className="MapSearchComponent__list-headings"
+                    >
+                      <Col xs={2}>
+                        {translations[currentLanguage].HEADING_PLOT_NUMBER}
+                      </Col>
+                      <Col xs={3}>
+                        {translations[currentLanguage].HEADING_PLOT_ADDRESS}
+                      </Col>
+                      <Col xs={2} style={{ hyphens: 'auto' }}>
+                        {translations[currentLanguage].HEADING_INTENDED_USE}
+                      </Col>
+                      <Col xs={2} style={{ hyphens: 'auto' }}>
+                        {
+                          translations[currentLanguage]
+                            .HEADING_PERMITTED_BUILD_FLOOR_AREA
+                        }
+                      </Col>
+                      <Col xs={2}>
+                        {translations[currentLanguage].HEADING_AREA}
+                      </Col>
+                      <Col xs={1} />
+                    </Row>
                     <div role="list">
-                      {plotSearch.plot_search_targets.map((target) => (
-                        <Row
-                          className="MapSearchComponent__target"
-                          key={target.id}
-                          role="listitem"
-                          gutterWidth={SIDEBAR_GUTTER_WIDTH}
-                        >
-                          <Col xs={2}>{target.lease_identifier}</Col>
-                          <Col
-                            xs={3}
-                            className="MapSearchComponent__target-address"
-                          >
-                            {target.lease_address.address}
-                          </Col>
-                          <Col xs={2}>
-                            {target.plan_unit.plan_unit_intended_use || '?'}
-                          </Col>
-                          <Col xs={2}>?</Col>
-                          <Col xs={2}>
-                            {target.plan_unit.area?.toLocaleString(
-                              currentLanguage
-                            ) || '?'}
-                          </Col>
-                          <Col xs={1}>
-                            <IconButton
-                              onClick={() =>
-                                setSelectedTarget({
-                                  target,
-                                  plotSearch,
-                                })
-                              }
-                            >
-                              <IconArrowRight size="s" />
-                            </IconButton>
-                          </Col>
-                        </Row>
+                      {sections.map((section) => (
+                        <div key={section.key} role="listitem">
+                          <div className="MapSearchComponent__plot-search-heading">
+                            <h4>{section.heading}</h4>
+                            {section.headingExtra?.endDate && (
+                              <span>
+                                {translations[currentLanguage].HEADING_END_DATE}{' '}
+                                {new Date(
+                                  section.headingExtra.endDate
+                                ).toLocaleString('fi', {
+                                  dateStyle: 'medium',
+                                  timeStyle: 'short',
+                                })}
+                              </span>
+                            )}
+                          </div>
+                          <div role="list">
+                            {section.targets.map((target) => (
+                              <Row
+                                className="MapSearchComponent__target"
+                                key={target.data.id}
+                                role="listitem"
+                                gutterWidth={SIDEBAR_GUTTER_WIDTH}
+                                align="center"
+                              >
+                                <Col xs={2}>{target.data.lease_identifier}</Col>
+                                <Col
+                                  xs={3}
+                                  className="MapSearchComponent__target-address"
+                                >
+                                  {target.data.lease_address.address}
+                                </Col>
+                                <Col xs={2}>
+                                  {/* TODO: actual short code instead of numeric ID */}
+                                  {target.data.plan_unit
+                                    .plan_unit_intended_use || '?'}
+                                </Col>
+                                <Col xs={2}>?</Col>
+                                <Col xs={2}>
+                                  {target.data.plan_unit.area?.toLocaleString(
+                                    currentLanguage
+                                  ) || '?'}
+                                </Col>
+                                <Col xs={1}>
+                                  <IconButton
+                                    onClick={() =>
+                                      setSelectedTarget({
+                                        target: target.data,
+                                        plotSearch: target.relatedPlotSearch,
+                                      })
+                                    }
+                                  >
+                                    <IconArrowRight size="s" />
+                                  </IconButton>
+                                </Col>
+                              </Row>
+                            ))}
+                          </div>
+                        </div>
                       ))}
                     </div>
-                  </div>
-                ))}
-              </div>
+                  </Fragment>
+                );
+              })}
             </MapSearchComponentAccordion>
           );
         })}
