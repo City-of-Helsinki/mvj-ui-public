@@ -6,6 +6,7 @@
 
 @import 'modal/modal';
 @import 'modal/confirmation-modal';
+@import 'breadcrumbs/breadcrumbs';
 @import 'button/button';
 @import 'button/close-button';
 @import 'button/iconButton';
@@ -20,6 +21,7 @@
 @import 'map/map-view';
 @import 'plotSearchAndCompetitionsPage/components/mapSymbol';
 @import 'plotSearchAndCompetitionsPage/components/mapSearchComponent';
+@import 'plotSearchAndCompetitionsPage/components/mapSearchSingleTargetView';
 
 html {
   -webkit-font-smoothing: antialiased;

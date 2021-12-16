@@ -85,18 +85,7 @@
     padding: 5px 10px;
   }
 
-  .MapSearchComponent__single-target-view + .MapSearchComponent__list-view {
+  .MapSearchSingleTargetView + .MapSearchComponent__list-view {
     display: none;
-  }
-
-  dl {
-    div {
-      margin: 5px 0;
-      padding: 5px 0;
-    }
-
-    dt {
-      font-weight: bold;
-    }
   }
 }

@@ -68,6 +68,22 @@
       "sidebar": {
         "sectionApplyBy": "",
         "singleTarget": {
+          "address": "",
+          "applyButton": "",
+          "applyByDate": "",
+          "area": "",
+          "detailedPlanIdentifier": "",
+          "detailedPlanState": "",
+          "financingMethod": "",
+          "firstSuitableConstructionYear": "",
+          "hitas": "",
+          "infoLinks": "",
+          "intendedUse": "",
+          "management": "",
+          "permittedBuildArea": "",
+          "permittedBuildAreaCommercial": "",
+          "permittedBuildAreaResidential": "",
+          "plotNumber": "",
           "returnToList": ""
         },
         "targetHeadings": {

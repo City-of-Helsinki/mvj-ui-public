@@ -1,7 +1,6 @@
 import React, { ChangeEvent, Fragment, ReactNode } from 'react';
 import classNames from 'classnames';
 import {
-  Button,
   Checkbox,
   IconAngleDown,
   IconAngleUp,
@@ -19,10 +18,8 @@ import {
 } from '../plotSearchAndCompetitionsPage';
 import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import IconButton from '../../button/iconButton';
-import { connect } from 'react-redux';
-import { RootState } from '../../root/rootReducer';
-import { ApiAttributes } from '../../api/types';
 import { useTranslation } from 'react-i18next';
+import MapSearchSingleTargetView from './mapSearchSingleTargetView';
 
 interface MapSearchComponentAccordionProps {
   initiallyOpen?: boolean;
@@ -96,11 +93,6 @@ interface MapSearchComponentProps {
   plotSearches: Array<PlotSearch>;
   setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
-  plotSearchAttributes: ApiAttributes;
-}
-
-interface State {
-  plotSearchAttributes: ApiAttributes;
 }
 
 const MapSearchComponent = ({
@@ -113,22 +105,6 @@ const MapSearchComponent = ({
 }: MapSearchComponentProps): JSX.Element => {
   const { t, i18n } = useTranslation();
 
-  const renderSelectedTargetSidebar = () => {
-    if (!selectedTarget) {
-      return null;
-    }
-    return (
-      <div className="MapSearchComponent__single-target-view">
-        <Button onClick={() => setSelectedTarget(null)}>
-          {t(
-            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.returnToList',
-            'Return to list'
-          )}
-        </Button>
-      </div>
-    );
-  };
-
   const plotSearchesByCategory = categoryOptions.map((category) => ({
     category,
     plotSearches: plotSearches?.filter(
@@ -138,7 +114,12 @@ const MapSearchComponent = ({
 
   return (
     <SidePanel className="MapSearchComponent">
-      {selectedTarget && renderSelectedTargetSidebar()}
+      {selectedTarget && (
+        <MapSearchSingleTargetView
+          selectedTarget={selectedTarget}
+          setSelectedTarget={setSelectedTarget}
+        />
+      )}
       <div className="MapSearchComponent__list-view">
         <Row
           gutterWidth={SIDEBAR_GUTTER_WIDTH}
@@ -350,8 +331,4 @@ const MapSearchComponent = ({
   );
 };
 
-export default connect(
-  (state: RootState): State => ({
-    plotSearchAttributes: state.plotSearch.plotSearchAttributes,
-  })
-)(MapSearchComponent);
+export default MapSearchComponent;

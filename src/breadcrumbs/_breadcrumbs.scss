@@ -1,0 +1,13 @@
+.Breadcrumbs {
+  padding: 0;
+  font-size: $fontsize-body-s;
+
+  .Breadcrumbs__item {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    vertical-align: middle;
+  }
+}

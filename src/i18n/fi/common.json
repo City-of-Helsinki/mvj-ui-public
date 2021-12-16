@@ -68,6 +68,22 @@
       "sidebar": {
         "sectionApplyBy": "Hakuaika päättyy {{date}}",
         "singleTarget": {
+          "address": "Osoite",
+          "applyButton": "Hae kohdetta",
+          "applyByDate": "Hakuaika päättyy",
+          "area": "Pinta-ala (m²)",
+          "detailedPlanIdentifier": "Asemakaava",
+          "detailedPlanState": "Asemakaavan käsittelyvaihe",
+          "financingMethod": "Rahoitusmuoto",
+          "firstSuitableConstructionYear": "Rakennuskelpoinen",
+          "hitas": "HITAS",
+          "infoLinks": "Lisätietoja",
+          "intendedUse": "Käyttötarkoitus",
+          "management": "Hallintamuoto",
+          "permittedBuildArea": "Rakennusoikeus (k-m²)",
+          "permittedBuildAreaCommercial": "Liikerakennusoikeus (k-m²)",
+          "permittedBuildAreaResidential": "Asuinrakennusoikeus (k-m²)",
+          "plotNumber": "Tontti",
           "returnToList": "Takaisin"
         },
         "targetHeadings": {
