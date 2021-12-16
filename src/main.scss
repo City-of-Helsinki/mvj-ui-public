@@ -18,10 +18,10 @@
 @import 'login/components/login-component';
 @import 'panel/side-panel';
 @import 'app';
-@import 'map/map-view';
 @import 'plotSearchAndCompetitionsPage/components/mapSymbol';
 @import 'plotSearchAndCompetitionsPage/components/mapSearchComponent';
 @import 'plotSearchAndCompetitionsPage/components/mapSearchSingleTargetView';
+@import 'plotSearchAndCompetitionsPage/components/mapComponent';
 
 html {
   -webkit-font-smoothing: antialiased;

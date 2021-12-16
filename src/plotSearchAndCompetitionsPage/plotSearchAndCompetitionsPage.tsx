@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +9,7 @@ import Tabs from '../tabs/tabs';
 import TabPane from '../tabs/tabPane';
 import TabContent from '../tabs/tabContent';
 import MapSearchComponent from './components/mapSearchComponent';
-import MapComponent from '../map/mapComponent';
+import MapComponent from './components/mapComponent';
 import {
   fetchPlotSearchAttributes,
   fetchPlotSearches,
@@ -178,7 +178,13 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
               setSelectedTarget={setSelectedTarget}
               selectedTarget={selectedTarget}
             />
-            <MapComponent />
+            <MapComponent
+              plotSearches={plotSearches.filter(
+                (s) => s.search_class === 'plot_search'
+              )}
+              setSelectedTarget={setSelectedTarget}
+              selectedTarget={selectedTarget}
+            />
           </div>
         </TabPane>
         <TabPane>

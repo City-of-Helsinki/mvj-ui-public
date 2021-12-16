@@ -4,13 +4,24 @@ import {
   WMSTileLayer,
   LayersControl,
   ZoomControl,
+  Marker,
 } from 'react-leaflet';
 import * as L from 'leaflet';
 import proj4 from 'proj4';
 import 'proj4leaflet';
 import { LatLng } from 'leaflet';
+import { PlotSearch } from '../../plotSearch/types';
+import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
-const MapComponent = (): JSX.Element => {
+interface Props {
+  plotSearches: Array<PlotSearch>;
+  setSelectedTarget: (target: SelectedTarget) => void;
+  selectedTarget: SelectedTarget;
+}
+
+const MapComponent = (props: Props): JSX.Element => {
   // const map = useMap();
   const position = new LatLng(60.167642, 24.954753);
   const { BaseLayer } = LayersControl;
@@ -38,8 +49,16 @@ const MapComponent = (): JSX.Element => {
     '+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees'
   );
 
+  const DefaultIcon = new L.Icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+  });
+
+  L.Marker.prototype.options.icon = DefaultIcon;
+
   return (
     <MapContainer
+      className={'mapComponent'}
       center={position}
       zoom={6}
       scrollWheelZoom={false}
@@ -74,7 +93,13 @@ const MapComponent = (): JSX.Element => {
           />
         </BaseLayer>
       </LayersControl>
-      <ZoomControl position={'bottomright'} />
+      <ZoomControl position={'topright'} />
+      {props.plotSearches.map((plotSearch) => (
+        <Marker
+          position={new LatLng(60.167642, 24.954753)}
+          key={plotSearch.id}
+        />
+      ))}
     </MapContainer>
   );
 };
