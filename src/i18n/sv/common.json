@@ -1,0 +1,100 @@
+{
+  "common": {
+    "confirmationModal": {
+      "cancel": "",
+      "close": "",
+      "save": ""
+    }
+  },
+  "error": {
+    "pageNotFound": ""
+  },
+  "footer": {
+    "copyright": {
+      "holder": "",
+      "text": ""
+    }
+  },
+  "frontPage": {
+    "applyChange": {
+      "counter": "",
+      "explanation": "",
+      "label": ""
+    },
+    "areaSearch": {
+      "counter": "Områdesökning",
+      "explanation": "",
+      "label": ""
+    },
+    "bannerText": "Helsingfors stadstomter, mark, lokaler och uthyrning av Lorem ipsum",
+    "contentHeader": "Hur kan vi hjälpa till med dina hyresbehov?",
+    "otherCompetitionsAndSearches": {
+      "counter_one": "Andra tävlingar och sökningar: {{count}}",
+      "counter_other": "Andra tävlingar och sökningar: {{count}}",
+      "explanation": "",
+      "label": ""
+    },
+    "plotSearchAndCompetitions": {
+      "counter_one": "Plot sökningar och tävlingar: {{count}}",
+      "counter_other": "Plot sökningar och tävlingar: {{count}}",
+      "explanation": "Tomter för långtidsbostäder eller industriell verksamhet",
+      "label": "Jag vill delta i en tomtsökning eller tävling"
+    },
+    "questions": {
+      "explanation": "",
+      "heading": "Några frågor?"
+    }
+  },
+  "login": {
+    "cancel": "Annullera",
+    "form": {
+      "forgotPasswordLink": "",
+      "newAccountLink": "",
+      "password": {
+        "label": "",
+        "placeholder": ""
+      },
+      "title": "",
+      "username": {
+        "label": "",
+        "placeholder": ""
+      }
+    },
+    "login": "Logga in",
+    "title": "Logga in på tjänsten för att ansöka om tomter."
+  },
+  "plotSearchAndCompetitions": {
+    "mapView": {
+      "sidebar": {
+        "sectionApplyBy": "",
+        "singleTarget": {
+          "returnToList": ""
+        },
+        "targetHeadings": {
+          "address": "",
+          "area": "",
+          "intendedUse": "",
+          "permittedBuildArea": "",
+          "plotNumber": ""
+        },
+        "typeHeadings": {
+          "showThisType": "",
+          "type": ""
+        }
+      }
+    },
+    "tabs": {
+      "list": "Lista",
+      "mapSearch": "Kartsökning"
+    }
+  },
+  "topNavigation": {
+    "signIn": "",
+    "skipToContent": "",
+    "tabs": {
+      "areaSearch": "Områdesökning",
+      "otherCompetitionsAndSearches": "Andra tävlingar och sökningar",
+      "plotSearchAndCompetitions": "Plot sökningar och tävlingar"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 .MapSearchComponent {
   width: 440px;
+  padding-bottom: 24px;
 
   &__search-input {
     padding: 15px;
@@ -29,12 +30,19 @@
       background-color: $color-black-5;
     }
 
+    &--expanded + .MapSearchComponent__accordion {
+      // overlap the bottom border of the last target list in the previous opened section
+      margin-top: -1px;
+    }
+
     .MapSearchComponent__accordion-body {
       background-color: $color-black-5;
     }
 
     .MapSearchComponent__target {
-      padding: 0 10px;
+      padding: 5px 10px;
+      border-bottom: 1px solid $color-black-20;
+      font-size: $fontsize-body-s;
     }
 
     .MapSearchComponent__target-address {
@@ -57,7 +65,18 @@
 
   &__plot-search-heading {
     background-color: $color-black-20;
-    padding: 5px 10px;
+    padding: 10px 10px;
+    margin: 10px 0 0 0;
+
+    h4 {
+      margin: 0;
+
+      + span {
+        display: block;
+        padding-top: 5px;
+        font-size: $fontsize-body-s;
+      }
+    }
   }
 
   &__list-headings {
@@ -73,6 +92,7 @@
   dl {
     div {
       margin: 5px 0;
+      padding: 5px 0;
     }
 
     dt {

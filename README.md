@@ -22,3 +22,19 @@ To build up a development environment please follow these steps:
 2. On project root `run yarn` to install packages
 3. Run `yarn start` to run dev server
 
+## Localisation
+
+The application is localised using the [react-i18next](https://react.i18next.com/) library.
+All translatable messages should be defined through either its translation function or the
+`Trans` component, whichever is more appropriate for the situation, and given a meaningful
+translation key as well as a default message in English. The translation keys can then be
+automatically collected into the translation files located in `src/i18n` by running the command
+
+```shell
+yarn run i18n
+```
+
+After this, all new messages as well as any old messages whose default translation changed
+will now have an empty string in each of the respective non-English locale files, which can
+then be translated. The English file will also be populated with the default values from the
+source code files.

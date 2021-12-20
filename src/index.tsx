@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './i18n';
 import configureStore from './root/storeConfig';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
