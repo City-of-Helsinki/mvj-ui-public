@@ -31,9 +31,9 @@ const MapComponent = (props: Props): JSX.Element => {
   const initialPosition = new LatLng(60.167642, 24.954753);
   const { BaseLayer } = LayersControl;
   const southWest = new LatLng(60.079029, 24.646353);
-  const northEast = new LatLng(60.318135, 25.196695);
+  const northEast = new LatLng(60.318135, 26.196695);
   const latLonBounds = new L.LatLngBounds(southWest, northEast);
-  const bounds = L.bounds([25440000, 6630000], [25571072, 6761072]);
+  const bounds = L.bounds([25440000, 6630000], [26571072, 6761072]);
   const CRS = new L.Proj.CRS(
     'EPSG:3879',
     '+proj=tmerc +lat_0=0 +lon_0=25 +k=1 +x_0=25500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',

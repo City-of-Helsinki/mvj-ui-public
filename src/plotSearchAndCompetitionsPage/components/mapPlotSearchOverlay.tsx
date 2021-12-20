@@ -37,10 +37,14 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
     },
   });
 
-  if (props.selectedTarget && props.selectedTarget != prevSelectedTarget) {
-    const map = useMap();
-    map.setView(getCentroid(props.selectedTarget.target.plan_unit.geometry), 9);
-  }
+  useEffect(() => {
+    if (props.selectedTarget && props.selectedTarget != prevSelectedTarget) {
+      map.setView(
+        getCentroid(props.selectedTarget.target.plan_unit.geometry),
+        9
+      );
+    }
+  });
 
   const getMarkerIcon = (): DivIcon => {
     const html = renderToStaticMarkup(
