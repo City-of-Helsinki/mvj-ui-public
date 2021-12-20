@@ -4,26 +4,31 @@ import {
   WMSTileLayer,
   LayersControl,
   ZoomControl,
-  Marker,
 } from 'react-leaflet';
 import * as L from 'leaflet';
 import proj4 from 'proj4';
 import 'proj4leaflet';
 import { LatLng } from 'leaflet';
 import { PlotSearch } from '../../plotSearch/types';
-import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import {
+  CategoryOptions,
+  CategoryVisibilities,
+  SelectedTarget,
+} from '../plotSearchAndCompetitionsPage';
+import MapPlotSearchOverlay from './mapPlotSearchOverlay';
 
 interface Props {
   plotSearches: Array<PlotSearch>;
   setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
+  categoryOptions: CategoryOptions;
+  categoryVisibilities: CategoryVisibilities;
 }
 
 const MapComponent = (props: Props): JSX.Element => {
-  // const map = useMap();
-  const position = new LatLng(60.167642, 24.954753);
+  // Initializing map settings
+
+  const initialPosition = new LatLng(60.167642, 24.954753);
   const { BaseLayer } = LayersControl;
   const southWest = new LatLng(60.079029, 24.646353);
   const northEast = new LatLng(60.318135, 25.196695);
@@ -49,19 +54,19 @@ const MapComponent = (props: Props): JSX.Element => {
     '+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees'
   );
 
-  const DefaultIcon = new L.Icon({
-    iconUrl: icon,
-    shadowUrl: iconShadow,
-  });
-
-  L.Marker.prototype.options.icon = DefaultIcon;
+  const plotSearchesByCategory = props.categoryOptions.map((category) => ({
+    category,
+    plotSearches: props.plotSearches?.filter(
+      (plotSearch) => plotSearch.type?.id === category.id
+    ),
+  }));
 
   return (
     <MapContainer
       className={'mapComponent'}
-      center={position}
+      center={initialPosition}
       zoom={6}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
       maxBounds={latLonBounds}
       bounds={latLonBounds}
       crs={CRS}
@@ -71,7 +76,7 @@ const MapComponent = (props: Props): JSX.Element => {
         <BaseLayer checked name="Karttasarja">
           <WMSTileLayer
             url={'https://kartta.hel.fi/ws/geoserver/avoindata/wms?'}
-            layers={'avoindata:Karttasarja'}
+            layers={'avoindata:Karttasarja_harmaa'}
             format={'image/png'}
             transparent={true}
           />
@@ -94,12 +99,21 @@ const MapComponent = (props: Props): JSX.Element => {
         </BaseLayer>
       </LayersControl>
       <ZoomControl position={'topright'} />
-      {props.plotSearches.map((plotSearch) => (
-        <Marker
-          position={new LatLng(60.167642, 24.954753)}
-          key={plotSearch.id}
-        />
-      ))}
+      {plotSearchesByCategory.map(
+        (item, index) =>
+          props.categoryVisibilities[item.category.id] &&
+          item.plotSearches.map((plotSearch) => (
+            <MapPlotSearchOverlay
+              plotSearchTargets={plotSearch.plot_search_targets}
+              key={plotSearch.id}
+              selectedTarget={props.selectedTarget}
+              plotSearch={plotSearch}
+              setSelectedTarget={props.setSelectedTarget}
+              categoryIndex={index}
+              categorySymbol={item.category.symbol}
+            />
+          ))
+      )}
     </MapContainer>
   );
 };

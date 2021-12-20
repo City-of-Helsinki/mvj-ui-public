@@ -179,6 +179,8 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
               selectedTarget={selectedTarget}
             />
             <MapComponent
+              categoryOptions={categoryOptions}
+              categoryVisibilities={categoryVisibilities}
               plotSearches={plotSearches.filter(
                 (s) => s.search_class === 'plot_search'
               )}
