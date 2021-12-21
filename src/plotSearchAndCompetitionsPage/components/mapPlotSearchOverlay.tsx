@@ -39,10 +39,12 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
 
   useEffect(() => {
     if (props.selectedTarget && props.selectedTarget != prevSelectedTarget) {
-      map.setView(
-        getCentroid(props.selectedTarget.target.plan_unit.geometry),
-        9
+      const position = getCentroid(
+        props.selectedTarget.target.plan_unit.geometry
       );
+      if (position) {
+        map.setView(position, 9);
+      }
     }
   });
 
@@ -56,35 +58,43 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
     return new L.DivIcon({ html: html, className: 'MapSymbol' });
   };
 
+  const handleMarkerClick = (target: PlotSearchTarget): void => {
+    props.setSelectedTarget({
+      target: target,
+      plotSearch: props.plotSearch,
+    });
+  };
+
+  const renderMarker = (target: PlotSearchTarget): JSX.Element | null => {
+    const position = getCentroid(target.plan_unit.geometry);
+    if (position) {
+      return (
+        <Marker
+          position={position}
+          icon={getMarkerIcon()}
+          eventHandlers={{
+            click: () => handleMarkerClick(target),
+          }}
+        />
+      );
+    }
+    return null;
+  };
+
   return (
     <Fragment>
       {props.plotSearchTargets.map((target) => (
         <Fragment key={target.id}>
           {zoomLevel > 7 && (
             <GeoJSON
+              style={{ weight: 0 }}
               data={target.plan_unit.geometry}
               eventHandlers={{
-                click: () => {
-                  props.setSelectedTarget({
-                    target: target,
-                    plotSearch: props.plotSearch,
-                  });
-                },
+                click: () => handleMarkerClick(target),
               }}
             />
           )}
-          <Marker
-            position={getCentroid(target.plan_unit.geometry)}
-            icon={getMarkerIcon()}
-            eventHandlers={{
-              click: () => {
-                props.setSelectedTarget({
-                  target: target,
-                  plotSearch: props.plotSearch,
-                });
-              },
-            }}
-          />
+          {renderMarker(target)}
         </Fragment>
       ))}
     </Fragment>

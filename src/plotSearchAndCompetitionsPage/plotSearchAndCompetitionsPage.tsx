@@ -151,6 +151,10 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     return <div />;
   }
 
+  const filteredPlotSearches = plotSearches.filter(
+    (s) => s.search_class === 'plot_search'
+  );
+
   return (
     <div className="PlotSearchAndCompetitionsPage container">
       <Tabs
@@ -172,18 +176,14 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
               categoryOptions={categoryOptions}
               categoryVisibilities={categoryVisibilities}
               onToggleVisibility={onToggleCategoryVisibility}
-              plotSearches={plotSearches.filter(
-                (s) => s.search_class === 'plot_search'
-              )}
+              plotSearches={filteredPlotSearches}
               setSelectedTarget={setSelectedTarget}
               selectedTarget={selectedTarget}
             />
             <MapComponent
               categoryOptions={categoryOptions}
               categoryVisibilities={categoryVisibilities}
-              plotSearches={plotSearches.filter(
-                (s) => s.search_class === 'plot_search'
-              )}
+              plotSearches={filteredPlotSearches}
               setSelectedTarget={setSelectedTarget}
               selectedTarget={selectedTarget}
             />

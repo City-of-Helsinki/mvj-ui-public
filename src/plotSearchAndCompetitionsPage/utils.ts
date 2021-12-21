@@ -1,7 +1,7 @@
 import { Geometry } from 'geojson';
 import { LatLng, LatLngExpression } from 'leaflet';
 
-export const getCentroid = (geometry: Geometry): LatLngExpression => {
+export const getCentroid = (geometry: Geometry): LatLngExpression | null => {
   const sum = [0, 0];
   let count = 0;
 
@@ -29,7 +29,6 @@ export const getCentroid = (geometry: Geometry): LatLngExpression => {
       return new LatLng(sum[1] / count, sum[0] / count);
 
     default:
-      // TODO: Fix to throw "geometry type not valid" exception
-      return new LatLng(0, 0);
+      return null;
   }
 };

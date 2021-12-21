@@ -9,6 +9,7 @@ import * as L from 'leaflet';
 import proj4 from 'proj4';
 import 'proj4leaflet';
 import { LatLng } from 'leaflet';
+import { useTranslation } from 'react-i18next';
 import { PlotSearch } from '../../plotSearch/types';
 import {
   CategoryOptions,
@@ -54,6 +55,9 @@ const MapComponent = (props: Props): JSX.Element => {
     '+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees'
   );
 
+  // Initializing other component variables
+
+  const { t } = useTranslation();
   const plotSearchesByCategory = props.categoryOptions.map((category) => ({
     category,
     plotSearches: props.plotSearches?.filter(
@@ -73,7 +77,13 @@ const MapComponent = (props: Props): JSX.Element => {
       zoomControl={false}
     >
       <LayersControl position="bottomright">
-        <BaseLayer checked name="Karttasarja">
+        <BaseLayer
+          checked
+          name={t(
+            'plotSearchAndCompetitions.mapComponent.mapLayers.base',
+            'Base map'
+          )}
+        >
           <WMSTileLayer
             url={'https://kartta.hel.fi/ws/geoserver/avoindata/wms?'}
             layers={'avoindata:Karttasarja_harmaa'}
@@ -81,7 +91,12 @@ const MapComponent = (props: Props): JSX.Element => {
             transparent={true}
           />
         </BaseLayer>
-        <BaseLayer name="Ortoilmakuva">
+        <BaseLayer
+          name={t(
+            'plotSearchAndCompetitions.mapComponent.mapLayers.orto',
+            'Ortographic'
+          )}
+        >
           <WMSTileLayer
             url={'https://kartta.hel.fi/ws/geoserver/avoindata/wms?'}
             layers={'avoindata:Ortoilmakuva'}
@@ -89,7 +104,12 @@ const MapComponent = (props: Props): JSX.Element => {
             transparent={true}
           />
         </BaseLayer>
-        <BaseLayer name="Asemakaava">
+        <BaseLayer
+          name={t(
+            'plotSearchAndCompetitions.mapComponent.mapLayers.plan',
+            'City plan'
+          )}
+        >
           <WMSTileLayer
             url={'https://kartta.hel.fi/ws/geoserver/avoindata/wms?'}
             layers={'avoindata:Ajantasa_asemakaava'}

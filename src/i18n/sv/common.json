@@ -99,6 +99,13 @@
         }
       }
     },
+    "mapComponent": {
+      "mapLayers": {
+        "base": "",
+        "orto": "",
+        "plan": ""
+      }
+    },
     "tabs": {
       "list": "Lista",
       "mapSearch": "Kartsökning"
