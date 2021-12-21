@@ -1,6 +1,6 @@
 .MapSearchComponent {
   width: 440px;
-  padding-bottom: 24px;
+  padding-bottom: $spacing-m;
 
   &__search-input {
     padding: 15px;
@@ -18,7 +18,7 @@
       }
 
       .MapSearchComponent__accordion-heading-toggler {
-        padding: 15px 0;
+        padding: $spacing-s 0;
         cursor: pointer;
         display: flex;
         flex-direction: row;
@@ -40,7 +40,7 @@
     }
 
     .MapSearchComponent__target {
-      padding: 5px 10px;
+      padding: ($spacing-xs / 2) $spacing-xs;
       border-bottom: 1px solid $color-black-20;
       font-size: $fontsize-body-s;
     }
@@ -59,14 +59,14 @@
   &__plot-search-subtype-heading {
     text-transform: uppercase;
     font-size: $fontsize-body-l;
-    padding: 10px 10px;
+    padding: ($spacing-s / 2) $spacing-xs;
     margin: 0;
   }
 
   &__plot-search-heading {
     background-color: $color-black-20;
-    padding: 10px 10px;
-    margin: 10px 0 0 0;
+    padding: ($spacing-s / 2) $spacing-xs;
+    margin: ($spacing-s / 2) 0 0 0;
 
     h4 {
       margin: 0;
@@ -82,21 +82,10 @@
   &__list-headings {
     font-weight: 700;
     font-size: $fontsize-body-s;
-    padding: 5px 10px;
+    padding: ($spacing-xs / 2) $spacing-xs;
   }
 
-  .MapSearchComponent__single-target-view + .MapSearchComponent__list-view {
+  .MapSearchSingleTargetView + .MapSearchComponent__list-view {
     display: none;
-  }
-
-  dl {
-    div {
-      margin: 5px 0;
-      padding: 5px 0;
-    }
-
-    dt {
-      font-weight: bold;
-    }
   }
 }

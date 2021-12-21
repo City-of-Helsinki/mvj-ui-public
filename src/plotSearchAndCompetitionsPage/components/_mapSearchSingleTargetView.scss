@@ -1,0 +1,48 @@
+.MapSearchSingleTargetView {
+  padding: $spacing-m;
+
+  dl {
+    font-size: $fontsize-body-s;
+
+    div {
+      margin: $spacing-s 0;
+    }
+
+    dt {
+      font-weight: bold;
+    }
+  }
+
+  .Breadcrumbs {
+    margin-top: $spacing-s;
+  }
+
+  h2 {
+    text-transform: uppercase;
+    font-size: $fontsize-body-xl;
+    margin: $spacing-m 0;
+  }
+
+  h3 {
+    font-size: $fontsize-body-m;
+    margin: $spacing-m 0 $spacing-s 0;
+  }
+
+  &__next-button {
+    display: flex;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  &__info-links {
+    padding: 0;
+    margin: 0;
+
+    li {
+      list-style: none;
+      padding: ($spacing-s / 2) 0;
+      font-size: $fontsize-body-s;
+      font-weight: 500;
+    }
+  }
+}

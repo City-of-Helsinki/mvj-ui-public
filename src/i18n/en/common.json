@@ -68,6 +68,22 @@
       "sidebar": {
         "sectionApplyBy": "Apply by {{date}}",
         "singleTarget": {
+          "address": "Address",
+          "applyButton": "Apply for this plot",
+          "applyByDate": "Apply by",
+          "area": "Area (m²)",
+          "detailedPlanIdentifier": "Detailed plan identifier",
+          "detailedPlanState": "Detailed plan state",
+          "financingMethod": "Financing method",
+          "firstSuitableConstructionYear": "First suitable construction year",
+          "hitas": "HITAS",
+          "infoLinks": "Details",
+          "intendedUse": "Intended use",
+          "management": "Management method",
+          "permittedBuildArea": "Permitted build floor area (floor-m²)",
+          "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
+          "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
+          "plotNumber": "Plot",
           "returnToList": "Return to list"
         },
         "targetHeadings": {
