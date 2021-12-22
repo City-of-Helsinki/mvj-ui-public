@@ -99,6 +99,13 @@
         }
       }
     },
+    "mapComponent": {
+      "mapLayers": {
+        "base": "Karttasarja",
+        "orto": "Ortoilmakuva",
+        "plan": "Asemakaava"
+      }
+    },
     "tabs": {
       "list": "Lista",
       "mapSearch": "Karttahaku"

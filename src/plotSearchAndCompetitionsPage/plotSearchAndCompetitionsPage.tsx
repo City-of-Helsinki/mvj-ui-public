@@ -9,7 +9,7 @@ import Tabs from '../tabs/tabs';
 import TabPane from '../tabs/tabPane';
 import TabContent from '../tabs/tabContent';
 import MapSearchComponent from './components/mapSearchComponent';
-import MapComponent from '../map/mapComponent';
+import MapComponent from './components/mapComponent';
 import {
   fetchPlotSearchAttributes,
   fetchPlotSearches,
@@ -151,6 +151,10 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     return <div />;
   }
 
+  const filteredPlotSearches = plotSearches.filter(
+    (s) => s.search_class === 'plot_search'
+  );
+
   return (
     <div className="PlotSearchAndCompetitionsPage container">
       <Tabs
@@ -172,13 +176,17 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
               categoryOptions={categoryOptions}
               categoryVisibilities={categoryVisibilities}
               onToggleVisibility={onToggleCategoryVisibility}
-              plotSearches={plotSearches.filter(
-                (s) => s.search_class === 'plot_search'
-              )}
+              plotSearches={filteredPlotSearches}
               setSelectedTarget={setSelectedTarget}
               selectedTarget={selectedTarget}
             />
-            <MapComponent />
+            <MapComponent
+              categoryOptions={categoryOptions}
+              categoryVisibilities={categoryVisibilities}
+              plotSearches={filteredPlotSearches}
+              setSelectedTarget={setSelectedTarget}
+              selectedTarget={selectedTarget}
+            />
           </div>
         </TabPane>
         <TabPane>

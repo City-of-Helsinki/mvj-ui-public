@@ -1,6 +1,7 @@
 .MapSearchComponent {
   width: 440px;
   padding-bottom: $spacing-m;
+  z-index: 30;
 
   &__search-input {
     padding: 15px;

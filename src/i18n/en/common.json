@@ -99,6 +99,13 @@
         }
       }
     },
+    "mapComponent": {
+      "mapLayers": {
+        "base": "Base map",
+        "orto": "Ortographic",
+        "plan": "City plan"
+      }
+    },
     "tabs": {
       "list": "List",
       "mapSearch": "Map search"
