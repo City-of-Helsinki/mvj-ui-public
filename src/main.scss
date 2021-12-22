@@ -4,11 +4,7 @@
 @import 'styles/variables';
 @import 'styles/mixins';
 
-@import 'modal/modal';
-@import 'modal/confirmation-modal';
 @import 'breadcrumbs/breadcrumbs';
-@import 'button/button';
-@import 'button/close-button';
 @import 'button/iconButton';
 @import 'footer/footer';
 @import 'frontPage/front-page';
@@ -16,7 +12,7 @@
 @import 'topNavigation/topNavigation';
 @import 'tabs/tabPane';
 @import 'tabs/tabs';
-@import 'login/components/login-component';
+@import 'login/components/loginForm';
 @import 'panel/side-panel';
 @import 'app';
 @import 'plotSearchAndCompetitionsPage/components/mapSymbol';

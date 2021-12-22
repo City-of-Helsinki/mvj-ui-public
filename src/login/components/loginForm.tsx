@@ -2,12 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { TextInput } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 
-const LoginComponent: FunctionComponent = () => {
+const LoginForm: FunctionComponent = () => {
   const { t } = useTranslation();
 
   return (
-    <div className={'login-component'}>
-      <h1>{t('login.form.title', 'Log in')}</h1>
+    <div className="LoginForm">
       <TextInput
         id="username"
         label={t('login.form.username.label', 'Username')}
@@ -27,7 +26,7 @@ const LoginComponent: FunctionComponent = () => {
         )}
         required
       />
-      <div className={'cover'}>
+      <div className="LoginForm__action-links">
         {t('login.form.forgotPasswordLink', 'Forgot your password?')}
         {' | '}
         {t('login.form.newAccountLink', 'Create an account')}
@@ -36,4 +35,4 @@ const LoginComponent: FunctionComponent = () => {
   );
 };
 
-export default LoginComponent;
+export default LoginForm;

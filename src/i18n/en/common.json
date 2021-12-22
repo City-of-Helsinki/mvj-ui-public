@@ -1,11 +1,4 @@
 {
-  "common": {
-    "confirmationModal": {
-      "cancel": "Cancel",
-      "close": "Close",
-      "save": "Save"
-    }
-  },
   "error": {
     "pageNotFound": "404 Page not found"
   },
@@ -47,6 +40,8 @@
   },
   "login": {
     "cancel": "Cancel",
+    "close": "Close",
+    "descriptor": "To search plots, please login to the service.",
     "form": {
       "forgotPasswordLink": "Forgot your password?",
       "newAccountLink": "Create an account",
@@ -54,16 +49,22 @@
         "label": "Password",
         "placeholder": "Please type your password"
       },
-      "title": "Log in",
       "username": {
         "label": "Username",
         "placeholder": "Please type your username"
       }
     },
     "login": "Log in",
-    "title": "To search plots, please login to the service."
+    "title": "Log in"
   },
   "plotSearchAndCompetitions": {
+    "mapComponent": {
+      "mapLayers": {
+        "base": "Base map",
+        "orto": "Ortographic",
+        "plan": "City plan"
+      }
+    },
     "mapView": {
       "sidebar": {
         "sectionApplyBy": "Apply by {{date}}",
@@ -97,13 +98,6 @@
           "showThisType": "Show",
           "type": "Type"
         }
-      }
-    },
-    "mapComponent": {
-      "mapLayers": {
-        "base": "Base map",
-        "orto": "Ortographic",
-        "plan": "City plan"
       }
     },
     "tabs": {
