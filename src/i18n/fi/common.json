@@ -99,10 +99,6 @@
           "type": "Tyyppi"
         }
       }
-    },
-    "tabs": {
-      "list": "Lista",
-      "mapSearch": "Karttahaku"
     }
   },
   "topNavigation": {

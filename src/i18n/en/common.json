@@ -99,10 +99,6 @@
           "type": "Type"
         }
       }
-    },
-    "tabs": {
-      "list": "List",
-      "mapSearch": "Map search"
     }
   },
   "topNavigation": {
