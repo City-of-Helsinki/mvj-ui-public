@@ -14,6 +14,7 @@ const FooterComponent = (): JSX.Element => {
         '--footer-divider-color': 'var(--color-white)',
         '--footer-focus-outline-color': 'var(--color-white)',
       }}
+      className="Footer"
     >
       <Footer.Base
         copyrightHolder={t('footer.copyright.holder', 'Copyright')}
