@@ -1,4 +1,4 @@
-.app {
+.App {
   margin-top: rem-calc(60px);
   width: 100%;
   display: block;
@@ -9,7 +9,7 @@
     min-height: 100vh;
     margin-top: 72px;
     margin-bottom: -$spacing-s;
-    @media #{$mq-xsmall} {
+    @media (max-width: #{$breakpoint-s - 1px}) {
       margin-top: 65px;
     }
   }

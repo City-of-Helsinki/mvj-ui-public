@@ -7,7 +7,7 @@ const FooterComponent = (): JSX.Element => {
 
   return (
     <Footer
-      title={'Footer lorem ipsum'}
+      title={t('footer.text', 'Footer lorem ipsum')}
       theme={{
         '--footer-background': 'var(--color-gold)',
         '--footer-color': 'var(--color-white)',

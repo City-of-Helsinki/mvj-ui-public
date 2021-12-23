@@ -11,7 +11,7 @@ interface Props {
 
 const App = ({ children }: Props): JSX.Element => {
   return (
-    <div className={'app'}>
+    <div className="App">
       <LoginModal />
       <TopNavigation />
       <main>{children}</main>

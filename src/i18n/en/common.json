@@ -6,7 +6,8 @@
     "copyright": {
       "holder": "Copyright",
       "text": "All rights reserved"
-    }
+    },
+    "text": "Footer lorem ipsum"
   },
   "frontPage": {
     "applyChange": {
@@ -35,7 +36,7 @@
     },
     "questions": {
       "explanation": "Please log in and contact us through the Messages page. We will get back to you as soon as possible.",
-      "heading": "Questions"
+      "heading": "Questions?"
     }
   },
   "login": {

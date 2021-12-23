@@ -32,7 +32,7 @@ const TopNavigation = ({ openLoginModal }: TopNavigationProps): JSX.Element => {
       skipToContentLabel={t('topNavigation.skipToContent', 'Skip to content')}
       onTitleClick={() => returnHome(navigate)}
       fixed={true}
-      className={'top-nav'}
+      className="TopNavigation"
     >
       <Navigation.Row variant="inline">
         <Link to={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}>
@@ -65,17 +65,17 @@ const TopNavigation = ({ openLoginModal }: TopNavigationProps): JSX.Element => {
         <Navigation.LanguageSelector label={i18n.language.toUpperCase()}>
           <Navigation.Item
             label="Suomeksi"
-            lang="fi"
+            lang={Language.FI}
             onClick={() => i18n.changeLanguage(Language.FI)}
           />
           <Navigation.Item
             label="På svenska"
-            lang="sv"
+            lang={Language.SV}
             onClick={() => i18n.changeLanguage(Language.SV)}
           />
           <Navigation.Item
             label="In English"
-            lang="en"
+            lang={Language.EN}
             onClick={() => i18n.changeLanguage(Language.EN)}
           />
         </Navigation.LanguageSelector>

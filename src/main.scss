@@ -7,11 +7,11 @@
 @import 'breadcrumbs/breadcrumbs';
 @import 'button/iconButton';
 @import 'footer/footer';
-@import 'frontPage/front-page';
-@import 'frontPage/components/box';
+@import 'src/frontPage/frontPage';
+@import 'src/frontPage/components/frontPageBox';
 @import 'topNavigation/topNavigation';
 @import 'login/components/loginForm';
-@import 'panel/side-panel';
+@import 'src/panel/sidePanel';
 @import 'app';
 @import 'plotSearchAndCompetitionsPage/components/mapSymbol';
 @import 'plotSearchAndCompetitionsPage/components/mapSearchComponent';
@@ -28,5 +28,5 @@ body {
   overflow-y: auto;
   height: calc(100% - 60px);
   background-color: $body-background;
-  font-family: $primary-font-family;
+  font-family: $font-default;
 }
