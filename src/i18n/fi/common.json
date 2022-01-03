@@ -103,6 +103,7 @@
     }
   },
   "topNavigation": {
+    "menuLabel": "Valikko",
     "signIn": "Kirjaudu sisään",
     "skipToContent": "Siirry sisältöön",
     "tabs": {

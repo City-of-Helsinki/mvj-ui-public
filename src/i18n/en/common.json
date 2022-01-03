@@ -103,6 +103,7 @@
     }
   },
   "topNavigation": {
+    "menuLabel": "Menu",
     "signIn": "Sign in",
     "skipToContent": "Skip to content",
     "tabs": {
