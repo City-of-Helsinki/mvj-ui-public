@@ -283,7 +283,12 @@ const MapSearchComponent = ({
                                 gutterWidth={SIDEBAR_GUTTER_WIDTH}
                                 align="center"
                               >
-                                <Col xs={2}>{target.data.lease_identifier}</Col>
+                                <Col xs={2}>
+                                  {
+                                    target.data.plan_unit
+                                      .plot_division_identifier
+                                  }
+                                </Col>
                                 <Col
                                   xs={3}
                                   className="MapSearchComponent__target-address"
