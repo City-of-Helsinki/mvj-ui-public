@@ -65,9 +65,15 @@ const MapComponent = (props: Props): JSX.Element => {
     ),
   }));
 
+  const whenMapCreated = (map: L.Map) => {
+    new ResizeObserver(() => {
+      map.invalidateSize(false);
+    }).observe(map.getContainer());
+  };
+
   return (
     <MapContainer
-      className={'mapComponent'}
+      className="MapComponent"
       center={initialPosition}
       zoom={6}
       scrollWheelZoom={true}
@@ -75,6 +81,7 @@ const MapComponent = (props: Props): JSX.Element => {
       bounds={latLonBounds}
       crs={CRS}
       zoomControl={false}
+      whenCreated={whenMapCreated}
     >
       <LayersControl position="bottomright">
         <BaseLayer

@@ -95,6 +95,8 @@ interface MapSearchComponentProps {
   plotSearches: Array<PlotSearch>;
   setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
+  isOpen: boolean;
+  toggle: (newValue: boolean) => void;
 }
 
 const MapSearchComponent = ({
@@ -104,6 +106,8 @@ const MapSearchComponent = ({
   plotSearches,
   setSelectedTarget,
   selectedTarget,
+  isOpen,
+  toggle,
 }: MapSearchComponentProps): JSX.Element => {
   const { t } = useTranslation();
 
@@ -115,7 +119,7 @@ const MapSearchComponent = ({
   }));
 
   return (
-    <SidePanel className="MapSearchComponent">
+    <SidePanel className="MapSearchComponent" isOpen={isOpen} toggle={toggle}>
       {selectedTarget && (
         <MapSearchSingleTargetView
           selectedTarget={selectedTarget}

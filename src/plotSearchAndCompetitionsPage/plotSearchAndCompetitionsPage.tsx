@@ -67,6 +67,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     useState<CategoryVisibilities>({});
   const [categoryOptions, setCategoryOptions] = useState<CategoryOptions>([]);
   const [selectedTarget, setSelectedTarget] = useState<SelectedTarget>(null);
+  const [isSidebarOpen, setSidebarOpen] = useState<boolean>(true);
 
   useEffect(() => {
     fetchPlotSearches();
@@ -114,6 +115,13 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     );
   };
 
+  const onSelectTarget = (target: SelectedTarget | null) => {
+    setSelectedTarget(target);
+    if (target) {
+      setSidebarOpen(true);
+    }
+  };
+
   if (
     isFetchingPlotSearches ||
     isFetchingPlotSearchAttributes ||
@@ -136,12 +144,14 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
         plotSearches={filteredPlotSearches}
         setSelectedTarget={setSelectedTarget}
         selectedTarget={selectedTarget}
+        isOpen={isSidebarOpen}
+        toggle={setSidebarOpen}
       />
       <MapComponent
         categoryOptions={categoryOptions}
         categoryVisibilities={categoryVisibilities}
         plotSearches={filteredPlotSearches}
-        setSelectedTarget={setSelectedTarget}
+        setSelectedTarget={onSelectTarget}
         selectedTarget={selectedTarget}
       />
     </div>

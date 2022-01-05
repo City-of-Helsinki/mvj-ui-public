@@ -1,4 +1,4 @@
-.mapComponent {
+.MapComponent {
   height: 100vh;
   z-index: 10;
 
@@ -8,7 +8,7 @@
     }
   }
 
-  .SidePanel + & {
-    margin-left: 440px;
+  .SidePanel--open + & {
+    margin-left: $search-map-sidebar-width;
   }
 }
