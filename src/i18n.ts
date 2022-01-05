@@ -5,6 +5,8 @@ import en from './i18n/en/common.json';
 import fi from './i18n/fi/common.json';
 import sv from './i18n/sv/common.json';
 
+export const defaultLanguage = 'fi';
+
 i18n
   .use(initReactI18next)
   .use(LanguageDetector)

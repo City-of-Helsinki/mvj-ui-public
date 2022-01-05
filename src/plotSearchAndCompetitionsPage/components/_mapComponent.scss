@@ -1,4 +1,14 @@
 .mapComponent {
   height: 100vh;
   z-index: 10;
+
+  .leaflet-control-container {
+    .leaflet-bottom {
+      margin-bottom: $spacing-s;
+    }
+  }
+
+  .SidePanel + & {
+    margin-left: 440px;
+  }
 }

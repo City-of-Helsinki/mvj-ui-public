@@ -1,11 +1,4 @@
 {
-  "common": {
-    "confirmationModal": {
-      "cancel": "Peruuta",
-      "close": "Sulje",
-      "save": "Tallenna"
-    }
-  },
   "error": {
     "pageNotFound": "404 Sivua ei löytynyt"
   },
@@ -13,7 +6,8 @@
     "copyright": {
       "holder": "Copyright",
       "text": "All rights reserved"
-    }
+    },
+    "text": ""
   },
   "frontPage": {
     "applyChange": {
@@ -47,6 +41,8 @@
   },
   "login": {
     "cancel": "Peruuta",
+    "close": "Sulje",
+    "descriptor": "Hakeaksesi tontteja, ole hyvä ja kirjaudu sisään palveluun.",
     "form": {
       "forgotPasswordLink": "Salasana unohtunut?",
       "newAccountLink": "Rekisteröidy",
@@ -54,16 +50,22 @@
         "label": "Salasana",
         "placeholder": "Kirjoita salasanasi"
       },
-      "title": "Kirjaudu sisään",
       "username": {
         "label": "Käyttäjätunnus",
         "placeholder": "Kirjoita käyttäjätunnuksesi"
       }
     },
     "login": "Kirjaudu",
-    "title": "Hakeaksesi tontteja, ole hyvä ja kirjaudu sisään palveluun."
+    "title": "Kirjaudu sisään"
   },
   "plotSearchAndCompetitions": {
+    "mapComponent": {
+      "mapLayers": {
+        "base": "Karttasarja",
+        "orto": "Ortoilmakuva",
+        "plan": "Asemakaava"
+      }
+    },
     "mapView": {
       "sidebar": {
         "sectionApplyBy": "Hakuaika päättyy {{date}}",
@@ -98,20 +100,10 @@
           "type": "Tyyppi"
         }
       }
-    },
-    "mapComponent": {
-      "mapLayers": {
-        "base": "Karttasarja",
-        "orto": "Ortoilmakuva",
-        "plan": "Asemakaava"
-      }
-    },
-    "tabs": {
-      "list": "Lista",
-      "mapSearch": "Karttahaku"
     }
   },
   "topNavigation": {
+    "menuLabel": "Valikko",
     "signIn": "Kirjaudu sisään",
     "skipToContent": "Siirry sisältöön",
     "tabs": {

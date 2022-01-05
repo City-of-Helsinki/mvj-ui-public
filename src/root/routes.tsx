@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from '../App';
 import FrontPage from '../frontPage/frontPage';
 import ErrorPage from '../errorPage/errorPage';
-import CounterPage from '../counter/counterPage';
 import PlotSearchAndCompetitionsPage from '../plotSearchAndCompetitionsPage/plotSearchAndCompetitionsPage';
 
 export const AppRoutes = {
@@ -15,7 +14,6 @@ export const AppRoutes = {
   LEASES: 'leases',
   APPLICATIONS: 'applications',
   MESSAGES: 'messages',
-  DEBUG: 'debug',
 };
 
 /**
@@ -32,7 +30,6 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.LEASES]: '/vuokraukset',
     [AppRoutes.APPLICATIONS]: '/hakemukset',
     [AppRoutes.MESSAGES]: '/viestit',
-    [AppRoutes.DEBUG]: '/debug',
   };
 
   return routes[id] ? routes[id] : '';
@@ -55,10 +52,6 @@ const SiteRoutes = (): JSX.Element => {
           <Route
             path={getRouteById(AppRoutes.AREA_SEARCH)}
             element={<div className={'container'}>Aluehaku sivu</div>}
-          />
-          <Route
-            path={getRouteById(AppRoutes.DEBUG)}
-            element={<CounterPage />}
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

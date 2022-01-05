@@ -1,13 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 import authReducer from '../auth/reducer';
-import counterReducer from '../counter/reducer';
 import loginReducer from '../login/reducer';
 import plotSearchReducer from '../plotSearch/reducer';
 
 const allReducers = {
   auth: authReducer,
-  count: counterReducer,
   login: loginReducer,
   plotSearch: plotSearchReducer,
 };

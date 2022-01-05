@@ -1,11 +1,4 @@
 {
-  "common": {
-    "confirmationModal": {
-      "cancel": "",
-      "close": "",
-      "save": ""
-    }
-  },
   "error": {
     "pageNotFound": ""
   },
@@ -13,7 +6,8 @@
     "copyright": {
       "holder": "",
       "text": ""
-    }
+    },
+    "text": ""
   },
   "frontPage": {
     "applyChange": {
@@ -47,6 +41,8 @@
   },
   "login": {
     "cancel": "Annullera",
+    "close": "",
+    "descriptor": "Logga in på tjänsten för att ansöka om tomter.",
     "form": {
       "forgotPasswordLink": "",
       "newAccountLink": "",
@@ -54,16 +50,22 @@
         "label": "",
         "placeholder": ""
       },
-      "title": "",
       "username": {
         "label": "",
         "placeholder": ""
       }
     },
     "login": "Logga in",
-    "title": "Logga in på tjänsten för att ansöka om tomter."
+    "title": "Logga in"
   },
   "plotSearchAndCompetitions": {
+    "mapComponent": {
+      "mapLayers": {
+        "base": "",
+        "orto": "",
+        "plan": ""
+      }
+    },
     "mapView": {
       "sidebar": {
         "sectionApplyBy": "",
@@ -98,20 +100,10 @@
           "type": ""
         }
       }
-    },
-    "mapComponent": {
-      "mapLayers": {
-        "base": "",
-        "orto": "",
-        "plan": ""
-      }
-    },
-    "tabs": {
-      "list": "Lista",
-      "mapSearch": "Kartsökning"
     }
   },
   "topNavigation": {
+    "menuLabel": "",
     "signIn": "",
     "skipToContent": "",
     "tabs": {

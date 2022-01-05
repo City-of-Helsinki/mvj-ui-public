@@ -22,6 +22,55 @@ To build up a development environment please follow these steps:
 2. On project root `run yarn` to install packages
 3. Run `yarn start` to run dev server
 
+## Code style
+Formatting wise, consistent code style is primarily enforced with [Prettier](https://prettier.io/)
+automatically when files are committed to the repository. Some code style guidelines should be
+followed manually by the developer as listed below.
+
+### Functional vs class-based components
+Prefer functional components, hooks, and other modern React concepts over the more traditional
+class and HOC based approaches.
+
+### Style definitions and class names
+Prefer specifying the styles for components in Sass stylesheets. Inline CSS rules should
+primarily be used when they need to be dynamic (for example, a background image based on the
+current application state).
+
+All class names we are in control of should follow the [Block-Element-Modifier](http://getbem.com/naming/)
+naming system. In the context of a React application, each component represents one block, 
+so the outermost element rendered by that component should have a class named after the component 
+itself if there are any styles to attach to it or its children. Any inner elements rendered by that 
+same component will then follow the BEM style normally, all using the component name as the block base.
+Use PascalCase for the block part of the name and kebab-case for the element and modifier parts.
+
+For example, note how the class names are laid out in the component definition below:
+
+```typescript jsx
+type Props = {
+  disabled?: boolean;
+  wrapText?: boolean;
+  text?: string;
+}
+
+const CustomButton = ({ disabled = false, wrapText = false, text = '' } : Props): JSX.Element => {
+  return <button className={classNames(
+   "CustomButton", {
+     "CustomButton--disabled": disabled,
+     "CustomButton--wrap-text": wrapText
+   })
+  }>
+    <span className="CustomButton__label">
+     {text}
+    </span>
+  </button>;
+};
+```
+
+"Magic" class names that are first defined somewhere and then sprinkled over different 
+components when needed should not be used; if parts of different components need to be 
+styled the same way, either make a new shared component that will provide that style or
+use Sass mixins, whichever is more appropriate for that situation.
+
 ## Localisation
 
 The application is localised using the [react-i18next](https://react.i18next.com/) library.

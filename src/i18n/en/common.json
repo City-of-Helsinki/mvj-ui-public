@@ -1,11 +1,4 @@
 {
-  "common": {
-    "confirmationModal": {
-      "cancel": "Cancel",
-      "close": "Close",
-      "save": "Save"
-    }
-  },
   "error": {
     "pageNotFound": "404 Page not found"
   },
@@ -13,7 +6,8 @@
     "copyright": {
       "holder": "Copyright",
       "text": "All rights reserved"
-    }
+    },
+    "text": "Footer lorem ipsum"
   },
   "frontPage": {
     "applyChange": {
@@ -42,11 +36,13 @@
     },
     "questions": {
       "explanation": "Please log in and contact us through the Messages page. We will get back to you as soon as possible.",
-      "heading": "Questions"
+      "heading": "Questions?"
     }
   },
   "login": {
     "cancel": "Cancel",
+    "close": "Close",
+    "descriptor": "To search plots, please login to the service.",
     "form": {
       "forgotPasswordLink": "Forgot your password?",
       "newAccountLink": "Create an account",
@@ -54,16 +50,22 @@
         "label": "Password",
         "placeholder": "Please type your password"
       },
-      "title": "Log in",
       "username": {
         "label": "Username",
         "placeholder": "Please type your username"
       }
     },
     "login": "Log in",
-    "title": "To search plots, please login to the service."
+    "title": "Log in"
   },
   "plotSearchAndCompetitions": {
+    "mapComponent": {
+      "mapLayers": {
+        "base": "Base map",
+        "orto": "Ortographic",
+        "plan": "City plan"
+      }
+    },
     "mapView": {
       "sidebar": {
         "sectionApplyBy": "Apply by {{date}}",
@@ -98,20 +100,10 @@
           "type": "Type"
         }
       }
-    },
-    "mapComponent": {
-      "mapLayers": {
-        "base": "Base map",
-        "orto": "Ortographic",
-        "plan": "City plan"
-      }
-    },
-    "tabs": {
-      "list": "List",
-      "mapSearch": "Map search"
     }
   },
   "topNavigation": {
+    "menuLabel": "Menu",
     "signIn": "Sign in",
     "skipToContent": "Skip to content",
     "tabs": {

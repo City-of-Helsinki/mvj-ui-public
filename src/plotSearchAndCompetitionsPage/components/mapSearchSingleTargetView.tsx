@@ -9,6 +9,8 @@ import { ApiAttributeChoice, ApiAttributes } from '../../api/types';
 import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
 import { RootState } from '../../root/rootReducer';
 import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
+import { defaultLanguage } from '../../i18n';
+import { renderDateTime } from '../../i18n/utils';
 
 interface State {
   plotSearchAttributes: ApiAttributes;
@@ -88,10 +90,7 @@ const MapSearchSingleTargetView = ({
           </LeftColumn>
           <RightColumn>
             {plotSearch.end_at
-              ? new Date(plotSearch.end_at).toLocaleString('fi', {
-                  dateStyle: 'medium',
-                  timeStyle: 'short',
-                })
+              ? renderDateTime(new Date(plotSearch.end_at))
               : '???'}
           </RightColumn>
         </Row>
@@ -150,7 +149,7 @@ const MapSearchSingleTargetView = ({
             )}
           </LeftColumn>
           <RightColumn>
-            {/* {target.plan_unit.permitted_build_floor_area_commercial?.toLocaleString(i18n.language) || '???'} */}
+            {/* {target.plan_unit.permitted_build_floor_area_commercial?.toLocaleString(defaultLanguage) || '???'} */}
             ???
           </RightColumn>
         </Row>
@@ -162,7 +161,7 @@ const MapSearchSingleTargetView = ({
             )}
           </LeftColumn>
           <RightColumn>
-            {/* {target.plan_unit.permitted_build_floor_area_residential?.toLocaleString(i18n.language) || '???'} */}
+            {/* {target.plan_unit.permitted_build_floor_area_residential?.toLocaleString(defaultLanguage) || '???'} */}
             ???
           </RightColumn>
         </Row>
@@ -174,7 +173,7 @@ const MapSearchSingleTargetView = ({
             )}
           </LeftColumn>
           <RightColumn>
-            {/* {target.plan_unit.permitted_build_floor_area_commercial?.toLocaleString(i18n.language) || '???'} */}
+            {/* {target.plan_unit.permitted_build_floor_area_commercial?.toLocaleString(defaultLanguage) || '???'} */}
             ???
           </RightColumn>
         </Row>
@@ -186,7 +185,7 @@ const MapSearchSingleTargetView = ({
             )}
           </LeftColumn>
           <RightColumn>
-            {target.plan_unit.area?.toLocaleString(i18n.language) || '???'}
+            {target.plan_unit.area?.toLocaleString(defaultLanguage) || '???'}
           </RightColumn>
         </Row>
         <Row>

@@ -20,6 +20,8 @@ import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import IconButton from '../../button/iconButton';
 import { useTranslation } from 'react-i18next';
 import MapSearchSingleTargetView from './mapSearchSingleTargetView';
+import { defaultLanguage } from '../../i18n';
+import { renderDateTime } from '../../i18n/utils';
 
 interface MapSearchComponentAccordionProps {
   initiallyOpen?: boolean;
@@ -103,7 +105,7 @@ const MapSearchComponent = ({
   setSelectedTarget,
   selectedTarget,
 }: MapSearchComponentProps): JSX.Element => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const plotSearchesByCategory = categoryOptions.map((category) => ({
     category,
@@ -264,12 +266,9 @@ const MapSearchComponent = ({
                                   'plotSearchAndCompetitions.mapView.sidebar.sectionApplyBy',
                                   'Apply by {{date}}',
                                   {
-                                    date: new Date(
-                                      section.headingExtra.endDate
-                                    ).toLocaleString('fi', {
-                                      dateStyle: 'medium',
-                                      timeStyle: 'short',
-                                    }),
+                                    date: renderDateTime(
+                                      new Date(section.headingExtra.endDate)
+                                    ),
                                   }
                                 )}
                               </span>
@@ -284,7 +283,12 @@ const MapSearchComponent = ({
                                 gutterWidth={SIDEBAR_GUTTER_WIDTH}
                                 align="center"
                               >
-                                <Col xs={2}>{target.data.lease_identifier}</Col>
+                                <Col xs={2}>
+                                  {
+                                    target.data.plan_unit
+                                      .plot_division_identifier
+                                  }
+                                </Col>
                                 <Col
                                   xs={3}
                                   className="MapSearchComponent__target-address"
@@ -299,8 +303,8 @@ const MapSearchComponent = ({
                                 <Col xs={2}>?</Col>
                                 <Col xs={2}>
                                   {target.data.plan_unit.area?.toLocaleString(
-                                    i18n.language
-                                  ) || '?'}
+                                    defaultLanguage
+                                  )}
                                 </Col>
                                 <Col xs={1}>
                                   <IconButton

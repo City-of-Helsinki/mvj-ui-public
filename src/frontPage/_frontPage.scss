@@ -1,0 +1,90 @@
+@import 'styles/variables';
+@import 'styles/fonts';
+
+.FrontPage {
+  .FrontPage__banner {
+    background-color: #9fc9eb;
+    height: 540px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: url(../assets/images/banner-image.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position-y: 35%;
+    z-index: -1;
+    @media (max-width: $breakpoint-m) {
+      background-size: cover !important;
+      background-position-y: 0;
+    }
+
+    .FrontPage__heading-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      h3 {
+        padding: 0 15%;
+        font-weight: $semibold;
+        font-size: $fontsize-heading-xl;
+        color: $color-white;
+        margin: auto;
+        @media (max-width: $breakpoint-m) {
+          font-size: $fontsize-heading-l;
+        }
+      }
+    }
+
+    .FrontPage__banner-koros {
+      fill: $color-white;
+    }
+  }
+
+  .FrontPage__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h4 {
+      padding: 0 15%;
+      font-weight: $semibold;
+      font-size: $fontsize-heading-l;
+      color: $color-black;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0;
+      @media (max-width: $breakpoint-m) {
+        font-size: $fontsize-heading-m;
+      }
+    }
+
+    .FrontPage__boxes {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    h5 {
+      margin-top: $spacing-m;
+      margin-bottom: 0;
+      font-size: $fontsize-heading-l;
+      font-weight: $semibold;
+      margin-left: auto;
+      margin-right: auto;
+
+      + p {
+        margin-bottom: $spacing-layout-l;
+      }
+
+      @media (max-width: $breakpoint-m) {
+        font-size: $fontsize-heading-m;
+      }
+    }
+  }
+}

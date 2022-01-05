@@ -9,7 +9,7 @@ interface Props {
 const SidePanel = (props: Props): JSX.Element => {
   const { children } = props;
   return (
-    <div className={classNames('side-panel', props.className)}>{children}</div>
+    <div className={classNames('SidePanel', props.className)}>{children}</div>
   );
 };
 
