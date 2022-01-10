@@ -3,7 +3,35 @@
   position: absolute;
   height: 100%;
   max-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  box-sizing: border-box;
+
+  &:not(.SidePanel--open) {
+    width: 0;
+  }
+
+  .SidePanel__toggler {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: $color-gold;
+    color: $color-black;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    svg path {
+      fill: currentColor;
+    }
+  }
+
+  .SidePanel__content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+  }
 }

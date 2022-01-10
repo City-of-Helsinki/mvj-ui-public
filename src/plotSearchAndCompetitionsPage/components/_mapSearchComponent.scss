@@ -1,7 +1,10 @@
 .MapSearchComponent {
-  width: 440px;
-  padding-bottom: $spacing-m;
+  width: $search-map-sidebar-width;
   z-index: 30;
+
+  .SidePanel__content {
+    padding-bottom: $spacing-m;
+  }
 
   &__search-input {
     padding: 15px;
