@@ -1,5 +1,6 @@
 import { call, Effect, select } from 'redux-saga/effects';
 import { getApiToken } from '../auth/selectors';
+import i18n, { defaultLanguage } from '../i18n';
 
 export interface ApiCallResult {
   response: Response;
@@ -16,6 +17,11 @@ function* callApi(
   if (apiToken) {
     request.headers.set('Authorization', `Bearer ${apiToken}`);
   }
+
+  request.headers.set(
+    'Accept-Language',
+    `${i18n.language},${defaultLanguage};q=0.5`
+  );
 
   if (
     request.method === 'PATCH' ||

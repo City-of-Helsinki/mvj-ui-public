@@ -56,6 +56,12 @@ const TopNavigation = ({ openLoginModal }: TopNavigationProps): JSX.Element => {
   );
   const matchAreaSearch = useMatch(getRouteById(AppRoutes.AREA_SEARCH));
 
+  const changeLanguage = (language: Language) => {
+    i18n.changeLanguage(language).then(() => {
+      document.location.reload();
+    });
+  };
+
   return (
     <Navigation
       menuToggleAriaLabel={t('topNavigation.menuLabel', 'Menu')}
@@ -101,17 +107,17 @@ const TopNavigation = ({ openLoginModal }: TopNavigationProps): JSX.Element => {
           <Navigation.Item
             label="Suomeksi"
             lang={Language.FI}
-            onClick={() => i18n.changeLanguage(Language.FI)}
+            onClick={() => changeLanguage(Language.FI)}
           />
           <Navigation.Item
             label="På svenska"
             lang={Language.SV}
-            onClick={() => i18n.changeLanguage(Language.SV)}
+            onClick={() => changeLanguage(Language.SV)}
           />
           <Navigation.Item
             label="In English"
             lang={Language.EN}
-            onClick={() => i18n.changeLanguage(Language.EN)}
+            onClick={() => changeLanguage(Language.EN)}
           />
         </Navigation.LanguageSelector>
       </Navigation.Actions>
