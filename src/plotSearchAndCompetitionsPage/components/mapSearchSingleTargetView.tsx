@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
 import { connect } from 'react-redux';
 
-import { PlanUnit } from '../../plotSearch/types';
+import { PlanUnit, PlotSearchTarget } from '../../plotSearch/types';
 import { ApiAttributeChoice, ApiAttributes } from '../../api/types';
 import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
 import { RootState } from '../../root/rootReducer';
@@ -20,12 +20,14 @@ interface Props {
   plotSearchAttributes: ApiAttributes;
   selectedTarget: SelectedTarget;
   setSelectedTarget: (target: SelectedTarget) => void;
+  addFavourite: (target: PlotSearchTarget) => void;
 }
 
 const MapSearchSingleTargetView = ({
   plotSearchAttributes,
   selectedTarget,
   setSelectedTarget,
+  addFavourite,
 }: Props) => {
   const { t, i18n } = useTranslation();
 
@@ -48,6 +50,10 @@ const MapSearchSingleTargetView = ({
         (choice: ApiAttributeChoice) => choice.value === target.plan_unit[field]
       )?.display_name || '???'
     );
+  };
+
+  const handleApplyButton = (target: PlotSearchTarget): void => {
+    addFavourite(target);
   };
 
   if (!selectedTarget) {
@@ -249,7 +255,10 @@ const MapSearchSingleTargetView = ({
         </>
       )}
 
-      <Button className="MapSearchSingleTargetView__next-button">
+      <Button
+        className="MapSearchSingleTargetView__next-button"
+        onClick={() => handleApplyButton(target)}
+      >
         {t(
           'plotSearchAndCompetitions.mapView.sidebar.singleTarget.applyButton',
           'Apply for this plot'

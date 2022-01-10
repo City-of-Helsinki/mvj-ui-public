@@ -12,6 +12,7 @@ import { Language } from '../i18n/types';
 import { RootState } from '../root/rootReducer';
 import { getUser } from '../auth/selectors';
 import { userManager } from '../auth/userManager';
+import FavouritesIcon from './components/favouritesIcon';
 
 interface Dispatch {
   openLoginModal: () => void;
@@ -20,10 +21,12 @@ interface Dispatch {
 interface TopNavigationProps {
   openLoginModal: () => void;
   user: User | null;
+  favouritesCount: number;
 }
 
 interface State {
   user: User | null;
+  favouritesCount: number;
 }
 
 /*
@@ -51,6 +54,7 @@ const TopNavigationLink = ({to, label, className}: TopNavigationLinkProps): JSX.
 
 const TopNavigation = ({
   openLoginModal,
+  favouritesCount,
   user,
 }: TopNavigationProps): JSX.Element => {
   const returnHome = (navigate: NavigateFunction) => {
@@ -68,7 +72,7 @@ const TopNavigation = ({
     getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)
   );
   const matchAreaSearch = useMatch(getRouteById(AppRoutes.AREA_SEARCH));
-
+  const matchFavourites = useMatch(getRouteById(AppRoutes.FAVOURITES));
   const changeLanguage = (language: Language) => {
     i18n.changeLanguage(language).then(() => {
       document.location.reload();
@@ -112,6 +116,12 @@ const TopNavigation = ({
         />
       </Navigation.Row>
       <Navigation.Actions>
+        <Navigation.Item
+          as={Link}
+          to={getRouteById(AppRoutes.FAVOURITES)}
+          icon={<FavouritesIcon count={favouritesCount} />}
+          active={matchFavourites !== null}
+        />
         <Navigation.User
           label={t('topNavigation.signIn', 'Sign in')}
           onSignIn={() => openLoginModal()}
@@ -158,6 +168,7 @@ const mapDispatchToProps: Dispatch = {
 export default connect(
   (state: RootState): State => ({
     user: getUser(state),
+    favouritesCount: state.favourite.favourite.targets.length
   }),
   mapDispatchToProps
 )(TopNavigation);

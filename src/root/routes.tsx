@@ -18,6 +18,7 @@ export const AppRoutes = {
   LEASES: 'leases',
   APPLICATIONS: 'applications',
   MESSAGES: 'messages',
+  FAVOURITES: 'favourites',
   OIDC_CALLBACK: 'oidc-callback',
 };
 
@@ -35,6 +36,7 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.LEASES]: '/vuokraukset',
     [AppRoutes.APPLICATIONS]: '/hakemukset',
     [AppRoutes.MESSAGES]: '/viestit',
+    [AppRoutes.FAVOURITES]: '/suosikit',
     [AppRoutes.OIDC_CALLBACK]: '/oidc/callback',
   };
 
@@ -97,6 +99,10 @@ const SiteRoutes = (): JSX.Element => {
                 <div>Aluehakusivu</div>
               </RouteWithLoader>
             }
+          />
+          <Route
+            path={getRouteById(AppRoutes.FAVOURITES)}
+            element={<div className={'container'}>Suosikit sivu</div>}
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

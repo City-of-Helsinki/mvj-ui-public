@@ -4,11 +4,13 @@ import { reducer as oidcReducer } from 'redux-oidc';
 import authReducer from '../auth/reducer';
 import loginReducer from '../login/reducer';
 import plotSearchReducer from '../plotSearch/reducer';
+import favouriteReducer from '../favourites/reducer';
 
 const allReducers = {
   auth: authReducer,
   login: loginReducer,
   plotSearch: plotSearchReducer,
+  favourite: favouriteReducer,
   oidc: oidcReducer,
 };
 

@@ -20,10 +20,12 @@ import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import IconButton from '../../button/iconButton';
 import { useTranslation } from 'react-i18next';
 import MapSearchSingleTargetView from './mapSearchSingleTargetView';
-import { defaultLanguage } from '../../i18n';
-import { renderDateTime } from '../../i18n/utils';
+import { AddTargetPayload, Favourite } from '../../favourites/types';
+// import { defaultLanguage } from '../../i18n';
+// import { renderDateTime } from '../../i18n/utils';
 
 interface MapSearchComponentAccordionProps {
+  isHidden: boolean;
   initiallyOpen?: boolean;
   children?: ReactNode;
   heading: ReactNode;
@@ -36,6 +38,7 @@ interface MapSearchComponentAccordionProps {
 const SIDEBAR_GUTTER_WIDTH = 5; // px
 
 const MapSearchComponentAccordion = ({
+  isHidden,
   initiallyOpen = false,
   isVisible,
   onToggleVisibility,
@@ -53,6 +56,10 @@ const MapSearchComponentAccordion = ({
   };
 
   const Icon = isOpen ? IconAngleUp : IconAngleDown;
+
+  if (isHidden) {
+    return <></>;
+  }
 
   return (
     <div
@@ -95,8 +102,10 @@ interface MapSearchComponentProps {
   plotSearches: Array<PlotSearch>;
   setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
+  addFavouriteTarget: (payLoad: AddTargetPayload) => void;
   isOpen: boolean;
   toggle: (newValue: boolean) => void;
+  favourite: Favourite;
 }
 
 const MapSearchComponent = ({
@@ -106,22 +115,38 @@ const MapSearchComponent = ({
   plotSearches,
   setSelectedTarget,
   selectedTarget,
-  isOpen,
-  toggle,
-}: MapSearchComponentProps): JSX.Element => {
-  const { t } = useTranslation();
+  addFavouriteTarget,
+  favourite,
+}: // isOpen,
+// toggle,
+MapSearchComponentProps): JSX.Element => {
+  const { t, i18n } = useTranslation();
 
   const plotSearchesByCategory = categoryOptions.map((category) => ({
     category,
-    plotSearches: plotSearches?.filter(
-      (plotSearch) => plotSearch.type?.id === category.id
-    ),
+    plotSearches: plotSearches?.filter((plotSearch) => {
+      if (plotSearch.type?.id === category.id) {
+        if (favourite.plotSearch === null) {
+          return true;
+        }
+        return favourite.plotSearch === plotSearch.id;
+      }
+    }),
   }));
 
+  const checkHidden = (plotSearches: PlotSearch[]): boolean => {
+    if (favourite.plotSearch === null) {
+      return false;
+    }
+
+    return !plotSearches.some((s) => s.id === favourite.plotSearch);
+  };
+
   return (
-    <SidePanel className="MapSearchComponent" isOpen={isOpen} toggle={toggle}>
+    <SidePanel className="MapSearchComponent">
       {selectedTarget && (
         <MapSearchSingleTargetView
+          addFavouriteTarget={addFavouriteTarget}
           selectedTarget={selectedTarget}
           setSelectedTarget={setSelectedTarget}
         />
@@ -147,6 +172,7 @@ const MapSearchComponent = ({
         {plotSearchesByCategory.map((item, index) => {
           return (
             <MapSearchComponentAccordion
+              isHidden={checkHidden(item.plotSearches)}
               heading={`${item.category.name} (${item.plotSearches.length})`}
               symbol={item.category.symbol}
               colorIndex={index}
@@ -270,9 +296,12 @@ const MapSearchComponent = ({
                                   'plotSearchAndCompetitions.mapView.sidebar.sectionApplyBy',
                                   'Apply by {{date}}',
                                   {
-                                    date: renderDateTime(
-                                      new Date(section.headingExtra.endDate)
-                                    ),
+                                    date: new Date(
+                                      section.headingExtra.endDate
+                                    ).toLocaleString('fi', {
+                                      dateStyle: 'medium',
+                                      timeStyle: 'short',
+                                    }),
                                   }
                                 )}
                               </span>
@@ -281,18 +310,21 @@ const MapSearchComponent = ({
                           <div role="list">
                             {section.targets.map((target) => (
                               <Row
-                                className="MapSearchComponent__target"
+                                className={classNames(
+                                  'MapSearchComponent__target',
+                                  {
+                                    MapSearchComponent__target__favourited:
+                                      favourite.targets.some(
+                                        (t) => t.id === target.data.id
+                                      ),
+                                  }
+                                )}
                                 key={target.data.id}
                                 role="listitem"
                                 gutterWidth={SIDEBAR_GUTTER_WIDTH}
                                 align="center"
                               >
-                                <Col xs={2}>
-                                  {
-                                    target.data.plan_unit
-                                      .plot_division_identifier
-                                  }
-                                </Col>
+                                <Col xs={2}>{target.data.lease_identifier}</Col>
                                 <Col
                                   xs={3}
                                   className="MapSearchComponent__target-address"
@@ -307,8 +339,8 @@ const MapSearchComponent = ({
                                 <Col xs={2}>?</Col>
                                 <Col xs={2}>
                                   {target.data.plan_unit.area?.toLocaleString(
-                                    defaultLanguage
-                                  )}
+                                    i18n.language
+                                  ) || '?'}
                                 </Col>
                                 <Col xs={1}>
                                   <IconButton
