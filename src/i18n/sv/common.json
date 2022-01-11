@@ -39,10 +39,13 @@
       "heading": "Några frågor?"
     }
   },
+  "loader": {
+    "loading": ""
+  },
   "login": {
     "cancel": "Annullera",
     "close": "",
-    "descriptor": "Logga in på tjänsten för att ansöka om tomter.",
+    "descriptor": "",
     "form": {
       "forgotPasswordLink": "",
       "newAccountLink": "",
@@ -105,6 +108,7 @@
   "topNavigation": {
     "menuLabel": "",
     "signIn": "",
+    "signOut": "",
     "skipToContent": "",
     "tabs": {
       "areaSearch": "Områdesökning",

@@ -1,9 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import App from '../App';
 import FrontPage from '../frontPage/frontPage';
 import ErrorPage from '../errorPage/errorPage';
 import PlotSearchAndCompetitionsPage from '../plotSearchAndCompetitionsPage/plotSearchAndCompetitionsPage';
+import FinalizeLogin from '../auth/components/finalizeLogin';
+import AuthDependentContent from '../auth/components/authDependentContent';
+import BlockLoader from '../loader/blockLoader';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -14,11 +18,12 @@ export const AppRoutes = {
   LEASES: 'leases',
   APPLICATIONS: 'applications',
   MESSAGES: 'messages',
+  OIDC_CALLBACK: 'oidc-callback',
 };
 
 /**
  * Get route by id
- * @param {string} string
+ * @param {string} id
  * @returns {string}
  */
 export const getRouteById = (id: string): string => {
@@ -30,28 +35,68 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.LEASES]: '/vuokraukset',
     [AppRoutes.APPLICATIONS]: '/hakemukset',
     [AppRoutes.MESSAGES]: '/viestit',
+    [AppRoutes.OIDC_CALLBACK]: '/oidc/callback',
   };
 
   return routes[id] ? routes[id] : '';
 };
 
 const SiteRoutes = (): JSX.Element => {
+  const RouteWithLoader = ({
+    children,
+  }: {
+    children: JSX.Element | null;
+  }): JSX.Element | null => (
+    <AuthDependentContent>
+      {(loading, loggedIn) => {
+        if (!loggedIn || !loading) {
+          return children || null;
+        }
+
+        return <BlockLoader />;
+      }}
+    </AuthDependentContent>
+  );
+
   return (
     <BrowserRouter>
       <App>
         <Routes>
-          <Route path="/" element={<FrontPage />} />
+          <Route
+            path={getRouteById(AppRoutes.OIDC_CALLBACK)}
+            element={<FinalizeLogin />}
+          />
+          <Route
+            path="/"
+            element={
+              <RouteWithLoader>
+                <FrontPage />
+              </RouteWithLoader>
+            }
+          />
           <Route
             path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
-            element={<PlotSearchAndCompetitionsPage />}
+            element={
+              <RouteWithLoader>
+                <PlotSearchAndCompetitionsPage />
+              </RouteWithLoader>
+            }
           />
           <Route
             path={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
-            element={<div className={'container'}>Muut kilpailut ja haut</div>}
+            element={
+              <RouteWithLoader>
+                <div>Muut kilpailut ja haut</div>
+              </RouteWithLoader>
+            }
           />
           <Route
             path={getRouteById(AppRoutes.AREA_SEARCH)}
-            element={<div className={'container'}>Aluehaku sivu</div>}
+            element={
+              <RouteWithLoader>
+                <div>Aluehakusivu</div>
+              </RouteWithLoader>
+            }
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { LogoLanguage, Navigation } from 'hds-react';
+import { IconSignout, LogoLanguage, Navigation } from 'hds-react';
+import { NavigateFunction, useMatch } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { User } from 'oidc-client';
+
 import { AppRoutes, getRouteById } from '../root/routes';
 import { openLoginModal } from '../login/actions';
 import { Language } from '../i18n/types';
-import { NavigateFunction, useMatch } from 'react-router';
-import { useTranslation } from 'react-i18next';
+import { RootState } from '../root/rootReducer';
+import { getUser } from '../auth/selectors';
+import { userManager } from '../auth/userManager';
 
 interface Dispatch {
   openLoginModal: () => void;
@@ -14,6 +19,11 @@ interface Dispatch {
 
 interface TopNavigationProps {
   openLoginModal: () => void;
+  user: User | null;
+}
+
+interface State {
+  user: User | null;
 }
 
 /*
@@ -39,7 +49,10 @@ const TopNavigationLink = ({to, label, className}: TopNavigationLinkProps): JSX.
 };
  */
 
-const TopNavigation = ({ openLoginModal }: TopNavigationProps): JSX.Element => {
+const TopNavigation = ({
+  openLoginModal,
+  user,
+}: TopNavigationProps): JSX.Element => {
   const returnHome = (navigate: NavigateFunction) => {
     navigate(getRouteById(AppRoutes.HOME));
   };
@@ -102,7 +115,20 @@ const TopNavigation = ({ openLoginModal }: TopNavigationProps): JSX.Element => {
         <Navigation.User
           label={t('topNavigation.signIn', 'Sign in')}
           onSignIn={() => openLoginModal()}
-        />
+          authenticated={!!user}
+          userName={user?.profile?.name}
+        >
+          <Navigation.Item
+            label={t('topNavigation.signOut', 'Sign out')}
+            href="#"
+            icon={<IconSignout aria-hidden />}
+            variant="supplementary"
+            onClick={(e: React.MouseEvent<HTMLElement>) => {
+              e.preventDefault();
+              userManager.signoutRedirect().then();
+            }}
+          />
+        </Navigation.User>
         <Navigation.LanguageSelector label={i18n.language.toUpperCase()}>
           <Navigation.Item
             label="Suomeksi"
@@ -129,4 +155,9 @@ const mapDispatchToProps: Dispatch = {
   openLoginModal,
 };
 
-export default connect(null, mapDispatchToProps)(TopNavigation);
+export default connect(
+  (state: RootState): State => ({
+    user: getUser(state),
+  }),
+  mapDispatchToProps
+)(TopNavigation);

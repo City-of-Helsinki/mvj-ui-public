@@ -1,16 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { OidcProvider } from 'redux-oidc';
+import { Provider } from 'react-redux';
+
 import './i18n';
 import configureStore from './root/storeConfig';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
 import SiteRoutes from './root/routes';
+import { userManager } from './auth/userManager';
+
 const initialState = {};
 const store = configureStore(initialState);
 
 ReactDOM.render(
   <Provider store={store}>
-    <SiteRoutes />
+    <OidcProvider store={store} userManager={userManager}>
+      <SiteRoutes />
+    </OidcProvider>
   </Provider>,
   document.getElementById('root')
 );

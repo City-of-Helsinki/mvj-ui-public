@@ -1,11 +1,13 @@
-import { configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
+import { configureStore, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { createInjectorsEnhancer } from 'redux-injectors';
+import { createBrowserHistory } from 'history';
+import { routerMiddleware, connectRouter } from 'connected-react-router';
+import { loadUser } from 'redux-oidc';
+
 import createReducer from './rootReducer';
 import rootSaga from './rootSaga';
-import { createBrowserHistory } from 'history';
-
-import { routerMiddleware, connectRouter } from 'connected-react-router';
+import { userManager } from '../auth/userManager';
 
 export const history = createBrowserHistory();
 
@@ -28,13 +30,23 @@ export default function configureAppStore(initialState = {}): Store {
 
   const store = configureStore({
     reducer: createReducer(router),
-    middleware: [...getDefaultMiddleware(), ...middlewares],
+    middleware: (defaultMiddleware) => [
+      ...defaultMiddleware({
+        serializableCheck: {
+          ignoredActions: ['redux-oidc/USER_FOUND'],
+          ignoredPaths: ['oidc.user'],
+        },
+      }),
+      ...middlewares,
+    ],
     preloadedState: initialState,
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,
   });
 
-  /* tslint:disable-next-line */
   sagaMiddleware.run(rootSaga);
+
+  loadUser(store, userManager).then();
+
   return store;
 }
