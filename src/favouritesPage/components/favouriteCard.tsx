@@ -6,6 +6,7 @@ import { IconCrossCircle, IconArrowDown, IconArrowUp } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { getInfo } from '../utils';
 import { FavouriteCardDetails } from './favouriteCardDetails';
+import FavouriteCardMap from './favouriteCardMap';
 
 interface Props {
   target: PlotSearchTarget;
@@ -32,7 +33,7 @@ const FavouriteCard = (props: Props): JSX.Element => {
       <Row>
         <Col md={3} xs={4}>
           {/* Left Column (map)*/}
-          Kartta
+          <FavouriteCardMap target={target} />
         </Col>
         <Col md={9} xs={8}>
           {/* Right Column (text and actionbuttons etc.. */}
