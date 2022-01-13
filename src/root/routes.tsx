@@ -5,6 +5,7 @@ import App from '../App';
 import FrontPage from '../frontPage/frontPage';
 import ErrorPage from '../errorPage/errorPage';
 import PlotSearchAndCompetitionsPage from '../plotSearchAndCompetitionsPage/plotSearchAndCompetitionsPage';
+import FavouritesPage from '../favouritesPage/favouritesPage';
 import FinalizeLogin from '../auth/components/finalizeLogin';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
@@ -102,7 +103,7 @@ const SiteRoutes = (): JSX.Element => {
           />
           <Route
             path={getRouteById(AppRoutes.FAVOURITES)}
-            element={<div className={'container'}>Suosikit sivu</div>}
+            element={<FavouritesPage />}
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

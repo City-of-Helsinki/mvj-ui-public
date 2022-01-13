@@ -105,6 +105,34 @@
       }
     }
   },
+  "favouritesPage": {
+    "title": "You have added following plots to favourites",
+    "targetCard": {
+      "removeButton": "Remove from list",
+      "table": {
+        "detailedPlanIdentifier": "Detailed plan identifier",
+        "detailedPlanState": "Detailed plan state",
+        "financingMethod": "Financing method",
+        "firstSuitableConstructionYear": "First suitable construction year",
+        "hitas": "HITAS",
+        "infoLinks": "Details",
+        "intendedUse": "Intended use",
+        "management": "Management method",
+        "address": "Address",
+        "applyByDate": "Apply by",
+        "plot": "Plot",
+        "intendedUsage": "Intended use",
+        "permittedBuildArea": "Permitted build floor area (floor-m²)",
+        "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
+        "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
+        "area": "Area (m²)"
+      },
+      "showFullDesc": {
+        "show": "Show additional details",
+        "hide": "Hide additional details"
+      }
+    }
+  },
   "topNavigation": {
     "menuLabel": "Menu",
     "signIn": "Sign in",
