@@ -35,4 +35,10 @@
     background-color: $color-suomenlinna;
     color: $color-black-90;
   }
+  &__favourite-icon {
+    color: $color-gold;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+  }
 }

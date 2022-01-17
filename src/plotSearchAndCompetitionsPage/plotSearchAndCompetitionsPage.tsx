@@ -10,7 +10,7 @@ import {
   fetchPlotSearches,
   fetchPlotSearchTypes,
 } from '../plotSearch/actions';
-import { addFavouriteTarget, fetchFavourite } from '../favourites/actions';
+import { fetchFavourite } from '../favourites/actions';
 
 import { ApiAttributes } from '../api/types';
 import {
@@ -19,8 +19,7 @@ import {
   PlotSearchTarget,
   PlotSearchType,
 } from '../plotSearch/types';
-import { AddTargetPayload, Favourite } from '../favourites/types';
-// import {add} from 'husky';
+import { Favourite } from '../favourites/types';
 
 interface State {
   isFetchingPlotSearches: boolean;
@@ -37,7 +36,6 @@ interface Props {
   fetchPlotSearchAttributes: () => void;
   fetchPlotSearchTypes: () => void;
   fetchFavourite: () => void;
-  addFavouriteTarget: (payload: AddTargetPayload) => void;
   isFetchingPlotSearches: boolean;
   isFetchingPlotSearchAttributes: boolean;
   isFetchingPlotSearchTypes: boolean;
@@ -66,7 +64,6 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     fetchPlotSearchAttributes,
     fetchPlotSearchTypes,
     fetchFavourite,
-    addFavouriteTarget,
     isFetchingPlotSearches,
     isFetchingPlotSearchAttributes,
     isFetchingPlotSearchTypes,
@@ -157,7 +154,6 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
         selectedTarget={selectedTarget}
         isOpen={isSidebarOpen}
         toggle={setSidebarOpen}
-        addFavouriteTarget={addFavouriteTarget}
         favourite={favourite}
       />
       <MapComponent
@@ -188,5 +184,4 @@ export default connect(mapStateToProps, {
   fetchPlotSearchAttributes,
   fetchPlotSearchTypes,
   fetchFavourite,
-  addFavouriteTarget,
 })(PlotSearchAndCompetitionsPage);

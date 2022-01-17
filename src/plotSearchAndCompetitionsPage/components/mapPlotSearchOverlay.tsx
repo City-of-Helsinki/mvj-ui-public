@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import { useMapEvents, GeoJSON, Marker, useMap } from 'react-leaflet';
 import L, { DivIcon, LatLngExpression } from 'leaflet';
-import { IconHeartFill } from 'hds-react';
 import { getCentroid } from '../utils';
 import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -34,8 +33,7 @@ export const getMarkerIcon = (
 ): DivIcon => {
   const html = renderToStaticMarkup(
     <div>
-      {isFavourite && <IconHeartFill className="favouriteIcon" />}
-      <MapSymbol symbol={symbol} colorIndex={index} />
+      <MapSymbol symbol={symbol} colorIndex={index} isFavourite={isFavourite} />
     </div>
   );
   return new L.DivIcon({

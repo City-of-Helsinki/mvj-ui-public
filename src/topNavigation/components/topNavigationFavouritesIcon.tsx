@@ -5,11 +5,11 @@ interface Props {
   count: number;
 }
 
-const FavouritesIcon = (props: Props): JSX.Element => {
+const TopNavigationFavouritesIcon = (props: Props): JSX.Element => {
   return (
-    <div className="TopNavigation_FavouritesIcon">
+    <div className="TopNavigationFavouritesIcon">
       {props.count > 0 && (
-        <div className="TopNavigation__FavouritesIcon__FavCount">
+        <div className="TopNavigationFavouritesIcon__favourite-count">
           {props.count}
         </div>
       )}
@@ -18,4 +18,4 @@ const FavouritesIcon = (props: Props): JSX.Element => {
   );
 };
 
-export default FavouritesIcon;
+export default TopNavigationFavouritesIcon;

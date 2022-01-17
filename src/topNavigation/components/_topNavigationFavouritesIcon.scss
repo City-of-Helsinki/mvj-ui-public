@@ -1,0 +1,25 @@
+.TopNavigationFavouritesIcon {
+  position: relative;
+  color: black;
+  text-decoration: none;
+
+  &__favourite-count {
+    position: absolute;
+    left: $spacing-xs;
+    top: -$spacing-xs;
+    background-color: $color-gold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+    font-weight: bold;
+    color: black;
+    font-size: $fontsize-body-s;
+
+    &:link {
+      text-decoration: none;
+    }
+  }
+}

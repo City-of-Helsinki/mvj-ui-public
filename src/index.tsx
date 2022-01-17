@@ -15,7 +15,7 @@ const store = configureStore(initialState);
 // save favourites into localstorage
 store.subscribe(() => {
   const { favourite } = store.getState();
-  localStorage.setItem('mvj_favourites', JSON.stringify(favourite.favourite));
+  localStorage.setItem('mvj_favourite', JSON.stringify(favourite.favourite));
 });
 
 ReactDOM.render(

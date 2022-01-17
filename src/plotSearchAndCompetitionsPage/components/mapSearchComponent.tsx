@@ -21,8 +21,10 @@ import IconButton from '../../button/iconButton';
 import { useTranslation } from 'react-i18next';
 import MapSearchSingleTargetView from './mapSearchSingleTargetView';
 import { AddTargetPayload, Favourite } from '../../favourites/types';
-// import { defaultLanguage } from '../../i18n';
-// import { renderDateTime } from '../../i18n/utils';
+import { defaultLanguage } from '../../i18n';
+import { renderDateTime } from '../../i18n/utils';
+import { connect } from 'react-redux';
+import { addFavouriteTarget } from '../../favourites/actions';
 
 interface MapSearchComponentAccordionProps {
   isHidden: boolean;
@@ -46,7 +48,7 @@ const MapSearchComponentAccordion = ({
   heading,
   symbol,
   colorIndex = 0,
-}: MapSearchComponentAccordionProps): JSX.Element => {
+}: MapSearchComponentAccordionProps): JSX.Element | null => {
   const { isOpen, buttonProps, contentProps } = useAccordion({ initiallyOpen });
 
   const onVisibilityChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +60,7 @@ const MapSearchComponentAccordion = ({
   const Icon = isOpen ? IconAngleUp : IconAngleDown;
 
   if (isHidden) {
-    return <></>;
+    return null;
   }
 
   return (
@@ -117,10 +119,10 @@ const MapSearchComponent = ({
   selectedTarget,
   addFavouriteTarget,
   favourite,
-}: // isOpen,
-// toggle,
-MapSearchComponentProps): JSX.Element => {
-  const { t, i18n } = useTranslation();
+  isOpen,
+  toggle,
+}: MapSearchComponentProps): JSX.Element => {
+  const { t } = useTranslation();
 
   const plotSearchesByCategory = categoryOptions.map((category) => ({
     category,
@@ -143,7 +145,7 @@ MapSearchComponentProps): JSX.Element => {
   };
 
   return (
-    <SidePanel className="MapSearchComponent">
+    <SidePanel className="MapSearchComponent" isOpen={isOpen} toggle={toggle}>
       {selectedTarget && (
         <MapSearchSingleTargetView
           addFavouriteTarget={addFavouriteTarget}
@@ -296,12 +298,9 @@ MapSearchComponentProps): JSX.Element => {
                                   'plotSearchAndCompetitions.mapView.sidebar.sectionApplyBy',
                                   'Apply by {{date}}',
                                   {
-                                    date: new Date(
-                                      section.headingExtra.endDate
-                                    ).toLocaleString('fi', {
-                                      dateStyle: 'medium',
-                                      timeStyle: 'short',
-                                    }),
+                                    date: renderDateTime(
+                                      new Date(section.headingExtra.endDate)
+                                    ),
                                   }
                                 )}
                               </span>
@@ -313,7 +312,7 @@ MapSearchComponentProps): JSX.Element => {
                                 className={classNames(
                                   'MapSearchComponent__target',
                                   {
-                                    MapSearchComponent__target__favourited:
+                                    'MapSearchComponent__target--favourited':
                                       favourite.targets.some(
                                         (t) => t.id === target.data.id
                                       ),
@@ -324,7 +323,12 @@ MapSearchComponentProps): JSX.Element => {
                                 gutterWidth={SIDEBAR_GUTTER_WIDTH}
                                 align="center"
                               >
-                                <Col xs={2}>{target.data.lease_identifier}</Col>
+                                <Col xs={2}>
+                                  {
+                                    target.data.plan_unit
+                                      .plot_division_identifier
+                                  }
+                                </Col>
                                 <Col
                                   xs={3}
                                   className="MapSearchComponent__target-address"
@@ -339,7 +343,7 @@ MapSearchComponentProps): JSX.Element => {
                                 <Col xs={2}>?</Col>
                                 <Col xs={2}>
                                   {target.data.plan_unit.area?.toLocaleString(
-                                    i18n.language
+                                    defaultLanguage
                                   ) || '?'}
                                 </Col>
                                 <Col xs={1}>
@@ -371,4 +375,4 @@ MapSearchComponentProps): JSX.Element => {
   );
 };
 
-export default MapSearchComponent;
+export default connect(null, { addFavouriteTarget })(MapSearchComponent);

@@ -103,7 +103,11 @@ const SiteRoutes = (): JSX.Element => {
           />
           <Route
             path={getRouteById(AppRoutes.FAVOURITES)}
-            element={<FavouritesPage />}
+            element={
+              <RouteWithLoader>
+                <FavouritesPage />
+              </RouteWithLoader>
+            }
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

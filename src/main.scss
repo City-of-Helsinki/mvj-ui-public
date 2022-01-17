@@ -10,6 +10,7 @@
 @import 'frontPage/frontPage';
 @import 'frontPage/components/frontPageBox';
 @import 'topNavigation/topNavigation';
+@import 'topNavigation/components/topNavigationFavouritesIcon';
 @import 'login/components/loginForm';
 @import 'panel/sidePanel';
 @import 'app';
@@ -18,6 +19,9 @@
 @import 'plotSearchAndCompetitionsPage/components/mapSearchSingleTargetView';
 @import 'plotSearchAndCompetitionsPage/components/mapComponent';
 @import 'favouritesPage/favouritesPage';
+@import 'favouritesPage/components/favouriteCard';
+@import 'favouritesPage/components/favouriteCardDetails';
+@import 'favouritesPage/components/favouriteCardMap';
 @import 'loader/blockLoader';
 
 html {

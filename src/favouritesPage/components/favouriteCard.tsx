@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Card, LoadingSpinner } from 'hds-react';
+import { Button, Card } from 'hds-react';
 import { Row, Col } from 'react-grid-system';
-import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import { IconCrossCircle, IconArrowDown, IconArrowUp } from 'hds-react';
 import { useTranslation } from 'react-i18next';
+import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import { getInfo } from '../utils';
 import { FavouriteCardDetails } from './favouriteCardDetails';
 import FavouriteCardMap from './favouriteCardMap';
@@ -18,18 +18,11 @@ const FavouriteCard = (props: Props): JSX.Element => {
   const { target, remove, plotSearch } = props;
   const { t } = useTranslation();
   const [fullDescription, setFullDescription] = useState(false);
-  if (!plotSearch) {
-    return (
-      <Col style={{ alignContent: 'center' }}>
-        <LoadingSpinner />
-      </Col>
-    );
-  }
 
-  const infoCols = getInfo(target, plotSearch, t);
+  const infoCols = getInfo(target, plotSearch as PlotSearch, t);
 
   return (
-    <Card className="favouritesPage__targetCard" border key={target.id}>
+    <Card className="FavouriteCard" border key={target.id}>
       <Row>
         <Col md={3} xs={4}>
           {/* Left Column (map)*/}
@@ -37,23 +30,25 @@ const FavouriteCard = (props: Props): JSX.Element => {
         </Col>
         <Col md={9} xs={8}>
           {/* Right Column (text and actionbuttons etc.. */}
-          <Row className="favouritesPage__targetCard__headerRow">
+          <Row className="FavouriteCard__header-row">
             {/* Top row with title and delete action on top right */}
             <Col md={8} xs={7}>
               <h3>{target.lease_address.address}</h3>
             </Col>
             <Col md={4} xs={5}>
               <Button
-                className="favouritesPage__targetCard__removeButton"
+                className="FavouriteCard__action-button"
                 onClick={() => remove(target.id)}
                 variant="supplementary"
-                iconLeft={<IconCrossCircle style={{ color: 'black' }} />}
+                iconLeft={
+                  <IconCrossCircle className="FavouriteCard__action-button-icon" />
+                }
               >
                 {t('favouritesPage.targetCard.removeButton')}
               </Button>
             </Col>
           </Row>
-          <Row style={{ lineHeight: 2.2 }}>
+          <Row className="FavouriteCard__info-row">
             {/* Middle row with info & descriptions */}
             {infoCols.map((info) => (
               <FavouriteCardDetails
@@ -63,18 +58,18 @@ const FavouriteCard = (props: Props): JSX.Element => {
               />
             ))}
           </Row>
-          <Row style={{ marginTop: 10 }}>
+          <Row>
             {/* Bottom row with "more info" -action */}
             <Col>
               <Button
-                style={{ float: 'right' }}
+                className="FavouriteCard__action-button"
                 onClick={() => setFullDescription(!fullDescription)}
                 variant="supplementary"
                 iconLeft={
                   fullDescription ? (
-                    <IconArrowUp style={{ color: 'black' }} />
+                    <IconArrowUp className="FavouriteCard__action-button-icon" />
                   ) : (
-                    <IconArrowDown style={{ color: 'black' }} />
+                    <IconArrowDown className="FavouriteCard__action-button-icon" />
                   )
                 }
               >

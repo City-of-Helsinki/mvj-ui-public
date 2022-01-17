@@ -7,14 +7,14 @@ interface Props {
   fullDesc: boolean;
 }
 
-export const FavouriteCardDetails = (props: Props): JSX.Element => {
+export const FavouriteCardDetails = (props: Props): JSX.Element | null => {
   const { info, fullDesc } = props;
 
   if (fullDesc) {
     return (
       <>
         <Col xs={6} component="dt">
-          <span style={{ fontWeight: 'bold' }}>{info.key}</span>
+          <span className="FavouriteCardDetails__info-header">{info.key}</span>
         </Col>
         <Col xs={6} component="dd">
           {info.value}
@@ -27,12 +27,12 @@ export const FavouriteCardDetails = (props: Props): JSX.Element => {
     return (
       <>
         <Col>
-          <span style={{ fontWeight: 'bold' }}>{info.key}</span>
+          <span className="FavouriteCardDetails__info-header">{info.key}</span>
           <br />
           {info.value}
         </Col>
       </>
     );
   }
-  return <></>;
+  return null;
 };

@@ -47,6 +47,10 @@
       padding: ($spacing-xs / 2) $spacing-xs;
       border-bottom: 1px solid $color-black-20;
       font-size: $fontsize-body-s;
+
+      &--favourited {
+        background-color: $color-gold;
+      }
     }
 
     .MapSearchComponent__target-address {

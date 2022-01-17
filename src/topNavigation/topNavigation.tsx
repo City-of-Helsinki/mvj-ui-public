@@ -9,10 +9,10 @@ import { User } from 'oidc-client';
 import { AppRoutes, getRouteById } from '../root/routes';
 import { openLoginModal } from '../login/actions';
 import { Language } from '../i18n/types';
+import TopNavigationFavouritesIcon from './components/topNavigationFavouritesIcon';
 import { RootState } from '../root/rootReducer';
 import { getUser } from '../auth/selectors';
 import { userManager } from '../auth/userManager';
-import FavouritesIcon from './components/favouritesIcon';
 
 interface Dispatch {
   openLoginModal: () => void;
@@ -119,7 +119,7 @@ const TopNavigation = ({
         <Navigation.Item
           as={Link}
           to={getRouteById(AppRoutes.FAVOURITES)}
-          icon={<FavouritesIcon count={favouritesCount} />}
+          icon={<TopNavigationFavouritesIcon count={favouritesCount} />}
           active={matchFavourites !== null}
         />
         <Navigation.User
@@ -168,7 +168,7 @@ const mapDispatchToProps: Dispatch = {
 export default connect(
   (state: RootState): State => ({
     user: getUser(state),
-    favouritesCount: state.favourite.favourite.targets.length
+    favouritesCount: state.favourite.favourite.targets.length,
   }),
   mapDispatchToProps
 )(TopNavigation);
