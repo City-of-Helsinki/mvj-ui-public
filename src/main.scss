@@ -7,16 +7,17 @@
 @import 'breadcrumbs/breadcrumbs';
 @import 'button/iconButton';
 @import 'footer/footer';
-@import 'src/frontPage/frontPage';
-@import 'src/frontPage/components/frontPageBox';
+@import 'frontPage/frontPage';
+@import 'frontPage/components/frontPageBox';
 @import 'topNavigation/topNavigation';
 @import 'login/components/loginForm';
-@import 'src/panel/sidePanel';
+@import 'panel/sidePanel';
 @import 'app';
 @import 'plotSearchAndCompetitionsPage/components/mapSymbol';
 @import 'plotSearchAndCompetitionsPage/components/mapSearchComponent';
 @import 'plotSearchAndCompetitionsPage/components/mapSearchSingleTargetView';
 @import 'plotSearchAndCompetitionsPage/components/mapComponent';
+@import 'loader/blockLoader';
 
 html {
   -webkit-font-smoothing: antialiased;

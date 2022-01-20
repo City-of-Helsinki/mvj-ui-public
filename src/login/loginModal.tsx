@@ -2,10 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog } from 'hds-react';
+import { useLocation } from 'react-router';
 
 import { RootState } from '../root/rootReducer';
 import { hideLoginModal } from './actions';
-import LoginForm from './components/loginForm';
+// import LoginForm from './components/loginForm';
+import { userManager } from '../auth/userManager';
+import { AppRoutes, getRouteById } from '../root/routes';
+import { setRedirectUrlToSessionStorage } from '../auth/util';
 
 interface State {
   isLoginModalOpen: boolean;
@@ -23,9 +27,18 @@ interface Props {
 const LoginModal = (props: Props): JSX.Element => {
   const { hideLoginModal, isLoginModalOpen } = props;
   const { t } = useTranslation();
+  const { pathname, search } = useLocation();
 
   const titleId = 'LoginModalTitle';
   const descriptionId = 'LoginFormDescriptor';
+
+  const loginRedirect = () => {
+    setRedirectUrlToSessionStorage(
+      `${pathname}${search}` || getRouteById(AppRoutes.HOME)
+    );
+
+    userManager.signinRedirect().then();
+  };
 
   return (
     <Dialog
@@ -42,13 +55,12 @@ const LoginModal = (props: Props): JSX.Element => {
         <p id="LoginFormDescriptor">
           {t(
             'login.descriptor',
-            'To search plots, please login to the service.'
+            'To search plots, please log in through one of the supported services.'
           )}
         </p>
-        <LoginForm />
       </Dialog.Content>
       <Dialog.ActionButtons>
-        <Button onClick={() => console.log('save')}>
+        <Button onClick={() => loginRedirect()}>
           {t('login.login', 'Log in')}
         </Button>
         <Button onClick={hideLoginModal} variant="secondary">

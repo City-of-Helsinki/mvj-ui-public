@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { FETCH_API_TOKEN, TOKEN_NOT_FOUND, RECEIVE_API_TOKEN } from './types';
 
 type CurrentDisplayState = {

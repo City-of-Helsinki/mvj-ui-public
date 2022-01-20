@@ -1,4 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import { reducer as oidcReducer } from 'redux-oidc';
 
 import authReducer from '../auth/reducer';
 import loginReducer from '../login/reducer';
@@ -8,6 +9,7 @@ const allReducers = {
   auth: authReducer,
   login: loginReducer,
   plotSearch: plotSearchReducer,
+  oidc: oidcReducer,
 };
 
 export let rootReducer = combineReducers({

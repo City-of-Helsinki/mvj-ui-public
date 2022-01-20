@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { RootState } from '../root/rootReducer';
 import MapSearchComponent from './components/mapSearchComponent';
 import MapComponent from './components/mapComponent';
+import BlockLoader from '../loader/blockLoader';
 import {
   fetchPlotSearchAttributes,
   fetchPlotSearches,
@@ -127,8 +128,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     isFetchingPlotSearchAttributes ||
     isFetchingPlotSearchTypes
   ) {
-    // TODO: loader
-    return <div />;
+    return <BlockLoader />;
   }
 
   const filteredPlotSearches = plotSearches.filter(

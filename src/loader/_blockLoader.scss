@@ -1,0 +1,8 @@
+.BlockLoader {
+  padding: $spacing-l;
+  display: block;
+
+  > .BlockLoader__inner {
+    margin: 0 auto;
+  }
+}
