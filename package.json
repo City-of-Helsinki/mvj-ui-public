@@ -57,7 +57,7 @@
     "test:coverage": "react-scripts test --coverage --runInBand --watchAll=false",
     "prepare": "husky install",
     "i18n": "npx i18next",
-    "prepare-renew-endpoint": "cp node_modules/oidc-client/dist/oidc-client.min.js public/oidc-client.min.js"
+    "prepare-renew-endpoint": "node scripts/prepare-renew-endpoint.js"
   },
   "eslintConfig": {
     "extends": [
