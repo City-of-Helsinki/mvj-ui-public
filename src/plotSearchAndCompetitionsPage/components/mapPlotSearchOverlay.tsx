@@ -1,12 +1,11 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import { useMapEvents, GeoJSON, Marker, useMap } from 'react-leaflet';
-import { DivIcon } from 'leaflet';
-import L from 'leaflet';
-import { renderToStaticMarkup } from 'react-dom/server';
-import MapSymbol from './mapSymbol';
+import L, { DivIcon, LatLngExpression } from 'leaflet';
 import { getCentroid } from '../utils';
 import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
+import { renderToStaticMarkup } from 'react-dom/server';
+import MapSymbol from './mapSymbol';
 
 interface Props {
   plotSearchTargets: PlotSearchTarget[];
@@ -15,6 +14,8 @@ interface Props {
   plotSearch: PlotSearch;
   categoryIndex: number;
   categorySymbol: string;
+  initialPosition: LatLngExpression;
+  favouritedTargets: PlotSearchTarget[];
 }
 
 const usePreviousTarget = (value: SelectedTarget) => {
@@ -23,6 +24,23 @@ const usePreviousTarget = (value: SelectedTarget) => {
     ref.current = value;
   });
   return ref.current;
+};
+
+export const getMarkerIcon = (
+  symbol: string,
+  index: number,
+  isFavourite: boolean
+): DivIcon => {
+  const html = renderToStaticMarkup(
+    <div>
+      <MapSymbol symbol={symbol} colorIndex={index} isFavourite={isFavourite} />
+    </div>
+  );
+  return new L.DivIcon({
+    html: html,
+    className: 'MapSymbol',
+    iconAnchor: [15, 0],
+  });
 };
 
 const MapPlotSearchOverlay = (props: Props): JSX.Element => {
@@ -46,17 +64,12 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
         map.setView(position, 9);
       }
     }
-  });
 
-  const getMarkerIcon = (): DivIcon => {
-    const html = renderToStaticMarkup(
-      <MapSymbol
-        symbol={props.categorySymbol}
-        colorIndex={props.categoryIndex}
-      />
-    );
-    return new L.DivIcon({ html: html, className: 'MapSymbol' });
-  };
+    // if target is going to null, set map to initialPosition
+    if (prevSelectedTarget !== null && props.selectedTarget === null) {
+      map.setView(props.initialPosition, 6);
+    }
+  });
 
   const handleMarkerClick = (target: PlotSearchTarget): void => {
     props.setSelectedTarget({
@@ -65,13 +78,21 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
     });
   };
 
-  const renderMarker = (target: PlotSearchTarget): JSX.Element | null => {
+  const renderMarker = (
+    target: PlotSearchTarget,
+    favouritedTargets: PlotSearchTarget[]
+  ): JSX.Element | null => {
+    const isFavourited = favouritedTargets.some((t) => t.id === target.id);
     const position = getCentroid(target.plan_unit.geometry);
     if (position) {
       return (
         <Marker
           position={position}
-          icon={getMarkerIcon()}
+          icon={getMarkerIcon(
+            props.categorySymbol,
+            props.categoryIndex,
+            isFavourited
+          )}
           eventHandlers={{
             click: () => handleMarkerClick(target),
           }}
@@ -94,7 +115,7 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
               }}
             />
           )}
-          {renderMarker(target)}
+          {renderMarker(target, props.favouritedTargets)}
         </Fragment>
       ))}
     </Fragment>

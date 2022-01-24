@@ -1,0 +1,21 @@
+.FavouriteCard {
+  width: 80%;
+  margin-bottom: $spacing-2-xl;
+
+  &__header-row {
+    margin-bottom: $spacing-2-xs;
+  }
+
+  &__info-row {
+    line-height: $spacing-xl;
+    padding-bottom: $spacing-xl;
+  }
+
+  &__action-button {
+    float: right;
+  }
+
+  &__action-button-icon {
+    color: black;
+  }
+}

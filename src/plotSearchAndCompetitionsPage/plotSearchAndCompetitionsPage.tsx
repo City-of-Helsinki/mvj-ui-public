@@ -10,6 +10,7 @@ import {
   fetchPlotSearches,
   fetchPlotSearchTypes,
 } from '../plotSearch/actions';
+import { fetchFavourite } from '../favourites/actions';
 
 import { ApiAttributes } from '../api/types';
 import {
@@ -18,6 +19,7 @@ import {
   PlotSearchTarget,
   PlotSearchType,
 } from '../plotSearch/types';
+import { Favourite } from '../favourites/types';
 
 interface State {
   isFetchingPlotSearches: boolean;
@@ -26,18 +28,21 @@ interface State {
   plotSearches: Array<PlotSearch>;
   plotSearchAttributes: ApiAttributes;
   plotSearchTypes: Array<PlotSearchType>;
+  favourite: Favourite;
 }
 
 interface Props {
   fetchPlotSearches: () => void;
   fetchPlotSearchAttributes: () => void;
   fetchPlotSearchTypes: () => void;
+  fetchFavourite: () => void;
   isFetchingPlotSearches: boolean;
   isFetchingPlotSearchAttributes: boolean;
   isFetchingPlotSearchTypes: boolean;
   plotSearches: Array<PlotSearch>;
   plotSearchAttributes: ApiAttributes;
   plotSearchTypes: Array<PlotSearchType>;
+  favourite: Favourite;
 }
 
 export type CategoryOptions = Array<{
@@ -58,11 +63,13 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     fetchPlotSearches,
     fetchPlotSearchAttributes,
     fetchPlotSearchTypes,
+    fetchFavourite,
     isFetchingPlotSearches,
     isFetchingPlotSearchAttributes,
     isFetchingPlotSearchTypes,
     plotSearchTypes,
     plotSearches,
+    favourite,
   } = props;
   const [categoryVisibilities, setCategoryVisibilities] =
     useState<CategoryVisibilities>({});
@@ -74,6 +81,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     fetchPlotSearches();
     fetchPlotSearchAttributes();
     fetchPlotSearchTypes();
+    fetchFavourite();
   }, []);
 
   useEffect(() => {
@@ -100,7 +108,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
         }, {} as CategoryVisibilities)
       );
     }
-  }, [plotSearchTypes, plotSearches]);
+  }, [plotSearchTypes, plotSearches, favourite]);
 
   const onToggleCategoryVisibility = (
     categoryId: number,
@@ -115,6 +123,10 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
       }, {} as CategoryVisibilities)
     );
   };
+
+  const filteredPlotSearches = plotSearches.filter(
+    (s) => s.search_class === 'plot_search'
+  );
 
   const onSelectTarget = (target: SelectedTarget | null) => {
     setSelectedTarget(target);
@@ -131,10 +143,6 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     return <BlockLoader />;
   }
 
-  const filteredPlotSearches = plotSearches.filter(
-    (s) => s.search_class === 'plot_search'
-  );
-
   return (
     <div className="PlotSearchAndCompetitionsPage">
       <MapSearchComponent
@@ -146,6 +154,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
         selectedTarget={selectedTarget}
         isOpen={isSidebarOpen}
         toggle={setSidebarOpen}
+        favourite={favourite}
       />
       <MapComponent
         categoryOptions={categoryOptions}
@@ -153,6 +162,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
         plotSearches={filteredPlotSearches}
         setSelectedTarget={onSelectTarget}
         selectedTarget={selectedTarget}
+        favourite={favourite}
       />
     </div>
   );
@@ -166,10 +176,12 @@ const mapStateToProps = (state: RootState): State => ({
   isFetchingPlotSearchAttributes:
     state.plotSearch.isFetchingPlotSearchAttributes,
   isFetchingPlotSearchTypes: state.plotSearch.isFetchingPlotSearchTypes,
+  favourite: state.favourite.favourite,
 });
 
 export default connect(mapStateToProps, {
   fetchPlotSearches,
   fetchPlotSearchAttributes,
   fetchPlotSearchTypes,
+  fetchFavourite,
 })(PlotSearchAndCompetitionsPage);

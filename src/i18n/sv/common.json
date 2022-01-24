@@ -105,6 +105,34 @@
       }
     }
   },
+  "favouritesPage": {
+    "title": "",
+    "targetCard": {
+      "removeButton": "",
+      "table": {
+        "detailedPlanIdentifier": "",
+        "detailedPlanState": "",
+        "financingMethod": "",
+        "firstSuitableConstructionYear": "",
+        "hitas": "",
+        "infoLinks": "",
+        "intendedUse": "",
+        "management": "",
+        "address": "",
+        "applyByDate": "",
+        "plot": "",
+        "intendedUsage": "",
+        "permittedBuildArea": "",
+        "permittedBuildAreaCommercial": "",
+        "permittedBuildAreaResidential": "",
+        "area": ""
+      },
+      "showFullDesc": {
+        "show": "",
+        "hide": ""
+      }
+    }
+  },
   "topNavigation": {
     "menuLabel": "",
     "signIn": "",

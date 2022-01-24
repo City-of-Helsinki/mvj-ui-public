@@ -20,10 +20,14 @@ import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import IconButton from '../../button/iconButton';
 import { useTranslation } from 'react-i18next';
 import MapSearchSingleTargetView from './mapSearchSingleTargetView';
+import { AddTargetPayload, Favourite } from '../../favourites/types';
 import { defaultLanguage } from '../../i18n';
 import { renderDateTime } from '../../i18n/utils';
+import { connect } from 'react-redux';
+import { addFavouriteTarget } from '../../favourites/actions';
 
 interface MapSearchComponentAccordionProps {
+  isHidden: boolean;
   initiallyOpen?: boolean;
   children?: ReactNode;
   heading: ReactNode;
@@ -36,6 +40,7 @@ interface MapSearchComponentAccordionProps {
 const SIDEBAR_GUTTER_WIDTH = 5; // px
 
 const MapSearchComponentAccordion = ({
+  isHidden,
   initiallyOpen = false,
   isVisible,
   onToggleVisibility,
@@ -43,7 +48,7 @@ const MapSearchComponentAccordion = ({
   heading,
   symbol,
   colorIndex = 0,
-}: MapSearchComponentAccordionProps): JSX.Element => {
+}: MapSearchComponentAccordionProps): JSX.Element | null => {
   const { isOpen, buttonProps, contentProps } = useAccordion({ initiallyOpen });
 
   const onVisibilityChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +58,10 @@ const MapSearchComponentAccordion = ({
   };
 
   const Icon = isOpen ? IconAngleUp : IconAngleDown;
+
+  if (isHidden) {
+    return null;
+  }
 
   return (
     <div
@@ -95,8 +104,10 @@ interface MapSearchComponentProps {
   plotSearches: Array<PlotSearch>;
   setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
+  addFavouriteTarget: (payLoad: AddTargetPayload) => void;
   isOpen: boolean;
   toggle: (newValue: boolean) => void;
+  favourite: Favourite;
 }
 
 const MapSearchComponent = ({
@@ -106,6 +117,8 @@ const MapSearchComponent = ({
   plotSearches,
   setSelectedTarget,
   selectedTarget,
+  addFavouriteTarget,
+  favourite,
   isOpen,
   toggle,
 }: MapSearchComponentProps): JSX.Element => {
@@ -113,15 +126,29 @@ const MapSearchComponent = ({
 
   const plotSearchesByCategory = categoryOptions.map((category) => ({
     category,
-    plotSearches: plotSearches?.filter(
-      (plotSearch) => plotSearch.type?.id === category.id
-    ),
+    plotSearches: plotSearches?.filter((plotSearch) => {
+      if (plotSearch.type?.id === category.id) {
+        if (favourite.plotSearch === null) {
+          return true;
+        }
+        return favourite.plotSearch === plotSearch.id;
+      }
+    }),
   }));
+
+  const checkHidden = (plotSearches: PlotSearch[]): boolean => {
+    if (favourite.plotSearch === null) {
+      return false;
+    }
+
+    return !plotSearches.some((s) => s.id === favourite.plotSearch);
+  };
 
   return (
     <SidePanel className="MapSearchComponent" isOpen={isOpen} toggle={toggle}>
       {selectedTarget && (
         <MapSearchSingleTargetView
+          addFavouriteTarget={addFavouriteTarget}
           selectedTarget={selectedTarget}
           setSelectedTarget={setSelectedTarget}
         />
@@ -147,6 +174,7 @@ const MapSearchComponent = ({
         {plotSearchesByCategory.map((item, index) => {
           return (
             <MapSearchComponentAccordion
+              isHidden={checkHidden(item.plotSearches)}
               heading={`${item.category.name} (${item.plotSearches.length})`}
               symbol={item.category.symbol}
               colorIndex={index}
@@ -281,7 +309,15 @@ const MapSearchComponent = ({
                           <div role="list">
                             {section.targets.map((target) => (
                               <Row
-                                className="MapSearchComponent__target"
+                                className={classNames(
+                                  'MapSearchComponent__target',
+                                  {
+                                    'MapSearchComponent__target--favourited':
+                                      favourite.targets.some(
+                                        (t) => t.id === target.data.id
+                                      ),
+                                  }
+                                )}
                                 key={target.data.id}
                                 role="listitem"
                                 gutterWidth={SIDEBAR_GUTTER_WIDTH}
@@ -308,7 +344,7 @@ const MapSearchComponent = ({
                                 <Col xs={2}>
                                   {target.data.plan_unit.area?.toLocaleString(
                                     defaultLanguage
-                                  )}
+                                  ) || '?'}
                                 </Col>
                                 <Col xs={1}>
                                   <IconButton
@@ -339,4 +375,4 @@ const MapSearchComponent = ({
   );
 };
 
-export default MapSearchComponent;
+export default connect(null, { addFavouriteTarget })(MapSearchComponent);

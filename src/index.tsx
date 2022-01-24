@@ -12,6 +12,12 @@ import { userManager } from './auth/userManager';
 const initialState = {};
 const store = configureStore(initialState);
 
+// save favourites into localstorage
+store.subscribe(() => {
+  const { favourite } = store.getState();
+  localStorage.setItem('mvj_favourite', JSON.stringify(favourite.favourite));
+});
+
 ReactDOM.render(
   <Provider store={store}>
     <OidcProvider store={store} userManager={userManager}>

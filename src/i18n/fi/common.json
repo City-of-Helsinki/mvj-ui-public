@@ -105,6 +105,34 @@
       }
     }
   },
+  "favouritesPage": {
+    "title": "Olet hakemassa seuraavia tontteja",
+    "targetCard": {
+      "removeButton": "Poista listalta",
+      "table": {
+        "detailedPlanIdentifier": "Asemakaava",
+        "detailedPlanState": "Asemakaavan käsittelyvaihe",
+        "financingMethod": "Rahoitusmuoto",
+        "firstSuitableConstructionYear": "Rakennuskelpoinen",
+        "hitas": "HITAS",
+        "infoLinks": "Lisätietoja",
+        "intendedUse": "Käyttötarkoitus",
+        "management": "Hallintamuoto",
+        "address": "Osoite",
+        "applyByDate": "Hakuaika päättyy",
+        "plot": "Tontti",
+        "intendedUsage": "Käyttötarkoitus",
+        "permittedBuildArea": "Rakennusoikeus (k-m²)",
+        "permittedBuildAreaCommercial": "Liikerakennusoikeus (k-m²)",
+        "permittedBuildAreaResidential": "Asuinrakennusoikeus (k-m²)",
+        "area": "Pinta-ala (m²)"
+      },
+      "showFullDesc": {
+        "show": "Näytä kohteen tarkemmat tiedot",
+        "hide": "Piilota kohteen tarkemmat tiedot"
+      }
+    }
+  },
   "topNavigation": {
     "menuLabel": "Valikko",
     "signIn": "Kirjaudu sisään",

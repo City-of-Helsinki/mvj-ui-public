@@ -5,6 +5,7 @@ import App from '../App';
 import FrontPage from '../frontPage/frontPage';
 import ErrorPage from '../errorPage/errorPage';
 import PlotSearchAndCompetitionsPage from '../plotSearchAndCompetitionsPage/plotSearchAndCompetitionsPage';
+import FavouritesPage from '../favouritesPage/favouritesPage';
 import FinalizeLogin from '../auth/components/finalizeLogin';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
@@ -18,6 +19,7 @@ export const AppRoutes = {
   LEASES: 'leases',
   APPLICATIONS: 'applications',
   MESSAGES: 'messages',
+  FAVOURITES: 'favourites',
   OIDC_CALLBACK: 'oidc-callback',
 };
 
@@ -35,6 +37,7 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.LEASES]: '/vuokraukset',
     [AppRoutes.APPLICATIONS]: '/hakemukset',
     [AppRoutes.MESSAGES]: '/viestit',
+    [AppRoutes.FAVOURITES]: '/suosikit',
     [AppRoutes.OIDC_CALLBACK]: '/oidc/callback',
   };
 
@@ -95,6 +98,14 @@ const SiteRoutes = (): JSX.Element => {
             element={
               <RouteWithLoader>
                 <div>Aluehakusivu</div>
+              </RouteWithLoader>
+            }
+          />
+          <Route
+            path={getRouteById(AppRoutes.FAVOURITES)}
+            element={
+              <RouteWithLoader>
+                <FavouritesPage />
               </RouteWithLoader>
             }
           />
