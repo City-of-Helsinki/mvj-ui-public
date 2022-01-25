@@ -2,6 +2,32 @@
   "error": {
     "pageNotFound": "404 Page not found"
   },
+  "favouritesPage": {
+    "targetCard": {
+      "removeButton": "",
+      "showFullDesc": {
+        "hide": "Hide additional details",
+        "show": "Show additional details"
+      },
+      "table": {
+        "address": "Address",
+        "applyByDate": "Apply by",
+        "area": "Area (m²)",
+        "detailedPlanIdentifier": "Detailed plan identifier",
+        "detailedPlanState": "Detailed plan state",
+        "financingMethod": "Financing method",
+        "firstSuitableConstructionYear": "First suitable construction year",
+        "hitas": "HITAS",
+        "intendedUsage": "Intended use",
+        "management": "Management method",
+        "permittedBuildArea": "Permitted build floor area (floor-m²)",
+        "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
+        "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
+        "plot": "Plot"
+      }
+    },
+    "title": "You are attending to following plot searches"
+  },
   "footer": {
     "copyright": {
       "holder": "Copyright",
@@ -39,6 +65,11 @@
       "heading": "Questions?"
     }
   },
+  "globalNotifications": {
+    "notification": {
+      "close": "close"
+    }
+  },
   "loader": {
     "loading": "Please wait, content is loading..."
   },
@@ -74,6 +105,7 @@
         "sectionApplyBy": "Apply by {{date}}",
         "singleTarget": {
           "address": "Address",
+          "addTarget": "Target \"{{address}}\" added into application.",
           "applyButton": "Apply for this plot",
           "applyByDate": "Apply by",
           "area": "Area (m²)",
@@ -89,6 +121,8 @@
           "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
           "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
           "plotNumber": "Plot",
+          "removeButton": "Remove plot from application",
+          "removeTarget": "Target \"{{address}}\" removed from application.",
           "returnToList": "Return to list"
         },
         "targetHeadings": {
@@ -102,34 +136,6 @@
           "showThisType": "Show",
           "type": "Type"
         }
-      }
-    }
-  },
-  "favouritesPage": {
-    "title": "You have added following plots to favourites",
-    "targetCard": {
-      "removeButton": "Remove from list",
-      "table": {
-        "detailedPlanIdentifier": "Detailed plan identifier",
-        "detailedPlanState": "Detailed plan state",
-        "financingMethod": "Financing method",
-        "firstSuitableConstructionYear": "First suitable construction year",
-        "hitas": "HITAS",
-        "infoLinks": "Details",
-        "intendedUse": "Intended use",
-        "management": "Management method",
-        "address": "Address",
-        "applyByDate": "Apply by",
-        "plot": "Plot",
-        "intendedUsage": "Intended use",
-        "permittedBuildArea": "Permitted build floor area (floor-m²)",
-        "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
-        "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
-        "area": "Area (m²)"
-      },
-      "showFullDesc": {
-        "show": "Show additional details",
-        "hide": "Hide additional details"
       }
     }
   },

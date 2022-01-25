@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import { Button, IconAngleLeft } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
@@ -11,7 +11,8 @@ import { RootState } from '../../root/rootReducer';
 import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import { defaultLanguage } from '../../i18n';
 import { renderDateTime } from '../../i18n/utils';
-import { AddTargetPayload } from '../../favourites/types';
+import { AddTargetPayload, Favourite } from '../../favourites/types';
+import { GlobalNotificationCtx } from '../../globalNotification/globalNotificationProvider';
 
 interface State {
   plotSearchAttributes: ApiAttributes;
@@ -21,17 +22,21 @@ interface Props {
   plotSearchAttributes: ApiAttributes;
   selectedTarget: SelectedTarget;
   setSelectedTarget: (target: SelectedTarget) => void;
+  favourite: Favourite;
   addFavouriteTarget: (payload: AddTargetPayload) => void;
+  removeFavouriteTarget: (payload: number) => void;
 }
 
 const MapSearchSingleTargetView = ({
   plotSearchAttributes,
   selectedTarget,
   setSelectedTarget,
+  favourite,
   addFavouriteTarget,
+  removeFavouriteTarget,
 }: Props) => {
   const { t, i18n } = useTranslation();
-
+  const notifications = useContext(GlobalNotificationCtx);
   const LeftColumn = ({ children }: { children: ReactNode }): JSX.Element => (
     <Col xs={6} component="dt">
       {children}
@@ -55,8 +60,25 @@ const MapSearchSingleTargetView = ({
 
   const handleApplyButton = (
     target: PlotSearchTarget,
-    plotSearch: PlotSearch
+    plotSearch: PlotSearch,
+    isFavourited: boolean
   ): void => {
+    if (isFavourited) {
+      removeFavouriteTarget(target.id);
+      notifications.pushNotification({
+        type: 'alert',
+        id: 'remove_' + target.id.toString(),
+        icon: true,
+        body: t(
+          'plotSearchAndCompetitions.mapView.sidebar.singleTarget.removeTarget',
+          'Target "{{address}}" removed from application.',
+          {
+            address: target.lease_address.address,
+          }
+        ),
+      });
+      return;
+    }
     const payLoad = {
       target: {
         plot_search: plotSearch.id,
@@ -64,6 +86,19 @@ const MapSearchSingleTargetView = ({
       },
     } as AddTargetPayload;
     addFavouriteTarget(payLoad);
+
+    notifications.pushNotification({
+      type: 'success',
+      id: 'add_' + target.id.toString(),
+      icon: true,
+      body: t(
+        'plotSearchAndCompetitions.mapView.sidebar.singleTarget.addTarget',
+        'Target "{{address}}" added into application.',
+        {
+          address: target.lease_address.address,
+        }
+      ),
+    });
   };
 
   if (!selectedTarget) {
@@ -72,6 +107,10 @@ const MapSearchSingleTargetView = ({
   const { target, plotSearch } = selectedTarget;
   const currentLanguageInfoLinks = target.info_links.filter(
     (link) => link.language === i18n.language
+  );
+
+  const isFavourited = favourite.targets.some(
+    (t) => t.plot_search_target.id === target.id
   );
 
   return (
@@ -267,12 +306,18 @@ const MapSearchSingleTargetView = ({
 
       <Button
         className="MapSearchSingleTargetView__next-button"
-        onClick={() => handleApplyButton(target, plotSearch)}
+        onClick={() => handleApplyButton(target, plotSearch, isFavourited)}
+        variant={isFavourited ? 'danger' : 'success'}
       >
-        {t(
-          'plotSearchAndCompetitions.mapView.sidebar.singleTarget.applyButton',
-          'Apply for this plot'
-        )}
+        {isFavourited
+          ? t(
+              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.removeButton',
+              'Remove plot from application'
+            )
+          : t(
+              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.applyButton',
+              'Apply for this plot'
+            )}
       </Button>
     </div>
   );

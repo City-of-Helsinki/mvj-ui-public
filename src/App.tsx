@@ -9,9 +9,10 @@ import { RootState } from './root/rootReducer';
 import { getIsFetchingApiToken, getUser } from './auth/selectors';
 import { fetchApiToken, receiveApiToken } from './auth/actions';
 import { fetchFavourite } from './favourites/actions';
+import GlobalNotificationContainer from './globalNotification/globalNotificationContainer';
+import { getIsFetchingFavourite } from './favourites/selectors';
 
 import './main.scss';
-import { getIsFetchingFavourite } from './favourites/selectors';
 
 interface Props {
   children?: JSX.Element;
@@ -38,6 +39,7 @@ const App = ({
   const [tokenRefreshTimeout, setTokenRefreshTimeout] = useState<ReturnType<
     typeof setTimeout
   > | null>(null);
+
   useEffect(() => {
     if (user) {
       if (tokenOutdated && !isFetchingToken) {
@@ -67,6 +69,7 @@ const App = ({
     <div className="App">
       <LoginModal />
       <TopNavigation />
+      <GlobalNotificationContainer />
       <main>{children}</main>
       <Footer />
     </div>

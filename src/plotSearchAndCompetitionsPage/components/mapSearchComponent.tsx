@@ -24,7 +24,10 @@ import { AddTargetPayload, Favourite } from '../../favourites/types';
 import { defaultLanguage } from '../../i18n';
 import { renderDateTime } from '../../i18n/utils';
 import { connect } from 'react-redux';
-import { addFavouriteTarget } from '../../favourites/actions';
+import {
+  addFavouriteTarget,
+  removeFavouriteTarget,
+} from '../../favourites/actions';
 
 interface MapSearchComponentAccordionProps {
   isHidden: boolean;
@@ -105,6 +108,7 @@ interface MapSearchComponentProps {
   setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
   addFavouriteTarget: (payLoad: AddTargetPayload) => void;
+  removeFavouriteTarget: (id: number) => void;
   isOpen: boolean;
   toggle: (newValue: boolean) => void;
   favourite: Favourite;
@@ -118,6 +122,7 @@ const MapSearchComponent = ({
   setSelectedTarget,
   selectedTarget,
   addFavouriteTarget,
+  removeFavouriteTarget,
   favourite,
   isOpen,
   toggle,
@@ -151,6 +156,8 @@ const MapSearchComponent = ({
           addFavouriteTarget={addFavouriteTarget}
           selectedTarget={selectedTarget}
           setSelectedTarget={setSelectedTarget}
+          favourite={favourite}
+          removeFavouriteTarget={removeFavouriteTarget}
         />
       )}
       <div className="MapSearchComponent__list-view">
@@ -377,4 +384,6 @@ const MapSearchComponent = ({
   );
 };
 
-export default connect(null, { addFavouriteTarget })(MapSearchComponent);
+export default connect(null, { addFavouriteTarget, removeFavouriteTarget })(
+  MapSearchComponent
+);
