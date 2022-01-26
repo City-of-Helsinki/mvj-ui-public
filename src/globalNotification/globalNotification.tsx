@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   IconAlertCircleFill,
   IconCheckCircleFill,
@@ -8,7 +8,7 @@ import {
   NotificationType,
 } from 'hds-react';
 import { useTranslation } from 'react-i18next';
-import { GlobalNotificationCtx } from './globalNotificationProvider';
+import { useGlobalNotifications } from './globalNotificationProvider';
 
 export interface Props {
   id: string;
@@ -20,7 +20,7 @@ export interface Props {
 
 const GlobalNotification = (props: Props): JSX.Element | null => {
   const { t } = useTranslation();
-  const { popNotification } = useContext(GlobalNotificationCtx);
+  const { popNotification } = useGlobalNotifications();
 
   const getIcon = (type: NotificationType): JSX.Element => {
     switch (type) {

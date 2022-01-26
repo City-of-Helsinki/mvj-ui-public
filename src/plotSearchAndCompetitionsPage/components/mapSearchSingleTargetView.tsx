@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode } from 'react';
 import { Button, IconAngleLeft } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
@@ -12,7 +12,7 @@ import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import { defaultLanguage } from '../../i18n';
 import { renderDateTime } from '../../i18n/utils';
 import { AddTargetPayload, Favourite } from '../../favourites/types';
-import { GlobalNotificationCtx } from '../../globalNotification/globalNotificationProvider';
+import { useGlobalNotifications } from '../../globalNotification/globalNotificationProvider';
 
 interface State {
   plotSearchAttributes: ApiAttributes;
@@ -36,7 +36,7 @@ const MapSearchSingleTargetView = ({
   removeFavouriteTarget,
 }: Props) => {
   const { t, i18n } = useTranslation();
-  const notifications = useContext(GlobalNotificationCtx);
+  const notifications = useGlobalNotifications();
   const LeftColumn = ({ children }: { children: ReactNode }): JSX.Element => (
     <Col xs={6} component="dt">
       {children}

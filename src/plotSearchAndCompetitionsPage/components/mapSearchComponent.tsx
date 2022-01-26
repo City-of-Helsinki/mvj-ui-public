@@ -5,6 +5,7 @@ import {
   IconAngleDown,
   IconAngleUp,
   IconArrowRight,
+  Notification,
   useAccordion,
 } from 'hds-react';
 import { Row, Col, Container } from 'react-grid-system';
@@ -380,6 +381,28 @@ const MapSearchComponent = ({
           );
         })}
       </div>
+      {favourite.targets.length > 0 && (
+        <div className="MapSearchComponent__notification">
+          <Notification
+            type="alert"
+            label={
+              t(
+                'plotSearchAndCompetitions.mapView.sidebar.notification.title',
+                'Attention!'
+              ) as string
+            }
+          >
+            {t(
+              'plotSearchAndCompetitions.mapView.sidebar.notification.body',
+              'You can attend only in one plot search per application. \n\n ' +
+                'If one plot search contains multiple searchable targets, you can add ' +
+                'those in the same application.\n\n' +
+                'If you want to attend other plot search, you need to fill new application ' +
+                'for every plot search.'
+            )}
+          </Notification>
+        </div>
+      )}
     </SidePanel>
   );
 };

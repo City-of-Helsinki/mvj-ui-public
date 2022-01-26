@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import GlobalNotification, {
   Props as NotificationProps,
 } from './globalNotification';
@@ -76,5 +76,10 @@ const GlobalNotificationProvider = (
     </GlobalNotificationCtx.Provider>
   );
 };
+
+export const useGlobalNotifications =
+  (): GlobalNotificationContextInterface => {
+    return useContext(GlobalNotificationCtx);
+  };
 
 export default GlobalNotificationProvider;

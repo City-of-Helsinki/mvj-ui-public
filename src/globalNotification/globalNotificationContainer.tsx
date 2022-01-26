@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { GlobalNotificationCtx } from './globalNotificationProvider';
+import React from 'react';
+import { useGlobalNotifications } from './globalNotificationProvider';
 
 const GlobalNotificationContainer = (): JSX.Element | null => {
-  const { render } = useContext(GlobalNotificationCtx);
+  const { render } = useGlobalNotifications();
   return <div className="GlobalNotificationContainer">{render()}</div>;
 };
 
