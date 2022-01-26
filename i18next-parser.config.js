@@ -20,6 +20,7 @@ module.exports = {
   failOnUpdate: false,
   customValueTemplate: null,
   resetDefaultValueLocale: 'en',
-  i18nextOptions: {}
+  i18nextOptions: {},
+  transSupportBasicHtmlNodes: true,
 };
 

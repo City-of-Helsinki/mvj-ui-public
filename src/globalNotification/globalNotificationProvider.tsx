@@ -30,15 +30,7 @@ const GlobalNotificationProvider = (
   const [notifications, setNotifications] = useState<NotificationProps[]>([]);
 
   const render = () =>
-    notifications.map((n) => (
-      <GlobalNotification
-        key={n.id}
-        id={n.id}
-        body={n.body}
-        type={n.type}
-        icon={n.icon}
-      />
-    ));
+    notifications.map((n) => <GlobalNotification key={n.id} {...n} />);
 
   const pushNotification = (notification: NotificationProps): void => {
     if (notifications.some((n) => n.id === notification.id)) {

@@ -3,6 +3,11 @@
     "pageNotFound": "404 Sivua ei löytynyt"
   },
   "favouritesPage": {
+    "notification": {
+      "body": "Löydät hakemukseen lisätyt tontit täältä. Voit palata tonttihakusivulle lisätäksesi uusia kohteita.",
+      "link": "Palaa tonttihakusivulle",
+      "title": "Haluatko hakea lisää tontteja?"
+    },
     "targetCard": {
       "removeButton": "Poista listalta",
       "showFullDesc": {
@@ -67,7 +72,7 @@
   },
   "globalNotifications": {
     "notification": {
-      "close": ""
+      "close": "Sulje"
     }
   },
   "loader": {
@@ -102,6 +107,10 @@
     },
     "mapView": {
       "sidebar": {
+        "notification": {
+          "body": "<0>Voit lähettää hakemuksen vain yhdestä kilpailusta / tonttihausta kerrallaan.</0><1>Mikäli yhdessä kilpailussa on useita haettavia tontteja, voit lisätä niitä samaan hakemukseen.</1><2>Mikäli haluat osallistua muihin kilpailuihin / tonttihakuihin, niistä on lähetettävä eri hakemus.</2>",
+          "title": "Huom!"
+        },
         "sectionApplyBy": "Hakuaika päättyy {{date}}",
         "singleTarget": {
           "address": "Osoite",

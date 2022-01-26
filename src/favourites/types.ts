@@ -13,8 +13,11 @@ export interface Favourite {
   id?: number | null;
 }
 
+export const MVJ_FAVOURITE = 'mvj_favourite';
+
 export const FETCH_FAVOURITE = 'favourite/FETCH_FAVOURITE';
 export const FAVOURITE_NOT_FOUND = 'favourite/FAVOURITE_NOT_FOUND';
+export const FAVOURITE_FETCH_ERROR = 'favourite/FAVOURITE_FETCH_ERROR';
 export const RECEIVE_FAVOURITE = 'favourite/RECEIVE_FAVOURITE';
 export const ADD_FAVOURITE_TARGET = 'favourite/ADD_FAVOURITE_TARGET';
 export const REMOVE_FAVOURITE_TARGET = 'favourite/REMOVE_FAVOURITE_TARGET';

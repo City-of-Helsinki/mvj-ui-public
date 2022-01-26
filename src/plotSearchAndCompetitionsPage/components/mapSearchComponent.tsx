@@ -19,7 +19,7 @@ import {
 } from '../plotSearchAndCompetitionsPage';
 import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import IconButton from '../../button/iconButton';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import MapSearchSingleTargetView from './mapSearchSingleTargetView';
 import { AddTargetPayload, Favourite } from '../../favourites/types';
 import { defaultLanguage } from '../../i18n';
@@ -392,14 +392,19 @@ const MapSearchComponent = ({
               ) as string
             }
           >
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.notification.body',
-              'You can attend only in one plot search per application. \n\n ' +
-                'If one plot search contains multiple searchable targets, you can add ' +
-                'those in the same application.\n\n' +
-                'If you want to attend other plot search, you need to fill new application ' +
-                'for every plot search.'
-            )}
+            <Trans i18nKey="plotSearchAndCompetitions.mapView.sidebar.notification.body">
+              <p>You can attend only in one plot search per application.</p>
+
+              <p>
+                If one plot search contains multiple searchable targets, you can
+                add those in the same application.
+              </p>
+
+              <p>
+                If you want to attend other plot search, you need to fill new
+                application for every plot search.
+              </p>
+            </Trans>
           </Notification>
         </div>
       )}

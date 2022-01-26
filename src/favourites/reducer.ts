@@ -7,6 +7,8 @@ import {
   ADD_FAVOURITE_TARGET,
   REMOVE_FAVOURITE_TARGET,
   FAVOURITE_NOT_FOUND,
+  MVJ_FAVOURITE,
+  FAVOURITE_FETCH_ERROR,
 } from './types';
 
 type CurrentDisplayState = {
@@ -15,7 +17,7 @@ type CurrentDisplayState = {
 };
 
 const getInitialFavourite = (): Favourite => {
-  const favs = localStorage.getItem('mvj_favourite');
+  const favs = localStorage.getItem(MVJ_FAVOURITE);
   if (favs !== null) {
     return JSON.parse(favs) as Favourite;
   }
@@ -52,6 +54,9 @@ const favouriteSlice = createSlice({
     },
     [REMOVE_FAVOURITE_TARGET]: (state) => {
       state.isFetchingFavourite = true;
+    },
+    [FAVOURITE_FETCH_ERROR]: (state) => {
+      state.isFetchingFavourite = false;
     },
   },
 });

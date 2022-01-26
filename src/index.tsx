@@ -8,6 +8,7 @@ import configureStore from './root/storeConfig';
 import reportWebVitals from './reportWebVitals';
 import SiteRoutes from './root/routes';
 import { userManager } from './auth/userManager';
+import { MVJ_FAVOURITE } from './favourites/types';
 
 const initialState = {};
 const store = configureStore(initialState);
@@ -30,7 +31,7 @@ store.subscribe(() => {
     console.error('Invalid favourite for localstorage', favourite);
     return;
   }
-  localStorage.setItem('mvj_favourite', JSON.stringify(favourite.favourite));
+  localStorage.setItem(MVJ_FAVOURITE, JSON.stringify(favourite.favourite));
 });
 
 ReactDOM.render(

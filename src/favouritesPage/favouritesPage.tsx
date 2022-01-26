@@ -87,17 +87,19 @@ const FavouritesPage = (props: Props): JSX.Element => {
             )}
           >
             <Trans i18nKey="favouritesPage.notification.body">
-              You can find all the selected targets here. You can return to plot
-              search page to add more targets.
+              <p>
+                You can find all the selected targets here. You can return to
+                plot search page to add more targets.
+              </p>
             </Trans>
-            <br />
-            <br />
-            <Link href="/tonttihaut-ja-kilpailut" size="M">
-              {t(
-                'favouritesPage.notification.link',
-                'Return to plot search page'
-              )}
-            </Link>
+            <p>
+              <Link href="/tonttihaut-ja-kilpailut" size="M">
+                {t(
+                  'favouritesPage.notification.link',
+                  'Return to plot search page'
+                )}
+              </Link>
+            </p>
           </Notification>
         </Col>
       </Row>

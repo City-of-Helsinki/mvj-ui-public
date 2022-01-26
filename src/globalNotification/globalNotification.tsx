@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   IconAlertCircleFill,
   IconCheckCircleFill,
@@ -6,9 +6,11 @@ import {
   IconInfoCircleFill,
   Notification,
   NotificationType,
+  IconProps,
 } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { useGlobalNotifications } from './globalNotificationProvider';
+import classNames from 'classnames';
 
 export interface Props {
   id: string;
@@ -22,37 +24,33 @@ const GlobalNotification = (props: Props): JSX.Element | null => {
   const { t } = useTranslation();
   const { popNotification } = useGlobalNotifications();
 
-  const getIcon = (type: NotificationType): JSX.Element => {
-    switch (type) {
-      case 'alert':
-        return (
-          <IconAlertCircleFill className="GlobalNotificationContainer__notification-icon--alert" />
-        );
-      case 'info':
-        return (
-          <IconInfoCircleFill className="GlobalNotificationContainer__notification-icon--info" />
-        );
-      case 'success':
-        return (
-          <IconCheckCircleFill className="GlobalNotificationContainer__notification-icon--success" />
-        );
-      case 'error':
-        return (
-          <IconErrorFill className="GlobalNotificationContainer__notification-icon--error" />
-        );
-    }
-  };
+  let IconComponent: FC<IconProps>;
+
+  switch (props.type) {
+    case 'alert':
+      IconComponent = IconAlertCircleFill;
+      break;
+    case 'info':
+      IconComponent = IconInfoCircleFill;
+      break;
+    case 'success':
+      IconComponent = IconCheckCircleFill;
+      break;
+    case 'error':
+      IconComponent = IconErrorFill;
+      break;
+  }
 
   return (
     <Notification
       key={props.id}
       label={props.label || null}
       position="top-right"
-      className={`GlobalNotificationContainer__notification`}
+      className="GlobalNotificationContainer__notification"
       autoClose
       closeButtonLabelText={t(
         'globalNotifications.notification.close',
-        'close'
+        'Close'
       )}
       onClose={() => popNotification()}
       type={props.type}
@@ -60,7 +58,12 @@ const GlobalNotification = (props: Props): JSX.Element | null => {
       <div className="GlobalNotificationContainer__notification-body">
         {props.icon && (
           <div className="GlobalNotificationContainer__notification-icon-container">
-            {getIcon(props.type)}
+            <IconComponent
+              className={classNames(
+                'GlobalNotificationContainer__notification-icon',
+                `GlobalNotificationContainer__notification-icon--${props.type}`
+              )}
+            />
           </div>
         )}
         <div className="GlobalNotificationContainer__notification-text-container">

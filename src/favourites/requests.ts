@@ -1,7 +1,7 @@
 import { Effect } from 'redux-saga/effects';
 import callApi, { ApiCallResult } from '../api/callApi';
 import createUrl from '../api/createUrl';
-import { Favourite } from './types';
+import { Favourite, MVJ_FAVOURITE } from './types';
 
 export const fetchFavouriteRequest = (): Generator<
   Effect,
@@ -16,7 +16,7 @@ export const initializeFavouriteRequest = (): Generator<
   ApiCallResult,
   Response
 > => {
-  const favouriteFromLs = localStorage.getItem('mvj_favourite');
+  const favouriteFromLs = localStorage.getItem(MVJ_FAVOURITE);
   const body: Favourite = favouriteFromLs
     ? JSON.parse(favouriteFromLs)
     : {

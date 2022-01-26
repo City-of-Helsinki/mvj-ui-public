@@ -13,6 +13,7 @@ import TopNavigationFavouritesIcon from './components/topNavigationFavouritesIco
 import { RootState } from '../root/rootReducer';
 import { getUser } from '../auth/selectors';
 import { userManager } from '../auth/userManager';
+import { MVJ_FAVOURITE } from '../favourites/types';
 
 interface Dispatch {
   openLoginModal: () => void;
@@ -136,7 +137,7 @@ const TopNavigation = ({
             onClick={(e: React.MouseEvent<HTMLElement>) => {
               e.preventDefault();
               userManager.signoutRedirect().then(() => {
-                localStorage.removeItem('mvj_favourite');
+                localStorage.removeItem(MVJ_FAVOURITE);
               });
             }}
           />

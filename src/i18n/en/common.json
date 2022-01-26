@@ -3,8 +3,13 @@
     "pageNotFound": "404 Page not found"
   },
   "favouritesPage": {
+    "notification": {
+      "body": "<0>You can find all the selected targets here. You can return to plot search page to add more targets.</0>",
+      "link": "Return to plot search page",
+      "title": "Do you want to search for more targets?"
+    },
     "targetCard": {
-      "removeButton": "",
+      "removeButton": "Remove from list",
       "showFullDesc": {
         "hide": "Hide additional details",
         "show": "Show additional details"
@@ -67,7 +72,7 @@
   },
   "globalNotifications": {
     "notification": {
-      "close": "close"
+      "close": "Close"
     }
   },
   "loader": {
@@ -102,6 +107,10 @@
     },
     "mapView": {
       "sidebar": {
+        "notification": {
+          "body": "<0>You can attend only in one plot search per application.</0><1>If one plot search contains multiple searchable targets, you can add those in the same application.</1><2>If you want to attend other plot search, you need to fill new application for every plot search.</2>",
+          "title": "Attention!"
+        },
         "sectionApplyBy": "Apply by {{date}}",
         "singleTarget": {
           "address": "Address",

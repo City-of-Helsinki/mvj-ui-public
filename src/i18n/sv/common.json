@@ -3,6 +3,11 @@
     "pageNotFound": ""
   },
   "favouritesPage": {
+    "notification": {
+      "body": "",
+      "link": "",
+      "title": ""
+    },
     "targetCard": {
       "removeButton": "",
       "showFullDesc": {
@@ -102,6 +107,10 @@
     },
     "mapView": {
       "sidebar": {
+        "notification": {
+          "body": "",
+          "title": ""
+        },
         "sectionApplyBy": "",
         "singleTarget": {
           "address": "",

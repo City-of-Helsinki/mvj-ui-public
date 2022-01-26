@@ -4,6 +4,7 @@ import { Action } from 'redux';
 import {
   FETCH_FAVOURITE,
   FAVOURITE_NOT_FOUND,
+  FAVOURITE_FETCH_ERROR,
   RECEIVE_FAVOURITE,
   ADD_FAVOURITE_TARGET,
   REMOVE_FAVOURITE_TARGET,
@@ -28,3 +29,6 @@ export const removeFavouriteTarget = (payload: number): Action<string> =>
 
 export const favouriteNotFound = (): Action<string> =>
   createAction(FAVOURITE_NOT_FOUND)();
+
+export const favouriteFetchError = (): Action<string> =>
+  createAction(FAVOURITE_FETCH_ERROR)();

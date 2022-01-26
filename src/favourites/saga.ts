@@ -21,12 +21,14 @@ import {
   REMOVE_FAVOURITE_TARGET,
   AddFavouriteTargetAction,
   ADD_FAVOURITE_TARGET,
+  MVJ_FAVOURITE,
 } from './types';
 
 import {
   favouriteNotFound,
   receiveFavourite,
   initializeFavourite,
+  favouriteFetchError,
 } from './actions';
 
 import { ApiCallResult } from '../api/callApi';
@@ -36,11 +38,10 @@ import { getFavourite } from './selectors';
 function* fetchFavouriteSaga(): Generator<Effect, void, never> {
   try {
     const apiToken: string | null = yield select(getApiToken);
-    const localStorageFavouriteItem = localStorage.getItem('mvj_favourite');
-    let lsFavourite: Favourite | null = null;
-    if (localStorageFavouriteItem) {
-      lsFavourite = JSON.parse(localStorageFavouriteItem);
-    }
+    const localStorageFavouriteItem = localStorage.getItem(MVJ_FAVOURITE);
+    const lsFavourite: Favourite | null = localStorageFavouriteItem
+      ? JSON.parse(localStorageFavouriteItem)
+      : null;
 
     if (apiToken) {
       const { response, bodyAsJson }: ApiCallResult = yield call(
@@ -64,7 +65,7 @@ function* fetchFavouriteSaga(): Generator<Effect, void, never> {
           ) {
             // Use localstorage instead of api
             if (!lsFavourite.id) {
-              lsFavourite['id'] = apiFavourite.id;
+              lsFavourite.id = apiFavourite.id;
             }
             const { response, bodyAsJson }: ApiCallResult = yield call(
               updateFavouriteRequest,
@@ -90,7 +91,7 @@ function* fetchFavouriteSaga(): Generator<Effect, void, never> {
     yield put(favouriteNotFound());
   } catch (e) {
     console.error(e);
-    yield put(favouriteNotFound());
+    yield put(favouriteFetchError());
     throw e;
   }
 }
@@ -107,7 +108,7 @@ function* initializeFavouriteSaga(): Generator<Effect, void, ApiCallResult> {
     }
   } catch (e) {
     console.error(e);
-    yield put(favouriteNotFound());
+    yield put(favouriteFetchError());
     throw e;
   }
 }
@@ -158,7 +159,7 @@ function* addFavouriteTargetSaga({
     }
   } catch (e) {
     console.error(e);
-    yield put(favouriteNotFound());
+    yield put(favouriteFetchError());
   }
 }
 
@@ -197,7 +198,7 @@ function* removeFavouriteTargetSaga({
     }
   } catch (e) {
     console.error(e);
-    yield put(favouriteNotFound());
+    yield put(favouriteFetchError());
   }
 }
 
