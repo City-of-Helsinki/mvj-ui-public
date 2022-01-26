@@ -72,7 +72,7 @@
   },
   "globalNotifications": {
     "notification": {
-      "close": "Close"
+      "close": "close"
     }
   },
   "loader": {
