@@ -135,7 +135,9 @@ const TopNavigation = ({
             variant="supplementary"
             onClick={(e: React.MouseEvent<HTMLElement>) => {
               e.preventDefault();
-              userManager.signoutRedirect().then();
+              userManager.signoutRedirect().then(() => {
+                localStorage.removeItem('mvj_favourite');
+              });
             }}
           />
         </Navigation.User>

@@ -37,9 +37,14 @@ const FavouritesPage = (props: Props): JSX.Element => {
   }, []);
 
   useEffect(() => {
+    if (props.favourite.targets.length <= 0) {
+      setPlotSearch(null);
+      return;
+    }
+
     setPlotSearch(
       props.plotSearches.filter(
-        (plotSearch) => plotSearch.id === props.favourite.plotSearch
+        (plotSearch) => plotSearch.id === props.favourite.targets[0].plot_search
       )[0]
     );
   }, [props.favourite]);
@@ -61,8 +66,8 @@ const FavouritesPage = (props: Props): JSX.Element => {
           props.favourite.targets.map((target) => (
             <FavouriteCard
               plotSearch={plotSearch}
-              key={target.id}
-              target={target}
+              key={target.plot_search_target.id}
+              target={target.plot_search_target}
               remove={handleTargetRemove}
             />
           ))

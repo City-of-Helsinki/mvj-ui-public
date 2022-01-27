@@ -13,7 +13,6 @@ function* callApi(
   request: Request
 ): Generator<Effect, ApiCallResult, Response> {
   const apiToken = yield select(getApiToken);
-
   if (apiToken) {
     request.headers.set('Authorization', `Bearer ${apiToken}`);
   }
@@ -36,6 +35,8 @@ function* callApi(
 
   switch (status) {
     case 204:
+      return { response };
+    case 404:
       return { response };
     case 500:
       return {

@@ -58,8 +58,10 @@ const MapSearchSingleTargetView = ({
     plotSearch: PlotSearch
   ): void => {
     const payLoad = {
-      target: target,
-      plotSearch: plotSearch.id,
+      target: {
+        plot_search: plotSearch.id,
+        plot_search_target: target,
+      },
     } as AddTargetPayload;
     addFavouriteTarget(payLoad);
   };

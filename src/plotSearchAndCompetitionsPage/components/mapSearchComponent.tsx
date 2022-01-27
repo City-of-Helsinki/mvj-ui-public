@@ -128,20 +128,20 @@ const MapSearchComponent = ({
     category,
     plotSearches: plotSearches?.filter((plotSearch) => {
       if (plotSearch.type?.id === category.id) {
-        if (favourite.plotSearch === null) {
+        if (favourite.targets.length <= 0) {
           return true;
         }
-        return favourite.plotSearch === plotSearch.id;
+        return favourite.targets[0].plot_search === plotSearch.id;
       }
     }),
   }));
 
   const checkHidden = (plotSearches: PlotSearch[]): boolean => {
-    if (favourite.plotSearch === null) {
+    if (favourite.targets.length <= 0) {
       return false;
     }
 
-    return !plotSearches.some((s) => s.id === favourite.plotSearch);
+    return !plotSearches.some((s) => s.id === favourite.targets[0].plot_search);
   };
 
   return (
@@ -314,7 +314,9 @@ const MapSearchComponent = ({
                                   {
                                     'MapSearchComponent__target--favourited':
                                       favourite.targets.some(
-                                        (t) => t.id === target.data.id
+                                        (t) =>
+                                          t.plot_search_target.id ===
+                                          target.data.id
                                       ),
                                   }
                                 )}

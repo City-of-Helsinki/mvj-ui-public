@@ -6,6 +6,7 @@ import { getCentroid } from '../utils';
 import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
 import { renderToStaticMarkup } from 'react-dom/server';
 import MapSymbol from './mapSymbol';
+import { FavouriteTarget } from '../../favourites/types';
 
 interface Props {
   plotSearchTargets: PlotSearchTarget[];
@@ -15,7 +16,7 @@ interface Props {
   categoryIndex: number;
   categorySymbol: string;
   initialPosition: LatLngExpression;
-  favouritedTargets: PlotSearchTarget[];
+  favouritedTargets: FavouriteTarget[];
 }
 
 const usePreviousTarget = (value: SelectedTarget) => {
@@ -115,7 +116,10 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
               }}
             />
           )}
-          {renderMarker(target, props.favouritedTargets)}
+          {renderMarker(
+            target,
+            props.favouritedTargets.map((t) => t.plot_search_target)
+          )}
         </Fragment>
       ))}
     </Fragment>
