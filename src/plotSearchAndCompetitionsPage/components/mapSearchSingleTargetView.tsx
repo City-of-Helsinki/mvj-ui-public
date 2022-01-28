@@ -12,7 +12,6 @@ import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import { defaultLanguage } from '../../i18n';
 import { renderDateTime } from '../../i18n/utils';
 import { AddTargetPayload, Favourite } from '../../favourites/types';
-import { useGlobalNotifications } from '../../globalNotification/globalNotificationProvider';
 
 interface State {
   plotSearchAttributes: ApiAttributes;
@@ -36,7 +35,6 @@ const MapSearchSingleTargetView = ({
   removeFavouriteTarget,
 }: Props) => {
   const { t, i18n } = useTranslation();
-  const notifications = useGlobalNotifications();
   const LeftColumn = ({ children }: { children: ReactNode }): JSX.Element => (
     <Col xs={6} component="dt">
       {children}
@@ -65,18 +63,6 @@ const MapSearchSingleTargetView = ({
   ): void => {
     if (isFavourited) {
       removeFavouriteTarget(target.id);
-      notifications.pushNotification({
-        type: 'alert',
-        id: 'remove_' + target.id.toString(),
-        icon: true,
-        body: t(
-          'plotSearchAndCompetitions.mapView.sidebar.singleTarget.removeTarget',
-          'Target "{{address}}" removed from application.',
-          {
-            address: target.lease_address.address,
-          }
-        ),
-      });
       return;
     }
     const payLoad = {
@@ -86,19 +72,6 @@ const MapSearchSingleTargetView = ({
       },
     } as AddTargetPayload;
     addFavouriteTarget(payLoad);
-
-    notifications.pushNotification({
-      type: 'success',
-      id: 'add_' + target.id.toString(),
-      icon: true,
-      body: t(
-        'plotSearchAndCompetitions.mapView.sidebar.singleTarget.addTarget',
-        'Target "{{address}}" added into application.',
-        {
-          address: target.lease_address.address,
-        }
-      ),
-    });
   };
 
   if (!selectedTarget) {
