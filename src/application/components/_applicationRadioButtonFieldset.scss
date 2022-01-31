@@ -1,0 +1,7 @@
+@include applicationFieldset('ApplicationRadioButtonFieldset');
+
+.ApplicationRadioButtonFieldset {
+  .ApplicationRadioButtonFieldset__selection-group--horizontal > div {
+    align-items: center;
+  }
+}

@@ -1,0 +1,51 @@
+.ApplicationFormSubsection {
+  border-bottom: 1px solid $color-black-20;
+  padding-bottom: $spacing-l;
+  margin-bottom: $spacing-l;
+
+  &:last-of-type {
+    border-bottom-width: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .ApplicationFormSubsection__content {
+    background-color: $color-black-5;
+    padding: $spacing-m;
+  }
+
+  .ApplicationFormField {
+    margin-bottom: $spacing-s;
+  }
+
+  .ApplicationFormSubsectionFieldArray__item {
+    background-color: $color-black-5;
+    border-bottom: 1px solid $color-black-20;
+
+    &:last-of-type {
+      border-bottom-width: 0;
+    }
+
+    > .ApplicationFormSubsectionFieldArray__item-content {
+      padding: $spacing-m;
+      position: relative;
+    }
+
+    .ApplicationFormSubsectionFieldArray__remove-button {
+      position: absolute;
+      right: $spacing-m;
+      top: $spacing-m + ($lineheight-l - $lineheight-s) / 2;
+    }
+  }
+
+  .ApplicationFormSubsection {
+    .ApplicationFormSubsection__content,
+    .ApplicationFormSubsectionFieldArray__item {
+      padding: 0;
+    }
+  }
+
+  .ApplicationFormSubsectionFieldArray__add-button {
+    margin-top: $spacing-l;
+  }
+}

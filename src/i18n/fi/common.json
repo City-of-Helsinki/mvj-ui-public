@@ -1,4 +1,19 @@
 {
+  "application": {
+    "arraySection": {
+      "genericAddNew": "Lisää uusi",
+      "remove": "Poista"
+    },
+    "error": {
+      "noFormAvailable": "Valitsemillesi tonteille ei ole vielä määritetty hakulomaketta. Ota yhteyttä ja korjaamme tilanteen.",
+      "noPlotsSelected": "Voit täyttää tonttihakemuksen valittuasi ensin tonttihakusivulta yhden tai useamman haettavan kohteen."
+    },
+    "heading": "Tonttihakemus",
+    "targets": {
+      "identifier": "Tontti",
+      "screenReaderHeading": "Haettavat tontit"
+    }
+  },
   "error": {
     "pageNotFound": "404 Sivua ei löytynyt"
   },

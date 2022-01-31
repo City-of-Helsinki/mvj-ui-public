@@ -12,7 +12,7 @@ import { MVJ_FAVOURITE } from './favourites/types';
 import { logError } from './root/helpers';
 
 const initialState = {};
-const store = configureStore(initialState);
+export const store = configureStore(initialState);
 
 // save favourites into localstorage
 store.subscribe(() => {

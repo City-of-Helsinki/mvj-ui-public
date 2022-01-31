@@ -1,4 +1,19 @@
 {
+  "application": {
+    "arraySection": {
+      "genericAddNew": "",
+      "remove": ""
+    },
+    "error": {
+      "noFormAvailable": "",
+      "noPlotsSelected": ""
+    },
+    "heading": "",
+    "targets": {
+      "identifier": "",
+      "screenReaderHeading": ""
+    }
+  },
   "error": {
     "pageNotFound": ""
   },

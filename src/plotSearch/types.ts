@@ -170,7 +170,7 @@ export type FormField = {
   identifier: string;
   type: number;
   label: string;
-  hint_text?: string | null;
+  hint_text?: string;
   enabled: boolean;
   required: boolean;
   validation?: string | null;

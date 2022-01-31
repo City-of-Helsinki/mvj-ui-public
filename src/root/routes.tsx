@@ -9,6 +9,7 @@ import FavouritesPage from '../favouritesPage/favouritesPage';
 import FinalizeLogin from '../auth/components/finalizeLogin';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
+import ApplicationPage from '../application/applicationPage';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -22,6 +23,9 @@ export const AppRoutes = {
   MESSAGES: 'messages',
   FAVOURITES: 'favourites',
   OIDC_CALLBACK: 'oidc-callback',
+  APPLICATION_FORM: 'application-form',
+  APPLICATION_PREVIEW: 'application-preview',
+  APPLICATION_SUBMIT: 'application-submit',
 };
 
 /**
@@ -42,6 +46,9 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.MESSAGES]: '/viestit',
     [AppRoutes.FAVOURITES]: '/suosikit',
     [AppRoutes.OIDC_CALLBACK]: '/oidc/callback',
+    [AppRoutes.APPLICATION_FORM]: '/tee-hakemus/tietojen-taytto',
+    [AppRoutes.APPLICATION_PREVIEW]: '/tee-hakemus/tietojen-tarkistus',
+    [AppRoutes.APPLICATION_SUBMIT]: '/tee-hakemus/lahetys',
   };
 
   return routes[id] ? routes[id] : '';
@@ -122,6 +129,10 @@ const SiteRoutes = (): JSX.Element => {
                 <FavouritesPage />
               </RouteWithLoader>
             }
+          />
+          <Route
+            path={getRouteById(AppRoutes.APPLICATION_FORM)}
+            element={<ApplicationPage />}
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

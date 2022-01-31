@@ -1,4 +1,19 @@
 {
+  "application": {
+    "arraySection": {
+      "genericAddNew": "Add new",
+      "remove": "Remove"
+    },
+    "error": {
+      "noFormAvailable": "No application form has been specified for the plots you have selected yet. Please be in contact and we'll look into it.",
+      "noPlotsSelected": "To submit a plot application, you have to pick plots on the plot searches page first."
+    },
+    "heading": "Plot application",
+    "targets": {
+      "identifier": "Plot",
+      "screenReaderHeading": "Selected plots:"
+    }
+  },
   "error": {
     "pageNotFound": "404 Page not found"
   },
