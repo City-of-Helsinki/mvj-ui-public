@@ -59,6 +59,8 @@ const MapComponent = (props: Props): JSX.Element => {
       scrollWheelZoom={true}
       maxBounds={latLonBounds}
       bounds={latLonBounds}
+      minZoom={2}
+      maxZoom={12}
       crs={CRS}
       zoomControl={false}
       whenCreated={whenMapCreated}
