@@ -23,7 +23,7 @@ export const FavouriteCardDetails = (props: Props): JSX.Element | null => {
     );
   }
 
-  if (fullDesc == info.fullDescOnly) {
+  if (fullDesc === info.fullDescOnly) {
     return (
       <>
         <Col>

@@ -14,6 +14,7 @@ export const AppRoutes = {
   HOME: 'home',
   ERROR: 'error',
   PLOT_SEARCH_AND_COMPETITIONS: 'plot-search-and-competitions',
+  PLOT_SEARCH_AND_COMPETITIONS_TARGET: 'plot-search-and-competitions-target',
   OTHER_COMPETITIONS_AND_SEARCHES: 'other-competitions-and-searches',
   AREA_SEARCH: 'area-search',
   LEASES: 'leases',
@@ -32,6 +33,8 @@ export const getRouteById = (id: string): string => {
   const routes = {
     [AppRoutes.HOME]: '/',
     [AppRoutes.PLOT_SEARCH_AND_COMPETITIONS]: '/tonttihaut-ja-kilpailut',
+    [AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET]:
+      '/tonttihaut-ja-kilpailut/kohteet/',
     [AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES]: '/muut-kilpailut-ja-haut',
     [AppRoutes.AREA_SEARCH]: '/aluehaku',
     [AppRoutes.LEASES]: '/vuokraukset',
@@ -79,6 +82,17 @@ const SiteRoutes = (): JSX.Element => {
           />
           <Route
             path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
+            element={
+              <RouteWithLoader>
+                <PlotSearchAndCompetitionsPage />
+              </RouteWithLoader>
+            }
+          />
+          <Route
+            path={
+              getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET) +
+              ':id'
+            }
             element={
               <RouteWithLoader>
                 <PlotSearchAndCompetitionsPage />

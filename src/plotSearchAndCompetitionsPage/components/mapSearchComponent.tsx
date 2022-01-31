@@ -29,6 +29,8 @@ import {
   addFavouriteTarget,
   removeFavouriteTarget,
 } from '../../favourites/actions';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes, getRouteById } from '../../root/routes';
 
 interface MapSearchComponentAccordionProps {
   isHidden: boolean;
@@ -106,7 +108,6 @@ interface MapSearchComponentProps {
   categoryVisibilities: CategoryVisibilities;
   onToggleVisibility: (id: number, isVisible: boolean) => void;
   plotSearches: Array<PlotSearch>;
-  setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
   addFavouriteTarget: (payLoad: AddTargetPayload) => void;
   removeFavouriteTarget: (id: number) => void;
@@ -120,7 +121,6 @@ const MapSearchComponent = ({
   categoryOptions,
   onToggleVisibility,
   plotSearches,
-  setSelectedTarget,
   selectedTarget,
   addFavouriteTarget,
   removeFavouriteTarget,
@@ -129,6 +129,7 @@ const MapSearchComponent = ({
   toggle,
 }: MapSearchComponentProps): JSX.Element => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const plotSearchesByCategory = categoryOptions.map((category) => ({
     category,
@@ -156,7 +157,6 @@ const MapSearchComponent = ({
         <MapSearchSingleTargetView
           addFavouriteTarget={addFavouriteTarget}
           selectedTarget={selectedTarget}
-          setSelectedTarget={setSelectedTarget}
           favourite={favourite}
           removeFavouriteTarget={removeFavouriteTarget}
         />
@@ -359,10 +359,11 @@ const MapSearchComponent = ({
                                 <Col xs={1}>
                                   <IconButton
                                     onClick={() =>
-                                      setSelectedTarget({
-                                        target: target.data,
-                                        plotSearch: target.relatedPlotSearch,
-                                      })
+                                      navigate(
+                                        getRouteById(
+                                          AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET
+                                        ) + target.data.id
+                                      )
                                     }
                                   >
                                     <IconArrowRight size="s" />

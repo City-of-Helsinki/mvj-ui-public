@@ -12,6 +12,8 @@ import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import { defaultLanguage } from '../../i18n';
 import { renderDateTime } from '../../i18n/utils';
 import { AddTargetPayload, Favourite } from '../../favourites/types';
+import InfoLinks from './infoLinks';
+import { AppRoutes, getRouteById } from '../../root/routes';
 
 interface State {
   plotSearchAttributes: ApiAttributes;
@@ -20,7 +22,6 @@ interface State {
 interface Props {
   plotSearchAttributes: ApiAttributes;
   selectedTarget: SelectedTarget;
-  setSelectedTarget: (target: SelectedTarget) => void;
   favourite: Favourite;
   addFavouriteTarget: (payload: AddTargetPayload) => void;
   removeFavouriteTarget: (payload: number) => void;
@@ -29,12 +30,12 @@ interface Props {
 const MapSearchSingleTargetView = ({
   plotSearchAttributes,
   selectedTarget,
-  setSelectedTarget,
   favourite,
   addFavouriteTarget,
   removeFavouriteTarget,
 }: Props) => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const LeftColumn = ({ children }: { children: ReactNode }): JSX.Element => (
     <Col xs={6} component="dt">
       {children}
@@ -89,7 +90,9 @@ const MapSearchSingleTargetView = ({
   return (
     <div className="MapSearchSingleTargetView">
       <Button
-        onClick={() => setSelectedTarget(null)}
+        onClick={() =>
+          navigate(getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS))
+        }
         variant="secondary"
         size="small"
         iconLeft={<IconAngleLeft />}

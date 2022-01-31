@@ -7,6 +7,8 @@ import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
 import { renderToStaticMarkup } from 'react-dom/server';
 import MapSymbol from './mapSymbol';
 import { FavouriteTarget } from '../../favourites/types';
+import { useNavigate } from 'react-router';
+import { AppRoutes, getRouteById } from '../../root/routes';
 
 interface Props {
   plotSearchTargets: PlotSearchTarget[];
@@ -46,6 +48,7 @@ export const getMarkerIcon = (
 
 const MapPlotSearchOverlay = (props: Props): JSX.Element => {
   const map = useMap();
+  const navigate = useNavigate();
   const [zoomLevel, setZoomLevel] = useState(map.getZoom());
 
   const prevSelectedTarget = usePreviousTarget(props.selectedTarget);
@@ -73,10 +76,9 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
   });
 
   const handleMarkerClick = (target: PlotSearchTarget): void => {
-    props.setSelectedTarget({
-      target: target,
-      plotSearch: props.plotSearch,
-    });
+    navigate(
+      getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET) + target.id
+    );
   };
 
   const renderMarker = (

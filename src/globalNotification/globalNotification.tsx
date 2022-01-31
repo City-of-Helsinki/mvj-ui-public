@@ -9,7 +9,6 @@ import {
   IconProps,
 } from 'hds-react';
 import { useTranslation } from 'react-i18next';
-import { useGlobalNotifications } from './globalNotificationProvider';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { popNotification } from './actions';

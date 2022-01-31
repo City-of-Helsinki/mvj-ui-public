@@ -67,7 +67,7 @@ const TopNavigation = ({
   const navigate = useNavigate();
 
   const matchPlotSearchAndCompetitions = useMatch(
-    getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)
+    getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS) + '/*'
   );
   const matchOtherCompetitionsAndSearches = useMatch(
     getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)
