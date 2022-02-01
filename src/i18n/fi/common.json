@@ -2,6 +2,37 @@
   "error": {
     "pageNotFound": "404 Sivua ei löytynyt"
   },
+  "favouritesPage": {
+    "notification": {
+      "body": "Löydät hakemukseen lisätyt tontit täältä. Voit palata tonttihakusivulle lisätäksesi uusia kohteita.",
+      "link": "Palaa tonttihakusivulle",
+      "title": "Haluatko hakea lisää tontteja?"
+    },
+    "targetCard": {
+      "removeButton": "Poista listalta",
+      "showFullDesc": {
+        "hide": "Piilota kohteen tarkemmat tiedot",
+        "show": "Näytä kohteen tarkemmat tiedot"
+      },
+      "table": {
+        "address": "Osoite",
+        "applyByDate": "Hakuaika päättyy",
+        "area": "Pinta-ala (m²)",
+        "detailedPlanIdentifier": "Asemakaava",
+        "detailedPlanState": "Asemakaavan käsittelyvaihe",
+        "financingMethod": "Rahoitusmuoto",
+        "firstSuitableConstructionYear": "Rakennuskelpoinen",
+        "hitas": "HITAS",
+        "intendedUsage": "Käyttötarkoitus",
+        "management": "Hallintamuoto",
+        "permittedBuildArea": "Rakennusoikeus (k-m²)",
+        "permittedBuildAreaCommercial": "Liikerakennusoikeus (k-m²)",
+        "permittedBuildAreaResidential": "Asuinrakennusoikeus (k-m²)",
+        "plot": "Tontti"
+      }
+    },
+    "title": "Olet hakemassa seuraavia tontteja"
+  },
   "footer": {
     "copyright": {
       "holder": "Copyright",
@@ -39,6 +70,11 @@
       "heading": "Kysyttävää?"
     }
   },
+  "globalNotifications": {
+    "notification": {
+      "close": "Sulje"
+    }
+  },
   "loader": {
     "loading": "Sisältöä ladataan, odota hetki..."
   },
@@ -71,9 +107,14 @@
     },
     "mapView": {
       "sidebar": {
+        "notification": {
+          "body": "<0>Voit lähettää hakemuksen vain yhdestä kilpailusta / tonttihausta kerrallaan.</0><1>Mikäli yhdessä kilpailussa on useita haettavia tontteja, voit lisätä niitä samaan hakemukseen.</1><2>Mikäli haluat osallistua muihin kilpailuihin / tonttihakuihin, niistä on lähetettävä eri hakemus.</2>",
+          "title": "Huom!"
+        },
         "sectionApplyBy": "Hakuaika päättyy {{date}}",
         "singleTarget": {
           "address": "Osoite",
+          "addTarget": "Kohde \"{{address}}\" lisätty hakemukseen.",
           "applyButton": "Hae kohdetta",
           "applyByDate": "Hakuaika päättyy",
           "area": "Pinta-ala (m²)",
@@ -89,6 +130,8 @@
           "permittedBuildAreaCommercial": "Liikerakennusoikeus (k-m²)",
           "permittedBuildAreaResidential": "Asuinrakennusoikeus (k-m²)",
           "plotNumber": "Tontti",
+          "removeButton": "Poista kohde hakemuksesta",
+          "removeTarget": "Kohde \"{{address}}\" poistettu hakemuksesta.",
           "returnToList": "Takaisin"
         },
         "targetHeadings": {
@@ -102,34 +145,6 @@
           "showThisType": "Näytä",
           "type": "Tyyppi"
         }
-      }
-    }
-  },
-  "favouritesPage": {
-    "title": "Olet hakemassa seuraavia tontteja",
-    "targetCard": {
-      "removeButton": "Poista listalta",
-      "table": {
-        "detailedPlanIdentifier": "Asemakaava",
-        "detailedPlanState": "Asemakaavan käsittelyvaihe",
-        "financingMethod": "Rahoitusmuoto",
-        "firstSuitableConstructionYear": "Rakennuskelpoinen",
-        "hitas": "HITAS",
-        "infoLinks": "Lisätietoja",
-        "intendedUse": "Käyttötarkoitus",
-        "management": "Hallintamuoto",
-        "address": "Osoite",
-        "applyByDate": "Hakuaika päättyy",
-        "plot": "Tontti",
-        "intendedUsage": "Käyttötarkoitus",
-        "permittedBuildArea": "Rakennusoikeus (k-m²)",
-        "permittedBuildAreaCommercial": "Liikerakennusoikeus (k-m²)",
-        "permittedBuildAreaResidential": "Asuinrakennusoikeus (k-m²)",
-        "area": "Pinta-ala (m²)"
-      },
-      "showFullDesc": {
-        "show": "Näytä kohteen tarkemmat tiedot",
-        "hide": "Piilota kohteen tarkemmat tiedot"
       }
     }
   },

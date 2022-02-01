@@ -111,8 +111,8 @@ const MapComponent = (props: Props): JSX.Element => {
           props.categoryVisibilities[item.category.id] &&
           item.plotSearches.map((plotSearch) => {
             if (
-              props.favourite.plotSearch === null ||
-              plotSearch.id === props.favourite.plotSearch
+              props.favourite.targets.length <= 0 ||
+              plotSearch.id === props.favourite.targets[0].plot_search
             ) {
               return (
                 <MapPlotSearchOverlay

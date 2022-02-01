@@ -1,3 +1,8 @@
 .FavouritesPage {
   padding-top: $spacing-4-xl;
+  padding-bottom: $spacing-4-xl;
+
+  &__notification-container {
+    padding-left: 0 !important;
+  }
 }

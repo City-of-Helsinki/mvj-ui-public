@@ -93,6 +93,11 @@
     padding: ($spacing-xs / 2) $spacing-xs;
   }
 
+  &__notification {
+    padding: $spacing-xl;
+    white-space: pre-line;
+  }
+
   .MapSearchSingleTargetView + .MapSearchComponent__list-view {
     display: none;
   }

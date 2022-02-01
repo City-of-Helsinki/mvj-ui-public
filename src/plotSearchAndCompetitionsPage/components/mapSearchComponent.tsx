@@ -5,6 +5,7 @@ import {
   IconAngleDown,
   IconAngleUp,
   IconArrowRight,
+  Notification,
   useAccordion,
 } from 'hds-react';
 import { Row, Col, Container } from 'react-grid-system';
@@ -18,13 +19,16 @@ import {
 } from '../plotSearchAndCompetitionsPage';
 import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import IconButton from '../../button/iconButton';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import MapSearchSingleTargetView from './mapSearchSingleTargetView';
 import { AddTargetPayload, Favourite } from '../../favourites/types';
 import { defaultLanguage } from '../../i18n';
 import { renderDateTime } from '../../i18n/utils';
 import { connect } from 'react-redux';
-import { addFavouriteTarget } from '../../favourites/actions';
+import {
+  addFavouriteTarget,
+  removeFavouriteTarget,
+} from '../../favourites/actions';
 
 interface MapSearchComponentAccordionProps {
   isHidden: boolean;
@@ -105,6 +109,7 @@ interface MapSearchComponentProps {
   setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
   addFavouriteTarget: (payLoad: AddTargetPayload) => void;
+  removeFavouriteTarget: (id: number) => void;
   isOpen: boolean;
   toggle: (newValue: boolean) => void;
   favourite: Favourite;
@@ -118,6 +123,7 @@ const MapSearchComponent = ({
   setSelectedTarget,
   selectedTarget,
   addFavouriteTarget,
+  removeFavouriteTarget,
   favourite,
   isOpen,
   toggle,
@@ -128,20 +134,20 @@ const MapSearchComponent = ({
     category,
     plotSearches: plotSearches?.filter((plotSearch) => {
       if (plotSearch.type?.id === category.id) {
-        if (favourite.plotSearch === null) {
+        if (favourite.targets.length <= 0) {
           return true;
         }
-        return favourite.plotSearch === plotSearch.id;
+        return favourite.targets[0].plot_search === plotSearch.id;
       }
     }),
   }));
 
   const checkHidden = (plotSearches: PlotSearch[]): boolean => {
-    if (favourite.plotSearch === null) {
+    if (favourite.targets.length <= 0) {
       return false;
     }
 
-    return !plotSearches.some((s) => s.id === favourite.plotSearch);
+    return !plotSearches.some((s) => s.id === favourite.targets[0].plot_search);
   };
 
   return (
@@ -151,6 +157,8 @@ const MapSearchComponent = ({
           addFavouriteTarget={addFavouriteTarget}
           selectedTarget={selectedTarget}
           setSelectedTarget={setSelectedTarget}
+          favourite={favourite}
+          removeFavouriteTarget={removeFavouriteTarget}
         />
       )}
       <div className="MapSearchComponent__list-view">
@@ -314,7 +322,9 @@ const MapSearchComponent = ({
                                   {
                                     'MapSearchComponent__target--favourited':
                                       favourite.targets.some(
-                                        (t) => t.id === target.data.id
+                                        (t) =>
+                                          t.plot_search_target.id ===
+                                          target.data.id
                                       ),
                                   }
                                 )}
@@ -371,8 +381,37 @@ const MapSearchComponent = ({
           );
         })}
       </div>
+      {favourite.targets.length > 0 && (
+        <div className="MapSearchComponent__notification">
+          <Notification
+            type="alert"
+            label={
+              t(
+                'plotSearchAndCompetitions.mapView.sidebar.notification.title',
+                'Attention!'
+              ) as string
+            }
+          >
+            <Trans i18nKey="plotSearchAndCompetitions.mapView.sidebar.notification.body">
+              <p>You can attend only in one plot search per application.</p>
+
+              <p>
+                If one plot search contains multiple searchable targets, you can
+                add those in the same application.
+              </p>
+
+              <p>
+                If you want to attend other plot search, you need to fill new
+                application for every plot search.
+              </p>
+            </Trans>
+          </Notification>
+        </div>
+      )}
     </SidePanel>
   );
 };
 
-export default connect(null, { addFavouriteTarget })(MapSearchComponent);
+export default connect(null, { addFavouriteTarget, removeFavouriteTarget })(
+  MapSearchComponent
+);

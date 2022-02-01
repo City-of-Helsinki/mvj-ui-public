@@ -2,6 +2,37 @@
   "error": {
     "pageNotFound": ""
   },
+  "favouritesPage": {
+    "notification": {
+      "body": "",
+      "link": "",
+      "title": ""
+    },
+    "targetCard": {
+      "removeButton": "",
+      "showFullDesc": {
+        "hide": "",
+        "show": ""
+      },
+      "table": {
+        "address": "",
+        "applyByDate": "",
+        "area": "",
+        "detailedPlanIdentifier": "",
+        "detailedPlanState": "",
+        "financingMethod": "",
+        "firstSuitableConstructionYear": "",
+        "hitas": "",
+        "intendedUsage": "",
+        "management": "",
+        "permittedBuildArea": "",
+        "permittedBuildAreaCommercial": "",
+        "permittedBuildAreaResidential": "",
+        "plot": ""
+      }
+    },
+    "title": ""
+  },
   "footer": {
     "copyright": {
       "holder": "",
@@ -39,6 +70,11 @@
       "heading": "Några frågor?"
     }
   },
+  "globalNotifications": {
+    "notification": {
+      "close": ""
+    }
+  },
   "loader": {
     "loading": ""
   },
@@ -71,9 +107,14 @@
     },
     "mapView": {
       "sidebar": {
+        "notification": {
+          "body": "",
+          "title": ""
+        },
         "sectionApplyBy": "",
         "singleTarget": {
           "address": "",
+          "addTarget": "",
           "applyButton": "",
           "applyByDate": "",
           "area": "",
@@ -89,6 +130,8 @@
           "permittedBuildAreaCommercial": "",
           "permittedBuildAreaResidential": "",
           "plotNumber": "",
+          "removeButton": "",
+          "removeTarget": "",
           "returnToList": ""
         },
         "targetHeadings": {
@@ -102,34 +145,6 @@
           "showThisType": "",
           "type": ""
         }
-      }
-    }
-  },
-  "favouritesPage": {
-    "title": "",
-    "targetCard": {
-      "removeButton": "",
-      "table": {
-        "detailedPlanIdentifier": "",
-        "detailedPlanState": "",
-        "financingMethod": "",
-        "firstSuitableConstructionYear": "",
-        "hitas": "",
-        "infoLinks": "",
-        "intendedUse": "",
-        "management": "",
-        "address": "",
-        "applyByDate": "",
-        "plot": "",
-        "intendedUsage": "",
-        "permittedBuildArea": "",
-        "permittedBuildAreaCommercial": "",
-        "permittedBuildAreaResidential": "",
-        "area": ""
-      },
-      "showFullDesc": {
-        "show": "",
-        "hide": ""
       }
     }
   },

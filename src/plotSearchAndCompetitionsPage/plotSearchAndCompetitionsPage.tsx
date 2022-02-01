@@ -10,7 +10,6 @@ import {
   fetchPlotSearches,
   fetchPlotSearchTypes,
 } from '../plotSearch/actions';
-import { fetchFavourite } from '../favourites/actions';
 
 import { ApiAttributes } from '../api/types';
 import {
@@ -35,7 +34,6 @@ interface Props {
   fetchPlotSearches: () => void;
   fetchPlotSearchAttributes: () => void;
   fetchPlotSearchTypes: () => void;
-  fetchFavourite: () => void;
   isFetchingPlotSearches: boolean;
   isFetchingPlotSearchAttributes: boolean;
   isFetchingPlotSearchTypes: boolean;
@@ -63,7 +61,6 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     fetchPlotSearches,
     fetchPlotSearchAttributes,
     fetchPlotSearchTypes,
-    fetchFavourite,
     isFetchingPlotSearches,
     isFetchingPlotSearchAttributes,
     isFetchingPlotSearchTypes,
@@ -81,7 +78,6 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     fetchPlotSearches();
     fetchPlotSearchAttributes();
     fetchPlotSearchTypes();
-    fetchFavourite();
   }, []);
 
   useEffect(() => {
@@ -183,5 +179,4 @@ export default connect(mapStateToProps, {
   fetchPlotSearches,
   fetchPlotSearchAttributes,
   fetchPlotSearchTypes,
-  fetchFavourite,
 })(PlotSearchAndCompetitionsPage);

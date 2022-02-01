@@ -1,30 +1,30 @@
-import { ApiAttributes } from '../api/types';
 import { PlotSearchTarget } from '../plotSearch/types';
+
+export interface FavouriteTarget {
+  plot_search_target: PlotSearchTarget;
+  plot_search: number | null;
+}
 
 export interface Favourite {
   // todo: Figure out more descriptive name for this. Also refactor the backend side.
-  user: string | null;
   created_at: string | null;
   modified_at: string | null;
-  plotSearch: number | null;
-  targets: PlotSearchTarget[];
+  targets: FavouriteTarget[];
+  id?: number | null;
 }
 
+export const MVJ_FAVOURITE = 'mvj_favourite';
+
 export const FETCH_FAVOURITE = 'favourite/FETCH_FAVOURITE';
-export const FETCH_FAVOURITE_ATTRIBUTES =
-  'favourite/FETCH_FAVOURITE_ATTRIBUTES';
 export const FAVOURITE_NOT_FOUND = 'favourite/FAVOURITE_NOT_FOUND';
+export const FAVOURITE_FETCH_ERROR = 'favourite/FAVOURITE_FETCH_ERROR';
 export const RECEIVE_FAVOURITE = 'favourite/RECEIVE_FAVOURITE';
-export const RECEIVE_FAVOURITE_ATTRIBUTES =
-  'favourite/RECEIVE_FAVOURITE_ATTRIBUTES';
-export const FAVOURITE_ATTRIBUTES_NOT_FOUND =
-  'favourite/FAVOURITE_ATTRIBUTES_NOT_FOUND';
 export const ADD_FAVOURITE_TARGET = 'favourite/ADD_FAVOURITE_TARGET';
 export const REMOVE_FAVOURITE_TARGET = 'favourite/REMOVE_FAVOURITE_TARGET';
+export const INITIALIZE_FAVOURITE = 'favourite/INITIALIZE_FAVOURITE';
 
 export interface AddTargetPayload {
-  target: PlotSearchTarget;
-  plotSearch: number;
+  target: FavouriteTarget;
 }
 
 export interface ReceiveFavouriteAction {
@@ -34,14 +34,10 @@ export interface ReceiveFavouriteAction {
 
 export interface FetchFavouriteAction {
   type: typeof FETCH_FAVOURITE;
-  payload: {
-    params: Record<string, string>;
-  };
 }
 
-export interface ReceiveFavouriteAttributesAction {
-  type: typeof RECEIVE_FAVOURITE_ATTRIBUTES;
-  payload: ApiAttributes;
+export interface InitializeFavouriteAction {
+  type: typeof INITIALIZE_FAVOURITE;
 }
 
 export interface AddFavouriteTargetAction {

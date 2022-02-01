@@ -8,6 +8,9 @@ import LoginModal from './login/loginModal';
 import { RootState } from './root/rootReducer';
 import { getIsFetchingApiToken, getUser } from './auth/selectors';
 import { fetchApiToken, receiveApiToken } from './auth/actions';
+import { fetchFavourite } from './favourites/actions';
+import GlobalNotificationContainer from './globalNotification/globalNotificationContainer';
+import { getIsFetchingFavourite } from './favourites/selectors';
 
 import './main.scss';
 
@@ -15,6 +18,8 @@ interface Props {
   children?: JSX.Element;
   user: User | null;
   fetchApiToken: (accessToken: string) => void;
+  fetchFavourite: () => void;
+  isFetchingFavourite: boolean;
   receiveApiToken: (token: string) => void;
   isFetchingToken: boolean;
 }
@@ -25,6 +30,8 @@ const App = ({
   children,
   user,
   fetchApiToken,
+  fetchFavourite,
+  isFetchingFavourite,
   receiveApiToken,
   isFetchingToken,
 }: Props): JSX.Element => {
@@ -45,6 +52,9 @@ const App = ({
           }, 1000 * 60 * 10)
         );
       }
+      if (!isFetchingFavourite) {
+        fetchFavourite();
+      }
     } else {
       if (tokenRefreshTimeout) {
         clearTimeout(tokenRefreshTimeout);
@@ -59,6 +69,7 @@ const App = ({
     <div className="App">
       <LoginModal />
       <TopNavigation />
+      <GlobalNotificationContainer />
       <main>{children}</main>
       <Footer />
     </div>
@@ -69,6 +80,7 @@ export default connect(
   (state: RootState) => ({
     user: getUser(state),
     isFetchingToken: getIsFetchingApiToken(state),
+    isFetchingFavourite: getIsFetchingFavourite(state),
   }),
-  { fetchApiToken, receiveApiToken }
+  { fetchApiToken, receiveApiToken, fetchFavourite }
 )(App);

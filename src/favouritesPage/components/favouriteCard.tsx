@@ -44,7 +44,10 @@ const FavouriteCard = (props: Props): JSX.Element => {
                   <IconCrossCircle className="FavouriteCard__action-button-icon" />
                 }
               >
-                {t('favouritesPage.targetCard.removeButton')}
+                {t(
+                  'favouritesPage.targetCard.removeButton',
+                  'Remove from list'
+                )}
               </Button>
             </Col>
           </Row>

@@ -2,6 +2,37 @@
   "error": {
     "pageNotFound": "404 Page not found"
   },
+  "favouritesPage": {
+    "notification": {
+      "body": "<0>You can find all the selected targets here. You can return to plot search page to add more targets.</0>",
+      "link": "Return to plot search page",
+      "title": "Do you want to search for more targets?"
+    },
+    "targetCard": {
+      "removeButton": "Remove from list",
+      "showFullDesc": {
+        "hide": "Hide additional details",
+        "show": "Show additional details"
+      },
+      "table": {
+        "address": "Address",
+        "applyByDate": "Apply by",
+        "area": "Area (m²)",
+        "detailedPlanIdentifier": "Detailed plan identifier",
+        "detailedPlanState": "Detailed plan state",
+        "financingMethod": "Financing method",
+        "firstSuitableConstructionYear": "First suitable construction year",
+        "hitas": "HITAS",
+        "intendedUsage": "Intended use",
+        "management": "Management method",
+        "permittedBuildArea": "Permitted build floor area (floor-m²)",
+        "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
+        "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
+        "plot": "Plot"
+      }
+    },
+    "title": "You are attending to following plot searches"
+  },
   "footer": {
     "copyright": {
       "holder": "Copyright",
@@ -39,6 +70,11 @@
       "heading": "Questions?"
     }
   },
+  "globalNotifications": {
+    "notification": {
+      "close": "Close"
+    }
+  },
   "loader": {
     "loading": "Please wait, content is loading..."
   },
@@ -71,9 +107,14 @@
     },
     "mapView": {
       "sidebar": {
+        "notification": {
+          "body": "<0>You can attend only in one plot search per application.</0><1>If one plot search contains multiple searchable targets, you can add those in the same application.</1><2>If you want to attend other plot search, you need to fill new application for every plot search.</2>",
+          "title": "Attention!"
+        },
         "sectionApplyBy": "Apply by {{date}}",
         "singleTarget": {
           "address": "Address",
+          "addTarget": "Target \"{{address}}\" added into application.",
           "applyButton": "Apply for this plot",
           "applyByDate": "Apply by",
           "area": "Area (m²)",
@@ -89,6 +130,8 @@
           "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
           "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
           "plotNumber": "Plot",
+          "removeButton": "Remove plot from application",
+          "removeTarget": "Target \"{{address}}\" removed from application.",
           "returnToList": "Return to list"
         },
         "targetHeadings": {
@@ -102,34 +145,6 @@
           "showThisType": "Show",
           "type": "Type"
         }
-      }
-    }
-  },
-  "favouritesPage": {
-    "title": "You have added following plots to favourites",
-    "targetCard": {
-      "removeButton": "Remove from list",
-      "table": {
-        "detailedPlanIdentifier": "Detailed plan identifier",
-        "detailedPlanState": "Detailed plan state",
-        "financingMethod": "Financing method",
-        "firstSuitableConstructionYear": "First suitable construction year",
-        "hitas": "HITAS",
-        "infoLinks": "Details",
-        "intendedUse": "Intended use",
-        "management": "Management method",
-        "address": "Address",
-        "applyByDate": "Apply by",
-        "plot": "Plot",
-        "intendedUsage": "Intended use",
-        "permittedBuildArea": "Permitted build floor area (floor-m²)",
-        "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
-        "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
-        "area": "Area (m²)"
-      },
-      "showFullDesc": {
-        "show": "Show additional details",
-        "hide": "Hide additional details"
       }
     }
   },

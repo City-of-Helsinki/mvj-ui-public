@@ -1,0 +1,37 @@
+.GlobalNotificationContainer {
+  &__notification {
+    margin-top: $spacing-5-xl;
+  }
+
+  &__notification-icon {
+    &--success {
+      color: $color-success-dark;
+    }
+
+    &--error {
+      color: $color-error-dark;
+    }
+
+    &--alert {
+      color: $color-alert-dark;
+    }
+
+    &--info {
+      color: $color-info-dark;
+    }
+  }
+
+  &__notification-body {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__notification-icon-container {
+    height: 100%;
+    padding-right: $spacing-xs;
+  }
+
+  &__notification-text-container {
+    height: 100%;
+  }
+}

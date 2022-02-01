@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Favourite } from '../favourites/types';
 import { RootState } from '../root/rootReducer';
 import { connect } from 'react-redux';
-import { Container, Row } from 'react-grid-system';
+import { Col, Container, Row } from 'react-grid-system';
 import { removeFavouriteTarget } from '../favourites/actions';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import FavouriteCard from './components/favouriteCard';
 import { PlotSearch } from '../plotSearch/types';
 import { fetchPlotSearches } from '../plotSearch/actions';
 import BlockLoader from '../loader/blockLoader';
+import { Notification, Link } from 'hds-react';
 
 interface State {
   favourite: Favourite;
@@ -37,9 +38,14 @@ const FavouritesPage = (props: Props): JSX.Element => {
   }, []);
 
   useEffect(() => {
+    if (props.favourite.targets.length <= 0) {
+      setPlotSearch(null);
+      return;
+    }
+
     setPlotSearch(
       props.plotSearches.filter(
-        (plotSearch) => plotSearch.id === props.favourite.plotSearch
+        (plotSearch) => plotSearch.id === props.favourite.targets[0].plot_search
       )[0]
     );
   }, [props.favourite]);
@@ -47,12 +53,14 @@ const FavouritesPage = (props: Props): JSX.Element => {
   return (
     <Container className="FavouritesPage">
       <Row>
-        <h1>
-          {t(
-            'favouritesPage.title',
-            'You are attending to following plot searches'
-          )}
-        </h1>
+        {props.favourite.targets.length > 0 && (
+          <h1>
+            {t(
+              'favouritesPage.title',
+              'You are attending to following plot searches'
+            )}
+          </h1>
+        )}
       </Row>
       <Row>
         {props.isFetchingPlotSearches ? (
@@ -61,12 +69,39 @@ const FavouritesPage = (props: Props): JSX.Element => {
           props.favourite.targets.map((target) => (
             <FavouriteCard
               plotSearch={plotSearch}
-              key={target.id}
-              target={target}
+              key={target.plot_search_target.id}
+              target={target.plot_search_target}
               remove={handleTargetRemove}
             />
           ))
         )}
+      </Row>
+      <Row>
+        <Col md={6} xs={12} className="FavouritesPage__notification-container">
+          <Notification
+            type="info"
+            position="inline"
+            label={t(
+              'favouritesPage.notification.title',
+              'Do you want to search for more targets?'
+            )}
+          >
+            <Trans i18nKey="favouritesPage.notification.body">
+              <p>
+                You can find all the selected targets here. You can return to
+                plot search page to add more targets.
+              </p>
+            </Trans>
+            <p>
+              <Link href="/tonttihaut-ja-kilpailut" size="M">
+                {t(
+                  'favouritesPage.notification.link',
+                  'Return to plot search page'
+                )}
+              </Link>
+            </p>
+          </Notification>
+        </Col>
       </Row>
     </Container>
   );
