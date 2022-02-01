@@ -283,7 +283,7 @@ const MapSearchSingleTargetView = ({
       <Button
         className="MapSearchSingleTargetView__next-button"
         onClick={() => handleApplyButton(target, plotSearch, isFavourited)}
-        variant={isFavourited ? 'danger' : 'success'}
+        variant={isFavourited ? 'secondary' : 'primary'}
       >
         {isFavourited
           ? t(
