@@ -9,12 +9,16 @@
     }
   },
   "favouritesPage": {
+    "map": {
+      "showOnMap": ""
+    },
     "notification": {
       "body": "",
       "link": "",
       "title": ""
     },
     "targetCard": {
+      "infoLinkHeader": "",
       "removeButton": "",
       "showFullDesc": {
         "hide": "",

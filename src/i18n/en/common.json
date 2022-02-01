@@ -9,12 +9,16 @@
     }
   },
   "favouritesPage": {
+    "map": {
+      "showOnMap": "Show on map"
+    },
     "notification": {
       "body": "<0>You can find all the selected targets here. You can return to plot search page to add more targets.</0>",
       "link": "Return to plot search page",
       "title": "Do you want to search for more targets?"
     },
     "targetCard": {
+      "infoLinkHeader": "More information",
       "removeButton": "Remove from list",
       "showFullDesc": {
         "hide": "Hide additional details",
@@ -78,7 +82,7 @@
   },
   "globalNotifications": {
     "notification": {
-      "close": "close"
+      "close": "Close"
     }
   },
   "loader": {

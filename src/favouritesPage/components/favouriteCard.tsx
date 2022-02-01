@@ -82,14 +82,6 @@ const FavouriteCard = (props: Props): JSX.Element => {
                 })}
               </Col>
             )}
-            <Col xs={12}>
-              <Link href={`/tonttihaut-ja-kilpailut/${target.id}`} size="S">
-                {t(
-                  'favouritesPage.targetCard.watchInPlotsearchPage',
-                  'Watch this target in plot search and competitions page'
-                )}
-              </Link>
-            </Col>
           </Row>
           <Row>
             {/* Bottom row with "see on plotsearch page" & "more info" -action */}

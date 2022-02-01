@@ -9,12 +9,16 @@
     }
   },
   "favouritesPage": {
+    "map": {
+      "showOnMap": "Näytä kartalla"
+    },
     "notification": {
       "body": "Löydät hakemukseen lisätyt tontit täältä. Voit palata tonttihakusivulle lisätäksesi uusia kohteita.",
       "link": "Palaa tonttihakusivulle",
       "title": "Haluatko hakea lisää tontteja?"
     },
     "targetCard": {
+      "infoLinkHeader": "Lisätietoja",
       "removeButton": "Poista listalta",
       "showFullDesc": {
         "hide": "Piilota kohteen tarkemmat tiedot",

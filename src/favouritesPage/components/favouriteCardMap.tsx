@@ -1,7 +1,7 @@
 import React from 'react';
-import { MapContainer, WMSTileLayer, Marker } from 'react-leaflet';
+import { MapContainer, WMSTileLayer, Marker, Tooltip } from 'react-leaflet';
 import 'proj4leaflet';
-import { IconHeartFill } from 'hds-react';
+import { IconHeartFill, Link } from 'hds-react';
 import { PlotSearchTarget } from '../../plotSearch/types';
 import { getCentroid } from '../../plotSearchAndCompetitionsPage/utils';
 import { initializeHelsinkiMap } from '../../plotSearchAndCompetitionsPage/utils';
@@ -19,6 +19,8 @@ interface Props {
 const FavouriteCardMap = (props: Props): JSX.Element => {
   const { latLonBounds, CRS } = initializeHelsinkiMap();
   const coord = getCentroid(props.target.plan_unit.geometry);
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const getIcon = (): DivIcon => {
     const html = renderToStaticMarkup(<IconHeartFill />);
