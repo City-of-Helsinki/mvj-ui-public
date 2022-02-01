@@ -56,8 +56,6 @@ const MapSearchComponentAccordion = ({
   heading,
   symbol,
   colorIndex = 0,
-  hoveredTargetId,
-  setHoveredTargetId,
 }: MapSearchComponentAccordionProps): JSX.Element | null => {
   const { isOpen, buttonProps, contentProps } = useAccordion({ initiallyOpen });
 

@@ -38,7 +38,7 @@ export function* fetchApiTokenSaga({
       }
     }
   } catch (error) {
-    console.error(`Failed to fetch API token with error: ${error}`);
+    // console.error(`Failed to fetch API token with error: ${error}`);
     yield put(tokenNotFound());
     userManager.removeUser();
   }

@@ -28,7 +28,7 @@ store.subscribe(() => {
   });
 
   if (!checkIntegrity) {
-    console.error('Invalid favourite for localstorage', favourite);
+    // console.error('Invalid favourite for localstorage', favourite);
     return;
   }
   localStorage.setItem(MVJ_FAVOURITE, JSON.stringify(favourite.favourite));

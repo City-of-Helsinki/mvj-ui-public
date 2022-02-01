@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapContainer, WMSTileLayer, Marker, Tooltip } from 'react-leaflet';
 import 'proj4leaflet';
-import { IconHeartFill, Link } from 'hds-react';
+import { IconHeartFill } from 'hds-react';
 import { PlotSearchTarget } from '../../plotSearch/types';
 import { getCentroid } from '../../plotSearchAndCompetitionsPage/utils';
 import { initializeHelsinkiMap } from '../../plotSearchAndCompetitionsPage/utils';

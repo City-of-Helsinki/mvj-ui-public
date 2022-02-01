@@ -29,9 +29,9 @@ const FinalizeLogin = (): JSX.Element | null => {
       successCallback={() => {
         redirect(savedRedirectUrl);
       }}
-      errorCallback={(e: Error) => {
+      errorCallback={() => {
         redirect(savedRedirectUrl);
-        console.error(e);
+        // console.error(e);
       }}
     >
       <BlockLoader />

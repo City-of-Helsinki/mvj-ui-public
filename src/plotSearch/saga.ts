@@ -43,7 +43,7 @@ function* fetchPlotSearchesSaga({
         break;
     }
   } catch (e) {
-    console.error(e);
+    // console.error(e);
     yield put(plotSearchesNotFound());
     throw e;
   }
@@ -70,7 +70,7 @@ function* fetchPlotSearchAttributesSaga(): Generator<
         break;
     }
   } catch (e) {
-    console.error(e);
+    // console.error(e);
     yield put(plotSearchAttributesNotFound());
     throw e;
   }
@@ -91,7 +91,7 @@ function* fetchPlotSearchTypesSaga(): Generator<Effect, void, ApiCallResult> {
         break;
     }
   } catch (e) {
-    console.error(e);
+    // console.error(e);
     yield put(plotSearchTypesNotFound());
     throw e;
   }
