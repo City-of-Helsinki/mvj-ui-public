@@ -19,6 +19,8 @@ interface Props {
   categorySymbol: string;
   initialPosition: LatLngExpression;
   favouritedTargets: FavouriteTarget[];
+  hoveredTargetId: number | null;
+  setHoveredTargetId: (id: number | null) => void;
 }
 
 const usePreviousTarget = (value: SelectedTarget) => {
@@ -32,12 +34,16 @@ const usePreviousTarget = (value: SelectedTarget) => {
 export const getMarkerIcon = (
   symbol: string,
   index: number,
-  isFavourite: boolean
+  isFavourite: boolean,
+  isHover: boolean
 ): DivIcon => {
   const html = renderToStaticMarkup(
-    <div>
-      <MapSymbol symbol={symbol} colorIndex={index} isFavourite={isFavourite} />
-    </div>
+    <MapSymbol
+      symbol={symbol}
+      colorIndex={index}
+      isFavourite={isFavourite}
+      isHover={isHover}
+    />
   );
   return new L.DivIcon({
     html: html,
@@ -86,6 +92,7 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
     favouritedTargets: PlotSearchTarget[]
   ): JSX.Element | null => {
     const isFavourited = favouritedTargets.some((t) => t.id === target.id);
+    const isHover = props.hoveredTargetId === target.id && zoomLevel <= 7;
     const position = getCentroid(target.plan_unit.geometry);
     if (position) {
       return (
@@ -94,9 +101,12 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
           icon={getMarkerIcon(
             props.categorySymbol,
             props.categoryIndex,
-            isFavourited
+            isFavourited,
+            isHover
           )}
           eventHandlers={{
+            mouseover: () => props.setHoveredTargetId(target.id),
+            mouseout: () => props.setHoveredTargetId(null),
             click: () => handleMarkerClick(target),
           }}
         />
@@ -111,9 +121,11 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
         <Fragment key={target.id}>
           {zoomLevel > 7 && (
             <GeoJSON
-              style={{ weight: 0 }}
+              style={{ weight: props.hoveredTargetId === target.id ? 3 : 0 }}
               data={target.plan_unit.geometry}
               eventHandlers={{
+                mouseover: () => props.setHoveredTargetId(target.id),
+                mouseout: () => props.setHoveredTargetId(null),
                 click: () => handleMarkerClick(target),
               }}
             />

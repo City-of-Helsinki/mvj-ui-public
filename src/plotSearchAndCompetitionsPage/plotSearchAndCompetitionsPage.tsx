@@ -74,6 +74,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     useState<CategoryVisibilities>({});
   const [categoryOptions, setCategoryOptions] = useState<CategoryOptions>([]);
   const [selectedTarget, setSelectedTarget] = useState<SelectedTarget>(null);
+  const [hoveredTargetId, setHoveredTargetId] = useState<number | null>(null);
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(true);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -178,6 +179,8 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
         isOpen={isSidebarOpen}
         toggle={setSidebarOpen}
         favourite={favourite}
+        hoveredTargetId={hoveredTargetId}
+        setHoveredTargetId={setHoveredTargetId}
       />
       <MapComponent
         categoryOptions={categoryOptions}
@@ -186,6 +189,8 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
         setSelectedTarget={onSelectTarget}
         selectedTarget={selectedTarget}
         favourite={favourite}
+        hoveredTargetId={hoveredTargetId}
+        setHoveredTargetId={setHoveredTargetId}
       />
     </div>
   );

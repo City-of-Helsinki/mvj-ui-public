@@ -41,6 +41,8 @@ interface MapSearchComponentAccordionProps {
   colorIndex?: number;
   onToggleVisibility?: (isVisible: boolean) => void;
   isVisible: boolean;
+  hoveredTargetId: number | null;
+  setHoveredTargetId: (id: number | null) => void;
 }
 
 const SIDEBAR_GUTTER_WIDTH = 5; // px
@@ -54,6 +56,8 @@ const MapSearchComponentAccordion = ({
   heading,
   symbol,
   colorIndex = 0,
+  hoveredTargetId,
+  setHoveredTargetId,
 }: MapSearchComponentAccordionProps): JSX.Element | null => {
   const { isOpen, buttonProps, contentProps } = useAccordion({ initiallyOpen });
 
@@ -114,6 +118,8 @@ interface MapSearchComponentProps {
   isOpen: boolean;
   toggle: (newValue: boolean) => void;
   favourite: Favourite;
+  hoveredTargetId: number | null;
+  setHoveredTargetId: (id: number | null) => void;
 }
 
 const MapSearchComponent = ({
@@ -127,6 +133,8 @@ const MapSearchComponent = ({
   favourite,
   isOpen,
   toggle,
+  hoveredTargetId,
+  setHoveredTargetId,
 }: MapSearchComponentProps): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -191,6 +199,8 @@ const MapSearchComponent = ({
               onToggleVisibility={(isVisible: boolean) =>
                 onToggleVisibility(item.category.id, isVisible)
               }
+              hoveredTargetId={hoveredTargetId}
+              setHoveredTargetId={setHoveredTargetId}
             >
               {item.category.subtypes.map((subtype) => {
                 const matchingPlotSearches = item.plotSearches.filter(
@@ -317,6 +327,10 @@ const MapSearchComponent = ({
                           <div role="list">
                             {section.targets.map((target) => (
                               <Row
+                                onMouseEnter={() =>
+                                  setHoveredTargetId(target.data.id)
+                                }
+                                onMouseLeave={() => setHoveredTargetId(null)}
                                 className={classNames(
                                   'MapSearchComponent__target',
                                   {
@@ -326,6 +340,10 @@ const MapSearchComponent = ({
                                           t.plot_search_target.id ===
                                           target.data.id
                                       ),
+                                  },
+                                  {
+                                    'MapSearchComponent__target--hover':
+                                      hoveredTargetId === target.data.id,
                                   }
                                 )}
                                 key={target.data.id}

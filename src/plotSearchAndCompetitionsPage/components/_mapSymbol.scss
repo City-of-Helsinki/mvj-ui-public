@@ -41,4 +41,9 @@
     right: -10px;
     top: -10px;
   }
+  &--hover {
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    margin-top: -2px;
+    margin-left: -2px;
+  }
 }
