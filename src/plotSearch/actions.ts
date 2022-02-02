@@ -16,8 +16,9 @@ import {
 } from './types';
 import { ApiAttributes } from '../api/types';
 
-export const fetchPlotSearches = (): Action<string> =>
-  createAction(FETCH_PLOT_SEARCHES)();
+export const fetchPlotSearches = (payload?: {
+  params: Record<string, string>;
+}): Action<string> => createAction(FETCH_PLOT_SEARCHES)(payload);
 
 export const receivePlotSearches = (
   payload: Array<PlotSearch>
