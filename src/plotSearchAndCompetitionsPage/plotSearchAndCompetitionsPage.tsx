@@ -31,7 +31,7 @@ interface State {
 }
 
 interface Props {
-  fetchPlotSearches: () => void;
+  fetchPlotSearches: (payload?: { params: Record<string, string> }) => void;
   fetchPlotSearchAttributes: () => void;
   fetchPlotSearchTypes: () => void;
   isFetchingPlotSearches: boolean;
@@ -75,7 +75,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(true);
 
   useEffect(() => {
-    fetchPlotSearches();
+    fetchPlotSearches({ params: { search_class: 'plot_search' } });
     fetchPlotSearchAttributes();
     fetchPlotSearchTypes();
   }, []);
