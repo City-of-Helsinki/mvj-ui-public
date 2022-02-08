@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from 'react';
-import { Button, Card, Link } from 'hds-react';
+import React, { useState } from 'react';
+import { Button, Card } from 'hds-react';
 import { Row, Col } from 'react-grid-system';
 import { IconCrossCircle, IconArrowDown, IconArrowUp } from 'hds-react';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,7 @@ import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import { getInfo } from '../utils';
 import { FavouriteCardDetails } from './favouriteCardDetails';
 import FavouriteCardMap from './favouriteCardMap';
+import InfoLinks from '../../plotSearchAndCompetitionsPage/components/infoLinks';
 
 interface Props {
   target: PlotSearchTarget;
@@ -16,7 +17,7 @@ interface Props {
 
 const FavouriteCard = (props: Props): JSX.Element => {
   const { target, remove, plotSearch } = props;
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [fullDescription, setFullDescription] = useState(false);
 
   const infoCols = getInfo(target, plotSearch as PlotSearch, t);
@@ -62,24 +63,13 @@ const FavouriteCard = (props: Props): JSX.Element => {
             ))}
             {fullDescription && target.info_links.length > 0 && (
               <Col className="FavouriteCard__links">
-                <h4>
+                <h3>
                   {t(
-                    'favouritesPage.targetCard.infoLinkHeader',
-                    'More information'
+                    'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
+                    'Details'
                   )}
-                </h4>
-                {target.info_links.map((link, index) => {
-                  if (link.language === i18n.language) {
-                    return (
-                      <Fragment key={link.id}>
-                        <Link href={link.url} openInNewTab size="M">
-                          {link.description}
-                        </Link>
-                        {index < target.info_links.length - 1 && <br />}
-                      </Fragment>
-                    );
-                  }
-                })}
+                </h3>
+                <InfoLinks target={target} />
               </Col>
             )}
           </Row>

@@ -3,6 +3,7 @@ import { Button, IconAngleLeft } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { PlanUnit, PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import { ApiAttributeChoice, ApiAttributes } from '../../api/types';
@@ -34,7 +35,7 @@ const MapSearchSingleTargetView = ({
   addFavouriteTarget,
   removeFavouriteTarget,
 }: Props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const LeftColumn = ({ children }: { children: ReactNode }): JSX.Element => (
     <Col xs={6} component="dt">
@@ -79,10 +80,6 @@ const MapSearchSingleTargetView = ({
     return null;
   }
   const { target, plotSearch } = selectedTarget;
-  const currentLanguageInfoLinks = target.info_links.filter(
-    (link) => link.language === i18n.language
-  );
-
   const isFavourited = favourite.targets.some(
     (t) => t.plot_search_target.id === target.id
   );
@@ -259,27 +256,13 @@ const MapSearchSingleTargetView = ({
           <RightColumn>{target.lease_management || '???'}</RightColumn>
         </Row>
       </dl>
-
-      {currentLanguageInfoLinks.length > 0 && (
-        <>
-          <h3>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
-              'Details'
-            )}
-          </h3>
-          <ul className="MapSearchSingleTargetView__info-links">
-            {currentLanguageInfoLinks.map((link) => (
-              <li key={link.id}>
-                <a href={link.url} target="_blank" rel="noreferrer">
-                  {link.description}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-
+      <h3>
+        {t(
+          'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
+          'Details'
+        )}
+      </h3>
+      <InfoLinks target={target} />
       <Button
         className="MapSearchSingleTargetView__next-button"
         onClick={() => handleApplyButton(target, plotSearch, isFavourited)}

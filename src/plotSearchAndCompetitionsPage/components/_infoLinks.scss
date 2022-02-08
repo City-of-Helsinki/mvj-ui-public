@@ -1,0 +1,11 @@
+.InfoLinks {
+  padding: 0;
+  margin: 0;
+
+  li {
+    list-style: none;
+    padding: ($spacing-s / 2) 0;
+    font-size: $fontsize-body-s;
+    font-weight: 500;
+  }
+}
