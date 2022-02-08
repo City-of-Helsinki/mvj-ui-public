@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Oidc, { User } from 'oidc-client';
+import { setConfiguration as setGridSystemConfiguration } from 'react-grid-system';
 
 import TopNavigation from './topNavigation/topNavigation';
 import Footer from './footer/footer';
@@ -11,6 +12,15 @@ import { fetchApiToken, receiveApiToken } from './auth/actions';
 import { fetchFavourite } from './favourites/actions';
 import GlobalNotificationContainer from './globalNotification/globalNotificationContainer';
 import { getIsFetchingFavourite } from './favourites/selectors';
+
+// https://hds.hel.fi/design-tokens/breakpoints
+// (container widths adjusted with gutters included)
+// TODO: gutter width should be 12/16 in smaller sizes, but isn't configurable on a size class basis
+setGridSystemConfiguration({
+  breakpoints: [320, 576, 768, 992, 1248],
+  containerWidths: [312, 568, 744, 968, 1224],
+  gutterWidth: 24,
+});
 
 import './main.scss';
 
