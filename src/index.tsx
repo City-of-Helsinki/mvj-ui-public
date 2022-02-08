@@ -9,29 +9,36 @@ import reportWebVitals from './reportWebVitals';
 import SiteRoutes from './root/routes';
 import { userManager } from './auth/userManager';
 import { MVJ_FAVOURITE } from './favourites/types';
+import { logError } from './root/helpers';
 
 const initialState = {};
 const store = configureStore(initialState);
 
 // save favourites into localstorage
 store.subscribe(() => {
-  const { favourite } = store.getState();
-  const checkList = ['created_at', 'modified_at', 'targets'];
-  const propertyNames = Object.getOwnPropertyNames(favourite.favourite);
+  try {
+    const { favourite } = store.getState();
+    const checkList = ['created_at', 'modified_at', 'targets'];
+    const propertyNames = Object.getOwnPropertyNames(favourite.favourite);
 
-  let checkIntegrity = true;
-  checkList.forEach((key) => {
-    if (propertyNames.some((fKey) => fKey === key)) {
-      return;
+    let checkIntegrity = true;
+    checkList.forEach((key) => {
+      if (propertyNames.some((fKey) => fKey === key)) {
+        return;
+      }
+      checkIntegrity = false;
+    });
+
+    if (!checkIntegrity) {
+      throw Error(
+        `Invalid object to save on mvj_favourite -localstorage item: ${favourite.favourite}`
+      );
     }
-    checkIntegrity = false;
-  });
 
-  if (!checkIntegrity) {
-    // console.error('Invalid favourite for localstorage', favourite);
-    return;
+    localStorage.setItem(MVJ_FAVOURITE, JSON.stringify(favourite.favourite));
+  } catch (e) {
+    logError(e);
   }
-  localStorage.setItem(MVJ_FAVOURITE, JSON.stringify(favourite.favourite));
 });
 
 ReactDOM.render(

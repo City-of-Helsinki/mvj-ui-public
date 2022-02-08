@@ -22,6 +22,7 @@ import {
 } from './actions';
 import { ApiCallResult } from '../api/callApi';
 import { ApiAttributes } from '../api/types';
+import { logError } from '../root/helpers';
 
 function* fetchPlotSearchesSaga({
   payload,
@@ -43,7 +44,7 @@ function* fetchPlotSearchesSaga({
         break;
     }
   } catch (e) {
-    // console.error(e);
+    logError(e);
     yield put(plotSearchesNotFound());
     throw e;
   }
@@ -70,7 +71,6 @@ function* fetchPlotSearchAttributesSaga(): Generator<
         break;
     }
   } catch (e) {
-    // console.error(e);
     yield put(plotSearchAttributesNotFound());
     throw e;
   }
@@ -91,7 +91,7 @@ function* fetchPlotSearchTypesSaga(): Generator<Effect, void, ApiCallResult> {
         break;
     }
   } catch (e) {
-    // console.error(e);
+    logError(e);
     yield put(plotSearchTypesNotFound());
     throw e;
   }

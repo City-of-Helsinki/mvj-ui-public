@@ -41,6 +41,7 @@ import { getApiToken } from '../auth/selectors';
 import { getFavourite } from './selectors';
 import { pushNotification } from '../globalNotification/actions';
 import { Notification } from '../globalNotification/types';
+import { logError } from '../root/helpers';
 
 function* fetchFavouriteSaga(): Generator<Effect, void, never> {
   try {
@@ -97,7 +98,7 @@ function* fetchFavouriteSaga(): Generator<Effect, void, never> {
     }
     yield put(favouriteNotFound());
   } catch (e) {
-    // console.error(e);
+    logError(e);
     yield put(favouriteFetchError());
     throw e;
   }
@@ -114,7 +115,7 @@ function* initializeFavouriteSaga(): Generator<Effect, void, ApiCallResult> {
         yield put(favouriteNotFound());
     }
   } catch (e) {
-    // console.error(e);
+    logError(e);
     yield put(favouriteFetchError());
     throw e;
   }
@@ -186,7 +187,7 @@ function* addFavouriteTargetSaga({
 
     yield put(updateFavourite({ apiToken, newFavourite, notification }));
   } catch (e) {
-    // console.error(e);
+    logError(e);
     yield put(favouriteFetchError());
   }
 }
@@ -224,7 +225,7 @@ function* removeFavouriteTargetSaga({
 
     yield put(updateFavourite({ apiToken, newFavourite, notification }));
   } catch (e) {
-    // console.error(e);
+    logError(e);
     yield put(favouriteFetchError());
   }
 }
