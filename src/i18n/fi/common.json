@@ -27,6 +27,7 @@
     "map": {
       "showOnMap": "Näytä kartalla"
     },
+    "nextButton": "Jatka hakemuksen täyttöön",
     "notification": {
       "body": "Löydät hakemukseen lisätyt tontit täältä. Voit palata tonttihakusivulle lisätäksesi uusia kohteita.",
       "link": "Palaa tonttihakusivulle",

@@ -27,6 +27,7 @@
     "map": {
       "showOnMap": "Show on map"
     },
+    "nextButton": "Apply for these plots",
     "notification": {
       "body": "<0>You can find all the selected targets here. You can return to plot search page to add more targets.</0>",
       "link": "Return to plot search page",
@@ -56,7 +57,7 @@
         "plot": "Plot"
       }
     },
-    "title": "You are attending to following plot searches"
+    "title": "You are applying for the following plot searches"
   },
   "footer": {
     "copyright": {

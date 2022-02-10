@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Favourite } from '../favourites/types';
-import { RootState } from '../root/rootReducer';
 import { connect } from 'react-redux';
 import { Col, Container, Row } from 'react-grid-system';
-import { removeFavouriteTarget } from '../favourites/actions';
 import { Trans, useTranslation } from 'react-i18next';
+import { Notification, Link, Button } from 'hds-react';
+import { useNavigate } from 'react-router-dom';
+
+import { Favourite } from '../favourites/types';
+import { RootState } from '../root/rootReducer';
+import { removeFavouriteTarget } from '../favourites/actions';
 import FavouriteCard from './components/favouriteCard';
 import { PlotSearch } from '../plotSearch/types';
 import { fetchPlotSearches } from '../plotSearch/actions';
 import BlockLoader from '../loader/blockLoader';
-import { Notification, Link } from 'hds-react';
+import { AppRoutes, getRouteById } from '../root/routes';
 
 interface State {
   favourite: Favourite;
@@ -27,6 +30,8 @@ interface Props {
 
 const FavouritesPage = (props: Props): JSX.Element => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const handleTargetRemove = (id: number): void => {
     props.removeFavouriteTarget(id);
   };
@@ -53,26 +58,29 @@ const FavouritesPage = (props: Props): JSX.Element => {
   return (
     <Container className="FavouritesPage">
       <Row>
-        {props.favourite.targets.length > 0 && (
-          <h1>
-            {t(
-              'favouritesPage.title',
-              'You are attending to following plot searches'
-            )}
-          </h1>
-        )}
+        <Col xs={12}>
+          {props.favourite.targets.length > 0 && (
+            <h1>
+              {t(
+                'favouritesPage.title',
+                'You are applying for the following plot searches'
+              )}
+            </h1>
+          )}
+        </Col>
       </Row>
       <Row>
         {props.isFetchingPlotSearches ? (
           <BlockLoader />
         ) : (
           props.favourite.targets.map((target) => (
-            <FavouriteCard
-              plotSearch={plotSearch}
-              key={target.plot_search_target.id}
-              target={target.plot_search_target}
-              remove={handleTargetRemove}
-            />
+            <Col xs={12} key={target.plot_search_target.id}>
+              <FavouriteCard
+                plotSearch={plotSearch}
+                target={target.plot_search_target}
+                remove={handleTargetRemove}
+              />
+            </Col>
           ))
         )}
       </Row>
@@ -93,7 +101,10 @@ const FavouritesPage = (props: Props): JSX.Element => {
               </p>
             </Trans>
             <p>
-              <Link href="/tonttihaut-ja-kilpailut" size="M">
+              <Link
+                href={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
+                size="M"
+              >
                 {t(
                   'favouritesPage.notification.link',
                   'Return to plot search page'
@@ -101,6 +112,15 @@ const FavouritesPage = (props: Props): JSX.Element => {
               </Link>
             </p>
           </Notification>
+        </Col>
+      </Row>
+      <Row className="FavouritesPage__actions">
+        <Col xs={12}>
+          <Button
+            onClick={() => navigate(getRouteById(AppRoutes.APPLICATION_FORM))}
+          >
+            {t('favouritesPage.nextButton', 'Apply for these plots')}
+          </Button>
         </Col>
       </Row>
     </Container>

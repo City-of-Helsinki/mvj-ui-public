@@ -27,6 +27,7 @@
     "map": {
       "showOnMap": ""
     },
+    "nextButton": "",
     "notification": {
       "body": "",
       "link": "",
