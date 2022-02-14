@@ -7,7 +7,7 @@ import ApplicationFieldsetHelperText from './applicationFieldsetHelperText';
 const ApplicationCheckboxFieldset = (
   props: FieldRendererProps
 ): JSX.Element => {
-  const { field, id, input, meta, setValue } = props;
+  const { field, id, input, meta, setValues } = props;
 
   return (
     <div className="ApplicationCheckboxFieldset">
@@ -25,13 +25,19 @@ const ApplicationCheckboxFieldset = (
                 checked={input.value?.value?.includes(option.value)}
                 onChange={(event) => {
                   if (event.target.checked) {
-                    setValue([...(input?.value?.value || []), option.value]);
+                    setValues({
+                      value: [...(input?.value?.value || []), option.value],
+                    });
                   } else {
-                    setValue(
-                      (input?.value?.value || []).filter(
+                    setValues({
+                      value: (input.value?.value || []).filter(
                         (v: string | number) => v !== option.value
-                      )
-                    );
+                      ),
+                      // If the item in control of the extra value was unselected, clear that value as well.
+                      extraValue: option.has_text_input
+                        ? ''
+                        : input.value?.extraValue,
+                    });
                   }
                 }}
                 label={option.text}
@@ -57,7 +63,7 @@ const ApplicationCheckboxFieldset = (
             required={field.required}
             errorText={meta.error}
             label={field.label}
-            onChange={(e) => setValue(e.target.checked)}
+            onChange={(e) => setValues({ value: e.target.checked })}
           />
           <ApplicationFieldsetHelperText>
             {field.hint_text}

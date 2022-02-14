@@ -33,8 +33,10 @@ export type FieldValue =
 export type FieldRendererProps = WrappedFieldProps & {
   id: string;
   field: FormField;
-  setValue: (value: FieldValue) => void;
-  setExtraValue: (value: FieldValue) => void;
+  setValues: (newValues: {
+    value?: FieldValue;
+    extraValue?: FieldValue;
+  }) => void;
   fieldType: SupportedFieldTypes | null;
 };
 

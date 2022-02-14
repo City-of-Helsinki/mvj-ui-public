@@ -11,7 +11,7 @@ const ApplicationExtraTextField = ({
   parentId,
   input,
   meta,
-  setExtraValue,
+  setValues,
   disabled,
 }: Omit<FieldRendererProps, 'id'> & ExtraTextFieldProps): JSX.Element => {
   return (
@@ -19,7 +19,7 @@ const ApplicationExtraTextField = ({
       <TextInput
         id={`${parentId}_extra`}
         value={input.value.extraValue}
-        onChange={(e) => setExtraValue(e.target.value)}
+        onChange={(e) => setValues({ extraValue: e.target.value })}
         invalid={meta.invalid}
         required
         errorText={meta.error}

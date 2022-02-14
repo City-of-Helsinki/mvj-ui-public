@@ -8,7 +8,7 @@ import classNames from 'classnames';
 const ApplicationRadioButtonFieldset = (
   props: FieldRendererProps
 ): JSX.Element => {
-  const { id, input, field, fieldType, setValue } = props;
+  const { id, input, field, fieldType, setValues } = props;
 
   const orientation =
     fieldType === SupportedFieldTypes.RadioButtonInline
@@ -31,7 +31,15 @@ const ApplicationRadioButtonFieldset = (
               id={`ApplicationRadiobuttonFieldSet_${id}_${index}`}
               checked={input.value.value === option.value}
               value={input.value.value}
-              onChange={() => setValue(option.value)}
+              onChange={() =>
+                setValues({
+                  value: option.value,
+                  extraValue:
+                    input.value.value !== option.value
+                      ? ''
+                      : input.value.extraValue,
+                })
+              }
               required={field.required}
               label={option.text}
             />

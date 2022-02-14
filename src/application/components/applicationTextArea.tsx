@@ -7,14 +7,14 @@ const ApplicationTextArea = ({
   input,
   field,
   meta,
-  setValue,
+  setValues,
 }: FieldRendererProps): JSX.Element => {
   return (
     <div className="ApplicationTextArea">
       <TextArea
         id={id}
         value={input.value.value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setValues({ value: e.target.value })}
         invalid={meta.invalid}
         required={field.required}
         errorText={meta.error}

@@ -45,17 +45,13 @@ const ApplicationFormField = ({
   innerComponent: Component,
   ...props
 }: ApplicationFormFieldProps & WrappedFieldProps) => {
-  const setValue = (newValue: FieldValue) => {
+  const setValues = (newValues: {
+    value?: FieldValue;
+    extraValue?: FieldValue;
+  }) => {
     input.onChange({
       ...input.value,
-      value: newValue,
-    });
-  };
-
-  const setExtraValue = (newValue: FieldValue) => {
-    input.onChange({
-      ...input.value,
-      extraValue: newValue,
+      ...newValues,
     });
   };
 
@@ -65,8 +61,7 @@ const ApplicationFormField = ({
         id={field.id.toString()}
         field={field}
         input={input}
-        setValue={setValue}
-        setExtraValue={setExtraValue}
+        setValues={setValues}
         fieldType={fieldType}
         {...props}
       />

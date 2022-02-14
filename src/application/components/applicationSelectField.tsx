@@ -7,7 +7,7 @@ const ApplicationSelectField = ({
   input,
   id,
   meta,
-  setValue,
+  setValues,
 }: FieldRendererProps): JSX.Element => {
   type OptionType = {
     label: string;
@@ -27,7 +27,9 @@ const ApplicationSelectField = ({
       <Select<OptionType>
         id={id}
         value={currentOption}
-        onChange={(newValue: OptionType) => setValue(newValue.value)}
+        onChange={(newValue: OptionType) =>
+          setValues({ value: newValue.value })
+        }
         invalid={meta.invalid}
         required={field.required}
         clearable={!field.required}
