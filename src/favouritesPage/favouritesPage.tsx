@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-grid-system';
 import { Trans, useTranslation } from 'react-i18next';
 import { Notification, Link, Button } from 'hds-react';
 import { useNavigate } from 'react-router-dom';
+import { User } from 'oidc-client';
 
 import { Favourite } from '../favourites/types';
 import { RootState } from '../root/rootReducer';
@@ -13,11 +14,15 @@ import { PlotSearch } from '../plotSearch/types';
 import { fetchPlotSearches } from '../plotSearch/actions';
 import BlockLoader from '../loader/blockLoader';
 import { AppRoutes, getRouteById } from '../root/routes';
+import { getIsLoadingUser, getUser } from '../auth/selectors';
+import { openLoginModal } from '../login/actions';
 
 interface State {
   favourite: Favourite;
   plotSearches: PlotSearch[];
   isFetchingPlotSearches: boolean;
+  user: User | null;
+  isLoadingUser: boolean;
 }
 
 interface Props {
@@ -26,6 +31,9 @@ interface Props {
   removeFavouriteTarget: (id: number) => void;
   fetchPlotSearches: () => void;
   isFetchingPlotSearches: boolean;
+  user: User | null;
+  isLoadingUser: boolean;
+  openLoginModal: () => void;
 }
 
 const FavouritesPage = (props: Props): JSX.Element => {
@@ -34,6 +42,14 @@ const FavouritesPage = (props: Props): JSX.Element => {
 
   const handleTargetRemove = (id: number): void => {
     props.removeFavouriteTarget(id);
+  };
+
+  const navigateToApplication = () => {
+    if (props.user) {
+      navigate(getRouteById(AppRoutes.APPLICATION_FORM));
+    } else {
+      props.openLoginModal();
+    }
   };
 
   const [plotSearch, setPlotSearch] = useState<PlotSearch | null>(null);
@@ -117,7 +133,8 @@ const FavouritesPage = (props: Props): JSX.Element => {
       <Row className="FavouritesPage__actions">
         <Col xs={12}>
           <Button
-            onClick={() => navigate(getRouteById(AppRoutes.APPLICATION_FORM))}
+            onClick={() => navigateToApplication()}
+            disabled={props.isLoadingUser}
           >
             {t('favouritesPage.nextButton', 'Apply for these plots')}
           </Button>
@@ -131,9 +148,12 @@ const mapStateToProps = (state: RootState): State => ({
   favourite: state.favourite.favourite,
   plotSearches: state.plotSearch.plotSearches,
   isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,
+  user: getUser(state),
+  isLoadingUser: getIsLoadingUser(state),
 });
 
 export default connect(mapStateToProps, {
   fetchPlotSearches,
   removeFavouriteTarget,
+  openLoginModal,
 })(FavouritesPage);

@@ -6,9 +6,11 @@
     },
     "error": {
       "noFormAvailable": "",
-      "noPlotsSelected": ""
+      "noPlotsSelected": "",
+      "notLoggedIn": ""
     },
     "heading": "",
+    "loginButton": "",
     "targets": {
       "identifier": "",
       "screenReaderHeading": ""

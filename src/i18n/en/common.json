@@ -6,9 +6,11 @@
     },
     "error": {
       "noFormAvailable": "No application form has been specified for the plots you have selected yet. Please be in contact and we'll look into it.",
-      "noPlotsSelected": "To submit a plot application, you have to pick plots on the plot searches page first."
+      "noPlotsSelected": "To submit a plot application, you have to pick plots on the plot searches page first.",
+      "notLoggedIn": "Please log in first in order to apply for plots."
     },
     "heading": "Plot application",
+    "loginButton": "Log in",
     "targets": {
       "identifier": "Plot",
       "screenReaderHeading": "Selected plots:"
