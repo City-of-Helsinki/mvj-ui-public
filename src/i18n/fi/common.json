@@ -1,4 +1,21 @@
 {
+  "application": {
+    "arraySection": {
+      "genericAddNew": "Lisää uusi",
+      "remove": "Poista"
+    },
+    "error": {
+      "noFormAvailable": "Valitsemillesi tonteille ei ole vielä määritetty hakulomaketta. Ota yhteyttä ja korjaamme tilanteen.",
+      "noPlotsSelected": "Voit täyttää tonttihakemuksen valittuasi ensin tonttihakusivulta yhden tai useamman haettavan kohteen.",
+      "notLoggedIn": "Kirjaudu ensin sisään hakeaksesi tontteja."
+    },
+    "heading": "Tonttihakemus",
+    "loginButton": "Kirjaudu sisään",
+    "targets": {
+      "identifier": "Tontti",
+      "screenReaderHeading": "Haettavat tontit"
+    }
+  },
   "error": {
     "pageNotFound": "404 Sivua ei löytynyt"
   },
@@ -12,6 +29,7 @@
     "map": {
       "showOnMap": "Näytä kartalla"
     },
+    "nextButton": "Jatka hakemuksen täyttöön",
     "notification": {
       "body": "Löydät hakemukseen lisätyt tontit täältä. Voit palata tonttihakusivulle lisätäksesi uusia kohteita.",
       "link": "Palaa tonttihakusivulle",

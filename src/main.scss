@@ -25,6 +25,12 @@
 @import 'favouritesPage/components/favouriteCardMap';
 @import 'loader/blockLoader';
 @import 'globalNotification/globalNotificationContainer';
+@import 'application/applicationPage';
+@import 'application/components/applicationFormSubsection';
+@import 'application/components/applicationFieldsetHelperText';
+@import 'application/components/applicationCheckboxFieldset';
+@import 'application/components/applicationRadioButtonFieldset';
+@import 'a11y/screenReaderText';
 
 html {
   -webkit-font-smoothing: antialiased;

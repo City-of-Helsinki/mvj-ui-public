@@ -1,4 +1,21 @@
 {
+  "application": {
+    "arraySection": {
+      "genericAddNew": "",
+      "remove": ""
+    },
+    "error": {
+      "noFormAvailable": "",
+      "noPlotsSelected": "",
+      "notLoggedIn": ""
+    },
+    "heading": "",
+    "loginButton": "",
+    "targets": {
+      "identifier": "",
+      "screenReaderHeading": ""
+    }
+  },
   "error": {
     "pageNotFound": ""
   },
@@ -12,6 +29,7 @@
     "map": {
       "showOnMap": ""
     },
+    "nextButton": "",
     "notification": {
       "body": "",
       "link": "",

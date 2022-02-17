@@ -1,0 +1,10 @@
+@mixin applicationFieldset($name) {
+  .#{$name} {
+    .#{$name}__option {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: $spacing-s;
+    }
+  }
+}
