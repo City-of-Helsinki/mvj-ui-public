@@ -11,6 +11,7 @@ import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
 import ApplicationPage from '../application/applicationPage';
 import ApplicationRootPage from '../application/applicationRootPage';
+import ApplicationSuccessPage from '../application/applicationSuccessPage';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -62,7 +63,9 @@ export const getPartialRouteById = (id: string, parentId: string): string => {
   const parent = getRouteById(parentId);
 
   if (!target.startsWith(parent)) {
-    throw new Error(`Invalid route nesting pattern! ${target} is not a subroute of ${parent}.`);
+    throw new Error(
+      `Invalid route nesting pattern! ${target} is not a subroute of ${parent}.`
+    );
   }
 
   return target.slice(parent.length);
@@ -155,6 +158,13 @@ const SiteRoutes = (): JSX.Element => {
                       AppRoutes.APPLICATION_ROOT
                     )}
                     element={<ApplicationPage />}
+                  />
+                  <Route
+                    path={getPartialRouteById(
+                      AppRoutes.APPLICATION_SUBMIT,
+                      AppRoutes.APPLICATION_ROOT
+                    )}
+                    element={<ApplicationSuccessPage />}
                   />
                   <Route path="*" element={<ErrorPage />} />
                 </Routes>

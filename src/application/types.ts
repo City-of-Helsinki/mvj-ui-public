@@ -45,6 +45,12 @@ export enum ApplicationSectionKeys {
   Fields = 'fields',
 }
 
+export type ApplicationSubmission = {
+  targets: Array<number>;
+  form: number;
+  entries: NestedField;
+};
+
 export const FETCH_FORM_ATTRIBUTES = 'application/FETCH_FORM_ATTRIBUTES';
 export interface FetchFormAttributesAction {
   type: typeof FETCH_FORM_ATTRIBUTES;
@@ -60,6 +66,31 @@ export const FORM_ATTRIBUTES_NOT_FOUND =
   'application/FORM_ATTRIBUTES_NOT_FOUND';
 export interface FormAttributesNotFoundAction {
   type: typeof FORM_ATTRIBUTES_NOT_FOUND;
+}
+
+export const SUBMIT_APPLICATION = 'application/SUBMIT_APPLICATION';
+export interface SubmitApplicationAction {
+  type: typeof SUBMIT_APPLICATION;
+  payload: ApplicationSubmission;
+}
+
+export const RECEIVE_APPLICATION_SAVED =
+  'application/RECEIVE_APPLICATION_SAVED';
+export interface ReceiveApplicationSavedAction {
+  type: typeof RECEIVE_APPLICATION_SAVED;
+  payload: number;
+}
+export const APPLICATION_SUBMISSION_FAILED =
+  'application/APPLICATION_SUBMISSION_FAILED';
+export interface ApplicationSubmissionFailedAction {
+  type: typeof APPLICATION_SUBMISSION_FAILED;
+  payload: Error;
+}
+
+export const RESET_LAST_APPLICATION_SUBMISSION_ERROR =
+  'application/RESET_LAST_APPLICATION_SUBMISSION_ERROR';
+export interface ResetLastApplicationSubmissionErrorAction {
+  type: typeof RESET_LAST_APPLICATION_SUBMISSION_ERROR;
 }
 
 export const APPLICATION_FORM_NAME = 'application';

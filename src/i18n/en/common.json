@@ -5,12 +5,20 @@
       "remove": "Remove"
     },
     "error": {
+      "generic": "The application could not be submitted correctly. Please try again later.",
+      "label": "Submission error",
       "noFormAvailable": "No application form has been specified for the plots you have selected yet. Please be in contact and we'll look into it.",
       "noPlotsSelected": "To submit a plot application, you have to pick plots on the plot searches page first.",
       "notLoggedIn": "Please log in first in order to apply for plots."
     },
     "heading": "Plot application",
     "loginButton": "Log in",
+    "submit": "Submit application",
+    "submitInProcess": "Submitting...",
+    "success": {
+      "body": "Your application has been received.",
+      "heading": "Thank you for your application"
+    },
     "targets": {
       "identifier": "Plot",
       "screenReaderHeading": "Selected plots:"
@@ -36,7 +44,6 @@
       "title": "Do you want to search for more targets?"
     },
     "targetCard": {
-      "infoLinkHeader": "More information",
       "removeButton": "Remove from list",
       "showFullDesc": {
         "hide": "Hide additional details",

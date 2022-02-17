@@ -13,6 +13,7 @@ import {
   INITIALIZE_FAVOURITE,
   UpdateFavouritePayload,
   UPDATE_FAVOURITE,
+  CLEAR_FAVOURITE,
 } from './types';
 
 export const fetchFavourite = (): Action => createAction(FETCH_FAVOURITE)();
@@ -28,6 +29,9 @@ export const addFavouriteTarget = (payload: AddTargetPayload): Action<string> =>
 
 export const removeFavouriteTarget = (payload: number): Action<string> =>
   createAction(REMOVE_FAVOURITE_TARGET)(payload);
+
+export const clearFavourite = (): Action<string> =>
+  createAction(CLEAR_FAVOURITE)();
 
 export const favouriteNotFound = (): Action<string> =>
   createAction(FAVOURITE_NOT_FOUND)();

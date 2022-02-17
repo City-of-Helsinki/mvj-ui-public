@@ -8,6 +8,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import {
+  deleteFavouriteRequest,
   fetchFavouriteRequest,
   initializeFavouriteRequest,
   updateFavouriteRequest,
@@ -26,6 +27,7 @@ import {
   UpdateFavouriteAction,
   UPDATE_FAVOURITE,
   MVJ_FAVOURITE,
+  CLEAR_FAVOURITE,
 } from './types';
 
 import {
@@ -230,6 +232,32 @@ function* removeFavouriteTargetSaga({
   }
 }
 
+function* clearFavouriteSaga(): Generator<Effect, void, never> {
+  try {
+    const oldFavourite: Favourite = yield select(getFavourite);
+
+    if (oldFavourite?.id) {
+      yield call(deleteFavouriteRequest, oldFavourite.id);
+    }
+
+    const { response, bodyAsJson }: ApiCallResult = yield call(
+      initializeFavouriteRequest,
+      false
+    );
+
+    switch (response.status) {
+      case 200:
+      case 201:
+        yield put(receiveFavourite(bodyAsJson));
+        break;
+      default:
+        yield put(favouriteNotFound());
+    }
+  } catch (e) {
+    yield put(favouriteNotFound());
+  }
+}
+
 export default function* favouriteSaga(): Generator {
   yield all([
     fork(function* (): Generator {
@@ -238,6 +266,7 @@ export default function* favouriteSaga(): Generator {
       yield takeLatest(REMOVE_FAVOURITE_TARGET, removeFavouriteTargetSaga);
       yield takeLatest(ADD_FAVOURITE_TARGET, addFavouriteTargetSaga);
       yield takeLatest(UPDATE_FAVOURITE, updateFavouriteSaga);
+      yield takeLatest(CLEAR_FAVOURITE, clearFavouriteSaga);
     }),
   ]);
 }

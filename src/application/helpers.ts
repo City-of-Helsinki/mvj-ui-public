@@ -3,22 +3,17 @@ import { formValueSelector } from 'redux-form';
 import { RootState } from '../root/rootReducer';
 import {
   APPLICATION_FORM_NAME,
+  ApplicationSubmission,
   NestedField,
   SupportedFieldTypes,
 } from './types';
 import { FormField, FormSection } from '../plotSearch/types';
 import { getFieldTypeMapping } from './selectors';
 import { store } from '../index';
+import { getPlotSearchFromFavourites } from '../favourites/helpers';
 
 export const getInitialApplicationForm = (state: RootState): NestedField => {
-  if (!state.favourite.favourite?.targets[0]?.plot_search) {
-    return {};
-  }
-
-  const plotSearch = state.plotSearch.plotSearches.find(
-    (plotSearch) =>
-      plotSearch.id === state.favourite.favourite?.targets[0]?.plot_search
-  );
+  const plotSearch = getPlotSearchFromFavourites(state);
 
   if (!plotSearch) {
     return {};
@@ -66,7 +61,7 @@ export const getInitialApplicationForm = (state: RootState): NestedField => {
       case SupportedFieldTypes.RadioButton:
       case SupportedFieldTypes.RadioButtonInline:
         initialValue = {
-          value: null,
+          value: '', //null,
           extraValue: '',
         };
         break;
@@ -111,4 +106,26 @@ export const getSectionTemplate = (identifier: string): NestedField => {
   );
 
   return templates[identifier] || {};
+};
+
+export const prepareApplicationForSubmission = (): ApplicationSubmission => {
+  const state: RootState = store.getState();
+  const sections = formValueSelector(APPLICATION_FORM_NAME)(state, 'sections');
+
+  const favourite = state.favourite.favourite;
+  const relevantPlotSearch = getPlotSearchFromFavourites(state);
+
+  if (!relevantPlotSearch || !relevantPlotSearch.form) {
+    throw new Error(
+      'Cannot submit an application to targets without an associated form!'
+    );
+  }
+
+  return {
+    form: relevantPlotSearch.form.id,
+    entries: {
+      sections,
+    },
+    targets: favourite.targets.map((target) => target.plot_search_target.id),
+  };
 };

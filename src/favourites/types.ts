@@ -24,6 +24,13 @@ export const ADD_FAVOURITE_TARGET = 'favourite/ADD_FAVOURITE_TARGET';
 export const REMOVE_FAVOURITE_TARGET = 'favourite/REMOVE_FAVOURITE_TARGET';
 export const INITIALIZE_FAVOURITE = 'favourite/INITIALIZE_FAVOURITE';
 export const UPDATE_FAVOURITE = 'favourite/UPDATE_FAVOURITE';
+export const CLEAR_FAVOURITE = 'favourite/CLEAR_FAVOURITE';
+
+export const DEFAULT_FAVOURITE: Favourite = {
+  modified_at: null,
+  created_at: null,
+  targets: [],
+};
 
 export interface AddTargetPayload {
   target: FavouriteTarget;
@@ -61,4 +68,8 @@ export interface AddFavouriteTargetAction {
 export interface RemoveFavouriteTargetAction {
   type: typeof REMOVE_FAVOURITE_TARGET;
   payload: number;
+}
+
+export interface ClearFavouriteAction {
+  type: typeof CLEAR_FAVOURITE;
 }

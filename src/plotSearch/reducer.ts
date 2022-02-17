@@ -3,6 +3,7 @@ import {
   FETCH_PLOT_SEARCH_ATTRIBUTES,
   FETCH_PLOT_SEARCH_TYPES,
   FETCH_PLOT_SEARCHES,
+  PLOT_SEARCHES_NOT_FOUND,
   PlotSearch,
   PlotSearchType,
   RECEIVE_PLOT_SEARCH_ATTRIBUTES,
@@ -46,6 +47,9 @@ const plotSearchSlice = createSlice({
     },
     [FETCH_PLOT_SEARCHES]: (state) => {
       state.isFetchingPlotSearches = true;
+    },
+    [PLOT_SEARCHES_NOT_FOUND]: (state) => {
+      state.isFetchingPlotSearches = false;
     },
     [RECEIVE_PLOT_SEARCH_ATTRIBUTES]: (
       state,

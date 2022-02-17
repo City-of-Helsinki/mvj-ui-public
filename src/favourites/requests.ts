@@ -11,17 +11,16 @@ export const fetchFavouriteRequest = (): Generator<
   return callApi(new Request(createUrl('favourite/')));
 };
 
-export const initializeFavouriteRequest = (): Generator<
-  Effect,
-  ApiCallResult,
-  Response
-> => {
+export const initializeFavouriteRequest = (
+  useLocalStorage = true
+): Generator<Effect, ApiCallResult, Response> => {
   const favouriteFromLs = localStorage.getItem(MVJ_FAVOURITE);
-  const body: Favourite = favouriteFromLs
-    ? JSON.parse(favouriteFromLs)
-    : {
-        targets: [],
-      };
+  const body: Favourite =
+    !!favouriteFromLs && useLocalStorage
+      ? JSON.parse(favouriteFromLs)
+      : {
+          targets: [],
+        };
   const request = new Request(createUrl('favourite/'), {
     method: 'POST',
     body: JSON.stringify(body),
@@ -39,6 +38,15 @@ export const updateFavouriteRequest = (
   const request = new Request(createUrl(`favourite/${payload.id}/`), {
     method: 'PATCH',
     body: JSON.stringify(payload),
+  });
+  return callApi(request);
+};
+
+export const deleteFavouriteRequest = (
+  id: number
+): Generator<Effect, ApiCallResult, Response> => {
+  const request = new Request(createUrl(`favourite/${id}/`), {
+    method: 'DELETE',
   });
   return callApi(request);
 };
