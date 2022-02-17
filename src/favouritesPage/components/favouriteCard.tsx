@@ -7,6 +7,7 @@ import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import { getInfo } from '../utils';
 import { FavouriteCardDetails } from './favouriteCardDetails';
 import FavouriteCardMap from './favouriteCardMap';
+import InfoLinks from '../../plotSearchAndCompetitionsPage/components/infoLinks';
 
 interface Props {
   target: PlotSearchTarget;
@@ -60,9 +61,20 @@ const FavouriteCard = (props: Props): JSX.Element => {
                 fullDesc={fullDescription}
               />
             ))}
+            {fullDescription && target.info_links.length > 0 && (
+              <Col className="FavouriteCard__links">
+                <h3>
+                  {t(
+                    'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
+                    'Details'
+                  )}
+                </h3>
+                <InfoLinks target={target} />
+              </Col>
+            )}
           </Row>
           <Row>
-            {/* Bottom row with "more info" -action */}
+            {/* Bottom row with "see on plotsearch page" & "more info" -action */}
             <Col>
               <Button
                 className="FavouriteCard__action-button"

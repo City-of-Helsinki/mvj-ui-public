@@ -13,9 +13,13 @@ export const getInfo = (
   plotSearch: PlotSearch,
   t: TFunction
 ): Info[] => {
+  let endAt = '-';
+  if (plotSearch && plotSearch.end_at) {
+    endAt = renderDateTime(new Date(plotSearch.end_at));
+  }
   return [
     {
-      value: renderDateTime(new Date(plotSearch?.end_at as string)),
+      value: endAt,
       key: t('favouritesPage.targetCard.table.applyByDate', 'Apply by'),
       fullDescOnly: true,
     },

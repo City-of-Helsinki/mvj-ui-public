@@ -3,6 +3,7 @@ import { Button, IconAngleLeft } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { PlanUnit, PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import { ApiAttributeChoice, ApiAttributes } from '../../api/types';
@@ -12,7 +13,8 @@ import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
 import { defaultLanguage } from '../../i18n';
 import { renderDateTime } from '../../i18n/utils';
 import { AddTargetPayload, Favourite } from '../../favourites/types';
-import { useGlobalNotifications } from '../../globalNotification/globalNotificationProvider';
+import InfoLinks from './infoLinks';
+import { AppRoutes, getRouteById } from '../../root/routes';
 
 interface State {
   plotSearchAttributes: ApiAttributes;
@@ -21,7 +23,6 @@ interface State {
 interface Props {
   plotSearchAttributes: ApiAttributes;
   selectedTarget: SelectedTarget;
-  setSelectedTarget: (target: SelectedTarget) => void;
   favourite: Favourite;
   addFavouriteTarget: (payload: AddTargetPayload) => void;
   removeFavouriteTarget: (payload: number) => void;
@@ -30,13 +31,12 @@ interface Props {
 const MapSearchSingleTargetView = ({
   plotSearchAttributes,
   selectedTarget,
-  setSelectedTarget,
   favourite,
   addFavouriteTarget,
   removeFavouriteTarget,
 }: Props) => {
-  const { t, i18n } = useTranslation();
-  const notifications = useGlobalNotifications();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const LeftColumn = ({ children }: { children: ReactNode }): JSX.Element => (
     <Col xs={6} component="dt">
       {children}
@@ -65,18 +65,6 @@ const MapSearchSingleTargetView = ({
   ): void => {
     if (isFavourited) {
       removeFavouriteTarget(target.id);
-      notifications.pushNotification({
-        type: 'alert',
-        id: 'remove_' + target.id.toString(),
-        icon: true,
-        body: t(
-          'plotSearchAndCompetitions.mapView.sidebar.singleTarget.removeTarget',
-          'Target "{{address}}" removed from application.',
-          {
-            address: target.lease_address.address,
-          }
-        ),
-      });
       return;
     }
     const payLoad = {
@@ -86,29 +74,12 @@ const MapSearchSingleTargetView = ({
       },
     } as AddTargetPayload;
     addFavouriteTarget(payLoad);
-
-    notifications.pushNotification({
-      type: 'success',
-      id: 'add_' + target.id.toString(),
-      icon: true,
-      body: t(
-        'plotSearchAndCompetitions.mapView.sidebar.singleTarget.addTarget',
-        'Target "{{address}}" added into application.',
-        {
-          address: target.lease_address.address,
-        }
-      ),
-    });
   };
 
   if (!selectedTarget) {
     return null;
   }
   const { target, plotSearch } = selectedTarget;
-  const currentLanguageInfoLinks = target.info_links.filter(
-    (link) => link.language === i18n.language
-  );
-
   const isFavourited = favourite.targets.some(
     (t) => t.plot_search_target.id === target.id
   );
@@ -116,7 +87,9 @@ const MapSearchSingleTargetView = ({
   return (
     <div className="MapSearchSingleTargetView">
       <Button
-        onClick={() => setSelectedTarget(null)}
+        onClick={() =>
+          navigate(getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS))
+        }
         variant="secondary"
         size="small"
         iconLeft={<IconAngleLeft />}
@@ -283,31 +256,17 @@ const MapSearchSingleTargetView = ({
           <RightColumn>{target.lease_management || '???'}</RightColumn>
         </Row>
       </dl>
-
-      {currentLanguageInfoLinks.length > 0 && (
-        <>
-          <h3>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
-              'Details'
-            )}
-          </h3>
-          <ul className="MapSearchSingleTargetView__info-links">
-            {currentLanguageInfoLinks.map((link) => (
-              <li key={link.id}>
-                <a href={link.url} target="_blank" rel="noreferrer">
-                  {link.description}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-
+      <h3>
+        {t(
+          'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
+          'Details'
+        )}
+      </h3>
+      <InfoLinks target={target} />
       <Button
         className="MapSearchSingleTargetView__next-button"
         onClick={() => handleApplyButton(target, plotSearch, isFavourited)}
-        variant={isFavourited ? 'danger' : 'success'}
+        variant={isFavourited ? 'secondary' : 'primary'}
       >
         {isFavourited
           ? t(

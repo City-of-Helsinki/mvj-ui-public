@@ -2,13 +2,23 @@
   "error": {
     "pageNotFound": "404 Sivua ei löytynyt"
   },
+  "favourites": {
+    "saga": {
+      "addTarget": "Kohde \"{{address}}\" lisätty hakemukseen.",
+      "removeTarget": "Kohde \"{{address}}\" poistettu hakemuksesta."
+    }
+  },
   "favouritesPage": {
+    "map": {
+      "showOnMap": "Näytä kartalla"
+    },
     "notification": {
       "body": "Löydät hakemukseen lisätyt tontit täältä. Voit palata tonttihakusivulle lisätäksesi uusia kohteita.",
       "link": "Palaa tonttihakusivulle",
       "title": "Haluatko hakea lisää tontteja?"
     },
     "targetCard": {
+      "infoLinkHeader": "Lisätietoja",
       "removeButton": "Poista listalta",
       "showFullDesc": {
         "hide": "Piilota kohteen tarkemmat tiedot",
@@ -114,7 +124,6 @@
         "sectionApplyBy": "Hakuaika päättyy {{date}}",
         "singleTarget": {
           "address": "Osoite",
-          "addTarget": "Kohde \"{{address}}\" lisätty hakemukseen.",
           "applyButton": "Hae kohdetta",
           "applyByDate": "Hakuaika päättyy",
           "area": "Pinta-ala (m²)",
@@ -131,7 +140,6 @@
           "permittedBuildAreaResidential": "Asuinrakennusoikeus (k-m²)",
           "plotNumber": "Tontti",
           "removeButton": "Poista kohde hakemuksesta",
-          "removeTarget": "Kohde \"{{address}}\" poistettu hakemuksesta.",
           "returnToList": "Takaisin"
         },
         "targetHeadings": {

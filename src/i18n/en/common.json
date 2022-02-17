@@ -2,13 +2,23 @@
   "error": {
     "pageNotFound": "404 Page not found"
   },
+  "favourites": {
+    "saga": {
+      "addTarget": "Target \"{{address}}\" added to application.",
+      "removeTarget": "Target \"{{address}}\" removed from application."
+    }
+  },
   "favouritesPage": {
+    "map": {
+      "showOnMap": "Show on map"
+    },
     "notification": {
       "body": "<0>You can find all the selected targets here. You can return to plot search page to add more targets.</0>",
       "link": "Return to plot search page",
       "title": "Do you want to search for more targets?"
     },
     "targetCard": {
+      "infoLinkHeader": "More information",
       "removeButton": "Remove from list",
       "showFullDesc": {
         "hide": "Hide additional details",
@@ -114,7 +124,6 @@
         "sectionApplyBy": "Apply by {{date}}",
         "singleTarget": {
           "address": "Address",
-          "addTarget": "Target \"{{address}}\" added into application.",
           "applyButton": "Apply for this plot",
           "applyByDate": "Apply by",
           "area": "Area (m²)",
@@ -131,7 +140,6 @@
           "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
           "plotNumber": "Plot",
           "removeButton": "Remove plot from application",
-          "removeTarget": "Target \"{{address}}\" removed from application.",
           "returnToList": "Return to list"
         },
         "targetHeadings": {

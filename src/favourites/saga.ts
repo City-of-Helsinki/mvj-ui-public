@@ -13,6 +13,8 @@ import {
   updateFavouriteRequest,
 } from './requests';
 
+import i18n from 'i18next';
+
 import {
   FETCH_FAVOURITE,
   Favourite,
@@ -21,6 +23,8 @@ import {
   REMOVE_FAVOURITE_TARGET,
   AddFavouriteTargetAction,
   ADD_FAVOURITE_TARGET,
+  UpdateFavouriteAction,
+  UPDATE_FAVOURITE,
   MVJ_FAVOURITE,
 } from './types';
 
@@ -28,12 +32,16 @@ import {
   favouriteNotFound,
   receiveFavourite,
   initializeFavourite,
+  updateFavourite,
   favouriteFetchError,
 } from './actions';
 
 import { ApiCallResult } from '../api/callApi';
 import { getApiToken } from '../auth/selectors';
 import { getFavourite } from './selectors';
+import { pushNotification } from '../globalNotification/actions';
+import { Notification } from '../globalNotification/types';
+import { logError } from '../root/helpers';
 
 function* fetchFavouriteSaga(): Generator<Effect, void, never> {
   try {
@@ -90,7 +98,7 @@ function* fetchFavouriteSaga(): Generator<Effect, void, never> {
     }
     yield put(favouriteNotFound());
   } catch (e) {
-    console.error(e);
+    logError(e);
     yield put(favouriteFetchError());
     throw e;
   }
@@ -107,9 +115,33 @@ function* initializeFavouriteSaga(): Generator<Effect, void, ApiCallResult> {
         yield put(favouriteNotFound());
     }
   } catch (e) {
-    console.error(e);
+    logError(e);
     yield put(favouriteFetchError());
     throw e;
+  }
+}
+
+function* updateFavouriteSaga({
+  payload,
+}: UpdateFavouriteAction): Generator<Effect, void, never> {
+  if (!payload.apiToken) {
+    yield put(pushNotification(payload.notification));
+    yield put(receiveFavourite(payload.newFavourite));
+    return;
+  }
+
+  const { response, bodyAsJson }: ApiCallResult = yield call(
+    updateFavouriteRequest,
+    payload.newFavourite
+  );
+
+  switch (response.status) {
+    case 200:
+      yield put(pushNotification(payload.notification));
+      yield put(receiveFavourite(bodyAsJson));
+      break;
+    default:
+      yield put(favouriteNotFound());
   }
 }
 
@@ -140,25 +172,22 @@ function* addFavouriteTargetSaga({
       targets: [...oldFavourite.targets, payload.target],
     };
 
-    if (!apiToken) {
-      yield put(receiveFavourite(newFavourite));
-      return;
-    }
+    const notification: Notification = {
+      id: 'add_' + payload.target.plot_search_target.id.toString(),
+      icon: true,
+      body: i18n.t(
+        'favourites.saga.addTarget',
+        'Target "{{address}}" added to application.',
+        {
+          address: payload.target.plot_search_target.lease_address.address,
+        }
+      ),
+      type: 'success',
+    };
 
-    const { response, bodyAsJson }: ApiCallResult = yield call(
-      updateFavouriteRequest,
-      newFavourite
-    );
-
-    switch (response.status) {
-      case 200:
-        yield put(receiveFavourite(bodyAsJson));
-        break;
-      default:
-        yield put(favouriteNotFound());
-    }
+    yield put(updateFavourite({ apiToken, newFavourite, notification }));
   } catch (e) {
-    console.error(e);
+    logError(e);
     yield put(favouriteFetchError());
   }
 }
@@ -179,25 +208,24 @@ function* removeFavouriteTargetSaga({
       ),
     };
 
-    if (!apiToken) {
-      yield put(receiveFavourite(newFavourite));
-      return;
-    }
+    const notification: Notification = {
+      id: 'remove_' + payload.toString(),
+      icon: true,
+      body: i18n.t(
+        'favourites.saga.removeTarget',
+        'Target "{{address}}" removed from application.',
+        {
+          address: oldFavourite.targets.filter(
+            (t) => t.plot_search_target.id === payload
+          )[0].plot_search_target.lease_address.address,
+        }
+      ),
+      type: 'alert',
+    };
 
-    const { response, bodyAsJson }: ApiCallResult = yield call(
-      updateFavouriteRequest,
-      newFavourite
-    );
-
-    switch (response.status) {
-      case 200:
-        yield put(receiveFavourite(bodyAsJson));
-        break;
-      default:
-        yield put(favouriteNotFound());
-    }
+    yield put(updateFavourite({ apiToken, newFavourite, notification }));
   } catch (e) {
-    console.error(e);
+    logError(e);
     yield put(favouriteFetchError());
   }
 }
@@ -209,6 +237,7 @@ export default function* favouriteSaga(): Generator {
       yield takeLatest(INITIALIZE_FAVOURITE, initializeFavouriteSaga);
       yield takeLatest(REMOVE_FAVOURITE_TARGET, removeFavouriteTargetSaga);
       yield takeLatest(ADD_FAVOURITE_TARGET, addFavouriteTargetSaga);
+      yield takeLatest(UPDATE_FAVOURITE, updateFavouriteSaga);
     }),
   ]);
 }

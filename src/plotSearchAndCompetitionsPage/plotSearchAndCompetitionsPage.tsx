@@ -19,6 +19,8 @@ import {
   PlotSearchType,
 } from '../plotSearch/types';
 import { Favourite } from '../favourites/types';
+import { useNavigate, useParams } from 'react-router';
+import { AppRoutes, getRouteById } from '../root/routes';
 
 interface State {
   isFetchingPlotSearches: boolean;
@@ -72,7 +74,34 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
     useState<CategoryVisibilities>({});
   const [categoryOptions, setCategoryOptions] = useState<CategoryOptions>([]);
   const [selectedTarget, setSelectedTarget] = useState<SelectedTarget>(null);
+  const [hoveredTargetId, setHoveredTargetId] = useState<number | null>(null);
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(true);
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (id) {
+      const target = plotSearches
+        .filter((plotSearch) =>
+          plotSearch.plot_search_targets.some((t) => t.id.toString() === id)
+        )
+        .map((p) => ({
+          plotSearch: p,
+          target: p.plot_search_targets.filter(
+            (t) => t.id.toString() === id
+          )[0],
+        }))[0];
+
+      if (!target) {
+        navigate(getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS));
+        return;
+      }
+
+      setSelectedTarget(target);
+      return;
+    }
+    setSelectedTarget(null);
+  }, [id, plotSearches]);
 
   useEffect(() => {
     fetchPlotSearches({ params: { search_class: 'plot_search' } });
@@ -146,11 +175,12 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
         categoryVisibilities={categoryVisibilities}
         onToggleVisibility={onToggleCategoryVisibility}
         plotSearches={filteredPlotSearches}
-        setSelectedTarget={setSelectedTarget}
         selectedTarget={selectedTarget}
         isOpen={isSidebarOpen}
         toggle={setSidebarOpen}
         favourite={favourite}
+        hoveredTargetId={hoveredTargetId}
+        setHoveredTargetId={setHoveredTargetId}
       />
       <MapComponent
         categoryOptions={categoryOptions}
@@ -159,6 +189,8 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
         setSelectedTarget={onSelectTarget}
         selectedTarget={selectedTarget}
         favourite={favourite}
+        hoveredTargetId={hoveredTargetId}
+        setHoveredTargetId={setHoveredTargetId}
       />
     </div>
   );

@@ -11,6 +11,10 @@
     padding-bottom: $spacing-xl;
   }
 
+  &__links {
+    line-height: normal;
+  }
+
   &__action-button {
     float: right;
   }

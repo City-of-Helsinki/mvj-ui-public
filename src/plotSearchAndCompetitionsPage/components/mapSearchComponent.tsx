@@ -29,6 +29,8 @@ import {
   addFavouriteTarget,
   removeFavouriteTarget,
 } from '../../favourites/actions';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes, getRouteById } from '../../root/routes';
 
 interface MapSearchComponentAccordionProps {
   isHidden: boolean;
@@ -39,6 +41,8 @@ interface MapSearchComponentAccordionProps {
   colorIndex?: number;
   onToggleVisibility?: (isVisible: boolean) => void;
   isVisible: boolean;
+  hoveredTargetId: number | null;
+  setHoveredTargetId: (id: number | null) => void;
 }
 
 const SIDEBAR_GUTTER_WIDTH = 5; // px
@@ -106,13 +110,14 @@ interface MapSearchComponentProps {
   categoryVisibilities: CategoryVisibilities;
   onToggleVisibility: (id: number, isVisible: boolean) => void;
   plotSearches: Array<PlotSearch>;
-  setSelectedTarget: (target: SelectedTarget) => void;
   selectedTarget: SelectedTarget;
   addFavouriteTarget: (payLoad: AddTargetPayload) => void;
   removeFavouriteTarget: (id: number) => void;
   isOpen: boolean;
   toggle: (newValue: boolean) => void;
   favourite: Favourite;
+  hoveredTargetId: number | null;
+  setHoveredTargetId: (id: number | null) => void;
 }
 
 const MapSearchComponent = ({
@@ -120,15 +125,17 @@ const MapSearchComponent = ({
   categoryOptions,
   onToggleVisibility,
   plotSearches,
-  setSelectedTarget,
   selectedTarget,
   addFavouriteTarget,
   removeFavouriteTarget,
   favourite,
   isOpen,
   toggle,
+  hoveredTargetId,
+  setHoveredTargetId,
 }: MapSearchComponentProps): JSX.Element => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const plotSearchesByCategory = categoryOptions.map((category) => ({
     category,
@@ -156,7 +163,6 @@ const MapSearchComponent = ({
         <MapSearchSingleTargetView
           addFavouriteTarget={addFavouriteTarget}
           selectedTarget={selectedTarget}
-          setSelectedTarget={setSelectedTarget}
           favourite={favourite}
           removeFavouriteTarget={removeFavouriteTarget}
         />
@@ -191,6 +197,8 @@ const MapSearchComponent = ({
               onToggleVisibility={(isVisible: boolean) =>
                 onToggleVisibility(item.category.id, isVisible)
               }
+              hoveredTargetId={hoveredTargetId}
+              setHoveredTargetId={setHoveredTargetId}
             >
               {item.category.subtypes.map((subtype) => {
                 const matchingPlotSearches = item.plotSearches.filter(
@@ -317,6 +325,10 @@ const MapSearchComponent = ({
                           <div role="list">
                             {section.targets.map((target) => (
                               <Row
+                                onMouseEnter={() =>
+                                  setHoveredTargetId(target.data.id)
+                                }
+                                onMouseLeave={() => setHoveredTargetId(null)}
                                 className={classNames(
                                   'MapSearchComponent__target',
                                   {
@@ -326,6 +338,10 @@ const MapSearchComponent = ({
                                           t.plot_search_target.id ===
                                           target.data.id
                                       ),
+                                  },
+                                  {
+                                    'MapSearchComponent__target--hover':
+                                      hoveredTargetId === target.data.id,
                                   }
                                 )}
                                 key={target.data.id}
@@ -359,10 +375,11 @@ const MapSearchComponent = ({
                                 <Col xs={1}>
                                   <IconButton
                                     onClick={() =>
-                                      setSelectedTarget({
-                                        target: target.data,
-                                        plotSearch: target.relatedPlotSearch,
-                                      })
+                                      navigate(
+                                        getRouteById(
+                                          AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET
+                                        ) + target.data.id
+                                      )
                                     }
                                   >
                                     <IconArrowRight size="s" />

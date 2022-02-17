@@ -26,6 +26,8 @@ interface Props {
   categoryOptions: CategoryOptions;
   categoryVisibilities: CategoryVisibilities;
   favourite: Favourite;
+  hoveredTargetId: number | null;
+  setHoveredTargetId: (id: number | null) => void;
 }
 
 export const whenMapCreated = (map: L.Map): void => {
@@ -59,6 +61,8 @@ const MapComponent = (props: Props): JSX.Element => {
       scrollWheelZoom={true}
       maxBounds={latLonBounds}
       bounds={latLonBounds}
+      minZoom={2}
+      maxZoom={12}
       crs={CRS}
       zoomControl={false}
       whenCreated={whenMapCreated}
@@ -125,6 +129,8 @@ const MapComponent = (props: Props): JSX.Element => {
                   categorySymbol={item.category.symbol}
                   initialPosition={initialPosition}
                   favouritedTargets={props.favourite.targets}
+                  hoveredTargetId={props.hoveredTargetId}
+                  setHoveredTargetId={props.setHoveredTargetId}
                 />
               );
             }

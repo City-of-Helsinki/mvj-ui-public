@@ -1,4 +1,5 @@
 import { all, fork, put, takeEvery, call } from 'redux-saga/effects';
+import { logError } from '../root/helpers';
 
 import { receiveApiToken, tokenNotFound } from './actions';
 import { FETCH_API_TOKEN, fetchApiTokenActionType } from './types';
@@ -38,7 +39,7 @@ export function* fetchApiTokenSaga({
       }
     }
   } catch (error) {
-    console.error(`Failed to fetch API token with error: ${error}`);
+    logError(error);
     yield put(tokenNotFound());
     userManager.removeUser();
   }

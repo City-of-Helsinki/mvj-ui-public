@@ -36,9 +36,14 @@
     color: $color-black-90;
   }
   &__favourite-icon {
-    color: $color-gold;
+    color: $color-info;
     position: absolute;
     right: -10px;
     top: -10px;
+  }
+  &--hover {
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    margin-top: -2px;
+    margin-left: -2px;
   }
 }

@@ -2,13 +2,23 @@
   "error": {
     "pageNotFound": ""
   },
+  "favourites": {
+    "saga": {
+      "addTarget": "",
+      "removeTarget": ""
+    }
+  },
   "favouritesPage": {
+    "map": {
+      "showOnMap": ""
+    },
     "notification": {
       "body": "",
       "link": "",
       "title": ""
     },
     "targetCard": {
+      "infoLinkHeader": "",
       "removeButton": "",
       "showFullDesc": {
         "hide": "",
@@ -114,7 +124,6 @@
         "sectionApplyBy": "",
         "singleTarget": {
           "address": "",
-          "addTarget": "",
           "applyButton": "",
           "applyByDate": "",
           "area": "",
@@ -131,7 +140,6 @@
           "permittedBuildAreaResidential": "",
           "plotNumber": "",
           "removeButton": "",
-          "removeTarget": "",
           "returnToList": ""
         },
         "targetHeadings": {

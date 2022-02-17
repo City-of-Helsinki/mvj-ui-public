@@ -5,12 +5,14 @@ import authReducer from '../auth/reducer';
 import loginReducer from '../login/reducer';
 import plotSearchReducer from '../plotSearch/reducer';
 import favouriteReducer from '../favourites/reducer';
+import notificationReducer from '../globalNotification/reducer';
 
 const allReducers = {
   auth: authReducer,
   login: loginReducer,
   plotSearch: plotSearchReducer,
   favourite: favouriteReducer,
+  notifications: notificationReducer,
   oidc: oidcReducer,
 };
 

@@ -9,20 +9,21 @@ import {
   IconProps,
 } from 'hds-react';
 import { useTranslation } from 'react-i18next';
-import { useGlobalNotifications } from './globalNotificationProvider';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { popNotification } from './actions';
 
-export interface Props {
+interface Props {
   id: string;
   label?: string;
   icon?: boolean;
   body: string;
   type: NotificationType;
+  popNotification: () => void;
 }
 
 const GlobalNotification = (props: Props): JSX.Element | null => {
   const { t } = useTranslation();
-  const { popNotification } = useGlobalNotifications();
 
   let IconComponent: FC<IconProps>;
 
@@ -52,7 +53,7 @@ const GlobalNotification = (props: Props): JSX.Element | null => {
         'globalNotifications.notification.close',
         'Close'
       )}
-      onClose={() => popNotification()}
+      onClose={() => props.popNotification()}
       type={props.type}
     >
       <div className="GlobalNotificationContainer__notification-body">
@@ -74,4 +75,4 @@ const GlobalNotification = (props: Props): JSX.Element | null => {
   );
 };
 
-export default GlobalNotification;
+export default connect(null, { popNotification })(GlobalNotification);

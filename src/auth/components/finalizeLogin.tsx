@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { userManager } from '../userManager';
 import BlockLoader from '../../loader/blockLoader';
 import { getRedirectUrlFromSessionStorage } from '../util';
+import { logError } from '../../root/helpers';
 
 const FinalizeLogin = (): JSX.Element | null => {
   const navigate = useNavigate();
@@ -29,9 +30,9 @@ const FinalizeLogin = (): JSX.Element | null => {
       successCallback={() => {
         redirect(savedRedirectUrl);
       }}
-      errorCallback={(e: Error) => {
+      errorCallback={(e) => {
+        logError(e);
         redirect(savedRedirectUrl);
-        console.error(e);
       }}
     >
       <BlockLoader />

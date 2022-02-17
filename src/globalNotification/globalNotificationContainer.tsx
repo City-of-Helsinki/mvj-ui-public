@@ -1,9 +1,32 @@
 import React from 'react';
-import { useGlobalNotifications } from './globalNotificationProvider';
+import GlobalNotification from './globalNotification';
+import { Notification } from './types';
+import { connect } from 'react-redux';
+import { RootState } from '../root/rootReducer';
 
-const GlobalNotificationContainer = (): JSX.Element | null => {
-  const { render } = useGlobalNotifications();
-  return <div className="GlobalNotificationContainer">{render()}</div>;
+interface State {
+  notifications: Notification[];
+}
+
+interface Props {
+  notifications: Notification[];
+}
+
+const GlobalNotificationContainer = ({
+  notifications,
+}: Props): JSX.Element | null => {
+  return (
+    <div className="GlobalNotificationContainer">
+      {notifications.map((n) => (
+        <GlobalNotification key={n.id} {...n} />
+      ))}
+    </div>
+  );
 };
 
-export default GlobalNotificationContainer;
+export default connect(
+  (state: RootState): State => ({
+    notifications: state.notifications.notifications,
+  }),
+  []
+)(GlobalNotificationContainer);

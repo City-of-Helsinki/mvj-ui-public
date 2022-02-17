@@ -49,7 +49,12 @@
       font-size: $fontsize-body-s;
 
       &--favourited {
-        background-color: $color-gold;
+        background-color: $color-info-light;
+      }
+
+      &--hover {
+        background-color: $color-info-dark;
+        color: white;
       }
     }
 
