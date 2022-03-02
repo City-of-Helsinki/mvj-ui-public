@@ -11,6 +11,7 @@ import { PlotSearch } from '../plotSearch/types';
 import { fetchPlotSearches } from '../plotSearch/actions';
 import {
   fetchFormAttributes,
+  fetchPendingUploads,
   resetLastApplicationSubmissionError,
   submitApplication,
 } from './actions';
@@ -31,6 +32,7 @@ interface State {
   isFetchingPlotSearches: boolean;
   submittedAnswerId: number;
   isSubmitting: boolean;
+  isPerformingFileOperation: boolean;
   lastError: unknown;
 }
 
@@ -45,8 +47,10 @@ interface Props {
   submitApplication: (data: ApplicationSubmission) => void;
   submittedAnswerId: number;
   isSubmitting: boolean;
+  isPerformingFileOperation: boolean;
   lastError: unknown;
   resetLastApplicationSubmissionError: () => void;
+  fetchPendingUploads: () => void;
 }
 
 const ApplicationPage = ({
@@ -60,8 +64,10 @@ const ApplicationPage = ({
   submitApplication,
   submittedAnswerId,
   isSubmitting,
+  isPerformingFileOperation,
   lastError,
   resetLastApplicationSubmissionError,
+  fetchPendingUploads,
 }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -84,6 +90,12 @@ const ApplicationPage = ({
   return (
     <AuthDependentContent>
       {(loading, loggedIn) => {
+        useEffect(() => {
+          if (loggedIn) {
+            fetchPendingUploads();
+          }
+        }, [loggedIn]);
+
         return (
           <div className="ApplicationPage">
             <Container>
@@ -150,6 +162,7 @@ const ApplicationPage = ({
                                   'application.submitInProcess',
                                   'Submitting...'
                                 )}
+                                disabled={isPerformingFileOperation}
                                 className="ApplicationPage__submission-button"
                               >
                                 {t('application.submit', 'Submit application')}
@@ -225,6 +238,7 @@ export default connect(
     submittedAnswerId: state.application.submittedAnswerId,
     isSubmitting: state.application.isSubmittingApplication,
     lastError: state.application.lastError,
+    isPerformingFileOperation: state.application.isPerformingFileOperation,
   }),
   {
     fetchPlotSearches,
@@ -232,5 +246,6 @@ export default connect(
     openLoginModal,
     submitApplication,
     resetLastApplicationSubmissionError,
+    fetchPendingUploads,
   }
 )(ApplicationPage);

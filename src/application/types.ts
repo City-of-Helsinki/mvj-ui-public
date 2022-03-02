@@ -51,6 +51,15 @@ export type ApplicationSubmission = {
   entries: NestedField;
 };
 
+export type UploadedFileMeta = {
+  id: number;
+  attachment: string;
+  name: string;
+  field: number;
+  created_at: string;
+  answer: number | null;
+};
+
 export const FETCH_FORM_ATTRIBUTES = 'application/FETCH_FORM_ATTRIBUTES';
 export interface FetchFormAttributesAction {
   type: typeof FETCH_FORM_ATTRIBUTES;
@@ -91,6 +100,43 @@ export const RESET_LAST_APPLICATION_SUBMISSION_ERROR =
   'application/RESET_LAST_APPLICATION_SUBMISSION_ERROR';
 export interface ResetLastApplicationSubmissionErrorAction {
   type: typeof RESET_LAST_APPLICATION_SUBMISSION_ERROR;
+}
+
+export const FETCH_PENDING_UPLOADS = 'application/FETCH_PENDING_UPLOADS';
+export interface FetchPendingUploadsAction {
+  type: typeof FETCH_PENDING_UPLOADS;
+}
+
+export const RECEIVE_PENDING_UPLOADS = 'application/RECEIVE_PENDING_UPLOADS';
+export interface ReceivePendingUploadsAction {
+  type: typeof RECEIVE_PENDING_UPLOADS;
+  payload: Array<UploadedFileMeta>;
+}
+
+export const PENDING_UPLOADS_NOT_FOUND =
+  'application/PENDING_UPLOADS_NOT_FOUND';
+export interface PendingUploadsNotFoundAction {
+  type: typeof PENDING_UPLOADS_NOT_FOUND;
+}
+
+export const DELETE_UPLOAD = 'application/DELETE_UPLOAD';
+export interface DeleteUploadAction {
+  type: typeof DELETE_UPLOAD;
+  payload: number;
+}
+
+export const UPLOAD_FILE = 'application/UPLOAD_FILE';
+export interface UploadFileAction {
+  type: typeof UPLOAD_FILE;
+  payload: {
+    field: number;
+    file: File;
+  };
+}
+
+export const FILE_OPERATION_FINISHED = 'application/FILE_OPERATION_FINISHED';
+export interface FileOperationFinishedAction {
+  type: typeof FILE_OPERATION_FINISHED;
 }
 
 export const APPLICATION_FORM_NAME = 'application';

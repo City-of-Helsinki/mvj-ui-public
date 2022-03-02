@@ -3,13 +3,19 @@ import {
   APPLICATION_FORM_NAME,
   APPLICATION_SUBMISSION_FAILED,
   ApplicationSubmissionFailedAction,
+  DELETE_UPLOAD,
   FETCH_FORM_ATTRIBUTES,
   FieldTypeMapping,
+  FILE_OPERATION_FINISHED,
   FORM_ATTRIBUTES_NOT_FOUND,
   RECEIVE_APPLICATION_SAVED,
   RECEIVE_FORM_ATTRIBUTES,
+  RECEIVE_PENDING_UPLOADS,
   ReceiveFormAttributesAction,
+  ReceivePendingUploadsAction,
   SUBMIT_APPLICATION,
+  UPLOAD_FILE,
+  UploadedFileMeta,
   /*ReceiveApplicationSavedAction,*/
 } from './types';
 import { ApiAttributes } from '../api/types';
@@ -21,6 +27,8 @@ type CurrentDisplayState = {
   isSubmittingApplication: boolean;
   submittedAnswerId: number;
   lastError: unknown;
+  pendingUploads: Array<UploadedFileMeta>;
+  isPerformingFileOperation: boolean;
 };
 
 const initialState: CurrentDisplayState = {
@@ -30,6 +38,8 @@ const initialState: CurrentDisplayState = {
   isSubmittingApplication: false,
   submittedAnswerId: 0,
   lastError: null,
+  pendingUploads: [],
+  isPerformingFileOperation: false,
 };
 
 const applicationSlice = createSlice({
@@ -76,6 +86,21 @@ const applicationSlice = createSlice({
     ) => {
       state.isSubmittingApplication = false;
       state.lastError = payload;
+    },
+    [RECEIVE_PENDING_UPLOADS]: (
+      state,
+      { payload }: ReceivePendingUploadsAction
+    ) => {
+      state.pendingUploads = payload;
+    },
+    [UPLOAD_FILE]: (state) => {
+      state.isPerformingFileOperation = true;
+    },
+    [DELETE_UPLOAD]: (state) => {
+      state.isPerformingFileOperation = true;
+    },
+    [FILE_OPERATION_FINISHED]: (state) => {
+      state.isPerformingFileOperation = false;
     },
   },
 });

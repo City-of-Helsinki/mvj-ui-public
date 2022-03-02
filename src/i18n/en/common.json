@@ -11,6 +11,16 @@
       "noPlotsSelected": "To submit a plot application, you have to pick plots on the plot searches page first.",
       "notLoggedIn": "Please log in first in order to apply for plots."
     },
+    "fileUpload": {
+      "delete": "Delete",
+      "deleteHeader": "Delete",
+      "filename": "File",
+      "info": "The maximum allowed file size is {{maxSize}} MB.",
+      "newFile": "Upload a new file",
+      "number": "Attachment",
+      "rowLabel": "Attachment #{{number}}",
+      "uploadedAt": "Uploaded at"
+    },
     "heading": "Plot application",
     "loginButton": "Log in",
     "submit": "Submit application",

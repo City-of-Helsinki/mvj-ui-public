@@ -11,7 +11,12 @@ export interface ApiCallResult {
 }
 
 function* callApi(
-  request: Request
+  request: Request,
+  options: {
+    autoContentType: boolean;
+  } = {
+    autoContentType: true,
+  }
 ): Generator<Effect, ApiCallResult, Response> {
   try {
     const apiToken = yield select(getApiToken);
@@ -25,9 +30,8 @@ function* callApi(
     );
 
     if (
-      request.method === 'PATCH' ||
-      request.method === 'POST' ||
-      request.method === 'PUT'
+      ['PATCH', 'POST', 'PUT'].includes(request.method) &&
+      options.autoContentType
     ) {
       request.headers.set('Content-Type', 'application/json');
     }

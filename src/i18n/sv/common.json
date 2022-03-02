@@ -11,6 +11,16 @@
       "noPlotsSelected": "",
       "notLoggedIn": ""
     },
+    "fileUpload": {
+      "delete": "",
+      "deleteHeader": "",
+      "filename": "",
+      "info": "",
+      "newFile": "",
+      "number": "",
+      "rowLabel": "",
+      "uploadedAt": ""
+    },
     "heading": "",
     "loginButton": "",
     "submit": "",

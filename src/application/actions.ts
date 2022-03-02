@@ -4,12 +4,19 @@ import { createAction } from 'redux-actions';
 import {
   APPLICATION_SUBMISSION_FAILED,
   ApplicationSubmission,
+  DELETE_UPLOAD,
   FETCH_FORM_ATTRIBUTES,
+  FETCH_PENDING_UPLOADS,
+  FILE_OPERATION_FINISHED,
   FORM_ATTRIBUTES_NOT_FOUND,
+  PENDING_UPLOADS_NOT_FOUND,
   RECEIVE_APPLICATION_SAVED,
   RECEIVE_FORM_ATTRIBUTES,
+  RECEIVE_PENDING_UPLOADS,
   RESET_LAST_APPLICATION_SUBMISSION_ERROR,
   SUBMIT_APPLICATION,
+  UPLOAD_FILE,
+  UploadedFileMeta,
 } from './types';
 
 export const fetchFormAttributes = (): Action<string> =>
@@ -33,3 +40,24 @@ export const applicationSubmissionFailed = (payload: unknown): Action<string> =>
 
 export const resetLastApplicationSubmissionError = (): Action<string> =>
   createAction(RESET_LAST_APPLICATION_SUBMISSION_ERROR)();
+
+export const fetchPendingUploads = (): Action<string> =>
+  createAction(FETCH_PENDING_UPLOADS)();
+
+export const receivePendingUploads = (
+  payload: Array<UploadedFileMeta>
+): Action<string> => createAction(RECEIVE_PENDING_UPLOADS)(payload);
+
+export const pendingUploadsNotFound = (): Action<string> =>
+  createAction(PENDING_UPLOADS_NOT_FOUND)();
+
+export const deleteUpload = (payload: number): Action<string> =>
+  createAction(DELETE_UPLOAD)(payload);
+
+export const uploadFile = (payload: {
+  field: number;
+  file: File;
+}): Action<string> => createAction(UPLOAD_FILE)(payload);
+
+export const fileOperationFinished = (): Action<string> =>
+  createAction(FILE_OPERATION_FINISHED)();
