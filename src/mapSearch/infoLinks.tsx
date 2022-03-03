@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { PlotSearchTarget } from '../../plotSearch/types';
+import { PlotSearchTarget } from '../plotSearch/types';
 
 interface Props {
   target: PlotSearchTarget;

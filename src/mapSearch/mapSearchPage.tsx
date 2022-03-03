@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { RootState } from '../root/rootReducer';
-import MapSearchComponent from './components/mapSearchComponent';
-import MapComponent from './components/mapComponent';
+import MapSearchComponent from './mapSearchComponent';
+import MapComponent from './mapComponent';
 import BlockLoader from '../loader/blockLoader';
 import {
   fetchPlotSearchAttributes,
@@ -33,6 +33,7 @@ interface State {
 }
 
 interface Props {
+  searchClass: string;
   fetchPlotSearches: (payload?: { params: Record<string, string> }) => void;
   fetchPlotSearchAttributes: () => void;
   fetchPlotSearchTypes: () => void;
@@ -58,8 +59,9 @@ export type SelectedTarget = {
   plotSearch: PlotSearch;
 } | null;
 
-const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
+const MapSearchPage = (props: Props): JSX.Element => {
   const {
+    searchClass,
     fetchPlotSearches,
     fetchPlotSearchAttributes,
     fetchPlotSearchTypes,
@@ -104,7 +106,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
   }, [id, plotSearches]);
 
   useEffect(() => {
-    fetchPlotSearches({ params: { search_class: 'plot_search' } });
+    fetchPlotSearches({ params: { search_class: searchClass } });
     fetchPlotSearchAttributes();
     fetchPlotSearchTypes();
   }, []);
@@ -169,7 +171,7 @@ const PlotSearchAndCompetitionsPage = (props: Props): JSX.Element => {
   }
 
   return (
-    <div className="PlotSearchAndCompetitionsPage">
+    <div className="MapSearchPage">
       <MapSearchComponent
         categoryOptions={categoryOptions}
         categoryVisibilities={categoryVisibilities}
@@ -211,4 +213,4 @@ export default connect(mapStateToProps, {
   fetchPlotSearches,
   fetchPlotSearchAttributes,
   fetchPlotSearchTypes,
-})(PlotSearchAndCompetitionsPage);
+})(MapSearchPage);

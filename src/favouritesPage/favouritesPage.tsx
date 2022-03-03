@@ -16,6 +16,7 @@ import BlockLoader from '../loader/blockLoader';
 import { AppRoutes, getRouteById } from '../root/routes';
 import { getIsLoadingUser, getUser } from '../auth/selectors';
 import { openLoginModal } from '../login/actions';
+import { getPageForCurrentPlotSearch } from '../plotSearch/helpers';
 
 interface State {
   favourite: Favourite;
@@ -23,6 +24,7 @@ interface State {
   isFetchingPlotSearches: boolean;
   user: User | null;
   isLoadingUser: boolean;
+  searchPageLink: string | null;
 }
 
 interface Props {
@@ -34,6 +36,7 @@ interface Props {
   user: User | null;
   isLoadingUser: boolean;
   openLoginModal: () => void;
+  searchPageLink: string | null;
 }
 
 const FavouritesPage = (props: Props): JSX.Element => {
@@ -110,32 +113,31 @@ const FavouritesPage = (props: Props): JSX.Element => {
               xs={12}
               className="FavouritesPage__notification-container"
             >
-              <Notification
-                type="info"
-                position="inline"
-                label={t(
-                  'favouritesPage.notification.title',
-                  'Do you want to search for more targets?'
-                )}
-              >
-                <Trans i18nKey="favouritesPage.notification.body">
+              {props.searchPageLink && (
+                <Notification
+                  type="info"
+                  position="inline"
+                  label={t(
+                    'favouritesPage.notification.title',
+                    'Do you want to search for more targets?'
+                  )}
+                >
+                  <Trans i18nKey="favouritesPage.notification.body">
+                    <p>
+                      You can find all the selected targets here. You can return
+                      to plot search page to add more targets.
+                    </p>
+                  </Trans>
                   <p>
-                    You can find all the selected targets here. You can return
-                    to plot search page to add more targets.
+                    <Link href={props.searchPageLink} size="M">
+                      {t(
+                        'favouritesPage.notification.link',
+                        'Return to plot search page'
+                      )}
+                    </Link>
                   </p>
-                </Trans>
-                <p>
-                  <Link
-                    href={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
-                    size="M"
-                  >
-                    {t(
-                      'favouritesPage.notification.link',
-                      'Return to plot search page'
-                    )}
-                  </Link>
-                </p>
-              </Notification>
+                </Notification>
+              )}
             </Col>
           </Row>
           <Row className="FavouritesPage__actions">
@@ -160,6 +162,7 @@ const mapStateToProps = (state: RootState): State => ({
   isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,
   user: getUser(state),
   isLoadingUser: getIsLoadingUser(state),
+  searchPageLink: getPageForCurrentPlotSearch(state),
 });
 
 export default connect(mapStateToProps, {

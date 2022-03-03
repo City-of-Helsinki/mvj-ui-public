@@ -7,7 +7,7 @@ import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
 import { getInfo } from '../utils';
 import { FavouriteCardDetails } from './favouriteCardDetails';
 import FavouriteCardMap from './favouriteCardMap';
-import InfoLinks from '../../plotSearchAndCompetitionsPage/components/infoLinks';
+import InfoLinks from '../../mapSearch/infoLinks';
 
 interface Props {
   target: PlotSearchTarget;

@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from '../App';
 import FrontPage from '../frontPage/frontPage';
 import ErrorPage from '../errorPage/errorPage';
-import PlotSearchAndCompetitionsPage from '../plotSearchAndCompetitionsPage/plotSearchAndCompetitionsPage';
+import MapSearchPage from '../mapSearch/mapSearchPage';
 import FavouritesPage from '../favouritesPage/favouritesPage';
 import FinalizeLogin from '../auth/components/finalizeLogin';
 import AuthDependentContent from '../auth/components/authDependentContent';
@@ -108,7 +108,7 @@ const SiteRoutes = (): JSX.Element => {
             path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
             element={
               <RouteWithLoader>
-                <PlotSearchAndCompetitionsPage />
+                <MapSearchPage searchClass="plot_search" key="plot_search" />
               </RouteWithLoader>
             }
           />
@@ -119,7 +119,7 @@ const SiteRoutes = (): JSX.Element => {
             }
             element={
               <RouteWithLoader>
-                <PlotSearchAndCompetitionsPage />
+                <MapSearchPage searchClass="plot_search" key="plot_search" />
               </RouteWithLoader>
             }
           />
@@ -127,7 +127,17 @@ const SiteRoutes = (): JSX.Element => {
             path={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
             element={
               <RouteWithLoader>
-                <div>Muut kilpailut ja haut</div>
+                <MapSearchPage searchClass="other_search" key="other_search" />
+              </RouteWithLoader>
+            }
+          />
+          <Route
+            path={
+              getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES) + ':id'
+            }
+            element={
+              <RouteWithLoader>
+                <MapSearchPage searchClass="other_search" key="other_search" />
               </RouteWithLoader>
             }
           />

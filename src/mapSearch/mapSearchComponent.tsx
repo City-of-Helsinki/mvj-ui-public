@@ -8,29 +8,29 @@ import {
   Notification,
   useAccordion,
 } from 'hds-react';
+import { Trans, useTranslation } from 'react-i18next';
 import { Row, Col, Container } from 'react-grid-system';
+import { Link, useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import SidePanel from '../../panel/sidePanel';
+import SidePanel from '../panel/sidePanel';
 import MapSymbol from './mapSymbol';
 import {
   CategoryOptions,
   CategoryVisibilities,
   SelectedTarget,
-} from '../plotSearchAndCompetitionsPage';
-import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
-import IconButton from '../../button/iconButton';
-import { Trans, useTranslation } from 'react-i18next';
+} from './mapSearchPage';
+import { PlotSearch, PlotSearchTarget } from '../plotSearch/types';
+import IconButton from '../button/iconButton';
 import MapSearchSingleTargetView from './mapSearchSingleTargetView';
-import { AddTargetPayload, Favourite } from '../../favourites/types';
-import { defaultLanguage } from '../../i18n';
-import { renderDateTime } from '../../i18n/utils';
-import { connect } from 'react-redux';
+import { AddTargetPayload, Favourite } from '../favourites/types';
+import { defaultLanguage } from '../i18n';
+import { renderDateTime } from '../i18n/utils';
 import {
   addFavouriteTarget,
   removeFavouriteTarget,
-} from '../../favourites/actions';
-import { useNavigate } from 'react-router-dom';
-import { AppRoutes, getRouteById } from '../../root/routes';
+} from '../favourites/actions';
+import { AppRoutes, getRouteById } from '../root/routes';
 
 interface MapSearchComponentAccordionProps {
   isHidden: boolean;
@@ -148,6 +148,11 @@ const MapSearchComponent = ({
       }
     }),
   }));
+
+  const totalFilteredPlotSearches = plotSearchesByCategory.reduce(
+    (acc, cat) => acc + cat.plotSearches.length,
+    0
+  );
 
   const checkHidden = (plotSearches: PlotSearch[]): boolean => {
     if (favourite.targets.length <= 0) {
@@ -399,27 +404,84 @@ const MapSearchComponent = ({
         })}
       </div>
       {favourite.targets.length > 0 && (
+        <>
+          {totalFilteredPlotSearches > 0 && (
+            <div className="MapSearchComponent__notification">
+              <Notification
+                type="alert"
+                label={
+                  <>
+                    {t(
+                      'plotSearchAndCompetitions.mapView.sidebar.notification.singlePlotSearchAllowed.title',
+                      'Attention!'
+                    )}
+                  </>
+                }
+              >
+                <Trans i18nKey="plotSearchAndCompetitions.mapView.sidebar.notification.singlePlotSearchAllowed.body">
+                  <p>You can only apply for one plot search per application.</p>
+
+                  <p>
+                    If one plot search contains multiple searchable targets, you
+                    can add those in the same application.
+                  </p>
+
+                  <p>
+                    If you want to apply for targets in another plot search, you
+                    need to fill a new application for every plot search
+                    separately.
+                  </p>
+                </Trans>
+              </Notification>
+            </div>
+          )}
+          {totalFilteredPlotSearches === 0 && (
+            <div className="MapSearchComponent__notification">
+              <Notification
+                type="alert"
+                label={
+                  <>
+                    {t(
+                      'plotSearchAndCompetitions.mapView.sidebar.notification.selectionInAnotherTab.title',
+                      'Attention!'
+                    )}
+                  </>
+                }
+              >
+                <Trans i18nKey="plotSearchAndCompetitions.mapView.sidebar.notification.selectionInAnotherTab.body">
+                  <p>You can only apply for one plot search per application.</p>
+
+                  <p>
+                    Your currently selected targets are of a different search
+                    type than the ones shown on this page, and as a result, no
+                    targets can be added on this page.{' '}
+                    <Link to={getRouteById(AppRoutes.FAVOURITES)}>
+                      See your currently selected targets.
+                    </Link>
+                  </p>
+                </Trans>
+              </Notification>
+            </div>
+          )}
+        </>
+      )}
+      {favourite.targets.length === 0 && totalFilteredPlotSearches === 0 && (
         <div className="MapSearchComponent__notification">
           <Notification
-            type="alert"
+            type="info"
             label={
-              t(
-                'plotSearchAndCompetitions.mapView.sidebar.notification.title',
-                'Attention!'
-              ) as string
+              <>
+                {t(
+                  'plotSearchAndCompetitions.mapView.sidebar.notification.noTargetsToShow.title',
+                  'Notice'
+                )}
+              </>
             }
           >
-            <Trans i18nKey="plotSearchAndCompetitions.mapView.sidebar.notification.body">
-              <p>You can attend only in one plot search per application.</p>
-
+            <Trans i18nKey="plotSearchAndCompetitions.mapView.sidebar.notification.noTargetsToShow.body">
               <p>
-                If one plot search contains multiple searchable targets, you can
-                add those in the same application.
-              </p>
-
-              <p>
-                If you want to attend other plot search, you need to fill new
-                application for every plot search.
+                There are no searches of this type that you can apply to
+                available at the moment.
               </p>
             </Trans>
           </Notification>

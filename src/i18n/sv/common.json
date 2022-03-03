@@ -153,8 +153,18 @@
     "mapView": {
       "sidebar": {
         "notification": {
-          "body": "",
-          "title": ""
+          "noTargetsToShow": {
+            "body": "",
+            "title": ""
+          },
+          "selectionInAnotherTab": {
+            "body": "",
+            "title": ""
+          },
+          "singlePlotSearchAllowed": {
+            "body": "",
+            "title": ""
+          }
         },
         "sectionApplyBy": "",
         "singleTarget": {
