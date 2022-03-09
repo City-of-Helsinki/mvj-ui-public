@@ -26,11 +26,13 @@
 @import 'loader/blockLoader';
 @import 'globalNotification/globalNotificationContainer';
 @import 'application/applicationPage';
+@import 'application/applicationPreviewPage';
 @import 'application/components/applicationFormSubsection';
 @import 'application/components/applicationFieldsetHelperText';
 @import 'application/components/applicationCheckboxFieldset';
 @import 'application/components/applicationRadioButtonFieldset';
 @import 'application/components/applicationFileUploadField';
+@import 'application/components/applicationTargetList';
 @import 'a11y/screenReaderText';
 
 html {

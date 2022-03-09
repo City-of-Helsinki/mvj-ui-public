@@ -23,6 +23,14 @@
     },
     "heading": "Plot application",
     "loginButton": "Log in",
+    "preview": {
+      "attachmentNo": "Attachment #{{number}}",
+      "booleanNo": "No",
+      "booleanYes": "Yes",
+      "heading": "Plot application preview"
+    },
+    "previewButton": "Preview submission",
+    "returnToForm": "Edit application",
     "submit": "Submit application",
     "submitInProcess": "Submitting...",
     "success": {

@@ -12,6 +12,7 @@ import BlockLoader from '../loader/blockLoader';
 import ApplicationPage from '../application/applicationPage';
 import ApplicationRootPage from '../application/applicationRootPage';
 import ApplicationSuccessPage from '../application/applicationSuccessPage';
+import ApplicationPreviewPage from '../application/applicationPreviewPage';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -168,6 +169,13 @@ const SiteRoutes = (): JSX.Element => {
                       AppRoutes.APPLICATION_ROOT
                     )}
                     element={<ApplicationPage />}
+                  />
+                  <Route
+                    path={getPartialRouteById(
+                      AppRoutes.APPLICATION_PREVIEW,
+                      AppRoutes.APPLICATION_ROOT
+                    )}
+                    element={<ApplicationPreviewPage />}
                   />
                   <Route
                     path={getPartialRouteById(

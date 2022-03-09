@@ -3,14 +3,13 @@ import { WrappedFieldProps } from 'redux-form';
 import { ApiAttributes } from '../api/types';
 import { FormField } from '../plotSearch/types';
 
+export type NestedFieldLeaf = string | number | boolean | null;
+
 // A type definition cannot contain circular references, but an interface definition can,
 // thus this is implemented this way.
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NestedField
-  extends Record<
-    string,
-    string | number | boolean | null | NestedField | Array<NestedField>
-  > {}
+  extends Record<string, NestedFieldLeaf | NestedField | Array<NestedField>> {}
 
 export type FieldTypeMapping = Record<number, string>;
 
@@ -140,3 +139,20 @@ export interface FileOperationFinishedAction {
 }
 
 export const APPLICATION_FORM_NAME = 'application';
+
+export type ApplicationField = {
+  value: NestedFieldLeaf;
+  extraValue: NestedFieldLeaf;
+};
+
+export type ApplicationFormNode = {
+  fields: Record<string, ApplicationField>;
+  sections:
+    | Record<string, ApplicationFormNode>
+    | Record<string, Array<ApplicationFormNode>>;
+};
+
+export type ApplicationFormRoot = {
+  sections: Record<string, ApplicationFormNode>;
+  sectionTemplates: Record<string, NestedField>;
+};

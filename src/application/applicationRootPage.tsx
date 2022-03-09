@@ -6,6 +6,11 @@ import { APPLICATION_FORM_NAME, NestedField } from './types';
 import { getInitialApplicationForm } from './helpers';
 import { RootState } from '../root/rootReducer';
 import { PlotSearch } from '../plotSearch/types';
+import { fetchPlotSearches } from '../plotSearch/actions';
+import {
+  fetchFormAttributes,
+  resetLastApplicationSubmissionError,
+} from './actions';
 
 interface State {
   formTemplate: NestedField;
@@ -16,6 +21,9 @@ interface Props {
   initializeForm: typeof initialize;
   formTemplate: NestedField;
   plotSearches: Array<PlotSearch>;
+  fetchPlotSearches: () => void;
+  fetchFormAttributes: () => void;
+  resetLastApplicationSubmissionError: () => void;
 }
 
 const ApplicationRootPage = ({
@@ -23,10 +31,19 @@ const ApplicationRootPage = ({
   formTemplate,
   plotSearches,
   children,
+  fetchPlotSearches,
+  fetchFormAttributes,
+  resetLastApplicationSubmissionError,
 }: PropsWithChildren<Props>): JSX.Element => {
   useEffect(() => {
     initializeForm(APPLICATION_FORM_NAME, formTemplate, true);
   }, [plotSearches]);
+
+  useEffect(() => {
+    fetchPlotSearches();
+    fetchFormAttributes();
+    resetLastApplicationSubmissionError();
+  }, []);
 
   return <>{children}</>;
 };
@@ -38,6 +55,9 @@ export default connect(
   }),
   {
     initializeForm: initialize,
+    fetchPlotSearches,
+    fetchFormAttributes,
+    resetLastApplicationSubmissionError,
   }
 )(
   reduxForm<unknown, PropsWithChildren<Props>>({
