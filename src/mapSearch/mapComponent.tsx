@@ -9,15 +9,15 @@ import * as L from 'leaflet';
 import 'proj4leaflet';
 import { LatLng } from 'leaflet';
 import { useTranslation } from 'react-i18next';
-import { PlotSearch } from '../../plotSearch/types';
+import { PlotSearch } from '../plotSearch/types';
 import {
   CategoryOptions,
   CategoryVisibilities,
   SelectedTarget,
-} from '../plotSearchAndCompetitionsPage';
+} from './mapSearchPage';
 import MapPlotSearchOverlay from './mapPlotSearchOverlay';
-import { initializeHelsinkiMap } from '../utils';
-import { Favourite } from '../../favourites/types';
+import { initializeHelsinkiMap } from './utils';
+import { Favourite } from '../favourites/types';
 
 interface Props {
   plotSearches: Array<PlotSearch>;

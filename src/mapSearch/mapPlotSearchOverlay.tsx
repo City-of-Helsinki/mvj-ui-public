@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
+import { PlotSearch, PlotSearchTarget } from '../plotSearch/types';
 import { useMapEvents, GeoJSON, Marker, useMap } from 'react-leaflet';
 import L, { DivIcon, LatLngExpression } from 'leaflet';
-import { getCentroid } from '../utils';
-import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
+import { getCentroid } from './utils';
+import { SelectedTarget } from './mapSearchPage';
 import { renderToStaticMarkup } from 'react-dom/server';
 import MapSymbol from './mapSymbol';
-import { FavouriteTarget } from '../../favourites/types';
+import { FavouriteTarget } from '../favourites/types';
 import { useNavigate } from 'react-router';
-import { AppRoutes, getRouteById } from '../../root/routes';
+import { AppRoutes, getRouteById } from '../root/routes';
 
 interface Props {
   plotSearchTargets: PlotSearchTarget[];

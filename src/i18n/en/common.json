@@ -153,8 +153,18 @@
     "mapView": {
       "sidebar": {
         "notification": {
-          "body": "<0>You can attend only in one plot search per application.</0><1>If one plot search contains multiple searchable targets, you can add those in the same application.</1><2>If you want to attend other plot search, you need to fill new application for every plot search.</2>",
-          "title": "Attention!"
+          "noTargetsToShow": {
+            "body": "<0>There are no searches of this type that you can apply to available at the moment.</0>",
+            "title": "Notice"
+          },
+          "selectionInAnotherTab": {
+            "body": "<0>You can only apply for one plot search per application.</0><1>Your currently selected targets are of a different search type than the ones shown on this page, and as a result, no targets can be added on this page. <2>See your currently selected targets.</2></1>",
+            "title": "Attention!"
+          },
+          "singlePlotSearchAllowed": {
+            "body": "<0>You can only apply for one plot search per application.</0><1>If one plot search contains multiple searchable targets, you can add those in the same application.</1><2>If you want to apply for targets in another plot search, you need to fill a new application for every plot search separately.</2>",
+            "title": "Attention!"
+          }
         },
         "sectionApplyBy": "Apply by {{date}}",
         "singleTarget": {

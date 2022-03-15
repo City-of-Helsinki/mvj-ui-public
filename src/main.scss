@@ -14,11 +14,11 @@
 @import 'login/components/loginForm';
 @import 'panel/sidePanel';
 @import 'app';
-@import 'plotSearchAndCompetitionsPage/components/mapSymbol';
-@import 'plotSearchAndCompetitionsPage/components/mapSearchComponent';
-@import 'plotSearchAndCompetitionsPage/components/mapSearchSingleTargetView';
-@import 'plotSearchAndCompetitionsPage/components/mapComponent';
-@import 'plotSearchAndCompetitionsPage/components/infoLinks';
+@import 'src/mapSearch/mapSymbol';
+@import 'src/mapSearch/mapSearchComponent';
+@import 'src/mapSearch/mapSearchSingleTargetView';
+@import 'src/mapSearch/mapComponent';
+@import 'src/mapSearch/infoLinks';
 @import 'favouritesPage/favouritesPage';
 @import 'favouritesPage/components/favouriteCard';
 @import 'favouritesPage/components/favouriteCardDetails';

@@ -5,16 +5,16 @@ import { Row, Col } from 'react-grid-system';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { PlanUnit, PlotSearch, PlotSearchTarget } from '../../plotSearch/types';
-import { ApiAttributeChoice, ApiAttributes } from '../../api/types';
-import { SelectedTarget } from '../plotSearchAndCompetitionsPage';
-import { RootState } from '../../root/rootReducer';
-import Breadcrumbs from '../../breadcrumbs/breadcrumbs';
-import { defaultLanguage } from '../../i18n';
-import { renderDateTime } from '../../i18n/utils';
-import { AddTargetPayload, Favourite } from '../../favourites/types';
+import { PlanUnit, PlotSearch, PlotSearchTarget } from '../plotSearch/types';
+import { ApiAttributeChoice, ApiAttributes } from '../api/types';
+import { SelectedTarget } from './mapSearchPage';
+import { RootState } from '../root/rootReducer';
+import Breadcrumbs from '../breadcrumbs/breadcrumbs';
+import { defaultLanguage } from '../i18n';
+import { renderDateTime } from '../i18n/utils';
+import { AddTargetPayload, Favourite } from '../favourites/types';
 import InfoLinks from './infoLinks';
-import { AppRoutes, getRouteById } from '../../root/routes';
+import { AppRoutes, getRouteById } from '../root/routes';
 
 interface State {
   plotSearchAttributes: ApiAttributes;
