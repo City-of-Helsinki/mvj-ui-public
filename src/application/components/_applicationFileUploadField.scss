@@ -22,5 +22,10 @@
         padding: 0 $spacing-s;
       }
     }
+
+    .ApplicationFileUploadField__no-files-uploaded {
+      text-align: center;
+      padding: $spacing-s;
+    }
   }
 }
