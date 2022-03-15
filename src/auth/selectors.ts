@@ -14,6 +14,10 @@ export const getUser: Selector<RootState, User | null> = (
   state: RootState
 ): User | null => state.oidc.user || null;
 
+export const hasApiToken: Selector<RootState, boolean> = (
+  state: RootState
+): boolean => !!state.auth.apiToken;
+
 export const getIsLoadingUser: Selector<RootState, boolean> = (
   state: RootState
 ): boolean => state.oidc.isLoadingUser;

@@ -5,12 +5,30 @@
       "remove": "Poista"
     },
     "error": {
+      "generic": "Hakemuksen lähettäminen epäonnistui. Yritä myöhemmin uudelleen.",
+      "label": "Lähetys epäonnistui",
       "noFormAvailable": "Valitsemillesi tonteille ei ole vielä määritetty hakulomaketta. Ota yhteyttä ja korjaamme tilanteen.",
       "noPlotsSelected": "Voit täyttää tonttihakemuksen valittuasi ensin tonttihakusivulta yhden tai useamman haettavan kohteen.",
       "notLoggedIn": "Kirjaudu ensin sisään hakeaksesi tontteja."
     },
+    "fileUpload": {
+      "delete": "Poista",
+      "deleteHeader": "Poista",
+      "filename": "Tiedosto",
+      "info": "Suurin sallittu tiedostokoko on {{maxSize}} Mt.",
+      "newFile": "Lisää tiedosto",
+      "number": "Liite",
+      "rowLabel": "Liite {{number}}",
+      "uploadedAt": "Lähetetty"
+    },
     "heading": "Tonttihakemus",
     "loginButton": "Kirjaudu sisään",
+    "submit": "Lähetä hakemus",
+    "submitInProcess": "Hakemusta lähetetään...",
+    "success": {
+      "body": "Hakemuksesi on nyt lähetetty.",
+      "heading": "Kiitos hakemuksestasi"
+    },
     "targets": {
       "identifier": "Tontti",
       "screenReaderHeading": "Haettavat tontit"
@@ -36,7 +54,6 @@
       "title": "Haluatko hakea lisää tontteja?"
     },
     "targetCard": {
-      "infoLinkHeader": "Lisätietoja",
       "removeButton": "Poista listalta",
       "showFullDesc": {
         "hide": "Piilota kohteen tarkemmat tiedot",

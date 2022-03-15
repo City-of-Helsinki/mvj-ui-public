@@ -10,6 +10,8 @@ import FinalizeLogin from '../auth/components/finalizeLogin';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
 import ApplicationPage from '../application/applicationPage';
+import ApplicationRootPage from '../application/applicationRootPage';
+import ApplicationSuccessPage from '../application/applicationSuccessPage';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -23,6 +25,7 @@ export const AppRoutes = {
   MESSAGES: 'messages',
   FAVOURITES: 'favourites',
   OIDC_CALLBACK: 'oidc-callback',
+  APPLICATION_ROOT: 'application-root',
   APPLICATION_FORM: 'application-form',
   APPLICATION_PREVIEW: 'application-preview',
   APPLICATION_SUBMIT: 'application-submit',
@@ -46,12 +49,26 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.MESSAGES]: '/viestit',
     [AppRoutes.FAVOURITES]: '/suosikit',
     [AppRoutes.OIDC_CALLBACK]: '/oidc/callback',
-    [AppRoutes.APPLICATION_FORM]: '/tee-hakemus/tietojen-taytto',
-    [AppRoutes.APPLICATION_PREVIEW]: '/tee-hakemus/tietojen-tarkistus',
-    [AppRoutes.APPLICATION_SUBMIT]: '/tee-hakemus/lahetys',
+    [AppRoutes.APPLICATION_ROOT]: '/hakemus',
+    [AppRoutes.APPLICATION_FORM]: '/hakemus/tietojen-taytto',
+    [AppRoutes.APPLICATION_PREVIEW]: '/hakemus/tietojen-tarkistus',
+    [AppRoutes.APPLICATION_SUBMIT]: '/hakemus/lahetys',
   };
 
   return routes[id] ? routes[id] : '';
+};
+
+export const getPartialRouteById = (id: string, parentId: string): string => {
+  const target = getRouteById(id);
+  const parent = getRouteById(parentId);
+
+  if (!target.startsWith(parent)) {
+    throw new Error(
+      `Invalid route nesting pattern! ${target} is not a subroute of ${parent}.`
+    );
+  }
+
+  return target.slice(parent.length);
 };
 
 const SiteRoutes = (): JSX.Element => {
@@ -131,8 +148,28 @@ const SiteRoutes = (): JSX.Element => {
             }
           />
           <Route
-            path={getRouteById(AppRoutes.APPLICATION_FORM)}
-            element={<ApplicationPage />}
+            path={getRouteById(AppRoutes.APPLICATION_ROOT) + '/*'}
+            element={
+              <ApplicationRootPage>
+                <Routes>
+                  <Route
+                    path={getPartialRouteById(
+                      AppRoutes.APPLICATION_FORM,
+                      AppRoutes.APPLICATION_ROOT
+                    )}
+                    element={<ApplicationPage />}
+                  />
+                  <Route
+                    path={getPartialRouteById(
+                      AppRoutes.APPLICATION_SUBMIT,
+                      AppRoutes.APPLICATION_ROOT
+                    )}
+                    element={<ApplicationSuccessPage />}
+                  />
+                  <Route path="*" element={<ErrorPage />} />
+                </Routes>
+              </ApplicationRootPage>
+            }
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

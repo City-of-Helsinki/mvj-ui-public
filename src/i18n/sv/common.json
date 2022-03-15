@@ -5,12 +5,30 @@
       "remove": ""
     },
     "error": {
+      "generic": "",
+      "label": "",
       "noFormAvailable": "",
       "noPlotsSelected": "",
       "notLoggedIn": ""
     },
+    "fileUpload": {
+      "delete": "",
+      "deleteHeader": "",
+      "filename": "",
+      "info": "",
+      "newFile": "",
+      "number": "",
+      "rowLabel": "",
+      "uploadedAt": ""
+    },
     "heading": "",
     "loginButton": "",
+    "submit": "",
+    "submitInProcess": "",
+    "success": {
+      "body": "",
+      "heading": ""
+    },
     "targets": {
       "identifier": "",
       "screenReaderHeading": ""
@@ -36,7 +54,6 @@
       "title": ""
     },
     "targetCard": {
-      "infoLinkHeader": "",
       "removeButton": "",
       "showFullDesc": {
         "hide": "",

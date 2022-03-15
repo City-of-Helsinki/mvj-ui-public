@@ -1,7 +1,31 @@
 import { all, call, Effect, fork, put, takeLatest } from 'redux-saga/effects';
-import { fetchFormAttributesRequest } from './requests';
-import { FETCH_FORM_ATTRIBUTES } from './types';
-import { formAttributesNotFound, receiveFormAttributes } from './actions';
+import {
+  deleteUploadRequest,
+  fetchFormAttributesRequest,
+  fetchPendingUploadsRequest,
+  submitApplicationRequest,
+  uploadFileRequest,
+} from './requests';
+import {
+  DELETE_UPLOAD,
+  DeleteUploadAction,
+  FETCH_FORM_ATTRIBUTES,
+  FETCH_PENDING_UPLOADS,
+  SUBMIT_APPLICATION,
+  SubmitApplicationAction,
+  UPLOAD_FILE,
+  UploadFileAction,
+} from './types';
+import {
+  applicationSubmissionFailed,
+  fetchPendingUploads,
+  fileOperationFinished,
+  formAttributesNotFound,
+  pendingUploadsNotFound,
+  receiveApplicationSaved,
+  receiveFormAttributes,
+  receivePendingUploads,
+} from './actions';
 import { ApiCallResult } from '../api/callApi';
 import { ApiAttributes } from '../api/types';
 import { logError } from '../root/helpers';
@@ -25,10 +49,88 @@ function* fetchFormAttributesSaga(): Generator<Effect, void, ApiCallResult> {
   }
 }
 
+function* submitApplicationSaga({
+  payload,
+}: SubmitApplicationAction): Generator<Effect, void, ApiCallResult> {
+  try {
+    const { response, bodyAsJson } = yield call(
+      submitApplicationRequest,
+      payload
+    );
+
+    switch (response.status) {
+      case 200:
+      case 201:
+        yield put(receiveApplicationSaved(bodyAsJson.id as number));
+        break;
+      default:
+        yield put(applicationSubmissionFailed(bodyAsJson));
+        break;
+    }
+  } catch (e) {
+    logError(e);
+    yield put(applicationSubmissionFailed(e));
+    throw e;
+  }
+}
+
+function* fetchPendingUploadsSaga(): Generator<Effect, void, ApiCallResult> {
+  try {
+    const { response, bodyAsJson } = yield call(fetchPendingUploadsRequest);
+
+    switch (response.status) {
+      case 200:
+        yield put(receivePendingUploads(bodyAsJson.results));
+        break;
+      default:
+        yield put(pendingUploadsNotFound());
+        break;
+    }
+  } catch (e) {
+    logError(e);
+    yield put(pendingUploadsNotFound());
+    throw e;
+  }
+}
+
+function* deleteUploadSaga({
+  payload,
+}: DeleteUploadAction): Generator<Effect, void, ApiCallResult> {
+  try {
+    yield call(deleteUploadRequest, payload);
+
+    yield put(fileOperationFinished());
+    yield put(fetchPendingUploads());
+  } catch (e) {
+    logError(e);
+    yield put(pendingUploadsNotFound());
+    throw e;
+  }
+}
+
+function* uploadFileSaga({
+  payload,
+}: UploadFileAction): Generator<Effect, void, ApiCallResult> {
+  try {
+    yield call(uploadFileRequest, payload);
+
+    yield put(fileOperationFinished());
+    yield put(fetchPendingUploads());
+  } catch (e) {
+    logError(e);
+    yield put(pendingUploadsNotFound());
+    throw e;
+  }
+}
+
 export default function* applicationSaga(): Generator {
   yield all([
     fork(function* (): Generator {
       yield takeLatest(FETCH_FORM_ATTRIBUTES, fetchFormAttributesSaga);
+      yield takeLatest(FETCH_PENDING_UPLOADS, fetchPendingUploadsSaga);
+      yield takeLatest(DELETE_UPLOAD, deleteUploadSaga);
+      yield takeLatest(UPLOAD_FILE, uploadFileSaga);
+      yield takeLatest(SUBMIT_APPLICATION, submitApplicationSaga);
     }),
   ]);
 }
