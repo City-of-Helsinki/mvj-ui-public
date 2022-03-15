@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, initialize } from 'redux-form';
 
-import { APPLICATION_FORM_NAME, NestedField } from './types';
+import { APPLICATION_FORM_NAME, ApplicationFormRoot } from './types';
 import { getInitialApplicationForm } from './helpers';
 import { RootState } from '../root/rootReducer';
 import { PlotSearch } from '../plotSearch/types';
@@ -13,13 +13,13 @@ import {
 } from './actions';
 
 interface State {
-  formTemplate: NestedField;
+  formTemplate: ApplicationFormRoot;
   plotSearches: Array<PlotSearch>;
 }
 
 interface Props {
   initializeForm: typeof initialize;
-  formTemplate: NestedField;
+  formTemplate: ApplicationFormRoot;
   plotSearches: Array<PlotSearch>;
   fetchPlotSearches: () => void;
   fetchFormAttributes: () => void;

@@ -48,6 +48,7 @@ export type ApplicationSubmission = {
   targets: Array<number>;
   form: number;
   entries: NestedField;
+  attachments: Array<number>;
 };
 
 export type UploadedFileMeta = {
@@ -155,4 +156,5 @@ export type ApplicationFormNode = {
 export type ApplicationFormRoot = {
   sections: Record<string, ApplicationFormNode>;
   sectionTemplates: Record<string, NestedField>;
+  fileFieldIds: Array<number>;
 };

@@ -13,18 +13,21 @@ import { getFieldTypeMapping } from './selectors';
 import { store } from '../index';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
 
-export const getInitialApplicationForm = (state: RootState): NestedField => {
+export const getInitialApplicationForm = (
+  state: RootState
+): ApplicationFormRoot => {
   const plotSearch = getPlotSearchFromFavourites(state);
-
-  if (!plotSearch) {
-    return {};
-  }
-
-  const form = plotSearch.form;
   const root: ApplicationFormRoot = {
     sections: {},
     sectionTemplates: {},
+    fileFieldIds: [],
   };
+
+  if (!plotSearch) {
+    return root;
+  }
+
+  const form = plotSearch.form;
   const fieldTypes = getFieldTypeMapping(state);
 
   const buildSection = (
@@ -54,6 +57,7 @@ export const getInitialApplicationForm = (state: RootState): NestedField => {
     switch (fieldTypes[field.type]) {
       case SupportedFieldTypes.FileUpload:
         // handled outside redux-form
+        root.fileFieldIds.push(field.id);
         break;
       case SupportedFieldTypes.SelectField:
       case SupportedFieldTypes.RadioButton:
@@ -109,6 +113,10 @@ export const getSectionTemplate = (identifier: string): NestedField => {
 export const prepareApplicationForSubmission = (): ApplicationSubmission => {
   const state: RootState = store.getState();
   const sections = formValueSelector(APPLICATION_FORM_NAME)(state, 'sections');
+  const fileFieldIds = formValueSelector(APPLICATION_FORM_NAME)(
+    state,
+    'fileFieldIds'
+  );
 
   const favourite = state.favourite.favourite;
   const relevantPlotSearch = getPlotSearchFromFavourites(state);
@@ -125,5 +133,8 @@ export const prepareApplicationForSubmission = (): ApplicationSubmission => {
       sections,
     },
     targets: favourite.targets.map((target) => target.plot_search_target.id),
+    attachments: state.application.pendingUploads
+      .filter((upload) => fileFieldIds.includes(upload.field))
+      .map((upload) => upload.id),
   };
 };
