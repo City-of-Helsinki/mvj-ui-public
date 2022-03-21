@@ -1,0 +1,42 @@
+.ApplicationPreviewPage {
+  padding-top: $spacing-layout-s;
+  padding-bottom: $spacing-layout-s;
+
+  .ApplicationPreviewPage__submission-button {
+    margin-top: $spacing-m;
+    margin-bottom: $spacing-m;
+    margin-right: $spacing-s;
+  }
+
+  .ApplicationPreviewPage__top-level-sections
+    > .ApplicationPreviewPage__subsection {
+    padding: $spacing-l 0;
+    border-bottom: 1px solid $color-black-20;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    > h2 {
+      margin-top: $spacing-xs;
+    }
+  }
+
+  .ApplicationPreviewPage__subsection {
+    h3 {
+      margin: $spacing-l 0;
+    }
+
+    .ApplicationPreviewPage__subsection-content {
+      .ApplicationPreviewPage__subsection-fields {
+        .ApplicationPreviewPage__subsection-field {
+          margin: $spacing-xs 0;
+
+          dt {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

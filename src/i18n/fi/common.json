@@ -23,6 +23,14 @@
     },
     "heading": "Tonttihakemus",
     "loginButton": "Kirjaudu sisään",
+    "preview": {
+      "attachmentNo": "Liite {{number}}",
+      "booleanNo": "Ei",
+      "booleanYes": "Kyllä",
+      "heading": "Esikatselu – tonttihakemus"
+    },
+    "previewButton": "Siirry esikatseluun",
+    "returnToForm": "Muokkaa hakemusta",
     "submit": "Lähetä hakemus",
     "submitInProcess": "Hakemusta lähetetään...",
     "success": {

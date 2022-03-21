@@ -23,6 +23,14 @@
     },
     "heading": "",
     "loginButton": "",
+    "preview": {
+      "attachmentNo": "",
+      "booleanNo": "",
+      "booleanYes": "",
+      "heading": ""
+    },
+    "previewButton": "",
+    "returnToForm": "",
     "submit": "",
     "submitInProcess": "",
     "success": {

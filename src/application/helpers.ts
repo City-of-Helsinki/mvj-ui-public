@@ -3,6 +3,7 @@ import { formValueSelector } from 'redux-form';
 import { RootState } from '../root/rootReducer';
 import {
   APPLICATION_FORM_NAME,
+  ApplicationFormRoot,
   ApplicationSubmission,
   NestedField,
   SupportedFieldTypes,
@@ -20,10 +21,7 @@ export const getInitialApplicationForm = (state: RootState): NestedField => {
   }
 
   const form = plotSearch.form;
-  const root: {
-    sections: NestedField;
-    sectionTemplates: Record<string, NestedField>;
-  } = {
+  const root: ApplicationFormRoot = {
     sections: {},
     sectionTemplates: {},
   };

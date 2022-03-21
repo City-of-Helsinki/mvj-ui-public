@@ -1,0 +1,32 @@
+.ApplicationTargetList {
+  .ApplicationTargetList__targets {
+    padding-left: 0;
+    margin-left: 1px;
+    overflow: hidden;
+    row-gap: $spacing-s;
+
+    li {
+      list-style: none;
+      border-left: 1px solid $color-black-20;
+      padding: $spacing-xs $spacing-m;
+
+      // Offset the items so that the first item on each flex line gets its leftmost pixel (with the border)
+      // cut off. This lets us style the separators easily for all column configurations without also leaving
+      // around ugly extra borders on the very left.
+      margin-left: -1px !important;
+
+      .ApplicationTargetList__target-address {
+        font-size: $fontsize-heading-s;
+        font-weight: bold;
+      }
+      .ApplicationTargetList__target-identifier {
+        margin-top: $spacing-xs;
+
+        .ApplicationTargetList__target-identifier-text {
+          font-size: $fontsize-heading-xs;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
