@@ -17,6 +17,7 @@
       "filename": "File",
       "info": "The maximum allowed file size is {{maxSize}} MB.",
       "newFile": "Upload a new file",
+      "noFilesUploaded": "No files have yet been uploaded.",
       "number": "Attachment",
       "rowLabel": "Attachment #{{number}}",
       "uploadedAt": "Uploaded at"

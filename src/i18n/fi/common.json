@@ -17,6 +17,7 @@
       "filename": "Tiedosto",
       "info": "Suurin sallittu tiedostokoko on {{maxSize}} Mt.",
       "newFile": "Lisää tiedosto",
+      "noFilesUploaded": "Yhtään tiedostoa ei ole vielä lisätty.",
       "number": "Liite",
       "rowLabel": "Liite {{number}}",
       "uploadedAt": "Lähetetty"

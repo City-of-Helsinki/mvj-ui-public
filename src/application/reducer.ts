@@ -91,7 +91,8 @@ const applicationSlice = createSlice({
       state,
       { payload }: ReceivePendingUploadsAction
     ) => {
-      state.pendingUploads = payload;
+      // TODO: filtering should probably be done server-side already
+      state.pendingUploads = payload.filter((upload) => upload.answer === null);
     },
     [UPLOAD_FILE]: (state) => {
       state.isPerformingFileOperation = true;

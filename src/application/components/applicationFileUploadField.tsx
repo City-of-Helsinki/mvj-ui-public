@@ -86,6 +86,19 @@ const ApplicationFileUploadField = ({
                 </td>
               </tr>
             ))}
+            {filesForField.length === 0 && (
+              <tr>
+                <td
+                  colSpan={4}
+                  className="ApplicationFileUploadField__no-files-uploaded"
+                >
+                  {t(
+                    'application.fileUpload.noFilesUploaded',
+                    'No files have yet been uploaded.'
+                  )}
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
         {isPerformingFileOperation ? (
