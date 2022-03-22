@@ -8,17 +8,16 @@
 @import 'button/iconButton';
 @import 'footer/footer';
 @import 'frontPage/frontPage';
-@import 'frontPage/components/frontPageBox';
 @import 'topNavigation/topNavigation';
 @import 'topNavigation/components/topNavigationFavouritesIcon';
 @import 'login/components/loginForm';
 @import 'panel/sidePanel';
 @import 'app';
-@import 'src/mapSearch/mapSymbol';
-@import 'src/mapSearch/mapSearchComponent';
-@import 'src/mapSearch/mapSearchSingleTargetView';
-@import 'src/mapSearch/mapComponent';
-@import 'src/mapSearch/infoLinks';
+@import 'mapSearch/mapSymbol';
+@import 'mapSearch/mapSearchComponent';
+@import 'mapSearch/mapSearchSingleTargetView';
+@import 'mapSearch/mapComponent';
+@import 'mapSearch/infoLinks';
 @import 'favouritesPage/favouritesPage';
 @import 'favouritesPage/components/favouriteCard';
 @import 'favouritesPage/components/favouriteCardDetails';
@@ -34,6 +33,9 @@
 @import 'application/components/applicationFileUploadField';
 @import 'application/components/applicationTargetList';
 @import 'a11y/screenReaderText';
+@import 'areaSearch/areaSearchLandingPage';
+@import 'boxGrid/boxGrid';
+@import 'boxGrid/boxGridBox';
 
 html {
   -webkit-font-smoothing: antialiased;
