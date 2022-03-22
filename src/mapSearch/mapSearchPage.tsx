@@ -21,6 +21,7 @@ import {
 import { Favourite } from '../favourites/types';
 import { useNavigate, useParams } from 'react-router';
 import { AppRoutes, getRouteById } from '../root/routes';
+import MainContentElement from '../a11y/MainContentElement';
 
 interface State {
   isFetchingPlotSearches: boolean;
@@ -171,7 +172,7 @@ const MapSearchPage = (props: Props): JSX.Element => {
   }
 
   return (
-    <div className="MapSearchPage">
+    <MainContentElement className="MapSearchPage">
       <MapSearchComponent
         categoryOptions={categoryOptions}
         categoryVisibilities={categoryVisibilities}
@@ -194,7 +195,7 @@ const MapSearchPage = (props: Props): JSX.Element => {
         hoveredTargetId={hoveredTargetId}
         setHoveredTargetId={setHoveredTargetId}
       />
-    </div>
+    </MainContentElement>
   );
 };
 

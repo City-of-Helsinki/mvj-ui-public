@@ -1,6 +1,5 @@
 .FavouritesPage {
-  padding-top: $spacing-4-xl;
-  padding-bottom: $spacing-4-xl;
+  @include pageTopLevelComponent();
 
   .FavouritesPage__actions {
     margin-top: $spacing-xl;

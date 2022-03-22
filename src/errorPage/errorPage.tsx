@@ -1,12 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import MainContentElement from '../a11y/MainContentElement';
 
 const ErrorPage = (): JSX.Element => {
   const { t } = useTranslation();
   return (
-    <div className="ErrorPage">
+    <MainContentElement className="ErrorPage">
       {t('error.pageNotFound', '404 Page not found')}
-    </div>
+    </MainContentElement>
   );
 };
 

@@ -1,5 +1,10 @@
 @import '../application/components/mixins';
 
+@mixin pageTopLevelComponent() {
+  padding-top: $spacing-layout-l;
+  padding-bottom: $spacing-layout-l;
+}
+
 @mixin transform($args...) {
   -webkit-transform: $args;
   -moz-transform: $args;

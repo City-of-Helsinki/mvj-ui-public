@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import BoxGrid from '../boxGrid/boxGrid';
 import BoxGridBox from '../boxGrid/boxGridBox';
 import { AppRoutes, getRouteById } from '../root/routes';
+import MainContentElement from '../a11y/MainContentElement';
 
 const AreaSearchLandingPage = (): JSX.Element => {
   const { t } = useTranslation();
@@ -24,7 +25,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
   );
 
   return (
-    <div className="AreaSearchLandingPage">
+    <MainContentElement className="AreaSearchLandingPage">
       <Container>
         <h1>
           {t('areaSearch.landingPage.heading', 'Apply for a land area lease')}
@@ -202,7 +203,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
           />
         </BoxGrid>
       </Container>
-    </div>
+    </MainContentElement>
   );
 };
 

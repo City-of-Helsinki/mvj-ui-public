@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 
 import BoxGrid from '../boxGrid/boxGrid';
 import BoxGridBox from '../boxGrid/boxGridBox';
+import MainContentElement from '../a11y/MainContentElement';
 
 const FrontPage = (): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <div className="FrontPage">
+    <MainContentElement className="FrontPage">
       <div className="FrontPage__banner">
         <div className="FrontPage__heading-container">
           <h3>
@@ -96,7 +97,7 @@ const FrontPage = (): JSX.Element => {
           )}
         </p>
       </div>
-    </div>
+    </MainContentElement>
   );
 };
 
