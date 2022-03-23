@@ -5,6 +5,10 @@ import { useTranslation } from 'react-i18next';
 import BoxGrid from '../boxGrid/boxGrid';
 import BoxGridBox from '../boxGrid/boxGridBox';
 import MainContentElement from '../a11y/MainContentElement';
+import { ReactComponent as PlotSearchesImage } from '../assets/images/frontPage/plotSearches.svg';
+import { ReactComponent as OtherSearchesImage } from '../assets/images/frontPage/otherSearches.svg';
+import { ReactComponent as AreaSearchesImage } from '../assets/images/areaSearch/areaSearch.svg';
+import { ReactComponent as ApplyForChangesImage } from '../assets/images/frontPage/applyForChanges.svg';
 
 const FrontPage = (): JSX.Element => {
   const { t } = useTranslation();
@@ -46,7 +50,8 @@ const FrontPage = (): JSX.Element => {
               'frontPage.plotSearchAndCompetitions.explanation',
               'Plots for long-term housing or industrial activities'
             )}
-            color={'pink'}
+            color="pink"
+            image={<PlotSearchesImage />}
           />
           <BoxGridBox
             topLabel={t(
@@ -64,7 +69,8 @@ const FrontPage = (): JSX.Element => {
               'frontPage.otherCompetitionsAndSearches.explanation',
               'Description lorem ipsum dolor sit amet et cetera et cetera.'
             )}
-            color={'gray'}
+            color="gray"
+            image={<OtherSearchesImage />}
           />
           <BoxGridBox
             topLabel={t('frontPage.areaSearch.counter', 'Area search')}
@@ -73,7 +79,8 @@ const FrontPage = (): JSX.Element => {
               'frontPage.areaSearch.explanation',
               'Description lorem ipsum dolor sit amet et cetera et cetera.'
             )}
-            color={'yellow'}
+            color="yellow"
+            image={<AreaSearchesImage />}
           />
           <BoxGridBox
             topLabel={t('frontPage.applyChange.counter', 'Existing leases')}
@@ -85,7 +92,8 @@ const FrontPage = (): JSX.Element => {
               'frontPage.applyChange.explanation',
               'Description lorem ipsum dolor sit amet et cetera et cetera.'
             )}
-            color={'blue'}
+            color="blue"
+            image={<ApplyForChangesImage />}
           />
         </BoxGrid>
 
