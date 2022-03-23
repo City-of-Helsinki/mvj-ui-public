@@ -6,6 +6,7 @@ interface Props {
   label: string;
   bottomText: string;
   color?: 'pink' | 'gray' | 'yellow' | 'blue';
+  image?: ReactNode;
   actions?: ReactNode;
 }
 
@@ -14,12 +15,13 @@ const BoxGridBox = ({
   label,
   bottomText,
   color = 'gray',
+  image,
   actions,
 }: Props): JSX.Element => {
   return (
     <div className={classNames('BoxGridBox', `BoxGridBox--${color}`)}>
       {topLabel && <div className="BoxGridBox__top-label">{topLabel}</div>}
-      <div className="BoxGridBox__image" />
+      {image && <div className="BoxGridBox__image">{image}</div>}
       <div className="BoxGridBox__label">{label}</div>
       <div className="BoxGridBox__bottom-text">{bottomText}</div>
       {actions && <div className="BoxGridBox__actions">{actions}</div>}

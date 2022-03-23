@@ -8,6 +8,13 @@ import BoxGrid from '../boxGrid/boxGrid';
 import BoxGridBox from '../boxGrid/boxGridBox';
 import { AppRoutes, getRouteById } from '../root/routes';
 import MainContentElement from '../a11y/MainContentElement';
+import { ReactComponent as AreaSearchImage } from '../assets/images/areaSearch/areaSearch.svg';
+import { ReactComponent as OtherConstructionImage } from '../assets/images/areaSearch/otherConstruction.svg';
+import { ReactComponent as PermanentFixturesImage } from '../assets/images/areaSearch/permanentFixtures.svg';
+import { ReactComponent as TerracesAndParkletsImage } from '../assets/images/areaSearch/terracesAndParklets.svg';
+import { ReactComponent as OutdoorEventImage } from '../assets/images/areaSearch/outdoorEvent.svg';
+import { ReactComponent as CommercialUsesImage } from '../assets/images/areaSearch/commercialUses.svg';
+import { ReactComponent as MiscUsesImage } from '../assets/images/areaSearch/misc.svg';
 
 const AreaSearchLandingPage = (): JSX.Element => {
   const { t } = useTranslation();
@@ -68,6 +75,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 </Button>
               </>
             }
+            image={<AreaSearchImage />}
           />
         </BoxGrid>
 
@@ -95,6 +103,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 />
               </>
             }
+            image={<OtherConstructionImage />}
           />
           <BoxGridBox
             label={t(
@@ -116,6 +125,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 />
               </>
             }
+            image={<PermanentFixturesImage />}
           />
           <BoxGridBox
             label={t(
@@ -137,6 +147,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 />
               </>
             }
+            image={<TerracesAndParkletsImage />}
           />
           <BoxGridBox
             label={t(
@@ -158,6 +169,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 />
               </>
             }
+            image={<OutdoorEventImage />}
           />
           <BoxGridBox
             label={t(
@@ -179,6 +191,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 />
               </>
             }
+            image={<CommercialUsesImage />}
           />
           <BoxGridBox
             label={t(
@@ -200,6 +213,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 />
               </>
             }
+            image={<MiscUsesImage />}
           />
         </BoxGrid>
       </Container>

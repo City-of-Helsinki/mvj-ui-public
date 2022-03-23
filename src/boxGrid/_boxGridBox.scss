@@ -30,11 +30,7 @@
     margin-top: -$spacing-s / 2;
   }
   .BoxGridBox__image {
-    background-color: #00000022;
     margin: $spacing-m auto;
-    width: 50%;
-    max-height: 100px;
-    height: 50%;
 
     &:first-child {
       margin-top: 0;
