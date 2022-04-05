@@ -1,9 +1,11 @@
-.FrontPageBox {
+.BoxGridBox {
   width: 280px;
-  height: 380px;
+  min-height: 380px;
   margin: $spacing-s / 2;
-  padding: $spacing-s;
-  overflow: scroll;
+  padding: $spacing-m $spacing-s;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 
   &--pink {
     background-color: $color-suomenlinna;
@@ -21,26 +23,33 @@
     background-color: $color-coat-of-arms-medium-light;
   }
 
-  .FrontPageBox__top-label {
+  .BoxGridBox__top-label {
     display: flex;
     align-items: flex-start;
     font-weight: bold;
+    margin-top: -$spacing-s / 2;
   }
-  .FrontPageBox__image {
-    background-color: #00000022;
-    margin: 30px auto;
-    width: 50%;
-    max-height: 100px;
-    height: 50%;
+  .BoxGridBox__image {
+    margin: $spacing-m auto;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
-  .FrontPageBox__label {
+  .BoxGridBox__label {
     margin-left: auto;
     margin-right: auto;
     width: 75%;
     font-size: $fontsize-heading-m;
     font-weight: $semibold;
   }
-  .FrontPageBox__bottom-text {
-    margin-top: 15px;
+
+  .BoxGridBox__bottom-text {
+    margin: $spacing-s 0;
+  }
+
+  .BoxGridBox__actions {
+    margin-top: auto;
+    text-align: center;
   }
 }

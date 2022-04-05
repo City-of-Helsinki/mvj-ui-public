@@ -15,6 +15,7 @@ import { openLoginModal } from '../login/actions';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
 import { AppRoutes, getRouteById } from '../root/routes';
 import ApplicationTargetList from './components/applicationTargetList';
+import MainContentElement from '../a11y/MainContentElement';
 
 interface State {
   relevantPlotSearch: PlotSearch | null;
@@ -53,7 +54,7 @@ const ApplicationPage = ({
         }, [loggedIn]);
 
         return (
-          <div className="ApplicationPage">
+          <MainContentElement className="ApplicationPage">
             <Container>
               <h1>{t('application.heading', 'Plot application')}</h1>
               <ApplicationTargetList />
@@ -132,7 +133,7 @@ const ApplicationPage = ({
                 )}
               </div>
             </Container>
-          </div>
+          </MainContentElement>
         );
       }}
     </AuthDependentContent>

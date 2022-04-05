@@ -2,13 +2,19 @@ import { Koros } from 'hds-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import FrontPageBox from './components/frontPageBox';
+import BoxGrid from '../boxGrid/boxGrid';
+import BoxGridBox from '../boxGrid/boxGridBox';
+import MainContentElement from '../a11y/MainContentElement';
+import { ReactComponent as PlotSearchesImage } from '../assets/images/frontPage/plotSearches.svg';
+import { ReactComponent as OtherSearchesImage } from '../assets/images/frontPage/otherSearches.svg';
+import { ReactComponent as AreaSearchesImage } from '../assets/images/areaSearch/areaSearch.svg';
+import { ReactComponent as ApplyForChangesImage } from '../assets/images/frontPage/applyForChanges.svg';
 
 const FrontPage = (): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <div className="FrontPage">
+    <MainContentElement className="FrontPage">
       <div className="FrontPage__banner">
         <div className="FrontPage__heading-container">
           <h3>
@@ -27,8 +33,8 @@ const FrontPage = (): JSX.Element => {
             'How can we help with your rental needs?'
           )}
         </h4>
-        <div className="FrontPage__boxes">
-          <FrontPageBox
+        <BoxGrid>
+          <BoxGridBox
             topLabel={t(
               'frontPage.plotSearchAndCompetitions.counter',
               'Plot search and competitions: {{count}}',
@@ -44,9 +50,10 @@ const FrontPage = (): JSX.Element => {
               'frontPage.plotSearchAndCompetitions.explanation',
               'Plots for long-term housing or industrial activities'
             )}
-            color={'pink'}
+            color="pink"
+            image={<PlotSearchesImage />}
           />
-          <FrontPageBox
+          <BoxGridBox
             topLabel={t(
               'frontPage.otherCompetitionsAndSearches.counter',
               'Other competitions and searches: {{count}}',
@@ -62,18 +69,20 @@ const FrontPage = (): JSX.Element => {
               'frontPage.otherCompetitionsAndSearches.explanation',
               'Description lorem ipsum dolor sit amet et cetera et cetera.'
             )}
-            color={'gray'}
+            color="gray"
+            image={<OtherSearchesImage />}
           />
-          <FrontPageBox
+          <BoxGridBox
             topLabel={t('frontPage.areaSearch.counter', 'Area search')}
             label={t('frontPage.areaSearch.label', 'I want to rent an area')}
             bottomText={t(
               'frontPage.areaSearch.explanation',
               'Description lorem ipsum dolor sit amet et cetera et cetera.'
             )}
-            color={'yellow'}
+            color="yellow"
+            image={<AreaSearchesImage />}
           />
-          <FrontPageBox
+          <BoxGridBox
             topLabel={t('frontPage.applyChange.counter', 'Existing leases')}
             label={t(
               'frontPage.applyChange.label',
@@ -83,9 +92,11 @@ const FrontPage = (): JSX.Element => {
               'frontPage.applyChange.explanation',
               'Description lorem ipsum dolor sit amet et cetera et cetera.'
             )}
-            color={'blue'}
+            color="blue"
+            image={<ApplyForChangesImage />}
           />
-        </div>
+        </BoxGrid>
+
         <h5>{t('frontPage.questions.heading', 'Questions?')}</h5>
         <p>
           {t(
@@ -94,7 +105,7 @@ const FrontPage = (): JSX.Element => {
           )}
         </p>
       </div>
-    </div>
+    </MainContentElement>
   );
 };
 

@@ -43,6 +43,52 @@
       "screenReaderHeading": "Haettavat tontit"
     }
   },
+  "areaSearch": {
+    "landingPage": {
+      "applyForArea": "Hae aluetta",
+      "areaSearches": {
+        "blurb": "Voit vuokrata vapaana olevaa maa ja vesi-aluetta tilapäistä käyttöä varten, esim. mastot, maatalousmaat, lisäpihat,  maanvuokraus, hiekkasiillot, keräyslaatikot, liikuntapuistot.",
+        "heading": "Alueen vuokraus",
+        "label": "Vuokraa alue"
+      },
+      "heading": "Hae vuokra-aluetta",
+      "introduction": "Helsingin kaupungilta on mahdollista vuokrata alueita ja tiloja monenlaiseen käyttöön. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Valitse ohesta tarkoitukseesi sopivin vaihtoehto.",
+      "otherUses": {
+        "commercialUses": {
+          "blurb": "A-standit, siltamainospaikat, ulkomainoslaitteet, vaalimainonta",
+          "label": "Myynti- ja mainospaikat",
+          "link": "https://www.hel.fi/helsinki/fi/asuminen-ja-ymparisto/tontit/luvat/mainonta/"
+        },
+        "heading": "Muu alueenkäyttö",
+        "misc": {
+          "blurb": "Esim. kaupunkiviljely, koirakoulutuskentät, mehiläistarhaus, muu maankäyttö- ja vuokraus, metsästysoikeudet , päiväkotien ulkoilualueet, vesialueen vuokraus ",
+          "label": "Muut alueenkäyttösopimukset",
+          "link": "https://www.hel.fi/helsinki/fi/asuminen-ja-ymparisto/tontit/luvat/"
+        },
+        "otherConstruction": {
+          "blurb": "Voit vuokrata vapaana olevaa maa ja vesi-aluetta tilapäistä käyttöä varten, esim. mastot, maatalousmaat, lisäpihat,  maanvuokraus, hiekkasiillot, keräyslaatikot, liikuntapuistot.",
+          "label": "Kaduilla ja puistoissa tehtävät työt",
+          "link": "https://www.hel.fi/helsinki/fi/asuminen-ja-ymparisto/tontit/luvat/kaduilla-ja-puistoissa-tehtavat-tyot/"
+        },
+        "outdoorEvent": {
+          "blurb": "Tarvitset luvan tapahtuman järjestämiseen kadulla, torilla tai puistossa, jos tapahtuma rajoittaa alueen yleistä käyttöä. Lupa tarvitaan esimerkiksi silloin, jos tapahtumapaikalle tuodaan telttakatoksia, pöytiä, tuoleja, lavoja, aitoja tai muita rakennelmia.",
+          "label": "Ulkoilmatapahtuman järjestäminen",
+          "link": "https://www.hel.fi/helsinki/fi/asuminen-ja-ymparisto/tontit/luvat/tapahtumat/"
+        },
+        "permanentFixtures": {
+          "blurb": "Yleiselle alueelle (kadut, puistot, torit) sijoitettaville pysyväisluonteisille rakenteille kuten putket, johdot, kaivot, rakennuksen perustukset, muurit ja aidat, tulee hakea sijoitussopimus.",
+          "label": "Kadulle tai puistoon sijoitettava pysyvä rakenne",
+          "link": "https://www.hel.fi/helsinki/fi/asuminen-ja-ymparisto/tontit/luvat/kaduilla-ja-puistoissa-tehtavat-tyot/"
+        },
+        "terraceOrParklet": {
+          "blurb": "Ravintolan tai kahvilan ulkotarjoilualueet tarvitsevat terassiluvan, jos terassi tulee kaupungin julkiselle katu- tai puistoalueelle. Lasitetun katuterassin pystyttämiseen tarvitset lisäksi rakennus- tai toimenpideluvan. Parkletilla tarkoitetaan pysäköintiruutua, joka otetaan tilapäisesti muuhun käyttöön.",
+          "label": "Terassit ja parkletit",
+          "link": "https://www.hel.fi/helsinki/fi/asuminen-ja-ymparisto/tontit/luvat/terassit-ja-parkletit/"
+        }
+      },
+      "readMore": "Lue lisää"
+    }
+  },
   "error": {
     "pageNotFound": "404 Sivua ei löytynyt"
   },

@@ -27,6 +27,7 @@ import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
 import ApplicationTargetList from './components/applicationTargetList';
 import { getFieldTypeMapping } from './selectors';
+import MainContentElement from '../a11y/MainContentElement';
 
 interface State {
   favourite: Favourite;
@@ -256,7 +257,7 @@ const ApplicationPreviewPage = ({
   return (
     <AuthDependentContent>
       {(loading, loggedIn) => (
-        <div className="ApplicationPreviewPage">
+        <MainContentElement className="ApplicationPreviewPage">
           <Container>
             <h1>
               {t('application.preview.heading', 'Plot application preview')}
@@ -322,7 +323,7 @@ const ApplicationPreviewPage = ({
               </div>
             )}
           </Container>
-        </div>
+        </MainContentElement>
       )}
     </AuthDependentContent>
   );

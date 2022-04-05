@@ -17,6 +17,7 @@ import { AppRoutes, getRouteById } from '../root/routes';
 import { getIsLoadingUser, getUser } from '../auth/selectors';
 import { openLoginModal } from '../login/actions';
 import { getPageForCurrentPlotSearch } from '../plotSearch/helpers';
+import MainContentElement from '../a11y/MainContentElement';
 
 interface State {
   favourite: Favourite;
@@ -75,84 +76,86 @@ const FavouritesPage = (props: Props): JSX.Element => {
   }, [props.favourite]);
 
   return (
-    <Container className="FavouritesPage">
-      <Row>
-        <Col xs={12}>
-          {props.favourite.targets.length > 0 && (
-            <h1>
-              {t(
-                'favouritesPage.title',
-                'You are applying for the following plot searches'
-              )}
-            </h1>
-          )}
-        </Col>
-      </Row>
-      {props.isFetchingPlotSearches ? (
+    <MainContentElement className="FavouritesPage">
+      <Container>
         <Row>
           <Col xs={12}>
-            <BlockLoader />
+            {props.favourite.targets.length > 0 && (
+              <h1>
+                {t(
+                  'favouritesPage.title',
+                  'You are applying for the following plot searches'
+                )}
+              </h1>
+            )}
           </Col>
         </Row>
-      ) : (
-        <>
+        {props.isFetchingPlotSearches ? (
           <Row>
-            {props.favourite.targets.map((target) => (
-              <Col xs={12} key={target.plot_search_target.id}>
-                <FavouriteCard
-                  plotSearch={plotSearch}
-                  target={target.plot_search_target}
-                  remove={handleTargetRemove}
-                />
-              </Col>
-            ))}
-          </Row>
-          <Row>
-            <Col
-              md={6}
-              xs={12}
-              className="FavouritesPage__notification-container"
-            >
-              {props.searchPageLink && (
-                <Notification
-                  type="info"
-                  position="inline"
-                  label={t(
-                    'favouritesPage.notification.title',
-                    'Do you want to search for more targets?'
-                  )}
-                >
-                  <Trans i18nKey="favouritesPage.notification.body">
-                    <p>
-                      You can find all the selected targets here. You can return
-                      to plot search page to add more targets.
-                    </p>
-                  </Trans>
-                  <p>
-                    <Link href={props.searchPageLink} size="M">
-                      {t(
-                        'favouritesPage.notification.link',
-                        'Return to plot search page'
-                      )}
-                    </Link>
-                  </p>
-                </Notification>
-              )}
-            </Col>
-          </Row>
-          <Row className="FavouritesPage__actions">
             <Col xs={12}>
-              <Button
-                onClick={() => navigateToApplication()}
-                disabled={props.isLoadingUser}
-              >
-                {t('favouritesPage.nextButton', 'Apply for these plots')}
-              </Button>
+              <BlockLoader />
             </Col>
           </Row>
-        </>
-      )}
-    </Container>
+        ) : (
+          <>
+            <Row>
+              {props.favourite.targets.map((target) => (
+                <Col xs={12} key={target.plot_search_target.id}>
+                  <FavouriteCard
+                    plotSearch={plotSearch}
+                    target={target.plot_search_target}
+                    remove={handleTargetRemove}
+                  />
+                </Col>
+              ))}
+            </Row>
+            <Row>
+              <Col
+                md={6}
+                xs={12}
+                className="FavouritesPage__notification-container"
+              >
+                {props.searchPageLink && (
+                  <Notification
+                    type="info"
+                    position="inline"
+                    label={t(
+                      'favouritesPage.notification.title',
+                      'Do you want to search for more targets?'
+                    )}
+                  >
+                    <Trans i18nKey="favouritesPage.notification.body">
+                      <p>
+                        You can find all the selected targets here. You can
+                        return to plot search page to add more targets.
+                      </p>
+                    </Trans>
+                    <p>
+                      <Link href={props.searchPageLink} size="M">
+                        {t(
+                          'favouritesPage.notification.link',
+                          'Return to plot search page'
+                        )}
+                      </Link>
+                    </p>
+                  </Notification>
+                )}
+              </Col>
+            </Row>
+            <Row className="FavouritesPage__actions">
+              <Col xs={12}>
+                <Button
+                  onClick={() => navigateToApplication()}
+                  disabled={props.isLoadingUser}
+                >
+                  {t('favouritesPage.nextButton', 'Apply for these plots')}
+                </Button>
+              </Col>
+            </Row>
+          </>
+        )}
+      </Container>
+    </MainContentElement>
   );
 };
 

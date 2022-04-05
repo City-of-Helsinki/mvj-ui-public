@@ -1,6 +1,5 @@
 .ApplicationPage {
-  padding-top: $spacing-layout-s;
-  padding-bottom: $spacing-layout-s;
+  @include pageTopLevelComponent();
 
   .ApplicationPage__preview-button {
     margin-top: $spacing-m;

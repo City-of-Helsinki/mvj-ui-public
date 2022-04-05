@@ -13,6 +13,8 @@ import ApplicationPage from '../application/applicationPage';
 import ApplicationRootPage from '../application/applicationRootPage';
 import ApplicationSuccessPage from '../application/applicationSuccessPage';
 import ApplicationPreviewPage from '../application/applicationPreviewPage';
+import AreaSearchLandingPage from '../areaSearch/areaSearchLandingPage';
+import AreaSearchApplicationRootPage from '../areaSearch/areaSearchApplicationRootPage';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -20,7 +22,11 @@ export const AppRoutes = {
   PLOT_SEARCH_AND_COMPETITIONS: 'plot-search-and-competitions',
   PLOT_SEARCH_AND_COMPETITIONS_TARGET: 'plot-search-and-competitions-target',
   OTHER_COMPETITIONS_AND_SEARCHES: 'other-competitions-and-searches',
-  AREA_SEARCH: 'area-search',
+  AREA_SEARCH_LANDING: 'area-search',
+  AREA_SEARCH_APPLICATION_ROOT: 'area-search-application-root',
+  AREA_SEARCH_APPLICATION_AREA_SPEC: 'area-search-application-area-spec',
+  AREA_SEARCH_APPLICATION_FORM: 'area-search-application-form',
+  AREA_SEARCH_APPLICATION_SUBMIT: 'area-search-application-submit',
   LEASES: 'leases',
   APPLICATIONS: 'applications',
   MESSAGES: 'messages',
@@ -44,7 +50,13 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET]:
       '/tonttihaut-ja-kilpailut/kohteet/',
     [AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES]: '/muut-kilpailut-ja-haut',
-    [AppRoutes.AREA_SEARCH]: '/aluehaku',
+    [AppRoutes.AREA_SEARCH_LANDING]: '/aluehaku',
+    [AppRoutes.AREA_SEARCH_APPLICATION_ROOT]: '/aluehaku/hakemus',
+    [AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC]:
+      '/aluehaku/hakemus/alueen-maaritys',
+    [AppRoutes.AREA_SEARCH_APPLICATION_FORM]:
+      '/aluehaku/hakemus/tietojen-taytto',
+    [AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT]: '/aluehaku/hakemus/lahetys',
     [AppRoutes.LEASES]: '/vuokraukset',
     [AppRoutes.APPLICATIONS]: '/hakemukset',
     [AppRoutes.MESSAGES]: '/viestit',
@@ -143,14 +155,6 @@ const SiteRoutes = (): JSX.Element => {
             }
           />
           <Route
-            path={getRouteById(AppRoutes.AREA_SEARCH)}
-            element={
-              <RouteWithLoader>
-                <div>Aluehakusivu</div>
-              </RouteWithLoader>
-            }
-          />
-          <Route
             path={getRouteById(AppRoutes.FAVOURITES)}
             element={
               <RouteWithLoader>
@@ -187,6 +191,44 @@ const SiteRoutes = (): JSX.Element => {
                   <Route path="*" element={<ErrorPage />} />
                 </Routes>
               </ApplicationRootPage>
+            }
+          />
+          <Route
+            path={getRouteById(AppRoutes.AREA_SEARCH_LANDING)}
+            element={
+              <RouteWithLoader>
+                <AreaSearchLandingPage />
+              </RouteWithLoader>
+            }
+          />
+          <Route
+            path={getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_ROOT) + '/*'}
+            element={
+              <AreaSearchApplicationRootPage>
+                <Routes>
+                  <Route
+                    path={getPartialRouteById(
+                      AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC,
+                      AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                    )}
+                    element={<div>aluehaun määritys</div>}
+                  />
+                  <Route
+                    path={getPartialRouteById(
+                      AppRoutes.AREA_SEARCH_APPLICATION_FORM,
+                      AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                    )}
+                    element={<div>aluehaun lomake</div>}
+                  />
+                  <Route
+                    path={getPartialRouteById(
+                      AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT,
+                      AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                    )}
+                    element={<div>aluehaun lähetys</div>}
+                  />
+                </Routes>
+              </AreaSearchApplicationRootPage>
             }
           />
           <Route path="*" element={<ErrorPage />} />
