@@ -57,9 +57,9 @@ function* fetchFavouriteSaga(): Generator<Effect, void, never> {
       const { response, bodyAsJson }: ApiCallResult = yield call(
         fetchFavouriteRequest
       );
-      const apiFavourite: Favourite = bodyAsJson.results[0];
       switch (response.status) {
-        case 200:
+        case 200: {
+          const apiFavourite: Favourite = bodyAsJson.results[0];
           if (bodyAsJson.results.length <= 0) {
             yield put(initializeFavourite());
             break;
@@ -93,6 +93,7 @@ function* fetchFavouriteSaga(): Generator<Effect, void, never> {
           }
           yield put(receiveFavourite(bodyAsJson.results[0] as Favourite));
           break;
+        }
         default:
           yield put(favouriteNotFound());
           break;
