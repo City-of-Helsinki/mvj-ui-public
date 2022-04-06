@@ -1,6 +1,6 @@
-import React, { PropsWithChildren, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { initialize, reduxForm } from 'redux-form';
+import { initialize, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { fetchFormAttributes } from '../application/actions';
 import { AREA_SEARCH_FORM_NAME } from './types';
@@ -10,19 +10,21 @@ interface State {
   areaSearchForm: null;
 }
 
-interface Props {
+export interface Props {
   initializeForm: typeof initialize;
+  children: (props: InjectedFormProps<unknown, Props>) => JSX.Element;
 }
 
 const AreaSearchApplicationRootPage = ({
   children,
   initializeForm,
-}: PropsWithChildren<Props>): JSX.Element => {
+  ...rest
+}: Props & InjectedFormProps<unknown, Props>): JSX.Element => {
   useEffect(() => {
     initializeForm(AREA_SEARCH_FORM_NAME, initializeAreaSearchForm());
   }, []);
 
-  return <div>{children}</div>;
+  return <div>{children(rest)}</div>;
 };
 
 export default connect(
@@ -34,7 +36,7 @@ export default connect(
     fetchFormAttributes,
   }
 )(
-  reduxForm<unknown, PropsWithChildren<Props>>({
+  reduxForm<unknown, Props>({
     form: AREA_SEARCH_FORM_NAME,
   })(AreaSearchApplicationRootPage)
 );

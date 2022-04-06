@@ -1,0 +1,13 @@
+.AreaSearchSpecsPage {
+  @include pageTopLevelComponent();
+
+  section {
+    padding: $spacing-m;
+    margin-bottom: $spacing-m;
+    background-color: $color-black-5;
+  }
+
+  .AreaSearchSpecsPage__submit-error {
+    margin-top: $spacing-layout-xs;
+  }
+}

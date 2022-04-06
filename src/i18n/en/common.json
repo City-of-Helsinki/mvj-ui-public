@@ -87,6 +87,43 @@
         }
       },
       "readMore": "Read more"
+    },
+    "specs": {
+      "area": {
+        "areaDescription": "Detailed description of desired area",
+        "drawOnMap": {
+          "explanation": "Note that the area you specify will be precursory only. We'll contact you to determine the exact area later during the application handling process. Areas colored in dark gray are not owned by the City of Helsinki.",
+          "heading": "Draw the desired area on the map"
+        },
+        "explanation": "Besides Helsinki itself, the City of Helsinki also owns land in other cities including Sipoo, Espoo, .... The selected area will only serve as the starting point during negotiations.",
+        "heading": "Tell us which area you'd like to lease",
+        "readMoreLink": "Read more on the City of Helsinki website",
+        "readMorelinkTarget": "https://hel.fi/"
+      },
+      "attachments": {
+        "heading": "Attachments",
+        "input": "You may also optionally include any relevant attachments here, such as photos of the area in question, lorem ipsum, dolor tai sit amet."
+      },
+      "checkErrors": "Please check the marked fields before proceeding.",
+      "continueButton": "Apply for this area",
+      "errors": {
+        "endDateAfterStartDate": "End date cannot be before start date.",
+        "startDateBeforeEndDate": "Start date cannot be after end date."
+      },
+      "explanation": "If you're planning to lease an area for example for lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, continue by filling the following form. Tell us a few details about the area you'd like to lease and then fill the application. We'll respond to you as soon as possible. Fields marked with an asterisk (*) are required.",
+      "heading": "Apply for a land area lease",
+      "intendedUse": {
+        "endDate": "End date for lease",
+        "endDateHelpText": "If you don't yet know the date you'd like the lease to end on or if you'd like to apply for a lease for an indefinite time, please expand on this in the detailed description field above.",
+        "heading": "Specify the intended use and desired time period for the lease",
+        "mainType": "Broad type of intended use",
+        "projectDescription": "Detailed description of intended use",
+        "startDate": "Start date for lease",
+        "subType": "Specific type of intended use"
+      },
+      "loginButton": "Log in",
+      "notLoggedIn": "To apply, please log in first.",
+      "submitting": "Submitting..."
     }
   },
   "error": {
@@ -265,6 +302,16 @@
       "areaSearch": "Area search",
       "otherCompetitionsAndSearches": "Other competitions and searches",
       "plotSearchAndCompetitions": "Plot search and competitions"
+    }
+  },
+  "validation": {
+    "errors": {
+      "dateAfter": "The selected date cannot be before {{date}}.",
+      "dateBefore": "The selected date cannot be after {{date}}.",
+      "greaterThan": "Please enter a value greater than {{number}}.",
+      "lessThan": "Please enter a value less than {{number}}.",
+      "requiredArray": "One or more options must be selected.",
+      "requiredValue": "This field is required."
     }
   }
 }

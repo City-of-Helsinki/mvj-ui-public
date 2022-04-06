@@ -62,7 +62,7 @@
         "heading": "Muu alueenkäyttö",
         "misc": {
           "blurb": "Esim. kaupunkiviljely, koirakoulutuskentät, mehiläistarhaus, muu maankäyttö- ja vuokraus, metsästysoikeudet , päiväkotien ulkoilualueet, vesialueen vuokraus ",
-          "label": "Muut alueenkäyttösopimukset",
+          "label": "Muut alueen\u00adkäyttö\u00adsopimukset",
           "link": "https://www.hel.fi/helsinki/fi/asuminen-ja-ymparisto/tontit/luvat/"
         },
         "otherConstruction": {
@@ -72,7 +72,7 @@
         },
         "outdoorEvent": {
           "blurb": "Tarvitset luvan tapahtuman järjestämiseen kadulla, torilla tai puistossa, jos tapahtuma rajoittaa alueen yleistä käyttöä. Lupa tarvitaan esimerkiksi silloin, jos tapahtumapaikalle tuodaan telttakatoksia, pöytiä, tuoleja, lavoja, aitoja tai muita rakennelmia.",
-          "label": "Ulkoilmatapahtuman järjestäminen",
+          "label": "Ulkoilma\u00adtapahtuman järjestäminen",
           "link": "https://www.hel.fi/helsinki/fi/asuminen-ja-ymparisto/tontit/luvat/tapahtumat/"
         },
         "permanentFixtures": {
@@ -87,6 +87,43 @@
         }
       },
       "readMore": "Lue lisää"
+    },
+    "specs": {
+      "area": {
+        "areaDescription": "Tarkempi kuvaus alueesta",
+        "drawOnMap": {
+          "explanation": "Huomaathan, että piirtämäsi alue on viitteellinen. Palaamme sinulle kohteen tarkoista rajoista hakemuksen käsittelyvaiheessa. Tummennetut alueet kartalla eivät ole Helsingin kaupungin omistuksessa.",
+          "heading": "Piirrä alue kartalle"
+        },
+        "explanation": "Helsingin kaupungilla on Helsingin lisäksi maaomistuksia Sipoossa, Espoossa, Lorem ipsum ja Dolor sit amet. Alueen valinta on lähtökohtana neuvottelulle.",
+        "heading": "Kerro meille, mistä haluat vuokrata alueen",
+        "readMoreLink": "Lue lisätietoja Helsingin kaupungin sivuilta",
+        "readMorelinkTarget": ""
+      },
+      "attachments": {
+        "heading": "Liitteet",
+        "input": "Voit myös lisätä vapaavalintaisia liitteitä, jos haluat. Esim. valokuva alueesta, lorem ipsum, dolor tai sit amet."
+      },
+      "checkErrors": "Tarkista, että merkityt kentät on täytetty oikein.",
+      "continueButton": "Hae tätä aluetta",
+      "errors": {
+        "endDateAfterStartDate": "Päättymispäivämäärän on oltava alkamispäivämäärän jälkeen.",
+        "startDateBeforeEndDate": "Alkamispäivämäärän on oltava ennen päättymispäivämäärää."
+      },
+      "explanation": "Jos haluat vuokrata alueen esim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Jatka täyttämällä oheinen lomake. Kerro meille muutama tieto toivomastasi alueesta ja täytä hakemus. Palaamme sinulle mahdollisimman pian. Tähdellä (*) merkityt kentät ovat pakollisia. ",
+      "heading": "Hae vuokra-aluetta",
+      "intendedUse": {
+        "endDate": "Vuokrauksen päättymispäivämäärä",
+        "endDateHelpText": "Jos et tiedä vuokrauksen päättymisajankohtaa tai haluat vuokrata alueen toistaiseksi, kuvaile asiaasi tarkemmassa kuvauksessa.",
+        "heading": "Valitse käyttötarkoitus ja toivottu vuokra-aika",
+        "mainType": "Käyttötarkoitus",
+        "projectDescription": "Tarkempi kuvaus käyttötarkoituksesta",
+        "startDate": "Vuokrauksen alkamispäivämäärä",
+        "subType": "Tarkenne"
+      },
+      "loginButton": "Kirjaudu sisään",
+      "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehaun.",
+      "submitting": "Lähetetään..."
     }
   },
   "error": {
@@ -265,6 +302,16 @@
       "areaSearch": "Aluehaku",
       "otherCompetitionsAndSearches": "Muut kilpailut ja haut",
       "plotSearchAndCompetitions": "Tonttihaut ja -kilpailut"
+    }
+  },
+  "validation": {
+    "errors": {
+      "dateAfter": "Aikaisin sallittu päivämäärä on {{date}}.",
+      "dateBefore": "Myöhäisin sallittu päivämäärä on {{date}}.",
+      "greaterThan": "Arvon on oltava suurempi kuin {{number}}.",
+      "lessThan": "Arvon on oltava pienempi kuin {{number}}.",
+      "requiredArray": "Valitse vähintään yksi vaihtoehto.",
+      "requiredValue": "Tämä tieto on pakollinen."
     }
   }
 }
