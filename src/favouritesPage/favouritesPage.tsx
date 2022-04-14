@@ -5,6 +5,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Notification, Link, Button } from 'hds-react';
 import { useNavigate } from 'react-router-dom';
 import { User } from 'oidc-client';
+import { Helmet } from 'react-helmet';
 
 import { Favourite } from '../favourites/types';
 import { RootState } from '../root/rootReducer';
@@ -18,6 +19,7 @@ import { getIsLoadingUser, getUser } from '../auth/selectors';
 import { openLoginModal } from '../login/actions';
 import { getPageForCurrentPlotSearch } from '../plotSearch/helpers';
 import MainContentElement from '../a11y/MainContentElement';
+import { getPageTitle } from '../root/helpers';
 
 interface State {
   favourite: Favourite;
@@ -77,6 +79,11 @@ const FavouritesPage = (props: Props): JSX.Element => {
 
   return (
     <MainContentElement className="FavouritesPage">
+      <Helmet>
+        <title>
+          {getPageTitle(t('favouritesPage.pageTitle', 'Selected plots'))}
+        </title>
+      </Helmet>
       <Container>
         <Row>
           <Col xs={12}>

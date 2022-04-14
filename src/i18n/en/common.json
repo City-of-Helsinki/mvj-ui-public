@@ -22,13 +22,17 @@
       "rowLabel": "Attachment #{{number}}",
       "uploadedAt": "Uploaded at"
     },
+    "form": {
+      "pageTitle": "Plot application"
+    },
     "heading": "Plot application",
     "loginButton": "Log in",
     "preview": {
       "attachmentNo": "Attachment #{{number}}",
       "booleanNo": "No",
       "booleanYes": "Yes",
-      "heading": "Plot application preview"
+      "heading": "Plot application preview",
+      "pageTitle": "Plot application"
     },
     "previewButton": "Preview submission",
     "returnToForm": "Edit application",
@@ -36,7 +40,8 @@
     "submitInProcess": "Submitting...",
     "success": {
       "body": "Your application has been received.",
-      "heading": "Thank you for your application"
+      "heading": "Thank you for your application",
+      "pageTitle": "Application sent"
     },
     "targets": {
       "identifier": "Plot",
@@ -86,6 +91,7 @@
           "link": "https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/terraces-and-parklets"
         }
       },
+      "pageTitle": "Area search",
       "readMore": "Read more"
     },
     "specs": {
@@ -123,11 +129,15 @@
       },
       "loginButton": "Log in",
       "notLoggedIn": "To apply, please log in first.",
+      "pageTitle": "Area search",
       "submitting": "Submitting..."
     }
   },
-  "error": {
-    "pageNotFound": "404 Page not found"
+  "errorPage": {
+    "notFound": {
+      "explanation": "404 Page not found",
+      "pageTitle": "Page not found"
+    }
   },
   "favourites": {
     "saga": {
@@ -145,6 +155,7 @@
       "link": "Return to plot search page",
       "title": "Do you want to search for more targets?"
     },
+    "pageTitle": "Selected plots",
     "targetCard": {
       "removeButton": "Remove from list",
       "showFullDesc": {
@@ -234,6 +245,7 @@
     "login": "Log in",
     "title": "Log in"
   },
+  "mainAppTitle": "City of Helsinki plot and land leasing system",
   "plotSearchAndCompetitions": {
     "mapComponent": {
       "mapLayers": {
@@ -243,6 +255,12 @@
       }
     },
     "mapView": {
+      "otherSearches": {
+        "pageTitle": "Other competitions and searches"
+      },
+      "plotSearches": {
+        "pageTitle": "Plot searches and competitions"
+      },
       "sidebar": {
         "notification": {
           "noTargetsToShow": {

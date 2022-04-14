@@ -5,6 +5,7 @@ import { Button, Notification } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { Col, Container, Row } from 'react-grid-system';
+import { Helmet } from 'react-helmet';
 
 import { RootState } from '../root/rootReducer';
 import { prepareApplicationForSubmission } from './helpers';
@@ -28,6 +29,7 @@ import BlockLoader from '../loader/blockLoader';
 import ApplicationTargetList from './components/applicationTargetList';
 import { getFieldTypeMapping } from './selectors';
 import MainContentElement from '../a11y/MainContentElement';
+import { getPageTitle } from '../root/helpers';
 
 interface State {
   favourite: Favourite;
@@ -258,6 +260,13 @@ const ApplicationPreviewPage = ({
     <AuthDependentContent>
       {(loading, loggedIn) => (
         <MainContentElement className="ApplicationPreviewPage">
+          <Helmet>
+            <title>
+              {getPageTitle(
+                t('application.preview.pageTitle', 'Plot application')
+              )}
+            </title>
+          </Helmet>
           <Container>
             <h1>
               {t('application.preview.heading', 'Plot application preview')}

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
+import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 
 import { RootState } from '../root/rootReducer';
 import MapSearchComponent from './mapSearchComponent';
@@ -19,9 +22,9 @@ import {
   PlotSearchType,
 } from '../plotSearch/types';
 import { Favourite } from '../favourites/types';
-import { useNavigate, useParams } from 'react-router';
 import { AppRoutes, getRouteById } from '../root/routes';
 import MainContentElement from '../a11y/MainContentElement';
+import { getPageTitle } from '../root/helpers';
 
 interface State {
   isFetchingPlotSearches: boolean;
@@ -81,6 +84,23 @@ const MapSearchPage = (props: Props): JSX.Element => {
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(true);
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  let pageTitle = '';
+  switch (searchClass) {
+    case 'plot_search':
+      pageTitle = t(
+        'plotSearchAndCompetitions.mapView.plotSearches.pageTitle',
+        'Plot searches and competitions'
+      );
+      break;
+    case 'other_search':
+      pageTitle = t(
+        'plotSearchAndCompetitions.mapView.otherSearches.pageTitle',
+        'Other competitions and searches'
+      );
+      break;
+  }
 
   useEffect(() => {
     if (id) {
@@ -173,6 +193,14 @@ const MapSearchPage = (props: Props): JSX.Element => {
 
   return (
     <MainContentElement className="MapSearchPage">
+      <Helmet>
+        <title>
+          {getPageTitle([
+            selectedTarget?.target.lease_address.address,
+            pageTitle,
+          ])}
+        </title>
+      </Helmet>
       <MapSearchComponent
         categoryOptions={categoryOptions}
         categoryVisibilities={categoryVisibilities}

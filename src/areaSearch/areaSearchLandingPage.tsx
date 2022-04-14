@@ -3,11 +3,14 @@ import { Container } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'hds-react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import BoxGrid from '../boxGrid/boxGrid';
 import BoxGridBox from '../boxGrid/boxGridBox';
 import { AppRoutes, getRouteById } from '../root/routes';
 import MainContentElement from '../a11y/MainContentElement';
+import { getPageTitle } from '../root/helpers';
+
 import { ReactComponent as AreaSearchImage } from '../assets/images/areaSearch/areaSearch.svg';
 import { ReactComponent as OtherConstructionImage } from '../assets/images/areaSearch/otherConstruction.svg';
 import { ReactComponent as PermanentFixturesImage } from '../assets/images/areaSearch/permanentFixtures.svg';
@@ -33,6 +36,11 @@ const AreaSearchLandingPage = (): JSX.Element => {
 
   return (
     <MainContentElement className="AreaSearchLandingPage">
+      <Helmet>
+        <title>
+          {getPageTitle(t('areaSearch.landingPage.pageTitle', 'Area search'))}
+        </title>
+      </Helmet>
       <Container>
         <h1>
           {t('areaSearch.landingPage.heading', 'Apply for a land area lease')}
