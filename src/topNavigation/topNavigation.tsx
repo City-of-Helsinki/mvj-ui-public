@@ -72,8 +72,9 @@ const TopNavigation = ({
   const matchOtherCompetitionsAndSearches = useMatch(
     getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES) + '/*'
   );
-  const matchAreaSearch =
-    useMatch(getRouteById(AppRoutes.AREA_SEARCH_LANDING)) + '/*';
+  const matchAreaSearch = useMatch(
+    getRouteById(AppRoutes.AREA_SEARCH_LANDING) + '/*'
+  );
   const matchFavourites = useMatch(getRouteById(AppRoutes.FAVOURITES));
   const changeLanguage = (language: Language) => {
     i18n.changeLanguage(language).then(() => {

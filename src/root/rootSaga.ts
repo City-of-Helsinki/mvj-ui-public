@@ -3,6 +3,7 @@ import authSaga from '../auth/saga';
 import plotSearchSaga from '../plotSearch/saga';
 import favouritesSaga from '../favourites/saga';
 import applicationSaga from '../application/saga';
+import areaSearchSaga from '../areaSearch/saga';
 
 export default function* rootSaga(): Generator {
   yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga(): Generator {
     fork(plotSearchSaga),
     fork(favouritesSaga),
     fork(applicationSaga),
+    fork(areaSearchSaga),
   ]);
 }

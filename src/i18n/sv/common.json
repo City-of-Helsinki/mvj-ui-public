@@ -87,6 +87,43 @@
         }
       },
       "readMore": ""
+    },
+    "specs": {
+      "area": {
+        "areaDescription": "",
+        "drawOnMap": {
+          "explanation": "",
+          "heading": ""
+        },
+        "explanation": "",
+        "heading": "",
+        "readMoreLink": "",
+        "readMorelinkTarget": ""
+      },
+      "attachments": {
+        "heading": "",
+        "input": ""
+      },
+      "checkErrors": "",
+      "continueButton": "",
+      "errors": {
+        "endDateAfterStartDate": "",
+        "startDateBeforeEndDate": ""
+      },
+      "explanation": "",
+      "heading": "",
+      "intendedUse": {
+        "endDate": "",
+        "endDateHelpText": "",
+        "heading": "",
+        "mainType": "",
+        "projectDescription": "",
+        "startDate": "",
+        "subType": ""
+      },
+      "loginButton": "",
+      "notLoggedIn": "",
+      "submitting": ""
     }
   },
   "error": {
@@ -265,6 +302,16 @@
       "areaSearch": "Områdesökning",
       "otherCompetitionsAndSearches": "Andra tävlingar och sökningar",
       "plotSearchAndCompetitions": "Plot sökningar och tävlingar"
+    }
+  },
+  "validation": {
+    "errors": {
+      "dateAfter": "",
+      "dateBefore": "",
+      "greaterThan": "",
+      "lessThan": "",
+      "requiredArray": "",
+      "requiredValue": ""
     }
   }
 }

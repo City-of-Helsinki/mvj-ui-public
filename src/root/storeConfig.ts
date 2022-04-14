@@ -33,8 +33,11 @@ export default function configureAppStore(initialState = {}): Store {
     middleware: (defaultMiddleware) => [
       ...defaultMiddleware({
         serializableCheck: {
-          ignoredActions: ['redux-oidc/USER_FOUND'],
-          ignoredPaths: ['oidc.user'],
+          ignoredActions: [
+            'redux-oidc/USER_FOUND',
+            'areaSearch/AREA_SEARCH_SUBMISSION_FAILED',
+          ],
+          ignoredPaths: ['oidc.user', 'areaSearch.lastError'],
         },
       }),
       ...middlewares,

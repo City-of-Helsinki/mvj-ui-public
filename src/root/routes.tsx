@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { InjectedFormProps } from 'redux-form';
 
 import App from '../App';
 import FrontPage from '../frontPage/frontPage';
@@ -14,7 +15,10 @@ import ApplicationRootPage from '../application/applicationRootPage';
 import ApplicationSuccessPage from '../application/applicationSuccessPage';
 import ApplicationPreviewPage from '../application/applicationPreviewPage';
 import AreaSearchLandingPage from '../areaSearch/areaSearchLandingPage';
-import AreaSearchApplicationRootPage from '../areaSearch/areaSearchApplicationRootPage';
+import AreaSearchApplicationRootPage, {
+  Props as AreaSearchApplicationRootPageProps,
+} from '../areaSearch/areaSearchApplicationRootPage';
+import AreaSearchSpecsPage from '../areaSearch/areaSearchSpecsPage';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -205,29 +209,48 @@ const SiteRoutes = (): JSX.Element => {
             path={getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_ROOT) + '/*'}
             element={
               <AreaSearchApplicationRootPage>
-                <Routes>
-                  <Route
-                    path={getPartialRouteById(
-                      AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC,
-                      AppRoutes.AREA_SEARCH_APPLICATION_ROOT
-                    )}
-                    element={<div>aluehaun määritys</div>}
-                  />
-                  <Route
-                    path={getPartialRouteById(
-                      AppRoutes.AREA_SEARCH_APPLICATION_FORM,
-                      AppRoutes.AREA_SEARCH_APPLICATION_ROOT
-                    )}
-                    element={<div>aluehaun lomake</div>}
-                  />
-                  <Route
-                    path={getPartialRouteById(
-                      AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT,
-                      AppRoutes.AREA_SEARCH_APPLICATION_ROOT
-                    )}
-                    element={<div>aluehaun lähetys</div>}
-                  />
-                </Routes>
+                {({
+                  valid,
+                }: InjectedFormProps<
+                  unknown,
+                  AreaSearchApplicationRootPageProps
+                >) => (
+                  <Routes>
+                    <Route
+                      path={getPartialRouteById(
+                        AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC,
+                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                      )}
+                      element={<AreaSearchSpecsPage valid={valid} />}
+                    />
+                    <Route
+                      path={getPartialRouteById(
+                        AppRoutes.AREA_SEARCH_APPLICATION_FORM,
+                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                      )}
+                      element={<div>aluehaun lomake</div>}
+                    />
+                    <Route
+                      path={getPartialRouteById(
+                        AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT,
+                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                      )}
+                      element={<div>aluehaun lähetys</div>}
+                    />
+                    <Route
+                      path=""
+                      element={
+                        <Navigate
+                          replace
+                          to={getRouteById(
+                            AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC
+                          )}
+                        />
+                      }
+                    />
+                    <Route path="*" element={<ErrorPage />} />
+                  </Routes>
+                )}
               </AreaSearchApplicationRootPage>
             }
           />

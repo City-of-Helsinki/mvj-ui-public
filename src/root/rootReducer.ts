@@ -8,6 +8,7 @@ import plotSearchReducer from '../plotSearch/reducer';
 import favouriteReducer from '../favourites/reducer';
 import notificationReducer from '../globalNotification/reducer';
 import applicationReducer from '../application/reducer';
+import areaSearchReducer from '../areaSearch/reducer';
 
 const allReducers = {
   auth: authReducer,
@@ -16,6 +17,7 @@ const allReducers = {
   favourite: favouriteReducer,
   notifications: notificationReducer,
   application: applicationReducer,
+  areaSearch: areaSearchReducer,
   oidc: oidcReducer,
   form: formReducer,
 };
