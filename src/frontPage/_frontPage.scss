@@ -1,6 +1,8 @@
 .FrontPage {
   @include pageTopLevelComponent();
 
+  padding-top: 0;
+
   .FrontPage__banner {
     background-color: #9fc9eb;
     height: 540px;
