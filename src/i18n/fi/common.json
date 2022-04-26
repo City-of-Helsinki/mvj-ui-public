@@ -246,14 +246,114 @@
     "title": "Kirjaudu sisään"
   },
   "mainAppTitle": "Helsingin kaupungin tontti- ja maanvuokrausjärjestelmä",
-  "plotSearchAndCompetitions": {
-    "mapComponent": {
-      "mapLayers": {
-        "base": "Karttasarja",
-        "orto": "Ortoilmakuva",
-        "plan": "Asemakaava"
+  "map": {
+    "drawTools": {
+      "draw": {
+        "handlers": {
+          "circle": {
+            "radius": "Säde",
+            "tooltip": {
+              "start": "Napsauta ja vedä piirtääksesi ympyrän"
+            }
+          },
+          "polygon": {
+            "tooltip": {
+              "cont": "Jatka alueen piirtämistä napsauttamalla.",
+              "end": "Napsauta ensimmäistä pistettä kuvion päättämiseksi.",
+              "start": "Aloita alueen piirtäminen napsauttamalla."
+            }
+          },
+          "polyline": {
+            "error": "<strong>Virhe:</strong> kuvion reunat eivät saa leikata toisiaan!",
+            "tooltip": {
+              "cont": "Jatka viivan piirtämistä napsauttamalla.",
+              "end": "Napsauta viimeistä pistettä viivan päättämiseksi.",
+              "start": "Aloita viivan piirtäminen napsauttamalla."
+            }
+          },
+          "rectangle": {
+            "tooltip": {
+              "start": "Napsauta ja vedä piirtääksesi suorakulmion."
+            }
+          },
+          "simpleshape": {
+            "tooltip": {
+              "end": "Vapauta hiiren painike päättääksesi piirtämisen."
+            }
+          }
+        },
+        "toolbar": {
+          "actions": {
+            "text": "Peruuta piirtäminen",
+            "title": "Peruuta"
+          },
+          "buttons": {
+            "circle": "Piirrä ympyrä",
+            "polygon": "Piirrä monikulmio",
+            "polyline": "Piirrä viiva",
+            "rectangle": "Piirrä suorakulmio"
+          },
+          "finish": {
+            "text": "Lopeta piirtäminen",
+            "title": "Lopeta"
+          },
+          "undo": {
+            "text": "Poista viimeisin piirretty piste",
+            "title": "Poista viimeisin piste"
+          }
+        }
+      },
+      "edit": {
+        "handlers": {
+          "edit": {
+            "tooltip": {
+              "subtext": "Napsauta Peruuta-painiketta kumotaksesi muutokset",
+              "text": "Muokkaa ominaisuuksia vetämällä kahvoja"
+            }
+          },
+          "remove": {
+            "tooltip": {
+              "text": "Poista alue sitä napsauttamalla"
+            }
+          }
+        },
+        "toolbar": {
+          "actions": {
+            "cancel": {
+              "text": "Peruuta",
+              "title": "Peruuta muutokset"
+            },
+            "clearAll": {
+              "text": "Poista kaikki",
+              "title": "Poista kaikki"
+            },
+            "save": {
+              "text": "Tallenna",
+              "title": "Tallenna muutokset"
+            }
+          },
+          "buttons": {
+            "edit": "Muokkaa alueita",
+            "editDisabled": "Ei muokattavia alueita",
+            "remove": "Poista alueita",
+            "removeDisabled": "Ei poistettavia alueita"
+          }
+        }
       }
     },
+    "mapLayers": {
+      "baseMap": "Kantakartta",
+      "cityPlan": "Asemakaava",
+      "generalMap": "Karttasarja",
+      "helsinkiOwnedAreas": "Helsingin omistamat alueet",
+      "ortographic": "Ortoilmakuva"
+    },
+    "zoomControl": {
+      "zoomIn": "Lähennä",
+      "zoomOut": "Loitonna"
+    }
+  },
+  "plotSearchAndCompetitions": {
     "mapView": {
       "otherSearches": {
         "pageTitle": "Muut kilpailut ja haut"
@@ -328,6 +428,7 @@
       "dateBefore": "Myöhäisin sallittu päivämäärä on {{date}}.",
       "greaterThan": "Arvon on oltava suurempi kuin {{number}}.",
       "lessThan": "Arvon on oltava pienempi kuin {{number}}.",
+      "nonEmptyGeometry": "",
       "requiredArray": "Valitse vähintään yksi vaihtoehto.",
       "requiredValue": "Tämä tieto on pakollinen."
     }

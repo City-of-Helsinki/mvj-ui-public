@@ -30,6 +30,7 @@ import FileInputFormField from '../form/FileInputFormField';
 import {
   dateAfterValidatorGenerator,
   dateBeforeValidatorGenerator,
+  nonEmptyMultiPolygonValidatorGenerator,
   requiredValidatorGenerator,
 } from '../form/validators';
 import { RootState } from '../root/rootReducer';
@@ -38,6 +39,7 @@ import { fetchIntendedUses, submitAreaSearch } from './actions';
 import { prepareAreaSearchSubmission } from './helpers';
 import { getFieldNamesFromFormErrors, ReduxFormError } from '../form/helpers';
 import { getPageTitle } from '../root/helpers';
+import AreaSearchMap from './components/AreaSearchMap';
 
 interface State {
   startDate?: string;
@@ -86,6 +88,9 @@ const AreaSearchSpecsPage = ({
   const simpleRequiredValidator = useMemo<
     ReturnType<typeof requiredValidatorGenerator>
   >(() => requiredValidatorGenerator(), []);
+  const nonEmptyMultiPolygonValidator = useMemo<
+    ReturnType<typeof nonEmptyMultiPolygonValidatorGenerator>
+  >(() => nonEmptyMultiPolygonValidatorGenerator(), []);
   const dateAfterPageLoadValidator = useMemo<
     ReturnType<typeof dateAfterValidatorGenerator>
   >(() => dateAfterValidatorGenerator(dateNow.toISOString()), []);
@@ -332,8 +337,16 @@ const AreaSearchSpecsPage = ({
                             "Note that the area you specify will be precursory only. We'll contact you to determine the exact area later during the application handling process. Areas colored in dark gray are not owned by the City of Helsinki."
                           )}
                         </p>
-                        {/* todo */}
-                        (karttakomponentti)
+                        <Row>
+                          <Col xs={12}>
+                            <Field
+                              id="geometry"
+                              name="search.geometry"
+                              component={AreaSearchMap}
+                              validate={[nonEmptyMultiPolygonValidator]}
+                            />
+                          </Col>
+                        </Row>
                         <Row>
                           <Col xs={12} xl={8}>
                             <Field

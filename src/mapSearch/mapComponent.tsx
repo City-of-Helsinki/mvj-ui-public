@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  MapContainer,
-  WMSTileLayer,
-  LayersControl,
-  ZoomControl,
-} from 'react-leaflet';
-import * as L from 'leaflet';
+import { MapContainer } from 'react-leaflet';
 import 'proj4leaflet';
-import { LatLng } from 'leaflet';
-import { useTranslation } from 'react-i18next';
+
 import { PlotSearch } from '../plotSearch/types';
 import {
   CategoryOptions,
@@ -16,8 +9,15 @@ import {
   SelectedTarget,
 } from './mapSearchPage';
 import MapPlotSearchOverlay from './mapPlotSearchOverlay';
-import { initializeHelsinkiMap } from './utils';
+import {
+  attachMapResizeObserver,
+  HELSINKI_CENTRAL_COORDINATES,
+  initializeHelsinkiMap,
+} from '../map/utils';
 import { Favourite } from '../favourites/types';
+import { StandardMapLayersControl } from '../map/StandardMapLayersControl';
+import { MapLayer } from '../map/types';
+import ZoomControl from '../map/ZoomControl';
 
 interface Props {
   plotSearches: Array<PlotSearch>;
@@ -30,22 +30,13 @@ interface Props {
   setHoveredTargetId: (id: number | null) => void;
 }
 
-export const whenMapCreated = (map: L.Map): void => {
-  new ResizeObserver(() => {
-    map.invalidateSize(false);
-  }).observe(map.getContainer());
-};
-
 const MapComponent = (props: Props): JSX.Element => {
   // Initializing map settings
-
-  const initialPosition = new LatLng(60.167642, 24.954753);
-  const { BaseLayer } = LayersControl;
+  const initialPosition = HELSINKI_CENTRAL_COORDINATES;
   const { latLonBounds, CRS } = initializeHelsinkiMap();
 
   // Initializing other component variables
 
-  const { t } = useTranslation();
   const plotSearchesByCategory = props.categoryOptions.map((category) => ({
     category,
     plotSearches: props.plotSearches?.filter(
@@ -65,51 +56,16 @@ const MapComponent = (props: Props): JSX.Element => {
       maxZoom={12}
       crs={CRS}
       zoomControl={false}
-      whenCreated={whenMapCreated}
+      whenCreated={attachMapResizeObserver}
     >
-      <LayersControl position="bottomright">
-        <BaseLayer
-          checked
-          name={t(
-            'plotSearchAndCompetitions.mapComponent.mapLayers.base',
-            'Base map'
-          )}
-        >
-          <WMSTileLayer
-            url={'https://kartta.hel.fi/ws/geoserver/avoindata/wms?'}
-            layers={'avoindata:Karttasarja_harmaa'}
-            format={'image/png'}
-            transparent={true}
-          />
-        </BaseLayer>
-        <BaseLayer
-          name={t(
-            'plotSearchAndCompetitions.mapComponent.mapLayers.orto',
-            'Ortographic'
-          )}
-        >
-          <WMSTileLayer
-            url={'https://kartta.hel.fi/ws/geoserver/avoindata/wms?'}
-            layers={'avoindata:Ortoilmakuva'}
-            format={'image/png'}
-            transparent={true}
-          />
-        </BaseLayer>
-        <BaseLayer
-          name={t(
-            'plotSearchAndCompetitions.mapComponent.mapLayers.plan',
-            'City plan'
-          )}
-        >
-          <WMSTileLayer
-            url={'https://kartta.hel.fi/ws/geoserver/avoindata/wms?'}
-            layers={'avoindata:Ajantasa_asemakaava'}
-            format={'image/png'}
-            transparent={true}
-          />
-        </BaseLayer>
-      </LayersControl>
-      <ZoomControl position={'topright'} />
+      <StandardMapLayersControl
+        enabledLayers={[
+          MapLayer.generalMap,
+          MapLayer.orthographic,
+          MapLayer.cityPlan,
+        ]}
+      />
+      <ZoomControl />
       {plotSearchesByCategory.map(
         (item, index) =>
           props.categoryVisibilities[item.category.id] &&

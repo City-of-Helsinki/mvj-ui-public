@@ -42,20 +42,5 @@ export const prepareAreaSearchSubmission = (
       acc.push(...files[field]);
       return acc;
     }, [] as Array<File>),
-    // TODO: mock value
-    geometry: {
-      type: 'MultiPolygon',
-      coordinates: [
-        [
-          [
-            [0, 0],
-            [0, 1],
-            [1, 1],
-            [1, 0],
-            [0, 0],
-          ],
-        ],
-      ],
-    },
   };
 };

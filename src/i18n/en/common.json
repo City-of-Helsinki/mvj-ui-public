@@ -246,14 +246,114 @@
     "title": "Log in"
   },
   "mainAppTitle": "City of Helsinki plot and land leasing system",
-  "plotSearchAndCompetitions": {
-    "mapComponent": {
-      "mapLayers": {
-        "base": "Base map",
-        "orto": "Ortographic",
-        "plan": "City plan"
+  "map": {
+    "drawTools": {
+      "draw": {
+        "handlers": {
+          "circle": {
+            "radius": "Radius",
+            "tooltip": {
+              "start": "Click and drag to draw a circle."
+            }
+          },
+          "polygon": {
+            "tooltip": {
+              "cont": "Click to continue drawing a shape.",
+              "end": "Click the first point to close this shape.",
+              "start": "Click to start drawing a shape."
+            }
+          },
+          "polyline": {
+            "error": "<strong>Error:</strong> shape edges cannot cross!",
+            "tooltip": {
+              "cont": "Click to continue drawing a line.",
+              "end": "Click the last point to finish the line.",
+              "start": "Click to start drawing a line."
+            }
+          },
+          "rectangle": {
+            "tooltip": {
+              "start": "Click and drag to draw a rectangle."
+            }
+          },
+          "simpleshape": {
+            "tooltip": {
+              "end": "Release the mouse button to finish drawing."
+            }
+          }
+        },
+        "toolbar": {
+          "actions": {
+            "text": "Cancel",
+            "title": "Cancel drawing"
+          },
+          "buttons": {
+            "circle": "Draw a circle",
+            "polygon": "Draw a polygon",
+            "polyline": "Draw a polyline",
+            "rectangle": "Draw a rectangle"
+          },
+          "finish": {
+            "text": "Finish",
+            "title": "Finish drawing"
+          },
+          "undo": {
+            "text": "Delete last point",
+            "title": "Delete the last point drawn"
+          }
+        }
+      },
+      "edit": {
+        "handlers": {
+          "edit": {
+            "tooltip": {
+              "subtext": "Click cancel to undo changes.",
+              "text": "Drag handles or markers to edit features."
+            }
+          },
+          "remove": {
+            "tooltip": {
+              "text": "Click on a feature to remove."
+            }
+          }
+        },
+        "toolbar": {
+          "actions": {
+            "cancel": {
+              "text": "Cancel",
+              "title": "Cancel editing, discards all changes"
+            },
+            "clearAll": {
+              "text": "Clear All",
+              "title": "Clear all layers"
+            },
+            "save": {
+              "text": "Save",
+              "title": "Save changes"
+            }
+          },
+          "buttons": {
+            "edit": "Edit layers",
+            "editDisabled": "No layers to edit",
+            "remove": "Delete layers",
+            "removeDisabled": "No layers to delete"
+          }
+        }
       }
     },
+    "mapLayers": {
+      "baseMap": "Base map",
+      "cityPlan": "City plan",
+      "generalMap": "Base map",
+      "helsinkiOwnedAreas": "Areas owned by the City of Helsinki",
+      "ortographic": "Ortographic"
+    },
+    "zoomControl": {
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out"
+    }
+  },
+  "plotSearchAndCompetitions": {
     "mapView": {
       "otherSearches": {
         "pageTitle": "Other competitions and searches"
@@ -328,6 +428,7 @@
       "dateBefore": "The selected date cannot be after {{date}}.",
       "greaterThan": "Please enter a value greater than {{number}}.",
       "lessThan": "Please enter a value less than {{number}}.",
+      "nonEmptyGeometry": "No area has yet been selected.",
       "requiredArray": "One or more options must be selected.",
       "requiredValue": "This field is required."
     }

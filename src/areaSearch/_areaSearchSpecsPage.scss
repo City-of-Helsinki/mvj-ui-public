@@ -1,7 +1,7 @@
 .AreaSearchSpecsPage {
   @include pageTopLevelComponent();
 
-  section {
+  form > section {
     padding: $spacing-m;
     margin-bottom: $spacing-m;
     background-color: $color-black-5;

@@ -246,14 +246,114 @@
     "title": "Logga in"
   },
   "mainAppTitle": "",
-  "plotSearchAndCompetitions": {
-    "mapComponent": {
-      "mapLayers": {
-        "base": "",
-        "orto": "",
-        "plan": ""
+  "map": {
+    "drawTools": {
+      "draw": {
+        "handlers": {
+          "circle": {
+            "radius": "",
+            "tooltip": {
+              "start": ""
+            }
+          },
+          "polygon": {
+            "tooltip": {
+              "cont": "",
+              "end": "",
+              "start": ""
+            }
+          },
+          "polyline": {
+            "error": "",
+            "tooltip": {
+              "cont": "",
+              "end": "",
+              "start": ""
+            }
+          },
+          "rectangle": {
+            "tooltip": {
+              "start": ""
+            }
+          },
+          "simpleshape": {
+            "tooltip": {
+              "end": ""
+            }
+          }
+        },
+        "toolbar": {
+          "actions": {
+            "text": "",
+            "title": ""
+          },
+          "buttons": {
+            "circle": "",
+            "polygon": "",
+            "polyline": "",
+            "rectangle": ""
+          },
+          "finish": {
+            "text": "",
+            "title": ""
+          },
+          "undo": {
+            "text": "",
+            "title": ""
+          }
+        }
+      },
+      "edit": {
+        "handlers": {
+          "edit": {
+            "tooltip": {
+              "subtext": "",
+              "text": ""
+            }
+          },
+          "remove": {
+            "tooltip": {
+              "text": ""
+            }
+          }
+        },
+        "toolbar": {
+          "actions": {
+            "cancel": {
+              "text": "",
+              "title": ""
+            },
+            "clearAll": {
+              "text": "",
+              "title": ""
+            },
+            "save": {
+              "text": "",
+              "title": ""
+            }
+          },
+          "buttons": {
+            "edit": "",
+            "editDisabled": "",
+            "remove": "",
+            "removeDisabled": ""
+          }
+        }
       }
     },
+    "mapLayers": {
+      "baseMap": "",
+      "cityPlan": "",
+      "generalMap": "",
+      "helsinkiOwnedAreas": "",
+      "ortographic": ""
+    },
+    "zoomControl": {
+      "zoomIn": "",
+      "zoomOut": ""
+    }
+  },
+  "plotSearchAndCompetitions": {
     "mapView": {
       "otherSearches": {
         "pageTitle": ""
@@ -328,6 +428,7 @@
       "dateBefore": "",
       "greaterThan": "",
       "lessThan": "",
+      "nonEmptyGeometry": "",
       "requiredArray": "",
       "requiredValue": ""
     }
