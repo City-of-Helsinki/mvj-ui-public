@@ -341,6 +341,9 @@
         }
       }
     },
+    "geoSearch": {
+      "searchLabel": "Search for an address"
+    },
     "mapLayers": {
       "baseMap": "Base map",
       "cityPlan": "City plan",

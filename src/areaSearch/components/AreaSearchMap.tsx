@@ -7,6 +7,7 @@ import {
 import { blur, focus, WrappedFieldProps } from 'redux-form';
 import { Feature } from 'geojson';
 import { connect } from 'react-redux';
+import { IconAlertCircleFill } from 'hds-react';
 
 import { StandardMapLayersControl } from '../../map/StandardMapLayersControl';
 import {
@@ -19,6 +20,7 @@ import {
 import { MapLayer } from '../../map/types';
 import ZoomControl from '../../map/ZoomControl';
 import DrawTools from '../../map/DrawTools';
+import GeoSearch from '../../map/GeoSearch';
 
 type Props = {
   focus: typeof focus;
@@ -90,11 +92,17 @@ const AreaSearchMap = ({
             //MapLayer.helsinkiOwnedAreas
           ]}
         />
+        <GeoSearch />
         <FeatureGroup ref={featureGroupRef}>
           <DrawTools onChange={updateFieldValue} />
         </FeatureGroup>
       </MapContainer>
-      {touched && !valid && <div>{error}</div>}
+      {touched && !valid && (
+        <div className="AreaSearchMap__error" role="alert">
+          <IconAlertCircleFill />
+          <span>{error}</span>
+        </div>
+      )}
     </div>
   );
 };

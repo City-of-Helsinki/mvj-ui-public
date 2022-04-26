@@ -341,6 +341,9 @@
         }
       }
     },
+    "geoSearch": {
+      "searchLabel": ""
+    },
     "mapLayers": {
       "baseMap": "",
       "cityPlan": "",
