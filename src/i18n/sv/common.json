@@ -22,13 +22,17 @@
       "rowLabel": "",
       "uploadedAt": ""
     },
+    "form": {
+      "pageTitle": ""
+    },
     "heading": "",
     "loginButton": "",
     "preview": {
       "attachmentNo": "",
       "booleanNo": "",
       "booleanYes": "",
-      "heading": ""
+      "heading": "",
+      "pageTitle": ""
     },
     "previewButton": "",
     "returnToForm": "",
@@ -36,7 +40,8 @@
     "submitInProcess": "",
     "success": {
       "body": "",
-      "heading": ""
+      "heading": "",
+      "pageTitle": ""
     },
     "targets": {
       "identifier": "",
@@ -86,6 +91,7 @@
           "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden/terrasser-och-parklet"
         }
       },
+      "pageTitle": "",
       "readMore": ""
     },
     "specs": {
@@ -123,11 +129,15 @@
       },
       "loginButton": "",
       "notLoggedIn": "",
+      "pageTitle": "",
       "submitting": ""
     }
   },
-  "error": {
-    "pageNotFound": ""
+  "errorPage": {
+    "notFound": {
+      "explanation": "",
+      "pageTitle": ""
+    }
   },
   "favourites": {
     "saga": {
@@ -145,6 +155,7 @@
       "link": "",
       "title": ""
     },
+    "pageTitle": "",
     "targetCard": {
       "removeButton": "",
       "showFullDesc": {
@@ -234,6 +245,7 @@
     "login": "Logga in",
     "title": "Logga in"
   },
+  "mainAppTitle": "",
   "plotSearchAndCompetitions": {
     "mapComponent": {
       "mapLayers": {
@@ -243,6 +255,12 @@
       }
     },
     "mapView": {
+      "otherSearches": {
+        "pageTitle": ""
+      },
+      "plotSearches": {
+        "pageTitle": ""
+      },
       "sidebar": {
         "notification": {
           "noTargetsToShow": {

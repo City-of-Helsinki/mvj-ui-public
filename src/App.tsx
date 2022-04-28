@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Oidc, { User } from 'oidc-client';
 import { setConfiguration as setGridSystemConfiguration } from 'react-grid-system';
+import { Helmet } from 'react-helmet';
 
 import TopNavigation from './topNavigation/topNavigation';
 import Footer from './footer/footer';
@@ -12,6 +13,7 @@ import { fetchApiToken, receiveApiToken } from './auth/actions';
 import { fetchFavourite } from './favourites/actions';
 import GlobalNotificationContainer from './globalNotification/globalNotificationContainer';
 import { getIsFetchingFavourite } from './favourites/selectors';
+import { getPageTitle } from './root/helpers';
 
 // https://hds.hel.fi/design-tokens/breakpoints
 // (container widths adjusted with gutters included)
@@ -77,6 +79,9 @@ const App = ({
 
   return (
     <div className="App">
+      <Helmet>
+        <title>{getPageTitle()}</title>
+      </Helmet>
       <LoginModal />
       <TopNavigation />
       <GlobalNotificationContainer />

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Col, Container, Row } from 'react-grid-system';
 import { Button } from 'hds-react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import { RootState } from '../root/rootReducer';
 import { PlotSearch } from '../plotSearch/types';
@@ -16,6 +17,7 @@ import { getPlotSearchFromFavourites } from '../favourites/helpers';
 import { AppRoutes, getRouteById } from '../root/routes';
 import ApplicationTargetList from './components/applicationTargetList';
 import MainContentElement from '../a11y/MainContentElement';
+import { getPageTitle } from '../root/helpers';
 
 interface State {
   relevantPlotSearch: PlotSearch | null;
@@ -55,6 +57,13 @@ const ApplicationPage = ({
 
         return (
           <MainContentElement className="ApplicationPage">
+            <Helmet>
+              <title>
+                {getPageTitle(
+                  t('application.form.pageTitle', 'Plot application')
+                )}
+              </title>
+            </Helmet>
             <Container>
               <h1>{t('application.heading', 'Plot application')}</h1>
               <ApplicationTargetList />

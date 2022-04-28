@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Container } from 'react-grid-system';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 import { clearFavourite } from '../favourites/actions';
 import MainContentElement from '../a11y/MainContentElement';
+import { getPageTitle } from '../root/helpers';
 
 interface Props {
   clearFavourite: () => void;
@@ -19,6 +21,11 @@ const ApplicationSuccessPage = ({ clearFavourite }: Props) => {
 
   return (
     <MainContentElement className="ApplicationSuccessPage">
+      <Helmet>
+        <title>
+          {getPageTitle(t('application.success.pageTitle', 'Application sent'))}
+        </title>
+      </Helmet>
       <Container>
         <h1>
           {t('application.success.heading', 'Thank you for your application')}

@@ -13,6 +13,7 @@ import {
 import { Col, Container, Row } from 'react-grid-system';
 import { Button, Link, Notification } from 'hds-react';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
@@ -36,6 +37,7 @@ import { AREA_SEARCH_FORM_NAME, IntendedSubUse, IntendedUse } from './types';
 import { fetchIntendedUses, submitAreaSearch } from './actions';
 import { prepareAreaSearchSubmission } from './helpers';
 import { getFieldNamesFromFormErrors, ReduxFormError } from '../form/helpers';
+import { getPageTitle } from '../root/helpers';
 
 interface State {
   startDate?: string;
@@ -169,6 +171,11 @@ const AreaSearchSpecsPage = ({
 
           return (
             <MainContentElement className="AreaSearchSpecsPage">
+              <Helmet>
+                <title>
+                  {getPageTitle(t('areaSearch.specs.pageTitle', 'Area search'))}
+                </title>
+              </Helmet>
               <Container>
                 <form onSubmit={onSubmit}>
                   <h1>

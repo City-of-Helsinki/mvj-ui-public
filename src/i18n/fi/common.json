@@ -22,13 +22,17 @@
       "rowLabel": "Liite {{number}}",
       "uploadedAt": "Lähetetty"
     },
+    "form": {
+      "pageTitle": "Tonttihakemus"
+    },
     "heading": "Tonttihakemus",
     "loginButton": "Kirjaudu sisään",
     "preview": {
       "attachmentNo": "Liite {{number}}",
       "booleanNo": "Ei",
       "booleanYes": "Kyllä",
-      "heading": "Esikatselu – tonttihakemus"
+      "heading": "Esikatselu – tonttihakemus",
+      "pageTitle": "Tonttihakemus"
     },
     "previewButton": "Siirry esikatseluun",
     "returnToForm": "Muokkaa hakemusta",
@@ -36,7 +40,8 @@
     "submitInProcess": "Hakemusta lähetetään...",
     "success": {
       "body": "Hakemuksesi on nyt lähetetty.",
-      "heading": "Kiitos hakemuksestasi"
+      "heading": "Kiitos hakemuksestasi",
+      "pageTitle": "Hakemus lähetetty"
     },
     "targets": {
       "identifier": "Tontti",
@@ -86,6 +91,7 @@
           "link": "https://www.hel.fi/helsinki/fi/asuminen-ja-ymparisto/tontit/luvat/terassit-ja-parkletit/"
         }
       },
+      "pageTitle": "Aluehaku",
       "readMore": "Lue lisää"
     },
     "specs": {
@@ -123,11 +129,15 @@
       },
       "loginButton": "Kirjaudu sisään",
       "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehaun.",
+      "pageTitle": "Aluehaku",
       "submitting": "Lähetetään..."
     }
   },
-  "error": {
-    "pageNotFound": "404 Sivua ei löytynyt"
+  "errorPage": {
+    "notFound": {
+      "explanation": "404 Sivua ei löytynyt",
+      "pageTitle": "Sivua ei löytynyt"
+    }
   },
   "favourites": {
     "saga": {
@@ -145,6 +155,7 @@
       "link": "Palaa tonttihakusivulle",
       "title": "Haluatko hakea lisää tontteja?"
     },
+    "pageTitle": "Valitut tontit",
     "targetCard": {
       "removeButton": "Poista listalta",
       "showFullDesc": {
@@ -234,6 +245,7 @@
     "login": "Kirjaudu",
     "title": "Kirjaudu sisään"
   },
+  "mainAppTitle": "Helsingin kaupungin tontti- ja maanvuokrausjärjestelmä",
   "plotSearchAndCompetitions": {
     "mapComponent": {
       "mapLayers": {
@@ -243,6 +255,12 @@
       }
     },
     "mapView": {
+      "otherSearches": {
+        "pageTitle": "Muut kilpailut ja haut"
+      },
+      "plotSearches": {
+        "pageTitle": "Tonttihaut ja -kilpailut"
+      },
       "sidebar": {
         "notification": {
           "noTargetsToShow": {
