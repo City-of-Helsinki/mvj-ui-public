@@ -34,6 +34,10 @@ export const getInitialApplicationForm = (
     section: FormSection,
     parent: NestedField = root.sections
   ): void => {
+    if (!section.visible) {
+      return;
+    }
+
     const workingItem = {
       sections: {},
       fields: {},
@@ -53,6 +57,10 @@ export const getInitialApplicationForm = (
   };
 
   const buildField = (field: FormField, parent: NestedField): void => {
+    if (!field.enabled) {
+      return;
+    }
+
     let initialValue;
     switch (fieldTypes[field.type]) {
       case SupportedFieldTypes.FileUpload:

@@ -108,6 +108,10 @@ const ApplicationFormSubsectionFields = connect(
        *   The options will have no effect.
        * */
 
+      if (!field.enabled) {
+        return null;
+      }
+
       const fieldName = [
         pathName,
         ApplicationSectionKeys.Fields,
@@ -275,7 +279,11 @@ const ApplicationFormSubsection = ({
   path,
   section,
   headerTag: HeaderTag = 'h3',
-}: ApplicationFormSubsectionProps): JSX.Element => {
+}: ApplicationFormSubsectionProps): JSX.Element | null => {
+  if (!section.visible) {
+    return null;
+  }
+
   const isArray = section.add_new_allowed;
   const pathName = [...path, section.identifier].join('.');
 
