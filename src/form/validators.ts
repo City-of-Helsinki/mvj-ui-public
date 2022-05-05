@@ -1,5 +1,6 @@
 import i18n from '../i18n';
 import { renderDate } from '../i18n/utils';
+import { MultiPolygon } from 'geojson';
 
 type genericValidatorInputTypes =
   | string
@@ -116,4 +117,20 @@ export const dateBeforeValidatorGenerator =
     }
 
     return null;
+  };
+
+export const nonEmptyMultiPolygonValidatorGenerator =
+  (customError?: string) =>
+  (value?: MultiPolygon | null): string | null => {
+    if (value && value.coordinates.length > 0) {
+      return null;
+    }
+
+    return (
+      customError ||
+      i18n.t(
+        'validation.errors.nonEmptyGeometry',
+        'No area has yet been selected.'
+      )
+    );
   };

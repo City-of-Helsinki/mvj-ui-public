@@ -1,16 +1,18 @@
 import React from 'react';
-import { MapContainer, WMSTileLayer, Marker, Tooltip } from 'react-leaflet';
+import { MapContainer, Marker, Tooltip } from 'react-leaflet';
 import 'proj4leaflet';
 import { IconHeartFill } from 'hds-react';
-import { PlotSearchTarget } from '../../plotSearch/types';
-import { getCentroid } from '../../mapSearch/utils';
-import { initializeHelsinkiMap } from '../../mapSearch/utils';
-import { whenMapCreated } from '../../mapSearch/mapComponent';
 import L, { DivIcon } from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+
+import { PlotSearchTarget } from '../../plotSearch/types';
+import { attachMapResizeObserver, getCentroid } from '../../map/utils';
+import { initializeHelsinkiMap } from '../../map/utils';
 import { AppRoutes, getRouteById } from '../../root/routes';
+import { StandardMapLayer } from '../../map/StandardMapLayersControl';
+import { MapLayer, MapLayers } from '../../map/types';
 
 interface Props {
   target: PlotSearchTarget;
@@ -48,14 +50,9 @@ const FavouriteCardMap = (props: Props): JSX.Element => {
       bounds={latLonBounds}
       crs={CRS}
       zoomControl={false}
-      whenCreated={whenMapCreated}
+      whenCreated={attachMapResizeObserver}
     >
-      <WMSTileLayer
-        url={'https://kartta.hel.fi/ws/geoserver/avoindata/wms?'}
-        layers={'avoindata:Karttasarja_harmaa'}
-        format={'image/png'}
-        transparent={true}
-      />
+      <StandardMapLayer layerData={MapLayers[MapLayer.generalMap]} />
       <Marker
         position={coord}
         icon={getIcon()}

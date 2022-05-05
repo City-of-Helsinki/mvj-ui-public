@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { PlotSearch, PlotSearchTarget } from '../plotSearch/types';
 import { useMapEvents, GeoJSON, Marker, useMap } from 'react-leaflet';
 import L, { DivIcon, LatLngExpression } from 'leaflet';
-import { getCentroid } from './utils';
+import { getCentroid } from '../map/utils';
 import { SelectedTarget } from './mapSearchPage';
 import { renderToStaticMarkup } from 'react-dom/server';
 import MapSymbol from './mapSymbol';

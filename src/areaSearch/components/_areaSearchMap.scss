@@ -1,0 +1,14 @@
+.AreaSearchMap {
+  &__map {
+    height: 600px;
+    max-height: 75vh;
+  }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    color: var(--color-error);
+    padding: ($spacing-xs / 2) 0 $spacing-xs;
+    gap: $spacing-xs / 2;
+  }
+}

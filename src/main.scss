@@ -1,5 +1,8 @@
 @import '~hds-design-tokens/lib/all';
 @import '~leaflet/dist/leaflet';
+@import '~leaflet-draw/dist/leaflet.draw';
+@import '~leaflet-geosearch/dist/geosearch';
+
 @import 'styles/fonts';
 @import 'styles/variables';
 @import 'styles/mixins';
@@ -35,6 +38,7 @@
 @import 'a11y/screenReaderText';
 @import 'areaSearch/areaSearchLandingPage';
 @import 'areaSearch/areaSearchSpecsPage';
+@import 'areaSearch/components/areaSearchMap';
 @import 'boxGrid/boxGrid';
 @import 'boxGrid/boxGridBox';
 
