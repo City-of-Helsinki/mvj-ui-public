@@ -94,7 +94,10 @@ const AreaSearchMap = ({
         />
         <GeoSearch />
         <FeatureGroup ref={featureGroupRef}>
-          <DrawTools onChange={updateFieldValue} />
+          <DrawTools
+            onChange={updateFieldValue}
+            featureGroup={featureGroupRef}
+          />
         </FeatureGroup>
       </MapContainer>
       {touched && !valid && (

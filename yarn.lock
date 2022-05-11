@@ -1435,6 +1435,18 @@
     "@react-aria/utils" "^3.2.0"
     clsx "^1.1.1"
 
+"@react-hook/latest@^1.0.2":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@react-hook/latest/-/latest-1.0.3.tgz#c2d1d0b0af8b69ec6e2b3a2412ba0768ac82db80"
+  integrity sha512-dy6duzl+JnAZcDbNTfmaP3xHiKtbXYOaz3G51MGVljh548Y8MWzTr+PHLOfvpypEVW9zwvl+VyKjbWKEVbV1Rg==
+
+"@react-hook/throttle@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@react-hook/throttle/-/throttle-2.2.0.tgz#d0402714a06e1ba0bc1da1fdf5c3c5cd0e08d45a"
+  integrity sha512-LJ5eg+yMV8lXtqK3lR+OtOZ2WH/EfWvuiEEu0M3bhR7dZRfTyEJKxH1oK9uyBxiXPtWXiQggWbZirMCXam51tg==
+  dependencies:
+    "@react-hook/latest" "^1.0.2"
+
 "@react-leaflet/core@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@react-leaflet/core/-/core-1.1.1.tgz#827fd05bb542cf874116176d8ef48d5b12163f81"
@@ -8116,6 +8128,11 @@ leaflet-geosearch@^3.6.0:
   integrity sha512-TkJOi+eVbsQB7wC0ssGzV9eGQv5BgEwDyb0QOunYA64qe53lB+ostUemvQD7Cmari0shtgBr3Patn5galjr3WA==
   optionalDependencies:
     leaflet "^1.6.0"
+
+leaflet-measure-path@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/leaflet-measure-path/-/leaflet-measure-path-1.5.0.tgz#68cf43fc5f65a2d40bac8994bd196c7f4a3c264e"
+  integrity sha512-veLRhd+TlJtPDLgCqN0i0SsYPMGCCMNchhDyLhn4TNdiTaWf68iTuXnts5UdiDDmUuVefc6pP9rHm+cKvOx5rQ==
 
 leaflet@1.7.1, leaflet@^1.6.0:
   version "1.7.1"
