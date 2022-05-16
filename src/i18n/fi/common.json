@@ -431,7 +431,7 @@
       "dateBefore": "Myöhäisin sallittu päivämäärä on {{date}}.",
       "greaterThan": "Arvon on oltava suurempi kuin {{number}}.",
       "lessThan": "Arvon on oltava pienempi kuin {{number}}.",
-      "nonEmptyGeometry": "",
+      "nonEmptyGeometry": "Aluetta ei ole vielä valittu.",
       "requiredArray": "Valitse vähintään yksi vaihtoehto.",
       "requiredValue": "Tämä tieto on pakollinen."
     }

@@ -1,9 +1,6 @@
 import React, { useRef } from 'react';
 import { FeatureGroup, MapContainer, useMapEvents } from 'react-leaflet';
-import {
-  FeatureGroup as FeatureGroupType,
-  LeafletEventHandlerFnMap,
-} from 'leaflet';
+import { FeatureGroup as FeatureGroupType } from 'leaflet';
 import { blur, focus, WrappedFieldProps } from 'redux-form';
 import { Feature } from 'geojson';
 import { connect } from 'react-redux';
@@ -57,14 +54,10 @@ const AreaSearchMap = ({
   };
 
   const EventHandler = () => {
-    // LeafletEventHandlerFnMap has a generic key-value pair field at the end of its definition,
-    // accompanied with a note that that allows custom events but makes the interface uncheckable.
-    // However, it has been commented out, i.e. not enabled. We manually cast to that function map
-    // to pass these unmentioned events that Leaflet does support and we need.
     useMapEvents({
       focus: () => focus(form, name),
       blur: () => blur(form, name, value, true),
-    } as LeafletEventHandlerFnMap);
+    });
 
     return null;
   };
@@ -94,7 +87,10 @@ const AreaSearchMap = ({
         />
         <GeoSearch />
         <FeatureGroup ref={featureGroupRef}>
-          <DrawTools onChange={updateFieldValue} />
+          <DrawTools
+            onChange={updateFieldValue}
+            featureGroup={featureGroupRef}
+          />
         </FeatureGroup>
       </MapContainer>
       {touched && !valid && (
