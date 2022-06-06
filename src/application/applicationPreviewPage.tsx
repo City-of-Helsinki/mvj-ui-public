@@ -87,6 +87,10 @@ const ApplicationPreviewPage = ({
     return (
       <dl className="ApplicationPreviewPage__subsection-fields">
         {sectionFields.map((field) => {
+          if (!field.enabled) {
+            return null;
+          }
+
           const value = sectionAnswers[field.identifier]?.value;
           let displayValue = '' + value;
           switch (fieldTypeMapping[field.type]) {
@@ -197,8 +201,12 @@ const ApplicationPreviewPage = ({
     answers,
     section,
     headerTag: HeaderTag = 'h3',
-  }: ApplicationPreviewSubsectionProps): JSX.Element => {
+  }: ApplicationPreviewSubsectionProps): JSX.Element | null => {
     const isArray = section.add_new_allowed;
+
+    if (!section.visible) {
+      return null;
+    }
 
     return (
       <div className="ApplicationPreviewPage__subsection">
