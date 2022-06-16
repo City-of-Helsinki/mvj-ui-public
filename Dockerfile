@@ -9,9 +9,12 @@ RUN apk update
 RUN apk add python3
 RUN npm rebuild node-sass
 RUN yarn install && yarn cache clean --force
+RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
 
 COPY . .
 
+RUN yarn prepare-renew-endpoint
+
 VOLUME [ "/app" ]
 
-CMD ["yarn", "start"]
+CMD ["yarn", "start-server"]

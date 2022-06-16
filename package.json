@@ -60,13 +60,14 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "yarn run prepare-renew-endpoint && react-scripts start",
+    "start": "yarn run prepare-renew-endpoint && yarn run start-server",
     "build": "yarn run prepare-renew-endpoint && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:coverage": "react-scripts test --coverage --runInBand --watchAll=false",
     "prepare": "husky install",
     "i18n": "npx i18next",
+    "start-server": "react-scripts start",
     "prepare-renew-endpoint": "node scripts/prepare-renew-endpoint.js"
   },
   "eslintConfig": {
