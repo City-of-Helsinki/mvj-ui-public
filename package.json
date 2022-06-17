@@ -61,7 +61,7 @@
   },
   "scripts": {
     "start": "yarn run prepare-renew-endpoint && yarn run start-server",
-    "build": "yarn run prepare-renew-endpoint && react-scripts build",
+    "build": "yarn run prepare-renew-endpoint && DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:coverage": "react-scripts test --coverage --runInBand --watchAll=false",
@@ -75,6 +75,10 @@
       "react-app"
     ]
   },
+  "eslintIgnore": [
+    "node_modules",
+    "build/*"
+  ],
   "browserslist": [
     ">0.2%",
     "not dead",
