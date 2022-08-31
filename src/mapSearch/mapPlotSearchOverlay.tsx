@@ -17,11 +17,15 @@ interface Props {
   plotSearch: PlotSearch;
   categoryIndex: number;
   categorySymbol: string;
-  initialPosition: LatLngExpression;
   favouritedTargets: FavouriteTarget[];
   hoveredTargetId: number | null;
   setHoveredTargetId: (id: number | null) => void;
 }
+
+type StoredMapState = {
+  coords: LatLngExpression;
+  zoom: number;
+};
 
 const usePreviousTarget = (value: SelectedTarget) => {
   const ref = useRef<SelectedTarget>();
@@ -56,6 +60,8 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
   const map = useMap();
   const navigate = useNavigate();
   const [zoomLevel, setZoomLevel] = useState(map.getZoom());
+  const [storedManualPosition, setStoredManualPosition] =
+    useState<StoredMapState | null>(null);
 
   const prevSelectedTarget = usePreviousTarget(props.selectedTarget);
 
@@ -63,19 +69,43 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
     zoomend: () => {
       setZoomLevel(mapEvents.getZoom());
     },
+    dragend: () => {
+      clearManualPosition();
+    },
   });
+
+  const memorizeManualPosition = (): void => {
+    setStoredManualPosition({
+      coords: map.getCenter(),
+      zoom: map.getZoom(),
+    });
+  };
+
+  const restoreManualPosition = (): void => {
+    if (storedManualPosition) {
+      map.setView(storedManualPosition.coords, storedManualPosition.zoom);
+    }
+    clearManualPosition();
+  };
+
+  const clearManualPosition = (): void => {
+    setStoredManualPosition(null);
+  };
 
   useEffect(() => {
     if (props.selectedTarget && props.selectedTarget != prevSelectedTarget) {
       const position = getTargetCentroid(props.selectedTarget.target);
       if (position) {
+        if (!prevSelectedTarget) {
+          memorizeManualPosition();
+        }
+
         map.setView(position, 9);
       }
     }
 
-    // if target is going to null, set map to initialPosition
     if (prevSelectedTarget !== null && props.selectedTarget === null) {
-      map.setView(props.initialPosition, 6);
+      restoreManualPosition();
     }
   });
 
