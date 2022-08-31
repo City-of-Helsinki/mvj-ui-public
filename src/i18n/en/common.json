@@ -147,6 +147,7 @@
   },
   "favouritesPage": {
     "map": {
+      "notAvailable": "Map not available",
       "showOnMap": "Show on map"
     },
     "nextButton": "Apply for these plots",

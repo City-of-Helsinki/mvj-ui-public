@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { PlotSearch, PlotSearchTarget } from '../plotSearch/types';
 import { useMapEvents, GeoJSON, Marker, useMap } from 'react-leaflet';
 import L, { DivIcon, LatLngExpression } from 'leaflet';
-import { getCentroid } from '../map/utils';
+import { getTargetCentroid } from '../map/utils';
 import { SelectedTarget } from './mapSearchPage';
 import { renderToStaticMarkup } from 'react-dom/server';
 import MapSymbol from './mapSymbol';
@@ -67,9 +67,7 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
 
   useEffect(() => {
     if (props.selectedTarget && props.selectedTarget != prevSelectedTarget) {
-      const position = getCentroid(
-        props.selectedTarget.target.plan_unit.geometry
-      );
+      const position = getTargetCentroid(props.selectedTarget.target);
       if (position) {
         map.setView(position, 9);
       }
@@ -93,7 +91,8 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
   ): JSX.Element | null => {
     const isFavourited = favouritedTargets.some((t) => t.id === target.id);
     const isHover = props.hoveredTargetId === target.id && zoomLevel <= 7;
-    const position = getCentroid(target.plan_unit.geometry);
+
+    const position = getTargetCentroid(target);
     if (position) {
       return (
         <Marker

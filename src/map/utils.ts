@@ -13,6 +13,7 @@ import {
 import * as L from 'leaflet';
 import proj4 from 'proj4';
 import i18n from 'i18next';
+import { PlotSearchTarget } from '../plotSearch/types';
 
 export const getCentroid = (geometry: Geometry): LatLngExpression | null => {
   const sum = [0, 0];
@@ -44,6 +45,16 @@ export const getCentroid = (geometry: Geometry): LatLngExpression | null => {
     default:
       return null;
   }
+};
+
+export const getTargetCentroid = (
+  target: PlotSearchTarget
+): LatLngExpression | null => {
+  if (target.plan_unit?.geometry) {
+    return getCentroid(target.plan_unit.geometry);
+  }
+
+  return null;
 };
 
 interface HelsinkiMapData {

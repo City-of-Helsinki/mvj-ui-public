@@ -147,6 +147,7 @@
   },
   "favouritesPage": {
     "map": {
+      "notAvailable": "Kartta ei saatavilla",
       "showOnMap": "Näytä kartalla"
     },
     "nextButton": "Jatka hakemuksen täyttöön",
