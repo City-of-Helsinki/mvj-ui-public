@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { PlotSearchTarget } from '../../plotSearch/types';
-import { attachMapResizeObserver, getCentroid } from '../../map/utils';
+import { attachMapResizeObserver, getTargetCentroid } from '../../map/utils';
 import { initializeHelsinkiMap } from '../../map/utils';
 import { AppRoutes, getRouteById } from '../../root/routes';
 import { StandardMapLayer } from '../../map/StandardMapLayersControl';
@@ -20,7 +20,7 @@ interface Props {
 
 const FavouriteCardMap = (props: Props): JSX.Element => {
   const { latLonBounds, CRS } = initializeHelsinkiMap();
-  const coord = getCentroid(props.target.plan_unit.geometry);
+  const coord = getTargetCentroid(props.target);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -34,8 +34,10 @@ const FavouriteCardMap = (props: Props): JSX.Element => {
   };
 
   if (!coord) {
-    // TODO: Some reasonable placeholder here..
-    return <div>NO MAP AVAILABLE</div>;
+    // TODO: A better placeholder here...
+    return (
+      <div>{t('favouritesPage.map.notAvailable', 'Map not available')}</div>
+    );
   }
 
   return (

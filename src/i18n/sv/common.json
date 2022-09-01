@@ -147,6 +147,7 @@
   },
   "favouritesPage": {
     "map": {
+      "notAvailable": "",
       "showOnMap": ""
     },
     "nextButton": "",

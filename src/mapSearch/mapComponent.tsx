@@ -83,7 +83,6 @@ const MapComponent = (props: Props): JSX.Element => {
                   setSelectedTarget={props.setSelectedTarget}
                   categoryIndex={index}
                   categorySymbol={item.category.symbol}
-                  initialPosition={initialPosition}
                   favouritedTargets={props.favourite.targets}
                   hoveredTargetId={props.hoveredTargetId}
                   setHoveredTargetId={props.setHoveredTargetId}
