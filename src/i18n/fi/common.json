@@ -23,7 +23,14 @@
       "uploadedAt": "Lähetetty"
     },
     "form": {
-      "pageTitle": "Tonttihakemus"
+      "pageTitle": "Tonttihakemus",
+      "tabs": {
+        "applicants_one": "Hakijat ({{count}})",
+        "applicants_other": "Hakijat ({{count}})",
+        "other": "Lisätiedot",
+        "targets_one": "Haettavat kohteet ({{count}})",
+        "targets_other": "Haettavat kohteet ({{count}})"
+      }
     },
     "heading": "Tonttihakemus",
     "loginButton": "Kirjaudu sisään",

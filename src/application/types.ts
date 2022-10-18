@@ -140,6 +140,9 @@ export interface FileOperationFinishedAction {
 }
 
 export const APPLICATION_FORM_NAME = 'application';
+export const APPLICANT_SECTION_IDENTIFIER = 'hakijan-tiedot';
+export const TARGET_SECTION_IDENTIFIER = 'haettava-kohde';
+export const CONFIRMATION_SECTION_IDENTIFIER = 'vahvistukset';
 
 export type ApplicationField = {
   value: NestedFieldLeaf;

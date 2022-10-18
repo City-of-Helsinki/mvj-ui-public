@@ -23,7 +23,14 @@
       "uploadedAt": ""
     },
     "form": {
-      "pageTitle": ""
+      "pageTitle": "",
+      "tabs": {
+        "applicants_one": "",
+        "applicants_other": "",
+        "other": "",
+        "targets_one": "",
+        "targets_other": ""
+      }
     },
     "heading": "",
     "loginButton": "",

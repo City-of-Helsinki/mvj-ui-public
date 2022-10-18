@@ -1,0 +1,29 @@
+.ApplicationForm {
+  .ApplicationForm__main-tabs {
+    ul {
+      width: 100% !important;
+      display: flex;
+      margin-bottom: $spacing-m;
+      background-color: $color-black-5;
+      --tab-color: #{$color-black};
+      --tab-font-size: #{$fontsize-body-l};
+
+      li {
+        flex: 0 1 50%;
+        font-weight: bold;
+
+        span {
+          &:before {
+            height: var(--tab-active-border-size);
+            background-color: $color-black;
+          }
+        }
+
+        &[aria-selected='true'] {
+          background-color: $color-black;
+          --tab-color: #{$color-white};
+        }
+      }
+    }
+  }
+}

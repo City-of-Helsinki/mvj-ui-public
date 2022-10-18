@@ -23,7 +23,14 @@
       "uploadedAt": "Uploaded at"
     },
     "form": {
-      "pageTitle": "Plot application"
+      "pageTitle": "Plot application",
+      "tabs": {
+        "applicants_one": "Applicants ({{count}})",
+        "applicants_other": "Applicants ({{count}})",
+        "other": "Details",
+        "targets_one": "Targets ({{count}})",
+        "targets_other": "Targets ({{count}})"
+      }
     },
     "heading": "Plot application",
     "loginButton": "Log in",
