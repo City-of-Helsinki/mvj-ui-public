@@ -1,8 +1,10 @@
 {
   "application": {
     "arraySection": {
+      "applicantHeader": "",
       "genericAddNew": "",
-      "remove": ""
+      "remove": "",
+      "removeTarget": ""
     },
     "error": {
       "generic": "",

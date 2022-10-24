@@ -3,7 +3,13 @@ import { WrappedFieldProps } from 'redux-form';
 import { ApiAttributes } from '../api/types';
 import { FormField } from '../plotSearch/types';
 
-export type NestedFieldLeaf = string | number | boolean | null;
+export type NestedFieldLeaf =
+  | string
+  | number
+  | boolean
+  | Array<string>
+  | Array<number>
+  | null;
 
 // A type definition cannot contain circular references, but an interface definition can,
 // thus this is implemented this way.
@@ -42,6 +48,7 @@ export type FieldRendererProps = WrappedFieldProps & {
 export enum ApplicationSectionKeys {
   Subsections = 'sections',
   Fields = 'fields',
+  Metadata = 'metadata',
 }
 
 export type ApplicationSubmission = {
@@ -149,15 +156,27 @@ export type ApplicationField = {
   extraValue: NestedFieldLeaf;
 };
 
+export type ApplicationFormSections =
+  | Record<string, ApplicationFormNode>
+  | Record<string, Array<ApplicationFormNode>>;
+
+export type ApplicationFormFields = Record<string, ApplicationField>;
+
 export type ApplicationFormNode = {
-  fields: Record<string, ApplicationField>;
-  sections:
-    | Record<string, ApplicationFormNode>
-    | Record<string, Array<ApplicationFormNode>>;
+  fields: ApplicationFormFields;
+  sections: ApplicationFormSections;
+  metadata?: Record<string, unknown>;
 };
 
 export type ApplicationFormRoot = {
   sections: Record<string, ApplicationFormNode>;
-  sectionTemplates: Record<string, NestedField>;
+  sectionTemplates: Record<string, ApplicationFormNode>;
   fileFieldIds: Array<number>;
 };
+
+export enum ApplicationFormTopLevelSectionFlavor {
+  GENERAL = 'general',
+  APPLICANT = 'applicant',
+  TARGET = 'target',
+  CONFIRMATION = 'confirmation',
+}

@@ -10,7 +10,7 @@ export interface Info {
 
 export const getInfo = (
   target: PlotSearchTarget,
-  plotSearch: PlotSearch,
+  plotSearch: PlotSearch | null,
   t: TFunction
 ): Info[] => {
   let endAt = '-';

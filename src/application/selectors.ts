@@ -1,4 +1,5 @@
 import { formValueSelector } from 'redux-form';
+import { Selector } from 'react-redux';
 
 import {
   APPLICATION_FORM_NAME,
@@ -8,10 +9,13 @@ import {
 } from './types';
 import { RootState } from '../root/rootReducer';
 
-export const getFieldTypeMapping = (state: RootState): FieldTypeMapping =>
-  state.application.fieldTypeMapping;
+export const getFieldTypeMapping: Selector<RootState, FieldTypeMapping> = (
+  state: RootState
+): FieldTypeMapping => state.application.fieldTypeMapping;
 
-export const getCurrentApplicantCount = (state: RootState): number => {
+export const getCurrentApplicantCount: Selector<RootState, number> = (
+  state: RootState
+): number => {
   const selector = formValueSelector(APPLICATION_FORM_NAME);
   return (
     selector(state, ApplicationSectionKeys.Subsections)?.[

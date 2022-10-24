@@ -1,8 +1,10 @@
 {
   "application": {
     "arraySection": {
+      "applicantHeader": "Details of applicant {{number}}",
       "genericAddNew": "Add new",
-      "remove": "Remove"
+      "remove": "Remove",
+      "removeTarget": "Remove from list"
     },
     "error": {
       "generic": "The application could not be submitted correctly. Please try again later.",

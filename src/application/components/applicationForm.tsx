@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { t } from 'i18next';
 
 import {
+  ApplicationFormTopLevelSectionFlavor,
   ApplicationSectionKeys,
   APPLICANT_SECTION_IDENTIFIER,
   CONFIRMATION_SECTION_IDENTIFIER,
@@ -13,6 +14,7 @@ import { Form } from '../../plotSearch/types';
 import ApplicationFormSubsection from './applicationFormSubsection';
 import { getCurrentApplicantCount } from '../selectors';
 import { RootState } from '../../root/rootReducer';
+import { getFavouriteCount } from '../../favourites/selectors';
 
 interface Props {
   baseForm: Form;
@@ -67,6 +69,7 @@ const ApplicationForm = ({
               path={[ApplicationSectionKeys.Subsections]}
               section={applicantSection}
               headerTag="h2"
+              flavor={ApplicationFormTopLevelSectionFlavor.APPLICANT}
             />
           )}
         </TabPanel>
@@ -76,6 +79,7 @@ const ApplicationForm = ({
               path={[ApplicationSectionKeys.Subsections]}
               section={targetSection}
               headerTag="h2"
+              flavor={ApplicationFormTopLevelSectionFlavor.TARGET}
             />
           )}
         </TabPanel>
@@ -97,6 +101,7 @@ const ApplicationForm = ({
           path={[ApplicationSectionKeys.Subsections]}
           section={confirmationSection}
           headerTag="h2"
+          flavor={ApplicationFormTopLevelSectionFlavor.CONFIRMATION}
         />
       )}
     </form>
@@ -105,5 +110,5 @@ const ApplicationForm = ({
 
 export default connect((state: RootState) => ({
   applicantCount: getCurrentApplicantCount(state),
-  favouritesCount: state.favourite.favourite.targets.length,
+  favouritesCount: getFavouriteCount(state),
 }))(ApplicationForm);

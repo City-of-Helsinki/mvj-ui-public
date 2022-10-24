@@ -7,17 +7,18 @@ import {
   WrappedFieldProps,
 } from 'redux-form';
 import { connect } from 'react-redux';
-import { Button, IconPlusCircle, IconTrash } from 'hds-react';
+import { Button, IconCrossCircle, IconPlusCircle } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 
 import { FormField, FormSection } from '../../plotSearch/types';
 import {
+  ApplicationFormNode,
+  ApplicationFormTopLevelSectionFlavor,
+  ApplicationSectionKeys,
   FieldRendererProps,
   FieldTypeMapping,
   FieldValue,
-  NestedField,
   SupportedFieldTypes,
-  ApplicationSectionKeys,
 } from '../types';
 import ApplicationFileUploadField from './applicationFileUploadField';
 import ApplicationTextField from './applicationTextField';
@@ -27,7 +28,10 @@ import ApplicationCheckboxFieldset from './applicationCheckboxFieldset';
 import ApplicationRadioButtonFieldset from './applicationRadioButtonFieldset';
 import { RootState } from '../../root/rootReducer';
 import { getFieldTypeMapping } from '../selectors';
-import { getSectionTemplate } from '../helpers';
+import { getSectionFavouriteTarget, getSectionTemplate } from '../helpers';
+import { removeFavouriteTarget } from '../../favourites/actions';
+import classNames from 'classnames';
+import ApplicationFormTargetSummary from './ApplicationFormTargetSummary';
 
 interface ApplicationFormFieldProps {
   name?: string | undefined;
@@ -218,67 +222,133 @@ const ApplicationFormSubsectionFields = connect(
 interface ApplicationFormSubsectionFieldArrayProps {
   section: FormSection;
   headerTag: React.ElementType;
+  flavor?: ApplicationFormTopLevelSectionFlavor;
 }
 
-const ApplicationFormSubsectionFieldArray = ({
-  fields,
-  section,
-  headerTag: HeaderTag,
-}: WrappedFieldArrayProps<NestedField> &
-  ApplicationFormSubsectionFieldArrayProps): JSX.Element => {
-  const { t } = useTranslation();
+interface ApplicationFormSubsectionFieldArrayInnerProps {
+  removeFavouriteTarget: (id: number) => void;
+}
 
-  return (
-    <div className="ApplicationFormSubsectionFieldArray">
-      {fields.map((identifier, i) => (
-        <div
-          className="ApplicationFormSubsectionFieldArray__item"
-          key={identifier}
-        >
-          <div className="ApplicationFormSubsectionFieldArray__item-content">
-            <HeaderTag>
-              {section.title} ({i + 1})
-            </HeaderTag>
-            {fields.length > 1 && (
-              <Button
-                className="ApplicationFormSubsectionFieldArray__remove-button"
-                onClick={() => fields.remove(i)}
-                variant="supplementary"
-                iconLeft={<IconTrash />}
-              >
-                {t('application.arraySection.remove', 'Remove')}
-              </Button>
-            )}
-            <ApplicationFormSubsectionFields
-              section={section}
-              identifier={identifier}
-            />
-          </div>
-        </div>
-      ))}
-      <Button
-        className="ApplicationFormSubsectionFieldArray__add-button"
-        onClick={() => fields.push(getSectionTemplate(section.identifier))}
-        variant="supplementary"
-        iconLeft={<IconPlusCircle />}
+const ApplicationFormSubsectionFieldArray = connect(null, {
+  removeFavouriteTarget,
+})(
+  ({
+    fields,
+    section,
+    headerTag: HeaderTag,
+    flavor,
+    removeFavouriteTarget,
+  }: WrappedFieldArrayProps<ApplicationFormNode> &
+    ApplicationFormSubsectionFieldArrayProps &
+    ApplicationFormSubsectionFieldArrayInnerProps): JSX.Element => {
+    const { t } = useTranslation();
+    const isTargetRoot = flavor === ApplicationFormTopLevelSectionFlavor.TARGET;
+
+    return (
+      <div
+        className={classNames('ApplicationFormSubsectionFieldArray', {
+          [`ApplicationFormSubsectionFieldArray--${flavor}`]: !!flavor,
+          'ApplicationFormSubsectionFieldArray--top-level': !!flavor,
+        })}
       >
-        {section.add_new_text ||
-          t('application.arraySection.genericAddNew', 'Add new')}
-      </Button>
-    </div>
-  );
-};
+        {fields.map((identifier, i) => {
+          const targetId = fields.get(i).metadata?.identifier as
+            | number
+            | undefined;
+          const target = getSectionFavouriteTarget(targetId);
+
+          const removeItem = (): void => {
+            if (isTargetRoot) {
+              if (targetId) {
+                removeFavouriteTarget(targetId);
+                fields.remove(i);
+              }
+            } else {
+              fields.remove(i);
+            }
+          };
+
+          let headerText: React.ReactNode;
+          switch (flavor) {
+            case ApplicationFormTopLevelSectionFlavor.APPLICANT:
+              headerText = t(
+                'application.arraySection.applicantHeader',
+                'Details of applicant {{number}}',
+                { number: i + 1 }
+              );
+              break;
+            case ApplicationFormTopLevelSectionFlavor.TARGET:
+              headerText = `${
+                target?.plot_search_target.lease_identifier || '?'
+              } - ${target?.plot_search_target.lease_address.address || '?'}, ${
+                target?.plot_search_target.district || '?'
+              }`;
+              break;
+            default:
+              headerText = `${section.title} (${i + 1})`;
+          }
+
+          return (
+            <div
+              className="ApplicationFormSubsectionFieldArray__item"
+              key={identifier}
+            >
+              <div className="ApplicationFormSubsectionFieldArray__item-content">
+                <HeaderTag>{headerText}</HeaderTag>
+                {(fields.length > 1 || isTargetRoot) && (
+                  <Button
+                    className="ApplicationFormSubsectionFieldArray__remove-button"
+                    onClick={removeItem}
+                    variant="supplementary"
+                    iconLeft={<IconCrossCircle />}
+                  >
+                    {isTargetRoot
+                      ? t('application.arraySection.remove', 'Remove')
+                      : t(
+                          'application.arraySection.removeTarget',
+                          'Remove from list'
+                        )}
+                  </Button>
+                )}
+                {isTargetRoot && (
+                  <ApplicationFormTargetSummary target={target} />
+                )}
+                <ApplicationFormSubsectionFields
+                  section={section}
+                  identifier={identifier}
+                />
+              </div>
+            </div>
+          );
+        })}
+        {!isTargetRoot && (
+          <Button
+            className="ApplicationFormSubsectionFieldArray__add-button"
+            onClick={() => fields.push(getSectionTemplate(section.identifier))}
+            variant="supplementary"
+            iconLeft={<IconPlusCircle />}
+          >
+            {section.add_new_text ||
+              t('application.arraySection.genericAddNew', 'Add new')}
+          </Button>
+        )}
+      </div>
+    );
+  }
+);
 
 interface ApplicationFormSubsectionProps {
   path: Array<string>;
   section: FormSection;
   headerTag?: React.ElementType;
+  flavor?: ApplicationFormTopLevelSectionFlavor;
 }
 
 const ApplicationFormSubsection = ({
   path,
   section,
   headerTag: HeaderTag = 'h3',
+  flavor = ApplicationFormTopLevelSectionFlavor.GENERAL,
 }: ApplicationFormSubsectionProps): JSX.Element | null => {
   if (!section.visible) {
     return null;
@@ -288,12 +358,21 @@ const ApplicationFormSubsection = ({
   const pathName = [...path, section.identifier].join('.');
 
   return (
-    <div className="ApplicationFormSubsection">
+    <div
+      className={classNames(
+        'ApplicationFormSubsection',
+        `ApplicationFormSubsection--${flavor}`
+      )}
+    >
       {isArray ? (
-        <FieldArray<ApplicationFormSubsectionFieldArrayProps, NestedField>
+        <FieldArray<
+          ApplicationFormSubsectionFieldArrayProps,
+          ApplicationFormNode
+        >
           name={pathName}
           component={ApplicationFormSubsectionFieldArray}
           props={{ section, headerTag: HeaderTag }}
+          flavor={flavor}
         />
       ) : (
         <div className="ApplicationFormSubsection__content">

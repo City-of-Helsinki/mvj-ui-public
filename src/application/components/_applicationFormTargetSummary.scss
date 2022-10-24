@@ -1,0 +1,12 @@
+.ApplicationFormTargetSummary {
+  margin-bottom: $spacing-layout-m;
+
+  .ApplicationFormTargetSummary__map-column {
+    height: 200px;
+  }
+
+  .ApplicationFormTargetSummary__info {
+    display: flex;
+    flex-direction: row;
+  }
+}

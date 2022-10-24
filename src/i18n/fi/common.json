@@ -1,8 +1,10 @@
 {
   "application": {
     "arraySection": {
+      "applicantHeader": "Hakijan {{number}} tiedot",
       "genericAddNew": "Lisää uusi",
-      "remove": "Poista"
+      "remove": "Poista",
+      "removeTarget": "Poista kohde listalta"
     },
     "error": {
       "generic": "Hakemuksen lähettäminen epäonnistui. Yritä myöhemmin uudelleen.",

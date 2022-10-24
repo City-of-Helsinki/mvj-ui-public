@@ -16,6 +16,7 @@ import { MapLayer, MapLayers } from '../../map/types';
 
 interface Props {
   target: PlotSearchTarget;
+  noLink?: boolean;
 }
 
 const FavouriteCardMap = (props: Props): JSX.Element => {
@@ -23,6 +24,8 @@ const FavouriteCardMap = (props: Props): JSX.Element => {
   const coord = getTargetCentroid(props.target);
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const linkToTarget = !(props.noLink || false);
 
   const getIcon = (): DivIcon => {
     const html = renderToStaticMarkup(<IconHeartFill />);
@@ -58,18 +61,25 @@ const FavouriteCardMap = (props: Props): JSX.Element => {
       <Marker
         position={coord}
         icon={getIcon()}
-        eventHandlers={{
-          click: () => {
-            navigate(
-              getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET) +
-                props.target.id
-            );
-          },
-        }}
+        eventHandlers={
+          linkToTarget
+            ? {
+                click: () => {
+                  navigate(
+                    getRouteById(
+                      AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET
+                    ) + props.target.id
+                  );
+                },
+              }
+            : {}
+        }
       >
-        <Tooltip direction="bottom">
-          {t('favouritesPage.map.showOnMap', 'Show on map')}
-        </Tooltip>
+        {linkToTarget && (
+          <Tooltip direction="bottom">
+            {t('favouritesPage.map.showOnMap', 'Show on map')}
+          </Tooltip>
+        )}
       </Marker>
     </MapContainer>
   );

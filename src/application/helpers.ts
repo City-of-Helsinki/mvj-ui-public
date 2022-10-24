@@ -3,15 +3,20 @@ import { formValueSelector } from 'redux-form';
 import { RootState } from '../root/rootReducer';
 import {
   APPLICATION_FORM_NAME,
+  ApplicationField,
+  ApplicationFormFields,
+  ApplicationFormNode,
   ApplicationFormRoot,
+  ApplicationFormSections,
   ApplicationSubmission,
-  NestedField,
   SupportedFieldTypes,
+  TARGET_SECTION_IDENTIFIER,
 } from './types';
 import { FormField, FormSection } from '../plotSearch/types';
 import { getFieldTypeMapping } from './selectors';
 import { store } from '../index';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
+import { FavouriteTarget } from '../favourites/types';
 
 export const getInitialApplicationForm = (
   state: RootState
@@ -32,13 +37,13 @@ export const getInitialApplicationForm = (
 
   const buildSection = (
     section: FormSection,
-    parent: NestedField = root.sections
+    parent: ApplicationFormSections = root.sections
   ): void => {
     if (!section.visible) {
       return;
     }
 
-    const workingItem = {
+    const workingItem: ApplicationFormNode = {
       sections: {},
       fields: {},
     };
@@ -49,19 +54,36 @@ export const getInitialApplicationForm = (
     section.fields.forEach((field) => buildField(field, workingItem.fields));
 
     if (section.add_new_allowed) {
-      parent[section.identifier] = [workingItem];
+      if (section.identifier === TARGET_SECTION_IDENTIFIER) {
+        parent[section.identifier] =
+          state.favourite.favourite.targets.map<ApplicationFormNode>(
+            (target) => {
+              return {
+                ...workingItem,
+                metadata: {
+                  identifier: target.plot_search_target.id,
+                },
+              };
+            }
+          );
+      } else {
+        parent[section.identifier] = [workingItem];
+      }
       root.sectionTemplates[section.identifier] = { ...workingItem };
     } else {
       parent[section.identifier] = workingItem;
     }
   };
 
-  const buildField = (field: FormField, parent: NestedField): void => {
+  const buildField = (
+    field: FormField,
+    parent: ApplicationFormFields
+  ): void => {
     if (!field.enabled) {
       return;
     }
 
-    let initialValue;
+    let initialValue: ApplicationField | null = null;
     switch (fieldTypes[field.type]) {
       case SupportedFieldTypes.FileUpload:
         // handled outside redux-form
@@ -108,7 +130,7 @@ export const getInitialApplicationForm = (
   return root;
 };
 
-export const getSectionTemplate = (identifier: string): NestedField => {
+export const getSectionTemplate = (identifier: string): ApplicationFormNode => {
   const state = store.getState();
   const templates = formValueSelector(APPLICATION_FORM_NAME)(
     state,
@@ -145,4 +167,19 @@ export const prepareApplicationForSubmission = (): ApplicationSubmission => {
       .filter((upload) => fileFieldIds.includes(upload.field))
       .map((upload) => upload.id),
   };
+};
+
+export const getSectionFavouriteTarget = (
+  id?: number
+): FavouriteTarget | null => {
+  if (!id) {
+    return null;
+  }
+
+  const state: RootState = store.getState();
+  return (
+    state.favourite?.favourite?.targets?.find(
+      (target) => target.plot_search_target.id === id
+    ) || null
+  );
 };
