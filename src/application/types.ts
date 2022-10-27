@@ -38,10 +38,7 @@ export type FieldValue =
 export type FieldRendererProps = WrappedFieldProps & {
   id: string;
   field: FormField;
-  setValues: (newValues: {
-    value?: FieldValue;
-    extraValue?: FieldValue;
-  }) => void;
+  setValues: (newValues: Partial<ApplicationField>) => void;
   fieldType: SupportedFieldTypes | null;
 };
 
@@ -151,14 +148,17 @@ export const APPLICANT_SECTION_IDENTIFIER = 'hakijan-tiedot';
 export const TARGET_SECTION_IDENTIFIER = 'haettava-kohde';
 export const CONFIRMATION_SECTION_IDENTIFIER = 'vahvistukset';
 
+export const APPLICANT_TYPE_FIELD_IDENTIFIER = 'hakija';
+
 export type ApplicationField = {
   value: NestedFieldLeaf;
   extraValue: NestedFieldLeaf;
 };
 
-export type ApplicationFormSections =
-  | Record<string, ApplicationFormNode>
-  | Record<string, Array<ApplicationFormNode>>;
+export type ApplicationFormSections = Record<
+  string,
+  ApplicationFormNode | Array<ApplicationFormNode>
+>;
 
 export type ApplicationFormFields = Record<string, ApplicationField>;
 
@@ -166,6 +166,7 @@ export type ApplicationFormNode = {
   fields: ApplicationFormFields;
   sections: ApplicationFormSections;
   metadata?: Record<string, unknown>;
+  sectionRestrictions?: Record<string, ApplicantTypes>;
 };
 
 export type ApplicationFormRoot = {
@@ -179,4 +180,44 @@ export enum ApplicationFormTopLevelSectionFlavor {
   APPLICANT = 'applicant',
   TARGET = 'target',
   CONFIRMATION = 'confirmation',
+}
+
+export enum ApplicantTypes {
+  PERSON = 'Person',
+  COMPANY = 'Company',
+  BOTH = 'Both',
+  UNKNOWN = 'Unknown',
+
+  // UI only states
+  UNSELECTED = 'unselected',
+  NOT_APPLICABLE = 'not applicable',
+}
+
+export const APPLICANT_MAIN_IDENTIFIERS: {
+  [type: string]: {
+    DATA_SECTION: string;
+    IDENTIFIER_FIELD: string;
+    NAME_FIELDS: Array<string>;
+    LABEL: string;
+  };
+} = {
+  [ApplicantTypes.COMPANY]: {
+    DATA_SECTION: 'yrityksen-tiedot',
+    IDENTIFIER_FIELD: 'y-tunnus',
+    NAME_FIELDS: ['yrityksen-nimi'],
+    LABEL: 'Yritys',
+  },
+  [ApplicantTypes.PERSON]: {
+    DATA_SECTION: 'henkilon-tiedot',
+    IDENTIFIER_FIELD: 'henkilotunnus',
+    NAME_FIELDS: ['etunimi', 'Sukunimi'],
+    LABEL: 'Henkilö',
+  },
+};
+
+export enum ApplicationPreparationError {
+  None,
+  NoApplicantTypeSet,
+  NoApplicantIdentifierFound,
+  MisconfiguredPlotSearch,
 }

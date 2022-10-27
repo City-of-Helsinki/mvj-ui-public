@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { Col, Row, ScreenClassMap } from 'react-grid-system';
 import {
+  change,
   Field,
   FieldArray,
   WrappedFieldArrayProps,
@@ -12,6 +13,11 @@ import { useTranslation } from 'react-i18next';
 
 import { FormField, FormSection } from '../../plotSearch/types';
 import {
+  APPLICANT_SECTION_IDENTIFIER,
+  APPLICANT_TYPE_FIELD_IDENTIFIER,
+  ApplicantTypes,
+  APPLICATION_FORM_NAME,
+  ApplicationField,
   ApplicationFormNode,
   ApplicationFormTopLevelSectionFlavor,
   ApplicationSectionKeys,
@@ -28,7 +34,12 @@ import ApplicationCheckboxFieldset from './applicationCheckboxFieldset';
 import ApplicationRadioButtonFieldset from './applicationRadioButtonFieldset';
 import { RootState } from '../../root/rootReducer';
 import { getFieldTypeMapping } from '../selectors';
-import { getSectionFavouriteTarget, getSectionTemplate } from '../helpers';
+import {
+  getSectionApplicantType,
+  getSectionFavouriteTarget,
+  getSectionTemplate,
+  valueToApplicantType,
+} from '../helpers';
 import { removeFavouriteTarget } from '../../favourites/actions';
 import classNames from 'classnames';
 import ApplicationFormTargetSummary from './ApplicationFormTargetSummary';
@@ -39,6 +50,7 @@ interface ApplicationFormFieldProps {
   fieldType: SupportedFieldTypes;
   columnWidths: ScreenClassMap<number>;
   innerComponent: React.FC<FieldRendererProps>;
+  onValueChange?: (newValues: Partial<ApplicationField>) => void;
 }
 
 const ApplicationFormField = ({
@@ -47,16 +59,17 @@ const ApplicationFormField = ({
   fieldType,
   columnWidths,
   innerComponent: Component,
+  onValueChange,
   ...props
 }: ApplicationFormFieldProps & WrappedFieldProps) => {
-  const setValues = (newValues: {
-    value?: FieldValue;
-    extraValue?: FieldValue;
-  }) => {
+  const setValues = (newValues: Partial<ApplicationField>) => {
     input.onChange({
       ...input.value,
       ...newValues,
     });
+    if (onValueChange) {
+      onValueChange(newValues);
+    }
   };
 
   return (
@@ -73,134 +86,169 @@ const ApplicationFormField = ({
   );
 };
 
-interface ApplicationFormSubsectionFieldsState {
-  fieldTypeMapping: FieldTypeMapping;
-}
-
 interface ApplicationFormSubsectionFieldsProps {
   section: FormSection;
-  fieldTypeMapping: FieldTypeMapping;
   identifier: string;
 }
 
+interface ApplicationFormSubsectionFieldsInnerProps {
+  fieldTypeMapping: FieldTypeMapping;
+  sectionApplicantType: ApplicantTypes;
+  change: typeof change;
+}
+
 const ApplicationFormSubsectionFields = connect(
-  (state: RootState): ApplicationFormSubsectionFieldsState => ({
+  (state: RootState, props: ApplicationFormSubsectionFieldsProps) => ({
     fieldTypeMapping: getFieldTypeMapping(state),
-  })
+    sectionApplicantType: getSectionApplicantType(
+      state,
+      props.section,
+      props.identifier
+    ),
+  }),
+  {
+    change,
+  }
 )(
   ({
     section,
     fieldTypeMapping,
     identifier,
-  }: ApplicationFormSubsectionFieldsProps) => {
-    const renderField = useCallback((pathName: string, field: FormField) => {
-      /*
-       * All usages of field components are created here, so this is a fitting place
-       * for some footnotes about them as a whole.
-       *
-       * The options available for each field allow for a wide variety of display styles
-       * for each field type. This complexity is not easy to map back to sensible data
-       * models for either the UI or for the saved answers, though, so some edge cases
-       * are deliberately not supported and may misbehave if put into use regardless.
-       *
-       * These include:
-       * - Multiple options in a checkbox or radio button group that have an extra
-       *   text input attached. Only one such option should have one; if multiple are
-       *   present, the inputs will all modify the same value.
-       * - Extra inputs on options for dropdown selectors. No input will be shown.
-       * - Options specified for non-option field types such as text fields.
-       *   The options will have no effect.
-       * */
+    change,
+    sectionApplicantType,
+  }: ApplicationFormSubsectionFieldsProps &
+    ApplicationFormSubsectionFieldsInnerProps) => {
+    const renderField = useCallback(
+      (pathName: string, field: FormField) => {
+        /*
+         * All usages of field components are created here, so this is a fitting place
+         * for some footnotes about them as a whole.
+         *
+         * The options available for each field allow for a wide variety of display styles
+         * for each field type. This complexity is not easy to map back to sensible data
+         * models for either the UI or for the saved answers, though, so some edge cases
+         * are deliberately not supported and may misbehave if put into use regardless.
+         *
+         * These include:
+         * - Multiple options in a checkbox or radio button group that have an extra
+         *   text input attached. Only one such option should have one; if multiple are
+         *   present, the inputs will all modify the same value.
+         * - Extra inputs on options for dropdown selectors. No input will be shown.
+         * - Options specified for non-option field types such as text fields.
+         *   The options will have no effect.
+         * */
 
-      if (!field.enabled) {
-        return null;
-      }
+        if (!field.enabled) {
+          return null;
+        }
 
-      const fieldName = [
-        pathName,
-        ApplicationSectionKeys.Fields,
-        field.identifier,
-      ].join('.');
-      const fieldType = fieldTypeMapping[field.type];
+        const fieldName = [
+          pathName,
+          ApplicationSectionKeys.Fields,
+          field.identifier,
+        ].join('.');
+        const fieldType = fieldTypeMapping[field.type];
 
-      // Special cases that use a different submission path and thus different props
-      if (fieldType === SupportedFieldTypes.FileUpload) {
+        // Special cases that use a different submission path and thus different props
+        if (fieldType === SupportedFieldTypes.FileUpload) {
+          return (
+            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
+              <ApplicationFileUploadField
+                id={field.id.toString()}
+                field={field}
+              />
+            </Col>
+          );
+        }
+
+        let component: React.FC<FieldRendererProps>;
+        let columnWidths: ScreenClassMap<number> = {
+          xs: 12,
+          sm: 12,
+          md: 6,
+          lg: 6,
+          xl: 3,
+        };
+
+        switch (fieldType) {
+          case SupportedFieldTypes.TextField:
+            component = ApplicationTextField;
+            break;
+          case SupportedFieldTypes.TextArea:
+            component = ApplicationTextArea;
+            columnWidths = {
+              xs: 12,
+              sm: 12,
+              md: 12,
+              lg: 12,
+              xl: 12,
+            };
+            break;
+          case SupportedFieldTypes.SelectField:
+            component = ApplicationSelectField;
+            break;
+          case SupportedFieldTypes.Checkbox:
+            component = ApplicationCheckboxFieldset;
+            columnWidths = {
+              xs: 12,
+              sm: 12,
+              md: 12,
+              lg: 12,
+              xl: 12,
+            };
+            break;
+          case SupportedFieldTypes.RadioButton:
+          case SupportedFieldTypes.RadioButtonInline:
+            component = ApplicationRadioButtonFieldset;
+            columnWidths = {
+              xs: 12,
+              sm: 12,
+              md: 12,
+              lg: 12,
+              xl: 12,
+            };
+            break;
+          default:
+            component = function RenderedUnimplementedPlaceholder() {
+              return <span>component type {field.type} not implemented</span>;
+            };
+        }
+
         return (
-          <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-            <ApplicationFileUploadField
-              id={field.id.toString()}
-              field={field}
-            />
-          </Col>
+          <Field
+            name={fieldName}
+            component={ApplicationFormField}
+            field={field}
+            fieldType={
+              (fieldTypeMapping[field.type] as SupportedFieldTypes) || null
+            }
+            columnWidths={columnWidths}
+            innerComponent={component}
+            onValueChange={(newValues: Partial<ApplicationField>) =>
+              checkSpecialValues(field, newValues)
+            }
+          />
+        );
+      },
+      [identifier]
+    );
+
+    const checkSpecialValues = (
+      field: FormField,
+      newValues: Partial<ApplicationField>
+    ) => {
+      if (
+        section.identifier === APPLICANT_SECTION_IDENTIFIER &&
+        field.identifier === APPLICANT_TYPE_FIELD_IDENTIFIER &&
+        newValues.value !== undefined
+      ) {
+        change(
+          APPLICATION_FORM_NAME,
+          `${identifier}.metadata.applicantType`,
+          valueToApplicantType(newValues.value as string)
         );
       }
-
-      let component: React.FC<FieldRendererProps>;
-      let columnWidths: ScreenClassMap<number> = {
-        xs: 12,
-        sm: 12,
-        md: 6,
-        lg: 6,
-        xl: 3,
-      };
-
-      switch (fieldType) {
-        case SupportedFieldTypes.TextField:
-          component = ApplicationTextField;
-          break;
-        case SupportedFieldTypes.TextArea:
-          component = ApplicationTextArea;
-          columnWidths = {
-            xs: 12,
-            sm: 12,
-            md: 12,
-            lg: 12,
-            xl: 12,
-          };
-          break;
-        case SupportedFieldTypes.SelectField:
-          component = ApplicationSelectField;
-          break;
-        case SupportedFieldTypes.Checkbox:
-          component = ApplicationCheckboxFieldset;
-          columnWidths = {
-            xs: 12,
-            sm: 12,
-            md: 12,
-            lg: 12,
-            xl: 12,
-          };
-          break;
-        case SupportedFieldTypes.RadioButton:
-        case SupportedFieldTypes.RadioButtonInline:
-          component = ApplicationRadioButtonFieldset;
-          columnWidths = {
-            xs: 12,
-            sm: 12,
-            md: 12,
-            lg: 12,
-            xl: 12,
-          };
-          break;
-        default:
-          component = function RenderedUnimplementedPlaceholder() {
-            return <span>component type {field.type} not implemented</span>;
-          };
-      }
-
-      return (
-        <Field
-          name={fieldName}
-          component={ApplicationFormField}
-          field={field}
-          fieldType={
-            (fieldTypeMapping[field.type] as SupportedFieldTypes) || null
-          }
-          columnWidths={columnWidths}
-          innerComponent={component}
-        />
-      );
-    }, []);
+    };
 
     return (
       <>
@@ -212,6 +260,7 @@ const ApplicationFormSubsectionFields = connect(
             path={[identifier, ApplicationSectionKeys.Subsections]}
             section={subsection}
             key={subsection.id}
+            parentApplicantType={sectionApplicantType}
           />
         ))}
       </>
@@ -342,6 +391,7 @@ interface ApplicationFormSubsectionProps {
   section: FormSection;
   headerTag?: React.ElementType;
   flavor?: ApplicationFormTopLevelSectionFlavor;
+  parentApplicantType?: ApplicantTypes;
 }
 
 const ApplicationFormSubsection = ({
@@ -349,8 +399,26 @@ const ApplicationFormSubsection = ({
   section,
   headerTag: HeaderTag = 'h3',
   flavor = ApplicationFormTopLevelSectionFlavor.GENERAL,
+  parentApplicantType,
 }: ApplicationFormSubsectionProps): JSX.Element | null => {
   if (!section.visible) {
+    return null;
+  }
+
+  if (parentApplicantType === ApplicantTypes.UNSELECTED) {
+    return null;
+  }
+
+  if (
+    parentApplicantType !== ApplicantTypes.NOT_APPLICABLE &&
+    !(
+      [
+        ApplicantTypes.UNKNOWN,
+        ApplicantTypes.BOTH,
+        parentApplicantType,
+      ] as Array<ApplicantTypes | null>
+    ).includes(section.applicant_type)
+  ) {
     return null;
   }
 

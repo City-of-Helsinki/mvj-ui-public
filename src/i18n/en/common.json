@@ -11,7 +11,14 @@
       "label": "Submission error",
       "noFormAvailable": "No application form has been specified for the plots you have selected yet. Please be in contact and we'll look into it.",
       "noPlotsSelected": "To submit a plot application, you have to pick plots on the plot searches page first.",
-      "notLoggedIn": "Please log in first in order to apply for plots."
+      "notLoggedIn": "Please log in first in order to apply for plots.",
+      "preparation": {
+        "label": "Preparation error",
+        "misconfiguredPlotSearch": "A problem with the search you're applying to was encountered. Please try again later.",
+        "noApplicantIdentifierFound": "An applicant with missing identifier data was encountered. Please verify that each applicant has either the personal identification number or company ID number set.",
+        "noApplicantTypeSet": "An applicant with no selected type was encountered. Please verify that all applicant data is filled correctly.",
+        "unknown": "An unexpected error occurred while preparing the application data for submission. Please try again later."
+      }
     },
     "fileUpload": {
       "delete": "Delete",

@@ -11,7 +11,14 @@
       "label": "",
       "noFormAvailable": "",
       "noPlotsSelected": "",
-      "notLoggedIn": ""
+      "notLoggedIn": "",
+      "preparation": {
+        "label": "",
+        "misconfiguredPlotSearch": "",
+        "noApplicantIdentifierFound": "",
+        "noApplicantTypeSet": "",
+        "unknown": ""
+      }
     },
     "fileUpload": {
       "delete": "",
