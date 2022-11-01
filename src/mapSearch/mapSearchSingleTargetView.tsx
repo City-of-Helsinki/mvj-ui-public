@@ -129,7 +129,7 @@ const MapSearchSingleTargetView = ({
               'Plot'
             )}
           </LeftColumn>
-          <RightColumn>{target.plan_unit.plot_division_identifier}</RightColumn>
+          <RightColumn>{target.plan_unit.identifier}</RightColumn>
         </Row>
         <Row>
           <LeftColumn>

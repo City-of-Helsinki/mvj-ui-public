@@ -1,5 +1,6 @@
 .MapSearchComponent {
   width: $search-map-sidebar-width;
+  max-width: 100vw;
   z-index: 30;
 
   .SidePanel__content {
@@ -47,6 +48,10 @@
       padding: ($spacing-xs / 2) $spacing-xs;
       border-bottom: 1px solid $color-black-20;
       font-size: $fontsize-body-s;
+
+      button {
+        color: currentColor;
+      }
 
       &--favourited {
         background-color: $color-info-light;
@@ -96,6 +101,8 @@
     font-weight: 700;
     font-size: $fontsize-body-s;
     padding: ($spacing-xs / 2) $spacing-xs;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   &__notification {
