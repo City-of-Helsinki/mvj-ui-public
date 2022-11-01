@@ -27,7 +27,9 @@ export function* fetchApiTokenSaga({
         >;
         yield put(
           receiveApiToken(
-            bodyAsJson[process.env.REACT_APP_OPENID_CONNECT_CLIENT_ID as string]
+            bodyAsJson[
+              process.env.REACT_APP_OPENID_CONNECT_API_TOKEN_KEY as string
+            ]
           )
         );
         break;
