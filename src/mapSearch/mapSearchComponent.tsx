@@ -31,6 +31,8 @@ import {
   removeFavouriteTarget,
 } from '../favourites/actions';
 import { AppRoutes, getRouteById } from '../root/routes';
+import { RootState } from '../root/rootReducer';
+import { ApiAttributes } from '../api/types';
 
 interface MapSearchComponentAccordionProps {
   isHidden: boolean;
@@ -45,7 +47,7 @@ interface MapSearchComponentAccordionProps {
   setHoveredTargetId: (id: number | null) => void;
 }
 
-const SIDEBAR_GUTTER_WIDTH = 5; // px
+const SIDEBAR_GUTTER_WIDTH = 8; // px
 
 const MapSearchComponentAccordion = ({
   isHidden,
@@ -77,9 +79,9 @@ const MapSearchComponentAccordion = ({
         'MapSearchComponent__accordion--expanded': isOpen,
       })}
     >
-      <Container className="MapSearchComponent__accordion-heading">
+      <Container className="MapSearchComponent__accordion-heading" fluid>
         <Row gutterWidth={SIDEBAR_GUTTER_WIDTH}>
-          <Col xs={2}>
+          <Col xs={1.5}>
             <Checkbox
               checked={isVisible}
               id={symbol || ''}
@@ -89,7 +91,7 @@ const MapSearchComponentAccordion = ({
           </Col>
           <Col
             className="MapSearchComponent__accordion-heading-toggler"
-            xs={10}
+            xs={10.5}
             role="button"
             {...buttonProps}
           >
@@ -118,6 +120,7 @@ interface MapSearchComponentProps {
   favourite: Favourite;
   hoveredTargetId: number | null;
   setHoveredTargetId: (id: number | null) => void;
+  plotSearchAttributes: ApiAttributes | null;
 }
 
 const MapSearchComponent = ({
@@ -133,6 +136,7 @@ const MapSearchComponent = ({
   toggle,
   hoveredTargetId,
   setHoveredTargetId,
+  plotSearchAttributes,
 }: MapSearchComponentProps): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -162,6 +166,24 @@ const MapSearchComponent = ({
     return !plotSearches.some((s) => s.id === favourite.targets[0].plot_search);
   };
 
+  const planUnitIntendedUses =
+    plotSearchAttributes?.plot_search_targets?.child?.children?.plan_unit
+      ?.children?.plan_unit_intended_use?.choices || null;
+  const getIntendedUseName = (intendedUse?: number): string => {
+    if (!intendedUse) {
+      return '?';
+    }
+
+    if (!planUnitIntendedUses) {
+      return '...';
+    }
+
+    return (
+      planUnitIntendedUses.find((use) => use.value === intendedUse)
+        ?.display_name || '?'
+    );
+  };
+
   return (
     <SidePanel className="MapSearchComponent" isOpen={isOpen} toggle={toggle}>
       {selectedTarget && (
@@ -177,13 +199,13 @@ const MapSearchComponent = ({
           gutterWidth={SIDEBAR_GUTTER_WIDTH}
           className="MapSearchComponent__list-headings"
         >
-          <Col xs={2}>
+          <Col xs={1.5}>
             {t(
               'plotSearchAndCompetitions.mapView.sidebar.typeHeadings.showThisType',
               'Show'
             )}
           </Col>
-          <Col xs={10}>
+          <Col xs={10.5}>
             {t(
               'plotSearchAndCompetitions.mapView.sidebar.typeHeadings.type',
               'Type'
@@ -272,42 +294,6 @@ const MapSearchComponent = ({
                     <h3 className="MapSearchComponent__plot-search-subtype-heading">
                       {subtype.name}
                     </h3>
-                    <Row
-                      gutterWidth={SIDEBAR_GUTTER_WIDTH}
-                      className="MapSearchComponent__list-headings"
-                    >
-                      <Col xs={2}>
-                        {t(
-                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.plotNumber',
-                          'Plot'
-                        )}
-                      </Col>
-                      <Col xs={3}>
-                        {t(
-                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.address',
-                          'Address'
-                        )}
-                      </Col>
-                      <Col xs={2} style={{ hyphens: 'auto' }}>
-                        {t(
-                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.intendedUse',
-                          'Intended use'
-                        )}
-                      </Col>
-                      <Col xs={2} style={{ hyphens: 'auto' }}>
-                        {t(
-                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.permittedBuildArea',
-                          'Permitted build floor area (m²)'
-                        )}
-                      </Col>
-                      <Col xs={2}>
-                        {t(
-                          'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.area',
-                          'Area (m²)'
-                        )}
-                      </Col>
-                      <Col xs={1} />
-                    </Row>
                     <div role="list">
                       {sections.map((section) => (
                         <div key={section.key} role="listitem">
@@ -327,6 +313,59 @@ const MapSearchComponent = ({
                               </span>
                             )}
                           </div>
+                          <Row
+                            gutterWidth={SIDEBAR_GUTTER_WIDTH}
+                            className="MapSearchComponent__list-headings"
+                          >
+                            <Col
+                              xs={1.5}
+                              id={`MapSearchComponentList-${section.key}-PlotNumber`}
+                            >
+                              {t(
+                                'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.plotNumber',
+                                'Plot'
+                              )}
+                            </Col>
+                            <Col
+                              xs={3.5}
+                              id={`MapSearchComponentList-${section.key}-Address`}
+                            >
+                              {t(
+                                'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.address',
+                                'Address'
+                              )}
+                            </Col>
+                            <Col
+                              xs={3}
+                              id={`MapSearchComponentList-${section.key}-IntendedUse`}
+                              style={{ hyphens: 'auto' }}
+                            >
+                              {t(
+                                'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.intendedUse',
+                                'Intended use'
+                              )}
+                            </Col>
+                            <Col
+                              xs={2}
+                              id={`MapSearchComponentList-${section.key}-PermittedBuildArea`}
+                              style={{ hyphens: 'auto' }}
+                            >
+                              {t(
+                                'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.permittedBuildArea',
+                                'Permitted build floor area (m²)'
+                              )}
+                            </Col>
+                            <Col
+                              xs={1.5}
+                              id={`MapSearchComponentList-${section.key}-Area`}
+                            >
+                              {t(
+                                'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.area',
+                                'Area (m²)'
+                              )}
+                            </Col>
+                            <Col xs={0.5} />
+                          </Row>
                           <div role="list">
                             {section.targets.map((target) => (
                               <Row
@@ -354,30 +393,42 @@ const MapSearchComponent = ({
                                 gutterWidth={SIDEBAR_GUTTER_WIDTH}
                                 align="center"
                               >
-                                <Col xs={2}>
-                                  {
-                                    target.data.plan_unit
-                                      .plot_division_identifier
-                                  }
+                                <Col
+                                  xs={1.5}
+                                  aria-labelledby={`MapSearchComponentList-${section.key}-PlotNumber`}
+                                >
+                                  {target.data.plan_unit.identifier}
                                 </Col>
                                 <Col
-                                  xs={3}
+                                  xs={3.5}
                                   className="MapSearchComponent__target-address"
+                                  aria-labelledby={`MapSearchComponentList-${section.key}-Address`}
                                 >
                                   {target.data.lease_address.address}
                                 </Col>
-                                <Col xs={2}>
-                                  {/* TODO: actual short code instead of numeric ID */}
-                                  {target.data.plan_unit
-                                    .plan_unit_intended_use || '?'}
+                                <Col
+                                  xs={3}
+                                  aria-labelledby={`MapSearchComponentList-${section.key}-IntendedUse`}
+                                >
+                                  {getIntendedUseName(
+                                    target.data.plan_unit.plan_unit_intended_use
+                                  )}
                                 </Col>
-                                <Col xs={2}>?</Col>
-                                <Col xs={2}>
+                                <Col
+                                  xs={2}
+                                  aria-labelledby={`MapSearchComponentList-${section.key}-PermittedBuildArea`}
+                                >
+                                  ?
+                                </Col>
+                                <Col
+                                  xs={1.5}
+                                  aria-labelledby={`MapSearchComponentList-${section.key}-Area`}
+                                >
                                   {target.data.plan_unit.area?.toLocaleString(
                                     defaultLanguage
                                   ) || '?'}
                                 </Col>
-                                <Col xs={1}>
+                                <Col xs={0.5}>
                                   <IconButton
                                     onClick={() =>
                                       navigate(
@@ -386,6 +437,10 @@ const MapSearchComponent = ({
                                         ) + target.data.id
                                       )
                                     }
+                                    aria-label={t(
+                                      'plotSearchAndCompetitions.mapView.sidebar.navigateToTarget',
+                                      'Open the details for this target'
+                                    )}
                                   >
                                     <IconArrowRight size="s" />
                                   </IconButton>
@@ -491,6 +546,9 @@ const MapSearchComponent = ({
   );
 };
 
-export default connect(null, { addFavouriteTarget, removeFavouriteTarget })(
-  MapSearchComponent
-);
+export default connect(
+  (state: RootState) => ({
+    plotSearchAttributes: state.plotSearch.plotSearchAttributes,
+  }),
+  { addFavouriteTarget, removeFavouriteTarget }
+)(MapSearchComponent);

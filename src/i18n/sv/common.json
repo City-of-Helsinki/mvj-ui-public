@@ -366,6 +366,7 @@
         "pageTitle": ""
       },
       "sidebar": {
+        "navigateToTarget": "",
         "notification": {
           "noTargetsToShow": {
             "body": "",

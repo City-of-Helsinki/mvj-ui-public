@@ -366,6 +366,7 @@
         "pageTitle": "Plot searches and competitions"
       },
       "sidebar": {
+        "navigateToTarget": "Open the details for this target",
         "notification": {
           "noTargetsToShow": {
             "body": "<0>There are no searches of this type that you can apply to available at the moment.</0>",

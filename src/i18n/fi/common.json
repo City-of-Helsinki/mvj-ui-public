@@ -366,6 +366,7 @@
         "pageTitle": "Tonttihaut ja -kilpailut"
       },
       "sidebar": {
+        "navigateToTarget": "Avaa tämän kohteen tiedot",
         "notification": {
           "noTargetsToShow": {
             "body": "<0>Yhtään tämäntyyppistä kohdetta ei ole tällä hetkellä haettavissa.</0>",
