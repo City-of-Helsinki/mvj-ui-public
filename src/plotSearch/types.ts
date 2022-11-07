@@ -1,5 +1,6 @@
 import { Geometry } from 'geojson';
 import { ApiAttributes } from '../api/types';
+import { ApplicantTypes } from '../application/types';
 
 export const FETCH_PLOT_SEARCHES = 'plotSearch/FETCH_PLOT_SEARCHES';
 export interface FetchPlotSearchesAction {
@@ -164,6 +165,7 @@ export type FormSection = {
   fields: Array<FormField>;
   form_id: number;
   parent_id: number | null;
+  applicant_type: ApplicantTypes | null;
 };
 export type FormField = {
   id: number;

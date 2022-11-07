@@ -14,6 +14,7 @@ import { RootState } from '../root/rootReducer';
 import { getUser } from '../auth/selectors';
 import { userManager } from '../auth/userManager';
 import { MVJ_FAVOURITE } from '../favourites/types';
+import { getFavouriteCount } from '../favourites/selectors';
 
 interface Dispatch {
   openLoginModal: () => void;
@@ -173,7 +174,7 @@ const mapDispatchToProps: Dispatch = {
 export default connect(
   (state: RootState): State => ({
     user: getUser(state),
-    favouritesCount: state.favourite.favourite.targets.length,
+    favouritesCount: getFavouriteCount(state),
   }),
   mapDispatchToProps
 )(TopNavigation);

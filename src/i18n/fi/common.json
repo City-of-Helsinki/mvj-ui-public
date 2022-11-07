@@ -1,15 +1,24 @@
 {
   "application": {
     "arraySection": {
+      "applicantHeader": "Hakijan {{number}} tiedot",
       "genericAddNew": "Lisää uusi",
-      "remove": "Poista"
+      "remove": "Poista",
+      "removeTarget": "Poista kohde listalta"
     },
     "error": {
       "generic": "Hakemuksen lähettäminen epäonnistui. Yritä myöhemmin uudelleen.",
       "label": "Lähetys epäonnistui",
       "noFormAvailable": "Valitsemillesi tonteille ei ole vielä määritetty hakulomaketta. Ota yhteyttä ja korjaamme tilanteen.",
       "noPlotsSelected": "Voit täyttää tonttihakemuksen valittuasi ensin tonttihakusivulta yhden tai useamman haettavan kohteen.",
-      "notLoggedIn": "Kirjaudu ensin sisään hakeaksesi tontteja."
+      "notLoggedIn": "Kirjaudu ensin sisään hakeaksesi tontteja.",
+      "preparation": {
+        "label": "Lähetyksen valmistelu epäonnistui",
+        "misconfiguredPlotSearch": "Valittuja tontteja koskevan haun käsittely ei onnistunut. Ole hyvä ja yritä myöhemmin uudelleen.",
+        "noApplicantIdentifierFound": "Yhden tai useamman hakijan tunnistetieto puuttuu. Ole hyvä ja varmista, että henkilöhakijoiden henkilötunnukset ja yrityshakijoiden Y-tunnukset on täytetty.",
+        "noApplicantTypeSet": "Yhden tai useamman hakijan tyyppi on valitsematta. Ole hyvä ja tarkista, että kaikki tarvittavat hakijoiden tiedot on täytetty.",
+        "unknown": "Lähetyksen valmistelu ei onnistunut tuntemattomasta syystä. Ole hyvä ja yritä myöhemmin uudelleen."
+      }
     },
     "fileUpload": {
       "delete": "Poista",
@@ -23,7 +32,14 @@
       "uploadedAt": "Lähetetty"
     },
     "form": {
-      "pageTitle": "Tonttihakemus"
+      "pageTitle": "Tonttihakemus",
+      "tabs": {
+        "applicants_one": "Hakijat ({{count}})",
+        "applicants_other": "Hakijat ({{count}})",
+        "other": "Lisätiedot",
+        "targets_one": "Haettavat kohteet ({{count}})",
+        "targets_other": "Haettavat kohteet ({{count}})"
+      }
     },
     "heading": "Tonttihakemus",
     "loginButton": "Kirjaudu sisään",

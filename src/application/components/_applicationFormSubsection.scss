@@ -1,12 +1,19 @@
 .ApplicationFormSubsection {
-  border-bottom: 1px solid $color-black-20;
-  padding-bottom: $spacing-l;
-  margin-bottom: $spacing-l;
+  &.ApplicationFormSubsection--confirmation {
+    border-top: 1px solid $color-black-20;
+    margin-top: $spacing-l;
+    padding-top: $spacing-l;
+  }
 
-  &:last-of-type {
-    border-bottom-width: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
+  .ApplicationFormSubsection {
+    border-bottom: 1px solid $color-black-20;
+    margin-bottom: $spacing-m;
+    padding-bottom: $spacing-m;
+
+    &:last-of-type {
+      border-bottom-width: 0;
+      margin-bottom: 0;
+    }
   }
 
   .ApplicationFormSubsection__content {
@@ -38,10 +45,21 @@
     }
   }
 
-  .ApplicationFormSubsection {
-    .ApplicationFormSubsection__content,
+  .ApplicationFormSubsectionFieldArray--top-level {
     .ApplicationFormSubsectionFieldArray__item {
-      padding: 0;
+      margin-top: $spacing-m;
+      padding: $spacing-m 0;
+      border-bottom-width: 0;
+    }
+  }
+
+  .ApplicationFormSubsection {
+    margin-left: -$spacing-m;
+    margin-right: -$spacing-m;
+
+    > * {
+      padding-left: $spacing-m;
+      padding-right: $spacing-m;
     }
   }
 

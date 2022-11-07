@@ -3,7 +3,13 @@ import { WrappedFieldProps } from 'redux-form';
 import { ApiAttributes } from '../api/types';
 import { FormField } from '../plotSearch/types';
 
-export type NestedFieldLeaf = string | number | boolean | null;
+export type NestedFieldLeaf =
+  | string
+  | number
+  | boolean
+  | Array<string>
+  | Array<number>
+  | null;
 
 // A type definition cannot contain circular references, but an interface definition can,
 // thus this is implemented this way.
@@ -32,16 +38,14 @@ export type FieldValue =
 export type FieldRendererProps = WrappedFieldProps & {
   id: string;
   field: FormField;
-  setValues: (newValues: {
-    value?: FieldValue;
-    extraValue?: FieldValue;
-  }) => void;
+  setValues: (newValues: Partial<ApplicationField>) => void;
   fieldType: SupportedFieldTypes | null;
 };
 
 export enum ApplicationSectionKeys {
   Subsections = 'sections',
   Fields = 'fields',
+  Metadata = 'metadata',
 }
 
 export type ApplicationSubmission = {
@@ -140,21 +144,80 @@ export interface FileOperationFinishedAction {
 }
 
 export const APPLICATION_FORM_NAME = 'application';
+export const APPLICANT_SECTION_IDENTIFIER = 'hakijan-tiedot';
+export const TARGET_SECTION_IDENTIFIER = 'haettava-kohde';
+export const CONFIRMATION_SECTION_IDENTIFIER = 'vahvistukset';
+
+export const APPLICANT_TYPE_FIELD_IDENTIFIER = 'hakija';
 
 export type ApplicationField = {
   value: NestedFieldLeaf;
   extraValue: NestedFieldLeaf;
 };
 
+export type ApplicationFormSections = Record<
+  string,
+  ApplicationFormNode | Array<ApplicationFormNode>
+>;
+
+export type ApplicationFormFields = Record<string, ApplicationField>;
+
 export type ApplicationFormNode = {
-  fields: Record<string, ApplicationField>;
-  sections:
-    | Record<string, ApplicationFormNode>
-    | Record<string, Array<ApplicationFormNode>>;
+  fields: ApplicationFormFields;
+  sections: ApplicationFormSections;
+  metadata?: Record<string, unknown>;
+  sectionRestrictions?: Record<string, ApplicantTypes>;
 };
 
 export type ApplicationFormRoot = {
   sections: Record<string, ApplicationFormNode>;
-  sectionTemplates: Record<string, NestedField>;
+  sectionTemplates: Record<string, ApplicationFormNode>;
   fileFieldIds: Array<number>;
 };
+
+export enum ApplicationFormTopLevelSectionFlavor {
+  GENERAL = 'general',
+  APPLICANT = 'applicant',
+  TARGET = 'target',
+  CONFIRMATION = 'confirmation',
+}
+
+export enum ApplicantTypes {
+  PERSON = 'Person',
+  COMPANY = 'Company',
+  BOTH = 'Both',
+  UNKNOWN = 'Unknown',
+
+  // UI only states
+  UNSELECTED = 'unselected',
+  NOT_APPLICABLE = 'not applicable',
+}
+
+export const APPLICANT_MAIN_IDENTIFIERS: {
+  [type: string]: {
+    DATA_SECTION: string;
+    IDENTIFIER_FIELD: string;
+    NAME_FIELDS: Array<string>;
+    LABEL: string;
+  };
+} = {
+  [ApplicantTypes.COMPANY]: {
+    DATA_SECTION: 'yrityksen-tiedot',
+    IDENTIFIER_FIELD: 'y-tunnus',
+    NAME_FIELDS: ['yrityksen-nimi'],
+    LABEL: 'Yritys',
+  },
+  [ApplicantTypes.PERSON]: {
+    DATA_SECTION: 'henkilon-tiedot',
+    IDENTIFIER_FIELD: 'henkilotunnus',
+    NAME_FIELDS: ['etunimi', 'Sukunimi'],
+    LABEL: 'Henkilö',
+  },
+};
+
+export enum ApplicationPreparationError {
+  None,
+  NoApplicantTypeSet,
+  NoApplicantIdentifierFound,
+  MisconfiguredPlotSearch,
+}

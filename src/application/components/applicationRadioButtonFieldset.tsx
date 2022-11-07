@@ -24,11 +24,12 @@ const ApplicationRadioButtonFieldset = (
           'ApplicationRadioButtonFieldset__selection-group',
           `ApplicationRadioButtonFieldset__selection-group--${orientation}`
         )}
+        name={input.name}
       >
         {field.choices.map((option, index) => (
           <div className="ApplicationRadioButtonFieldset__option" key={index}>
             <RadioButton
-              id={`ApplicationRadiobuttonFieldSet_${id}_${index}`}
+              id={`ApplicationRadiobuttonFieldSet_${input.name}_${id}_${index}`}
               checked={input.value.value === option.value}
               value={input.value.value}
               onChange={() =>

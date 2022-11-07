@@ -9,3 +9,7 @@ export const getFavourite: Selector<RootState, Favourite> = (
 export const getIsFetchingFavourite: Selector<RootState, boolean> = (
   state: RootState
 ): boolean => state.favourite.isFetchingFavourite;
+
+export const getFavouriteCount: Selector<RootState, number> = (
+  state: RootState
+): number => state.favourite.favourite.targets.length;

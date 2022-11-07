@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { Button, Notification } from 'hds-react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 
@@ -11,9 +11,11 @@ import { RootState } from '../root/rootReducer';
 import { prepareApplicationForSubmission } from './helpers';
 import { submitApplication } from './actions';
 import {
+  ApplicantTypes,
   ApplicationField,
   ApplicationFormNode,
   ApplicationFormRoot,
+  ApplicationPreparationError,
   ApplicationSectionKeys,
   ApplicationSubmission,
   FieldTypeMapping,
@@ -62,6 +64,7 @@ interface ApplicationPreviewSubsectionProps {
   section: FormSection;
   answers?: ApplicationFormNode | Array<ApplicationFormNode>;
   headerTag?: React.ElementType;
+  parentMeta?: Record<string, unknown>;
 }
 
 const ApplicationPreviewPage = ({
@@ -76,9 +79,26 @@ const ApplicationPreviewPage = ({
 }: Props): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const [lastClientError, setLastClientError] =
+    useState<ApplicationPreparationError | null>(null);
+
   const [previousAnswerId] = useState<number>(submittedAnswerId);
 
-  const submit = () => submitApplication(prepareApplicationForSubmission());
+  useEffect(() => {
+    if (submittedAnswerId !== previousAnswerId) {
+      navigate(getRouteById(AppRoutes.APPLICATION_SUBMIT));
+    }
+  }, [submittedAnswerId]);
+
+  const submit = () => {
+    try {
+      setLastClientError(null);
+      submitApplication(prepareApplicationForSubmission());
+    } catch (e) {
+      setLastClientError(e as ApplicationPreparationError);
+    }
+  };
 
   const renderSubsectionFields = (
     sectionFields: Array<FormField>,
@@ -201,10 +221,31 @@ const ApplicationPreviewPage = ({
     answers,
     section,
     headerTag: HeaderTag = 'h3',
+    parentMeta,
   }: ApplicationPreviewSubsectionProps): JSX.Element | null => {
     const isArray = section.add_new_allowed;
 
     if (!section.visible) {
+      return null;
+    }
+
+    const parentApplicantType =
+      (parentMeta?.applicantType as ApplicantTypes) || ApplicantTypes.BOTH;
+
+    if (parentApplicantType === ApplicantTypes.UNSELECTED) {
+      return null;
+    }
+
+    if (
+      parentApplicantType !== ApplicantTypes.NOT_APPLICABLE &&
+      !(
+        [
+          ApplicantTypes.UNKNOWN,
+          ApplicantTypes.BOTH,
+          parentApplicantType,
+        ] as Array<ApplicantTypes | null>
+      ).includes(section.applicant_type)
+    ) {
       return null;
     }
 
@@ -229,6 +270,7 @@ const ApplicationPreviewPage = ({
                         answer[ApplicationSectionKeys.Subsections][
                           subsection.identifier
                         ],
+                      parentMeta: answer[ApplicationSectionKeys.Metadata],
                     })
                   )}
                 </div>
@@ -258,11 +300,45 @@ const ApplicationPreviewPage = ({
     );
   };
 
-  useEffect(() => {
-    if (submittedAnswerId !== previousAnswerId) {
-      navigate(getRouteById(AppRoutes.APPLICATION_SUBMIT));
+  const getClientErrorMessage = (): JSX.Element => {
+    let message = '';
+    switch (lastClientError) {
+      case ApplicationPreparationError.NoApplicantTypeSet:
+        message = t(
+          'application.error.preparation.noApplicantTypeSet',
+          'An applicant with no selected type was encountered. Please verify that all applicant data is filled correctly.'
+        );
+        break;
+      case ApplicationPreparationError.NoApplicantIdentifierFound:
+        message = t(
+          'application.error.preparation.noApplicantIdentifierFound',
+          'An applicant with missing identifier data was encountered. Please verify that each applicant has either the personal identification number or company ID number set.'
+        );
+        break;
+      case ApplicationPreparationError.MisconfiguredPlotSearch:
+        message = t(
+          'application.error.preparation.misconfiguredPlotSearch',
+          "A problem with the search you're applying to was encountered. Please try again later."
+        );
+        break;
+      default:
+        message = t(
+          'application.error.preparation.unknown',
+          'An unexpected error occurred while preparing the application data for submission. Please try again later.'
+        );
+        break;
     }
-  }, [submittedAnswerId]);
+
+    return (
+      <Notification
+        size="small"
+        type="error"
+        label={t('application.error.preparation.label', 'Preparation error')}
+      >
+        {message}
+      </Notification>
+    );
+  };
 
   return (
     <AuthDependentContent>
@@ -337,6 +413,7 @@ const ApplicationPreviewPage = ({
                     )}
                   </Notification>
                 )}
+                {lastClientError !== null && getClientErrorMessage()}
               </div>
             )}
           </Container>
