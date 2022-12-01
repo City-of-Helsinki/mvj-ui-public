@@ -55,8 +55,11 @@ export const deleteUpload = (payload: number): Action<string> =>
   createAction(DELETE_UPLOAD)(payload);
 
 export const uploadFile = (payload: {
-  field: number;
-  file: File;
+  fileData: {
+    field: number;
+    file: File;
+  };
+  callback?: (file: UploadedFileMeta) => void;
 }): Action<string> => createAction(UPLOAD_FILE)(payload);
 
 export const fileOperationFinished = (): Action<string> =>

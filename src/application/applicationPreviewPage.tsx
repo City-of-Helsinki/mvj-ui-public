@@ -181,7 +181,12 @@ const ApplicationPreviewPage = ({
               break;
             case SupportedFieldTypes.FileUpload:
               displayValue = pendingUploads
-                .filter((upload) => upload.field === field.id)
+                .filter((upload) =>
+                  (value instanceof Array
+                    ? (value as Array<number>)
+                    : []
+                  ).includes(upload.id)
+                )
                 .map(
                   (file, i) =>
                     `${t(

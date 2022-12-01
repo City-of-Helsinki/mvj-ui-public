@@ -4,6 +4,7 @@ import {
   change,
   Field,
   FieldArray,
+  formValueSelector,
   WrappedFieldArrayProps,
   WrappedFieldProps,
 } from 'redux-form';
@@ -23,7 +24,6 @@ import {
   ApplicationSectionKeys,
   FieldRendererProps,
   FieldTypeMapping,
-  FieldValue,
   SupportedFieldTypes,
 } from '../types';
 import ApplicationFileUploadField from './applicationFileUploadField';
@@ -156,6 +156,7 @@ const ApplicationFormSubsectionFields = connect(
               <ApplicationFileUploadField
                 id={field.id.toString()}
                 field={field}
+                fieldName={fieldName}
               />
             </Col>
           );

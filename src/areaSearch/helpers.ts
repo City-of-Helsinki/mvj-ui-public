@@ -22,6 +22,7 @@ export const initializeAreaSearchForm = (): AreaSearchFormRoot => {
       sections: {},
       sectionTemplates: {},
       fileFieldIds: [],
+      attachments: [],
     },
   };
 };
