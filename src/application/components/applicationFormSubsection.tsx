@@ -330,9 +330,9 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
             case ApplicationFormTopLevelSectionFlavor.TARGET:
               headerText = `${
                 target?.plot_search_target.lease_identifier || '?'
-              } - ${target?.plot_search_target.lease_address.address || '?'}, ${
-                target?.plot_search_target.district || '?'
-              }`;
+              } - ${
+                target?.plot_search_target.lease_address?.address || '?'
+              }, ${target?.plot_search_target.district || '?'}`;
               break;
             default:
               headerText = `${section.title} (${i + 1})`;
