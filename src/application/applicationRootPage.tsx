@@ -11,6 +11,7 @@ import {
   fetchFormAttributes,
   resetLastApplicationSubmissionError,
 } from './actions';
+import ScrollToTop from '../common/ScrollToTop';
 
 interface State {
   formTemplate: ApplicationFormRoot;
@@ -45,7 +46,12 @@ const ApplicationRootPage = ({
     resetLastApplicationSubmissionError();
   }, []);
 
-  return <>{children}</>;
+  return (
+    <>
+      <ScrollToTop />
+      {children}
+    </>
+  );
 };
 
 export default connect(

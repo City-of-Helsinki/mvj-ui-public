@@ -133,8 +133,11 @@ export const UPLOAD_FILE = 'application/UPLOAD_FILE';
 export interface UploadFileAction {
   type: typeof UPLOAD_FILE;
   payload: {
-    field: number;
-    file: File;
+    fileData: {
+      field: number;
+      file: File;
+    };
+    callback?: (file: UploadedFileMeta) => void;
   };
 }
 
@@ -173,6 +176,7 @@ export type ApplicationFormRoot = {
   sections: Record<string, ApplicationFormNode>;
   sectionTemplates: Record<string, ApplicationFormNode>;
   fileFieldIds: Array<number>;
+  attachments: Array<number>;
 };
 
 export enum ApplicationFormTopLevelSectionFlavor {

@@ -8,7 +8,10 @@ import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 
 import { RootState } from '../root/rootReducer';
-import { prepareApplicationForSubmission } from './helpers';
+import {
+  getSectionFavouriteTarget,
+  prepareApplicationForSubmission,
+} from './helpers';
 import { submitApplication } from './actions';
 import {
   ApplicantTypes,
@@ -20,6 +23,7 @@ import {
   ApplicationSubmission,
   FieldTypeMapping,
   SupportedFieldTypes,
+  TARGET_SECTION_IDENTIFIER,
   UploadedFileMeta,
 } from './types';
 import { AppRoutes, getRouteById } from '../root/routes';
@@ -97,6 +101,17 @@ const ApplicationPreviewPage = ({
       submitApplication(prepareApplicationForSubmission());
     } catch (e) {
       setLastClientError(e as ApplicationPreparationError);
+    }
+  };
+
+  const getTargetTitle = (id?: number): string => {
+    if (id) {
+      const target = getSectionFavouriteTarget(id);
+      return `${target?.plot_search_target.lease_identifier || '?'} - ${
+        target?.plot_search_target.lease_address?.address || '?'
+      }, ${target?.plot_search_target.district || '?'}`;
+    } else {
+      return '?';
     }
   };
 
@@ -181,7 +196,12 @@ const ApplicationPreviewPage = ({
               break;
             case SupportedFieldTypes.FileUpload:
               displayValue = pendingUploads
-                .filter((upload) => upload.field === field.id)
+                .filter((upload) =>
+                  (value instanceof Array
+                    ? (value as Array<number>)
+                    : []
+                  ).includes(upload.id)
+                )
                 .map(
                   (file, i) =>
                     `${t(
@@ -256,7 +276,19 @@ const ApplicationPreviewPage = ({
             {(answers as Array<ApplicationFormNode>).map((answer, i) => (
               <div key={i}>
                 <HeaderTag>
-                  {section.title} ({i + 1})
+                  {section.identifier === TARGET_SECTION_IDENTIFIER ? (
+                    <>
+                      {section.title} (
+                      {getTargetTitle(
+                        answer.metadata?.identifier as number | undefined
+                      )}
+                      )
+                    </>
+                  ) : (
+                    <>
+                      {section.title} ({i + 1})
+                    </>
+                  )}
                 </HeaderTag>
                 <div className="ApplicationPreviewPage__subsection-content">
                   {renderSubsectionFields(

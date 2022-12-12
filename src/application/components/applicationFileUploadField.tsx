@@ -6,46 +6,82 @@ import { connect } from 'react-redux';
 import { FormField } from '../../plotSearch/types';
 import { Language } from '../../i18n/types';
 import { RootState } from '../../root/rootReducer';
-import { UploadedFileMeta } from '../types';
+import { APPLICATION_FORM_NAME, UploadedFileMeta } from '../types';
 import { deleteUpload, uploadFile } from '../actions';
 import BlockLoader from '../../loader/blockLoader';
 import { renderDateTime } from '../../i18n/utils';
-
-interface State {
-  pendingUploads: Array<UploadedFileMeta>;
-  isPerformingFileOperation: boolean;
-}
+import { getFieldFileIds } from '../helpers';
+import { change, formValueSelector } from 'redux-form';
 
 interface Props {
   id: string;
   field: FormField;
+  fieldName: string;
+}
+
+interface InnerProps {
   pendingUploads: Array<UploadedFileMeta>;
+  isPerformingFileOperation: boolean;
+  fieldFileIds: Array<number>;
+  attachmentIds: Array<number>;
   deleteUpload: typeof deleteUpload;
   uploadFile: typeof uploadFile;
-  isPerformingFileOperation: boolean;
+  change: typeof change;
 }
 
 const ApplicationFileUploadField = ({
   id,
   field,
+  fieldName,
   pendingUploads,
   deleteUpload,
   uploadFile,
   isPerformingFileOperation,
-}: Props): JSX.Element => {
+  fieldFileIds,
+  attachmentIds,
+  change,
+}: Props & InnerProps): JSX.Element => {
   const { i18n, t } = useTranslation();
 
-  const filesForField = pendingUploads.filter(
-    (upload) => upload.field === field.id
+  const filesForField = pendingUploads.filter((upload) =>
+    fieldFileIds.includes(upload.id)
   );
+
+  const addId = (id: number) => {
+    change(APPLICATION_FORM_NAME, `${fieldName}.value`, [...fieldFileIds, id]);
+    change(APPLICATION_FORM_NAME, 'attachments', [...attachmentIds, id]);
+  };
+
+  const removeId = (id: number) => {
+    change(
+      APPLICATION_FORM_NAME,
+      `${fieldName}.value`,
+      fieldFileIds.filter((fileId) => fileId !== id)
+    );
+    change(
+      APPLICATION_FORM_NAME,
+      'attachments',
+      attachmentIds.filter((fileId) => fileId !== id)
+    );
+  };
 
   const onSubmit = (files: Array<File> | null): void => {
     if (files) {
       uploadFile({
-        field: field.id,
-        file: files[0],
+        fileData: {
+          field: field.id,
+          file: files[0],
+        },
+        callback: (uploadedFile) => {
+          addId(uploadedFile.id);
+        },
       });
     }
+  };
+
+  const onDelete = (file: UploadedFileMeta) => {
+    deleteUpload(file.id);
+    removeId(file.id);
   };
 
   return (
@@ -76,7 +112,7 @@ const ApplicationFileUploadField = ({
                 <td>{renderDateTime(new Date(upload.created_at))}</td>
                 <td>
                   <Button
-                    onClick={() => deleteUpload(upload.id)}
+                    onClick={() => onDelete(upload)}
                     variant="supplementary"
                     iconLeft={<IconCrossCircle />}
                     disabled={isPerformingFileOperation}
@@ -127,12 +163,21 @@ const ApplicationFileUploadField = ({
 };
 
 export default connect(
-  (state: RootState): State => ({
+  (
+    state: RootState,
+    props: Props
+  ): Omit<InnerProps, 'deleteUpload' | 'uploadFile' | 'change'> => ({
     pendingUploads: state.application.pendingUploads,
     isPerformingFileOperation: state.application.isPerformingFileOperation,
+    fieldFileIds: getFieldFileIds(state, props.fieldName),
+    attachmentIds: formValueSelector(APPLICATION_FORM_NAME)(
+      state,
+      'attachments'
+    ),
   }),
   {
     deleteUpload,
     uploadFile,
+    change,
   }
 )(ApplicationFileUploadField);

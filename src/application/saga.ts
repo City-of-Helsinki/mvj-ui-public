@@ -112,9 +112,12 @@ function* uploadFileSaga({
   payload,
 }: UploadFileAction): Generator<Effect, void, ApiCallResult> {
   try {
-    yield call(uploadFileRequest, payload);
+    const result = yield call(uploadFileRequest, payload.fileData);
 
     yield put(fileOperationFinished());
+    if (payload.callback) {
+      payload.callback(result.bodyAsJson);
+    }
     yield put(fetchPendingUploads());
   } catch (e) {
     logError(e);

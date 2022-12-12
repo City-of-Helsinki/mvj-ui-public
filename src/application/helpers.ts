@@ -32,6 +32,7 @@ export const getInitialApplicationForm = (
     sections: {},
     sectionTemplates: {},
     fileFieldIds: [],
+    attachments: [],
   };
 
   if (!plotSearch) {
@@ -106,8 +107,11 @@ export const getInitialApplicationForm = (
     let initialValue: ApplicationField | null = null;
     switch (fieldTypes[field.type]) {
       case SupportedFieldTypes.FileUpload:
-        // handled outside redux-form
         root.fileFieldIds.push(field.id);
+        initialValue = {
+          value: [],
+          extraValue: '',
+        };
         break;
       case SupportedFieldTypes.SelectField:
       case SupportedFieldTypes.RadioButton:
@@ -163,9 +167,9 @@ export const getSectionTemplate = (identifier: string): ApplicationFormNode => {
 export const prepareApplicationForSubmission = (): ApplicationSubmission => {
   const state: RootState = store.getState();
   const sections = formValueSelector(APPLICATION_FORM_NAME)(state, 'sections');
-  const fileFieldIds = formValueSelector(APPLICATION_FORM_NAME)(
+  const attachments = formValueSelector(APPLICATION_FORM_NAME)(
     state,
-    'fileFieldIds'
+    'attachments'
   );
 
   const favourite = state.favourite.favourite;
@@ -289,9 +293,7 @@ export const prepareApplicationForSubmission = (): ApplicationSubmission => {
       sections: purgeUIFields(attachMeta(sections)) as NestedField,
     },
     targets: favourite.targets.map((target) => target.plot_search_target.id),
-    attachments: state.application.pendingUploads
-      .filter((upload) => fileFieldIds.includes(upload.field))
-      .map((upload) => upload.id),
+    attachments,
   };
 };
 
@@ -336,4 +338,12 @@ export const getSectionApplicantType = (
       `${reduxFormPath}.metadata.applicantType`
     ) || ApplicantTypes.UNSELECTED
   );
+};
+
+export const getFieldFileIds = (
+  state: RootState,
+  fieldPath: string
+): Array<number> => {
+  const fieldValue = formValueSelector(APPLICATION_FORM_NAME)(state, fieldPath);
+  return fieldValue?.value || [];
 };
