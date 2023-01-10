@@ -4,7 +4,6 @@ import {
   change,
   Field,
   FieldArray,
-  formValueSelector,
   WrappedFieldArrayProps,
   WrappedFieldProps,
 } from 'redux-form';
