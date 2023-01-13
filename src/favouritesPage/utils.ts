@@ -1,6 +1,8 @@
 import { PlotSearch, PlotSearchTarget } from '../plotSearch/types';
 import { renderDateTime } from '../i18n/utils';
 import { TFunction } from 'i18next';
+import { getTargetPlanOptionTitle } from '../plotSearch/helpers';
+import { ApiAttributes } from '../api/types';
 
 export interface Info {
   value: string | number;
@@ -9,6 +11,7 @@ export interface Info {
 }
 
 export const getInfo = (
+  plotSearchAttributes: ApiAttributes,
   target: PlotSearchTarget,
   plotSearch: PlotSearch | null,
   t: TFunction
@@ -25,16 +28,16 @@ export const getInfo = (
     },
     {
       value:
-        target.plan_unit.identifier !== ''
-          ? target.plan_unit.identifier
+        target.target_plan.identifier && target.target_plan.identifier !== ''
+          ? target.target_plan.identifier
           : '???',
       key: t('favouritesPage.targetCard.table.plot', 'Plot'),
       fullDescOnly: false,
     },
     {
       value:
-        target.lease_address.address !== ''
-          ? target.lease_address.address
+        target.target_plan.address && target.target_plan.address !== ''
+          ? target.target_plan.address
           : '???',
       key: t('favouritesPage.targetCard.table.address', 'Address'),
       fullDescOnly: true,
@@ -57,16 +60,22 @@ export const getInfo = (
     },
     {
       value:
-        target.plan_unit.plan_unit_intended_use !== null
-          ? target.plan_unit.plan_unit_intended_use
+        target.target_plan.plan_unit_intended_use !== null &&
+        target.target_plan.plan_unit_intended_use !== undefined
+          ? getTargetPlanOptionTitle(
+              plotSearchAttributes,
+              'plan_unit_intended_use',
+              target.target_plan_type,
+              target.target_plan
+            )
           : '???',
       key: t('favouritesPage.targetCard.table.intendedUsage', 'Intended use'),
       fullDescOnly: false,
     },
     {
       value:
-        target.plan_unit.section_area !== null
-          ? (target.plan_unit.section_area as number)
+        target.target_plan.rent_build_permission !== null
+          ? (target.target_plan.rent_build_permission as number)
           : '???',
       key: t(
         'favouritesPage.targetCard.table.permittedBuildArea',
@@ -92,8 +101,8 @@ export const getInfo = (
     },
     {
       value:
-        target.plan_unit.area !== null
-          ? (target.plan_unit.area as number)
+        target.target_plan.area !== null
+          ? (target.target_plan.area as number)
           : '???',
       key: t('favouritesPage.targetCard.table.area', 'Area (m²)'),
       fullDescOnly: false,

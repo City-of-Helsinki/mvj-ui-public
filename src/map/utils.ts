@@ -50,8 +50,8 @@ export const getCentroid = (geometry: Geometry): LatLngExpression | null => {
 export const getTargetCentroid = (
   target: PlotSearchTarget
 ): LatLngExpression | null => {
-  if (target.plan_unit?.geometry) {
-    return getCentroid(target.plan_unit.geometry);
+  if (target.target_plan?.geometry) {
+    return getCentroid(target.target_plan.geometry);
   }
 
   return null;

@@ -8,19 +8,32 @@ import { getInfo } from '../utils';
 import { FavouriteCardDetails } from './favouriteCardDetails';
 import FavouriteCardMap from './favouriteCardMap';
 import InfoLinks from '../../mapSearch/infoLinks';
+import { ApiAttributes } from '../../api/types';
+import { connect } from 'react-redux';
+import { RootState } from '../../root/rootReducer';
+
+interface State {
+  plotSearchAttributes: ApiAttributes;
+}
 
 interface Props {
   target: PlotSearchTarget;
   remove: (id: number) => void;
   plotSearch: PlotSearch | null;
+  plotSearchAttributes: ApiAttributes;
 }
 
 const FavouriteCard = (props: Props): JSX.Element => {
-  const { target, remove, plotSearch } = props;
+  const { target, remove, plotSearch, plotSearchAttributes } = props;
   const { t } = useTranslation();
   const [fullDescription, setFullDescription] = useState(false);
 
-  const infoCols = getInfo(target, plotSearch as PlotSearch, t);
+  const infoCols = getInfo(
+    plotSearchAttributes,
+    target,
+    plotSearch as PlotSearch,
+    t
+  );
 
   return (
     <Card className="FavouriteCard" border key={target.id}>
@@ -34,7 +47,7 @@ const FavouriteCard = (props: Props): JSX.Element => {
           <Row className="FavouriteCard__header-row">
             {/* Top row with title and delete action on top right */}
             <Col md={8} xs={7}>
-              <h3>{target.lease_address.address}</h3>
+              <h3>{target.target_plan.address}</h3>
             </Col>
             <Col md={4} xs={5}>
               <Button
@@ -61,17 +74,19 @@ const FavouriteCard = (props: Props): JSX.Element => {
                 fullDesc={fullDescription}
               />
             ))}
-            {fullDescription && target.info_links.length > 0 && (
-              <Col className="FavouriteCard__links">
-                <h3>
-                  {t(
-                    'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
-                    'Details'
-                  )}
-                </h3>
-                <InfoLinks target={target} />
-              </Col>
-            )}
+            {fullDescription &&
+              target.target_plan.info_links &&
+              target.target_plan.info_links?.length > 0 && (
+                <Col className="FavouriteCard__links">
+                  <h3>
+                    {t(
+                      'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
+                      'Details'
+                    )}
+                  </h3>
+                  <InfoLinks target={target} />
+                </Col>
+              )}
           </Row>
           <Row>
             {/* Bottom row with "see on plotsearch page" & "more info" -action */}
@@ -106,4 +121,8 @@ const FavouriteCard = (props: Props): JSX.Element => {
   );
 };
 
-export default FavouriteCard;
+export default connect(
+  (state: RootState): State => ({
+    plotSearchAttributes: state.plotSearch.plotSearchAttributes,
+  })
+)(FavouriteCard);

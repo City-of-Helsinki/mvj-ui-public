@@ -1,5 +1,11 @@
+import { parseTargetPlan } from '../plotSearch/helpers';
 import { PlotSearch } from '../plotSearch/types';
 import { RootState } from '../root/rootReducer';
+import {
+  Favourite,
+  FavouriteFromBackend,
+  FavouriteTargetFromBackend,
+} from './types';
 
 export const getPlotSearchFromFavourites = (
   state: RootState
@@ -10,4 +16,20 @@ export const getPlotSearchFromFavourites = (
   );
 
   return relevantPlotSearch || null;
+};
+
+export const parseFavouriteTargetPlans = (
+  favourite: FavouriteFromBackend
+): Favourite => {
+  const parsedTargets = favourite.targets.map(
+    (target: FavouriteTargetFromBackend) => ({
+      ...target,
+      plot_search_target: parseTargetPlan(target.plot_search_target),
+    })
+  );
+
+  return {
+    ...favourite,
+    targets: parsedTargets,
+  };
 };

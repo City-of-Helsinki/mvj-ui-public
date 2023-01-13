@@ -1,17 +1,34 @@
-import { PlotSearchTarget } from '../plotSearch/types';
+import {
+  PlotSearchTarget,
+  PlotSearchTargetFromBackend,
+} from '../plotSearch/types';
 import { Notification } from '../globalNotification/types';
 
-export interface FavouriteTarget {
-  plot_search_target: PlotSearchTarget;
+export interface FavouriteBase {
+  id?: number | null;
+  created_at: string | null;
+  modified_at: string | null;
+}
+
+export interface FavouriteTargetBase {
   plot_search: number | null;
 }
 
-export interface Favourite {
+export interface FavouriteTarget extends FavouriteTargetBase {
+  plot_search_target: PlotSearchTarget;
+}
+
+export interface FavouriteTargetFromBackend extends FavouriteTargetBase {
+  plot_search_target: PlotSearchTargetFromBackend;
+}
+
+export interface FavouriteFromBackend extends FavouriteBase {
+  targets: FavouriteTargetFromBackend[];
+}
+
+export interface Favourite extends FavouriteBase {
   // todo: Figure out more descriptive name for this. Also refactor the backend side.
-  created_at: string | null;
-  modified_at: string | null;
   targets: FavouriteTarget[];
-  id?: number | null;
 }
 
 export const MVJ_FAVOURITE = 'mvj_favourite';

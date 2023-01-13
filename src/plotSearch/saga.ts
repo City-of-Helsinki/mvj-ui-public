@@ -7,10 +7,10 @@ import {
 import {
   FetchPlotSearchesAction,
   FETCH_PLOT_SEARCHES,
-  PlotSearch,
   FETCH_PLOT_SEARCH_ATTRIBUTES,
   FETCH_PLOT_SEARCH_TYPES,
   PlotSearchType,
+  PlotSearchFromBackend,
 } from './types';
 import {
   plotSearchAttributesNotFound,
@@ -20,6 +20,7 @@ import {
   receivePlotSearches,
   receivePlotSearchTypes,
 } from './actions';
+import { parsePlotSearches } from './helpers';
 import { ApiCallResult } from '../api/callApi';
 import { ApiAttributes } from '../api/types';
 import { logError } from '../root/helpers';
@@ -36,7 +37,11 @@ function* fetchPlotSearchesSaga({
     switch (response.status) {
       case 200:
         yield put(
-          receivePlotSearches(bodyAsJson?.results as Array<PlotSearch>)
+          receivePlotSearches(
+            parsePlotSearches(
+              bodyAsJson?.results as Array<PlotSearchFromBackend>
+            )
+          )
         );
         break;
       default:

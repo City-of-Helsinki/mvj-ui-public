@@ -196,7 +196,7 @@ const MapSearchPage = (props: Props): JSX.Element => {
       <Helmet>
         <title>
           {getPageTitle([
-            selectedTarget?.target.lease_address.address,
+            selectedTarget?.target.target_plan.address,
             pageTitle,
           ])}
         </title>

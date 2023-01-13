@@ -6,19 +6,35 @@ import { FavouriteTarget } from '../../favourites/types';
 import FavouriteCardMap from '../../favouritesPage/components/favouriteCardMap';
 import { FavouriteCardDetails } from '../../favouritesPage/components/favouriteCardDetails';
 import { getInfo } from '../../favouritesPage/utils';
+import { connect } from 'react-redux';
+import { RootState } from '../../root/rootReducer';
+import { ApiAttributes } from '../../api/types';
+
+interface State {
+  plotSearchAttributes: ApiAttributes;
+}
 
 interface Props {
+  plotSearchAttributes: ApiAttributes;
   target?: FavouriteTarget | null;
 }
 
-const ApplicationFormTargetSummary = ({ target }: Props): JSX.Element => {
+const ApplicationFormTargetSummary = ({
+  target,
+  plotSearchAttributes,
+}: Props): JSX.Element => {
   const { t } = useTranslation();
 
   if (!target) {
     return <div />;
   }
 
-  const infoCols = getInfo(target.plot_search_target, null, t);
+  const infoCols = getInfo(
+    plotSearchAttributes,
+    target.plot_search_target,
+    null,
+    t
+  );
 
   return (
     <div className="ApplicationFormTargetSummary">
@@ -28,8 +44,9 @@ const ApplicationFormTargetSummary = ({ target }: Props): JSX.Element => {
         </Col>
         <Col md={9} xs={8}>
           <h3>
-            {target.plot_search_target.lease_address.address},{' '}
-            {target.plot_search_target.district}
+            {target.plot_search_target.target_plan.address}
+            {target.plot_search_target.district &&
+              `, ${target.plot_search_target.district}`}
           </h3>
           <div className="ApplicationFormTargetSummary__info">
             {infoCols.map((info) => (
@@ -46,4 +63,8 @@ const ApplicationFormTargetSummary = ({ target }: Props): JSX.Element => {
   );
 };
 
-export default ApplicationFormTargetSummary;
+export default connect(
+  (state: RootState): State => ({
+    plotSearchAttributes: state.plotSearch.plotSearchAttributes,
+  })
+)(ApplicationFormTargetSummary);

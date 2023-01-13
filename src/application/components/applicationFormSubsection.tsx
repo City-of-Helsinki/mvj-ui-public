@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Button, IconCrossCircle, IconPlusCircle } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 
-import { FormField, FormSection } from '../../plotSearch/types';
+import { FormField, FormSection, TargetPlanType } from '../../plotSearch/types';
 import {
   APPLICANT_SECTION_IDENTIFIER,
   APPLICANT_TYPE_FIELD_IDENTIFIER,
@@ -327,11 +327,13 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
               );
               break;
             case ApplicationFormTopLevelSectionFlavor.TARGET:
-              headerText = `${
-                target?.plot_search_target.lease_identifier || '?'
-              } - ${
-                target?.plot_search_target.lease_address?.address || '?'
-              }, ${target?.plot_search_target.district || '?'}`;
+              headerText =
+                target?.plot_search_target.target_plan_type ===
+                TargetPlanType.PlanUnit
+                  ? `${target?.plot_search_target.lease_identifier || '?'} - ${
+                      target?.plot_search_target.lease_address?.address || '?'
+                    }, ${target?.plot_search_target.district || '?'}`
+                  : `${target?.plot_search_target.target_plan.address || '?'}`;
               break;
             default:
               headerText = `${section.title} (${i + 1})`;

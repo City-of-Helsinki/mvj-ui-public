@@ -151,7 +151,7 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
           {zoomLevel > 7 && (
             <GeoJSON
               style={{ weight: props.hoveredTargetId === target.id ? 3 : 0 }}
-              data={target.plan_unit.geometry}
+              data={target.target_plan.geometry}
               eventHandlers={{
                 mouseover: () => props.setHoveredTargetId(target.id),
                 mouseout: () => props.setHoveredTargetId(null),

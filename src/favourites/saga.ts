@@ -28,6 +28,8 @@ import {
   UPDATE_FAVOURITE,
   MVJ_FAVOURITE,
   CLEAR_FAVOURITE,
+  FavouriteTargetFromBackend,
+  FavouriteFromBackend,
 } from './types';
 
 import {
@@ -44,6 +46,8 @@ import { getFavourite } from './selectors';
 import { pushNotification } from '../globalNotification/actions';
 import { Notification } from '../globalNotification/types';
 import { logError } from '../root/helpers';
+import { parseTargetPlan } from '../plotSearch/helpers';
+import { parseFavouriteTargetPlans } from './helpers';
 
 function* fetchFavouriteSaga(): Generator<Effect, void, never> {
   try {
@@ -83,7 +87,9 @@ function* fetchFavouriteSaga(): Generator<Effect, void, never> {
             );
             switch (response.status) {
               case 200:
-                yield put(receiveFavourite(bodyAsJson));
+                yield put(
+                  receiveFavourite(parseFavouriteTargetPlans(bodyAsJson))
+                );
                 break;
               default:
                 yield put(favouriteNotFound());
@@ -91,7 +97,19 @@ function* fetchFavouriteSaga(): Generator<Effect, void, never> {
             }
             return;
           }
-          yield put(receiveFavourite(bodyAsJson.results[0] as Favourite));
+          bodyAsJson.results[0].targets.forEach(
+            (target: FavouriteTargetFromBackend, index: number) => {
+              bodyAsJson.results[0].targets[index].plot_search_target =
+                parseTargetPlan(target.plot_search_target);
+            }
+          );
+          yield put(
+            receiveFavourite(
+              parseFavouriteTargetPlans(
+                bodyAsJson.results[0] as FavouriteFromBackend
+              )
+            )
+          );
           break;
         }
         default:
@@ -112,6 +130,9 @@ function* initializeFavouriteSaga(): Generator<Effect, void, ApiCallResult> {
     const { response, bodyAsJson } = yield call(initializeFavouriteRequest);
     switch (response.status) {
       case 201:
+        bodyAsJson.target.plot_search_target = parseTargetPlan(
+          bodyAsJson.target.plot_search_target
+        );
         yield put(receiveFavourite(bodyAsJson));
         break;
       default:
@@ -141,7 +162,7 @@ function* updateFavouriteSaga({
   switch (response.status) {
     case 200:
       yield put(pushNotification(payload.notification));
-      yield put(receiveFavourite(bodyAsJson));
+      yield put(receiveFavourite(parseFavouriteTargetPlans(bodyAsJson)));
       break;
     default:
       yield put(favouriteNotFound());
@@ -182,7 +203,7 @@ function* addFavouriteTargetSaga({
         'favourites.saga.addTarget',
         'Target "{{address}}" added to application.',
         {
-          address: payload.target.plot_search_target.lease_address.address,
+          address: payload.target.plot_search_target.target_plan.address,
         }
       ),
       type: 'success',
@@ -211,6 +232,10 @@ function* removeFavouriteTargetSaga({
       ),
     };
 
+    const target = oldFavourite.targets.filter(
+      (t) => t.plot_search_target.id === payload
+    )[0].plot_search_target;
+
     const notification: Notification = {
       id: 'remove_' + payload.toString(),
       icon: true,
@@ -218,9 +243,7 @@ function* removeFavouriteTargetSaga({
         'favourites.saga.removeTarget',
         'Target "{{address}}" removed from application.',
         {
-          address: oldFavourite.targets.filter(
-            (t) => t.plot_search_target.id === payload
-          )[0].plot_search_target.lease_address.address,
+          address: target.target_plan.address,
         }
       ),
       type: 'alert',
