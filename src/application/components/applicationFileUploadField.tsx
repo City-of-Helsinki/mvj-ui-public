@@ -169,7 +169,11 @@ export default connect(
   ): Omit<InnerProps, 'deleteUpload' | 'uploadFile' | 'change'> => ({
     pendingUploads: state.application.pendingUploads,
     isPerformingFileOperation: state.application.isPerformingFileOperation,
-    fieldFileIds: getFieldFileIds(state, props.fieldName),
+    fieldFileIds: getFieldFileIds(
+      state,
+      props.fieldName,
+      APPLICATION_FORM_NAME
+    ),
     attachmentIds: formValueSelector(APPLICATION_FORM_NAME)(
       state,
       'attachments'

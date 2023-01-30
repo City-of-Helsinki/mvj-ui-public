@@ -18,7 +18,10 @@ import AreaSearchLandingPage from '../areaSearch/areaSearchLandingPage';
 import AreaSearchApplicationRootPage, {
   Props as AreaSearchApplicationRootPageProps,
 } from '../areaSearch/areaSearchApplicationRootPage';
+import AreaSearchApplicationPage from '../areaSearch/areaSearchApplicationPage';
+import AreaSearchApplicationPreview from '../areaSearch/areaSearchApplicationPreview';
 import AreaSearchSpecsPage from '../areaSearch/areaSearchSpecsPage';
+import AreaSearchApplicationSuccessPage from '../areaSearch/areaSearchApplicationSuccessPage';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -31,6 +34,7 @@ export const AppRoutes = {
   AREA_SEARCH_APPLICATION_AREA_SPEC: 'area-search-application-area-spec',
   AREA_SEARCH_APPLICATION_FORM: 'area-search-application-form',
   AREA_SEARCH_APPLICATION_SUBMIT: 'area-search-application-submit',
+  AREA_SEARCH_APPLICATION_FORM_PREVIEW: 'area-search-application-form-preview',
   LEASES: 'leases',
   APPLICATIONS: 'applications',
   MESSAGES: 'messages',
@@ -61,6 +65,8 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.AREA_SEARCH_APPLICATION_FORM]:
       '/aluehaku/hakemus/tietojen-taytto',
     [AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT]: '/aluehaku/hakemus/lahetys',
+    [AppRoutes.AREA_SEARCH_APPLICATION_FORM_PREVIEW]:
+      '/aluehaku/hakemus/tietojen-tarkistus',
     [AppRoutes.LEASES]: '/vuokraukset',
     [AppRoutes.APPLICATIONS]: '/hakemukset',
     [AppRoutes.MESSAGES]: '/viestit',
@@ -228,14 +234,21 @@ const SiteRoutes = (): JSX.Element => {
                         AppRoutes.AREA_SEARCH_APPLICATION_FORM,
                         AppRoutes.AREA_SEARCH_APPLICATION_ROOT
                       )}
-                      element={<div>aluehaun lomake</div>}
+                      element={<AreaSearchApplicationPage />}
+                    />
+                    <Route
+                      path={getPartialRouteById(
+                        AppRoutes.AREA_SEARCH_APPLICATION_FORM_PREVIEW,
+                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                      )}
+                      element={<AreaSearchApplicationPreview />}
                     />
                     <Route
                       path={getPartialRouteById(
                         AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT,
                         AppRoutes.AREA_SEARCH_APPLICATION_ROOT
                       )}
-                      element={<div>aluehaun lähetys</div>}
+                      element={<AreaSearchApplicationSuccessPage />}
                     />
                     <Route
                       path=""

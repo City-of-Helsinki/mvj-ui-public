@@ -62,12 +62,8 @@ interface HelsinkiMapData {
   CRS: CRS;
 }
 
-export const initializeHelsinkiMap = (): HelsinkiMapData => {
-  const southWest = new LatLng(60.079029, 24.646353);
-  const northEast = new LatLng(60.318135, 26.196695);
-  const latLonBounds = new L.LatLngBounds(southWest, northEast);
-  const bounds = L.bounds([25440000, 6630000], [26571072, 6761072]);
-  const CRS = new L.Proj.CRS(
+const getCRS = (bounds: L.Bounds): L.Proj.CRS =>
+  new L.Proj.CRS(
     'EPSG:3879',
     '+proj=tmerc +lat_0=0 +lon_0=25 +k=1 +x_0=25500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
     {
@@ -77,6 +73,13 @@ export const initializeHelsinkiMap = (): HelsinkiMapData => {
       bounds,
     }
   );
+
+export const initializeHelsinkiMap = (): HelsinkiMapData => {
+  const southWest = new LatLng(60.079029, 24.646353);
+  const northEast = new LatLng(60.318135, 26.196695);
+  const latLonBounds = new L.LatLngBounds(southWest, northEast);
+  const bounds = L.bounds([25440000, 6630000], [26571072, 6761072]);
+  const CRS = getCRS(bounds);
 
   proj4.defs(
     'EPSG:3879',
@@ -263,3 +266,35 @@ export const setDrawToolLocalizations = (): void => {
 };
 
 export const HELSINKI_CENTRAL_COORDINATES = new LatLng(60.167642, 24.954753);
+
+export const getAreaString = (geometry: Geometry): string => {
+  return L.GeometryUtil.readableArea(getGeometryArea(geometry), true);
+};
+
+export const getGeometryArea = (geometry: Geometry): number => {
+  let area = 0;
+
+  switch (geometry.type) {
+    case 'GeometryCollection':
+      geometry.geometries.forEach((geometry) => {
+        area += getGeometryArea(geometry);
+      });
+      break;
+    case 'MultiPolygon':
+      L.GeoJSON.coordsToLatLngs(geometry.coordinates, 2).forEach((latLngs) => {
+        latLngs.forEach((latLng: Array<LatLng>) => {
+          const polygonArea = L.GeometryUtil.geodesicArea(latLng);
+          area += polygonArea;
+        });
+      });
+      break;
+    case 'Polygon':
+      L.GeoJSON.coordsToLatLngs(geometry.coordinates, 1).forEach((latLng) => {
+        area = L.GeometryUtil.geodesicArea(latLng);
+      });
+      break;
+    default:
+      break;
+  }
+  return area;
+};

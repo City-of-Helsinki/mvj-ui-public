@@ -5,7 +5,7 @@ import { getTargetPlanOptionTitle } from '../plotSearch/helpers';
 import { ApiAttributes } from '../api/types';
 
 export interface Info {
-  value: string | number;
+  value: string | number | JSX.Element | JSX.Element[];
   key: string;
   fullDescOnly: boolean;
 }

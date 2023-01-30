@@ -1,0 +1,13 @@
+.AreaSearchTargetSummary {
+  .AreaSearchTargetSummary__target {
+    padding-left: 0;
+    margin-left: 1px;
+    overflow: hidden;
+    row-gap: $spacing-s;
+
+    .AreaSearchTargetSummary__target-address {
+      font-size: $fontsize-heading-s;
+      font-weight: bold;
+    }
+  }
+}

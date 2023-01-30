@@ -88,6 +88,33 @@
     }
   },
   "areaSearch": {
+    "application": {
+      "error": {
+        "noAreaSelected": "To submit an area application, you have to select the area you're applying for on the area search page first.",
+        "notLoggedIn": "Please log in to send an application for an area.",
+        "preparation": {
+          "misconfiguredPlotSearch": "An area search you're applying to is not found. Please try to define the area again."
+        }
+      },
+      "form": {
+        "pageTitle": "Area search application"
+      },
+      "heading": "Area search application",
+      "loginButton": "Log in",
+      "preview": {
+        "heading": "Area search application preview",
+        "pageTitle": "Area search application"
+      },
+      "target": {
+        "addressNotFound": "No address found for the selected area",
+        "area": "Area (m²)",
+        "areaDescription": "Area description",
+        "attachments": "Attachments",
+        "intendedUsage": "Intended use",
+        "leaseTime": "Lease time",
+        "screenReaderHeading": "Selected area:"
+      }
+    },
     "landingPage": {
       "applyForArea": "Apply for an area",
       "areaSearches": {
@@ -143,7 +170,7 @@
         "explanation": "Besides Helsinki itself, the City of Helsinki also owns land in other cities including Sipoo, Espoo, .... The selected area will only serve as the starting point during negotiations.",
         "heading": "Tell us which area you'd like to lease",
         "readMoreLink": "Read more on the City of Helsinki website",
-        "readMorelinkTarget": "https://hel.fi/"
+        "readMorelinkTarget": "https://hel.fi/en"
       },
       "attachments": {
         "heading": "Attachments",
@@ -170,6 +197,12 @@
       "notLoggedIn": "To apply, please log in first.",
       "pageTitle": "Area search",
       "submitting": "Submitting..."
+    },
+    "targetCard": {
+      "showFullDesc": {
+        "hide": "Hide additional details",
+        "show": "Show additional details"
+      }
     }
   },
   "errorPage": {

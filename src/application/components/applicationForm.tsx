@@ -9,6 +9,7 @@ import {
   APPLICANT_SECTION_IDENTIFIER,
   CONFIRMATION_SECTION_IDENTIFIER,
   TARGET_SECTION_IDENTIFIER,
+  APPLICATION_FORM_NAME,
 } from '../types';
 import { Form } from '../../plotSearch/types';
 import ApplicationFormSubsection from './applicationFormSubsection';
@@ -78,6 +79,7 @@ const ApplicationForm = ({
         <TabPanel>
           {applicantSection && (
             <ApplicationFormSubsection
+              formName={APPLICATION_FORM_NAME}
               path={[ApplicationSectionKeys.Subsections]}
               section={applicantSection}
               headerTag="h2"
@@ -88,6 +90,7 @@ const ApplicationForm = ({
         <TabPanel>
           {targetSection && (
             <ApplicationFormSubsection
+              formName={APPLICATION_FORM_NAME}
               path={[ApplicationSectionKeys.Subsections]}
               section={targetSection}
               headerTag="h2"
@@ -100,6 +103,7 @@ const ApplicationForm = ({
           <TabPanel>
             {extraSections.map((section) => (
               <ApplicationFormSubsection
+                formName={APPLICATION_FORM_NAME}
                 path={[ApplicationSectionKeys.Subsections]}
                 section={section}
                 headerTag="h2"
@@ -111,6 +115,7 @@ const ApplicationForm = ({
       </Tabs>
       {confirmationSection && (
         <ApplicationFormSubsection
+          formName={APPLICATION_FORM_NAME}
           path={[ApplicationSectionKeys.Subsections]}
           section={confirmationSection}
           headerTag="h2"
@@ -122,6 +127,6 @@ const ApplicationForm = ({
 };
 
 export default connect((state: RootState) => ({
-  applicantCount: getCurrentApplicantCount(state),
+  applicantCount: getCurrentApplicantCount(state, APPLICATION_FORM_NAME),
   favouritesCount: getFavouriteCount(state),
 }))(ApplicationForm);

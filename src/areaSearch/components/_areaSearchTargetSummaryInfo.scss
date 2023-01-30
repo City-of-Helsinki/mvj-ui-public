@@ -1,0 +1,29 @@
+.AreaSearchTargetSummaryInfo {
+  &__action-button {
+    float: right;
+  }
+
+  &__action-button-icon {
+    color: black;
+  }
+
+  .AreaSearchTargetSummaryInfoRow {
+    margin-top: $spacing-xs;
+    display: inline-block;
+
+    &__full-desc {
+      margin-top: $spacing-s;
+      display: block;
+    }
+
+    &__text {
+      font-size: $fontsize-heading-xs;
+      font-weight: bold;
+    }
+
+    &__value {
+      padding-left: $spacing-s;
+      padding-right: $spacing-xl;
+    }
+  }
+}

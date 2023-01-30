@@ -1,14 +1,14 @@
-import React, { FormEvent, useEffect, useMemo, useState } from 'react';
+import React, { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Field,
   FormErrors,
   formValueSelector,
   getFormSyncErrors,
-  InjectedFormProps,
   setSubmitSucceeded,
   startSubmit,
   touch,
+  change,
 } from 'redux-form';
 import { Col, Container, Row } from 'react-grid-system';
 import { Button, Link, Notification } from 'hds-react';
@@ -35,12 +35,20 @@ import {
 } from '../form/validators';
 import { RootState } from '../root/rootReducer';
 import { AREA_SEARCH_FORM_NAME, IntendedSubUse, IntendedUse } from './types';
-import { fetchIntendedUses, submitAreaSearch } from './actions';
+import {
+  fetchIntendedUses,
+  initializeAreaSearchAttachments,
+  submitAreaSearch,
+  submitAreaSearchAttachment,
+} from './actions';
 import { prepareAreaSearchSubmission } from './helpers';
 import { getFieldNamesFromFormErrors, ReduxFormError } from '../form/helpers';
 import { getPageTitle } from '../root/helpers';
 import AreaSearchMap from './components/AreaSearchMap';
-import ApplicationProcedureInfo from '../application/components/ApplicationProcedureInfo';
+import { useNavigate } from 'react-router';
+import { AppRoutes, getRouteById } from '../root/routes';
+import { getInitialAreaSearchApplicationForm } from './helpers';
+import { ApplicationFormRoot } from '../application/types';
 
 interface State {
   startDate?: string;
@@ -49,23 +57,30 @@ interface State {
   selectedIntendedUseCategory?: number;
   lastSubmissionId: number;
   errors: FormErrors;
+  applicationFormTemplate: ApplicationFormRoot;
 }
 
 interface OwnProps {
   openLoginModal: () => void;
   submitAreaSearch: typeof submitAreaSearch;
+  initializeAreaSearchAttachments: typeof initializeAreaSearchAttachments;
+  submitAreaSearchAttachment: typeof submitAreaSearchAttachment;
   fetchIntendedUses: typeof fetchIntendedUses;
   startSubmit: typeof startSubmit;
   setSubmitSucceeded: typeof setSubmitSucceeded;
   isSubmittingAreaSearch: boolean;
+  change: typeof change;
+  valid: boolean;
+  touch(...field: string[]): void;
 }
 
-type Props = OwnProps & State & Partial<InjectedFormProps>;
+type Props = OwnProps & State;
 
 const AreaSearchSpecsPage = ({
   openLoginModal,
   submitAreaSearch,
   isSubmittingAreaSearch,
+  initializeAreaSearchAttachments,
   touch,
   valid,
   errors,
@@ -77,10 +92,14 @@ const AreaSearchSpecsPage = ({
   intendedUses,
   selectedIntendedUseCategory,
   lastSubmissionId,
+  applicationFormTemplate,
+  change,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  const [initialSubmissionId] = useState<number>(lastSubmissionId);
+  const prevSubmissionIdRef = useRef<number>(lastSubmissionId);
+
   const [hasSubmitErrors, setHasSubmitErrors] = useState<boolean>(false);
 
   const dateNow = useMemo<Date>(() => new Date(), []);
@@ -123,9 +142,11 @@ const AreaSearchSpecsPage = ({
   );
 
   useEffect(() => {
-    if (lastSubmissionId > initialSubmissionId) {
+    if (lastSubmissionId > prevSubmissionIdRef.current) {
+      prevSubmissionIdRef.current = lastSubmissionId;
       setSubmitSucceeded(AREA_SEARCH_FORM_NAME);
-      // TODO: go to application page
+      change(AREA_SEARCH_FORM_NAME, 'form', applicationFormTemplate, true);
+      navigate(getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM));
     }
   }, [lastSubmissionId]);
 
@@ -135,6 +156,7 @@ const AreaSearchSpecsPage = ({
         {(loading, loggedIn) => {
           useEffect(() => {
             fetchIntendedUses();
+            initializeAreaSearchAttachments();
           }, []);
 
           const { files } = useFileUploads();
@@ -163,7 +185,9 @@ const AreaSearchSpecsPage = ({
             if (valid) {
               startSubmit(AREA_SEARCH_FORM_NAME);
               setHasSubmitErrors(false);
-              submitAreaSearch(prepareAreaSearchSubmission(files));
+              submitAreaSearch(
+                prepareAreaSearchSubmission(files['search.attachments'])
+              );
             } else {
               if (touch) {
                 touch(
@@ -199,10 +223,6 @@ const AreaSearchSpecsPage = ({
                           "If you're planning to lease an area for example for lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, continue by filling the following form. Tell us a few details about the area you'd like to lease and then fill the application. We'll respond to you as soon as possible. Fields marked with an asterisk (*) are required."
                         )}
                       </p>
-
-                      {/* TODO: temporary placement */}
-                      <ApplicationProcedureInfo />
-
                       <section>
                         <h2>
                           {t(
@@ -374,7 +394,6 @@ const AreaSearchSpecsPage = ({
                             'Attachments'
                           )}
                         </h2>
-
                         <Field
                           id="attachments"
                           name="search.attachments"
@@ -390,7 +409,7 @@ const AreaSearchSpecsPage = ({
                       </section>
                       <Button
                         variant="primary"
-                        onClick={onSubmit}
+                        onClick={(e) => onSubmit(e)}
                         isLoading={isSubmittingAreaSearch}
                         loadingText={t(
                           'areaSearch.specs.submitting',
@@ -455,6 +474,7 @@ export default connect(
     isSubmittingAreaSearch: state.areaSearch.isSubmittingAreaSearch,
     lastSubmissionId: state.areaSearch.lastSubmissionId,
     errors: getFormSyncErrors(AREA_SEARCH_FORM_NAME)(state),
+    applicationFormTemplate: getInitialAreaSearchApplicationForm(state),
   }),
   {
     openLoginModal,
@@ -463,5 +483,8 @@ export default connect(
     setSubmitSucceeded,
     touch,
     fetchIntendedUses,
+    initializeAreaSearchAttachments,
+    submitAreaSearchAttachment,
+    change,
   }
 )(AreaSearchSpecsPage);

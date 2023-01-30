@@ -27,6 +27,7 @@ export enum SupportedFieldTypes {
   RadioButton = 'radiobutton',
   RadioButtonInline = 'radiobuttoninline',
   FileUpload = 'uploadfiles',
+  FractionalField = 'fractional',
 }
 
 export type FieldValue =
@@ -224,4 +225,12 @@ export enum ApplicationPreparationError {
   NoApplicantTypeSet,
   NoApplicantIdentifierFound,
   MisconfiguredPlotSearch,
+  NoAreaSearchFound,
 }
+
+export enum FieldType {
+  NUMERATOR = 0,
+  DENOMINATOR = 1,
+}
+
+export const SPLITTER = ' / ';

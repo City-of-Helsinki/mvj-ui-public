@@ -11,7 +11,7 @@ const ApplicationCheckboxFieldset = (
 
   return (
     <div className="ApplicationCheckboxFieldset">
-      {field.choices ? (
+      {field.choices && field.choices.length > 0 ? (
         <SelectionGroup
           label={field.label}
           required={field.required}
@@ -59,7 +59,9 @@ const ApplicationCheckboxFieldset = (
         <>
           <Checkbox
             id={`ApplicationCheckboxFieldSet_${id}`}
-            checked={!!input.value.value}
+            checked={
+              input.value.value instanceof Array ? false : input.value.value
+            }
             required={field.required}
             errorText={meta.error}
             label={field.label}
