@@ -94,10 +94,17 @@ export type Preparer = {
   is_staff: boolean;
 };
 
-export type PlotSearchTarget = {
+export enum TargetPlanType {
+  PlanUnit = 0,
+  CustomDetailedPlan = 1,
+}
+
+export type PlotSearchTargetFromBackend = {
   id: number;
-  plan_unit: PlanUnit;
-  plan_unit_id: number;
+  plan_unit: PlanUnit | null;
+  plan_unit_id: number | null;
+  custom_detailed_plan: CustomDetailedPlan | null;
+  custom_detailed_plan_id: number | null;
   target_type: string;
   master_plan_unit_id: number;
   is_master_plan_unit_deleted: boolean;
@@ -116,6 +123,12 @@ export type PlotSearchTarget = {
   }>;
   district: string;
 };
+
+export type PlotSearchTarget = PlotSearchTargetFromBackend & {
+  target_plan: TargetPlan;
+  target_plan_type: TargetPlanType;
+};
+
 export type PlanUnit = {
   id: number;
   identifier: string;
@@ -136,6 +149,56 @@ export type PlanUnit = {
   plan_unit_status: string;
   plan_unit_intended_use: number;
   geometry: Geometry;
+};
+
+export type CustomDetailedPlan = {
+  identifier: string;
+  intended_use?: { name: string; id: number };
+  address: string;
+  area: number;
+  state?: { name: string; id: number };
+  type?: { name: string; id: number };
+  detailed_plan?: string;
+  detailed_plan_latest_processing_date?: string;
+  detailed_plan_latest_processing_date_note?: string;
+  rent_build_permission: number;
+  preconstruction_estimated_construction_readiness_moment?: string;
+  info_links?: Array<PlotSearchTargetInfoLink>;
+  usage_distributions: Array<UsageDistribution>;
+  geometry: Geometry;
+};
+
+export type TargetPlan = {
+  id: number;
+  identifier?: string;
+  area?: number;
+  section_area?: number;
+  in_contract?: boolean;
+  is_master?: boolean;
+  decisions?: Array<Decision>;
+  plot_division_identifier?: string;
+  plot_division_date_of_approval?: string;
+  plot_division_effective_date?: string;
+  detailed_plan_identifier?: string;
+  detailed_plan_latest_processing_date?: string;
+  detailed_plan_latest_processing_date_note?: string;
+  plot_division_state?: number;
+  plan_unit_type?: number;
+  plan_unit_state?: number;
+  plan_unit_status?: string;
+  plan_unit_intended_use?: number;
+  geometry: Geometry;
+  address?: string;
+  usage_distributions?: Array<UsageDistribution>;
+  info_links?: Array<PlotSearchTargetInfoLink>;
+  preconstruction_estimated_construction_readiness_moment?: string;
+  rent_build_permission?: number;
+};
+
+export type UsageDistribution = {
+  distribution: string;
+  build_permission: string;
+  note: string;
 };
 
 export type PlotSearchTargetInfoLink = {
@@ -193,6 +256,23 @@ export type FormFieldChoice = {
 //  This site shouldn't probably care about decisions in any case, so this might be redundant.
 export type Decision = {
   lease: number;
+};
+
+export type PlotSearchFromBackend = {
+  id: number;
+  type: PlotSearchTypeReference;
+  subtype: PlotSearchSubtypeReference;
+  stage: PlotSearchStage;
+  search_class: string;
+  form: Form;
+  decisions: Array<Decision>;
+  preparer: Preparer;
+  plot_search_targets: Array<PlotSearchTargetFromBackend>;
+  created_at: string;
+  modified_at?: string;
+  name: string;
+  begin_at?: string;
+  end_at?: string;
 };
 
 export type PlotSearch = {

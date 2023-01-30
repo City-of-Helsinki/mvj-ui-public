@@ -10,9 +10,11 @@ const InfoLinks = (props: Props): JSX.Element | null => {
   const { target } = props;
 
   const { i18n } = useTranslation();
-  const currentLanguageInfoLinks = target.info_links.filter(
-    (link) => link.language === i18n.language
-  );
+  const currentLanguageInfoLinks = target.target_plan.info_links
+    ? target.target_plan.info_links.filter(
+        (link) => link.language === i18n.language
+      )
+    : [];
 
   if (currentLanguageInfoLinks.length > 0) {
     return (

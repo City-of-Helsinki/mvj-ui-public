@@ -397,34 +397,36 @@ const MapSearchComponent = ({
                                   xs={1.5}
                                   aria-labelledby={`MapSearchComponentList-${section.key}-PlotNumber`}
                                 >
-                                  {target.data.plan_unit.identifier}
+                                  {target.data.target_plan.identifier}
                                 </Col>
                                 <Col
                                   xs={3.5}
                                   className="MapSearchComponent__target-address"
                                   aria-labelledby={`MapSearchComponentList-${section.key}-Address`}
                                 >
-                                  {target.data.lease_address.address}
+                                  {target.data.target_plan.address}
                                 </Col>
                                 <Col
                                   xs={3}
                                   aria-labelledby={`MapSearchComponentList-${section.key}-IntendedUse`}
                                 >
                                   {getIntendedUseName(
-                                    target.data.plan_unit.plan_unit_intended_use
+                                    target.data.target_plan
+                                      .plan_unit_intended_use
                                   )}
                                 </Col>
                                 <Col
                                   xs={2}
                                   aria-labelledby={`MapSearchComponentList-${section.key}-PermittedBuildArea`}
                                 >
-                                  ?
+                                  {target.data.target_plan
+                                    .rent_build_permission || '?'}
                                 </Col>
                                 <Col
                                   xs={1.5}
                                   aria-labelledby={`MapSearchComponentList-${section.key}-Area`}
                                 >
-                                  {target.data.plan_unit.area?.toLocaleString(
+                                  {target.data.target_plan.area?.toLocaleString(
                                     defaultLanguage
                                   ) || '?'}
                                 </Col>

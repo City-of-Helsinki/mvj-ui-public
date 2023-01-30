@@ -5,8 +5,8 @@ import { Row, Col } from 'react-grid-system';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { PlanUnit, PlotSearch, PlotSearchTarget } from '../plotSearch/types';
-import { ApiAttributeChoice, ApiAttributes } from '../api/types';
+import { PlotSearch, PlotSearchTarget } from '../plotSearch/types';
+import { ApiAttributes } from '../api/types';
 import { SelectedTarget } from './mapSearchPage';
 import { RootState } from '../root/rootReducer';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
@@ -15,6 +15,7 @@ import { renderDateTime } from '../i18n/utils';
 import { AddTargetPayload, Favourite } from '../favourites/types';
 import InfoLinks from './infoLinks';
 import { AppRoutes, getRouteById } from '../root/routes';
+import { getTargetPlanOptionTitle } from '../plotSearch/helpers';
 
 interface State {
   plotSearchAttributes: ApiAttributes;
@@ -47,16 +48,6 @@ const MapSearchSingleTargetView = ({
       {children}
     </Col>
   );
-
-  const getPlanUnitOptionTitle = (field: keyof PlanUnit): string => {
-    return (
-      plotSearchAttributes.plot_search_targets?.child?.children?.plan_unit?.children?.[
-        field
-      ]?.choices?.find(
-        (choice: ApiAttributeChoice) => choice.value === target.plan_unit[field]
-      )?.display_name || '???'
-    );
-  };
 
   const handleApplyButton = (
     target: PlotSearchTarget,
@@ -129,7 +120,7 @@ const MapSearchSingleTargetView = ({
               'Plot'
             )}
           </LeftColumn>
-          <RightColumn>{target.plan_unit.identifier}</RightColumn>
+          <RightColumn>{target.target_plan.identifier}</RightColumn>
         </Row>
         <Row>
           <LeftColumn>
@@ -138,7 +129,7 @@ const MapSearchSingleTargetView = ({
               'Address'
             )}
           </LeftColumn>
-          <RightColumn>{target.lease_address.address}</RightColumn>
+          <RightColumn>{target.target_plan.address}</RightColumn>
         </Row>
         <Row>
           <LeftColumn>
@@ -147,7 +138,9 @@ const MapSearchSingleTargetView = ({
               'Detailed plan identifier'
             )}
           </LeftColumn>
-          <RightColumn>{target.plan_unit.detailed_plan_identifier}</RightColumn>
+          <RightColumn>
+            {target.target_plan.detailed_plan_identifier}
+          </RightColumn>
         </Row>
         <Row>
           <LeftColumn>
@@ -156,7 +149,14 @@ const MapSearchSingleTargetView = ({
               'Detailed plan state'
             )}
           </LeftColumn>
-          <RightColumn>{getPlanUnitOptionTitle('plan_unit_state')}</RightColumn>
+          <RightColumn>
+            {getTargetPlanOptionTitle(
+              plotSearchAttributes,
+              'plan_unit_state',
+              target.target_plan_type,
+              target.target_plan
+            )}
+          </RightColumn>
         </Row>
         <Row>
           <LeftColumn>
@@ -166,7 +166,12 @@ const MapSearchSingleTargetView = ({
             )}
           </LeftColumn>
           <RightColumn>
-            {getPlanUnitOptionTitle('plan_unit_intended_use')}
+            {getTargetPlanOptionTitle(
+              plotSearchAttributes,
+              'plan_unit_intended_use',
+              target.target_plan_type,
+              target.target_plan
+            )}
           </RightColumn>
         </Row>
         <Row>
@@ -177,8 +182,9 @@ const MapSearchSingleTargetView = ({
             )}
           </LeftColumn>
           <RightColumn>
-            {/* {target.plan_unit.permitted_build_floor_area_commercial?.toLocaleString(defaultLanguage) || '???'} */}
-            ???
+            {target.target_plan.rent_build_permission?.toLocaleString(
+              defaultLanguage
+            ) || '???'}
           </RightColumn>
         </Row>
         <Row>
@@ -213,7 +219,7 @@ const MapSearchSingleTargetView = ({
             )}
           </LeftColumn>
           <RightColumn>
-            {target.plan_unit.area?.toLocaleString(defaultLanguage) || '???'}
+            {target.target_plan.area?.toLocaleString(defaultLanguage) || '???'}
           </RightColumn>
         </Row>
         <Row>
@@ -256,13 +262,18 @@ const MapSearchSingleTargetView = ({
           <RightColumn>{target.lease_management || '???'}</RightColumn>
         </Row>
       </dl>
-      <h3>
-        {t(
-          'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
-          'Details'
+      {target.target_plan.info_links &&
+        target.target_plan.info_links.length > 0 && (
+          <>
+            <h3>
+              {t(
+                'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
+                'Details'
+              )}
+            </h3>
+            <InfoLinks target={target} />
+          </>
         )}
-      </h3>
-      <InfoLinks target={target} />
       <Button
         className="MapSearchSingleTargetView__next-button"
         onClick={() => handleApplyButton(target, plotSearch, isFavourited)}

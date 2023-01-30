@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import ScreenReaderText from '../../a11y/ScreenReaderText';
 import { RootState } from '../../root/rootReducer';
 import { Favourite } from '../../favourites/types';
+import { TargetPlanType } from '../../plotSearch/types';
 
 interface State {
   favourite: Favourite;
@@ -41,14 +42,18 @@ const ApplicationTargetList = ({ favourite }: Props): JSX.Element => {
             key={target.plot_search_target.id}
           >
             <div className="ApplicationTargetList__target-address">
-              {target.plot_search_target.lease_address.address},{' '}
-              {target.plot_search_target.district}
+              {target.plot_search_target.target_plan.address}
+              {target.plot_search_target.district &&
+                `, ${target.plot_search_target.district}`}
             </div>
             <div className="ApplicationTargetList__target-identifier">
               <span className="ApplicationTargetList__target-identifier-text">
                 {t('application.targets.identifier', 'Plot')}{' '}
               </span>
-              {target.plot_search_target.lease_identifier}
+              {target.plot_search_target.target_plan_type ===
+              TargetPlanType.PlanUnit
+                ? target.plot_search_target.lease_identifier
+                : target.plot_search_target.target_plan.identifier}
             </div>
           </Col>
         ))}
