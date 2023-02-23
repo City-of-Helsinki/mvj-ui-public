@@ -51,6 +51,20 @@
       "pageTitle": ""
     },
     "previewButton": "",
+    "procedure": {
+      "link": "",
+      "popup": {
+        "closeButton": "",
+        "stages": {
+          "decision": "",
+          "forwarding": "",
+          "offer": "",
+          "review": "",
+          "submission": ""
+        },
+        "title": ""
+      }
+    },
     "returnToForm": "",
     "submit": "",
     "submitInProcess": "",

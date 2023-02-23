@@ -1,0 +1,34 @@
+.ApplicationProcedureInfo {
+  float: right;
+}
+
+.ApplicationProcedureInfo__popup {
+  .ApplicationProcedureInfo__popup-steps {
+    padding: 0 $spacing-s;
+
+    li {
+      margin: $spacing-s 0 $spacing-s $spacing-xl;
+      padding: 0 0 $spacing-m $spacing-m;
+      list-style: none;
+      counter-increment: stepNumber;
+      position: relative;
+
+      &:before {
+        content: counter(stepNumber);
+        display: inline-block;
+        width: $spacing-xl;
+        height: $spacing-xl;
+        border-radius: 50%;
+        background-color: $color-bus;
+        color: $color-white;
+        text-align: center;
+        line-height: $spacing-xl;
+        font-weight: bold;
+        font-size: $fontsize-body-xl;
+        position: absolute;
+        left: -$spacing-xl;
+        top: -$spacing-xs;
+      }
+    }
+  }
+}

@@ -51,6 +51,20 @@
       "pageTitle": "Plot application"
     },
     "previewButton": "Preview submission",
+    "procedure": {
+      "link": "Information about the application review process",
+      "popup": {
+        "closeButton": "Close",
+        "stages": {
+          "decision": "The city will make a formal lease decision and the lease contract will be signed.",
+          "forwarding": "The application is forwarded to the correct city department for processing.",
+          "offer": "If the city decides to lease the area to the applicant, a draft contract will be sent to them for commenting.",
+          "review": "The city confirms if the area is eligible to be leased for the applied-for use case and requests further information from the applicant if necessary. Other parties relevant to the decision might be consulted at this stage as well.",
+          "submission": "The applicant submits their application."
+        },
+        "title": "How the application review process works"
+      }
+    },
     "returnToForm": "Edit application",
     "submit": "Submit application",
     "submitInProcess": "Submitting...",

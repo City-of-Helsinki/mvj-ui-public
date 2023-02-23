@@ -51,6 +51,20 @@
       "pageTitle": "Tonttihakemus"
     },
     "previewButton": "Siirry esikatseluun",
+    "procedure": {
+      "link": "Miten hakemuksen käsittely etenee?",
+      "popup": {
+        "closeButton": "Sulje",
+        "stages": {
+          "decision": "Kaupunki tekee vuokrauspäätöksen, jonka jälkeen allekirjoitetaan vuokrasopimus.",
+          "forwarding": "Hakemus ohjataan kaupungin sisällä oikeaan palveluun käsiteltäväksi.",
+          "offer": "Hakija saa sopimusluonnoksen kommentoitavaksi, mikäli päädytään alueen vuokraukseen.",
+          "review": "Kaupunki selvittää onko alue vuokrattavissa hakijalle hakijan ilmoittamaan käyttötarkoitukseen ja pyytää hakijalta mahdollisia lisätietoja.  Kaupunki voi joutua pyytämään kannanottoja muilta asiaan liittyviltä tahoilta päätöksentekoa varten.",
+          "submission": "Hakija jättää hakemuksen."
+        },
+        "title": "Tietoa käsittelyprosessista"
+      }
+    },
     "returnToForm": "Muokkaa hakemusta",
     "submit": "Lähetä hakemus",
     "submitInProcess": "Hakemusta lähetetään...",
