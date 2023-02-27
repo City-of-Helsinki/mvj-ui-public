@@ -6,6 +6,12 @@
       "remove": "",
       "removeTarget": ""
     },
+    "buttons": {
+      "cancel": "",
+      "login": "",
+      "preview": "",
+      "viewTargets": ""
+    },
     "error": {
       "generic": "",
       "label": "",
@@ -42,7 +48,11 @@
       }
     },
     "heading": "",
-    "loginButton": "",
+    "mustVisitTargetPage": {
+      "close": "",
+      "text": "",
+      "title": ""
+    },
     "preview": {
       "attachmentNo": "",
       "booleanNo": "",
@@ -50,7 +60,6 @@
       "heading": "",
       "pageTitle": ""
     },
-    "previewButton": "",
     "procedure": {
       "link": "",
       "popup": {

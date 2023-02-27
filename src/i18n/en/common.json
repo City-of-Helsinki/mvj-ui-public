@@ -6,6 +6,12 @@
       "remove": "Remove",
       "removeTarget": "Remove from list"
     },
+    "buttons": {
+      "cancel": "Cancel",
+      "login": "Log in",
+      "preview": "Preview submission",
+      "viewTargets": "View targets"
+    },
     "error": {
       "generic": "The application could not be submitted correctly. Please try again later.",
       "label": "Submission error",
@@ -42,7 +48,11 @@
       }
     },
     "heading": "Plot application",
-    "loginButton": "Log in",
+    "mustVisitTargetPage": {
+      "close": "Close",
+      "text": "You must first fill the required details for the targets you're applying to in the second tab. You can open that tab by clicking the button below.",
+      "title": "Attention!"
+    },
     "preview": {
       "attachmentNo": "Attachment #{{number}}",
       "booleanNo": "No",
@@ -50,7 +60,6 @@
       "heading": "Plot application preview",
       "pageTitle": "Plot application"
     },
-    "previewButton": "Preview submission",
     "procedure": {
       "link": "Information about the application review process",
       "popup": {

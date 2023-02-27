@@ -6,6 +6,12 @@
       "remove": "Poista",
       "removeTarget": "Poista kohde listalta"
     },
+    "buttons": {
+      "cancel": "Peruuta",
+      "login": "Kirjaudu sisään",
+      "preview": "Siirry esikatseluun",
+      "viewTargets": "Haettavat kohteet"
+    },
     "error": {
       "generic": "Hakemuksen lähettäminen epäonnistui. Yritä myöhemmin uudelleen.",
       "label": "Lähetys epäonnistui",
@@ -42,7 +48,11 @@
       }
     },
     "heading": "Tonttihakemus",
-    "loginButton": "Kirjaudu sisään",
+    "mustVisitTargetPage": {
+      "close": "Sulje",
+      "text": "Jatkaaksesi esikatseluun sinun tulee täyttää haettavien kohteiden välilehdellä pyydetyt tiedot. Voit siirtyä välilehdelle alla olevasta painikkeesta.",
+      "title": "Huom.!"
+    },
     "preview": {
       "attachmentNo": "Liite {{number}}",
       "booleanNo": "Ei",
@@ -50,7 +60,6 @@
       "heading": "Esikatselu – tonttihakemus",
       "pageTitle": "Tonttihakemus"
     },
-    "previewButton": "Siirry esikatseluun",
     "procedure": {
       "link": "Miten hakemuksen käsittely etenee?",
       "popup": {

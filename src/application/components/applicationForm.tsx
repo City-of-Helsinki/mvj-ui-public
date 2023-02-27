@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'hds-react';
 import { connect } from 'react-redux';
 import { t } from 'i18next';
@@ -20,12 +20,16 @@ interface Props {
   baseForm: Form;
   applicantCount: number;
   favouritesCount: number;
+  parentTargetTabRef?: RefObject<HTMLSpanElement>;
+  onTargetTabVisit?: () => void;
 }
 
 const ApplicationForm = ({
   baseForm,
   applicantCount,
   favouritesCount,
+  parentTargetTabRef,
+  onTargetTabVisit,
 }: Props): JSX.Element => {
   const applicantSection = baseForm.sections.find(
     (section) => section.identifier === APPLICANT_SECTION_IDENTIFIER
@@ -45,6 +49,12 @@ const ApplicationForm = ({
       ].includes(section.identifier)
   );
 
+  const TargetTabVisitDetector = () => {
+    onTargetTabVisit?.();
+
+    return null;
+  };
+
   return (
     <form className="ApplicationForm">
       <Tabs>
@@ -55,9 +65,11 @@ const ApplicationForm = ({
             })}
           </Tab>
           <Tab>
-            {t('application.form.tabs.targets', 'Targets ({{count}})', {
-              count: favouritesCount,
-            })}
+            <span ref={parentTargetTabRef ?? undefined}>
+              {t('application.form.tabs.targets', 'Targets ({{count}})', {
+                count: favouritesCount,
+              })}
+            </span>
           </Tab>
           {extraSections.length > 0 && (
             <Tab>{t('application.form.tabs.other', 'Details')}</Tab>
@@ -82,6 +94,7 @@ const ApplicationForm = ({
               flavor={ApplicationFormTopLevelSectionFlavor.TARGET}
             />
           )}
+          <TargetTabVisitDetector />
         </TabPanel>
         {extraSections.length > 0 && (
           <TabPanel>

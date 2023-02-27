@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Col, Container, Row } from 'react-grid-system';
-import { Button } from 'hds-react';
+import { Button, Notification } from 'hds-react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -46,6 +46,13 @@ const ApplicationPage = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const [hasVisitedTargetsTab, setHasVisitedTargetsTab] =
+    useState<boolean>(false);
+  const [hasDismissedTargetsAlert, setHasDismissedTargetsAlert] =
+    useState<boolean>(false);
+
+  const targetTabRef = useRef<HTMLSpanElement | null>(null);
+
   return (
     <AuthDependentContent>
       {(loading, loggedIn) => {
@@ -81,9 +88,54 @@ const ApplicationPage = ({
                           <>
                             <ApplicationForm
                               baseForm={relevantPlotSearch.form}
+                              parentTargetTabRef={targetTabRef}
+                              onTargetTabVisit={() =>
+                                setHasVisitedTargetsTab(true)
+                              }
                             />
-                            <Row>
+
+                            <Row className="ApplicationPage__action-buttons">
                               <Col xs={12}>
+                                {!hasVisitedTargetsTab &&
+                                  !!targetTabRef.current &&
+                                  !hasDismissedTargetsAlert && (
+                                    <Notification
+                                      type="error"
+                                      label={
+                                        <>
+                                          {t(
+                                            'application.mustVisitTargetPage.title',
+                                            'Attention!'
+                                          )}
+                                        </>
+                                      }
+                                      closeButtonLabelText={
+                                        t(
+                                          'application.mustVisitTargetPage.close',
+                                          'Close'
+                                        ) as string
+                                      }
+                                      onClose={() =>
+                                        setHasDismissedTargetsAlert(true)
+                                      }
+                                      dismissible
+                                    >
+                                      {t(
+                                        'application.mustVisitTargetPage.text',
+                                        "You must first fill the required details for the targets you're applying to in the second tab. You can open that tab by clicking the button below."
+                                      )}
+                                    </Notification>
+                                  )}
+
+                                <Button
+                                  variant="secondary"
+                                  onClick={() =>
+                                    navigate(getRouteById(AppRoutes.FAVOURITES))
+                                  }
+                                  disabled={isPerformingFileOperation}
+                                >
+                                  {t('application.buttons.cancel', 'Cancel')}
+                                </Button>
                                 <Button
                                   variant="primary"
                                   onClick={() =>
@@ -93,14 +145,40 @@ const ApplicationPage = ({
                                       )
                                     )
                                   }
-                                  disabled={isPerformingFileOperation}
-                                  className="ApplicationPage__preview-button"
+                                  disabled={
+                                    isPerformingFileOperation ||
+                                    (!hasVisitedTargetsTab &&
+                                      !!targetTabRef.current)
+                                  }
                                 >
                                   {t(
-                                    'application.previewButton',
+                                    'application.buttons.preview',
                                     'Preview submission'
                                   )}
                                 </Button>
+                                {!hasVisitedTargetsTab &&
+                                  !!targetTabRef.current && (
+                                    <Button
+                                      variant="primary"
+                                      onClick={() => {
+                                        if (!targetTabRef.current) {
+                                          return;
+                                        }
+
+                                        // The element itself gets covered by the top navigation bar since we're not
+                                        // offsetting its height, but that's perfectly fine in this case.
+                                        targetTabRef.current.scrollIntoView();
+                                        targetTabRef.current.click();
+                                        setHasVisitedTargetsTab(true);
+                                      }}
+                                      disabled={isPerformingFileOperation}
+                                    >
+                                      {t(
+                                        'application.buttons.viewTargets',
+                                        'View targets'
+                                      )}
+                                    </Button>
+                                  )}
                               </Col>
                             </Row>
                           </>
@@ -134,7 +212,7 @@ const ApplicationPage = ({
                           variant="primary"
                           onClick={() => openLoginModal()}
                         >
-                          {t('application.loginButton', 'Log in')}
+                          {t('application.buttons.login', 'Log in')}
                         </Button>
                       </>
                     )}

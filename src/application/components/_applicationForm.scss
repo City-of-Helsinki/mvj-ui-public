@@ -12,10 +12,17 @@
         flex: 0 1 50%;
         font-weight: bold;
 
-        span {
+        > span {
           &:before {
             height: var(--tab-active-border-size);
             background-color: $color-black;
+          }
+
+          > span {
+            &:before,
+            &:after {
+              display: none;
+            }
           }
         }
 
