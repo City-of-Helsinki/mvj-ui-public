@@ -1,8 +1,12 @@
 .ApplicationPage {
   @include pageTopLevelComponent();
 
-  .ApplicationPage__preview-button {
+  .ApplicationPage__action-buttons {
     margin-top: $spacing-m;
     margin-bottom: $spacing-m;
+
+    button + button {
+      margin-left: $spacing-s;
+    }
   }
 }
