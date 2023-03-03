@@ -40,6 +40,7 @@ import { prepareAreaSearchSubmission } from './helpers';
 import { getFieldNamesFromFormErrors, ReduxFormError } from '../form/helpers';
 import { getPageTitle } from '../root/helpers';
 import AreaSearchMap from './components/AreaSearchMap';
+import ApplicationProcedureInfo from '../application/components/ApplicationProcedureInfo';
 
 interface State {
   startDate?: string;
@@ -198,6 +199,9 @@ const AreaSearchSpecsPage = ({
                           "If you're planning to lease an area for example for lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, continue by filling the following form. Tell us a few details about the area you'd like to lease and then fill the application. We'll respond to you as soon as possible. Fields marked with an asterisk (*) are required."
                         )}
                       </p>
+
+                      {/* TODO: temporary placement */}
+                      <ApplicationProcedureInfo />
 
                       <section>
                         <h2>
