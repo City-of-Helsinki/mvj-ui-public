@@ -1,0 +1,21 @@
+.ApplicationFractionField {
+  fieldset {
+    display: flex;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+    legend {
+      font-weight: 500;
+    }
+  }
+
+  &__splitter {
+    font-size: $fontsize-heading-l;
+    margin: auto;
+    margin-left: $spacing-s;
+    margin-right: $spacing-s;
+  }
+  &__field {
+    flex: 0 1 auto;
+    display: inline-flex;
+  }
+}
