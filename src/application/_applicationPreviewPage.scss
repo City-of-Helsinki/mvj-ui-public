@@ -20,22 +20,4 @@
       margin-top: $spacing-xs;
     }
   }
-
-  .ApplicationPreviewPage__subsection {
-    h3 {
-      margin: $spacing-l 0;
-    }
-
-    .ApplicationPreviewPage__subsection-content {
-      .ApplicationPreviewPage__subsection-fields {
-        .ApplicationPreviewPage__subsection-field {
-          margin: $spacing-xs 0;
-
-          dt {
-            font-weight: bold;
-          }
-        }
-      }
-    }
-  }
 }

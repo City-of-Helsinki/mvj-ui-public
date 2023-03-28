@@ -16,7 +16,6 @@ import {
   APPLICANT_SECTION_IDENTIFIER,
   APPLICANT_TYPE_FIELD_IDENTIFIER,
   ApplicantTypes,
-  APPLICATION_FORM_NAME,
   ApplicationField,
   ApplicationFormNode,
   ApplicationFormTopLevelSectionFlavor,
@@ -31,6 +30,7 @@ import ApplicationTextArea from './applicationTextArea';
 import ApplicationSelectField from './applicationSelectField';
 import ApplicationCheckboxFieldset from './applicationCheckboxFieldset';
 import ApplicationRadioButtonFieldset from './applicationRadioButtonFieldset';
+import ApplicationFractionalFieldset from './applicationFractionalFieldset';
 import { RootState } from '../../root/rootReducer';
 import { getFieldTypeMapping } from '../selectors';
 import {
@@ -88,6 +88,7 @@ const ApplicationFormField = ({
 interface ApplicationFormSubsectionFieldsProps {
   section: FormSection;
   identifier: string;
+  formName: string;
 }
 
 interface ApplicationFormSubsectionFieldsInnerProps {
@@ -102,7 +103,8 @@ const ApplicationFormSubsectionFields = connect(
     sectionApplicantType: getSectionApplicantType(
       state,
       props.section,
-      props.identifier
+      props.identifier,
+      props.formName
     ),
   }),
   {
@@ -110,6 +112,7 @@ const ApplicationFormSubsectionFields = connect(
   }
 )(
   ({
+    formName,
     section,
     fieldTypeMapping,
     identifier,
@@ -208,6 +211,9 @@ const ApplicationFormSubsectionFields = connect(
               xl: 12,
             };
             break;
+          case SupportedFieldTypes.FractionalField:
+            component = ApplicationFractionalFieldset;
+            break;
           default:
             component = function RenderedUnimplementedPlaceholder() {
               return <span>component type {field.type} not implemented</span>;
@@ -243,7 +249,7 @@ const ApplicationFormSubsectionFields = connect(
         newValues.value !== undefined
       ) {
         change(
-          APPLICATION_FORM_NAME,
+          formName,
           `${identifier}.metadata.applicantType`,
           valueToApplicantType(newValues.value as string)
         );
@@ -257,6 +263,7 @@ const ApplicationFormSubsectionFields = connect(
         </Row>
         {section.subsections.map((subsection) => (
           <ApplicationFormSubsection
+            formName={formName}
             path={[identifier, ApplicationSectionKeys.Subsections]}
             section={subsection}
             key={subsection.id}
@@ -269,6 +276,7 @@ const ApplicationFormSubsectionFields = connect(
 );
 
 interface ApplicationFormSubsectionFieldArrayProps {
+  formName: string;
   section: FormSection;
   headerTag: React.ElementType;
   flavor?: ApplicationFormTopLevelSectionFlavor;
@@ -282,6 +290,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
   removeFavouriteTarget,
 })(
   ({
+    formName,
     fields,
     section,
     headerTag: HeaderTag,
@@ -365,6 +374,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
                   <ApplicationFormTargetSummary target={target} />
                 )}
                 <ApplicationFormSubsectionFields
+                  formName={formName}
                   section={section}
                   identifier={identifier}
                 />
@@ -375,7 +385,9 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
         {!isTargetRoot && (
           <Button
             className="ApplicationFormSubsectionFieldArray__add-button"
-            onClick={() => fields.push(getSectionTemplate(section.identifier))}
+            onClick={() =>
+              fields.push(getSectionTemplate(section.identifier, formName))
+            }
             variant="supplementary"
             iconLeft={<IconPlusCircle />}
           >
@@ -389,6 +401,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
 );
 
 interface ApplicationFormSubsectionProps {
+  formName: string;
   path: Array<string>;
   section: FormSection;
   headerTag?: React.ElementType;
@@ -397,6 +410,7 @@ interface ApplicationFormSubsectionProps {
 }
 
 const ApplicationFormSubsection = ({
+  formName,
   path,
   section,
   headerTag: HeaderTag = 'h3',
@@ -441,13 +455,14 @@ const ApplicationFormSubsection = ({
         >
           name={pathName}
           component={ApplicationFormSubsectionFieldArray}
-          props={{ section, headerTag: HeaderTag }}
+          props={{ section, headerTag: HeaderTag, formName }}
           flavor={flavor}
         />
       ) : (
         <div className="ApplicationFormSubsection__content">
           <HeaderTag>{section.title}</HeaderTag>
           <ApplicationFormSubsectionFields
+            formName={formName}
             section={section}
             identifier={pathName}
           />

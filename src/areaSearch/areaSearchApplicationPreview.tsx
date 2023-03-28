@@ -1,74 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { Button, Notification } from 'hds-react';
-import { useTranslation } from 'react-i18next';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router';
 import { Container } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
-
-import { RootState } from '../root/rootReducer';
+import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { getFormValues } from 'redux-form';
+import { Notification, Button } from 'hds-react';
+import MainContentElement from '../a11y/MainContentElement';
+import { getFieldTypeMapping } from '../application/selectors';
 import {
-  getClientErrorMessage,
-  prepareApplicationForSubmission,
-} from './helpers';
-import { submitApplication } from './actions';
-import {
-  ApplicationFormRoot,
   ApplicationPreparationError,
   ApplicationSectionKeys,
-  ApplicationSubmission,
-  APPLICATION_FORM_NAME,
   FieldTypeMapping,
-  UploadedFileMeta,
-} from './types';
-import { AppRoutes, getRouteById } from '../root/routes';
-import { getPlotSearchFromFavourites } from '../favourites/helpers';
-import { Favourite } from '../favourites/types';
-import { PlotSearch } from '../plotSearch/types';
+} from '../application/types';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
-import ApplicationTargetList from './components/applicationTargetList';
-import ApplicationPreviewSubsection from './components/applicationPreviewSubsection';
-import { getFieldTypeMapping } from './selectors';
-import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
+import { RootState } from '../root/rootReducer';
+import AreaSearchTargetSummary from './components/areaSearchTargetSummary';
+import {
+  AreaSearch,
+  AreaSearchApplicationSubmission,
+  AreaSearchFormRoot,
+  AREA_SEARCH_FORM_NAME,
+} from './types';
+import { submitAreaSearchApplication } from './actions';
+import ApplicationPreviewSubsection from '../application/components/applicationPreviewSubsection';
+import { AppRoutes, getRouteById } from '../root/routes';
+import { getClientErrorMessage } from '../application/helpers';
+import { prepareAreaSearchApplicationForSubmission } from './helpers';
 
 interface State {
-  favourite: Favourite;
-  relevantPlotSearch: PlotSearch | null;
-  isFetchingFormAttributes: boolean;
-  isFetchingPlotSearches: boolean;
-  isSubmitting: boolean;
-  submittedAnswerId: number;
-  formValues: ApplicationFormRoot;
+  lastSubmission: AreaSearch | null;
+  formValues: AreaSearchFormRoot;
   fieldTypeMapping: FieldTypeMapping;
-  pendingUploads: Array<UploadedFileMeta>;
+  submittedAnswerId: number;
   lastError: unknown;
 }
 
-interface Props {
-  favourite: Favourite;
-  relevantPlotSearch: PlotSearch | null;
-  isFetchingFormAttributes: boolean;
-  isFetchingPlotSearches: boolean;
-  isSubmitting: boolean;
-  submitApplication: (data: ApplicationSubmission) => void;
-  submittedAnswerId: number;
-  formValues: ApplicationFormRoot;
-  fieldTypeMapping: FieldTypeMapping;
-  pendingUploads: Array<UploadedFileMeta>;
-  lastError: unknown;
+interface Props extends State {
+  submitApplication: (data: AreaSearchApplicationSubmission) => void;
+  isSubmitting?: boolean;
 }
 
-const ApplicationPreviewPage = ({
-  isSubmitting,
+const AreaSearchApplicationPreview = ({
   submitApplication,
-  submittedAnswerId,
+  lastSubmission,
   formValues,
-  relevantPlotSearch,
-  pendingUploads,
   lastError,
+  isSubmitting = false,
+  submittedAnswerId,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -80,14 +61,16 @@ const ApplicationPreviewPage = ({
 
   useEffect(() => {
     if (submittedAnswerId !== previousAnswerId) {
-      navigate(getRouteById(AppRoutes.APPLICATION_SUBMIT));
+      navigate(getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT));
     }
   }, [submittedAnswerId]);
 
   const submit = () => {
     try {
       setLastClientError(null);
-      submitApplication(prepareApplicationForSubmission(APPLICATION_FORM_NAME));
+      submitApplication(
+        prepareAreaSearchApplicationForSubmission(AREA_SEARCH_FORM_NAME)
+      );
     } catch (e) {
       setLastClientError(e as ApplicationPreparationError);
     }
@@ -100,44 +83,55 @@ const ApplicationPreviewPage = ({
           <Helmet>
             <title>
               {getPageTitle(
-                t('application.preview.pageTitle', 'Plot application')
+                t(
+                  'areaSearch.application.preview.pageTitle',
+                  'Area search application'
+                )
               )}
             </title>
           </Helmet>
           <Container>
             <h1>
-              {t('application.preview.heading', 'Plot application preview')}
+              {t(
+                'areaSearch.application.preview.heading',
+                'Area search application preview'
+              )}
             </h1>
-            <ApplicationTargetList />
+
+            <AreaSearchTargetSummary />
+
             {loading ? (
               <BlockLoader />
             ) : (
               <div className="ApplicationPreviewPage__top-level-sections">
-                {/* these should already be loaded if we came from the first page; this page shouldn't be navigated to directly */}
-                {loggedIn && relevantPlotSearch && pendingUploads ? (
-                  relevantPlotSearch.form.sections.map((section) => (
+                {loggedIn &&
+                lastSubmission?.form?.sections &&
+                formValues.form[ApplicationSectionKeys.Subsections] ? (
+                  lastSubmission.form.sections.map((section) => (
                     <ApplicationPreviewSubsection
                       key={section.identifier}
                       section={section}
                       answers={
-                        formValues[ApplicationSectionKeys.Subsections][
+                        formValues.form[ApplicationSectionKeys.Subsections][
                           section.identifier
                         ]
                       }
                       headerTag={'h2'}
-                      pendingUploads={pendingUploads}
+                      pendingUploads={[]}
                     />
                   ))
                 ) : (
                   <Navigate
                     replace
-                    to={getRouteById(AppRoutes.APPLICATION_FORM)}
+                    to={getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM)}
                   />
                 )}
                 <Button
                   variant="secondary"
                   onClick={() =>
-                    navigate(getRouteById(AppRoutes.APPLICATION_FORM))
+                    navigate(
+                      getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM)
+                    )
                   }
                   disabled={isSubmitting}
                   className="ApplicationPreviewPage__submission-button"
@@ -191,18 +185,15 @@ const ApplicationPreviewPage = ({
 
 export default connect(
   (state: RootState): State => ({
-    formValues: getFormValues('application')(state) as ApplicationFormRoot,
-    isSubmitting: state.application.isSubmittingApplication,
-    submittedAnswerId: state.application.submittedAnswerId,
-    favourite: state.favourite.favourite,
-    relevantPlotSearch: getPlotSearchFromFavourites(state),
-    isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,
-    isFetchingFormAttributes: state.application.isFetchingFormAttributes,
+    formValues: getFormValues(AREA_SEARCH_FORM_NAME)(
+      state
+    ) as AreaSearchFormRoot,
     fieldTypeMapping: getFieldTypeMapping(state),
-    pendingUploads: state.application.pendingUploads,
-    lastError: state.application.lastError,
+    lastSubmission: state.areaSearch.lastSubmission,
+    submittedAnswerId: state.areaSearch.lastApplicationSubmissionId,
+    lastError: state.areaSearch.lastApplicationError,
   }),
   {
-    submitApplication,
+    submitApplication: submitAreaSearchApplication,
   }
-)(ApplicationPreviewPage);
+)(AreaSearchApplicationPreview);

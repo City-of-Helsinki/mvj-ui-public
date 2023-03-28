@@ -5,7 +5,6 @@ import {
   APPLICANT_MAIN_IDENTIFIERS,
   APPLICANT_SECTION_IDENTIFIER,
   ApplicantTypes,
-  APPLICATION_FORM_NAME,
   ApplicationField,
   ApplicationFormFields,
   ApplicationFormNode,
@@ -23,6 +22,7 @@ import { getFieldTypeMapping } from './selectors';
 import { store } from '../index';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
 import { FavouriteTarget } from '../favourites/types';
+import { useTranslation } from 'react-i18next';
 
 export const getInitialApplicationForm = (
   state: RootState
@@ -154,23 +154,26 @@ export const getInitialApplicationForm = (
   return root;
 };
 
-export const getSectionTemplate = (identifier: string): ApplicationFormNode => {
+export const getSectionTemplate = (
+  identifier: string,
+  formName: string,
+  path = ''
+): ApplicationFormNode => {
   const state = store.getState();
-  const templates = formValueSelector(APPLICATION_FORM_NAME)(
+  const templates = formValueSelector(formName)(
     state,
-    'sectionTemplates'
+    `${path !== '' && path + '.'}sectionTemplates`
   );
 
   return templates[identifier] || {};
 };
 
-export const prepareApplicationForSubmission = (): ApplicationSubmission => {
+export const prepareApplicationForSubmission = (
+  formName: string
+): ApplicationSubmission => {
   const state: RootState = store.getState();
-  const sections = formValueSelector(APPLICATION_FORM_NAME)(state, 'sections');
-  const attachments = formValueSelector(APPLICATION_FORM_NAME)(
-    state,
-    'attachments'
-  );
+  const sections = formValueSelector(formName)(state, 'sections');
+  const attachments = formValueSelector(formName)(state, 'attachments');
 
   const favourite = state.favourite.favourite;
   const relevantPlotSearch = getPlotSearchFromFavourites(state);
@@ -183,7 +186,8 @@ export const prepareApplicationForSubmission = (): ApplicationSubmission => {
     rootLevelSections: ApplicationFormSections
   ): ApplicationFormSections => {
     return Object.keys(rootLevelSections).reduce((acc, sectionName) => {
-      const section = rootLevelSections[sectionName];
+      const section: ApplicationFormNode | ApplicationFormNode[] =
+        rootLevelSections[sectionName];
 
       switch (sectionName) {
         case APPLICANT_SECTION_IDENTIFIER: {
@@ -262,7 +266,8 @@ export const prepareApplicationForSubmission = (): ApplicationSubmission => {
     section: ApplicationFormSections
   ): ApplicationFormSections => {
     return Object.keys(section).reduce((acc, sectionName) => {
-      const subsection = section[sectionName];
+      const subsection: ApplicationFormNode | ApplicationFormNode[] =
+        section[sectionName];
       let result: ApplicationFormNode | Array<ApplicationFormNode>;
 
       if (subsection instanceof Array) {
@@ -326,14 +331,15 @@ export const valueToApplicantType = (value: NestedFieldLeaf): string => {
 export const getSectionApplicantType = (
   state: RootState,
   section: FormSection,
-  reduxFormPath: string
+  reduxFormPath: string,
+  formName: string
 ): ApplicantTypes => {
   if (section.identifier !== APPLICANT_SECTION_IDENTIFIER) {
     return ApplicantTypes.NOT_APPLICABLE;
   }
 
   return (
-    formValueSelector(APPLICATION_FORM_NAME)(
+    formValueSelector(formName)(
       state,
       `${reduxFormPath}.metadata.applicantType`
     ) || ApplicantTypes.UNSELECTED
@@ -342,8 +348,48 @@ export const getSectionApplicantType = (
 
 export const getFieldFileIds = (
   state: RootState,
-  fieldPath: string
+  fieldPath: string,
+  formName: string
 ): Array<number> => {
-  const fieldValue = formValueSelector(APPLICATION_FORM_NAME)(state, fieldPath);
+  const fieldValue = formValueSelector(formName)(state, fieldPath);
   return fieldValue?.value || [];
+};
+
+export const getClientErrorMessage = (
+  lastClientError: ApplicationPreparationError | null
+): string => {
+  const { t } = useTranslation();
+
+  switch (lastClientError) {
+    case ApplicationPreparationError.NoApplicantTypeSet:
+      return t(
+        'application.error.preparation.noApplicantTypeSet',
+        'An applicant with no selected type was encountered. Please verify that all applicant data is filled correctly.'
+      );
+      break;
+    case ApplicationPreparationError.NoApplicantIdentifierFound:
+      return t(
+        'application.error.preparation.noApplicantIdentifierFound',
+        'An applicant with missing identifier data was encountered. Please verify that each applicant has either the personal identification number or company ID number set.'
+      );
+      break;
+    case ApplicationPreparationError.MisconfiguredPlotSearch:
+      return t(
+        'application.error.preparation.misconfiguredPlotSearch',
+        "A problem with the search you're applying to was encountered. Please try again later."
+      );
+      break;
+    case ApplicationPreparationError.NoAreaSearchFound:
+      return t(
+        'areaSearch.application.error.preparation.misconfiguredPlotSearch',
+        "An area search you're applying to is not found. Please try to define the area again."
+      );
+      break;
+    default:
+      return t(
+        'application.error.preparation.unknown',
+        'An unexpected error occurred while preparing the application data for submission. Please try again later.'
+      );
+      break;
+  }
 };

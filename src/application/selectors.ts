@@ -2,7 +2,6 @@ import { formValueSelector } from 'redux-form';
 import { Selector } from 'react-redux';
 
 import {
-  APPLICATION_FORM_NAME,
   APPLICANT_SECTION_IDENTIFIER,
   ApplicationSectionKeys,
   FieldTypeMapping,
@@ -13,10 +12,11 @@ export const getFieldTypeMapping: Selector<RootState, FieldTypeMapping> = (
   state: RootState
 ): FieldTypeMapping => state.application.fieldTypeMapping;
 
-export const getCurrentApplicantCount: Selector<RootState, number> = (
-  state: RootState
+export const getCurrentApplicantCount: Selector<RootState, number, string> = (
+  state: RootState,
+  formName: string
 ): number => {
-  const selector = formValueSelector(APPLICATION_FORM_NAME);
+  const selector = formValueSelector(formName);
   return (
     selector(state, ApplicationSectionKeys.Subsections)?.[
       APPLICANT_SECTION_IDENTIFIER

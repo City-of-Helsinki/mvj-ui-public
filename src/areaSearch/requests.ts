@@ -1,27 +1,57 @@
 import { Effect } from 'redux-saga/effects';
 import callApi, { ApiCallResult } from '../api/callApi';
 import createUrl from '../api/createUrl';
-import { AreaSearchSubmission } from './types';
+import { AreaSearchApplicationSubmission, AreaSearchSubmission } from './types';
 
-export const submitAreaSearchRequest = ({
-  attachments,
-  geometry,
-  ...rest
-}: AreaSearchSubmission): Generator<Effect, ApiCallResult, Response> => {
+export const submitAreaSearchAttachmentRequest = ({
+  field,
+  file,
+}: {
+  field: number;
+  file: File;
+}): Generator<Effect, ApiCallResult, Response> => {
   const formData = new FormData();
 
-  (Object.keys(rest) as Array<keyof typeof rest>).forEach((key) => {
-    formData.append(key, '' + rest[key]);
-  });
-  formData.append('geometry', JSON.stringify(geometry));
-  attachments.forEach((file, i) => formData.append(`attachments[${i}]`, file));
+  formData.append('field', field.toString());
+  formData.append('name', file.name);
+  formData.append('attachment', file);
 
   return callApi(
-    new Request(createUrl('area_search/'), {
+    new Request(createUrl('area_search_attachment/'), {
       method: 'POST',
       body: formData,
     }),
     { autoContentType: false }
+  );
+};
+
+export const submitAreaSearchRequest = ({
+  area_search_attachments,
+  geometry,
+  ...rest
+}: AreaSearchSubmission): Generator<Effect, ApiCallResult, Response> => {
+  const payload = {
+    area_search_attachments: area_search_attachments,
+    geometry: JSON.stringify(geometry),
+    ...rest,
+  };
+
+  return callApi(
+    new Request(createUrl('area_search/'), {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+  );
+};
+
+export const submitAreaSearchApplicationRequest = (
+  formData: AreaSearchApplicationSubmission
+): Generator<Effect, ApiCallResult, Response> => {
+  return callApi(
+    new Request(createUrl('answer/'), {
+      method: 'POST',
+      body: JSON.stringify(formData),
+    })
   );
 };
 

@@ -88,6 +88,33 @@
     }
   },
   "areaSearch": {
+    "application": {
+      "error": {
+        "noAreaSelected": "Lähettääksesi hakemuksen, on alueen oltava valittuna aluehakusivulla.",
+        "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehakuhakemuksen.",
+        "preparation": {
+          "misconfiguredPlotSearch": "Valitsemaasi aluehakua ei löytynyt, ole hyvä ja määrittele alue uudelleen."
+        }
+      },
+      "form": {
+        "pageTitle": "Aluehaun hakemus"
+      },
+      "heading": "Aluehaun hakemus",
+      "loginButton": "Kirjaudu sisään",
+      "preview": {
+        "heading": "Aluehaun hakemuksen esikatselu",
+        "pageTitle": "Aluehaun hakemus"
+      },
+      "target": {
+        "addressNotFound": "Valitsemallasi alueelle ei löytynyt osoitetta",
+        "area": "Pinta-ala (m²)",
+        "areaDescription": "Tarkempi kuvaus alueesta",
+        "attachments": "Liitteet",
+        "intendedUsage": "Käyttötarkoitus",
+        "leaseTime": "Vuokra-aika",
+        "screenReaderHeading": "Valittu alue:"
+      }
+    },
     "landingPage": {
       "applyForArea": "Hae aluetta",
       "areaSearches": {
@@ -143,7 +170,7 @@
         "explanation": "Helsingin kaupungilla on Helsingin lisäksi maaomistuksia Sipoossa, Espoossa, Lorem ipsum ja Dolor sit amet. Alueen valinta on lähtökohtana neuvottelulle.",
         "heading": "Kerro meille, mistä haluat vuokrata alueen",
         "readMoreLink": "Lue lisätietoja Helsingin kaupungin sivuilta",
-        "readMorelinkTarget": ""
+        "readMorelinkTarget": "https://hel.fi/fi"
       },
       "attachments": {
         "heading": "Liitteet",
@@ -170,6 +197,12 @@
       "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehaun.",
       "pageTitle": "Aluehaku",
       "submitting": "Lähetetään..."
+    },
+    "targetCard": {
+      "showFullDesc": {
+        "hide": "Piilota kohteen tarkemmat tiedot",
+        "show": "Näytä kohteen tarkemmat tiedot"
+      }
     }
   },
   "errorPage": {

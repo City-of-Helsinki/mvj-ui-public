@@ -88,6 +88,33 @@
     }
   },
   "areaSearch": {
+    "application": {
+      "error": {
+        "noAreaSelected": "",
+        "notLoggedIn": "",
+        "preparation": {
+          "misconfiguredPlotSearch": ""
+        }
+      },
+      "form": {
+        "pageTitle": ""
+      },
+      "heading": "",
+      "loginButton": "",
+      "preview": {
+        "heading": "",
+        "pageTitle": ""
+      },
+      "target": {
+        "addressNotFound": "",
+        "area": "",
+        "areaDescription": "",
+        "attachments": "",
+        "intendedUsage": "",
+        "leaseTime": "",
+        "screenReaderHeading": ""
+      }
+    },
     "landingPage": {
       "applyForArea": "",
       "areaSearches": {
@@ -170,6 +197,12 @@
       "notLoggedIn": "",
       "pageTitle": "",
       "submitting": ""
+    },
+    "targetCard": {
+      "showFullDesc": {
+        "hide": "",
+        "show": ""
+      }
     }
   },
   "errorPage": {
