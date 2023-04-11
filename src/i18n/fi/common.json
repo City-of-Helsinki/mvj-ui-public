@@ -60,6 +60,7 @@
       "heading": "Esikatselu – tonttihakemus",
       "pageTitle": "Tonttihakemus"
     },
+    "previewButton": "Siirry esikatseluun",
     "procedure": {
       "link": "Miten hakemuksen käsittely etenee?",
       "popup": {
@@ -190,8 +191,7 @@
         "heading": "Valitse käyttötarkoitus ja toivottu vuokra-aika",
         "mainType": "Käyttötarkoitus",
         "projectDescription": "Tarkempi kuvaus käyttötarkoituksesta",
-        "startDate": "Vuokrauksen alkamispäivämäärä",
-        "subType": "Tarkenne"
+        "startDate": "Vuokrauksen alkamispäivämäärä"
       },
       "loginButton": "Kirjaudu sisään",
       "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehaun.",

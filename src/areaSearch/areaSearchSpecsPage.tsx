@@ -34,7 +34,7 @@ import {
   requiredValidatorGenerator,
 } from '../form/validators';
 import { RootState } from '../root/rootReducer';
-import { AREA_SEARCH_FORM_NAME, IntendedSubUse, IntendedUse } from './types';
+import { AREA_SEARCH_FORM_NAME, IntendedUse } from './types';
 import {
   fetchIntendedUses,
   initializeAreaSearchAttachments,
@@ -54,7 +54,6 @@ interface State {
   startDate?: string;
   endDate?: string;
   intendedUses: Array<IntendedUse> | null;
-  selectedIntendedUseCategory?: number;
   lastSubmissionId: number;
   errors: FormErrors;
   applicationFormTemplate: ApplicationFormRoot;
@@ -90,7 +89,6 @@ const AreaSearchSpecsPage = ({
   setSubmitSucceeded,
   fetchIntendedUses,
   intendedUses,
-  selectedIntendedUseCategory,
   lastSubmissionId,
   applicationFormTemplate,
   change,
@@ -161,20 +159,6 @@ const AreaSearchSpecsPage = ({
 
           const { files } = useFileUploads();
 
-          const intendedSubUses = useMemo<Array<IntendedSubUse>>(() => {
-            if (selectedIntendedUseCategory) {
-              const intendedUseCategory = intendedUses?.find(
-                (use) => use.id === selectedIntendedUseCategory
-              );
-
-              if (intendedUseCategory) {
-                return [...intendedUseCategory.subuses];
-              }
-            }
-
-            return [];
-          }, [intendedUses, selectedIntendedUseCategory]);
-
           if (loading || !intendedUses) {
             return <BlockLoader />;
           }
@@ -234,7 +218,7 @@ const AreaSearchSpecsPage = ({
                         <Row>
                           <Col xs={12} lg={6} xl={4}>
                             <Field
-                              name="search.intended_use_category"
+                              name="search.intended_use"
                               component={SelectFormField}
                               required
                               options={intendedUses.map((intendedUse) => ({
@@ -243,25 +227,7 @@ const AreaSearchSpecsPage = ({
                               }))}
                               label={t(
                                 'areaSearch.specs.intendedUse.mainType',
-                                'Broad type of intended use'
-                              )}
-                              validate={[simpleRequiredValidator]}
-                            />
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col xs={12} lg={6} xl={4}>
-                            <Field
-                              name="search.intended_use"
-                              component={SelectFormField}
-                              required
-                              options={intendedSubUses.map((intendedUse) => ({
-                                label: intendedUse.name,
-                                value: intendedUse.id,
-                              }))}
-                              label={t(
-                                'areaSearch.specs.intendedUse.subType',
-                                'Specific type of intended use'
+                                'Intended use'
                               )}
                               validate={[simpleRequiredValidator]}
                             />
@@ -466,10 +432,6 @@ export default connect(
   (state: RootState) => ({
     startDate: selector(state, 'search.start_date'),
     endDate: selector(state, 'search.end_date'),
-    selectedIntendedUseCategory: selector(
-      state,
-      'search.intended_use_category'
-    ),
     intendedUses: state.areaSearch.intendedUses,
     isSubmittingAreaSearch: state.areaSearch.isSubmittingAreaSearch,
     lastSubmissionId: state.areaSearch.lastSubmissionId,
