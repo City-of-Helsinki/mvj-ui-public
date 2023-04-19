@@ -341,7 +341,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
                 TargetPlanType.PlanUnit
                   ? `${target?.plot_search_target.lease_identifier || '?'} - ${
                       target?.plot_search_target.lease_address?.address || '?'
-                    }, ${target?.plot_search_target.district || '?'}`
+                    }, ${target?.plot_search_target.district?.name || '?'}`
                   : `${target?.plot_search_target.target_plan.address || '?'}`;
               break;
             default:

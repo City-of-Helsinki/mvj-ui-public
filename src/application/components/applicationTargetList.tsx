@@ -44,7 +44,7 @@ const ApplicationTargetList = ({ favourite }: Props): JSX.Element => {
             <div className="ApplicationTargetList__target-address">
               {target.plot_search_target.target_plan.address}
               {target.plot_search_target.district &&
-                `, ${target.plot_search_target.district}`}
+                `, ${target.plot_search_target.district.name}`}
             </div>
             <div className="ApplicationTargetList__target-identifier">
               <span className="ApplicationTargetList__target-identifier-text">

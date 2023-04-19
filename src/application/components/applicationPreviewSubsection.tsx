@@ -53,7 +53,7 @@ const ApplicationPreviewSubsection = ({
       const target = getSectionFavouriteTarget(id);
       return `${target?.plot_search_target.lease_identifier || '?'} - ${
         target?.plot_search_target.lease_address?.address || '?'
-      }, ${target?.plot_search_target.district || '?'}`;
+      }, ${target?.plot_search_target.district?.name || '?'}`;
     } else {
       return '?';
     }
