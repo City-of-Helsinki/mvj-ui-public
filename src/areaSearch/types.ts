@@ -69,15 +69,9 @@ export type AreaSearchApplicationSubmission = {
   entries: NestedField;
 };
 
-export type IntendedSubUse = {
-  id: number;
-  name: string;
-};
-
 export type IntendedUse = {
   id: number;
   name: string;
-  subuses: Array<IntendedSubUse>;
 };
 
 export const SUBMIT_AREA_SEARCH = 'areaSearch/SUBMIT_AREA_SEARCH';

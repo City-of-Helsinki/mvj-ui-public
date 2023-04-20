@@ -84,6 +84,21 @@ const AreaSearchTargetSummary = ({
     });
   }
 
+  const getAddress = (): string => {
+    if (lastSubmission.address && lastSubmission.district) {
+      return `${lastSubmission.address}, ${lastSubmission.district}`;
+    }
+
+    if (lastSubmission.district) {
+      return `${lastSubmission.district}`;
+    }
+
+    return t(
+      'areaSearch.application.target.addressNotFound',
+      'No address found for the selected area'
+    );
+  };
+
   return (
     <div className="AreaSearchTargetSummary">
       <ScreenReaderText>
@@ -100,12 +115,7 @@ const AreaSearchTargetSummary = ({
         </Col>
         <Col lg={9} sm={10} xs={12} className="AreaSearchTargetSummary__target">
           <div className="AreaSearchTargetSummary__target-address">
-            {lastSubmission.address
-              ? `${lastSubmission.address} , ${lastSubmission.district}`
-              : t(
-                  'areaSearch.application.target.addressNotFound',
-                  'No address found for the selected area'
-                )}
+            {getAddress()}
           </div>
           <AreaSearchTargetSummaryInfo infoCols={infoCols} />
         </Col>

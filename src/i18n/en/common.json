@@ -60,6 +60,7 @@
       "heading": "Plot application preview",
       "pageTitle": "Plot application"
     },
+    "previewButton": "Preview submission",
     "procedure": {
       "link": "Information about the application review process",
       "popup": {
@@ -170,7 +171,7 @@
         "explanation": "Besides Helsinki itself, the City of Helsinki also owns land in other cities including Sipoo, Espoo, .... The selected area will only serve as the starting point during negotiations.",
         "heading": "Tell us which area you'd like to lease",
         "readMoreLink": "Read more on the City of Helsinki website",
-        "readMorelinkTarget": "https://hel.fi/en"
+        "readMorelinkTarget": "https://hel.fi/"
       },
       "attachments": {
         "heading": "Attachments",
@@ -188,10 +189,9 @@
         "endDate": "End date for lease",
         "endDateHelpText": "If you don't yet know the date you'd like the lease to end on or if you'd like to apply for a lease for an indefinite time, please expand on this in the detailed description field above.",
         "heading": "Specify the intended use and desired time period for the lease",
-        "mainType": "Broad type of intended use",
+        "mainType": "Intended use",
         "projectDescription": "Detailed description of intended use",
-        "startDate": "Start date for lease",
-        "subType": "Specific type of intended use"
+        "startDate": "Start date for lease"
       },
       "loginButton": "Log in",
       "notLoggedIn": "To apply, please log in first.",

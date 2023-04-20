@@ -60,6 +60,7 @@
       "heading": "",
       "pageTitle": ""
     },
+    "previewButton": "",
     "procedure": {
       "link": "",
       "popup": {
@@ -190,8 +191,7 @@
         "heading": "",
         "mainType": "",
         "projectDescription": "",
-        "startDate": "",
-        "subType": ""
+        "startDate": ""
       },
       "loginButton": "",
       "notLoggedIn": "",
