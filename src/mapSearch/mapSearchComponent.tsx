@@ -252,29 +252,25 @@ const MapSearchComponent = ({
                 if (subtype.show_district) {
                   const districts = matchingPlotSearches.reduce((acc, next) => {
                     next.plot_search_targets.forEach((target) => {
-                      if (!acc[target.district]) {
-                        acc[target.district] = {
-                          heading: target.district,
-                          key: target.district,
+                      if (!acc[target.district.id]) {
+                        acc[target.district.id] = {
+                          heading: target.district.name,
+                          key: target.district.id,
                           targets: [],
                         };
                       }
 
-                      acc[target.district].targets.push({
+                      acc[target.district.id].targets.push({
                         relatedPlotSearch: next,
                         data: target,
                       });
                     });
 
                     return acc;
-                  }, {} as Record<string, SectionSlice>);
+                  }, {} as Record<number, SectionSlice>);
 
-                  const districtNames = Object.keys(districts);
-                  districtNames.sort((a, b) => (a > b ? 1 : -1));
-
-                  sections = districtNames.map(
-                    (district) => districts[district]
-                  );
+                  sections = Object.values(districts);
+                  sections.sort((a, b) => (a.heading > b.heading ? 1 : -1));
                 } else {
                   sections = matchingPlotSearches.map((plotSearch) => ({
                     heading: plotSearch.name,

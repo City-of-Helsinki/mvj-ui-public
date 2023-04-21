@@ -46,7 +46,7 @@ const ApplicationFormTargetSummary = ({
           <h3>
             {target.plot_search_target.target_plan.address}
             {target.plot_search_target.district &&
-              `, ${target.plot_search_target.district}`}
+              `, ${target.plot_search_target.district.name}`}
           </h3>
           <div className="ApplicationFormTargetSummary__info">
             {infoCols.map((info) => (

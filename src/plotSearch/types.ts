@@ -121,7 +121,12 @@ export type PlotSearchTargetFromBackend = {
   decisions: Array<{
     lease: number;
   }>;
-  district: string;
+  district: {
+    id: number;
+    name: string;
+    identifier: string;
+    municipality: number;
+  };
 };
 
 export type PlotSearchTarget = PlotSearchTargetFromBackend & {
