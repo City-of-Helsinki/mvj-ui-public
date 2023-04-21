@@ -29,6 +29,10 @@
     "fileUpload": {
       "delete": "Poista",
       "deleteHeader": "Poista",
+      "error": {
+        "exception": "Liitteen lähetys keskeytyi virheeseen! Ole hyvä ja yritä myöhemmin uudelleen.",
+        "nonOkResponse": "Liitteen lähetys epäonnistui! Ole hyvä ja yritä myöhemmin uudelleen."
+      },
       "filename": "Tiedosto",
       "info": "Suurin sallittu tiedostokoko on {{maxSize}} Mt.",
       "newFile": "Lisää tiedosto",

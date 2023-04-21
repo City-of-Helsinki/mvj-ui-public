@@ -7,6 +7,7 @@ import {
   FETCH_FORM_ATTRIBUTES,
   FieldTypeMapping,
   FILE_OPERATION_FINISHED,
+  FILE_UPLOAD_FAILED,
   FORM_ATTRIBUTES_NOT_FOUND,
   RECEIVE_APPLICATION_SAVED,
   RECEIVE_FORM_ATTRIBUTES,
@@ -101,6 +102,9 @@ const applicationSlice = createSlice({
       state.isPerformingFileOperation = true;
     },
     [FILE_OPERATION_FINISHED]: (state) => {
+      state.isPerformingFileOperation = false;
+    },
+    [FILE_UPLOAD_FAILED]: (state) => {
       state.isPerformingFileOperation = false;
     },
   },

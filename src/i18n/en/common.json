@@ -29,6 +29,10 @@
     "fileUpload": {
       "delete": "Delete",
       "deleteHeader": "Delete",
+      "error": {
+        "exception": "Something went wrong while trying to upload the file. Please try again later.",
+        "nonOkResponse": "The file could not be uploaded! Please try again later."
+      },
       "filename": "File",
       "info": "The maximum allowed file size is {{maxSize}} MB.",
       "newFile": "Upload a new file",

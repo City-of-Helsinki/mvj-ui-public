@@ -29,6 +29,10 @@
     "fileUpload": {
       "delete": "",
       "deleteHeader": "",
+      "error": {
+        "exception": "",
+        "nonOkResponse": ""
+      },
       "filename": "",
       "info": "",
       "newFile": "",
