@@ -71,6 +71,7 @@ interface OwnProps {
   change: typeof change;
   valid: boolean;
   touch(...field: string[]): void;
+  lastSubmissionError: unknown;
 }
 
 type Props = OwnProps & State;
@@ -90,6 +91,7 @@ const AreaSearchSpecsPage = ({
   fetchIntendedUses,
   intendedUses,
   lastSubmissionId,
+  lastSubmissionError,
   applicationFormTemplate,
   change,
 }: Props): JSX.Element => {
@@ -394,9 +396,29 @@ const AreaSearchSpecsPage = ({
                           type="error"
                         >
                           {t(
-                            'areaSearch.specs.checkErrors',
+                            'areaSearch.specs.errors.validation',
                             'Please check the marked fields before proceeding.'
                           )}
+                        </Notification>
+                      )}
+                      {lastSubmissionError && (
+                        <Notification
+                          className="AreaSearchSpecsPage__submit-error"
+                          type="error"
+                        >
+                          {(
+                            lastSubmissionError as {
+                              failedAttachments: Array<string>;
+                            }
+                          )?.failedAttachments?.length > 0
+                            ? t(
+                                'areaSearch.specs.errors.attachment',
+                                'One or more attachments failed to upload! Please try again.'
+                              )
+                            : t(
+                                'areaSearch.specs.errors.other',
+                                'An unknown error occurred while submitting the area search. Please try again.'
+                              )}
                         </Notification>
                       )}
                     </>
@@ -435,6 +457,7 @@ export default connect(
     intendedUses: state.areaSearch.intendedUses,
     isSubmittingAreaSearch: state.areaSearch.isSubmittingAreaSearch,
     lastSubmissionId: state.areaSearch.lastSubmissionId,
+    lastSubmissionError: state.areaSearch.lastError,
     errors: getFormSyncErrors(AREA_SEARCH_FORM_NAME)(state),
     applicationFormTemplate: getInitialAreaSearchApplicationForm(state),
   }),

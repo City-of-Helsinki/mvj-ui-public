@@ -34,6 +34,7 @@ function* submitAreaSearchSaga({
 }: SubmitAreaSearchAction): Generator<Effect, void, ApiCallResult> {
   try {
     const attachmentIds: number[] = [];
+    const failedAttachmentUploads: string[] = [];
     const pushAttachmentIds = (id: number): void => {
       attachmentIds.push(id);
     };
@@ -58,11 +59,21 @@ function* submitAreaSearchSaga({
                     break;
                   default:
                     yield put(areaSearchAttachmentSubmissionFailed(bodyAsJson));
+                    failedAttachmentUploads.push(
+                      typeof attachment === 'number'
+                        ? String(attachment)
+                        : attachment.name
+                    );
                     break;
                 }
               } catch (e) {
                 logError(e);
                 yield put(areaSearchAttachmentSubmissionFailed(e));
+                failedAttachmentUploads.push(
+                  typeof attachment === 'number'
+                    ? String(attachment)
+                    : attachment.name
+                );
                 throw e;
               }
             },
@@ -76,6 +87,15 @@ function* submitAreaSearchSaga({
           )
         )
       );
+    }
+
+    if (failedAttachmentUploads.length > 0) {
+      yield put(
+        areaSearchSubmissionFailed({
+          failedAttachments: failedAttachmentUploads,
+        })
+      );
+      return;
     }
 
     const newPayload = { ...payload, area_search_attachments: attachmentIds };

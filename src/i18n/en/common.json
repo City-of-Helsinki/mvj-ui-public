@@ -181,11 +181,13 @@
         "heading": "Attachments",
         "input": "You may also optionally include any relevant attachments here, such as photos of the area in question, lorem ipsum, dolor tai sit amet."
       },
-      "checkErrors": "Please check the marked fields before proceeding.",
       "continueButton": "Apply for this area",
       "errors": {
+        "attachment": "One or more attachments failed to upload! Please try again.",
         "endDateAfterStartDate": "End date cannot be before start date.",
-        "startDateBeforeEndDate": "Start date cannot be after end date."
+        "other": "An unknown error occurred while submitting the area search. Please try again.",
+        "startDateBeforeEndDate": "Start date cannot be after end date.",
+        "validation": "Please check the marked fields before proceeding."
       },
       "explanation": "If you're planning to lease an area for example for lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, continue by filling the following form. Tell us a few details about the area you'd like to lease and then fill the application. We'll respond to you as soon as possible. Fields marked with an asterisk (*) are required.",
       "heading": "Apply for a land area lease",
