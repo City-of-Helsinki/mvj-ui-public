@@ -29,6 +29,10 @@
     "fileUpload": {
       "delete": "Poista",
       "deleteHeader": "Poista",
+      "error": {
+        "exception": "Liitteen lähetys keskeytyi virheeseen! Ole hyvä ja yritä myöhemmin uudelleen.",
+        "nonOkResponse": "Liitteen lähetys epäonnistui! Ole hyvä ja yritä myöhemmin uudelleen."
+      },
       "filename": "Tiedosto",
       "info": "Suurin sallittu tiedostokoko on {{maxSize}} Mt.",
       "newFile": "Lisää tiedosto",
@@ -177,11 +181,13 @@
         "heading": "Liitteet",
         "input": "Voit myös lisätä vapaavalintaisia liitteitä, jos haluat. Esim. valokuva alueesta, lorem ipsum, dolor tai sit amet."
       },
-      "checkErrors": "Tarkista, että merkityt kentät on täytetty oikein.",
       "continueButton": "Hae tätä aluetta",
       "errors": {
+        "attachment": "Liitteiden tallennus ei onnistunut! Ole hyvä ja yritä uudelleen.",
         "endDateAfterStartDate": "Päättymispäivämäärän on oltava alkamispäivämäärän jälkeen.",
-        "startDateBeforeEndDate": "Alkamispäivämäärän on oltava ennen päättymispäivämäärää."
+        "other": "Aluehaun tallennus ei onnistunut tuntemattomasta syystä. Ole hyvä ja yritä uudelleen.",
+        "startDateBeforeEndDate": "Alkamispäivämäärän on oltava ennen päättymispäivämäärää.",
+        "validation": "Tarkista, että merkityt kentät on täytetty oikein."
       },
       "explanation": "Jos haluat vuokrata alueen esim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Jatka täyttämällä oheinen lomake. Kerro meille muutama tieto toivomastasi alueesta ja täytä hakemus. Palaamme sinulle mahdollisimman pian. Tähdellä (*) merkityt kentät ovat pakollisia. ",
       "heading": "Hae vuokra-aluetta",

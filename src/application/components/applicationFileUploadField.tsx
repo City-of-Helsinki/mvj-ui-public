@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Fieldset, FileInput, IconCrossCircle } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -6,7 +6,11 @@ import { connect } from 'react-redux';
 import { FormField } from '../../plotSearch/types';
 import { Language } from '../../i18n/types';
 import { RootState } from '../../root/rootReducer';
-import { APPLICATION_FORM_NAME, UploadedFileMeta } from '../types';
+import {
+  APPLICATION_FORM_NAME,
+  FileUploadError,
+  UploadedFileMeta,
+} from '../types';
 import { deleteUpload, uploadFile } from '../actions';
 import BlockLoader from '../../loader/blockLoader';
 import { renderDateTime } from '../../i18n/utils';
@@ -42,6 +46,7 @@ const ApplicationFileUploadField = ({
   change,
 }: Props & InnerProps): JSX.Element => {
   const { i18n, t } = useTranslation();
+  const [error, setError] = useState<string | null>(null);
 
   const filesForField = pendingUploads.filter((upload) =>
     fieldFileIds.includes(upload.id)
@@ -67,13 +72,37 @@ const ApplicationFileUploadField = ({
 
   const onSubmit = (files: Array<File> | null): void => {
     if (files) {
+      setError(null);
       uploadFile({
         fileData: {
           field: field.id,
           file: files[0],
         },
-        callback: (uploadedFile) => {
-          addId(uploadedFile.id);
+        callback: (uploadedFile, error) => {
+          if (uploadedFile) {
+            addId(uploadedFile.id);
+          } else if (error) {
+            switch (error) {
+              case FileUploadError.NonOkResponse:
+                setError(
+                  t(
+                    'application.fileUpload.error.nonOkResponse',
+                    'The file could not be uploaded! Please try again later.'
+                  )
+                );
+                break;
+              case FileUploadError.Exception:
+                setError(
+                  t(
+                    'application.fileUpload.error.exception',
+                    'Something went wrong while trying to upload the file. Please try again later.'
+                  )
+                );
+                break;
+              default:
+                break;
+            }
+          }
         },
       });
     }
@@ -155,6 +184,7 @@ const ApplicationFileUploadField = ({
                 maxSize: 20,
               }
             )}
+            errorText={error ? error : undefined}
           />
         )}
       </Fieldset>

@@ -11,6 +11,7 @@ import {
   DeleteUploadAction,
   FETCH_FORM_ATTRIBUTES,
   FETCH_PENDING_UPLOADS,
+  FileUploadError,
   SUBMIT_APPLICATION,
   SubmitApplicationAction,
   UPLOAD_FILE,
@@ -20,6 +21,7 @@ import {
   applicationSubmissionFailed,
   fetchPendingUploads,
   fileOperationFinished,
+  fileUploadFailed,
   formAttributesNotFound,
   pendingUploadsNotFound,
   receiveApplicationSaved,
@@ -112,16 +114,27 @@ function* uploadFileSaga({
   payload,
 }: UploadFileAction): Generator<Effect, void, ApiCallResult> {
   try {
-    const result = yield call(uploadFileRequest, payload.fileData);
+    const { response, bodyAsJson } = yield call(
+      uploadFileRequest,
+      payload.fileData
+    );
 
-    yield put(fileOperationFinished());
-    if (payload.callback) {
-      payload.callback(result.bodyAsJson);
+    switch (response.status) {
+      case 200:
+      case 201:
+        yield put(fileOperationFinished());
+        payload.callback?.(bodyAsJson);
+        yield put(fetchPendingUploads());
+        break;
+      default:
+        logError(bodyAsJson);
+        yield put(fileUploadFailed());
+        payload.callback?.(undefined, FileUploadError.NonOkResponse);
     }
-    yield put(fetchPendingUploads());
   } catch (e) {
     logError(e);
-    yield put(pendingUploadsNotFound());
+    yield put(fileUploadFailed());
+    payload.callback?.(undefined, FileUploadError.Exception);
     throw e;
   }
 }

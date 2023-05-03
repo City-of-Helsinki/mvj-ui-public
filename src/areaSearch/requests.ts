@@ -62,7 +62,7 @@ export const fetchIntendedUsesRequest = (): Generator<
 > => {
   return callApi(
     new Request(
-      createUrl('intended_psuse/', {
+      createUrl('intended_use/', {
         limit: '9999',
       })
     )

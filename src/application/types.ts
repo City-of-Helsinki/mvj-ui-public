@@ -138,8 +138,13 @@ export interface UploadFileAction {
       field: number;
       file: File;
     };
-    callback?: (file: UploadedFileMeta) => void;
+    callback?: (file?: UploadedFileMeta, error?: FileUploadError) => void;
   };
+}
+
+export const FILE_UPLOAD_FAILED = 'application/FILE_UPLOAD_FAILED';
+export interface FileUploadFailedAction {
+  type: typeof FILE_UPLOAD_FAILED;
 }
 
 export const FILE_OPERATION_FINISHED = 'application/FILE_OPERATION_FINISHED';
@@ -226,6 +231,12 @@ export enum ApplicationPreparationError {
   NoApplicantIdentifierFound,
   MisconfiguredPlotSearch,
   NoAreaSearchFound,
+}
+
+export enum FileUploadError {
+  None,
+  NonOkResponse,
+  Exception,
 }
 
 export enum FieldType {

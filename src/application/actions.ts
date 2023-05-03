@@ -8,6 +8,8 @@ import {
   FETCH_FORM_ATTRIBUTES,
   FETCH_PENDING_UPLOADS,
   FILE_OPERATION_FINISHED,
+  FILE_UPLOAD_FAILED,
+  FileUploadError,
   FORM_ATTRIBUTES_NOT_FOUND,
   PENDING_UPLOADS_NOT_FOUND,
   RECEIVE_APPLICATION_SAVED,
@@ -59,8 +61,11 @@ export const uploadFile = (payload: {
     field: number;
     file: File;
   };
-  callback?: (file: UploadedFileMeta) => void;
+  callback?: (file?: UploadedFileMeta, error?: FileUploadError) => void;
 }): Action<string> => createAction(UPLOAD_FILE)(payload);
 
 export const fileOperationFinished = (): Action<string> =>
   createAction(FILE_OPERATION_FINISHED)();
+
+export const fileUploadFailed = (): Action<string> =>
+  createAction(FILE_UPLOAD_FAILED)();
