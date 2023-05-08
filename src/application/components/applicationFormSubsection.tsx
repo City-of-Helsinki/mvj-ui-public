@@ -31,6 +31,7 @@ import ApplicationSelectField from './applicationSelectField';
 import ApplicationCheckboxFieldset from './applicationCheckboxFieldset';
 import ApplicationRadioButtonFieldset from './applicationRadioButtonFieldset';
 import ApplicationFractionalFieldset from './applicationFractionalFieldset';
+import ApplicationHiddenField from './applicationHiddenField';
 import { RootState } from '../../root/rootReducer';
 import { getFieldTypeMapping } from '../selectors';
 import {
@@ -173,7 +174,25 @@ const ApplicationFormSubsectionFields = connect(
           xl: 3,
         };
 
+        if (field.default_value !== null) {
+          change(
+            formName,
+            `${identifier}.fields.${field.identifier}.value`,
+            field.default_value
+          );
+        }
+
         switch (fieldType) {
+          case SupportedFieldTypes.Hidden:
+            component = ApplicationHiddenField;
+            if (field.identifier == 'hakija') {
+              change(
+                formName,
+                `${identifier}.metadata.applicantType`,
+                valueToApplicantType(field.default_value as string)
+              );
+            }
+            break;
           case SupportedFieldTypes.TextField:
             component = ApplicationTextField;
             break;
