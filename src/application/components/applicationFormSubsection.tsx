@@ -280,6 +280,7 @@ interface ApplicationFormSubsectionFieldArrayProps {
   section: FormSection;
   headerTag: React.ElementType;
   flavor?: ApplicationFormTopLevelSectionFlavor;
+  path: Array<string>;
 }
 
 interface ApplicationFormSubsectionFieldArrayInnerProps {
@@ -296,6 +297,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
     headerTag: HeaderTag,
     flavor,
     removeFavouriteTarget,
+    path,
   }: WrappedFieldArrayProps<ApplicationFormNode> &
     ApplicationFormSubsectionFieldArrayProps &
     ApplicationFormSubsectionFieldArrayInnerProps): JSX.Element => {
@@ -386,7 +388,13 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
           <Button
             className="ApplicationFormSubsectionFieldArray__add-button"
             onClick={() =>
-              fields.push(getSectionTemplate(section.identifier, formName))
+              fields.push(
+                getSectionTemplate(
+                  section.identifier,
+                  formName,
+                  path.slice(0, -1).join('.')
+                )
+              )
             }
             variant="supplementary"
             iconLeft={<IconPlusCircle />}
@@ -455,7 +463,7 @@ const ApplicationFormSubsection = ({
         >
           name={pathName}
           component={ApplicationFormSubsectionFieldArray}
-          props={{ section, headerTag: HeaderTag, formName }}
+          props={{ section, headerTag: HeaderTag, formName, path }}
           flavor={flavor}
         />
       ) : (
