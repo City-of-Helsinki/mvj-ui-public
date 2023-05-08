@@ -162,7 +162,7 @@ export const getSectionTemplate = (
   const state = store.getState();
   const templates = formValueSelector(formName)(
     state,
-    `${path !== '' && path + '.'}sectionTemplates`
+    `${path !== '' ? path + '.' : ''}sectionTemplates`
   );
 
   return templates[identifier] || {};
