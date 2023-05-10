@@ -28,6 +28,7 @@ export enum SupportedFieldTypes {
   RadioButtonInline = 'radiobuttoninline',
   FileUpload = 'uploadfiles',
   FractionalField = 'fractional',
+  Hidden = 'hidden',
 }
 
 export type FieldValue =
