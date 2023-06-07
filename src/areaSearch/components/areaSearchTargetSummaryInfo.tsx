@@ -9,7 +9,7 @@ interface Props {
 
 const AreaSearchTargetSummaryInfo = ({ infoCols }: Props): JSX.Element => {
   const { t } = useTranslation();
-  const [isFullDesc, setIsFullDesc] = useState<boolean>(false);
+  const [isFullDesc, setIsFullDesc] = useState<boolean>(true);
 
   return (
     <div className="AreaSearchTargetSummaryInfo">
