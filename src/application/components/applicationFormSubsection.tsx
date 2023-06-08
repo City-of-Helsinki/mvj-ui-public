@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Col, Row, ScreenClassMap } from 'react-grid-system';
 import {
   change,
@@ -22,6 +22,7 @@ import {
   ApplicationSectionKeys,
   FieldRendererProps,
   FieldTypeMapping,
+  FieldValue,
   SupportedFieldTypes,
 } from '../types';
 import ApplicationFileUploadField from './applicationFileUploadField';
@@ -38,6 +39,7 @@ import {
   getSectionApplicantType,
   getSectionFavouriteTarget,
   getSectionTemplate,
+  getFieldValue,
   valueToApplicantType,
 } from '../helpers';
 import { removeFavouriteTarget } from '../../favourites/actions';
@@ -96,6 +98,7 @@ interface ApplicationFormSubsectionFieldsInnerProps {
   fieldTypeMapping: FieldTypeMapping;
   sectionApplicantType: ApplicantTypes;
   change: typeof change;
+  getValue: (identifier: string) => FieldValue;
 }
 
 const ApplicationFormSubsectionFields = connect(
@@ -107,6 +110,8 @@ const ApplicationFormSubsectionFields = connect(
       props.identifier,
       props.formName
     ),
+    getValue: (fieldIdentifier: string): FieldValue =>
+      getFieldValue(state, fieldIdentifier, props.formName),
   }),
   {
     change,
@@ -119,6 +124,7 @@ const ApplicationFormSubsectionFields = connect(
     identifier,
     change,
     sectionApplicantType,
+    getValue,
   }: ApplicationFormSubsectionFieldsProps &
     ApplicationFormSubsectionFieldsInnerProps) => {
     const renderField = useCallback(
@@ -144,6 +150,28 @@ const ApplicationFormSubsectionFields = connect(
         if (!field.enabled) {
           return null;
         }
+
+        useEffect(() => {
+          // set default value if exists and current value is empty
+          if (
+            field.default_value !== null &&
+            !getValue(`${identifier}.fields.${field.identifier}.value`)
+          ) {
+            change(
+              formName,
+              `${identifier}.fields.${field.identifier}.value`,
+              field.default_value
+            );
+            // set the metadata correctly for the section to render
+            if (field.identifier == 'hakija') {
+              change(
+                formName,
+                `${identifier}.metadata.applicantType`,
+                valueToApplicantType(field.default_value as string)
+              );
+            }
+          }
+        }, []);
 
         const fieldName = [
           pathName,
@@ -174,24 +202,9 @@ const ApplicationFormSubsectionFields = connect(
           xl: 3,
         };
 
-        if (field.default_value !== null) {
-          change(
-            formName,
-            `${identifier}.fields.${field.identifier}.value`,
-            field.default_value
-          );
-        }
-
         switch (fieldType) {
           case SupportedFieldTypes.Hidden:
             component = ApplicationHiddenField;
-            if (field.identifier == 'hakija') {
-              change(
-                formName,
-                `${identifier}.metadata.applicantType`,
-                valueToApplicantType(field.default_value as string)
-              );
-            }
             break;
           case SupportedFieldTypes.TextField:
             component = ApplicationTextField;
@@ -241,6 +254,7 @@ const ApplicationFormSubsectionFields = connect(
 
         return (
           <Field
+            key={fieldName}
             name={fieldName}
             component={ApplicationFormField}
             field={field}

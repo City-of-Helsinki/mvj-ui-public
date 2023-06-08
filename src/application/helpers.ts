@@ -12,6 +12,7 @@ import {
   ApplicationFormSections,
   ApplicationPreparationError,
   ApplicationSubmission,
+  FieldValue,
   NestedField,
   NestedFieldLeaf,
   SupportedFieldTypes,
@@ -353,6 +354,14 @@ export const getFieldFileIds = (
 ): Array<number> => {
   const fieldValue = formValueSelector(formName)(state, fieldPath);
   return fieldValue?.value || [];
+};
+
+export const getFieldValue = (
+  state: RootState,
+  fieldPath: string,
+  formName: string
+): FieldValue => {
+  return formValueSelector(formName)(state, fieldPath);
 };
 
 export const getClientErrorMessage = (
