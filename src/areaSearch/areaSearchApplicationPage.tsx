@@ -79,7 +79,7 @@ const AreaSearchApplicationPage = ({
                                     formName={AREA_SEARCH_FORM_NAME}
                                     baseForm={lastSubmission.form}
                                   />
-                                  <Row>
+                                  <Row className="ApplicationPage__action-buttons">
                                     <Col xs={12}>
                                       <Button
                                         variant="primary"
@@ -91,7 +91,6 @@ const AreaSearchApplicationPage = ({
                                           )
                                         }
                                         disabled={false}
-                                        className="ApplicationPage__preview-button"
                                       >
                                         {t(
                                           'application.previewButton',
