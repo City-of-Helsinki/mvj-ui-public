@@ -83,7 +83,8 @@
     "submit": "Submit application",
     "submitInProcess": "Submitting...",
     "success": {
-      "body": "Your application has been received.",
+      "body_one": "Your application has been received. Application identifier is {{applicationIdentifiers}}. A copy of the application has been sent into your email.",
+      "body_other": "Your application has been received. Application identifiers are {{applicationIdentifiers}}. A copy of the application has been sent into your email.",
       "heading": "Thank you for your application",
       "pageTitle": "Application sent"
     },

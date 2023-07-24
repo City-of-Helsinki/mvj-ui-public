@@ -84,6 +84,8 @@
     "submitInProcess": "",
     "success": {
       "body": "",
+      "body_one": "",
+      "body_other": "",
       "heading": "",
       "pageTitle": ""
     },

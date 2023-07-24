@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   APPLICATION_FORM_NAME,
   APPLICATION_SUBMISSION_FAILED,
+  ApplicationResponse,
   ApplicationSubmissionFailedAction,
   DELETE_UPLOAD,
   FETCH_FORM_ATTRIBUTES,
@@ -12,6 +13,7 @@ import {
   RECEIVE_APPLICATION_SAVED,
   RECEIVE_FORM_ATTRIBUTES,
   RECEIVE_PENDING_UPLOADS,
+  ReceiveApplicationSavedAction,
   ReceiveFormAttributesAction,
   ReceivePendingUploadsAction,
   SUBMIT_APPLICATION,
@@ -26,7 +28,7 @@ type CurrentDisplayState = {
   isFetchingFormAttributes: boolean;
   fieldTypeMapping: FieldTypeMapping;
   isSubmittingApplication: boolean;
-  submittedAnswerId: number;
+  submittedAnswer: ApplicationResponse;
   lastError: unknown;
   pendingUploads: Array<UploadedFileMeta>;
   isPerformingFileOperation: boolean;
@@ -37,10 +39,17 @@ const initialState: CurrentDisplayState = {
   isFetchingFormAttributes: false,
   fieldTypeMapping: {},
   isSubmittingApplication: false,
-  submittedAnswerId: 0,
   lastError: null,
   pendingUploads: [],
   isPerformingFileOperation: false,
+  submittedAnswer: {
+    id: 0,
+    targets: [],
+    entries_data: {},
+    form: 0,
+    information_checks: [],
+    target_statuses: [],
+  },
 };
 
 const applicationSlice = createSlice({
@@ -75,11 +84,11 @@ const applicationSlice = createSlice({
       state.lastError = null;
     },
     [RECEIVE_APPLICATION_SAVED]: (
-      state /*, { payload }: ReceiveApplicationSavedAction*/
+      state,
+      { payload }: ReceiveApplicationSavedAction
     ) => {
       state.isSubmittingApplication = false;
-      // TODO: ID not provided in the response at the moment
-      state.submittedAnswerId = state.submittedAnswerId + 1;
+      state.submittedAnswer = payload;
     },
     [APPLICATION_SUBMISSION_FAILED]: (
       state,
