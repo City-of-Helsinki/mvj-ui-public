@@ -451,11 +451,11 @@
             "title": "Ilmoitus"
           },
           "selectionInAnotherTab": {
-            "body": "<0>Voit lähettää hakemuksen vain yhdestä kilpailusta / tonttihausta kerrallaan.</0><1>Tällä hetkellä valitsemasi kohteet eivät ole samaa tyyppiä kuin tällä sivulla näytettävät kohteet, joten tältä sivulta ei voi lisätä hakemukseen uusia kohteita. <2>Tarkista täältä tällä hetkellä valitsemasi kohteet.</2></1>",
+            "body": "<0>Voit lähettää hakemuksen vain yhdestä kilpailusta tai tonttihausta kerrallaan.</0><1>Tällä hetkellä valitsemasi kohteet eivät ole samaa tyyppiä kuin tällä sivulla näytettävät kohteet, joten tältä sivulta ei voi lisätä hakemukseen uusia kohteita. <2>Tarkista täältä tällä hetkellä valitsemasi kohteet.</2></1>",
             "title": "Huom!"
           },
           "singlePlotSearchAllowed": {
-            "body": "<0>Voit lähettää hakemuksen vain yhdestä kilpailusta / tonttihausta kerrallaan.</0><1>Mikäli yhdessä kilpailussa on useita haettavia tontteja, voit lisätä niitä samaan hakemukseen.</1><2>Mikäli haluat osallistua muihin kilpailuihin / tonttihakuihin, niistä on lähetettävä eri hakemus.</2>",
+            "body": "<0>Voit lähettää hakemuksen vain yhdestä kilpailusta tai tonttihausta kerrallaan.</0><1>Mikäli yhdessä kilpailussa on useita haettavia tontteja, voit lisätä niitä samaan hakemukseen.</1><2>Mikäli haluat osallistua muihin kilpailuihin tai tonttihakuihin, niistä on lähetettävä eri hakemus.</2>",
             "title": "Huom!"
           }
         },
