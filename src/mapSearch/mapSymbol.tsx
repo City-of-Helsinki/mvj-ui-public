@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { IconHeartFill } from 'hds-react';
+import { IconStarFill } from 'hds-react';
 
 interface Props {
   symbol: string;
@@ -17,7 +17,7 @@ const MapSymbol = ({
 }: Props): JSX.Element => {
   return (
     <>
-      {isFavourite && <IconHeartFill className="MapSymbol__favourite-icon" />}
+      {isFavourite && <IconStarFill className="MapSymbol__favourite-icon" />}
       <span
         className={classNames('MapSymbol', `MapSymbol--style-${colorIndex}`, {
           'MapSymbol--hover': isHover,

@@ -5,6 +5,8 @@ import {
   IconAngleDown,
   IconAngleUp,
   IconArrowRight,
+  IconStar,
+  IconStarFill,
   Notification,
   useAccordion,
 } from 'hds-react';
@@ -184,14 +186,42 @@ const MapSearchComponent = ({
     );
   };
 
+  const isFavourited = (
+    target: PlotSearchTarget,
+    favourite: Favourite
+  ): boolean => {
+    return favourite.targets.some((t) => t.plot_search_target.id === target.id);
+  };
+
+  const handleApplyButton = (
+    target: PlotSearchTarget,
+    plotSearch: PlotSearch,
+    isFavourited: boolean
+  ): void => {
+    if (isFavourited) {
+      removeFavouriteTarget(target.id);
+      return;
+    }
+    const payLoad = {
+      target: {
+        plot_search: plotSearch.id,
+        plot_search_target: target,
+      },
+    } as AddTargetPayload;
+    addFavouriteTarget(payLoad);
+  };
+
+  const getStarIcon = (isFavoured: boolean): JSX.Element => {
+    return isFavoured ? <IconStarFill size="s" /> : <IconStar size="s" />;
+  };
+
   return (
     <SidePanel className="MapSearchComponent" isOpen={isOpen} toggle={toggle}>
       {selectedTarget && (
         <MapSearchSingleTargetView
-          addFavouriteTarget={addFavouriteTarget}
+          handleApplyButton={handleApplyButton}
           selectedTarget={selectedTarget}
-          favourite={favourite}
-          removeFavouriteTarget={removeFavouriteTarget}
+          isFavourited={isFavourited(selectedTarget.target, favourite)}
         />
       )}
       <div className="MapSearchComponent__list-view">
@@ -287,9 +317,23 @@ const MapSearchComponent = ({
 
                 return (
                   <Fragment key={subtype.id}>
-                    <h3 className="MapSearchComponent__plot-search-subtype-heading">
-                      {subtype.name}
-                    </h3>
+                    <div className="MapSearchComponent__plot-search-subtype-heading">
+                      <h3>{subtype.name}</h3>
+                      <span>
+                        <IconStar size="m" />
+                        {t(
+                          'plotSearchAndCompetitions.mapView.sidebar.legend.star',
+                          '= add to application'
+                        )}
+                      </span>
+                      <span>
+                        <IconArrowRight size="m" />
+                        {t(
+                          'plotSearchAndCompetitions.mapView.sidebar.legend.arrow',
+                          '= details'
+                        )}
+                      </span>
+                    </div>
                     <div role="list">
                       {sections.map((section) => (
                         <div key={section.key} role="listitem">
@@ -342,7 +386,7 @@ const MapSearchComponent = ({
                               )}
                             </Col>
                             <Col
-                              xs={2}
+                              xs={1.5}
                               id={`MapSearchComponentList-${section.key}-PermittedBuildArea`}
                               style={{ hyphens: 'auto' }}
                             >
@@ -360,7 +404,12 @@ const MapSearchComponent = ({
                                 'Area (m²)'
                               )}
                             </Col>
-                            <Col xs={0.5} />
+                            <Col xs={1}>
+                              {t(
+                                'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.tools',
+                                'Tools'
+                              )}
+                            </Col>
                           </Row>
                           <div role="list">
                             {section.targets.map((target) => (
@@ -412,7 +461,7 @@ const MapSearchComponent = ({
                                   )}
                                 </Col>
                                 <Col
-                                  xs={2}
+                                  xs={1.5}
                                   aria-labelledby={`MapSearchComponentList-${section.key}-PermittedBuildArea`}
                                 >
                                   {target.data.target_plan
@@ -426,7 +475,27 @@ const MapSearchComponent = ({
                                     defaultLanguage
                                   ) || '?'}
                                 </Col>
-                                <Col xs={0.5}>
+                                <Col
+                                  xs={1}
+                                  className="MapSearchComponent__target-action-buttons"
+                                >
+                                  <IconButton
+                                    onClick={() =>
+                                      handleApplyButton(
+                                        target.data,
+                                        target.relatedPlotSearch,
+                                        isFavourited(target.data, favourite)
+                                      )
+                                    }
+                                    aria-label={t(
+                                      'plotSearchAndCompetitions.mapView.sidebar.addToApplication',
+                                      'Add to application'
+                                    )}
+                                  >
+                                    {getStarIcon(
+                                      isFavourited(target.data, favourite)
+                                    )}
+                                  </IconButton>
                                   <IconButton
                                     onClick={() =>
                                       navigate(

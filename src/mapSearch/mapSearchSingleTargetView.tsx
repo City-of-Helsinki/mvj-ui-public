@@ -12,7 +12,6 @@ import { RootState } from '../root/rootReducer';
 import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import { defaultLanguage } from '../i18n';
 import { renderDateTime } from '../i18n/utils';
-import { AddTargetPayload, Favourite } from '../favourites/types';
 import InfoLinks from './infoLinks';
 import { AppRoutes, getRouteById } from '../root/routes';
 import { getTargetPlanOptionTitle } from '../plotSearch/helpers';
@@ -24,17 +23,19 @@ interface State {
 interface Props {
   plotSearchAttributes: ApiAttributes;
   selectedTarget: SelectedTarget;
-  favourite: Favourite;
-  addFavouriteTarget: (payload: AddTargetPayload) => void;
-  removeFavouriteTarget: (payload: number) => void;
+  isFavourited: boolean;
+  handleApplyButton: (
+    target: PlotSearchTarget,
+    plotSearch: PlotSearch,
+    isFavourite: boolean
+  ) => void;
 }
 
 const MapSearchSingleTargetView = ({
   plotSearchAttributes,
   selectedTarget,
-  favourite,
-  addFavouriteTarget,
-  removeFavouriteTarget,
+  isFavourited,
+  handleApplyButton,
 }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -49,31 +50,10 @@ const MapSearchSingleTargetView = ({
     </Col>
   );
 
-  const handleApplyButton = (
-    target: PlotSearchTarget,
-    plotSearch: PlotSearch,
-    isFavourited: boolean
-  ): void => {
-    if (isFavourited) {
-      removeFavouriteTarget(target.id);
-      return;
-    }
-    const payLoad = {
-      target: {
-        plot_search: plotSearch.id,
-        plot_search_target: target,
-      },
-    } as AddTargetPayload;
-    addFavouriteTarget(payLoad);
-  };
-
   if (!selectedTarget) {
     return null;
   }
   const { target, plotSearch } = selectedTarget;
-  const isFavourited = favourite.targets.some(
-    (t) => t.plot_search_target.id === target.id
-  );
 
   return (
     <div className="MapSearchSingleTargetView">

@@ -443,6 +443,11 @@
         "pageTitle": "Tonttihaut ja -kilpailut"
       },
       "sidebar": {
+        "addToApplication": "Lisää hakemukselle",
+        "legend": {
+          "arrow": "  = lisää hakemukselle",
+          "star": "  = lisätietoja"
+        },
         "navigateToTarget": "Avaa tämän kohteen tiedot",
         "notification": {
           "noTargetsToShow": {
@@ -484,7 +489,8 @@
           "area": "Pinta-ala (m²)",
           "intendedUse": "Käyttö\u00adtarkoitus",
           "permittedBuildArea": "Rakennus\u00adoik. (k-m²)",
-          "plotNumber": "Tontti"
+          "plotNumber": "Tontti",
+          "tools": "Työkalut"
         },
         "typeHeadings": {
           "showThisType": "Näytä",

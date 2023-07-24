@@ -69,16 +69,40 @@
       text-overflow: ellipsis;
     }
 
+    .MapSearchComponent__target-action-buttons {
+      display: flex;
+      flex-direction: row;
+    }
+
     .MapSymbol {
       margin-left: 3px;
     }
   }
 
   &__plot-search-subtype-heading {
-    text-transform: uppercase;
-    font-size: $fontsize-body-l;
-    padding: ($spacing-s / 2) $spacing-xs;
+    display: flex;
+    flex-direction: row;
+
+    h3 {
+      text-transform: uppercase;
+      font-size: $fontsize-body-l;
+      padding: ($spacing-s / 2) $spacing-xs;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    span {
+      margin-right: $spacing-m;
+      font-size: $fontsize-body-l;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__plot-search-subtype-legend {
     margin: 0;
+    font-size: $fontsize-body-l;
+    display: inline-block;
   }
 
   &__plot-search-heading {

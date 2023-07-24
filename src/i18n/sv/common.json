@@ -443,6 +443,11 @@
         "pageTitle": ""
       },
       "sidebar": {
+        "addToApplication": "",
+        "legend": {
+          "arrow": "",
+          "star": ""
+        },
         "navigateToTarget": "",
         "notification": {
           "noTargetsToShow": {
@@ -484,7 +489,8 @@
           "area": "",
           "intendedUse": "",
           "permittedBuildArea": "",
-          "plotNumber": ""
+          "plotNumber": "",
+          "tools": ""
         },
         "typeHeadings": {
           "showThisType": "",
