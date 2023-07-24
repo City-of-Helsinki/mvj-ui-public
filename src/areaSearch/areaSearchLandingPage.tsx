@@ -48,7 +48,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
         <p>
           {t(
             'areaSearch.landingPage.introduction',
-            'The City of Helsinki offers plots and venues for rent for various types of activities. Please select the option that best represents your needs below.'
+            'The City of Helsinki offers vacant land or water areas for rent for various types of activities (e.g. for placing masts, agricultural uses, additional courtyards, sand silos, collection boxes or exercising parks).'
           )}
         </p>
         <h2>

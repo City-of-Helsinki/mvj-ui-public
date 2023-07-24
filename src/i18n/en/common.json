@@ -83,6 +83,7 @@
     "submit": "Submit application",
     "submitInProcess": "Submitting...",
     "success": {
+      "body": "Your application has been received.",
       "body_one": "Your application has been received. Application identifier is {{applicationIdentifiers}}. A copy of the application has been sent into your email.",
       "body_other": "Your application has been received. Application identifiers are {{applicationIdentifiers}}. A copy of the application has been sent into your email.",
       "heading": "Thank you for your application",
@@ -129,7 +130,7 @@
         "label": "Area search"
       },
       "heading": "Apply for a land area lease",
-      "introduction": "The City of Helsinki offers plots and venues for rent for various types of activities. Please select the option that best represents your needs below.",
+      "introduction": "The City of Helsinki offers free land- or water areas for rent for various types of activities. (Fe. placing masts, agricultural uses, additional courtyards, sand silos, collection boxes, exercising parks.)",
       "otherUses": {
         "commercialUses": {
           "blurb": "This includes A frames, advertising spaces on bridges, outdoor advertising devices and election advertisements.",

@@ -83,6 +83,7 @@
     "submit": "Lähetä hakemus",
     "submitInProcess": "Hakemusta lähetetään...",
     "success": {
+      "body": "Hakemuksesi on lähetetty.",
       "body_one": "Hakemuksesi on lähetetty. Hakemusnumero on {{applicationIdentifiers}}. Sinulle on lähetetty antamaasi sähköpostiosoitteeseen kopio hakemuksesta.",
       "body_other": "Hakemuksesi on lähetetty. Hakemusnumerot ovat {{applicationIdentifiers}}. Sinulle on lähetetty antamaasi sähköpostiosoitteeseen kopio hakemuksesta.",
       "heading": "Kiitos hakemuksestasi",
@@ -124,12 +125,12 @@
     "landingPage": {
       "applyForArea": "Hae aluetta",
       "areaSearches": {
-        "blurb": "Voit vuokrata vapaana olevaa maa ja vesi-aluetta tilapäistä käyttöä varten, esim. mastot, maatalousmaat, lisäpihat,  maanvuokraus, hiekkasiillot, keräyslaatikot, liikuntapuistot.",
+        "blurb": "Voit vuokrata vapaana olevia maa- ja vesialueita monenlaista käyttöä varten. (esim. mastot, maatalousmaat, lisäpihat, hiekkasiilot, keräyslaatikot, liikuntapaikat)",
         "heading": "Alueen vuokraus",
         "label": "Vuokraa alue"
       },
       "heading": "Hae vuokra-aluetta",
-      "introduction": "Helsingin kaupungilta on mahdollista vuokrata alueita ja tiloja monenlaiseen käyttöön. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Valitse ohesta tarkoitukseesi sopivin vaihtoehto.",
+      "introduction": "Voit vuokrata Helsingin kaupungilta alueita monenlaiseen käyttöön. Valitse tarkoitukseesi sopivin vaihtoehto.",
       "otherUses": {
         "commercialUses": {
           "blurb": "A-standit, siltamainospaikat, ulkomainoslaitteet, vaalimainonta",
