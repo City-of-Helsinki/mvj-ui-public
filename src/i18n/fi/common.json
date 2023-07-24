@@ -171,17 +171,14 @@
       "area": {
         "areaDescription": "Tarkempi kuvaus alueesta",
         "drawOnMap": {
-          "explanation": "Huomaathan, että piirtämäsi alue on viitteellinen. Palaamme sinulle kohteen tarkoista rajoista hakemuksen käsittelyvaiheessa. Tummennetut alueet kartalla eivät ole Helsingin kaupungin omistuksessa.",
+          "explanation": "Alueen valinta on lähtökohtana neuvotteluille. Piirtämäsi alue on viitteellinen. Hakemuksen käsittelyvaiheessa olemme sinuun yhteydessä vuokra-alueen rajauksesta.",
           "heading": "Piirrä alue kartalle"
         },
-        "explanation": "Helsingin kaupungilla on Helsingin lisäksi maaomistuksia Sipoossa, Espoossa, Lorem ipsum ja Dolor sit amet. Alueen valinta on lähtökohtana neuvottelulle.",
-        "heading": "Kerro meille, mistä haluat vuokrata alueen",
-        "readMoreLink": "Lue lisätietoja Helsingin kaupungin sivuilta",
-        "readMorelinkTarget": "https://hel.fi/fi"
+        "heading": "Kerro meille, mistä haluat vuokrata alueen"
       },
       "attachments": {
         "heading": "Liitteet",
-        "input": "Voit myös lisätä vapaavalintaisia liitteitä, jos haluat. Esim. valokuva alueesta, lorem ipsum, dolor tai sit amet."
+        "input": "Voit myös lisätä vapaavalintaisia liitteitä, jos haluat. Esim. valokuva alueesta."
       },
       "continueButton": "Hae tätä aluetta",
       "errors": {
@@ -191,7 +188,7 @@
         "startDateBeforeEndDate": "Alkamispäivämäärän on oltava ennen päättymispäivämäärää.",
         "validation": "Tarkista, että merkityt kentät on täytetty oikein."
       },
-      "explanation": "Jos haluat vuokrata alueen esim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Jatka täyttämällä oheinen lomake. Kerro meille muutama tieto toivomastasi alueesta ja täytä hakemus. Palaamme sinulle mahdollisimman pian. Tähdellä (*) merkityt kentät ovat pakollisia. ",
+      "explanation": "Jatka täyttämällä hakemuslomake, jos haluat vuokrata alueen. Kerro meille toiveesi alueesta, vuokrauksen käyttötarkoituksesta ja vuokra-ajasta. Olemme sinuun yhteydessä mahdollisimman pian. Tähdellä merkityt kentät ovat pakollisia. ",
       "heading": "Hae vuokra-aluetta",
       "intendedUse": {
         "endDate": "Vuokrauksen päättymispäivämäärä",

@@ -174,14 +174,11 @@
           "explanation": "Note that the area you specify will be precursory only. We'll contact you to determine the exact area later during the application handling process. Areas colored in dark gray are not owned by the City of Helsinki.",
           "heading": "Draw the desired area on the map"
         },
-        "explanation": "Besides Helsinki itself, the City of Helsinki also owns land in other cities including Sipoo, Espoo, .... The selected area will only serve as the starting point during negotiations.",
-        "heading": "Tell us which area you'd like to lease",
-        "readMoreLink": "Read more on the City of Helsinki website",
-        "readMorelinkTarget": "https://hel.fi/"
+        "heading": "Tell us which area you'd like to lease"
       },
       "attachments": {
         "heading": "Attachments",
-        "input": "You may also optionally include any relevant attachments here, such as photos of the area in question, lorem ipsum, dolor tai sit amet."
+        "input": "You may also optionally include any relevant attachments here, such as photos of the area in question."
       },
       "continueButton": "Apply for this area",
       "errors": {
@@ -191,7 +188,7 @@
         "startDateBeforeEndDate": "Start date cannot be after end date.",
         "validation": "Please check the marked fields before proceeding."
       },
-      "explanation": "If you're planning to lease an area for example for lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, continue by filling the following form. Tell us a few details about the area you'd like to lease and then fill the application. We'll respond to you as soon as possible. Fields marked with an asterisk (*) are required.",
+      "explanation": "If you are willing to lease an area, continue by filling up the application. Please tell us your wishes concerning the area, intended use of the lease and lease time. We will contact you as soon as possible. Fields marked with an asterisk (*) are required.",
       "heading": "Apply for a land area lease",
       "intendedUse": {
         "endDate": "End date for lease",
