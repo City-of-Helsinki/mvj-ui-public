@@ -130,7 +130,7 @@
         "label": "Area search"
       },
       "heading": "Apply for a land area lease",
-      "introduction": "The City of Helsinki offers free land- or water areas for rent for various types of activities. (Fe. placing masts, agricultural uses, additional courtyards, sand silos, collection boxes, exercising parks.)",
+      "introduction": "The City of Helsinki offers vacant land or water areas for rent for various types of activities (e.g. for placing masts, agricultural uses, additional courtyards, sand silos, collection boxes or exercising parks).",
       "otherUses": {
         "commercialUses": {
           "blurb": "This includes A frames, advertising spaces on bridges, outdoor advertising devices and election advertisements.",
@@ -188,7 +188,7 @@
         "startDateBeforeEndDate": "Start date cannot be after end date.",
         "validation": "Please check the marked fields before proceeding."
       },
-      "explanation": "If you are willing to lease an area, continue by filling up the application. Please tell us your wishes concerning the area, intended use of the lease and lease time. We will contact you as soon as possible. Fields marked with an asterisk (*) are required.",
+      "explanation": "If you are willing to lease an area, continue by filling up the application. Please tell us your wishes concerning the area, intended use of the lease and lease time. We will contact you as soon as possible. Fields marked with an asterisk are required.",
       "heading": "Apply for a land area lease",
       "intendedUse": {
         "endDate": "End date for lease",
@@ -445,8 +445,8 @@
       "sidebar": {
         "addToApplication": "Add to application",
         "legend": {
-          "arrow": "  = details",
-          "star": "  = add to application"
+          "arrow": "= details",
+          "star": "= add to application"
         },
         "navigateToTarget": "Open the details for this target",
         "notification": {

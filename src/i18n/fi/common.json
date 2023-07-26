@@ -125,7 +125,7 @@
     "landingPage": {
       "applyForArea": "Hae aluetta",
       "areaSearches": {
-        "blurb": "Voit vuokrata vapaana olevia maa- ja vesialueita monenlaista käyttöä varten. (esim. mastot, maatalousmaat, lisäpihat, hiekkasiilot, keräyslaatikot, liikuntapaikat)",
+        "blurb": "Voit vuokrata vapaana olevia maa- ja vesialueita monenlaista käyttöä varten, esim. mastot, maatalousmaat, lisäpihat, hiekkasiilot, keräyslaatikot, liikuntapaikat.",
         "heading": "Alueen vuokraus",
         "label": "Vuokraa alue"
       },
@@ -445,8 +445,8 @@
       "sidebar": {
         "addToApplication": "Lisää hakemukselle",
         "legend": {
-          "arrow": "  = lisää hakemukselle",
-          "star": "  = lisätietoja"
+          "arrow": "= lisää hakemukselle",
+          "star": "= lisätietoja"
         },
         "navigateToTarget": "Avaa tämän kohteen tiedot",
         "notification": {
