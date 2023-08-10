@@ -159,10 +159,11 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
               }}
             />
           )}
-          {renderMarker(
-            target,
-            props.favouritedTargets.map((t) => t.plot_search_target)
-          )}
+          {target.target_type !== 'direct_reservation' &&
+            renderMarker(
+              target,
+              props.favouritedTargets.map((t) => t.plot_search_target)
+            )}
         </Fragment>
       ))}
     </Fragment>

@@ -210,6 +210,18 @@
       }
     }
   },
+  "directReservation": {
+    "buttons": {
+      "login": ""
+    },
+    "error": {
+      "notLoggedIn": ""
+    },
+    "errors": {
+      "favouriteGenerationError": ""
+    },
+    "pageTitle": ""
+  },
   "errorPage": {
     "notFound": {
       "explanation": "",

@@ -413,106 +413,113 @@ const MapSearchComponent = ({
                           </Row>
                           <div role="list">
                             {section.targets.map((target) => (
-                              <Row
-                                onMouseEnter={() =>
-                                  setHoveredTargetId(target.data.id)
-                                }
-                                onMouseLeave={() => setHoveredTargetId(null)}
-                                className={classNames(
-                                  'MapSearchComponent__target',
-                                  {
-                                    'MapSearchComponent__target--favourited':
-                                      favourite.targets.some(
-                                        (t) =>
-                                          t.plot_search_target.id ===
-                                          target.data.id
-                                      ),
-                                  },
-                                  {
-                                    'MapSearchComponent__target--hover':
-                                      hoveredTargetId === target.data.id,
-                                  }
+                              <>
+                                {target.data.target_type !==
+                                  'direct_reservation' && (
+                                  <Row
+                                    onMouseEnter={() =>
+                                      setHoveredTargetId(target.data.id)
+                                    }
+                                    onMouseLeave={() =>
+                                      setHoveredTargetId(null)
+                                    }
+                                    className={classNames(
+                                      'MapSearchComponent__target',
+                                      {
+                                        'MapSearchComponent__target--favourited':
+                                          favourite.targets.some(
+                                            (t) =>
+                                              t.plot_search_target.id ===
+                                              target.data.id
+                                          ),
+                                      },
+                                      {
+                                        'MapSearchComponent__target--hover':
+                                          hoveredTargetId === target.data.id,
+                                      }
+                                    )}
+                                    key={target.data.id}
+                                    role="listitem"
+                                    gutterWidth={SIDEBAR_GUTTER_WIDTH}
+                                    align="center"
+                                  >
+                                    <Col
+                                      xs={1.5}
+                                      aria-labelledby={`MapSearchComponentList-${section.key}-PlotNumber`}
+                                    >
+                                      {target.data.target_plan.identifier}
+                                    </Col>
+                                    <Col
+                                      xs={3.5}
+                                      className="MapSearchComponent__target-address"
+                                      aria-labelledby={`MapSearchComponentList-${section.key}-Address`}
+                                    >
+                                      {target.data.target_plan.address}
+                                    </Col>
+                                    <Col
+                                      xs={3}
+                                      aria-labelledby={`MapSearchComponentList-${section.key}-IntendedUse`}
+                                    >
+                                      {getIntendedUseName(
+                                        target.data.target_plan
+                                          .plan_unit_intended_use
+                                      )}
+                                    </Col>
+                                    <Col
+                                      xs={1.5}
+                                      aria-labelledby={`MapSearchComponentList-${section.key}-PermittedBuildArea`}
+                                    >
+                                      {target.data.target_plan
+                                        .rent_build_permission || '?'}
+                                    </Col>
+                                    <Col
+                                      xs={1.5}
+                                      aria-labelledby={`MapSearchComponentList-${section.key}-Area`}
+                                    >
+                                      {target.data.target_plan.area?.toLocaleString(
+                                        defaultLanguage
+                                      ) || '?'}
+                                    </Col>
+                                    <Col
+                                      xs={1}
+                                      className="MapSearchComponent__target-action-buttons"
+                                    >
+                                      <IconButton
+                                        onClick={() =>
+                                          handleApplyButton(
+                                            target.data,
+                                            target.relatedPlotSearch,
+                                            isFavourited(target.data, favourite)
+                                          )
+                                        }
+                                        aria-label={t(
+                                          'plotSearchAndCompetitions.mapView.sidebar.addToApplication',
+                                          'Add to application'
+                                        )}
+                                      >
+                                        {getStarIcon(
+                                          isFavourited(target.data, favourite)
+                                        )}
+                                      </IconButton>
+                                      <IconButton
+                                        onClick={() =>
+                                          navigate(
+                                            getRouteById(
+                                              AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET
+                                            ) + target.data.id
+                                          )
+                                        }
+                                        aria-label={t(
+                                          'plotSearchAndCompetitions.mapView.sidebar.navigateToTarget',
+                                          'Open the details for this target'
+                                        )}
+                                      >
+                                        <IconArrowRight size="s" />
+                                      </IconButton>
+                                    </Col>
+                                  </Row>
                                 )}
-                                key={target.data.id}
-                                role="listitem"
-                                gutterWidth={SIDEBAR_GUTTER_WIDTH}
-                                align="center"
-                              >
-                                <Col
-                                  xs={1.5}
-                                  aria-labelledby={`MapSearchComponentList-${section.key}-PlotNumber`}
-                                >
-                                  {target.data.target_plan.identifier}
-                                </Col>
-                                <Col
-                                  xs={3.5}
-                                  className="MapSearchComponent__target-address"
-                                  aria-labelledby={`MapSearchComponentList-${section.key}-Address`}
-                                >
-                                  {target.data.target_plan.address}
-                                </Col>
-                                <Col
-                                  xs={3}
-                                  aria-labelledby={`MapSearchComponentList-${section.key}-IntendedUse`}
-                                >
-                                  {getIntendedUseName(
-                                    target.data.target_plan
-                                      .plan_unit_intended_use
-                                  )}
-                                </Col>
-                                <Col
-                                  xs={1.5}
-                                  aria-labelledby={`MapSearchComponentList-${section.key}-PermittedBuildArea`}
-                                >
-                                  {target.data.target_plan
-                                    .rent_build_permission || '?'}
-                                </Col>
-                                <Col
-                                  xs={1.5}
-                                  aria-labelledby={`MapSearchComponentList-${section.key}-Area`}
-                                >
-                                  {target.data.target_plan.area?.toLocaleString(
-                                    defaultLanguage
-                                  ) || '?'}
-                                </Col>
-                                <Col
-                                  xs={1}
-                                  className="MapSearchComponent__target-action-buttons"
-                                >
-                                  <IconButton
-                                    onClick={() =>
-                                      handleApplyButton(
-                                        target.data,
-                                        target.relatedPlotSearch,
-                                        isFavourited(target.data, favourite)
-                                      )
-                                    }
-                                    aria-label={t(
-                                      'plotSearchAndCompetitions.mapView.sidebar.addToApplication',
-                                      'Add to application'
-                                    )}
-                                  >
-                                    {getStarIcon(
-                                      isFavourited(target.data, favourite)
-                                    )}
-                                  </IconButton>
-                                  <IconButton
-                                    onClick={() =>
-                                      navigate(
-                                        getRouteById(
-                                          AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET
-                                        ) + target.data.id
-                                      )
-                                    }
-                                    aria-label={t(
-                                      'plotSearchAndCompetitions.mapView.sidebar.navigateToTarget',
-                                      'Open the details for this target'
-                                    )}
-                                  >
-                                    <IconArrowRight size="s" />
-                                  </IconButton>
-                                </Col>
-                              </Row>
+                              </>
                             ))}
                           </div>
                         </div>
