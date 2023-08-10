@@ -84,6 +84,8 @@
     "submitInProcess": "",
     "success": {
       "body": "",
+      "body_one": "",
+      "body_other": "",
       "heading": "",
       "pageTitle": ""
     },
@@ -172,10 +174,7 @@
           "explanation": "",
           "heading": ""
         },
-        "explanation": "",
-        "heading": "",
-        "readMoreLink": "",
-        "readMorelinkTarget": ""
+        "heading": ""
       },
       "attachments": {
         "heading": "",
@@ -444,6 +443,11 @@
         "pageTitle": ""
       },
       "sidebar": {
+        "addToApplication": "",
+        "legend": {
+          "arrow": "",
+          "star": ""
+        },
         "navigateToTarget": "",
         "notification": {
           "noTargetsToShow": {
@@ -485,7 +489,8 @@
           "area": "",
           "intendedUse": "",
           "permittedBuildArea": "",
-          "plotNumber": ""
+          "plotNumber": "",
+          "tools": ""
         },
         "typeHeadings": {
           "showThisType": "",

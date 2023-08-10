@@ -3,6 +3,7 @@ import { Action } from 'redux';
 import { createAction } from 'redux-actions';
 import {
   APPLICATION_SUBMISSION_FAILED,
+  ApplicationResponse,
   ApplicationSubmission,
   DELETE_UPLOAD,
   FETCH_FORM_ATTRIBUTES,
@@ -34,8 +35,9 @@ export const submitApplication = (
   payload: ApplicationSubmission
 ): Action<string> => createAction(SUBMIT_APPLICATION)(payload);
 
-export const receiveApplicationSaved = (payload: number): Action<string> =>
-  createAction(RECEIVE_APPLICATION_SAVED)(payload);
+export const receiveApplicationSaved = (
+  payload: ApplicationResponse
+): Action<string> => createAction(RECEIVE_APPLICATION_SAVED)(payload);
 
 export const applicationSubmissionFailed = (payload: unknown): Action<string> =>
   createAction(APPLICATION_SUBMISSION_FAILED)(payload);

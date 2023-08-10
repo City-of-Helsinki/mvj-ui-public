@@ -2,6 +2,7 @@ import { WrappedFieldProps } from 'redux-form';
 
 import { ApiAttributes } from '../api/types';
 import { FormField } from '../plotSearch/types';
+import { Geometry } from 'geojson';
 
 export type NestedFieldLeaf =
   | string
@@ -57,6 +58,51 @@ export type ApplicationSubmission = {
   attachments: Array<number>;
 };
 
+export type TargetStatus = {
+  id: number;
+  identifier: string | null;
+  share_of_rental_indicator: number | null;
+  share_of_rental_denominator: number | null;
+  reserved: boolean;
+  added_target_to_applicant: boolean;
+  counsel_date: string | null;
+  decline_reason: string | null;
+  arguments: string | null;
+  proposed_managements: Array<{
+    proposed_financing: number;
+    proposed_management: number;
+    hitas: number;
+    target_status_id: number;
+  }> | null;
+  meeting_memos: Array<{
+    id: number;
+    user: {
+      id: number;
+      username: string;
+      first_name: string;
+      last_name: string;
+      is_staff: boolean;
+    };
+    name: string;
+    target_status: TargetStatus;
+    created_at: string;
+    meeting_memo: string;
+  }> | null;
+  reservation_conditions: Array<string>;
+  address: { address: string } | null;
+  geometry: Geometry | null;
+  application_identifier: string | null;
+};
+
+export type ApplicationResponse = {
+  targets: Array<number>;
+  entries_data: NestedField;
+  form: number;
+  id: number;
+  information_checks: Array<{ id: number; name: string }>;
+  target_statuses: Array<TargetStatus>;
+};
+
 export type UploadedFileMeta = {
   id: number;
   attachment: string;
@@ -93,7 +139,7 @@ export const RECEIVE_APPLICATION_SAVED =
   'application/RECEIVE_APPLICATION_SAVED';
 export interface ReceiveApplicationSavedAction {
   type: typeof RECEIVE_APPLICATION_SAVED;
-  payload: number;
+  payload: ApplicationResponse;
 }
 export const APPLICATION_SUBMISSION_FAILED =
   'application/APPLICATION_SUBMISSION_FAILED';

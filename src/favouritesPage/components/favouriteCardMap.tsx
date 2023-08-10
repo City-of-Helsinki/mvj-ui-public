@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapContainer, Marker, Tooltip } from 'react-leaflet';
 import 'proj4leaflet';
-import { IconHeartFill } from 'hds-react';
+import { IconStarFill } from 'hds-react';
 import L, { DivIcon } from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +28,7 @@ const FavouriteCardMap = (props: Props): JSX.Element => {
   const linkToTarget = !(props.noLink || false);
 
   const getIcon = (): DivIcon => {
-    const html = renderToStaticMarkup(<IconHeartFill />);
+    const html = renderToStaticMarkup(<IconStarFill />);
     return new L.DivIcon({
       html: html,
       className: 'FavouriteCardMap__icon',

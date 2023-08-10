@@ -193,7 +193,7 @@ export default connect(
   (state: RootState): State => ({
     formValues: getFormValues('application')(state) as ApplicationFormRoot,
     isSubmitting: state.application.isSubmittingApplication,
-    submittedAnswerId: state.application.submittedAnswerId,
+    submittedAnswerId: state.application.submittedAnswer.id,
     favourite: state.favourite.favourite,
     relevantPlotSearch: getPlotSearchFromFavourites(state),
     isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,

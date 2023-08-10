@@ -7,6 +7,7 @@ import {
   uploadFileRequest,
 } from './requests';
 import {
+  ApplicationResponse,
   DELETE_UPLOAD,
   DeleteUploadAction,
   FETCH_FORM_ATTRIBUTES,
@@ -63,7 +64,7 @@ function* submitApplicationSaga({
     switch (response.status) {
       case 200:
       case 201:
-        yield put(receiveApplicationSaved(bodyAsJson.id as number));
+        yield put(receiveApplicationSaved(bodyAsJson as ApplicationResponse));
         break;
       default:
         yield put(applicationSubmissionFailed(bodyAsJson));

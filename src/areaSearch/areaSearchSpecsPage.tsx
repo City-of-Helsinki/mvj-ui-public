@@ -11,7 +11,7 @@ import {
   change,
 } from 'redux-form';
 import { Col, Container, Row } from 'react-grid-system';
-import { Button, Link, Notification } from 'hds-react';
+import { Button, Notification } from 'hds-react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
@@ -206,7 +206,7 @@ const AreaSearchSpecsPage = ({
                       <p>
                         {t(
                           'areaSearch.specs.explanation',
-                          "If you're planning to lease an area for example for lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, continue by filling the following form. Tell us a few details about the area you'd like to lease and then fill the application. We'll respond to you as soon as possible. Fields marked with an asterisk (*) are required."
+                          'If you are willing to lease an area, continue by filling up the application. Please tell us your wishes concerning the area, intended use of the lease and lease time. We will contact you as soon as possible. Fields marked with an asterisk are required.'
                         )}
                       </p>
                       <section>
@@ -298,25 +298,6 @@ const AreaSearchSpecsPage = ({
                             "Tell us which area you'd like to lease"
                           )}
                         </h2>
-                        <p>
-                          {t(
-                            'areaSearch.specs.area.explanation',
-                            'Besides Helsinki itself, the City of Helsinki also owns land in other cities including Sipoo, Espoo, .... The selected area will only serve as the starting point during negotiations.'
-                          )}
-                        </p>
-                        <Link
-                          href={t(
-                            'areaSearch.specs.area.readMorelinkTarget',
-                            'https://hel.fi/'
-                          )}
-                          external
-                          openInNewTab
-                        >
-                          {t(
-                            'areaSearch.specs.area.readMoreLink',
-                            'Read more on the City of Helsinki website'
-                          )}
-                        </Link>
                         <h3>
                           {t(
                             'areaSearch.specs.area.drawOnMap.heading',
@@ -368,7 +349,7 @@ const AreaSearchSpecsPage = ({
                           component={FileInputFormField}
                           label={t(
                             'areaSearch.specs.attachments.input',
-                            'You may also optionally include any relevant attachments here, such as photos of the area in question, lorem ipsum, dolor tai sit amet.'
+                            'You may also optionally include any relevant attachments here, such as photos of the area in question.'
                           )}
                           dragAndDrop
                           multiple

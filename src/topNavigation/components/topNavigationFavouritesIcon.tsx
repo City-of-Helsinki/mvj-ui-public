@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconHeart } from 'hds-react';
+import { IconStar } from 'hds-react';
 
 interface Props {
   count: number;
@@ -13,7 +13,7 @@ const TopNavigationFavouritesIcon = (props: Props): JSX.Element => {
           {props.count}
         </div>
       )}
-      <IconHeart aria-hidden={true} />
+      <IconStar aria-hidden={true} />
     </div>
   );
 };

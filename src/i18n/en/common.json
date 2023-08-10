@@ -84,6 +84,8 @@
     "submitInProcess": "Submitting...",
     "success": {
       "body": "Your application has been received.",
+      "body_one": "Your application has been received. Application identifier is {{applicationIdentifiers}}. A copy of the application has been sent into your email.",
+      "body_other": "Your application has been received. Application identifiers are {{applicationIdentifiers}}. A copy of the application has been sent into your email.",
       "heading": "Thank you for your application",
       "pageTitle": "Application sent"
     },
@@ -128,7 +130,7 @@
         "label": "Area search"
       },
       "heading": "Apply for a land area lease",
-      "introduction": "The City of Helsinki offers plots and venues for rent for various types of activities. Please select the option that best represents your needs below.",
+      "introduction": "The City of Helsinki offers vacant land or water areas for rent for various types of activities (e.g. for placing masts, agricultural uses, additional courtyards, sand silos, collection boxes or exercising parks).",
       "otherUses": {
         "commercialUses": {
           "blurb": "This includes A frames, advertising spaces on bridges, outdoor advertising devices and election advertisements.",
@@ -172,14 +174,11 @@
           "explanation": "Note that the area you specify will be precursory only. We'll contact you to determine the exact area later during the application handling process. Areas colored in dark gray are not owned by the City of Helsinki.",
           "heading": "Draw the desired area on the map"
         },
-        "explanation": "Besides Helsinki itself, the City of Helsinki also owns land in other cities including Sipoo, Espoo, .... The selected area will only serve as the starting point during negotiations.",
-        "heading": "Tell us which area you'd like to lease",
-        "readMoreLink": "Read more on the City of Helsinki website",
-        "readMorelinkTarget": "https://hel.fi/"
+        "heading": "Tell us which area you'd like to lease"
       },
       "attachments": {
         "heading": "Attachments",
-        "input": "You may also optionally include any relevant attachments here, such as photos of the area in question, lorem ipsum, dolor tai sit amet."
+        "input": "You may also optionally include any relevant attachments here, such as photos of the area in question."
       },
       "continueButton": "Apply for this area",
       "errors": {
@@ -189,7 +188,7 @@
         "startDateBeforeEndDate": "Start date cannot be after end date.",
         "validation": "Please check the marked fields before proceeding."
       },
-      "explanation": "If you're planning to lease an area for example for lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, continue by filling the following form. Tell us a few details about the area you'd like to lease and then fill the application. We'll respond to you as soon as possible. Fields marked with an asterisk (*) are required.",
+      "explanation": "If you are willing to lease an area, continue by filling up the application. Please tell us your wishes concerning the area, intended use of the lease and lease time. We will contact you as soon as possible. Fields marked with an asterisk are required.",
       "heading": "Apply for a land area lease",
       "intendedUse": {
         "endDate": "End date for lease",
@@ -444,6 +443,11 @@
         "pageTitle": "Plot searches and competitions"
       },
       "sidebar": {
+        "addToApplication": "Add to application",
+        "legend": {
+          "arrow": "= details",
+          "star": "= add to application"
+        },
         "navigateToTarget": "Open the details for this target",
         "notification": {
           "noTargetsToShow": {
@@ -485,7 +489,8 @@
           "area": "Area (m²)",
           "intendedUse": "Intended use",
           "permittedBuildArea": "Permitted build floor area (m²)",
-          "plotNumber": "Plot"
+          "plotNumber": "Plot",
+          "tools": "Tools"
         },
         "typeHeadings": {
           "showThisType": "Show",
