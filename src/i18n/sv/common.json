@@ -228,6 +228,14 @@
       "pageTitle": ""
     }
   },
+  "faq": {
+    "accordion": {
+      "heading": ""
+    },
+    "notification": {
+      "error": ""
+    }
+  },
   "favourites": {
     "saga": {
       "addTarget": "",
@@ -302,10 +310,6 @@
       "counter_other": "Plot sökningar och tävlingar: {{count}}",
       "explanation": "Tomter för långtidsbostäder eller industriell verksamhet",
       "label": "Jag vill delta i en tomtsökning eller tävling"
-    },
-    "questions": {
-      "explanation": "",
-      "heading": "Några frågor?"
     }
   },
   "globalNotifications": {

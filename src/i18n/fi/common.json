@@ -228,6 +228,14 @@
       "pageTitle": "Sivua ei löytynyt"
     }
   },
+  "faq": {
+    "accordion": {
+      "heading": "Usein kysytyt kysymykset"
+    },
+    "notification": {
+      "error": "Jokin meni pieleen usein kysyttyjä kysymyksiä noudettaessa."
+    }
+  },
   "favourites": {
     "saga": {
       "addTarget": "Kohde \"{{address}}\" lisätty hakemukseen.",
@@ -302,10 +310,6 @@
       "counter_other": "Tonttihaut ja kilpailut: {{count}} kpl",
       "explanation": "Tontit pitkäkestoiseen asumiseen tai teollisuustoimintaan",
       "label": "Haluan osallistua tonttihakuun tai -kilpailuun"
-    },
-    "questions": {
-      "explanation": "Kirjaudu palveluun ja ole meihin yhteydessä Viestit-sivun kautta. Vastaamme sinulle mahdollisimman pian.",
-      "heading": "Kysyttävää?"
     }
   },
   "globalNotifications": {

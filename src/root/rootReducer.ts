@@ -10,6 +10,7 @@ import notificationReducer from '../globalNotification/reducer';
 import applicationReducer from '../application/reducer';
 import areaSearchReducer from '../areaSearch/reducer';
 import directReservationReducer from '../directReservation/reducer';
+import faqReducer from '../faq/reducer';
 
 const allReducers = {
   auth: authReducer,
@@ -22,6 +23,7 @@ const allReducers = {
   oidc: oidcReducer,
   form: formReducer,
   directReservation: directReservationReducer,
+  faq: faqReducer,
 };
 
 export let rootReducer = combineReducers({

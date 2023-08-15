@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import BoxGrid from '../boxGrid/boxGrid';
 import BoxGridBox from '../boxGrid/boxGridBox';
+import FaqAccordion from '../faq/faqAccordion';
 import MainContentElement from '../a11y/MainContentElement';
 import { ReactComponent as PlotSearchesImage } from '../assets/images/frontPage/plotSearches.svg';
 import { ReactComponent as OtherSearchesImage } from '../assets/images/frontPage/otherSearches.svg';
@@ -96,14 +97,7 @@ const FrontPage = (): JSX.Element => {
             image={<ApplyForChangesImage />}
           />
         </BoxGrid>
-
-        <h5>{t('frontPage.questions.heading', 'Questions?')}</h5>
-        <p>
-          {t(
-            'frontPage.questions.explanation',
-            'Please log in and contact us through the Messages page. We will get back to you as soon as possible.'
-          )}
-        </p>
+        <FaqAccordion />
       </div>
     </MainContentElement>
   );

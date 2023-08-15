@@ -1,0 +1,16 @@
+.FaqAccordion {
+  margin-top: $spacing-l;
+  margin-left: $spacing-layout-2-xl;
+  margin-right: $spacing-layout-2-xl;
+  min-width: 60%;
+  border-bottom: none !important;
+
+  &__faq-item {
+    margin-bottom: $spacing-m;
+    white-space: pre-wrap;
+  }
+
+  &__question {
+    font-weight: bold;
+  }
+}
