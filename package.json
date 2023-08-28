@@ -23,10 +23,10 @@
     "@types/redux-form": "^8.3.3",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.8.0",
-    "hds-core": "^1.6.0",
-    "hds-design-tokens": "^1.7.1",
-    "hds-react": "^1.6.0",
-    "history": "5.1.0",
+    "hds-core": "2.13.0",
+    "hds-design-tokens": "2.13.0",
+    "hds-react": "2.13.0",
+    "history": "^5.3.0",
     "i18next": "^21.6.0",
     "i18next-browser-languagedetector": "^6.1.2",
     "i18next-parser": "^5.3.0",
@@ -36,7 +36,7 @@
     "leaflet-measure-path": "^1.5.0",
     "node-sass": "^8.0.0",
     "oidc-client": "^1.11.5",
-    "proj4": "^2.7.5",
+    "proj4": "^2.9.0",
     "proj4leaflet": "^1.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -49,13 +49,13 @@
     "react-router": "^6.0.2",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-    "redux": "^4.0.5",
+    "redux": "^4.2.1",
     "redux-actions": "^2.6.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-form": "^8.3.8",
     "redux-injectors": "^1.3.0",
     "redux-oidc": "^4.0.0-beta1",
-    "redux-saga": "^1.1.3",
+    "redux-saga": "^1.2.3",
     "typescript": "^4.1.3",
     "web-vitals": "^2.1.2"
   },
@@ -98,7 +98,7 @@
     "jest-fetch-mock": "^3.0.3",
     "lint-staged": "^12.1.2",
     "prettier": "^2.4.1",
-    "ts-jest": "^27.0.7"
+    "ts-jest": "^27.1.5"
   },
   "jest": {
     "collectCoverageFrom": [
