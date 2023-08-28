@@ -1,16 +1,19 @@
-.App {
-  margin-top: rem-calc(60px);
-  width: 100%;
-  display: block;
-  overflow: hidden;
-  min-height: 100%;
+body {
+  margin: 0;
 
-  main {
-    min-height: 100vh;
-    margin-top: 72px;
-    margin-bottom: -$spacing-s;
-    @media (max-width: #{$breakpoint-s - 1px}) {
-      margin-top: 65px;
+  .App {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    min-height: 100%;
+
+    main {
+      min-height: 100vh;
+      margin-top: 72px;
+      margin-bottom: -$spacing-s;
+      @media (max-width: #{$breakpoint-s - 1px}) {
+        margin-top: 65px;
+      }
     }
   }
 }
