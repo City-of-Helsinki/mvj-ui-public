@@ -58,13 +58,15 @@ export const prepareAreaSearchSubmission = (
   const formData = getFormValues(AREA_SEARCH_FORM_NAME)(
     store.getState()
   ) as AreaSearchFormRoot;
-  const { intended_use_category, intended_use, ...rest } = formData.search;
+  const { intended_use_category, intended_use, end_date, ...rest } =
+    formData.search;
 
   return {
     ...rest,
     // Should already be validated to not be null at this stage
     intended_use: intended_use as number,
     area_search_attachments: files,
+    end_date: end_date || null,
   };
 };
 

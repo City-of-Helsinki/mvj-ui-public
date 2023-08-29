@@ -196,7 +196,8 @@
         "heading": "Valitse käyttötarkoitus ja toivottu vuokra-aika",
         "mainType": "Käyttötarkoitus",
         "projectDescription": "Tarkempi kuvaus käyttötarkoituksesta",
-        "startDate": "Vuokrauksen alkamispäivämäärä"
+        "startDate": "Vuokrauksen alkamispäivämäärä",
+        "startDateHelpText": "Huomioithan alkamispäivää merkitessäsi, että hakemukset käsitellään saapumisjärjestyksessä."
       },
       "loginButton": "Kirjaudu sisään",
       "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehaun.",

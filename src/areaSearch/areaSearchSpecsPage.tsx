@@ -103,6 +103,16 @@ const AreaSearchSpecsPage = ({
   const [hasSubmitErrors, setHasSubmitErrors] = useState<boolean>(false);
 
   const dateNow = useMemo<Date>(() => new Date(), []);
+  const lastDate = useMemo<Date>(() => {
+    const now = new Date();
+    now.setFullYear(now.getFullYear() + 25);
+
+    return now;
+  }, []);
+  const startDateObject = useMemo<Date | null>(
+    () => (startDate ? new Date(startDate) : null),
+    [startDate]
+  );
 
   // define and memoize validators locally (to prevent redefinition/rerender loops)
   const simpleRequiredValidator = useMemo<
@@ -261,7 +271,12 @@ const AreaSearchSpecsPage = ({
                                 'areaSearch.specs.intendedUse.startDate',
                                 'Start date for lease'
                               )}
+                              helperText={t(
+                                'areaSearch.specs.intendedUse.startDateHelpText',
+                                'Please note that applications will be processed in the order they were submitted.'
+                              )}
                               minDate={dateNow}
+                              maxDate={lastDate}
                               validate={[
                                 simpleRequiredValidator,
                                 dateAfterPageLoadValidator,
@@ -282,11 +297,13 @@ const AreaSearchSpecsPage = ({
                                 'areaSearch.specs.intendedUse.endDateHelpText',
                                 "If you don't yet know the date you'd like the lease to end on or if you'd like to apply for a lease for an indefinite time, please expand on this in the detailed description field above."
                               )}
-                              minDate={dateNow}
+                              minDate={startDateObject || dateNow}
+                              maxDate={lastDate}
                               validate={[
                                 dateAfterPageLoadValidator,
                                 isAfterStartDateValidator,
                               ]}
+                              initialMonth={startDateObject || dateNow}
                             />
                           </Col>
                         </Row>

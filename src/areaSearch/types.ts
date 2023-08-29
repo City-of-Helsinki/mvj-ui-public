@@ -55,7 +55,7 @@ export type AreaSearchAttachment = {
 
 export type AreaSearchSubmission = {
   start_date: string;
-  end_date: string;
+  end_date: string | null;
   description_area: string;
   description_intended_use: string;
   intended_use: number;
