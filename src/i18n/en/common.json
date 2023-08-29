@@ -228,6 +228,14 @@
       "pageTitle": "Page not found"
     }
   },
+  "faq": {
+    "accordion": {
+      "heading": "Frequently asked questions"
+    },
+    "notification": {
+      "error": "Something went wrong while fetching frequently asked questions."
+    }
+  },
   "favourites": {
     "saga": {
       "addTarget": "Target \"{{address}}\" added to application.",
@@ -302,10 +310,6 @@
       "counter_other": "Plot search and competitions: {{count}}",
       "explanation": "Plots for long-term housing or industrial activities",
       "label": "I want to participate in a plot search or competition"
-    },
-    "questions": {
-      "explanation": "Please log in and contact us through the Messages page. We will get back to you as soon as possible.",
-      "heading": "Questions?"
     }
   },
   "globalNotifications": {
