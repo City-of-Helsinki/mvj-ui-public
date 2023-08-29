@@ -9,6 +9,7 @@ import favouriteReducer from '../favourites/reducer';
 import notificationReducer from '../globalNotification/reducer';
 import applicationReducer from '../application/reducer';
 import areaSearchReducer from '../areaSearch/reducer';
+import directReservationReducer from '../directReservation/reducer';
 
 const allReducers = {
   auth: authReducer,
@@ -20,6 +21,7 @@ const allReducers = {
   areaSearch: areaSearchReducer,
   oidc: oidcReducer,
   form: formReducer,
+  directReservation: directReservationReducer,
 };
 
 export let rootReducer = combineReducers({

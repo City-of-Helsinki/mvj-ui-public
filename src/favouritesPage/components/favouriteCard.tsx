@@ -40,7 +40,10 @@ const FavouriteCard = (props: Props): JSX.Element => {
       <Row>
         <Col md={3} xs={4}>
           {/* Left Column (map)*/}
-          <FavouriteCardMap target={target} />
+          <FavouriteCardMap
+            target={target}
+            noLink={target.target_type == 'direct_reservation'}
+          />
         </Col>
         <Col md={9} xs={8}>
           {/* Right Column (text and actionbuttons etc.. */}

@@ -22,6 +22,7 @@ import AreaSearchApplicationPage from '../areaSearch/areaSearchApplicationPage';
 import AreaSearchApplicationPreview from '../areaSearch/areaSearchApplicationPreview';
 import AreaSearchSpecsPage from '../areaSearch/areaSearchSpecsPage';
 import AreaSearchApplicationSuccessPage from '../areaSearch/areaSearchApplicationSuccessPage';
+import DirectReservationPage from '../directReservation/directReservationPage';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -44,6 +45,7 @@ export const AppRoutes = {
   APPLICATION_FORM: 'application-form',
   APPLICATION_PREVIEW: 'application-preview',
   APPLICATION_SUBMIT: 'application-submit',
+  DIRECT_RESERVATION: 'direct-reservation',
 };
 
 /**
@@ -76,6 +78,7 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.APPLICATION_FORM]: '/hakemus/tietojen-taytto',
     [AppRoutes.APPLICATION_PREVIEW]: '/hakemus/tietojen-tarkistus',
     [AppRoutes.APPLICATION_SUBMIT]: '/hakemus/lahetys',
+    [AppRoutes.DIRECT_RESERVATION]: '/suoravaraus/',
   };
 
   return routes[id] ? routes[id] : '';
@@ -265,6 +268,14 @@ const SiteRoutes = (): JSX.Element => {
                   </Routes>
                 )}
               </AreaSearchApplicationRootPage>
+            }
+          />
+          <Route
+            path={getRouteById(AppRoutes.DIRECT_RESERVATION) + ':id'}
+            element={
+              <RouteWithLoader>
+                <DirectReservationPage />
+              </RouteWithLoader>
             }
           />
           <Route path="*" element={<ErrorPage />} />

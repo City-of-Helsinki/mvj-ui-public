@@ -210,6 +210,18 @@
       }
     }
   },
+  "directReservation": {
+    "buttons": {
+      "login": "Kirjaudu sisään"
+    },
+    "error": {
+      "notLoggedIn": "Kirjaudu sisään hakeaksesi suoravarauskohteita"
+    },
+    "errors": {
+      "favouriteGenerationError": "Jotain meni pieleen. Yritä uudelleen tai ota yhteyttä linkin lähettäneeseen virkailijaan."
+    },
+    "pageTitle": "Suoravaraus"
+  },
   "errorPage": {
     "notFound": {
       "explanation": "404 Sivua ei löytynyt",

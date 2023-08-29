@@ -1,0 +1,8 @@
+.DirectReservationPage {
+  @include pageTopLevelComponent();
+
+  .DirectReservationPage__content {
+    margin-top: $spacing-xl;
+    align-items: center;
+  }
+}

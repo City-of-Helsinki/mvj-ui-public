@@ -210,6 +210,18 @@
       }
     }
   },
+  "directReservation": {
+    "buttons": {
+      "login": "Log in"
+    },
+    "error": {
+      "notLoggedIn": "Please log in first in order to apply for direct reservation plots."
+    },
+    "errors": {
+      "favouriteGenerationError": "Something went wrong! Try again later or contact the city official you received the direct reservation link from."
+    },
+    "pageTitle": "Direct reservation"
+  },
   "errorPage": {
     "notFound": {
       "explanation": "404 Page not found",
