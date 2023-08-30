@@ -65,7 +65,7 @@ const AreaSearchTargetSummary = ({
       ),
       value: lastSubmission?.description_area
         ? lastSubmission.description_area
-        : '???',
+        : '-',
       fullDescOnly: true,
     },
   ];

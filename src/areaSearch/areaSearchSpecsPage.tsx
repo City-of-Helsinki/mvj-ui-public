@@ -343,12 +343,10 @@ const AreaSearchSpecsPage = ({
                               id="description_area"
                               name="search.description_area"
                               component={TextAreaFormField}
-                              required
                               label={t(
                                 'areaSearch.specs.area.areaDescription',
                                 'Detailed description of desired area'
                               )}
-                              validate={[simpleRequiredValidator]}
                             />
                           </Col>
                         </Row>
