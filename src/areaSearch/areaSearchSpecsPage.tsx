@@ -28,8 +28,9 @@ import {
 } from '../form/FileUploadsContext';
 import FileInputFormField from '../form/FileInputFormField';
 import {
+  dateAfterOrEqualValidatorGenerator,
   dateAfterValidatorGenerator,
-  dateBeforeValidatorGenerator,
+  dateBeforeOrEqualValidatorGenerator,
   nonEmptyMultiPolygonValidatorGenerator,
   requiredValidatorGenerator,
 } from '../form/validators';
@@ -125,10 +126,10 @@ const AreaSearchSpecsPage = ({
     ReturnType<typeof dateAfterValidatorGenerator>
   >(() => dateAfterValidatorGenerator(dateNow.toISOString()), []);
   const isBeforeEndDateValidator = useMemo<
-    ReturnType<typeof dateBeforeValidatorGenerator>
+    ReturnType<typeof dateBeforeOrEqualValidatorGenerator>
   >(
     () =>
-      dateBeforeValidatorGenerator(
+      dateBeforeOrEqualValidatorGenerator(
         endDate,
         t(
           'areaSearch.specs.errors.startDateBeforeEndDate',
@@ -138,10 +139,10 @@ const AreaSearchSpecsPage = ({
     [startDate, endDate]
   );
   const isAfterStartDateValidator = useMemo<
-    ReturnType<typeof dateAfterValidatorGenerator>
+    ReturnType<typeof dateAfterOrEqualValidatorGenerator>
   >(
     () =>
-      dateAfterValidatorGenerator(
+      dateAfterOrEqualValidatorGenerator(
         startDate,
         t(
           'areaSearch.specs.errors.endDateAfterStartDate',
