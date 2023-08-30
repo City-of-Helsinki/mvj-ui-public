@@ -57,6 +57,24 @@ export interface PlotSearchTypesNotFoundAction {
   type: typeof PLOT_SEARCH_TYPES_NOT_FOUND;
 }
 
+export const FETCH_PLOT_SEARCH_STAGES = 'plotSearch/FETCH_PLOT_SEARCH_STAGES';
+export interface FetchPlotSearchStagesAction {
+  type: typeof FETCH_PLOT_SEARCH_STAGES;
+}
+
+export const RECEIVE_PLOT_SEARCH_STAGES =
+  'plotSearch/RECEIVE_PLOT_SEARCH_STAGES';
+export interface ReceivePlotSearchStagesAction {
+  type: typeof RECEIVE_PLOT_SEARCH_STAGES;
+  payload: Array<PlotSearchStage>;
+}
+
+export const PLOT_SEARCH_STAGES_NOT_FOUND =
+  'plotSearch/PLOT_SEARCH_STAGES_NOT_FOUND';
+export interface PlotSearchStagesNotFoundAction {
+  type: typeof PLOT_SEARCH_STAGES_NOT_FOUND;
+}
+
 export type PlotSearchType = {
   id: number;
   name: string;
@@ -70,6 +88,12 @@ export type PlotSearchSubtype = {
   show_district: boolean;
 };
 
+export type PlotSearchStage = {
+  id: number;
+  name: string;
+  stage: string;
+};
+
 export type PlotSearchTypeReference = {
   id: number;
   name: string;
@@ -81,7 +105,7 @@ export type PlotSearchSubtypeReference = {
   plot_search_type: number;
 };
 
-export type PlotSearchStage = {
+export type PlotSearchStageReference = {
   id: number;
   name: string;
 };
@@ -268,7 +292,7 @@ export type PlotSearchFromBackend = {
   id: number;
   type: PlotSearchTypeReference;
   subtype: PlotSearchSubtypeReference;
-  stage: PlotSearchStage;
+  stage: PlotSearchStageReference;
   search_class: string;
   form: Form;
   decisions: Array<Decision>;
@@ -285,7 +309,7 @@ export type PlotSearch = {
   id: number;
   type: PlotSearchTypeReference;
   subtype: PlotSearchSubtypeReference;
-  stage: PlotSearchStage;
+  stage: PlotSearchStageReference;
   search_class: string;
   form: Form;
   decisions: Array<Decision>;
