@@ -31,6 +31,31 @@ interface Props {
   ) => void;
 }
 
+const MapSearchSingleTargetViewRow = ({
+  label,
+  value,
+  alwaysShow = false,
+}: {
+  label: JSX.Element;
+  value: unknown;
+  alwaysShow?: boolean;
+}) => {
+  if (!value && !alwaysShow) {
+    return null;
+  }
+
+  return (
+    <Row>
+      <Col xs={6} component="dt">
+        {label}
+      </Col>
+      <Col xs={6} component="dd">
+        {value || '???'}
+      </Col>
+    </Row>
+  );
+};
+
 const MapSearchSingleTargetView = ({
   plotSearchAttributes,
   selectedTarget,
@@ -39,16 +64,6 @@ const MapSearchSingleTargetView = ({
 }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const LeftColumn = ({ children }: { children: ReactNode }): JSX.Element => (
-    <Col xs={6} component="dt">
-      {children}
-    </Col>
-  );
-  const RightColumn = ({ children }: { children: ReactNode }): JSX.Element => (
-    <Col xs={6} component="dd">
-      {children}
-    </Col>
-  );
 
   if (!selectedTarget) {
     return null;
@@ -80,167 +95,126 @@ const MapSearchSingleTargetView = ({
 
       <h2>{plotSearch.name}</h2>
       <dl>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.applyByDate',
-              'Apply by'
-            )}
-          </LeftColumn>
-          <RightColumn>
-            {plotSearch.end_at
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.applyByDate',
+            'Apply by'
+          )}
+          value={
+            plotSearch.end_at
               ? renderDateTime(new Date(plotSearch.end_at))
-              : '???'}
-          </RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.plotNumber',
-              'Plot'
-            )}
-          </LeftColumn>
-          <RightColumn>{target.target_plan.identifier}</RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.address',
-              'Address'
-            )}
-          </LeftColumn>
-          <RightColumn>{target.target_plan.address}</RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.detailedPlanIdentifier',
-              'Detailed plan identifier'
-            )}
-          </LeftColumn>
-          <RightColumn>
-            {target.target_plan.detailed_plan_identifier}
-          </RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.detailedPlanState',
-              'Detailed plan state'
-            )}
-          </LeftColumn>
-          <RightColumn>
-            {getTargetPlanOptionTitle(
-              plotSearchAttributes,
-              'plan_unit_state',
-              target.target_plan_type,
-              target.target_plan
-            )}
-          </RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.intendedUse',
-              'Intended use'
-            )}
-          </LeftColumn>
-          <RightColumn>
-            {getTargetPlanOptionTitle(
-              plotSearchAttributes,
-              'plan_unit_intended_use',
-              target.target_plan_type,
-              target.target_plan
-            )}
-          </RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.permittedBuildArea',
-              'Permitted build floor area (floor-m²)'
-            )}
-          </LeftColumn>
-          <RightColumn>
-            {target.target_plan.rent_build_permission?.toLocaleString(
-              defaultLanguage
-            ) || '???'}
-          </RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.permittedBuildAreaResidential',
-              'Permitted build residential floor area (floor-m²)'
-            )}
-          </LeftColumn>
-          <RightColumn>
-            {/* {target.plan_unit.permitted_build_floor_area_residential?.toLocaleString(defaultLanguage) || '???'} */}
-            ???
-          </RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.permittedBuildAreaCommercial',
-              'Permitted build commercial floor area (floor-m²)'
-            )}
-          </LeftColumn>
-          <RightColumn>
-            {/* {target.plan_unit.permitted_build_floor_area_commercial?.toLocaleString(defaultLanguage) || '???'} */}
-            ???
-          </RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.area',
-              'Area (m²)'
-            )}
-          </LeftColumn>
-          <RightColumn>
-            {target.target_plan.area?.toLocaleString(defaultLanguage) || '???'}
-          </RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.firstSuitableConstructionYear',
-              'First suitable construction year'
-            )}
-          </LeftColumn>
-          <RightColumn>
-            {/* {target.plan_unit.first_suitable_construction_year} */}
-            ???
-          </RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.hitas',
-              'HITAS'
-            )}
-          </LeftColumn>
-          <RightColumn>{target.lease_hitas || '???'}</RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.financingMethod',
-              'Financing method'
-            )}
-          </LeftColumn>
-          <RightColumn>{target.lease_financing || '???'}</RightColumn>
-        </Row>
-        <Row>
-          <LeftColumn>
-            {t(
-              'plotSearchAndCompetitions.mapView.sidebar.singleTarget.management',
-              'Management method'
-            )}
-          </LeftColumn>
-          <RightColumn>{target.lease_management || '???'}</RightColumn>
-        </Row>
+              : null
+          }
+          alwaysShow
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.plotNumber',
+            'Plot'
+          )}
+          value={target.target_plan.identifier}
+          alwaysShow
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.address',
+            'Address'
+          )}
+          value={target.target_plan.address}
+          alwaysShow
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.detailedPlanIdentifier',
+            'Detailed plan identifier'
+          )}
+          value={target.target_plan.detailed_plan_identifier}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.detailedPlanState',
+            'Detailed plan state'
+          )}
+          value={getTargetPlanOptionTitle(
+            plotSearchAttributes,
+            'plan_unit_state',
+            target.target_plan_type,
+            target.target_plan
+          )}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.intendedUse',
+            'Intended use'
+          )}
+          value={getTargetPlanOptionTitle(
+            plotSearchAttributes,
+            'plan_unit_intended_use',
+            target.target_plan_type,
+            target.target_plan
+          )}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.permittedBuildArea',
+            'Permitted build floor area (floor-m²)'
+          )}
+          value={target.target_plan.rent_build_permission?.toLocaleString(
+            defaultLanguage
+          )}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.permittedBuildAreaResidential',
+            'Permitted build residential floor area (floor-m²)'
+          )}
+          /*value={target.target_plan.permitted_build_floor_area_residential?.toLocaleString(defaultLanguage)}*/
+          value={null}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.permittedBuildAreaCommercial',
+            'Permitted build commercial floor area (floor-m²)'
+          )}
+          /*value={target.target_plan.permitted_build_floor_area_commercial?.toLocaleString(defaultLanguage)}*/
+          value={null}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.area',
+            'Area (m²)'
+          )}
+          value={target.target_plan.area?.toLocaleString(defaultLanguage)}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.firstSuitableConstructionYear',
+            'First suitable construction year'
+          )}
+          /*value={target.target_plan.first_suitable_construction_year}*/
+          value={null}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.hitas',
+            'HITAS'
+          )}
+          value={target.lease_hitas}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.financingMethod',
+            'Financing method'
+          )}
+          value={target.lease_financing}
+        />
+        <MapSearchSingleTargetViewRow
+          label={t(
+            'plotSearchAndCompetitions.mapView.sidebar.singleTarget.management',
+            'Management method'
+          )}
+          value={target.lease_management}
+        />
       </dl>
       {target.target_plan.info_links &&
         target.target_plan.info_links.length > 0 && (
