@@ -134,6 +134,10 @@ const ApplicationPreviewSubsectionField = ({
     return displayValue;
   };
 
+  if (!field.enabled) {
+    return null;
+  }
+
   return (
     <dl className="ApplicationPreviewSubsectionField">
       <Row key={field.id} className="ApplicationPreviewSubsectionField__row">
