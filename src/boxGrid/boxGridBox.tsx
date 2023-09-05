@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 interface Props {
   topLabel?: string;
@@ -8,6 +9,7 @@ interface Props {
   color?: 'pink' | 'gray' | 'yellow' | 'blue';
   image?: ReactNode;
   actions?: ReactNode;
+  url?: string;
 }
 
 const BoxGridBox = ({
@@ -17,16 +19,35 @@ const BoxGridBox = ({
   color = 'gray',
   image,
   actions,
+  url,
 }: Props): JSX.Element => {
-  return (
-    <div className={classNames('BoxGridBox', `BoxGridBox--${color}`)}>
+  const children = (
+    <>
       {topLabel && <div className="BoxGridBox__top-label">{topLabel}</div>}
       {image && <div className="BoxGridBox__image">{image}</div>}
       <div className="BoxGridBox__label">{label}</div>
       <div className="BoxGridBox__bottom-text">{bottomText}</div>
       {actions && <div className="BoxGridBox__actions">{actions}</div>}
-    </div>
+    </>
   );
+
+  const rootProps = {
+    className: classNames(
+      'BoxGridBox',
+      `BoxGridBox--${color}`,
+      !!url && 'BoxGridBox--link'
+    ),
+  };
+
+  if (url) {
+    return (
+      <Link {...rootProps} to={url} reloadDocument={false} aria-label={label}>
+        {children}
+      </Link>
+    );
+  }
+
+  return <div {...rootProps}>{children}</div>;
 };
 
 export default BoxGridBox;
