@@ -119,6 +119,38 @@ export const dateBeforeValidatorGenerator =
     return null;
   };
 
+export const dateAfterOrEqualValidatorGenerator =
+  (comparisonValue?: string, customError?: string) =>
+  (value?: string): string | null => {
+    if (value && comparisonValue) {
+      const valueDate = new Date(value);
+      const comparisonDate = new Date(comparisonValue);
+
+      if (valueDate.valueOf() === comparisonDate.valueOf()) {
+        return null;
+      }
+
+      return dateAfterValidatorGenerator(comparisonValue, customError)(value);
+    }
+    return null;
+  };
+
+export const dateBeforeOrEqualValidatorGenerator =
+  (comparisonValue?: string, customError?: string) =>
+  (value?: string): string | null => {
+    if (value && comparisonValue) {
+      const valueDate = new Date(value);
+      const comparisonDate = new Date(comparisonValue);
+
+      if (valueDate.valueOf() === comparisonDate.valueOf()) {
+        return null;
+      }
+
+      return dateBeforeValidatorGenerator(comparisonValue, customError)(value);
+    }
+    return null;
+  };
+
 export const nonEmptyMultiPolygonValidatorGenerator =
   (customError?: string) =>
   (value?: MultiPolygon | null): string | null => {

@@ -81,7 +81,7 @@ const AreaSearchMap = ({
         <EventHandler />
         <StandardMapLayersControl
           enabledLayers={[
-            MapLayer.baseMap,
+            MapLayer.generalMap,
             //MapLayer.helsinkiOwnedAreas
           ]}
         />

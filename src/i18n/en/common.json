@@ -196,7 +196,8 @@
         "heading": "Specify the intended use and desired time period for the lease",
         "mainType": "Intended use",
         "projectDescription": "Detailed description of intended use",
-        "startDate": "Start date for lease"
+        "startDate": "Start date for lease",
+        "startDateHelpText": "Please note that applications will be processed in the order they were submitted."
       },
       "loginButton": "Log in",
       "notLoggedIn": "To apply, please log in first.",

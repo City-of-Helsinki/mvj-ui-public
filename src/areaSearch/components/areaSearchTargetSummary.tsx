@@ -44,11 +44,11 @@ const AreaSearchTargetSummary = ({
     {
       key: t('areaSearch.application.target.leaseTime', 'Lease time'),
       value:
-        lastSubmission?.start_date && lastSubmission?.end_date
-          ? `${renderDate(
-              new Date(lastSubmission?.start_date as string)
-            )} - ${renderDate(new Date(lastSubmission?.end_date as string))}`
-          : '???',
+        renderDate(new Date(lastSubmission?.start_date as string)) +
+        ' – ' +
+        (lastSubmission?.end_date
+          ? renderDate(new Date(lastSubmission?.end_date as string))
+          : '???'),
       fullDescOnly: false,
     },
     {
@@ -65,7 +65,7 @@ const AreaSearchTargetSummary = ({
       ),
       value: lastSubmission?.description_area
         ? lastSubmission.description_area
-        : '???',
+        : '-',
       fullDescOnly: true,
     },
   ];

@@ -196,7 +196,8 @@
         "heading": "",
         "mainType": "",
         "projectDescription": "",
-        "startDate": ""
+        "startDate": "",
+        "startDateHelpText": ""
       },
       "loginButton": "",
       "notLoggedIn": "",

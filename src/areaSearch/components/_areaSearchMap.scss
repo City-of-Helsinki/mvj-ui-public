@@ -2,6 +2,10 @@
   &__map {
     height: 600px;
     max-height: 75vh;
+
+    .leaflet-geosearch-bar {
+      z-index: 400;
+    }
   }
 
   &__error {
