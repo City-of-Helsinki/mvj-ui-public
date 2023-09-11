@@ -9,7 +9,7 @@ import MainContentElement from '../a11y/MainContentElement';
 import { ReactComponent as PlotSearchesImage } from '../assets/images/frontPage/plotSearches.svg';
 import { ReactComponent as OtherSearchesImage } from '../assets/images/frontPage/otherSearches.svg';
 import { ReactComponent as AreaSearchesImage } from '../assets/images/areaSearch/areaSearch.svg';
-import { ReactComponent as ApplyForChangesImage } from '../assets/images/frontPage/applyForChanges.svg';
+import { AppRoutes, getRouteById } from '../root/routes';
 
 const FrontPage = (): JSX.Element => {
   const { t } = useTranslation();
@@ -53,6 +53,7 @@ const FrontPage = (): JSX.Element => {
             )}
             color="pink"
             image={<PlotSearchesImage />}
+            url={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
           />
           <BoxGridBox
             topLabel={t(
@@ -68,33 +69,22 @@ const FrontPage = (): JSX.Element => {
             )}
             bottomText={t(
               'frontPage.otherCompetitionsAndSearches.explanation',
-              'Description lorem ipsum dolor sit amet et cetera et cetera.'
+              'Other ongoing area searches and competitions'
             )}
             color="gray"
             image={<OtherSearchesImage />}
+            url={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
           />
           <BoxGridBox
             topLabel={t('frontPage.areaSearch.counter', 'Area search')}
             label={t('frontPage.areaSearch.label', 'I want to rent an area')}
             bottomText={t(
               'frontPage.areaSearch.explanation',
-              'Description lorem ipsum dolor sit amet et cetera et cetera.'
+              'Land and water area leases'
             )}
             color="yellow"
             image={<AreaSearchesImage />}
-          />
-          <BoxGridBox
-            topLabel={t('frontPage.applyChange.counter', 'Existing leases')}
-            label={t(
-              'frontPage.applyChange.label',
-              'I want to apply for a change for my lease'
-            )}
-            bottomText={t(
-              'frontPage.applyChange.explanation',
-              'Description lorem ipsum dolor sit amet et cetera et cetera.'
-            )}
-            color="blue"
-            image={<ApplyForChangesImage />}
+            url={getRouteById(AppRoutes.AREA_SEARCH_LANDING)}
           />
         </BoxGrid>
         <FaqAccordion />

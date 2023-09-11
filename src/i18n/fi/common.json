@@ -288,14 +288,9 @@
     "text": ""
   },
   "frontPage": {
-    "applyChange": {
-      "counter": "Vuokraukset",
-      "explanation": "Kuvaus lorem ipsum dolor sit amet et cetera et cetera.",
-      "label": "Haen muutosta vuokraukseeni"
-    },
     "areaSearch": {
       "counter": "Aluehaku",
-      "explanation": "Kuvaus lorem ipsum dolor sit amet et cetera et cetera.",
+      "explanation": "Maa- ja vesialueiden vuokraaminen",
       "label": "Haluan vuokrata alueen"
     },
     "bannerText": "Helsingin kaupungin tonttien, maan, tilojen ja lorem ipsum vuokraus",
@@ -303,13 +298,13 @@
     "otherCompetitionsAndSearches": {
       "counter_one": "Muut kilpailut ja haut: {{count}} kpl",
       "counter_other": "Muut kilpailut ja haut: {{count}} kpl",
-      "explanation": "Kuvaus lorem ipsum dolor sit amet et cetera et cetera.",
+      "explanation": "Muut käynnissä olevat haut ja kilpailut",
       "label": "Haluan osallistua muuhun aluehakuun tai kilpailuun"
     },
     "plotSearchAndCompetitions": {
       "counter_one": "Tonttihaut ja kilpailut: {{count}} kpl",
       "counter_other": "Tonttihaut ja kilpailut: {{count}} kpl",
-      "explanation": "Tontit pitkäkestoiseen asumiseen tai teollisuustoimintaan",
+      "explanation": "Tontit pitkäkestoiseen asumiseen ja kiinteistökehittämiseen",
       "label": "Haluan osallistua tonttihakuun tai -kilpailuun"
     }
   },

@@ -288,14 +288,9 @@
     "text": "Footer lorem ipsum"
   },
   "frontPage": {
-    "applyChange": {
-      "counter": "Existing leases",
-      "explanation": "Description lorem ipsum dolor sit amet et cetera et cetera.",
-      "label": "I want to apply for a change for my lease"
-    },
     "areaSearch": {
       "counter": "Area search",
-      "explanation": "Description lorem ipsum dolor sit amet et cetera et cetera.",
+      "explanation": "Land and water area leases",
       "label": "I want to rent an area"
     },
     "bannerText": "City of Helsinki plot, land, area and lorem ipsum rental",
@@ -303,7 +298,7 @@
     "otherCompetitionsAndSearches": {
       "counter_one": "Other competitions and searches: {{count}}",
       "counter_other": "Other competitions and searches: {{count}}",
-      "explanation": "Description lorem ipsum dolor sit amet et cetera et cetera.",
+      "explanation": "Other ongoing area searches and competitions",
       "label": "I want to participate in another area search or competition"
     },
     "plotSearchAndCompetitions": {
