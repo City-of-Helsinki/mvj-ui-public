@@ -24,6 +24,7 @@ setGridSystemConfiguration({
   gutterWidth: 24,
 });
 
+import 'hds-core';
 import './main.scss';
 
 interface Props {
