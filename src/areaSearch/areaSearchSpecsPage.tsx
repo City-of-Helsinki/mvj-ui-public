@@ -29,7 +29,6 @@ import {
 import FileInputFormField from '../form/FileInputFormField';
 import {
   dateAfterOrEqualValidatorGenerator,
-  dateAfterValidatorGenerator,
   dateBeforeOrEqualValidatorGenerator,
   nonEmptyMultiPolygonValidatorGenerator,
   requiredValidatorGenerator,
@@ -103,7 +102,12 @@ const AreaSearchSpecsPage = ({
 
   const [hasSubmitErrors, setHasSubmitErrors] = useState<boolean>(false);
 
-  const dateNow = useMemo<Date>(() => new Date(), []);
+  const dateNow = useMemo<Date>(() => {
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+
+    return date;
+  }, []);
   const lastDate = useMemo<Date>(() => {
     const now = new Date();
     now.setFullYear(now.getFullYear() + 25);
@@ -123,8 +127,8 @@ const AreaSearchSpecsPage = ({
     ReturnType<typeof nonEmptyMultiPolygonValidatorGenerator>
   >(() => nonEmptyMultiPolygonValidatorGenerator(), []);
   const dateAfterPageLoadValidator = useMemo<
-    ReturnType<typeof dateAfterValidatorGenerator>
-  >(() => dateAfterValidatorGenerator(dateNow.toISOString()), []);
+    ReturnType<typeof dateAfterOrEqualValidatorGenerator>
+  >(() => dateAfterOrEqualValidatorGenerator(dateNow.toISOString()), []);
   const isBeforeEndDateValidator = useMemo<
     ReturnType<typeof dateBeforeOrEqualValidatorGenerator>
   >(
