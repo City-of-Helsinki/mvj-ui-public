@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Button, IconAngleLeft } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
