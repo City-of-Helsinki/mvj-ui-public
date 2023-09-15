@@ -298,12 +298,14 @@
     "otherCompetitionsAndSearches": {
       "counter_one": "Muut kilpailut ja haut: {{count}} kpl",
       "counter_other": "Muut kilpailut ja haut: {{count}} kpl",
+      "counterFailed": "Muut kilpailut ja haut",
       "explanation": "Muut käynnissä olevat haut ja kilpailut",
       "label": "Haluan osallistua muuhun aluehakuun tai kilpailuun"
     },
     "plotSearchAndCompetitions": {
       "counter_one": "Tonttihaut ja kilpailut: {{count}} kpl",
       "counter_other": "Tonttihaut ja kilpailut: {{count}} kpl",
+      "counterFailed": "Tonttihaut ja kilpailut",
       "explanation": "Tontit pitkäkestoiseen asumiseen ja kiinteistökehittämiseen",
       "label": "Haluan osallistua tonttihakuun tai -kilpailuun"
     }

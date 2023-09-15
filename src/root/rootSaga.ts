@@ -6,6 +6,7 @@ import applicationSaga from '../application/saga';
 import areaSearchSaga from '../areaSearch/saga';
 import directReservationSaga from '../directReservation/saga';
 import faqSaqa from '../faq/saga';
+import frontPageSaga from '../frontPage/saga';
 
 export default function* rootSaga(): Generator {
   yield all([
@@ -16,5 +17,6 @@ export default function* rootSaga(): Generator {
     fork(areaSearchSaga),
     fork(directReservationSaga),
     fork(faqSaqa),
+    fork(frontPageSaga),
   ]);
 }

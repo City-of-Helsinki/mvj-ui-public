@@ -1,5 +1,6 @@
 import { Koros } from 'hds-react';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import BoxGrid from '../boxGrid/boxGrid';
@@ -10,9 +11,37 @@ import { ReactComponent as PlotSearchesImage } from '../assets/images/frontPage/
 import { ReactComponent as OtherSearchesImage } from '../assets/images/frontPage/otherSearches.svg';
 import { ReactComponent as AreaSearchesImage } from '../assets/images/areaSearch/areaSearch.svg';
 import { AppRoutes, getRouteById } from '../root/routes';
+import { RootState } from '../root/rootReducer';
+import { fetchUiData } from './actions';
+import { UiData } from './types';
 
-const FrontPage = (): JSX.Element => {
+interface State {
+  uiData: UiData;
+  isFetchingUiData: boolean;
+  fetchingFailed: boolean;
+  uiDataNotFound: boolean;
+}
+
+interface Props {
+  uiData: UiData;
+  isFetchingUiData: boolean;
+  fetchingFailed: boolean;
+  uiDataNotFound: boolean;
+  fetchUiData: () => void;
+}
+
+const FrontPage = ({
+  uiData,
+  isFetchingUiData,
+  fetchingFailed,
+  uiDataNotFound,
+  fetchUiData,
+}: Props): JSX.Element => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    fetchUiData();
+  }, []);
 
   return (
     <MainContentElement className="FrontPage">
@@ -36,13 +65,20 @@ const FrontPage = (): JSX.Element => {
         </h4>
         <BoxGrid>
           <BoxGridBox
-            topLabel={t(
-              'frontPage.plotSearchAndCompetitions.counter',
-              'Plot search and competitions: {{count}}',
-              {
-                count: 2,
-              }
-            )}
+            topLabel={
+              isFetchingUiData || fetchingFailed || uiDataNotFound
+                ? t(
+                    'frontPage.plotSearchAndCompetitions.counterFailed',
+                    'Plot search and competitions'
+                  )
+                : t(
+                    'frontPage.plotSearchAndCompetitions.counter',
+                    'Plot search and competitions: {{count}}',
+                    {
+                      count: uiData.plot_search,
+                    }
+                  )
+            }
             label={t(
               'frontPage.plotSearchAndCompetitions.label',
               'I want to participate in a plot search or competition'
@@ -56,13 +92,20 @@ const FrontPage = (): JSX.Element => {
             url={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
           />
           <BoxGridBox
-            topLabel={t(
-              'frontPage.otherCompetitionsAndSearches.counter',
-              'Other competitions and searches: {{count}}',
-              {
-                count: 14,
-              }
-            )}
+            topLabel={
+              isFetchingUiData || fetchingFailed || uiDataNotFound
+                ? t(
+                    'frontPage.otherCompetitionsAndSearches.counterFailed',
+                    'Other competitions and searches'
+                  )
+                : t(
+                    'frontPage.otherCompetitionsAndSearches.counter',
+                    'Other competitions and searches: {{count}}',
+                    {
+                      count: uiData.other_search,
+                    }
+                  )
+            }
             label={t(
               'frontPage.otherCompetitionsAndSearches.label',
               'I want to participate in another area search or competition'
@@ -93,4 +136,13 @@ const FrontPage = (): JSX.Element => {
   );
 };
 
-export default FrontPage;
+const mapStateToProps = (state: RootState): State => ({
+  uiData: state.frontPage.uiData,
+  isFetchingUiData: state.frontPage.isFetchingUiData,
+  fetchingFailed: state.frontPage.fetchingFailed,
+  uiDataNotFound: state.frontPage.uiDataNotFound,
+});
+
+export default connect(mapStateToProps, {
+  fetchUiData,
+})(FrontPage);
