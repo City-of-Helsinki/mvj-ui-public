@@ -240,10 +240,10 @@ export enum ApplicationFormTopLevelSectionFlavor {
 }
 
 export enum ApplicantTypes {
-  PERSON = 'Person',
-  COMPANY = 'Company',
-  BOTH = 'Both',
-  UNKNOWN = 'Unknown',
+  PERSON = 'person',
+  COMPANY = 'company',
+  BOTH = 'both',
+  UNKNOWN = 'unknown',
 
   // UI only states
   UNSELECTED = 'unselected',
