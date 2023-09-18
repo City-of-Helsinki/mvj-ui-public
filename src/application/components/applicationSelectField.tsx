@@ -27,8 +27,8 @@ const ApplicationSelectField = ({
       <Select<OptionType>
         id={id}
         value={currentOption}
-        onChange={(newValue: OptionType) =>
-          setValues({ value: newValue.value })
+        onChange={(newValue: OptionType | null) =>
+          setValues({ value: newValue?.value || null })
         }
         invalid={meta.invalid}
         required={field.required}
