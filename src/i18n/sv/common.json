@@ -298,12 +298,14 @@
     "otherCompetitionsAndSearches": {
       "counter_one": "Andra tävlingar och sökningar: {{count}}",
       "counter_other": "Andra tävlingar och sökningar: {{count}}",
+      "counterFailed": "",
       "explanation": "",
       "label": ""
     },
     "plotSearchAndCompetitions": {
       "counter_one": "Plot sökningar och tävlingar: {{count}}",
       "counter_other": "Plot sökningar och tävlingar: {{count}}",
+      "counterFailed": "",
       "explanation": "Tomter för långtidsbostäder eller industriell verksamhet",
       "label": "Jag vill delta i en tomtsökning eller tävling"
     }

@@ -11,6 +11,7 @@ import applicationReducer from '../application/reducer';
 import areaSearchReducer from '../areaSearch/reducer';
 import directReservationReducer from '../directReservation/reducer';
 import faqReducer from '../faq/reducer';
+import frontPageReducer from '../frontPage/reducer';
 
 const allReducers = {
   auth: authReducer,
@@ -24,6 +25,7 @@ const allReducers = {
   form: formReducer,
   directReservation: directReservationReducer,
   faq: faqReducer,
+  frontPage: frontPageReducer,
 };
 
 export let rootReducer = combineReducers({

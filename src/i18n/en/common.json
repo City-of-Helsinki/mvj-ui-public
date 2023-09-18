@@ -298,12 +298,14 @@
     "otherCompetitionsAndSearches": {
       "counter_one": "Other competitions and searches: {{count}}",
       "counter_other": "Other competitions and searches: {{count}}",
+      "counterFailed": "Other competitions and searches",
       "explanation": "Other ongoing area searches and competitions",
       "label": "I want to participate in another area search or competition"
     },
     "plotSearchAndCompetitions": {
       "counter_one": "Plot search and competitions: {{count}}",
       "counter_other": "Plot search and competitions: {{count}}",
+      "counterFailed": "Plot search and competitions",
       "explanation": "Plots for long-term housing or industrial activities",
       "label": "I want to participate in a plot search or competition"
     }
