@@ -6,6 +6,7 @@ import {
   put,
   select,
   takeLatest,
+  take,
 } from 'redux-saga/effects';
 import {
   fetchPlotSearchAttributesRequest,
@@ -22,8 +23,11 @@ import {
   PlotSearchFromBackend,
   PlotSearchStage,
   FETCH_PLOT_SEARCH_STAGES,
+  PLOT_SEARCH_STAGES_NOT_FOUND,
+  RECEIVE_PLOT_SEARCH_STAGES,
 } from './types';
 import {
+  fetchPlotSearchStages,
   plotSearchAttributesNotFound,
   plotSearchesNotFound,
   plotSearchStagesNotFound,
@@ -43,9 +47,19 @@ function* fetchPlotSearchesSaga({
   payload,
 }: FetchPlotSearchesAction): Generator<Effect, void, never> {
   try {
-    const stages: Array<PlotSearchStage> = yield select(
+    let stages: Array<PlotSearchStage> = yield select(
       (state: RootState) => state.plotSearch.plotSearchStages
     );
+
+    if (!stages.length) {
+      yield put(fetchPlotSearchStages());
+      yield take([RECEIVE_PLOT_SEARCH_STAGES, PLOT_SEARCH_STAGES_NOT_FOUND]);
+
+      stages = yield select(
+        (state: RootState) => state.plotSearch.plotSearchStages
+      );
+    }
+
     const ongoingId = stages.find((stage) => stage.stage === 'in_action')?.id;
 
     if (!ongoingId) {
