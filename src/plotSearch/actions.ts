@@ -3,14 +3,18 @@ import { Action } from 'redux';
 
 import {
   FETCH_PLOT_SEARCH_ATTRIBUTES,
+  FETCH_PLOT_SEARCH_STAGES,
   FETCH_PLOT_SEARCH_TYPES,
   FETCH_PLOT_SEARCHES,
   PLOT_SEARCH_ATTRIBUTES_NOT_FOUND,
+  PLOT_SEARCH_STAGES_NOT_FOUND,
   PLOT_SEARCH_TYPES_NOT_FOUND,
   PLOT_SEARCHES_NOT_FOUND,
   PlotSearch,
+  PlotSearchStage,
   PlotSearchType,
   RECEIVE_PLOT_SEARCH_ATTRIBUTES,
+  RECEIVE_PLOT_SEARCH_STAGES,
   RECEIVE_PLOT_SEARCH_TYPES,
   RECEIVE_PLOT_SEARCHES,
 } from './types';
@@ -46,3 +50,13 @@ export const receivePlotSearchTypes = (
 
 export const plotSearchTypesNotFound = (): Action<string> =>
   createAction(PLOT_SEARCH_TYPES_NOT_FOUND)();
+
+export const fetchPlotSearchStages = (): Action<string> =>
+  createAction(FETCH_PLOT_SEARCH_STAGES)();
+
+export const receivePlotSearchStages = (
+  payload: Array<PlotSearchStage>
+): Action<string> => createAction(RECEIVE_PLOT_SEARCH_STAGES)(payload);
+
+export const plotSearchStagesNotFound = (): Action<string> =>
+  createAction(PLOT_SEARCH_STAGES_NOT_FOUND)();

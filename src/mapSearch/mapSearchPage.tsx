@@ -11,12 +11,14 @@ import BlockLoader from '../loader/blockLoader';
 import {
   fetchPlotSearchAttributes,
   fetchPlotSearches,
+  fetchPlotSearchStages,
   fetchPlotSearchTypes,
 } from '../plotSearch/actions';
 
 import { ApiAttributes } from '../api/types';
 import {
   PlotSearch,
+  PlotSearchStage,
   PlotSearchSubtype,
   PlotSearchTarget,
   PlotSearchType,
@@ -30,9 +32,11 @@ interface State {
   isFetchingPlotSearches: boolean;
   isFetchingPlotSearchAttributes: boolean;
   isFetchingPlotSearchTypes: boolean;
+  isFetchingPlotSearchStages: boolean;
   plotSearches: Array<PlotSearch>;
   plotSearchAttributes: ApiAttributes;
   plotSearchTypes: Array<PlotSearchType>;
+  plotSearchStages: Array<PlotSearchStage>;
   favourite: Favourite;
 }
 
@@ -41,12 +45,15 @@ interface Props {
   fetchPlotSearches: (payload?: { params: Record<string, string> }) => void;
   fetchPlotSearchAttributes: () => void;
   fetchPlotSearchTypes: () => void;
+  fetchPlotSearchStages: () => void;
   isFetchingPlotSearches: boolean;
   isFetchingPlotSearchAttributes: boolean;
   isFetchingPlotSearchTypes: boolean;
+  isFetchingPlotSearchStages: boolean;
   plotSearches: Array<PlotSearch>;
   plotSearchAttributes: ApiAttributes;
   plotSearchTypes: Array<PlotSearchType>;
+  plotSearchStages: Array<PlotSearchStage>;
   favourite: Favourite;
 }
 
@@ -69,10 +76,13 @@ const MapSearchPage = (props: Props): JSX.Element => {
     fetchPlotSearches,
     fetchPlotSearchAttributes,
     fetchPlotSearchTypes,
+    fetchPlotSearchStages,
     isFetchingPlotSearches,
     isFetchingPlotSearchAttributes,
     isFetchingPlotSearchTypes,
+    isFetchingPlotSearchStages,
     plotSearchTypes,
+    plotSearchStages,
     plotSearches,
     favourite,
   } = props;
@@ -127,10 +137,16 @@ const MapSearchPage = (props: Props): JSX.Element => {
   }, [id, plotSearches]);
 
   useEffect(() => {
-    fetchPlotSearches({ params: { search_class: searchClass } });
     fetchPlotSearchAttributes();
     fetchPlotSearchTypes();
+    fetchPlotSearchStages();
   }, []);
+
+  useEffect(() => {
+    if (!isFetchingPlotSearchStages && plotSearchStages.length > 0) {
+      fetchPlotSearches({ params: { search_class: searchClass } });
+    }
+  }, [isFetchingPlotSearchStages]);
 
   useEffect(() => {
     let newOptions = [...(plotSearchTypes || [])];
@@ -186,7 +202,8 @@ const MapSearchPage = (props: Props): JSX.Element => {
   if (
     isFetchingPlotSearches ||
     isFetchingPlotSearchAttributes ||
-    isFetchingPlotSearchTypes
+    isFetchingPlotSearchTypes ||
+    isFetchingPlotSearchStages
   ) {
     return <BlockLoader />;
   }
@@ -235,6 +252,8 @@ const mapStateToProps = (state: RootState): State => ({
   isFetchingPlotSearchAttributes:
     state.plotSearch.isFetchingPlotSearchAttributes,
   isFetchingPlotSearchTypes: state.plotSearch.isFetchingPlotSearchTypes,
+  isFetchingPlotSearchStages: state.plotSearch.isFetchingPlotSearchStages,
+  plotSearchStages: state.plotSearch.plotSearchStages,
   favourite: state.favourite.favourite,
 });
 
@@ -242,4 +261,5 @@ export default connect(mapStateToProps, {
   fetchPlotSearches,
   fetchPlotSearchAttributes,
   fetchPlotSearchTypes,
+  fetchPlotSearchStages,
 })(MapSearchPage);

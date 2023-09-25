@@ -27,3 +27,11 @@ export const fetchPlotSearchTypesRequest = (): Generator<
 > => {
   return callApi(new Request(createUrl('plot_search_type/')));
 };
+
+export const fetchPlotSearchStagesRequest = (): Generator<
+  Effect,
+  ApiCallResult,
+  Response
+> => {
+  return callApi(new Request(createUrl('plot_search_stage/')));
+};

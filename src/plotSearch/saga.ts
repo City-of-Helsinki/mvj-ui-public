@@ -1,7 +1,16 @@
-import { all, call, Effect, fork, put, takeLatest } from 'redux-saga/effects';
+import {
+  all,
+  call,
+  Effect,
+  fork,
+  put,
+  select,
+  takeLatest,
+} from 'redux-saga/effects';
 import {
   fetchPlotSearchAttributesRequest,
   fetchPlotSearchesRequest,
+  fetchPlotSearchStagesRequest,
   fetchPlotSearchTypesRequest,
 } from './requests';
 import {
@@ -11,28 +20,45 @@ import {
   FETCH_PLOT_SEARCH_TYPES,
   PlotSearchType,
   PlotSearchFromBackend,
+  PlotSearchStage,
+  FETCH_PLOT_SEARCH_STAGES,
 } from './types';
 import {
   plotSearchAttributesNotFound,
   plotSearchesNotFound,
+  plotSearchStagesNotFound,
   plotSearchTypesNotFound,
   receivePlotSearchAttributes,
   receivePlotSearches,
+  receivePlotSearchStages,
   receivePlotSearchTypes,
 } from './actions';
 import { parsePlotSearches } from './helpers';
 import { ApiCallResult } from '../api/callApi';
 import { ApiAttributes } from '../api/types';
 import { logError } from '../root/helpers';
+import { RootState } from '../root/rootReducer';
 
 function* fetchPlotSearchesSaga({
   payload,
-}: FetchPlotSearchesAction): Generator<Effect, void, ApiCallResult> {
+}: FetchPlotSearchesAction): Generator<Effect, void, never> {
   try {
-    const { response, bodyAsJson } = yield call(
-      fetchPlotSearchesRequest,
-      payload?.params
+    const stages: Array<PlotSearchStage> = yield select(
+      (state: RootState) => state.plotSearch.plotSearchStages
     );
+    const ongoingId = stages.find((stage) => stage.stage === 'in_action')?.id;
+
+    if (!ongoingId) {
+      logError('Could not find ongoing stage ID');
+      yield put(plotSearchesNotFound());
+      return;
+    }
+
+    const result: ApiCallResult = yield call(fetchPlotSearchesRequest, {
+      stage: '' + ongoingId,
+      ...(payload?.params || {}),
+    });
+    const { response, bodyAsJson } = result;
 
     switch (response.status) {
       case 200:
@@ -102,6 +128,27 @@ function* fetchPlotSearchTypesSaga(): Generator<Effect, void, ApiCallResult> {
   }
 }
 
+function* fetchPlotSearchStagesSaga(): Generator<Effect, void, ApiCallResult> {
+  try {
+    const { response, bodyAsJson } = yield call(fetchPlotSearchStagesRequest);
+
+    switch (response.status) {
+      case 200:
+        yield put(
+          receivePlotSearchStages(bodyAsJson?.results as Array<PlotSearchStage>)
+        );
+        break;
+      default:
+        yield put(plotSearchStagesNotFound());
+        break;
+    }
+  } catch (e) {
+    logError(e);
+    yield put(plotSearchStagesNotFound());
+    throw e;
+  }
+}
+
 export default function* plotSearchSaga(): Generator {
   yield all([
     fork(function* (): Generator {
@@ -111,6 +158,7 @@ export default function* plotSearchSaga(): Generator {
         fetchPlotSearchAttributesSaga
       );
       yield takeLatest(FETCH_PLOT_SEARCH_TYPES, fetchPlotSearchTypesSaga);
+      yield takeLatest(FETCH_PLOT_SEARCH_STAGES, fetchPlotSearchStagesSaga);
     }),
   ]);
 }
