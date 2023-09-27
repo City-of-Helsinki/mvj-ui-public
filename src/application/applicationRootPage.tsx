@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, initialize } from 'redux-form';
 
@@ -64,9 +64,9 @@ export default connect(
     fetchPlotSearches,
     fetchFormAttributes,
     resetLastApplicationSubmissionError,
-  }
+  },
 )(
   reduxForm<unknown, PropsWithChildren<Props>>({
     form: APPLICATION_FORM_NAME,
-  })(ApplicationRootPage)
+  })(ApplicationRootPage),
 );

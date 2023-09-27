@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Container } from 'react-grid-system';
 import { connect } from 'react-redux';
@@ -28,7 +28,7 @@ const ApplicationSuccessPage = ({ clearFavourite, application }: Props) => {
 
   const getApplicationIdentifiers = (): { value: string; count: number } => {
     const applicationIdentifiers = application.target_statuses.map(
-      (targetStatus) => targetStatus.application_identifier
+      (targetStatus) => targetStatus.application_identifier,
     );
     return {
       value: applicationIdentifiers.join(', '),
@@ -56,7 +56,7 @@ const ApplicationSuccessPage = ({ clearFavourite, application }: Props) => {
             {
               applicationIdentifiers: applicationIdentifiers.value,
               count: applicationIdentifiers.count,
-            }
+            },
           )}
         </p>
       </Container>
@@ -68,5 +68,5 @@ export default connect(
   (state: RootState): State => ({
     application: state.application.submittedAnswer,
   }),
-  { clearFavourite }
+  { clearFavourite },
 )(ApplicationSuccessPage);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Fieldset, FileInput, IconCrossCircle } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -49,7 +49,7 @@ const ApplicationFileUploadField = ({
   const [error, setError] = useState<string | null>(null);
 
   const filesForField = pendingUploads.filter((upload) =>
-    fieldFileIds.includes(upload.id)
+    fieldFileIds.includes(upload.id),
   );
 
   const addId = (id: number) => {
@@ -61,12 +61,12 @@ const ApplicationFileUploadField = ({
     change(
       APPLICATION_FORM_NAME,
       `${fieldName}.value`,
-      fieldFileIds.filter((fileId) => fileId !== id)
+      fieldFileIds.filter((fileId) => fileId !== id),
     );
     change(
       APPLICATION_FORM_NAME,
       'attachments',
-      attachmentIds.filter((fileId) => fileId !== id)
+      attachmentIds.filter((fileId) => fileId !== id),
     );
   };
 
@@ -87,16 +87,16 @@ const ApplicationFileUploadField = ({
                 setError(
                   t(
                     'application.fileUpload.error.nonOkResponse',
-                    'The file could not be uploaded! Please try again later.'
-                  )
+                    'The file could not be uploaded! Please try again later.',
+                  ),
                 );
                 break;
               case FileUploadError.Exception:
                 setError(
                   t(
                     'application.fileUpload.error.exception',
-                    'Something went wrong while trying to upload the file. Please try again later.'
-                  )
+                    'Something went wrong while trying to upload the file. Please try again later.',
+                  ),
                 );
                 break;
               default:
@@ -134,7 +134,7 @@ const ApplicationFileUploadField = ({
                     'Attachment #{{number}}',
                     {
                       number: i + 1,
-                    }
+                    },
                   )}
                 </th>
                 <td>{upload.name}</td>
@@ -159,7 +159,7 @@ const ApplicationFileUploadField = ({
                 >
                   {t(
                     'application.fileUpload.noFilesUploaded',
-                    'No files have yet been uploaded.'
+                    'No files have yet been uploaded.',
                   )}
                 </td>
               </tr>
@@ -182,7 +182,7 @@ const ApplicationFileUploadField = ({
               'The maximum allowed file size is {{maxSize}} MB.',
               {
                 maxSize: 20,
-              }
+              },
             )}
             errorText={error ? error : undefined}
           />
@@ -195,23 +195,23 @@ const ApplicationFileUploadField = ({
 export default connect(
   (
     state: RootState,
-    props: Props
+    props: Props,
   ): Omit<InnerProps, 'deleteUpload' | 'uploadFile' | 'change'> => ({
     pendingUploads: state.application.pendingUploads,
     isPerformingFileOperation: state.application.isPerformingFileOperation,
     fieldFileIds: getFieldFileIds(
       state,
       props.fieldName,
-      APPLICATION_FORM_NAME
+      APPLICATION_FORM_NAME,
     ),
     attachmentIds: formValueSelector(APPLICATION_FORM_NAME)(
       state,
-      'attachments'
+      'attachments',
     ),
   }),
   {
     deleteUpload,
     uploadFile,
     change,
-  }
+  },
 )(ApplicationFileUploadField);

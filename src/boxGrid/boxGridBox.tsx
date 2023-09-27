@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
@@ -35,7 +35,7 @@ const BoxGridBox = ({
     className: classNames(
       'BoxGridBox',
       `BoxGridBox--${color}`,
-      !!url && 'BoxGridBox--link'
+      !!url && 'BoxGridBox--link',
     ),
   };
 

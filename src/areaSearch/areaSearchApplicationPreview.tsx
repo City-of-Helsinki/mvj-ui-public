@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import { Container } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
@@ -69,7 +69,7 @@ const AreaSearchApplicationPreview = ({
     try {
       setLastClientError(null);
       submitApplication(
-        prepareAreaSearchApplicationForSubmission(AREA_SEARCH_FORM_NAME)
+        prepareAreaSearchApplicationForSubmission(AREA_SEARCH_FORM_NAME),
       );
     } catch (e) {
       setLastClientError(e as ApplicationPreparationError);
@@ -78,15 +78,15 @@ const AreaSearchApplicationPreview = ({
 
   return (
     <AuthDependentContent>
-      {(loading, loggedIn) => (
+      {(loading: boolean, loggedIn: boolean) => (
         <MainContentElement className="ApplicationPreviewPage">
           <Helmet>
             <title>
               {getPageTitle(
                 t(
                   'areaSearch.application.preview.pageTitle',
-                  'Area search application'
-                )
+                  'Area search application',
+                ),
               )}
             </title>
           </Helmet>
@@ -94,7 +94,7 @@ const AreaSearchApplicationPreview = ({
             <h1>
               {t(
                 'areaSearch.application.preview.heading',
-                'Area search application preview'
+                'Area search application preview',
               )}
             </h1>
 
@@ -130,7 +130,7 @@ const AreaSearchApplicationPreview = ({
                   variant="secondary"
                   onClick={() =>
                     navigate(
-                      getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM)
+                      getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM),
                     )
                   }
                   disabled={isSubmitting}
@@ -144,13 +144,13 @@ const AreaSearchApplicationPreview = ({
                   isLoading={isSubmitting}
                   loadingText={t(
                     'application.submitInProcess',
-                    'Submitting...'
+                    'Submitting...',
                   )}
                   className="ApplicationPreviewPage__submission-button"
                 >
                   {t('application.submit', 'Submit application')}
                 </Button>
-                {lastError && (
+                {!!lastError && (
                   <Notification
                     size="small"
                     type="error"
@@ -158,7 +158,7 @@ const AreaSearchApplicationPreview = ({
                   >
                     {t(
                       'application.error.generic',
-                      'The application could not be submitted correctly. Please try again later.'
+                      'The application could not be submitted correctly. Please try again later.',
                     )}
                   </Notification>
                 )}
@@ -168,7 +168,7 @@ const AreaSearchApplicationPreview = ({
                     type="error"
                     label={t(
                       'application.error.preparation.label',
-                      'Preparation error'
+                      'Preparation error',
                     )}
                   >
                     {getClientErrorMessage(lastClientError)}
@@ -186,7 +186,7 @@ const AreaSearchApplicationPreview = ({
 export default connect(
   (state: RootState): State => ({
     formValues: getFormValues(AREA_SEARCH_FORM_NAME)(
-      state
+      state,
     ) as AreaSearchFormRoot,
     fieldTypeMapping: getFieldTypeMapping(state),
     lastSubmission: state.areaSearch.lastSubmission,
@@ -195,5 +195,5 @@ export default connect(
   }),
   {
     submitApplication: submitAreaSearchApplication,
-  }
+  },
 )(AreaSearchApplicationPreview);

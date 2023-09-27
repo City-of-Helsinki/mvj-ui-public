@@ -36,7 +36,7 @@ const GeoSearch = (): null => {
   useEffect(() => {
     map.addControl(searchControl);
 
-    return function cleanup() {
+    return () => {
       map.removeControl(searchControl);
     };
   }, []);

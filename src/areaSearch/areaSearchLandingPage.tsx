@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'hds-react';
@@ -11,13 +10,13 @@ import { AppRoutes, getRouteById } from '../root/routes';
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
 
-import { ReactComponent as AreaSearchImage } from '../assets/images/areaSearch/areaSearch.svg';
-import { ReactComponent as OtherConstructionImage } from '../assets/images/areaSearch/otherConstruction.svg';
-import { ReactComponent as PermanentFixturesImage } from '../assets/images/areaSearch/permanentFixtures.svg';
-import { ReactComponent as TerracesAndParkletsImage } from '../assets/images/areaSearch/terracesAndParklets.svg';
-import { ReactComponent as OutdoorEventImage } from '../assets/images/areaSearch/outdoorEvent.svg';
-import { ReactComponent as CommercialUsesImage } from '../assets/images/areaSearch/commercialUses.svg';
-import { ReactComponent as MiscUsesImage } from '../assets/images/areaSearch/misc.svg';
+import AreaSearchImage from '../assets/images/areaSearch/areaSearch.svg?react';
+import OtherConstructionImage from '../assets/images/areaSearch/otherConstruction.svg?react';
+import PermanentFixturesImage from '../assets/images/areaSearch/permanentFixtures.svg?react';
+import TerracesAndParkletsImage from '../assets/images/areaSearch/terracesAndParklets.svg?react';
+import OutdoorEventImage from '../assets/images/areaSearch/outdoorEvent.svg?react';
+import CommercialUsesImage from '../assets/images/areaSearch/commercialUses.svg?react';
+import MiscUsesImage from '../assets/images/areaSearch/misc.svg?react';
 
 const AreaSearchLandingPage = (): JSX.Element => {
   const { t } = useTranslation();
@@ -48,7 +47,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
         <p>
           {t(
             'areaSearch.landingPage.introduction',
-            'The City of Helsinki offers vacant land or water areas for rent for various types of activities (e.g. for placing masts, agricultural uses, additional courtyards, sand silos, collection boxes or exercising parks).'
+            'The City of Helsinki offers vacant land or water areas for rent for various types of activities (e.g. for placing masts, agricultural uses, additional courtyards, sand silos, collection boxes or exercising parks).',
           )}
         </p>
         <h2>
@@ -58,11 +57,11 @@ const AreaSearchLandingPage = (): JSX.Element => {
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.areaSearches.label',
-              'Area search'
+              'Area search',
             )}
             bottomText={t(
               'areaSearch.landingPage.areaSearches.blurb',
-              'You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.'
+              'You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.',
             )}
             color="yellow"
             actions={
@@ -72,13 +71,13 @@ const AreaSearchLandingPage = (): JSX.Element => {
                   theme="black"
                   onClick={() =>
                     navigate(
-                      getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC)
+                      getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC),
                     )
                   }
                 >
                   {t(
                     'areaSearch.landingPage.applyForArea',
-                    'Apply for an area'
+                    'Apply for an area',
                   )}
                 </Button>
               </>
@@ -94,11 +93,11 @@ const AreaSearchLandingPage = (): JSX.Element => {
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.otherConstruction.label',
-              'Construction on streets or in parks'
+              'Construction on streets or in parks',
             )}
             bottomText={t(
               'areaSearch.landingPage.otherUses.otherConstruction.blurb',
-              'You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.'
+              'You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.',
             )}
             color="blue"
             actions={
@@ -106,7 +105,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 <ReadMoreButton
                   target={t(
                     'areaSearch.landingPage.otherUses.otherConstruction.link',
-                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/working-on-streets-and-in-parks'
+                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/working-on-streets-and-in-parks',
                   )}
                 />
               </>
@@ -116,11 +115,11 @@ const AreaSearchLandingPage = (): JSX.Element => {
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.permanentFixtures.label',
-              'Permanent fixture installations on streets or in parks'
+              'Permanent fixture installations on streets or in parks',
             )}
             bottomText={t(
               'areaSearch.landingPage.otherUses.permanentFixtures.blurb',
-              'In order to place permanent fixtures such as pipes, cables, wells, building foundations, fences or walls to public areas like streets, parks and marketplaces, a permit must be acquired.'
+              'In order to place permanent fixtures such as pipes, cables, wells, building foundations, fences or walls to public areas like streets, parks and marketplaces, a permit must be acquired.',
             )}
             color="blue"
             actions={
@@ -128,7 +127,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 <ReadMoreButton
                   target={t(
                     'areaSearch.landingPage.otherUses.permanentFixtures.link',
-                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/working-on-streets-and-in-parks'
+                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/working-on-streets-and-in-parks',
                   )}
                 />
               </>
@@ -138,11 +137,11 @@ const AreaSearchLandingPage = (): JSX.Element => {
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.terraceOrParklet.label',
-              'Terraces and parklets'
+              'Terraces and parklets',
             )}
             bottomText={t(
               'areaSearch.landingPage.otherUses.terraceOrParklet.blurb',
-              'Setting up an outdoor serving area for a restaurant or café requires a terrace permit if the terrace is set up in a public street or park area. Setting up a glazed street terrace also requires a building or action permit. A parklet means a parking space that is temporarily re-purposed for other use.'
+              'Setting up an outdoor serving area for a restaurant or café requires a terrace permit if the terrace is set up in a public street or park area. Setting up a glazed street terrace also requires a building or action permit. A parklet means a parking space that is temporarily re-purposed for other use.',
             )}
             color="blue"
             actions={
@@ -150,7 +149,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 <ReadMoreButton
                   target={t(
                     'areaSearch.landingPage.otherUses.terraceOrParklet.link',
-                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/terraces-and-parklets'
+                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/terraces-and-parklets',
                   )}
                 />
               </>
@@ -160,11 +159,11 @@ const AreaSearchLandingPage = (): JSX.Element => {
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.outdoorEvent.label',
-              'Organizing an outdoor event'
+              'Organizing an outdoor event',
             )}
             bottomText={t(
               'areaSearch.landingPage.otherUses.outdoorEvent.blurb',
-              'You need a permit to organize an event on a street, square or park if the event restricts the public use of the area. A permit is required if the event involves bringing marquee tents, tables, chairs, stages, fences or other structures to the area, for example.'
+              'You need a permit to organize an event on a street, square or park if the event restricts the public use of the area. A permit is required if the event involves bringing marquee tents, tables, chairs, stages, fences or other structures to the area, for example.',
             )}
             color="blue"
             actions={
@@ -172,7 +171,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 <ReadMoreButton
                   target={t(
                     'areaSearch.landingPage.otherUses.outdoorEvent.link',
-                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/outdoor-events'
+                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/outdoor-events',
                   )}
                 />
               </>
@@ -182,11 +181,11 @@ const AreaSearchLandingPage = (): JSX.Element => {
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.commercialUses.label',
-              'Commercial and advertising spaces'
+              'Commercial and advertising spaces',
             )}
             bottomText={t(
               'areaSearch.landingPage.otherUses.commercialUses.blurb',
-              'This includes A frames, advertising spaces on bridges, outdoor advertising devices and election advertisements.'
+              'This includes A frames, advertising spaces on bridges, outdoor advertising devices and election advertisements.',
             )}
             color="blue"
             actions={
@@ -194,7 +193,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 <ReadMoreButton
                   target={t(
                     'areaSearch.landingPage.otherUses.commercialUses.link',
-                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/advertising-spots'
+                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/advertising-spots',
                   )}
                 />
               </>
@@ -204,11 +203,11 @@ const AreaSearchLandingPage = (): JSX.Element => {
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.misc.label',
-              'Other land use arrangements'
+              'Other land use arrangements',
             )}
             bottomText={t(
               'areaSearch.landingPage.otherUses.misc.blurb',
-              'For example city farming, dog training fields, bee farming, other land use and leasing, hunting licenses, kindergarten outdoor areas, water area leasing.'
+              'For example city farming, dog training fields, bee farming, other land use and leasing, hunting licenses, kindergarten outdoor areas, water area leasing.',
             )}
             color="blue"
             actions={
@@ -216,7 +215,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
                 <ReadMoreButton
                   target={t(
                     'areaSearch.landingPage.otherUses.misc.link',
-                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas'
+                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas',
                   )}
                 />
               </>

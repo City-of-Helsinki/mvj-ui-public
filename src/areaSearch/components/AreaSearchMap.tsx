@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { FeatureGroup, MapContainer, useMapEvents } from 'react-leaflet';
 import { FeatureGroup as FeatureGroupType } from 'leaflet';
 import { blur, focus, WrappedFieldProps } from 'redux-form';
@@ -18,6 +18,7 @@ import { MapLayer } from '../../map/types';
 import ZoomControl from '../../map/ZoomControl';
 import DrawTools from '../../map/DrawTools';
 import GeoSearch from '../../map/GeoSearch';
+import MapReadyHandler from '../../map/MapReadyHandler';
 
 type Props = {
   focus: typeof focus;
@@ -75,8 +76,8 @@ const AreaSearchMap = ({
         maxZoom={12}
         crs={CRS}
         zoomControl={false}
-        whenCreated={attachMapResizeObserver}
       >
+        <MapReadyHandler whenCreated={attachMapResizeObserver} />
         <ZoomControl />
         <EventHandler />
         <StandardMapLayersControl

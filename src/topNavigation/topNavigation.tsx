@@ -1,8 +1,14 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { IconSignout, LogoLanguage, Navigation } from 'hds-react';
-import { NavigateFunction, useMatch } from 'react-router';
+import {
+  Header,
+  IconSignout,
+  IconUser,
+  LanguageOption,
+  Logo,
+  logoFi,
+} from 'hds-react';
+import { useMatch } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { User } from 'oidc-client';
 
@@ -31,139 +37,154 @@ interface State {
   favouritesCount: number;
 }
 
-/*
-// TODO: Not currently possible due to the way HDS handles the active class name, but possibly in the future.
-// For now, the same structure is defined separately for every link further below instead.
-
 interface TopNavigationLinkProps {
-  to: string,
-  label: ReactNode,
-  className?: string
+  to: string;
+  label: string;
+  className?: string;
 }
 
-const TopNavigationLink = ({to, label, className}: TopNavigationLinkProps): JSX.Element => {
+const TopNavigationLink = ({
+  to,
+  label,
+  className,
+}: TopNavigationLinkProps): JSX.Element => {
   const match = useMatch(to);
 
-  return <Navigation.Item
+  return (
+    <Header.Link
       label={label}
       as={Link}
       to={to}
       active={match !== null}
       className={className}
-  />;
+    />
+  );
 };
- */
 
 const TopNavigation = ({
   openLoginModal,
   favouritesCount,
   user,
 }: TopNavigationProps): JSX.Element => {
-  const returnHome = (navigate: NavigateFunction) => {
-    navigate(getRouteById(AppRoutes.HOME));
-  };
-
   const { t, i18n } = useTranslation();
-
   const navigate = useNavigate();
 
-  const matchPlotSearchAndCompetitions = useMatch(
-    getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS) + '/*'
-  );
-  const matchOtherCompetitionsAndSearches = useMatch(
-    getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES) + '/*'
-  );
-  const matchAreaSearch = useMatch(
-    getRouteById(AppRoutes.AREA_SEARCH_LANDING) + '/*'
-  );
-  const matchFavourites = useMatch(getRouteById(AppRoutes.FAVOURITES));
-  const changeLanguage = (language: Language) => {
-    i18n.changeLanguage(language).then(() => {
-      document.location.reload();
-    });
+  const naviLinks: TopNavigationLinkProps[] = [
+    {
+      to: getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS),
+      label: t(
+        'topNavigation.tabs.plotSearchAndCompetitions',
+        'Plot search and competitions',
+      ),
+    },
+    {
+      to: getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES),
+      label: t(
+        'topNavigation.tabs.otherCompetitionsAndSearches',
+        'Other competitions and searches',
+      ),
+    },
+    {
+      to: getRouteById(AppRoutes.AREA_SEARCH_LANDING),
+      label: t('topNavigation.tabs.areaSearch', 'Area search'),
+    },
+  ];
+
+  const languages: LanguageOption[] = [
+    {
+      label: 'Suomi',
+      value: Language.FI,
+      isPrimary: false,
+    },
+    {
+      label: 'Svenska',
+      value: Language.SV,
+      isPrimary: false,
+    },
+    {
+      label: 'English',
+      value: Language.EN,
+      isPrimary: false,
+    },
+  ];
+
+  const changeLanguage = (lang: string) => {
+    if (lang !== i18n.language) {
+      i18n.changeLanguage(lang).then(() => {
+        document.location.reload();
+      });
+    }
   };
 
   return (
-    <Navigation
-      menuToggleAriaLabel={t('topNavigation.menuLabel', 'Menu')}
-      skipTo="#content"
-      skipToContentLabel={t('topNavigation.skipToContent', 'Skip to content')}
-      onTitleClick={() => returnHome(navigate)}
-      fixed
+    <Header
+      onDidChangeLanguage={(lang) => changeLanguage(lang)}
+      languages={languages}
+      defaultLanguage={i18n.language}
       className="TopNavigation"
-      logoLanguage={i18n.language as LogoLanguage}
     >
-      <Navigation.Row variant="inline">
-        <Navigation.Item
-          label={t(
-            'topNavigation.tabs.plotSearchAndCompetitions',
-            'Plot search and competitions'
-          )}
-          as={Link}
-          to={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
-          active={matchPlotSearchAndCompetitions !== null}
+      <Header.SkipLink
+        skipTo="#content"
+        label={t('topNavigation.skipToContent', 'Skip to content')}
+      />
+      <Header.ActionBar
+        title={t(
+          'mainAppTitle',
+          'City of Helsinki plot and land leasing system',
+        )}
+        frontPageLabel={t('frontPage.label', 'Front page')}
+        titleAriaLabel={t(
+          'mainAppTitle',
+          'City of Helsinki plot and land leasing system',
+        )}
+        titleHref={getRouteById(AppRoutes.HOME)}
+        logo={<Logo src={logoFi} alt={t('frontPage.label', 'Front page')} />}
+        logoAriaLabel={t('frontPage.label', 'Front page')}
+        logoHref={getRouteById(AppRoutes.HOME)}
+        menuButtonAriaLabel={t('language.languageSelection', 'Language')}
+      >
+        <Header.LanguageSelector
+          ariaLabel={t('language.languageSelection', 'Language')}
         />
-        <Navigation.Item
-          label={t(
-            'topNavigation.tabs.otherCompetitionsAndSearches',
-            'Other competitions and searches'
-          )}
-          as={Link}
-          to={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
-          active={matchOtherCompetitionsAndSearches !== null}
-        />
-        <Navigation.Item
-          label={t('topNavigation.tabs.areaSearch', 'Area search')}
-          as={Link}
-          to={getRouteById(AppRoutes.AREA_SEARCH_LANDING)}
-          active={matchAreaSearch !== null}
-        />
-      </Navigation.Row>
-      <Navigation.Actions>
-        <Navigation.Item
-          as={Link}
-          to={getRouteById(AppRoutes.FAVOURITES)}
+        <Header.ActionBarItem
+          label={t('header.actions.favourites.title', 'Favourites')}
+          id="action-bar-favourites"
           icon={<TopNavigationFavouritesIcon count={favouritesCount} />}
-          active={matchFavourites !== null}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(getRouteById(AppRoutes.FAVOURITES));
+          }}
         />
-        <Navigation.User
-          label={t('topNavigation.signIn', 'Sign in')}
-          onSignIn={() => openLoginModal()}
-          authenticated={!!user}
-          userName={user?.profile?.name}
-        >
-          <Navigation.Item
-            label={t('topNavigation.signOut', 'Sign out')}
-            href="#"
-            icon={<IconSignout aria-hidden />}
-            variant="supplementary"
-            onClick={(e: React.MouseEvent<HTMLElement>) => {
-              e.preventDefault();
-              userManager.signoutRedirect().then(() => {
-                localStorage.removeItem(MVJ_FAVOURITE);
-              });
-            }}
-          />
-        </Navigation.User>
-        <Navigation.LanguageSelector label={i18n.language.toUpperCase()}>
-          <Navigation.Item
-            label="Suomeksi"
-            lang={Language.FI}
-            onClick={() => changeLanguage(Language.FI)}
-          />
-          <Navigation.Item
-            label="På svenska"
-            lang={Language.SV}
-            onClick={() => changeLanguage(Language.SV)}
-          />
-          <Navigation.Item
-            label="In English"
-            lang={Language.EN}
-            onClick={() => changeLanguage(Language.EN)}
-          />
-        </Navigation.LanguageSelector>
-      </Navigation.Actions>
-    </Navigation>
+        <Header.ActionBarItem
+          label={
+            !user
+              ? t('header.actions.userManagement.logIn', 'Log in')
+              : t('header.actions.userManagement.logOut', 'Log out')
+          }
+          fixedRightPosition
+          icon={!user ? <IconUser /> : <IconSignout />}
+          id="action-bar-login"
+          onClick={
+            !user
+              ? (e) => {
+                  e.preventDefault();
+                  openLoginModal();
+                }
+              : (e) => {
+                  e.preventDefault();
+                  userManager.signoutRedirect().then(() => {
+                    localStorage.removeItem(MVJ_FAVOURITE);
+                  });
+                }
+          }
+        />
+      </Header.ActionBar>
+      <Header.NavigationMenu>
+        {naviLinks.map((link) => (
+          <TopNavigationLink key={link.to} to={link.to} label={link.label} />
+        ))}
+      </Header.NavigationMenu>
+    </Header>
   );
 };
 
@@ -176,5 +197,5 @@ export default connect(
     user: getUser(state),
     favouritesCount: getFavouriteCount(state),
   }),
-  mapDispatchToProps
+  mapDispatchToProps,
 )(TopNavigation);

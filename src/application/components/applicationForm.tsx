@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import { RefObject } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'hds-react';
 import { connect } from 'react-redux';
 import { t } from 'i18next';
@@ -33,13 +33,13 @@ const ApplicationForm = ({
   onTargetTabVisit,
 }: Props): JSX.Element => {
   const applicantSection = baseForm.sections.find(
-    (section) => section.identifier === APPLICANT_SECTION_IDENTIFIER
+    (section) => section.identifier === APPLICANT_SECTION_IDENTIFIER,
   );
   const targetSection = baseForm.sections.find(
-    (section) => section.identifier === TARGET_SECTION_IDENTIFIER
+    (section) => section.identifier === TARGET_SECTION_IDENTIFIER,
   );
   const confirmationSection = baseForm.sections.find(
-    (section) => section.identifier === CONFIRMATION_SECTION_IDENTIFIER
+    (section) => section.identifier === CONFIRMATION_SECTION_IDENTIFIER,
   );
   const extraSections = baseForm.sections.filter(
     (section) =>
@@ -47,7 +47,7 @@ const ApplicationForm = ({
         APPLICANT_SECTION_IDENTIFIER,
         TARGET_SECTION_IDENTIFIER,
         CONFIRMATION_SECTION_IDENTIFIER,
-      ].includes(section.identifier)
+      ].includes(section.identifier),
   );
 
   const TargetTabVisitDetector = () => {

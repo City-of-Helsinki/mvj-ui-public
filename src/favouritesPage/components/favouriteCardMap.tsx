@@ -1,4 +1,3 @@
-import React from 'react';
 import { MapContainer, Marker, Tooltip } from 'react-leaflet';
 import 'proj4leaflet';
 import { IconStarFill } from 'hds-react';
@@ -13,6 +12,7 @@ import { initializeHelsinkiMap } from '../../map/utils';
 import { AppRoutes, getRouteById } from '../../root/routes';
 import { StandardMapLayer } from '../../map/StandardMapLayersControl';
 import { MapLayer, MapLayers } from '../../map/types';
+import MapReadyHandler from '../../map/MapReadyHandler';
 
 interface Props {
   target: PlotSearchTarget;
@@ -55,8 +55,8 @@ const FavouriteCardMap = (props: Props): JSX.Element => {
       bounds={latLonBounds}
       crs={CRS}
       zoomControl={false}
-      whenCreated={attachMapResizeObserver}
     >
+      <MapReadyHandler whenCreated={attachMapResizeObserver} />
       <StandardMapLayer layerData={MapLayers[MapLayer.generalMap]} />
       <Marker
         position={coord}
@@ -67,8 +67,8 @@ const FavouriteCardMap = (props: Props): JSX.Element => {
                 click: () => {
                   navigate(
                     getRouteById(
-                      AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET
-                    ) + props.target.id
+                      AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET,
+                    ) + props.target.id,
                   );
                 },
               }

@@ -20,6 +20,7 @@ import {
   AREA_SEARCH_ATTACHMENT_SUBMISSION_FAILED,
   RECEIVE_AREA_SEARCH_ATTACHMENT_SAVED,
   INITIALIZE_AREA_SEARCH_ATTACHMENTS,
+  AreaSearchAttachmentSubmissionFailed,
 } from './types';
 
 type CurrentDisplayState = {
@@ -54,76 +55,84 @@ const areaSearchSlice = createSlice({
   name: AREA_SEARCH_FORM_NAME,
   initialState,
   reducers: {},
-  extraReducers: {
-    [INITIALIZE_AREA_SEARCH_ATTACHMENTS]: (state) => {
-      state.areaSearchAttachmentError = null;
-      state.isSubmittingAreaSearchAttachments = false;
-      state.areaSearchAttachments = [];
-    },
-    [SUBMIT_AREA_SEARCH_ATTACHMENT]: (state) => {
-      state.isSubmittingAreaSearchAttachments = true;
-      state.areaSearchAttachmentError = null;
-    },
-    [RECEIVE_AREA_SEARCH_ATTACHMENT_SAVED]: (
-      state,
-      { payload }: ReceiveAreaSearchAttachmentSaved
-    ) => {
-      state.isSubmittingAreaSearchAttachments = false;
-      state.areaSearchAttachments = [...state.areaSearchAttachments, payload];
-    },
-    [AREA_SEARCH_ATTACHMENT_SUBMISSION_FAILED]: (
-      state,
-      { payload }: AreaSearchApplicationSubmissionFailedAction
-    ) => {
-      state.isSubmittingAreaSearchAttachments = false;
-      state.areaSearchAttachmentError = payload;
-    },
-    [SUBMIT_AREA_SEARCH]: (state) => {
-      state.isSubmittingAreaSearch = true;
-      state.lastError = null;
-    },
-    [RECEIVE_AREA_SEARCH_SAVED]: (
-      state,
-      { payload }: ReceiveAreaSearchSavedAction
-    ) => {
-      state.isSubmittingAreaSearch = false;
-      state.lastSubmissionId = payload.id;
-      state.lastSubmission = payload;
-    },
-    [AREA_SEARCH_SUBMISSION_FAILED]: (
-      state,
-      { payload }: AreaSearchSubmissionFailedAction
-    ) => {
-      state.isSubmittingAreaSearch = false;
-      state.lastError = payload;
-    },
-    [SUBMIT_AREA_SEARCH_APPLICATION]: (state) => {
-      state.isSubmittingAreaSearchApplication = true;
-      state.lastApplicationError = null;
-    },
-    [RECEIVE_AREA_SEARCH_APPLICATION_SAVED]: (
-      state
-      // { payload }: ReceiveAreaSearchApplicationSavedAction // API does not provide payload for this yet
-    ) => {
-      state.isSubmittingAreaSearchApplication = false;
-      state.lastApplicationSubmissionId = state.lastApplicationSubmissionId + 1;
-      state.areaSearchAttachments = [];
-      state.areaSearchAttachmentError = null;
-      state.isSubmittingAreaSearchAttachments = false;
-    },
-    [AREA_SEARCH_APPLICATION_SUBMISSION_FAILED]: (
-      state,
-      { payload }: AreaSearchApplicationSubmissionFailedAction
-    ) => {
-      state.isSubmittingAreaSearchApplication = false;
-      state.lastApplicationError = payload;
-    },
-    [RECEIVE_INTENDED_USES]: (
-      state,
-      { payload }: ReceiveIntendedUsesAction
-    ) => {
-      state.intendedUses = payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(INITIALIZE_AREA_SEARCH_ATTACHMENTS, (state) => {
+        state.areaSearchAttachmentError = null;
+        state.isSubmittingAreaSearchAttachments = false;
+        state.areaSearchAttachments = [];
+      })
+      .addCase(SUBMIT_AREA_SEARCH_ATTACHMENT, (state) => {
+        state.isSubmittingAreaSearchAttachments = true;
+        state.areaSearchAttachmentError = null;
+      })
+      .addCase(
+        RECEIVE_AREA_SEARCH_ATTACHMENT_SAVED,
+        (state, { payload }: ReceiveAreaSearchAttachmentSaved) => {
+          state.isSubmittingAreaSearchAttachments = false;
+          state.areaSearchAttachments = [
+            ...state.areaSearchAttachments,
+            payload,
+          ];
+        },
+      )
+      .addCase(
+        AREA_SEARCH_ATTACHMENT_SUBMISSION_FAILED,
+        (state, { payload }: AreaSearchAttachmentSubmissionFailed) => {
+          state.isSubmittingAreaSearchAttachments = false;
+          state.areaSearchAttachmentError = payload;
+        },
+      )
+      .addCase(SUBMIT_AREA_SEARCH, (state) => {
+        state.isSubmittingAreaSearch = true;
+        state.lastError = null;
+      })
+      .addCase(
+        RECEIVE_AREA_SEARCH_SAVED,
+        (state, { payload }: ReceiveAreaSearchSavedAction) => {
+          state.isSubmittingAreaSearch = false;
+          state.lastSubmissionId = payload.id;
+          state.lastSubmission = payload;
+        },
+      )
+      .addCase(
+        AREA_SEARCH_SUBMISSION_FAILED,
+        (state, { payload }: AreaSearchSubmissionFailedAction) => {
+          state.isSubmittingAreaSearch = false;
+          state.lastError = payload;
+        },
+      )
+      .addCase(SUBMIT_AREA_SEARCH_APPLICATION, (state) => {
+        state.isSubmittingAreaSearchApplication = true;
+        state.lastApplicationError = null;
+      })
+      .addCase(
+        RECEIVE_AREA_SEARCH_APPLICATION_SAVED,
+        (
+          state,
+          // { payload }: ReceiveAreaSearchApplicationSavedAction // API does not provide payload for this yet
+        ) => {
+          state.isSubmittingAreaSearchApplication = false;
+          state.lastApplicationSubmissionId =
+            state.lastApplicationSubmissionId + 1;
+          state.areaSearchAttachments = [];
+          state.areaSearchAttachmentError = null;
+          state.isSubmittingAreaSearchAttachments = false;
+        },
+      )
+      .addCase(
+        AREA_SEARCH_APPLICATION_SUBMISSION_FAILED,
+        (state, { payload }: AreaSearchApplicationSubmissionFailedAction) => {
+          state.isSubmittingAreaSearchApplication = false;
+          state.lastApplicationError = payload;
+        },
+      )
+      .addCase(
+        RECEIVE_INTENDED_USES,
+        (state, { payload }: ReceiveIntendedUsesAction) => {
+          state.intendedUses = payload;
+        },
+      );
   },
 });
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Col, Row } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -56,14 +55,13 @@ const ApplicationPreviewSubsectionField = ({
           }
 
           const optionItem = field.choices.find(
-            (choice) => choice.value === value
+            (choice) => choice.value === value,
           );
           if (optionItem) {
             displayValue = optionItem.text;
             if (optionItem.has_text_input) {
-              displayValue += ` (${
-                sectionAnswers[field.identifier]?.extraValue
-              })`;
+              displayValue += ` (${sectionAnswers[field.identifier]
+                ?.extraValue})`;
             }
           } else {
             // should not happen
@@ -81,15 +79,14 @@ const ApplicationPreviewSubsectionField = ({
           displayValue = value
             .map((singleValue) => {
               const optionItem = field.choices.find(
-                (choice) => choice.value === singleValue
+                (choice) => choice.value === singleValue,
               );
               let optionText;
               if (optionItem) {
                 optionText = optionItem.text;
                 if (optionItem.has_text_input) {
-                  optionText += ` (${
-                    sectionAnswers[field.identifier]?.extraValue
-                  })`;
+                  optionText += ` (${sectionAnswers[field.identifier]
+                    ?.extraValue})`;
                 }
               } else {
                 // should not happen
@@ -111,8 +108,8 @@ const ApplicationPreviewSubsectionField = ({
         displayValue = pendingUploads
           .filter((upload) =>
             (value instanceof Array ? (value as Array<number>) : []).includes(
-              upload.id
-            )
+              upload.id,
+            ),
           )
           .map(
             (file, i) =>
@@ -121,8 +118,8 @@ const ApplicationPreviewSubsectionField = ({
                 'Attachment #{{number}}',
                 {
                   number: i + 1,
-                }
-              )} (${file.name})`
+                },
+              )} (${file.name})`,
           )
           .join(', ');
         break;
@@ -156,5 +153,5 @@ export default connect(
   (state: RootState): State => ({
     fieldTypeMapping: getFieldTypeMapping(state),
   }),
-  {}
+  {},
 )(ApplicationPreviewSubsectionField);

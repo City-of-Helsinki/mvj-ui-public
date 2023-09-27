@@ -4,7 +4,7 @@
 
   li {
     list-style: none;
-    padding: ($spacing-s / 2) 0;
+    padding: calc($spacing-s / 2) 0;
     font-size: $fontsize-body-s;
     font-weight: 500;
   }

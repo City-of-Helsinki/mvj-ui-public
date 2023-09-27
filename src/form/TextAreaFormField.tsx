@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { TextArea, TextAreaProps } from 'hds-react';
 import { WrappedFieldProps } from 'redux-form';
 

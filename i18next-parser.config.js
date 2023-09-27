@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   contextSeparator: '_',
   createOldCatalogs: false,
   defaultNamespace: 'common',

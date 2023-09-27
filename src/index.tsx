@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { OidcProvider } from 'redux-oidc';
 import { Provider } from 'react-redux';
 
@@ -31,7 +30,7 @@ store.subscribe(() => {
 
     if (!checkIntegrity) {
       throw Error(
-        `Invalid object to save on mvj_favourite -localstorage item: ${favourite.favourite}`
+        `Invalid object to save on mvj_favourite -localstorage item: ${favourite.favourite}`,
       );
     }
 
@@ -41,13 +40,16 @@ store.subscribe(() => {
   }
 });
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container as Element);
+
+root.render(
   <Provider store={store}>
+    {/* @ts-expect-error: TS2769: No overload matches this call */}
     <OidcProvider store={store} userManager={userManager}>
       <SiteRoutes />
     </OidcProvider>
   </Provider>,
-  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

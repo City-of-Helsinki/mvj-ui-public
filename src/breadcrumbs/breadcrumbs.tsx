@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import { ComponentType } from 'react';
 import { ReactNode } from 'react';
 import { IconAngleRight } from 'hds-react';
 

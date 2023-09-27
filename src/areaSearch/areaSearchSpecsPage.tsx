@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Field,
@@ -116,7 +116,7 @@ const AreaSearchSpecsPage = ({
   }, []);
   const startDateObject = useMemo<Date | null>(
     () => (startDate ? new Date(startDate) : null),
-    [startDate]
+    [startDate],
   );
 
   // define and memoize validators locally (to prevent redefinition/rerender loops)
@@ -137,10 +137,10 @@ const AreaSearchSpecsPage = ({
         endDate,
         t(
           'areaSearch.specs.errors.startDateBeforeEndDate',
-          'Start date cannot be after end date.'
-        )
+          'Start date cannot be after end date.',
+        ),
       ),
-    [startDate, endDate]
+    [startDate, endDate],
   );
   const isAfterStartDateValidator = useMemo<
     ReturnType<typeof dateAfterOrEqualValidatorGenerator>
@@ -150,10 +150,10 @@ const AreaSearchSpecsPage = ({
         startDate,
         t(
           'areaSearch.specs.errors.endDateAfterStartDate',
-          'End date cannot be before start date.'
-        )
+          'End date cannot be before start date.',
+        ),
       ),
-    [startDate, endDate]
+    [startDate, endDate],
   );
 
   useEffect(() => {
@@ -187,13 +187,13 @@ const AreaSearchSpecsPage = ({
               startSubmit(AREA_SEARCH_FORM_NAME);
               setHasSubmitErrors(false);
               submitAreaSearch(
-                prepareAreaSearchSubmission(files['search.attachments'])
+                prepareAreaSearchSubmission(files['search.attachments']),
               );
             } else {
               if (touch) {
                 touch(
                   AREA_SEARCH_FORM_NAME,
-                  ...getFieldNamesFromFormErrors(errors as ReduxFormError)
+                  ...getFieldNamesFromFormErrors(errors as ReduxFormError),
                 );
                 setHasSubmitErrors(true);
               }
@@ -212,7 +212,7 @@ const AreaSearchSpecsPage = ({
                   <h1>
                     {t(
                       'areaSearch.specs.heading',
-                      'Apply for a land area lease'
+                      'Apply for a land area lease',
                     )}
                   </h1>
 
@@ -221,14 +221,14 @@ const AreaSearchSpecsPage = ({
                       <p>
                         {t(
                           'areaSearch.specs.explanation',
-                          'If you are willing to lease an area, continue by filling up the application. Please tell us your wishes concerning the area, intended use of the lease and lease time. We will contact you as soon as possible. Fields marked with an asterisk are required.'
+                          'If you are willing to lease an area, continue by filling up the application. Please tell us your wishes concerning the area, intended use of the lease and lease time. We will contact you as soon as possible. Fields marked with an asterisk are required.',
                         )}
                       </p>
                       <section>
                         <h2>
                           {t(
                             'areaSearch.specs.intendedUse.heading',
-                            'Specify the intended use and desired time period for the lease'
+                            'Specify the intended use and desired time period for the lease',
                           )}
                         </h2>
 
@@ -244,7 +244,7 @@ const AreaSearchSpecsPage = ({
                               }))}
                               label={t(
                                 'areaSearch.specs.intendedUse.mainType',
-                                'Intended use'
+                                'Intended use',
                               )}
                               validate={[simpleRequiredValidator]}
                             />
@@ -259,7 +259,7 @@ const AreaSearchSpecsPage = ({
                               required
                               label={t(
                                 'areaSearch.specs.intendedUse.projectDescription',
-                                'Detailed description of intended use'
+                                'Detailed description of intended use',
                               )}
                               validate={[simpleRequiredValidator]}
                             />
@@ -274,11 +274,11 @@ const AreaSearchSpecsPage = ({
                               required
                               label={t(
                                 'areaSearch.specs.intendedUse.startDate',
-                                'Start date for lease'
+                                'Start date for lease',
                               )}
                               helperText={t(
                                 'areaSearch.specs.intendedUse.startDateHelpText',
-                                'Please note that applications will be processed in the order they were submitted.'
+                                'Please note that applications will be processed in the order they were submitted.',
                               )}
                               minDate={dateNow}
                               maxDate={lastDate}
@@ -296,11 +296,11 @@ const AreaSearchSpecsPage = ({
                               component={DateInputFormField}
                               label={t(
                                 'areaSearch.specs.intendedUse.endDate',
-                                'End date for lease'
+                                'End date for lease',
                               )}
                               helperText={t(
                                 'areaSearch.specs.intendedUse.endDateHelpText',
-                                "If you don't yet know the date you'd like the lease to end on or if you'd like to apply for a lease for an indefinite time, please expand on this in the detailed description field above."
+                                "If you don't yet know the date you'd like the lease to end on or if you'd like to apply for a lease for an indefinite time, please expand on this in the detailed description field above.",
                               )}
                               minDate={startDateObject || dateNow}
                               maxDate={lastDate}
@@ -317,19 +317,19 @@ const AreaSearchSpecsPage = ({
                         <h2>
                           {t(
                             'areaSearch.specs.area.heading',
-                            "Tell us which area you'd like to lease"
+                            "Tell us which area you'd like to lease",
                           )}
                         </h2>
                         <h3>
                           {t(
                             'areaSearch.specs.area.drawOnMap.heading',
-                            'Draw the desired area on the map'
+                            'Draw the desired area on the map',
                           )}
                         </h3>
                         <p>
                           {t(
                             'areaSearch.specs.area.drawOnMap.explanation',
-                            "Note that the area you specify will be precursory only. We'll contact you to determine the exact area later during the application handling process. Areas colored in dark gray are not owned by the City of Helsinki."
+                            "Note that the area you specify will be precursory only. We'll contact you to determine the exact area later during the application handling process. Areas colored in dark gray are not owned by the City of Helsinki.",
                           )}
                         </p>
                         <Row>
@@ -350,7 +350,7 @@ const AreaSearchSpecsPage = ({
                               component={TextAreaFormField}
                               label={t(
                                 'areaSearch.specs.area.areaDescription',
-                                'Detailed description of desired area'
+                                'Detailed description of desired area',
                               )}
                             />
                           </Col>
@@ -360,7 +360,7 @@ const AreaSearchSpecsPage = ({
                         <h2>
                           {t(
                             'areaSearch.specs.attachments.heading',
-                            'Attachments'
+                            'Attachments',
                           )}
                         </h2>
                         <Field
@@ -369,7 +369,7 @@ const AreaSearchSpecsPage = ({
                           component={FileInputFormField}
                           label={t(
                             'areaSearch.specs.attachments.input',
-                            'You may also optionally include any relevant attachments here, such as photos of the area in question.'
+                            'You may also optionally include any relevant attachments here, such as photos of the area in question.',
                           )}
                           dragAndDrop
                           multiple
@@ -382,13 +382,13 @@ const AreaSearchSpecsPage = ({
                         isLoading={isSubmittingAreaSearch}
                         loadingText={t(
                           'areaSearch.specs.submitting',
-                          'Submitting...'
+                          'Submitting...',
                         )}
                         disabled={hasSubmitErrors && !valid}
                       >
                         {t(
                           'areaSearch.specs.continueButton',
-                          'Apply for this area'
+                          'Apply for this area',
                         )}
                       </Button>
                       {hasSubmitErrors && !valid && (
@@ -398,7 +398,7 @@ const AreaSearchSpecsPage = ({
                         >
                           {t(
                             'areaSearch.specs.errors.validation',
-                            'Please check the marked fields before proceeding.'
+                            'Please check the marked fields before proceeding.',
                           )}
                         </Notification>
                       )}
@@ -414,11 +414,11 @@ const AreaSearchSpecsPage = ({
                           )?.failedAttachments?.length > 0
                             ? t(
                                 'areaSearch.specs.errors.attachment',
-                                'One or more attachments failed to upload! Please try again.'
+                                'One or more attachments failed to upload! Please try again.',
                               )
                             : t(
                                 'areaSearch.specs.errors.other',
-                                'An unknown error occurred while submitting the area search. Please try again.'
+                                'An unknown error occurred while submitting the area search. Please try again.',
                               )}
                         </Notification>
                       )}
@@ -428,7 +428,7 @@ const AreaSearchSpecsPage = ({
                       <p>
                         {t(
                           'areaSearch.specs.notLoggedIn',
-                          'To apply, please log in first.'
+                          'To apply, please log in first.',
                         )}
                       </p>
                       <Button
@@ -472,5 +472,5 @@ export default connect(
     initializeAreaSearchAttachments,
     submitAreaSearchAttachment,
     change,
-  }
+  },
 )(AreaSearchSpecsPage);

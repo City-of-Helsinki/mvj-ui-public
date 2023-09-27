@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import Oidc, { User } from 'oidc-client';
+import { User, Log } from 'oidc-client';
 import { setConfiguration as setGridSystemConfiguration } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 
@@ -37,7 +37,7 @@ interface Props {
   isFetchingToken: boolean;
 }
 
-Oidc.Log.logger = console;
+Log.logger = console;
 
 const App = ({
   children,
@@ -60,9 +60,12 @@ const App = ({
         setTokenOutdated(false);
 
         setTokenRefreshTimeout(
-          setTimeout(() => {
-            setTokenOutdated(true);
-          }, 1000 * 60 * 10)
+          setTimeout(
+            () => {
+              setTokenOutdated(true);
+            },
+            1000 * 60 * 10,
+          ),
         );
       }
       if (!isFetchingFavourite) {
@@ -98,5 +101,5 @@ export default connect(
     isFetchingToken: getIsFetchingApiToken(state),
     isFetchingFavourite: getIsFetchingFavourite(state),
   }),
-  { fetchApiToken, receiveApiToken, fetchFavourite }
+  { fetchApiToken, receiveApiToken, fetchFavourite },
 )(App);

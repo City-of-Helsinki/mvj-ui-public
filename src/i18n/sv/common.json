@@ -285,6 +285,9 @@
       "holder": "",
       "text": ""
     },
+    "logo": {
+      "alt": ""
+    },
     "text": ""
   },
   "frontPage": {
@@ -295,6 +298,7 @@
     },
     "bannerText": "Helsingfors stadstomter, mark, lokaler och uthyrning av Lorem ipsum",
     "contentHeader": "Hur kan vi hjälpa till med dina hyresbehov?",
+    "label": "Front page",
     "otherCompetitionsAndSearches": {
       "counter_one": "Andra tävlingar och sökningar: {{count}}",
       "counter_other": "Andra tävlingar och sökningar: {{count}}",
@@ -314,6 +318,20 @@
     "notification": {
       "close": ""
     }
+  },
+  "header": {
+    "actions": {
+      "favourites": {
+        "title": ""
+      },
+      "userManagement": {
+        "logIn": "",
+        "logOut": ""
+      }
+    }
+  },
+  "language": {
+    "languageSelection": ""
   },
   "loader": {
     "loading": ""
@@ -514,9 +532,6 @@
     }
   },
   "topNavigation": {
-    "menuLabel": "",
-    "signIn": "",
-    "signOut": "",
     "skipToContent": "",
     "tabs": {
       "areaSearch": "Områdesökning",

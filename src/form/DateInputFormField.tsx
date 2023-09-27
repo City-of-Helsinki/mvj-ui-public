@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { DateInput, DateInputProps } from 'hds-react';
 import { WrappedFieldProps, blur } from 'redux-form';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +20,7 @@ const DateInputFormField = ({
 }: WrappedFieldProps & Props & DateInputProps): JSX.Element => {
   const { i18n } = useTranslation();
   const [internalValue, setInternalValue] = useState<string>(
-    input.value ? renderDate(input.value) : ''
+    input.value ? renderDate(input.value) : '',
   );
 
   const onChangeHandler = (value: string, valueAsDate: Date): void => {
@@ -54,6 +54,7 @@ const DateInputFormField = ({
       language={i18n.language as Language}
       invalid={meta.touched && meta.invalid}
       errorText={meta.touched && meta.error}
+      crossOrigin={undefined}
       {...rest}
     />
   );

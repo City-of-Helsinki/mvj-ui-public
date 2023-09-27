@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+import { loadEnv } from 'vite';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
-const cwd = path.dirname(require.main.filename);
-const environment = process.env.NODE_ENV || 'development';
-
-if (environment === 'development') {
+const cwd = path.dirname(import.meta.url);
+import.meta.env = {...import.meta.env, ...loadEnv('development', '..')};
+if (import.meta.env.DEV) {
   try {
     fs.copyFileSync(
       path.resolve(cwd, '../node_modules/oidc-client/dist/oidc-client.min.js'),

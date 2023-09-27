@@ -10,3 +10,17 @@ export const fetchApiTokenActionType = (payload: string): Action<string> => {
     payload,
   };
 };
+
+export interface ReceiveApiTokenAction {
+  type: typeof RECEIVE_API_TOKEN;
+  payload: string;
+}
+
+export const receiveApiTokenActionType = (
+  payload: string,
+): ReceiveApiTokenAction => {
+  return {
+    type: RECEIVE_API_TOKEN,
+    payload,
+  };
+};

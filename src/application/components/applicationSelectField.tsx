@@ -1,4 +1,3 @@
-import React from 'react';
 import { FieldRendererProps } from '../types';
 import { Select } from 'hds-react';
 

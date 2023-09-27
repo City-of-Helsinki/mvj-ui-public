@@ -1,4 +1,3 @@
-import React from 'react';
 import { IconStar } from 'hds-react';
 
 interface Props {

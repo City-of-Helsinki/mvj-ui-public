@@ -36,30 +36,34 @@ const favouriteSlice = createSlice({
   name: 'favourite',
   initialState,
   reducers: {},
-  extraReducers: {
-    [RECEIVE_FAVOURITE]: (state, { payload }: ReceiveFavouriteAction) => {
-      state.favourite = payload;
-      state.isFetchingFavourite = false;
-    },
-    [FETCH_FAVOURITE]: (state) => {
-      state.isFetchingFavourite = true;
-    },
-    [FAVOURITE_NOT_FOUND]: (state) => {
-      state.isFetchingFavourite = false;
-    },
-    [ADD_FAVOURITE_TARGET]: (state) => {
-      state.isFetchingFavourite = true;
-    },
-    [REMOVE_FAVOURITE_TARGET]: (state) => {
-      state.isFetchingFavourite = true;
-    },
-    [FAVOURITE_FETCH_ERROR]: (state) => {
-      state.isFetchingFavourite = false;
-    },
-    [CLEAR_FAVOURITE]: (state) => {
-      state.favourite.targets = [];
-      state.favourite.modified_at = new Date().toISOString();
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        RECEIVE_FAVOURITE,
+        (state, { payload }: ReceiveFavouriteAction) => {
+          state.favourite = payload;
+          state.isFetchingFavourite = false;
+        },
+      )
+      .addCase(FETCH_FAVOURITE, (state) => {
+        state.isFetchingFavourite = true;
+      })
+      .addCase(FAVOURITE_NOT_FOUND, (state) => {
+        state.isFetchingFavourite = false;
+      })
+      .addCase(ADD_FAVOURITE_TARGET, (state) => {
+        state.isFetchingFavourite = true;
+      })
+      .addCase(REMOVE_FAVOURITE_TARGET, (state) => {
+        state.isFetchingFavourite = true;
+      })
+      .addCase(FAVOURITE_FETCH_ERROR, (state) => {
+        state.isFetchingFavourite = false;
+      })
+      .addCase(CLEAR_FAVOURITE, (state) => {
+        state.favourite.targets = [];
+        state.favourite.modified_at = new Date().toISOString();
+      });
   },
 });
 

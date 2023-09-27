@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useState } from 'react';
+import { RefObject, useEffect, useState, memo } from 'react';
 import { EditControl } from 'react-leaflet-draw';
 import { FeatureGroup } from 'leaflet';
 import 'leaflet-measure-path';
@@ -14,9 +14,17 @@ interface Props {
 
 const SHAPE_COLOR = '#9d27b0';
 
-const DrawTools = (props: Props): JSX.Element | null => {
+const updateComponent = (prevProps: Props, nextProps: Props): boolean => {
+  return prevProps !== nextProps;
+};
+
+const DrawTools = memo<Props>((props: Props): JSX.Element | null => {
   const { featureGroup, onChange } = props;
   const [l10nReady, setl10nReady] = useState<boolean>(false);
+
+  // Fixes the bug in leaflet-draw lib: https://github.com/Leaflet/Leaflet.draw/issues/1026
+  // @ts-expect-error this sets the window.type wich is causing the bug mentioned above
+  window.type = '';
 
   const updateAllMeasurements = useThrottleCallback(
     () => {
@@ -29,7 +37,7 @@ const DrawTools = (props: Props): JSX.Element | null => {
       }
     },
     60,
-    true
+    true,
   );
 
   // Used for changes that trigger a change in the saved value.
@@ -80,6 +88,7 @@ const DrawTools = (props: Props): JSX.Element | null => {
             color: SHAPE_COLOR,
             fillOpacity: 0.5,
           },
+          zIndexOffset: 7000,
         },
         rectangle: {
           shapeOptions: {
@@ -90,6 +99,8 @@ const DrawTools = (props: Props): JSX.Element | null => {
       }}
     />
   );
-};
+}, updateComponent);
+
+DrawTools.displayName = 'DrawTools';
 
 export default DrawTools;

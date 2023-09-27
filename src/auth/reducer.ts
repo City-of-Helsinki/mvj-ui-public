@@ -1,6 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { FETCH_API_TOKEN, TOKEN_NOT_FOUND, RECEIVE_API_TOKEN } from './types';
+import {
+  FETCH_API_TOKEN,
+  TOKEN_NOT_FOUND,
+  RECEIVE_API_TOKEN,
+  ReceiveApiTokenAction,
+} from './types';
 
 type CurrentDisplayState = {
   apiToken: string;
@@ -16,17 +21,18 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
-  extraReducers: {
-    [FETCH_API_TOKEN]: (state) => {
-      state.isFetching = true;
-    },
-    [TOKEN_NOT_FOUND]: (state) => {
-      state.isFetching = false;
-    },
-    [RECEIVE_API_TOKEN]: (state, action: PayloadAction<string>) => {
-      state.isFetching = false;
-      state.apiToken = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(FETCH_API_TOKEN, (state) => {
+        state.isFetching = true;
+      })
+      .addCase(TOKEN_NOT_FOUND, (state) => {
+        state.isFetching = false;
+      })
+      .addCase(RECEIVE_API_TOKEN, (state, action: ReceiveApiTokenAction) => {
+        state.isFetching = false;
+        state.apiToken = action.payload;
+      });
   },
 });
 

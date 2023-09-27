@@ -1,5 +1,5 @@
-import { createAction } from 'redux-actions';
 import { Action } from 'redux';
+import { createAction } from 'redux-actions';
 
 import { OPEN_LOGIN_MODAL, HIDE_LOGIN_MODAL } from './types';
 

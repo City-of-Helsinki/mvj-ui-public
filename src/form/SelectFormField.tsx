@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SelectProps, Select } from 'hds-react';
 import { focus, blur, WrappedFieldProps } from 'redux-form';
 import { connect } from 'react-redux';
@@ -63,30 +63,30 @@ const SelectFormField = <OptionType extends SelectFormFieldOption>({
         options.filter((option) =>
           internalValue.some(
             (singleValue) =>
-              singleValue.value && option.label === singleValue.label
-          )
-        )
+              singleValue.value && option.label === singleValue.label,
+          ),
+        ),
       );
     } else {
       onChangeHandler(
         options.find(
           (option) =>
             option.value === internalValue.value &&
-            option.label === internalValue.label
-        )
+            option.label === internalValue.label,
+        ),
       );
     }
   }, [options]);
 
   const onChangeHandler = (
-    selected: Array<OptionType> | OptionType | undefined
+    selected: Array<OptionType> | OptionType | undefined,
   ): void => {
     setInternalValue(selected);
 
     if (onChange) {
       (
         onChange as (
-          selected: Array<OptionType> | OptionType | undefined
+          selected: Array<OptionType> | OptionType | undefined,
         ) => void
       )(selected);
     }

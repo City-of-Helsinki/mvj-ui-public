@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CallbackComponent } from 'redux-oidc';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,6 +25,9 @@ const FinalizeLogin = (): JSX.Element | null => {
   const savedRedirectUrl = getRedirectUrlFromSessionStorage();
 
   return (
+    // this redux-oidc library is not react18 compatible and gives typescript overload
+    // error from missing children -prop definition
+    // @ts-expect-error: TS2769: No overload matches this call
     <CallbackComponent
       userManager={userManager}
       successCallback={() => {
