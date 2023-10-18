@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Col, Container, Row } from 'react-grid-system';
 import { Button, Notification } from 'hds-react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { isPristine } from 'redux-form';
 
 import { RootState } from '../root/rootReducer';
 import { PlotSearch } from '../plotSearch/types';
@@ -18,12 +19,14 @@ import { AppRoutes, getRouteById } from '../root/routes';
 import ApplicationTargetList from './components/applicationTargetList';
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
+import { TARGET_SECTION_IDENTIFIER } from './types';
 
 interface State {
   relevantPlotSearch: PlotSearch | null;
   isFetchingFormAttributes: boolean;
   isFetchingPlotSearches: boolean;
   isPerformingFileOperation: boolean;
+  isTargetsPagePristine: boolean;
 }
 
 interface Props {
@@ -33,6 +36,7 @@ interface Props {
   openLoginModal: () => void;
   isPerformingFileOperation: boolean;
   fetchPendingUploads: () => void;
+  isTargetsPagePristine: boolean;
 }
 
 const ApplicationPage = ({
@@ -42,6 +46,7 @@ const ApplicationPage = ({
   openLoginModal,
   isPerformingFileOperation,
   fetchPendingUploads,
+  isTargetsPagePristine,
 }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -51,7 +56,16 @@ const ApplicationPage = ({
   const [hasDismissedTargetsAlert, setHasDismissedTargetsAlert] =
     useState<boolean>(false);
 
-  const targetTabRef = useRef<HTMLSpanElement | null>(null);
+  useEffect(() => {
+    if (!isTargetsPagePristine) {
+      setHasVisitedTargetsTab(true);
+    }
+  }, [isTargetsPagePristine]);
+
+  const hasTargetTab =
+    relevantPlotSearch?.form?.sections.findIndex(
+      (section) => section.identifier === TARGET_SECTION_IDENTIFIER
+    ) !== -1;
 
   return (
     <AuthDependentContent>
@@ -88,16 +102,12 @@ const ApplicationPage = ({
                           <>
                             <ApplicationForm
                               baseForm={relevantPlotSearch.form}
-                              parentTargetTabRef={targetTabRef}
-                              onTargetTabVisit={() =>
-                                setHasVisitedTargetsTab(true)
-                              }
                             />
 
                             <Row className="ApplicationPage__action-buttons">
                               <Col xs={12}>
                                 {!hasVisitedTargetsTab &&
-                                  !!targetTabRef.current &&
+                                  hasTargetTab &&
                                   !hasDismissedTargetsAlert && (
                                     <Notification
                                       type="error"
@@ -147,8 +157,7 @@ const ApplicationPage = ({
                                   }
                                   disabled={
                                     isPerformingFileOperation ||
-                                    (!hasVisitedTargetsTab &&
-                                      !!targetTabRef.current)
+                                    (!hasVisitedTargetsTab && hasTargetTab)
                                   }
                                 >
                                   {t(
@@ -156,29 +165,31 @@ const ApplicationPage = ({
                                     'Preview submission',
                                   )}
                                 </Button>
-                                {!hasVisitedTargetsTab &&
-                                  !!targetTabRef.current && (
-                                    <Button
-                                      variant="primary"
-                                      onClick={() => {
-                                        if (!targetTabRef.current) {
-                                          return;
-                                        }
+                                {!hasVisitedTargetsTab && hasTargetTab && (
+                                  <Button
+                                    variant="primary"
+                                    onClick={() => {
+                                      const targetTab = document.getElementById(
+                                        'ApplicationForm-TargetsTabAnchor'
+                                      );
+                                      if (!targetTab) {
+                                        return;
+                                      }
 
-                                        // The element itself gets covered by the top navigation bar since we're not
-                                        // offsetting its height, but that's perfectly fine in this case.
-                                        targetTabRef.current.scrollIntoView();
-                                        targetTabRef.current.click();
-                                        setHasVisitedTargetsTab(true);
-                                      }}
-                                      disabled={isPerformingFileOperation}
-                                    >
-                                      {t(
-                                        'application.buttons.viewTargets',
-                                        'View targets',
-                                      )}
-                                    </Button>
-                                  )}
+                                      // The element itself gets covered by the top navigation bar since we're not
+                                      // offsetting its height, but that's perfectly fine in this case.
+                                      targetTab.scrollIntoView();
+                                      targetTab.click();
+                                      setHasVisitedTargetsTab(true);
+                                    }}
+                                    disabled={isPerformingFileOperation}
+                                  >
+                                    {t(
+                                      'application.buttons.viewTargets',
+                                      'View targets',
+                                    )}
+                                  </Button>
+                                )}
                               </Col>
                             </Row>
                           </>
@@ -233,6 +244,10 @@ export default connect(
     isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,
     isFetchingFormAttributes: state.application.isFetchingFormAttributes,
     isPerformingFileOperation: state.application.isPerformingFileOperation,
+    isTargetsPagePristine: isPristine('application')(
+      state,
+      `sections.${TARGET_SECTION_IDENTIFIER}`
+    ),
   }),
   {
     openLoginModal,
