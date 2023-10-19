@@ -441,7 +441,6 @@ const MapSearchComponent = ({
                                           hoveredTargetId === target.data.id,
                                       },
                                     )}
-                                    key={target.data.id}
                                     role="listitem"
                                     gutterWidth={SIDEBAR_GUTTER_WIDTH}
                                     align="center"
