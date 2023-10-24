@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { Fragment, useCallback, useEffect, useMemo } from 'react';
 import { Col, Row, ScreenClassMap } from 'react-grid-system';
 import {
   change,
@@ -307,7 +307,6 @@ const ApplicationFormSubsectionFields = connect(
 
       return (
         <Field
-          key={fieldName}
           name={fieldName}
           component={ApplicationFormField}
           field={field}
@@ -346,7 +345,13 @@ const ApplicationFormSubsectionFields = connect(
 
   return (
     <>
-      <Row>{section.fields.map((field) => renderField(identifier, field))}</Row>
+      <Row>
+        {section.fields.map((field) => (
+          <Fragment key={field.identifier}>
+            {renderField(identifier, field)}
+          </Fragment>
+        ))}
+      </Row>
       {section.subsections.map((subsection) => (
         <ApplicationFormSubsection
           formName={formName}
