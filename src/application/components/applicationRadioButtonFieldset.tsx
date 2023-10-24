@@ -7,7 +7,7 @@ import classNames from 'classnames';
 const ApplicationRadioButtonFieldset = (
   props: FieldRendererProps,
 ): JSX.Element => {
-  const { id, input, field, fieldType, setValues } = props;
+  const { id, input, meta, field, fieldType, setValues, displayError } = props;
 
   const orientation =
     fieldType === SupportedFieldTypes.RadioButtonInline
@@ -23,6 +23,7 @@ const ApplicationRadioButtonFieldset = (
           `ApplicationRadioButtonFieldset__selection-group--${orientation}`,
         )}
         name={input.name}
+        errorText={displayError && meta.error?.value}
       >
         {field.choices.map((option, index) => (
           <div
@@ -44,6 +45,7 @@ const ApplicationRadioButtonFieldset = (
               }
               required={field.required}
               label={option.text}
+              onBlur={() => input.onBlur(input.value)}
             />
             {option.has_text_input && (
               <ApplicationExtraTextField

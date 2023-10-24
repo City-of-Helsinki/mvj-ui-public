@@ -211,6 +211,14 @@
       }
     }
   },
+  "components": {
+    "form": {
+      "fractionalFieldset": {
+        "denominator": "",
+        "numerator": ""
+      }
+    }
+  },
   "directReservation": {
     "buttons": {
       "login": ""
@@ -541,11 +549,24 @@
   },
   "validation": {
     "errors": {
+      "companyIdentifier": {
+        "checkNumber": "",
+        "generic": ""
+      },
+      "controlShare": {
+        "generic": "",
+        "invalidSum": ""
+      },
       "dateAfter": "",
       "dateBefore": "",
+      "email": "",
       "greaterThan": "",
       "lessThan": "",
       "nonEmptyGeometry": "",
+      "personalIdentifier": {
+        "checkChar": "",
+        "generic": ""
+      },
       "requiredArray": "",
       "requiredValue": ""
     }

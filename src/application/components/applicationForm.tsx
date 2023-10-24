@@ -73,6 +73,7 @@ const ApplicationForm = ({
               section={applicantSection}
               headerTag="h2"
               flavor={ApplicationFormTopLevelSectionFlavor.APPLICANT}
+              isSaveClicked={false}
             />
           )}
         </TabPanel>
@@ -84,6 +85,7 @@ const ApplicationForm = ({
               section={targetSection}
               headerTag="h2"
               flavor={ApplicationFormTopLevelSectionFlavor.TARGET}
+              isSaveClicked={false}
             />
           )}
         </TabPanel>
@@ -96,6 +98,7 @@ const ApplicationForm = ({
                 section={section}
                 headerTag="h2"
                 key={section.id}
+                isSaveClicked={false}
               />
             ))}
           </TabPanel>

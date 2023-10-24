@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Col, Row, ScreenClassMap } from 'react-grid-system';
 import {
   change,
@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 import { FormField, FormSection, TargetPlanType } from '../../plotSearch/types';
 import {
+  APPLICANT_MAIN_IDENTIFIERS,
   APPLICANT_SECTION_IDENTIFIER,
   APPLICANT_TYPE_FIELD_IDENTIFIER,
   ApplicantTypes,
@@ -20,6 +21,7 @@ import {
   ApplicationFormNode,
   ApplicationFormTopLevelSectionFlavor,
   ApplicationSectionKeys,
+  EMAIL_FIELD_IDENTIFIER,
   FieldRendererProps,
   FieldTypeMapping,
   FieldValue,
@@ -45,6 +47,12 @@ import {
 import { removeFavouriteTarget } from '../../favourites/actions';
 import classNames from 'classnames';
 import ApplicationFormTargetSummary from './ApplicationFormTargetSummary';
+import {
+  companyIdentifierValidator,
+  emailValidator,
+  personalIdentifierValidator,
+  requiredValidator,
+} from '../validations';
 
 interface ApplicationFormFieldProps {
   name?: string | undefined;
@@ -53,15 +61,18 @@ interface ApplicationFormFieldProps {
   columnWidths: ScreenClassMap<number>;
   innerComponent: React.FC<FieldRendererProps>;
   onValueChange?: (newValues: Partial<ApplicationField>) => void;
+  isSaveClicked?: boolean;
 }
 
 const ApplicationFormField = ({
   input,
   field,
+  meta,
   fieldType,
   columnWidths,
   innerComponent: Component,
   onValueChange,
+  isSaveClicked,
   ...props
 }: ApplicationFormFieldProps & WrappedFieldProps) => {
   const setValues = (newValues: Partial<ApplicationField>) => {
@@ -80,8 +91,10 @@ const ApplicationFormField = ({
         id={field.id.toString()}
         field={field}
         input={input}
+        meta={meta}
         setValues={setValues}
         fieldType={fieldType}
+        displayError={meta.touched || isSaveClicked === true}
         {...props}
       />
     </Col>
@@ -92,6 +105,7 @@ interface ApplicationFormSubsectionFieldsProps {
   section: FormSection;
   identifier: string;
   formName: string;
+  isSaveClicked?: boolean;
 }
 
 interface ApplicationFormSubsectionFieldsInnerProps {
@@ -99,6 +113,7 @@ interface ApplicationFormSubsectionFieldsInnerProps {
   sectionApplicantType: ApplicantTypes;
   change: typeof change;
   getValue: (identifier: string) => FieldValue;
+  isSaveClicked?: boolean;
 }
 
 const ApplicationFormSubsectionFields = connect(
@@ -124,6 +139,7 @@ const ApplicationFormSubsectionFields = connect(
   change,
   sectionApplicantType,
   getValue,
+  isSaveClicked,
 }: ApplicationFormSubsectionFieldsProps &
   ApplicationFormSubsectionFieldsInnerProps) => {
   const renderField = useCallback(
@@ -162,7 +178,7 @@ const ApplicationFormSubsectionFields = connect(
             field.default_value,
           );
           // set the metadata correctly for the section to render
-          if (field.identifier == 'hakija') {
+          if (field.identifier == APPLICANT_TYPE_FIELD_IDENTIFIER) {
             change(
               formName,
               `${identifier}.metadata.applicantType`,
@@ -251,6 +267,44 @@ const ApplicationFormSubsectionFields = connect(
           };
       }
 
+      const handleValidate = useMemo<
+        (
+          value: ApplicationField,
+          error?: string
+        ) => { value: string } | undefined
+      >(() => {
+        let validator: (value: unknown, error?: string) => string | undefined;
+        switch (fieldName.substring(fieldName.lastIndexOf('.') + 1)) {
+          case APPLICANT_MAIN_IDENTIFIERS[ApplicantTypes.PERSON]
+            .IDENTIFIER_FIELD:
+            validator = personalIdentifierValidator;
+            break;
+          case APPLICANT_MAIN_IDENTIFIERS[ApplicantTypes.COMPANY]
+            .IDENTIFIER_FIELD:
+            validator = companyIdentifierValidator;
+            break;
+          case EMAIL_FIELD_IDENTIFIER:
+            validator = emailValidator;
+            break;
+        }
+
+        return (value: ApplicationField) => {
+          let returnError;
+          if (field.required) {
+            returnError = requiredValidator(value?.value);
+          }
+          if (validator) {
+            returnError = returnError || validator(value?.value);
+          }
+
+          if (returnError) {
+            return {
+              value: returnError,
+            };
+          }
+        };
+      }, []);
+
       return (
         <Field
           key={fieldName}
@@ -265,6 +319,8 @@ const ApplicationFormSubsectionFields = connect(
           onValueChange={(newValues: Partial<ApplicationField>) =>
             checkSpecialValues(field, newValues)
           }
+          validate={handleValidate}
+          isSaveClicked={isSaveClicked}
         />
       );
     },
@@ -310,6 +366,7 @@ interface ApplicationFormSubsectionFieldArrayProps {
   headerTag: React.ElementType;
   flavor?: ApplicationFormTopLevelSectionFlavor;
   path: Array<string>;
+  isSaveClicked?: boolean;
 }
 
 interface ApplicationFormSubsectionFieldArrayInnerProps {
@@ -326,6 +383,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
   flavor,
   removeFavouriteTarget,
   path,
+  isSaveClicked,
 }: WrappedFieldArrayProps<ApplicationFormNode> &
   ApplicationFormSubsectionFieldArrayProps &
   ApplicationFormSubsectionFieldArrayInnerProps): JSX.Element => {
@@ -405,6 +463,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
                 formName={formName}
                 section={section}
                 identifier={identifier}
+                isSaveClicked={isSaveClicked}
               />
             </div>
           </div>
@@ -440,6 +499,7 @@ interface ApplicationFormSubsectionProps {
   headerTag?: React.ElementType;
   flavor?: ApplicationFormTopLevelSectionFlavor;
   parentApplicantType?: ApplicantTypes;
+  isSaveClicked?: boolean;
 }
 
 const ApplicationFormSubsection = ({
@@ -449,6 +509,7 @@ const ApplicationFormSubsection = ({
   headerTag: HeaderTag = 'h3',
   flavor = ApplicationFormTopLevelSectionFlavor.GENERAL,
   parentApplicantType,
+  isSaveClicked,
 }: ApplicationFormSubsectionProps): JSX.Element | null => {
   if (!section.visible) {
     return null;
@@ -488,7 +549,13 @@ const ApplicationFormSubsection = ({
         >
           name={pathName}
           component={ApplicationFormSubsectionFieldArray}
-          props={{ section, headerTag: HeaderTag, formName, path }}
+          props={{
+            section,
+            headerTag: HeaderTag,
+            formName,
+            path,
+            isSaveClicked,
+          }}
           flavor={flavor}
         />
       ) : (
@@ -498,6 +565,7 @@ const ApplicationFormSubsection = ({
             formName={formName}
             section={section}
             identifier={pathName}
+            isSaveClicked={isSaveClicked}
           />
         </div>
       )}

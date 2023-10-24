@@ -211,6 +211,14 @@
       }
     }
   },
+  "components": {
+    "form": {
+      "fractionalFieldset": {
+        "denominator": "Denominator",
+        "numerator": "Numerator"
+      }
+    }
+  },
   "directReservation": {
     "buttons": {
       "login": "Log in"
@@ -541,11 +549,24 @@
   },
   "validation": {
     "errors": {
+      "companyIdentifier": {
+        "checkNumber": "Check character doesn't match.",
+        "generic": "Invalid company identifier."
+      },
+      "controlShare": {
+        "generic": "Invalid control share fraction.",
+        "invalidSum": "Control shares of applicants must sum up to 100%."
+      },
       "dateAfter": "The selected date cannot be before {{date}}.",
       "dateBefore": "The selected date cannot be after {{date}}.",
+      "email": "Invalid email address format.",
       "greaterThan": "Please enter a value greater than {{number}}.",
       "lessThan": "Please enter a value less than {{number}}.",
       "nonEmptyGeometry": "No area has yet been selected.",
+      "personalIdentifier": {
+        "checkChar": "Check character doesn't match.",
+        "generic": "Invalid personal identifier."
+      },
       "requiredArray": "One or more options must be selected.",
       "requiredValue": "This field is required."
     }

@@ -211,6 +211,14 @@
       }
     }
   },
+  "components": {
+    "form": {
+      "fractionalFieldset": {
+        "denominator": "Nimittäjä",
+        "numerator": "Osoittaja"
+      }
+    }
+  },
   "directReservation": {
     "buttons": {
       "login": "Kirjaudu sisään"
@@ -541,11 +549,24 @@
   },
   "validation": {
     "errors": {
+      "companyIdentifier": {
+        "checkNumber": "Tarkistusmerkki ei täsmää.",
+        "generic": "Virheellinen Y-tunnus."
+      },
+      "controlShare": {
+        "generic": "Virheellinen hallintaosuus.",
+        "invalidSum": "Hakijoiden hallintaosuuksien yhteenlasketun määrän on oltava 100 %."
+      },
       "dateAfter": "Aikaisin sallittu päivämäärä on {{date}}.",
       "dateBefore": "Myöhäisin sallittu päivämäärä on {{date}}.",
+      "email": "Virheellinen sähköpostiosoite.",
       "greaterThan": "Arvon on oltava suurempi kuin {{number}}.",
       "lessThan": "Arvon on oltava pienempi kuin {{number}}.",
       "nonEmptyGeometry": "Aluetta ei ole vielä valittu.",
+      "personalIdentifier": {
+        "checkChar": "Tarkistusmerkki ei täsmää.",
+        "generic": "Virheellinen henkilötunnus."
+      },
       "requiredArray": "Valitse vähintään yksi vaihtoehto.",
       "requiredValue": "Tämä tieto on pakollinen."
     }

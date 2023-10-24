@@ -39,6 +39,7 @@ const ApplicationForm = ({ baseForm, formName }: Props): JSX.Element => {
             section={applicantSection}
             headerTag="h2"
             flavor={ApplicationFormTopLevelSectionFlavor.APPLICANT}
+            isSaveClicked={false}
           />
         </div>
       )}
@@ -51,6 +52,7 @@ const ApplicationForm = ({ baseForm, formName }: Props): JSX.Element => {
               section={section}
               headerTag="h2"
               key={section.identifier}
+              isSaveClicked={false}
             />
           ))}
         </div>
@@ -63,6 +65,7 @@ const ApplicationForm = ({ baseForm, formName }: Props): JSX.Element => {
           section={confirmationSection}
           headerTag="h2"
           flavor={ApplicationFormTopLevelSectionFlavor.CONFIRMATION}
+          isSaveClicked={false}
         />
       )}
     </form>

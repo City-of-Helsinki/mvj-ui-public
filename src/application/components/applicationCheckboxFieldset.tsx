@@ -6,7 +6,8 @@ import ApplicationFieldsetHelperText from './applicationFieldsetHelperText';
 const ApplicationCheckboxFieldset = (
   props: FieldRendererProps,
 ): JSX.Element => {
-  const { field, id, input, meta, setValues } = props;
+  const { field, id, input, meta, setValues, displayError } = props;
+
   return (
     <div className="ApplicationCheckboxFieldset">
       {field.choices && field.choices.length > 0 ? (
@@ -14,7 +15,7 @@ const ApplicationCheckboxFieldset = (
           <SelectionGroup
             label={field.label}
             required={field.required}
-            errorText={meta.error}
+            errorText={displayError && meta.error?.value}
             className="ApplicationCheckboxFieldset__selection-group"
           >
             {field.choices.map((option, index) => (
@@ -39,6 +40,7 @@ const ApplicationCheckboxFieldset = (
                       });
                     }
                   }}
+                  onBlur={() => input.onBlur(input.value)}
                   label={option.text}
                 />
                 {option.has_text_input && (
@@ -63,9 +65,10 @@ const ApplicationCheckboxFieldset = (
               input.value.value instanceof Array ? false : input.value.value
             }
             required={field.required}
-            errorText={meta.error}
+            errorText={displayError && meta.error?.value}
             label={field.label}
             onChange={(e) => setValues({ value: e.target.checked })}
+            onBlur={() => input.onBlur(input.value)}
           />
           <ApplicationFieldsetHelperText>
             {field.hint_text}

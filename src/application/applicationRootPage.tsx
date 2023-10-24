@@ -12,6 +12,7 @@ import {
   resetLastApplicationSubmissionError,
 } from './actions';
 import ScrollToTop from '../common/ScrollToTop';
+import { validateApplicationForm } from './validations';
 
 interface State {
   formTemplate: ApplicationFormRoot;
@@ -68,5 +69,6 @@ export default connect(
 )(
   reduxForm<unknown, PropsWithChildren<Props>>({
     form: APPLICATION_FORM_NAME,
+    validate: validateApplicationForm(''),
   })(ApplicationRootPage),
 );
