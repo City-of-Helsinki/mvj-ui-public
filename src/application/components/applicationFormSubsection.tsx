@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useMemo } from 'react';
+import React, { Fragment, useCallback, useEffect } from 'react';
 import { Col, Row, ScreenClassMap } from 'react-grid-system';
 import {
   change,
@@ -10,10 +10,10 @@ import {
 import { connect } from 'react-redux';
 import { Button, IconCrossCircle, IconPlusCircle } from 'hds-react';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
 
 import { FormField, FormSection, TargetPlanType } from '../../plotSearch/types';
 import {
-  APPLICANT_MAIN_IDENTIFIERS,
   APPLICANT_SECTION_IDENTIFIER,
   APPLICANT_TYPE_FIELD_IDENTIFIER,
   ApplicantTypes,
@@ -21,7 +21,6 @@ import {
   ApplicationFormNode,
   ApplicationFormTopLevelSectionFlavor,
   ApplicationSectionKeys,
-  EMAIL_FIELD_IDENTIFIER,
   FieldRendererProps,
   FieldTypeMapping,
   FieldValue,
@@ -45,14 +44,7 @@ import {
   valueToApplicantType,
 } from '../helpers';
 import { removeFavouriteTarget } from '../../favourites/actions';
-import classNames from 'classnames';
 import ApplicationFormTargetSummary from './ApplicationFormTargetSummary';
-import {
-  companyIdentifierValidator,
-  emailValidator,
-  personalIdentifierValidator,
-  requiredValidator,
-} from '../validations';
 
 interface ApplicationFormFieldProps {
   name?: string | undefined;
@@ -143,7 +135,7 @@ const ApplicationFormSubsectionFields = connect(
 }: ApplicationFormSubsectionFieldsProps &
   ApplicationFormSubsectionFieldsInnerProps) => {
   const renderField = useCallback(
-    (pathName: string, field: FormField) => {
+    (pathName: string, field: FormField, isSaveClicked?: boolean) => {
       /*
        * All usages of field components are created here, so this is a fitting place
        * for some footnotes about them as a whole.
@@ -267,44 +259,6 @@ const ApplicationFormSubsectionFields = connect(
           };
       }
 
-      const handleValidate = useMemo<
-        (
-          value: ApplicationField,
-          error?: string
-        ) => { value: string } | undefined
-      >(() => {
-        let validator: (value: unknown, error?: string) => string | undefined;
-        switch (fieldName.substring(fieldName.lastIndexOf('.') + 1)) {
-          case APPLICANT_MAIN_IDENTIFIERS[ApplicantTypes.PERSON]
-            .IDENTIFIER_FIELD:
-            validator = personalIdentifierValidator;
-            break;
-          case APPLICANT_MAIN_IDENTIFIERS[ApplicantTypes.COMPANY]
-            .IDENTIFIER_FIELD:
-            validator = companyIdentifierValidator;
-            break;
-          case EMAIL_FIELD_IDENTIFIER:
-            validator = emailValidator;
-            break;
-        }
-
-        return (value: ApplicationField) => {
-          let returnError;
-          if (field.required) {
-            returnError = requiredValidator(value?.value);
-          }
-          if (validator) {
-            returnError = returnError || validator(value?.value);
-          }
-
-          if (returnError) {
-            return {
-              value: returnError,
-            };
-          }
-        };
-      }, []);
-
       return (
         <Field
           name={fieldName}
@@ -318,7 +272,6 @@ const ApplicationFormSubsectionFields = connect(
           onValueChange={(newValues: Partial<ApplicationField>) =>
             checkSpecialValues(field, newValues)
           }
-          validate={handleValidate}
           isSaveClicked={isSaveClicked}
         />
       );
@@ -328,7 +281,7 @@ const ApplicationFormSubsectionFields = connect(
 
   const checkSpecialValues = (
     field: FormField,
-    newValues: Partial<ApplicationField>,
+    newValues: Partial<ApplicationField>
   ) => {
     if (
       section.identifier === APPLICANT_SECTION_IDENTIFIER &&
@@ -338,7 +291,7 @@ const ApplicationFormSubsectionFields = connect(
       change(
         formName,
         `${identifier}.metadata.applicantType`,
-        valueToApplicantType(newValues.value as string),
+        valueToApplicantType(newValues.value as string)
       );
     }
   };
@@ -348,7 +301,7 @@ const ApplicationFormSubsectionFields = connect(
       <Row>
         {section.fields.map((field) => (
           <Fragment key={field.identifier}>
-            {renderField(identifier, field)}
+            {renderField(identifier, field, isSaveClicked)}
           </Fragment>
         ))}
       </Row>
@@ -359,6 +312,7 @@ const ApplicationFormSubsectionFields = connect(
           section={subsection}
           key={subsection.id}
           parentApplicantType={sectionApplicantType}
+          isSaveClicked={isSaveClicked}
         />
       ))}
     </>
@@ -559,9 +513,9 @@ const ApplicationFormSubsection = ({
             headerTag: HeaderTag,
             formName,
             path,
-            isSaveClicked,
           }}
           flavor={flavor}
+          isSaveClicked={isSaveClicked}
         />
       ) : (
         <div className="ApplicationFormSubsection__content">

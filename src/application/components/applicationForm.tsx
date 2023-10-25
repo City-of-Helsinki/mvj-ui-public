@@ -20,12 +20,14 @@ interface Props {
   baseForm: Form;
   applicantCount: number;
   favouritesCount: number;
+  isSaveClicked?: boolean;
 }
 
 const ApplicationForm = ({
   baseForm,
   applicantCount,
   favouritesCount,
+  isSaveClicked,
 }: Props): JSX.Element => {
   const applicantSection = baseForm.sections.find(
     (section) => section.identifier === APPLICANT_SECTION_IDENTIFIER,
@@ -73,7 +75,7 @@ const ApplicationForm = ({
               section={applicantSection}
               headerTag="h2"
               flavor={ApplicationFormTopLevelSectionFlavor.APPLICANT}
-              isSaveClicked={false}
+              isSaveClicked={isSaveClicked}
             />
           )}
         </TabPanel>
@@ -85,7 +87,7 @@ const ApplicationForm = ({
               section={targetSection}
               headerTag="h2"
               flavor={ApplicationFormTopLevelSectionFlavor.TARGET}
-              isSaveClicked={false}
+              isSaveClicked={isSaveClicked}
             />
           )}
         </TabPanel>
@@ -98,7 +100,7 @@ const ApplicationForm = ({
                 section={section}
                 headerTag="h2"
                 key={section.id}
-                isSaveClicked={false}
+                isSaveClicked={isSaveClicked}
               />
             ))}
           </TabPanel>
@@ -111,6 +113,7 @@ const ApplicationForm = ({
           section={confirmationSection}
           headerTag="h2"
           flavor={ApplicationFormTopLevelSectionFlavor.CONFIRMATION}
+          isSaveClicked={isSaveClicked}
         />
       )}
     </form>

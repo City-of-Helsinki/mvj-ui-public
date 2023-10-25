@@ -24,6 +24,9 @@
         "noApplicantIdentifierFound": "An applicant with missing identifier data was encountered. Please verify that each applicant has either the personal identification number or company ID number set.",
         "noApplicantTypeSet": "An applicant with no selected type was encountered. Please verify that all applicant data is filled correctly.",
         "unknown": "An unexpected error occurred while preparing the application data for submission. Please try again later."
+      },
+      "summary": {
+        "header": "Please correct these fields before proceeding."
       }
     },
     "fileUpload": {

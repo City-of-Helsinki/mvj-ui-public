@@ -1,118 +1,15 @@
 import { parseISO } from 'date-fns';
-import { ApplicationFormNode, CONTROL_SHARE_FIELD_IDENTIFIER } from './types';
+import {
+  APPLICANT_MAIN_IDENTIFIERS,
+  ApplicantTypes,
+  ApplicationFormNode,
+  CONTROL_SHARE_FIELD_IDENTIFIER,
+  EMAIL_FIELD_IDENTIFIER,
+} from './types';
 import i18n from '../i18n';
-
-type PathPart = {
-  kind: 'objectKey' | 'arrayKey' | 'index';
-  value: string;
-};
-
-const getPathParts = (path: string): Array<PathPart> => {
-  const result: Array<PathPart> = [];
-  const dotParts = path.split('.');
-
-  if (dotParts[0] === '') {
-    dotParts.shift();
-  }
-  dotParts.forEach((part) => {
-    const maybeArrayComponents = /^(.+)\[(\d+)]$/.exec(part);
-    if (maybeArrayComponents) {
-      result.push({ kind: 'arrayKey', value: maybeArrayComponents[1] });
-      result.push({ kind: 'index', value: maybeArrayComponents[2] });
-    } else {
-      result.push({ kind: 'objectKey', value: part });
-    }
-  });
-
-  return result;
-};
-
-const get = (obj: unknown, path: string): unknown => {
-  let node: unknown = obj;
-  const pathParts = getPathParts(path);
-
-  for (let i = 0; i < pathParts.length; ++i) {
-    const part = pathParts[i];
-
-    if (part.kind === 'index') {
-      if (node instanceof Array) {
-        node = node[parseInt(part.value)];
-      } else {
-        return;
-      }
-    } else {
-      if (node instanceof Object) {
-        if (part.value in node) {
-          node = (node as Record<string, unknown>)[part.value];
-        } else {
-          return;
-        }
-      }
-    }
-  }
-
-  return node;
-};
-const set = (obj: unknown, path: string, value: unknown): void => {
-  let node: unknown = obj;
-  const pathParts = getPathParts(path);
-
-  for (let i = 0; i < pathParts.length; ++i) {
-    const part = pathParts[i];
-    const isLast = i + 1 === pathParts.length;
-
-    // end of path, set the value onto the final node
-    if (isLast) {
-      if (part.kind === 'index' && node instanceof Array) {
-        node[parseInt(part.value)] = value;
-      } else if (part.kind !== 'index' && node instanceof Object) {
-        (node as Record<string, unknown>)[part.value] = value;
-      } else {
-        // invalid path
-        return;
-      }
-    }
-
-    // find next level node, create it if it doesn't exist
-    if (part.kind === 'objectKey') {
-      if (node instanceof Object) {
-        if (!(node as Record<string, unknown>)[part.value]) {
-          (node as Record<string, unknown>)[part.value] = {};
-        }
-        node = (node as Record<string, unknown>)[part.value];
-      } else {
-        // invalid path
-        return;
-      }
-    } else if (part.kind === 'arrayKey') {
-      if (node instanceof Object) {
-        if (!(node as Record<string, unknown>)[part.value]) {
-          (node as Record<string, unknown>)[part.value] = [];
-        }
-        node = (node as Record<string, unknown>)[part.value];
-      } else {
-        // invalid path
-        return;
-      }
-    } else {
-      if (node instanceof Array) {
-        if (!node[parseInt(part.value)]) {
-          // peek next node
-          const nextPart = pathParts[i + 1];
-          if (nextPart.kind === 'index') {
-            node[parseInt(part.value)] = [];
-          } else {
-            node[parseInt(part.value)] = {};
-          }
-        }
-        node = node[parseInt(part.value)];
-      } else {
-        // invalid path
-        return;
-      }
-    }
-  }
-};
+import { Form, FormSection } from '../plotSearch/types';
+import { ValidateCallback } from 'redux-form';
+import { get, set } from './helpers';
 
 const PERSONAL_IDENTIFIER_CHECK_CHAR_LIST = '0123456789ABCDEFHJKLMNPRSTUVWXY';
 // from the rightmost digit to the leftmost
@@ -320,8 +217,8 @@ export const emailValidator = (
 
 export const validateApplicationForm =
   (pathPrefix: string) =>
-  (values: unknown): Record<string, unknown> => {
-    let sum = 0;
+  (values: unknown, form?: Form): Record<string, unknown> => {
+    let controlShareSum = 0;
     const errors = {};
     const controlSharePaths: Array<string> = [];
 
@@ -329,68 +226,124 @@ export const validateApplicationForm =
       | { sections: Record<string, ApplicationFormNode> }
       | undefined;
 
-    if (!root?.sections) {
+    if (!root?.sections || !form) {
       return {};
     }
 
     const searchSingleSection = (
+      formSection: FormSection,
       section: ApplicationFormNode,
       path: string
     ) => {
-      if (section.fields) {
-        Object.keys(section.fields).map((fieldIdentifier) => {
-          if (fieldIdentifier === CONTROL_SHARE_FIELD_IDENTIFIER) {
+      if (!section) {
+        return;
+      }
+
+      if (formSection.fields) {
+        formSection.fields.forEach((field) => {
+          let validator:
+            | ((value: unknown, error?: string) => string | undefined)
+            | undefined;
+          let validatorError;
+          switch (field.identifier) {
+            case APPLICANT_MAIN_IDENTIFIERS[ApplicantTypes.PERSON]
+              .IDENTIFIER_FIELD:
+              validator = personalIdentifierValidator;
+              break;
+            case APPLICANT_MAIN_IDENTIFIERS[ApplicantTypes.COMPANY]
+              .IDENTIFIER_FIELD:
+              validator = companyIdentifierValidator;
+              break;
+            case EMAIL_FIELD_IDENTIFIER:
+              validator = emailValidator;
+              break;
+          }
+
+          if (field.required) {
+            validatorError = requiredValidator(
+              section.fields[field.identifier].value
+            );
+          }
+          if (validator) {
+            validatorError =
+              validatorError ||
+              validator(section.fields[field.identifier].value);
+          }
+
+          if (field.identifier === CONTROL_SHARE_FIELD_IDENTIFIER) {
             const result = /^(\d+)\s*\/\s*(\d+)$/.exec(
-              section.fields[fieldIdentifier].value as string
+              section.fields[field.identifier].value as string
             );
             if (!result) {
               set(
                 errors,
-                `${path}.fields.${fieldIdentifier}.value`,
+                `${path}.fields.${field.identifier}.value`,
                 i18n.t(
                   'validation.errors.controlShare.generic',
                   'Invalid control share fraction.'
                 )
               );
             } else {
-              sum += parseInt(result[1]) / parseInt(result[2]);
-              controlSharePaths.push(`${path}.fields.${fieldIdentifier}.value`);
+              controlShareSum += parseInt(result[1]) / parseInt(result[2]);
+              controlSharePaths.push(
+                `${path}.fields.${field.identifier}.value`
+              );
             }
+          }
+
+          if (validatorError) {
+            set(
+              errors,
+              `${path}.fields.${field.identifier}.value`,
+              validatorError
+            );
           }
         });
       }
 
-      if (section.sections) {
-        Object.keys(section.sections).map((identifier) =>
+      if (formSection.subsections) {
+        formSection.subsections.forEach((subsection) => {
+          if (
+            section.sectionRestrictions?.[subsection.identifier] &&
+            ![ApplicantTypes.BOTH, section.metadata?.applicantType].includes(
+              section.sectionRestrictions[subsection.identifier]
+            )
+          ) {
+            return;
+          }
+
           searchSection(
-            section.sections[identifier],
-            `${path}.sections.${identifier}`
-          )
-        );
+            subsection,
+            section.sections[subsection.identifier],
+            `${path}.sections.${subsection.identifier}`
+          );
+        });
       }
     };
 
     const searchSection = (
+      formSection: FormSection,
       section: ApplicationFormNode | Array<ApplicationFormNode>,
       path: string
     ) => {
       if (section instanceof Array) {
         section.forEach((singleSection, i) =>
-          searchSingleSection(singleSection, `${path}[${i}]`)
+          searchSingleSection(formSection, singleSection, `${path}[${i}]`)
         );
       } else {
-        searchSingleSection(section, path);
+        searchSingleSection(formSection, section, path);
       }
     };
 
-    Object.keys(root.sections).map((identifier) =>
+    form.sections.forEach((formSection) =>
       searchSection(
-        root.sections[identifier],
-        `${pathPrefix}.sections.${identifier}`
+        formSection,
+        root.sections[formSection.identifier],
+        `${pathPrefix}.sections.${formSection.identifier}`
       )
     );
 
-    if (Math.abs(sum - 1) > 1e-9) {
+    if (Math.abs(controlShareSum - 1) > 1e-9) {
       controlSharePaths.forEach((path) => {
         set(
           errors,
@@ -405,3 +358,22 @@ export const validateApplicationForm =
 
     return errors;
   };
+
+export const shouldApplicationFormValidate = <FormData, P>({
+  props,
+  nextProps,
+  structure,
+}: ValidateCallback<FormData, P, string>): boolean => {
+  // By default, redux-form removes unmounted fields and also removes their sync errors
+  // without also rerunning the validation function afterwards. In our use case,
+  // the fields that aren't on the current tab (applicant or target) get unmounted,
+  // but we do still want to retain their errors just like their values.
+  // By letting redux-form know that validation should rerun on any change in registered
+  // fields, we can ensure that the errors remain.
+  return (
+    !structure.deepEqual(
+      props?.registeredFields,
+      nextProps?.registeredFields
+    ) || !structure.deepEqual(props?.values, nextProps?.values)
+  );
+};

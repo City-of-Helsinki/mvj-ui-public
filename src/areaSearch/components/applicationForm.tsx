@@ -10,9 +10,14 @@ import { Form } from '../../plotSearch/types';
 interface Props {
   baseForm: Form;
   formName: string;
+  isSaveClicked?: boolean;
 }
 
-const ApplicationForm = ({ baseForm, formName }: Props): JSX.Element => {
+const ApplicationForm = ({
+  baseForm,
+  formName,
+  isSaveClicked,
+}: Props): JSX.Element => {
   const applicantSection = baseForm.sections.find(
     (section) => section.identifier === APPLICANT_SECTION_IDENTIFIER,
   );
@@ -39,7 +44,7 @@ const ApplicationForm = ({ baseForm, formName }: Props): JSX.Element => {
             section={applicantSection}
             headerTag="h2"
             flavor={ApplicationFormTopLevelSectionFlavor.APPLICANT}
-            isSaveClicked={false}
+            isSaveClicked={isSaveClicked}
           />
         </div>
       )}
@@ -52,7 +57,7 @@ const ApplicationForm = ({ baseForm, formName }: Props): JSX.Element => {
               section={section}
               headerTag="h2"
               key={section.identifier}
-              isSaveClicked={false}
+              isSaveClicked={isSaveClicked}
             />
           ))}
         </div>
@@ -65,7 +70,7 @@ const ApplicationForm = ({ baseForm, formName }: Props): JSX.Element => {
           section={confirmationSection}
           headerTag="h2"
           flavor={ApplicationFormTopLevelSectionFlavor.CONFIRMATION}
-          isSaveClicked={false}
+          isSaveClicked={isSaveClicked}
         />
       )}
     </form>

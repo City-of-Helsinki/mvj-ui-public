@@ -24,6 +24,9 @@
         "noApplicantIdentifierFound": "Yhden tai useamman hakijan tunnistetieto puuttuu. Ole hyvä ja varmista, että henkilöhakijoiden henkilötunnukset ja yrityshakijoiden Y-tunnukset on täytetty.",
         "noApplicantTypeSet": "Yhden tai useamman hakijan tyyppi on valitsematta. Ole hyvä ja tarkista, että kaikki tarvittavat hakijoiden tiedot on täytetty.",
         "unknown": "Lähetyksen valmistelu ei onnistunut tuntemattomasta syystä. Ole hyvä ja yritä myöhemmin uudelleen."
+      },
+      "summary": {
+        "header": "Tarkistathan seuraavien kenttien arvot ennen jatkamista."
       }
     },
     "fileUpload": {

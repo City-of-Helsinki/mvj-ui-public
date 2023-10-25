@@ -7,7 +7,10 @@ import { AreaSearch, AREA_SEARCH_FORM_NAME } from './types';
 import { initializeAreaSearchForm } from './helpers';
 import { RootState } from '../root/rootReducer';
 import ScrollToTop from '../common/ScrollToTop';
-import { validateApplicationForm } from '../application/validations';
+import {
+  shouldApplicationFormValidate,
+  validateApplicationForm,
+} from '../application/validations';
 
 interface State {
   areaSearchForm: null;
@@ -56,6 +59,9 @@ export default connect(
 )(
   reduxForm<unknown, Props>({
     form: AREA_SEARCH_FORM_NAME,
-    validate: validateApplicationForm('form'),
+    shouldError: (...args) =>
+      shouldApplicationFormValidate<unknown, Props>(...args),
+    validate: (values, props) =>
+      validateApplicationForm('form')(values, props.lastSubmission?.form),
   })(AreaSearchApplicationRootPage),
 );

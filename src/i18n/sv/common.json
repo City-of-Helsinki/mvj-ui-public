@@ -24,6 +24,9 @@
         "noApplicantIdentifierFound": "",
         "noApplicantTypeSet": "",
         "unknown": ""
+      },
+      "summary": {
+        "header": ""
       }
     },
     "fileUpload": {
