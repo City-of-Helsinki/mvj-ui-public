@@ -19,9 +19,13 @@ const ApplicationCheckboxFieldset = (
             className="ApplicationCheckboxFieldset__selection-group"
           >
             {field.choices.map((option, index) => (
-              <div className="ApplicationCheckboxFieldset__option" key={index}>
+              <div
+                className="ApplicationCheckboxFieldset__option"
+                id={`ApplicationCheckboxFieldSet_${input.name}_${index}_div`}
+                key={index}
+              >
                 <Checkbox
-                  id={`ApplicationCheckboxFieldSet_${id}_${index}`}
+                  id={`ApplicationCheckboxFieldSet_${input.name}_${index}`}
                   checked={input.value?.value?.includes(option.value)}
                   onChange={(event) => {
                     if (event.target.checked) {

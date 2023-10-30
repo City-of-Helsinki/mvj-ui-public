@@ -28,10 +28,11 @@ const ApplicationRadioButtonFieldset = (
         {field.choices.map((option, index) => (
           <div
             className="ApplicationRadioButtonFieldset__option"
+            id={`ApplicationRadioButtonFieldset_${input.name}_${index}_div`}
             key={option.value}
           >
             <RadioButton
-              id={`ApplicationRadiobuttonFieldSet_${input.name}_${id}_${index}`}
+              id={`ApplicationRadiobuttonFieldSet_${input.name}_${index}`}
               checked={input.value.value === option.value}
               value={input.value.value}
               onChange={() =>
