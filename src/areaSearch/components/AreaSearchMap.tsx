@@ -4,7 +4,6 @@ import { FeatureGroup as FeatureGroupType } from 'leaflet';
 import { blur, focus, WrappedFieldProps } from 'redux-form';
 import { Feature } from 'geojson';
 import { connect } from 'react-redux';
-import { IconAlertCircleFill } from 'hds-react';
 
 import { StandardMapLayersControl } from '../../map/StandardMapLayersControl';
 import {
@@ -19,6 +18,7 @@ import ZoomControl from '../../map/ZoomControl';
 import DrawTools from '../../map/DrawTools';
 import GeoSearch from '../../map/GeoSearch';
 import MapReadyHandler from '../../map/MapReadyHandler';
+import ApplicationFieldError from '../../application/components/ApplicationFieldError';
 
 type Props = {
   focus: typeof focus;
@@ -95,10 +95,7 @@ const AreaSearchMap = ({
         </FeatureGroup>
       </MapContainer>
       {touched && !valid && (
-        <div className="AreaSearchMap__error" role="alert">
-          <IconAlertCircleFill />
-          <span>{error}</span>
-        </div>
+        <ApplicationFieldError className="AreaSearchMap__error" error={error} />
       )}
     </div>
   );

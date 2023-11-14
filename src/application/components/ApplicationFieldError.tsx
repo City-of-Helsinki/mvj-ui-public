@@ -1,18 +1,24 @@
+import classNames from 'classnames';
+
 type Props = {
-  error: unknown;
+  error?: string;
+  className?: string;
 };
 
-const ApplicationFieldError = ({ error }: Props): JSX.Element | null => {
-  if (
-    !error ||
-    (typeof error === 'object' && !Object.keys(error).includes('value'))
-  ) {
+const ApplicationFieldError = ({
+  error,
+  className,
+}: Props): JSX.Element | null => {
+  if (!error) {
     return null;
   }
 
   return (
-    <div className="ApplicationFieldError">
-      {(error as { value: string }).value}
+    <div
+      className={classNames('ApplicationFieldError', className)}
+      role="alert"
+    >
+      {error}
     </div>
   );
 };

@@ -61,7 +61,7 @@ const ApplicationFractionalFieldset = ({
             min={1}
             label={t(
               'components.form.fractionalFieldset.numerator',
-              'Numerator'
+              'Numerator',
             )}
             hideLabel
             ref={firstField}
@@ -82,14 +82,14 @@ const ApplicationFractionalFieldset = ({
             min={1}
             label={t(
               'components.form.fractionalFieldset.denominator',
-              'Denominator'
+              'Denominator',
             )}
             hideLabel
             ref={secondField}
             onBlur={blurHandler}
           />
         </div>
-        <ApplicationFieldError error={displayError && meta.error} />
+        <ApplicationFieldError error={displayError && meta.error.value} />
       </Fieldset>
     </div>
   );
