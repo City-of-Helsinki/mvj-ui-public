@@ -26,28 +26,29 @@ const faqSlice = createSlice({
   name: 'faq',
   initialState,
   reducers: {},
-  extraReducers: {
-    [RECEIVE_FAQS]: (state, { payload }: ReceiveFaqsAction) => {
-      state.faqs = payload;
-      state.isFetchingFaqs = false;
-      state.fethingFailed = false;
-      state.faqsNotFound = false;
-    },
-    [FETCH_FAQS]: (state) => {
-      state.isFetchingFaqs = true;
-      state.fethingFailed = false;
-      state.faqsNotFound = false;
-    },
-    [FAQS_NOT_FOUND]: (state) => {
-      state.isFetchingFaqs = false;
-      state.fethingFailed = false;
-      state.faqsNotFound = true;
-    },
-    [FAQS_FETCH_ERROR]: (state) => {
-      state.isFetchingFaqs = false;
-      state.fethingFailed = true;
-      state.faqsNotFound = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(RECEIVE_FAQS, (state, { payload }: ReceiveFaqsAction) => {
+        state.faqs = payload;
+        state.isFetchingFaqs = false;
+        state.fethingFailed = false;
+        state.faqsNotFound = false;
+      })
+      .addCase(FETCH_FAQS, (state) => {
+        state.isFetchingFaqs = true;
+        state.fethingFailed = false;
+        state.faqsNotFound = false;
+      })
+      .addCase(FAQS_NOT_FOUND, (state) => {
+        state.isFetchingFaqs = false;
+        state.fethingFailed = false;
+        state.faqsNotFound = true;
+      })
+      .addCase(FAQS_FETCH_ERROR, (state) => {
+        state.isFetchingFaqs = false;
+        state.fethingFailed = true;
+        state.faqsNotFound = false;
+      });
   },
 });
 

@@ -10,13 +10,21 @@ export function* fetchApiTokenSaga({
 }: ReturnType<typeof fetchApiTokenActionType>): Generator {
   try {
     const request = new Request(
-      process.env.REACT_APP_OPENID_CONNECT_API_TOKEN_URL ||
+      import.meta.env.REACT_APP_OPENID_CONNECT_API_TOKEN_URL ||
         'https://api.hel.fi/sso/api-tokens/',
       {
         headers: { Authorization: `Bearer ${accessToken}` },
-      }
+      },
     );
-    const response = (yield call(fetch, request)) as Response;
+    /*
+    The solution would be to force TypeScript to ignore the fetch 
+    implementation from a fetch polyfill package intended for node, 
+    given that its implementation of RequestInit differs from that 
+    in the typedefs of both core Node and core browser DOM. 
+    I didn't find a way to do so though.
+    */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const response = (yield call<any>(fetch, request)) as Response;
     const { status: statusCode } = response;
 
     switch (statusCode) {
@@ -28,9 +36,9 @@ export function* fetchApiTokenSaga({
         yield put(
           receiveApiToken(
             bodyAsJson[
-              process.env.REACT_APP_OPENID_CONNECT_API_TOKEN_KEY as string
-            ]
-          )
+              import.meta.env.REACT_APP_OPENID_CONNECT_API_TOKEN_KEY as string
+            ],
+          ),
         );
         break;
       }

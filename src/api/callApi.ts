@@ -16,7 +16,7 @@ function* callApi(
     autoContentType: boolean;
   } = {
     autoContentType: true,
-  }
+  },
 ): Generator<Effect, ApiCallResult, Response> {
   try {
     const apiToken = yield select(getApiToken);
@@ -26,7 +26,7 @@ function* callApi(
 
     request.headers.set(
       'Accept-Language',
-      `${i18n.language},${defaultLanguage};q=0.5`
+      `${i18n.language},${defaultLanguage};q=0.5`,
     );
 
     if (
@@ -35,8 +35,15 @@ function* callApi(
     ) {
       request.headers.set('Content-Type', 'application/json');
     }
-
-    const response = yield call(fetch, request);
+    /*
+    The solution would be to force TypeScript to ignore the fetch 
+    implementation from a fetch polyfill package intended for node, 
+    given that its implementation of RequestInit differs from that 
+    in the typedefs of both core Node and core browser DOM. 
+    I didn't find a way to do so though.
+    */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const response = yield call<any>(fetch, request);
     const status = response.status;
 
     switch (status) {

@@ -45,7 +45,7 @@
     }
 
     .MapSearchComponent__target {
-      padding: ($spacing-xs / 2) $spacing-xs;
+      padding: calc($spacing-xs / 2) $spacing-xs;
       border-bottom: 1px solid $color-black-20;
       font-size: $fontsize-body-s;
 
@@ -86,7 +86,7 @@
     h3 {
       text-transform: uppercase;
       font-size: $fontsize-body-l;
-      padding: ($spacing-s / 2) $spacing-xs;
+      padding: calc($spacing-s / 2) $spacing-xs;
       margin: 0;
       flex-grow: 1;
     }
@@ -107,8 +107,8 @@
 
   &__plot-search-heading {
     background-color: $color-black-20;
-    padding: ($spacing-s / 2) $spacing-xs;
-    margin: ($spacing-s / 2) 0 0 0;
+    padding: calc($spacing-s / 2) $spacing-xs;
+    margin: calc($spacing-s / 2) 0 0 0;
 
     h4 {
       margin: 0;
@@ -124,7 +124,7 @@
   &__list-headings {
     font-weight: 700;
     font-size: $fontsize-body-s;
-    padding: ($spacing-xs / 2) $spacing-xs;
+    padding: calc($spacing-xs / 2) $spacing-xs;
     margin-left: 0;
     margin-right: 0;
   }

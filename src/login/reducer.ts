@@ -13,13 +13,14 @@ const countSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {},
-  extraReducers: {
-    [OPEN_LOGIN_MODAL]: (state) => {
-      state.isLoginModalOpen = true;
-    },
-    [HIDE_LOGIN_MODAL]: (state) => {
-      state.isLoginModalOpen = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(OPEN_LOGIN_MODAL, (state) => {
+        state.isLoginModalOpen = true;
+      })
+      .addCase(HIDE_LOGIN_MODAL, (state) => {
+        state.isLoginModalOpen = false;
+      });
   },
 });
 

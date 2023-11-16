@@ -1,4 +1,3 @@
-import React from 'react';
 import GlobalNotification from './globalNotification';
 import { Notification } from './types';
 import { connect } from 'react-redux';
@@ -28,5 +27,5 @@ export default connect(
   (state: RootState): State => ({
     notifications: state.notifications.notifications,
   }),
-  []
+  [],
 )(GlobalNotificationContainer);

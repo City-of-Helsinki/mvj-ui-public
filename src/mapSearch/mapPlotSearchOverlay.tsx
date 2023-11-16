@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { PlotSearch, PlotSearchTarget } from '../plotSearch/types';
 import { useMapEvents, GeoJSON, Marker, useMap } from 'react-leaflet';
 import L, { DivIcon, LatLngExpression } from 'leaflet';
@@ -39,7 +39,7 @@ export const getMarkerIcon = (
   symbol: string,
   index: number,
   isFavourite: boolean,
-  isHover: boolean
+  isHover: boolean,
 ): DivIcon => {
   const html = renderToStaticMarkup(
     <MapSymbol
@@ -47,7 +47,7 @@ export const getMarkerIcon = (
       colorIndex={index}
       isFavourite={isFavourite}
       isHover={isHover}
-    />
+    />,
   );
   return new L.DivIcon({
     html: html,
@@ -111,13 +111,13 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
 
   const handleMarkerClick = (target: PlotSearchTarget): void => {
     navigate(
-      getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET) + target.id
+      getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET) + target.id,
     );
   };
 
   const renderMarker = (
     target: PlotSearchTarget,
-    favouritedTargets: PlotSearchTarget[]
+    favouritedTargets: PlotSearchTarget[],
   ): JSX.Element | null => {
     const isFavourited = favouritedTargets.some((t) => t.id === target.id);
     const isHover = props.hoveredTargetId === target.id && zoomLevel <= 7;
@@ -131,7 +131,7 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
             props.categorySymbol,
             props.categoryIndex,
             isFavourited,
-            isHover
+            isHover,
           )}
           eventHandlers={{
             mouseover: () => props.setHoveredTargetId(target.id),
@@ -162,7 +162,7 @@ const MapPlotSearchOverlay = (props: Props): JSX.Element => {
           {target.target_type !== 'direct_reservation' &&
             renderMarker(
               target,
-              props.favouritedTargets.map((t) => t.plot_search_target)
+              props.favouritedTargets.map((t) => t.plot_search_target),
             )}
         </Fragment>
       ))}

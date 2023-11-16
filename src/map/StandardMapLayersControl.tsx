@@ -1,4 +1,3 @@
-import React from 'react';
 import { LayersControl, WMSTileLayer } from 'react-leaflet';
 
 import { MapLayer, MapLayerProperties, MapLayers } from './types';

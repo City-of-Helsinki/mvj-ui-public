@@ -1,4 +1,3 @@
-import React from 'react';
 import { RadioButton, SelectionGroup } from 'hds-react';
 import { FieldRendererProps, SupportedFieldTypes } from '../types';
 import ApplicationExtraTextField from './applicationExtraTextField';
@@ -6,7 +5,7 @@ import ApplicationFieldsetHelperText from './applicationFieldsetHelperText';
 import classNames from 'classnames';
 
 const ApplicationRadioButtonFieldset = (
-  props: FieldRendererProps
+  props: FieldRendererProps,
 ): JSX.Element => {
   const { id, input, field, fieldType, setValues } = props;
 
@@ -14,7 +13,6 @@ const ApplicationRadioButtonFieldset = (
     fieldType === SupportedFieldTypes.RadioButtonInline
       ? 'horizontal'
       : 'vertical';
-
   return (
     <div className="ApplicationRadioButtonFieldset">
       <SelectionGroup
@@ -22,12 +20,15 @@ const ApplicationRadioButtonFieldset = (
         direction={orientation}
         className={classNames(
           'ApplicationRadioButtonFieldset__selection-group',
-          `ApplicationRadioButtonFieldset__selection-group--${orientation}`
+          `ApplicationRadioButtonFieldset__selection-group--${orientation}`,
         )}
         name={input.name}
       >
         {field.choices.map((option, index) => (
-          <div className="ApplicationRadioButtonFieldset__option" key={index}>
+          <div
+            className="ApplicationRadioButtonFieldset__option"
+            key={option.value}
+          >
             <RadioButton
               id={`ApplicationRadiobuttonFieldSet_${input.name}_${id}_${index}`}
               checked={input.value.value === option.value}
@@ -53,10 +54,10 @@ const ApplicationRadioButtonFieldset = (
             )}
           </div>
         ))}
-        <ApplicationFieldsetHelperText>
-          {field.hint_text}
-        </ApplicationFieldsetHelperText>
       </SelectionGroup>
+      <ApplicationFieldsetHelperText>
+        {field.hint_text}
+      </ApplicationFieldsetHelperText>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { WrappedFieldProps } from 'redux-form';
-
 import { ApiAttributes } from '../api/types';
 import { FormField } from '../plotSearch/types';
 import { Geometry } from 'geojson';
@@ -14,7 +13,6 @@ export type NestedFieldLeaf =
 
 // A type definition cannot contain circular references, but an interface definition can,
 // thus this is implemented this way.
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NestedField
   extends Record<string, NestedFieldLeaf | NestedField | Array<NestedField>> {}
 

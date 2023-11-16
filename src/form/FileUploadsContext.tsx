@@ -7,7 +7,7 @@ type FileUploadsContextState = {
 };
 
 const FileUploadsContext = React.createContext<FileUploadsContextState | null>(
-  null
+  null,
 );
 
 export const FileUploadsProvider = ({

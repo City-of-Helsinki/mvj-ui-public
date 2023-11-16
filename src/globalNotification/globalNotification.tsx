@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   IconAlertCircleFill,
   IconCheckCircleFill,
@@ -24,6 +24,10 @@ interface Props {
 
 const GlobalNotification = (props: Props): JSX.Element | null => {
   const { t } = useTranslation();
+  const scrollThreshold = 150;
+  const [isFixed, setIsFixed] = useState<boolean>(
+    window.scrollY > scrollThreshold,
+  );
 
   let IconComponent: FC<IconProps>;
 
@@ -42,16 +46,31 @@ const GlobalNotification = (props: Props): JSX.Element | null => {
       break;
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsFixed(window.scrollY > scrollThreshold);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Notification
       key={props.id}
       label={props.label || null}
       position="top-right"
-      className="GlobalNotificationContainer__notification"
+      className={`GlobalNotificationContainer__notification${
+        isFixed ? '--fixed' : ''
+      }`}
       autoClose
       closeButtonLabelText={t(
         'globalNotifications.notification.close',
-        'Close'
+        'Close',
       )}
       onClose={() => props.popNotification()}
       type={props.type}
@@ -62,7 +81,7 @@ const GlobalNotification = (props: Props): JSX.Element | null => {
             <IconComponent
               className={classNames(
                 'GlobalNotificationContainer__notification-icon',
-                `GlobalNotificationContainer__notification-icon--${props.type}`
+                `GlobalNotificationContainer__notification-icon--${props.type}`,
               )}
             />
           </div>

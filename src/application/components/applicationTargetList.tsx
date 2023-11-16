@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
 import { connect } from 'react-redux';
@@ -65,5 +64,5 @@ const ApplicationTargetList = ({ favourite }: Props): JSX.Element => {
 export default connect(
   (state: RootState): State => ({
     favourite: state.favourite.favourite,
-  })
+  }),
 )(ApplicationTargetList);

@@ -43,7 +43,7 @@ export default function configureAppStore(initialState = {}): Store {
       ...middlewares,
     ],
     preloadedState: initialState,
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: import.meta.env.DEV,
     enhancers,
   });
 

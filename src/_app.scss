@@ -8,8 +8,7 @@ body {
     min-height: 100%;
 
     main {
-      min-height: calc(100vh - #{$spacing-3-xl});
-      margin-top: $spacing-5-xl;
+      min-height: calc(100vh - #{$spacing-layout-2-xl});
       margin-bottom: -$spacing-s;
       @media (max-width: #{$breakpoint-s - 1px}) {
         margin-top: 65px;

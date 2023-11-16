@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Col, Container, Row } from 'react-grid-system';
@@ -67,7 +67,7 @@ const ApplicationPage = ({
             <Helmet>
               <title>
                 {getPageTitle(
-                  t('application.form.pageTitle', 'Plot application')
+                  t('application.form.pageTitle', 'Plot application'),
                 )}
               </title>
             </Helmet>
@@ -105,14 +105,14 @@ const ApplicationPage = ({
                                         <>
                                           {t(
                                             'application.mustVisitTargetPage.title',
-                                            'Attention!'
+                                            'Attention!',
                                           )}
                                         </>
                                       }
                                       closeButtonLabelText={
                                         t(
                                           'application.mustVisitTargetPage.close',
-                                          'Close'
+                                          'Close',
                                         ) as string
                                       }
                                       onClose={() =>
@@ -122,7 +122,7 @@ const ApplicationPage = ({
                                     >
                                       {t(
                                         'application.mustVisitTargetPage.text',
-                                        "You must first fill the required details for the targets you're applying to in the second tab. You can open that tab by clicking the button below."
+                                        "You must first fill the required details for the targets you're applying to in the second tab. You can open that tab by clicking the button below.",
                                       )}
                                     </Notification>
                                   )}
@@ -141,8 +141,8 @@ const ApplicationPage = ({
                                   onClick={() =>
                                     navigate(
                                       getRouteById(
-                                        AppRoutes.APPLICATION_PREVIEW
-                                      )
+                                        AppRoutes.APPLICATION_PREVIEW,
+                                      ),
                                     )
                                   }
                                   disabled={
@@ -153,7 +153,7 @@ const ApplicationPage = ({
                                 >
                                   {t(
                                     'application.buttons.preview',
-                                    'Preview submission'
+                                    'Preview submission',
                                   )}
                                 </Button>
                                 {!hasVisitedTargetsTab &&
@@ -175,7 +175,7 @@ const ApplicationPage = ({
                                     >
                                       {t(
                                         'application.buttons.viewTargets',
-                                        'View targets'
+                                        'View targets',
                                       )}
                                     </Button>
                                   )}
@@ -187,7 +187,7 @@ const ApplicationPage = ({
                           <p>
                             {t(
                               'application.error.noPlotsSelected',
-                              'To submit a plot application, you have to pick plots on the plot searches page first.'
+                              'To submit a plot application, you have to pick plots on the plot searches page first.',
                             )}
                           </p>
                         )}
@@ -195,7 +195,7 @@ const ApplicationPage = ({
                           <p>
                             {t(
                               'application.error.noFormAvailable',
-                              "No application form has been specified for the plots you have selected yet. Please be in contact and we'll look into it."
+                              "No application form has been specified for the plots you have selected yet. Please be in contact and we'll look into it.",
                             )}
                           </p>
                         )}
@@ -205,7 +205,7 @@ const ApplicationPage = ({
                         <p>
                           {t(
                             'application.error.notLoggedIn',
-                            'Please log in first in order to apply for plots.'
+                            'Please log in first in order to apply for plots.',
                           )}
                         </p>
                         <Button
@@ -237,5 +237,5 @@ export default connect(
   {
     openLoginModal,
     fetchPendingUploads,
-  }
+  },
 )(ApplicationPage);

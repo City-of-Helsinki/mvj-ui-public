@@ -1,4 +1,3 @@
-import React from 'react';
 import { TextArea } from 'hds-react';
 import { FieldRendererProps } from '../types';
 

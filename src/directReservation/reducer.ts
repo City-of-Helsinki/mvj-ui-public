@@ -24,23 +24,27 @@ const directReservationSlice = createSlice({
   name: 'directReservation',
   initialState,
   reducers: {},
-  extraReducers: {
-    [GENERATE_FAVOURITE]: (state, { payload }: GenerateFavouriteAction) => {
-      state.directReservationLinkId = payload;
-      state.isGeneratingFavourite = true;
-      state.generationSuccessful = false;
-      state.generationFailed = false;
-    },
-    [FAVOURITE_GENERATED]: (state) => {
-      state.generationSuccessful = true;
-      state.isGeneratingFavourite = false;
-      state.generationFailed = false;
-    },
-    [FAVOURITE_GENERATION_FAILED]: (state) => {
-      state.generationSuccessful = false;
-      state.isGeneratingFavourite = false;
-      state.generationFailed = true;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        GENERATE_FAVOURITE,
+        (state, { payload }: GenerateFavouriteAction) => {
+          state.directReservationLinkId = payload;
+          state.isGeneratingFavourite = true;
+          state.generationSuccessful = false;
+          state.generationFailed = false;
+        },
+      )
+      .addCase(FAVOURITE_GENERATED, (state) => {
+        state.generationSuccessful = true;
+        state.isGeneratingFavourite = false;
+        state.generationFailed = false;
+      })
+      .addCase(FAVOURITE_GENERATION_FAILED, (state) => {
+        state.generationSuccessful = false;
+        state.isGeneratingFavourite = false;
+        state.generationFailed = true;
+      });
   },
 });
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog } from 'hds-react';
@@ -34,7 +33,7 @@ const LoginModal = (props: Props): JSX.Element => {
 
   const loginRedirect = () => {
     setRedirectUrlToSessionStorage(
-      `${pathname}${search}` || getRouteById(AppRoutes.HOME)
+      `${pathname}${search}` || getRouteById(AppRoutes.HOME),
     );
 
     userManager.signinRedirect().then();
@@ -55,7 +54,7 @@ const LoginModal = (props: Props): JSX.Element => {
         <p id="LoginFormDescriptor">
           {t(
             'login.descriptor',
-            'To search plots, please log in through one of the supported services.'
+            'To search plots, please log in through one of the supported services.',
           )}
         </p>
       </Dialog.Content>

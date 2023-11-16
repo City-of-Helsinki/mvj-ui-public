@@ -285,6 +285,9 @@
       "holder": "Copyright",
       "text": "All rights reserved"
     },
+    "logo": {
+      "alt": "Helsinki logo"
+    },
     "text": "Footer lorem ipsum"
   },
   "frontPage": {
@@ -295,6 +298,7 @@
     },
     "bannerText": "City of Helsinki plot, land, area and lorem ipsum rental",
     "contentHeader": "How can we help with your rental needs?",
+    "label": "Front page",
     "otherCompetitionsAndSearches": {
       "counter_one": "Other competitions and searches: {{count}}",
       "counter_other": "Other competitions and searches: {{count}}",
@@ -314,6 +318,20 @@
     "notification": {
       "close": "Close"
     }
+  },
+  "header": {
+    "actions": {
+      "favourites": {
+        "title": "Favourites"
+      },
+      "userManagement": {
+        "logIn": "Log in",
+        "logOut": "Log out"
+      }
+    }
+  },
+  "language": {
+    "languageSelection": "Language"
   },
   "loader": {
     "loading": "Please wait, content is loading..."
@@ -514,9 +532,6 @@
     }
   },
   "topNavigation": {
-    "menuLabel": "Menu",
-    "signIn": "Sign in",
-    "signOut": "Sign out",
     "skipToContent": "Skip to content",
     "tabs": {
       "areaSearch": "Area search",

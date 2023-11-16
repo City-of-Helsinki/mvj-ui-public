@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Fragment, ReactNode } from 'react';
+import { ChangeEvent, Fragment, ReactNode } from 'react';
 import classNames from 'classnames';
 import {
   Checkbox,
@@ -157,7 +157,7 @@ const MapSearchComponent = ({
 
   const totalFilteredPlotSearches = plotSearchesByCategory.reduce(
     (acc, cat) => acc + cat.plotSearches.length,
-    0
+    0,
   );
 
   const checkHidden = (plotSearches: PlotSearch[]): boolean => {
@@ -188,7 +188,7 @@ const MapSearchComponent = ({
 
   const isFavourited = (
     target: PlotSearchTarget,
-    favourite: Favourite
+    favourite: Favourite,
   ): boolean => {
     return favourite.targets.some((t) => t.plot_search_target.id === target.id);
   };
@@ -196,7 +196,7 @@ const MapSearchComponent = ({
   const handleApplyButton = (
     target: PlotSearchTarget,
     plotSearch: PlotSearch,
-    isFavourited: boolean
+    isFavourited: boolean,
   ): void => {
     if (isFavourited) {
       removeFavouriteTarget(target.id);
@@ -232,13 +232,13 @@ const MapSearchComponent = ({
           <Col xs={1.5}>
             {t(
               'plotSearchAndCompetitions.mapView.sidebar.typeHeadings.showThisType',
-              'Show'
+              'Show',
             )}
           </Col>
           <Col xs={10.5}>
             {t(
               'plotSearchAndCompetitions.mapView.sidebar.typeHeadings.type',
-              'Type'
+              'Type',
             )}
           </Col>
         </Row>
@@ -259,7 +259,7 @@ const MapSearchComponent = ({
             >
               {item.category.subtypes.map((subtype) => {
                 const matchingPlotSearches = item.plotSearches.filter(
-                  (plotSearch) => plotSearch.subtype.id === subtype.id
+                  (plotSearch) => plotSearch.subtype.id === subtype.id,
                 );
 
                 if (matchingPlotSearches.length === 0) {
@@ -280,24 +280,27 @@ const MapSearchComponent = ({
                 let sections: Array<SectionSlice>;
 
                 if (subtype.show_district) {
-                  const districts = matchingPlotSearches.reduce((acc, next) => {
-                    next.plot_search_targets.forEach((target) => {
-                      if (!acc[target.district.id]) {
-                        acc[target.district.id] = {
-                          heading: target.district.name,
-                          key: target.district.id,
-                          targets: [],
-                        };
-                      }
+                  const districts = matchingPlotSearches.reduce(
+                    (acc, next) => {
+                      next.plot_search_targets.forEach((target) => {
+                        if (!acc[target.district.id]) {
+                          acc[target.district.id] = {
+                            heading: target.district.name,
+                            key: target.district.id,
+                            targets: [],
+                          };
+                        }
 
-                      acc[target.district.id].targets.push({
-                        relatedPlotSearch: next,
-                        data: target,
+                        acc[target.district.id].targets.push({
+                          relatedPlotSearch: next,
+                          data: target,
+                        });
                       });
-                    });
 
-                    return acc;
-                  }, {} as Record<number, SectionSlice>);
+                      return acc;
+                    },
+                    {} as Record<number, SectionSlice>,
+                  );
 
                   sections = Object.values(districts);
                   sections.sort((a, b) => (a.heading > b.heading ? 1 : -1));
@@ -323,14 +326,14 @@ const MapSearchComponent = ({
                         <IconStar size="m" />
                         {t(
                           'plotSearchAndCompetitions.mapView.sidebar.legend.star',
-                          '= add to application'
+                          '= add to application',
                         )}
                       </span>
                       <span>
                         <IconArrowRight size="m" />
                         {t(
                           'plotSearchAndCompetitions.mapView.sidebar.legend.arrow',
-                          '= details'
+                          '= details',
                         )}
                       </span>
                     </div>
@@ -346,9 +349,9 @@ const MapSearchComponent = ({
                                   'Apply by {{date}}',
                                   {
                                     date: renderDateTime(
-                                      new Date(section.headingExtra.endDate)
+                                      new Date(section.headingExtra.endDate),
                                     ),
-                                  }
+                                  },
                                 )}
                               </span>
                             )}
@@ -363,7 +366,7 @@ const MapSearchComponent = ({
                             >
                               {t(
                                 'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.plotNumber',
-                                'Plot'
+                                'Plot',
                               )}
                             </Col>
                             <Col
@@ -372,7 +375,7 @@ const MapSearchComponent = ({
                             >
                               {t(
                                 'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.address',
-                                'Address'
+                                'Address',
                               )}
                             </Col>
                             <Col
@@ -382,7 +385,7 @@ const MapSearchComponent = ({
                             >
                               {t(
                                 'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.intendedUse',
-                                'Intended use'
+                                'Intended use',
                               )}
                             </Col>
                             <Col
@@ -392,7 +395,7 @@ const MapSearchComponent = ({
                             >
                               {t(
                                 'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.permittedBuildArea',
-                                'Permitted build floor area (m²)'
+                                'Permitted build floor area (m²)',
                               )}
                             </Col>
                             <Col
@@ -401,19 +404,19 @@ const MapSearchComponent = ({
                             >
                               {t(
                                 'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.area',
-                                'Area (m²)'
+                                'Area (m²)',
                               )}
                             </Col>
                             <Col xs={1}>
                               {t(
                                 'plotSearchAndCompetitions.mapView.sidebar.targetHeadings.tools',
-                                'Tools'
+                                'Tools',
                               )}
                             </Col>
                           </Row>
                           <div role="list">
                             {section.targets.map((target) => (
-                              <>
+                              <Fragment key={target.data.id}>
                                 {target.data.target_type !==
                                   'direct_reservation' && (
                                   <Row
@@ -430,13 +433,13 @@ const MapSearchComponent = ({
                                           favourite.targets.some(
                                             (t) =>
                                               t.plot_search_target.id ===
-                                              target.data.id
+                                              target.data.id,
                                           ),
                                       },
                                       {
                                         'MapSearchComponent__target--hover':
                                           hoveredTargetId === target.data.id,
-                                      }
+                                      },
                                     )}
                                     key={target.data.id}
                                     role="listitem"
@@ -462,7 +465,7 @@ const MapSearchComponent = ({
                                     >
                                       {getIntendedUseName(
                                         target.data.target_plan
-                                          .plan_unit_intended_use
+                                          .plan_unit_intended_use,
                                       )}
                                     </Col>
                                     <Col
@@ -477,7 +480,7 @@ const MapSearchComponent = ({
                                       aria-labelledby={`MapSearchComponentList-${section.key}-Area`}
                                     >
                                       {target.data.target_plan.area?.toLocaleString(
-                                        defaultLanguage
+                                        defaultLanguage,
                                       ) || '?'}
                                     </Col>
                                     <Col
@@ -489,29 +492,32 @@ const MapSearchComponent = ({
                                           handleApplyButton(
                                             target.data,
                                             target.relatedPlotSearch,
-                                            isFavourited(target.data, favourite)
+                                            isFavourited(
+                                              target.data,
+                                              favourite,
+                                            ),
                                           )
                                         }
                                         aria-label={t(
                                           'plotSearchAndCompetitions.mapView.sidebar.addToApplication',
-                                          'Add to application'
+                                          'Add to application',
                                         )}
                                       >
                                         {getStarIcon(
-                                          isFavourited(target.data, favourite)
+                                          isFavourited(target.data, favourite),
                                         )}
                                       </IconButton>
                                       <IconButton
                                         onClick={() =>
                                           navigate(
                                             getRouteById(
-                                              AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET
-                                            ) + target.data.id
+                                              AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET,
+                                            ) + target.data.id,
                                           )
                                         }
                                         aria-label={t(
                                           'plotSearchAndCompetitions.mapView.sidebar.navigateToTarget',
-                                          'Open the details for this target'
+                                          'Open the details for this target',
                                         )}
                                       >
                                         <IconArrowRight size="s" />
@@ -519,7 +525,7 @@ const MapSearchComponent = ({
                                     </Col>
                                   </Row>
                                 )}
-                              </>
+                              </Fragment>
                             ))}
                           </div>
                         </div>
@@ -542,7 +548,7 @@ const MapSearchComponent = ({
                   <>
                     {t(
                       'plotSearchAndCompetitions.mapView.sidebar.notification.singlePlotSearchAllowed.title',
-                      'Attention!'
+                      'Attention!',
                     )}
                   </>
                 }
@@ -572,7 +578,7 @@ const MapSearchComponent = ({
                   <>
                     {t(
                       'plotSearchAndCompetitions.mapView.sidebar.notification.selectionInAnotherTab.title',
-                      'Attention!'
+                      'Attention!',
                     )}
                   </>
                 }
@@ -602,7 +608,7 @@ const MapSearchComponent = ({
               <>
                 {t(
                   'plotSearchAndCompetitions.mapView.sidebar.notification.noTargetsToShow.title',
-                  'Notice'
+                  'Notice',
                 )}
               </>
             }
@@ -624,5 +630,5 @@ export default connect(
   (state: RootState) => ({
     plotSearchAttributes: state.plotSearch.plotSearchAttributes,
   }),
-  { addFavouriteTarget, removeFavouriteTarget }
+  { addFavouriteTarget, removeFavouriteTarget },
 )(MapSearchComponent);

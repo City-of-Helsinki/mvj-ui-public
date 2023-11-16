@@ -1,4 +1,3 @@
-import React from 'react';
 import { TextInput } from 'hds-react';
 import { FieldRendererProps } from '../types';
 

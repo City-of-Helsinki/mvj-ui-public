@@ -1,4 +1,3 @@
-import React from 'react';
 import { Info } from '../utils';
 import { Col } from 'react-grid-system';
 

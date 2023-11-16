@@ -1,5 +1,5 @@
 import { Button } from 'hds-react';
-import React from 'react';
+
 import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
@@ -44,8 +44,8 @@ const AreaSearchApplicationPage = ({
                   {getPageTitle(
                     t(
                       'areaSearch.application.form.pageTitle',
-                      'Area search application'
-                    )
+                      'Area search application',
+                    ),
                   )}
                 </title>
               </Helmet>
@@ -53,7 +53,7 @@ const AreaSearchApplicationPage = ({
                 <h1>
                   {t(
                     'areaSearch.application.heading',
-                    'Area search application'
+                    'Area search application',
                   )}
                 </h1>
                 {lastSubmission && <AreaSearchTargetSummary />}
@@ -68,7 +68,7 @@ const AreaSearchApplicationPage = ({
                             <p>
                               {t(
                                 'areaSearch.application.error.noAreaSelected',
-                                "To submit an area application, you have to select the area you're applying for on the area search page first."
+                                "To submit an area application, you have to select the area you're applying for on the area search page first.",
                               )}
                             </p>
                           ) : (
@@ -86,15 +86,15 @@ const AreaSearchApplicationPage = ({
                                         onClick={() =>
                                           navigate(
                                             getRouteById(
-                                              AppRoutes.AREA_SEARCH_APPLICATION_FORM_PREVIEW
-                                            )
+                                              AppRoutes.AREA_SEARCH_APPLICATION_FORM_PREVIEW,
+                                            ),
                                           )
                                         }
                                         disabled={false}
                                       >
                                         {t(
                                           'application.previewButton',
-                                          'Preview submission'
+                                          'Preview submission',
                                         )}
                                       </Button>
                                     </Col>
@@ -109,7 +109,7 @@ const AreaSearchApplicationPage = ({
                           <p>
                             {t(
                               'areaSearch.application.error.notLoggedIn',
-                              'Please log in to send an application for an area.'
+                              'Please log in to send an application for an area.',
                             )}
                           </p>
                           <Button
@@ -139,5 +139,5 @@ export default connect(
   }),
   {
     openLoginModal,
-  }
+  },
 )(AreaSearchApplicationPage);

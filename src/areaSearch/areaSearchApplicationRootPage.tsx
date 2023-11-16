@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { initialize, reduxForm, InjectedFormProps } from 'redux-form';
 
@@ -51,9 +51,9 @@ export default connect(
   {
     initializeForm: initialize,
     fetchFormAttributes,
-  }
+  },
 )(
   reduxForm<unknown, Props>({
     form: AREA_SEARCH_FORM_NAME,
-  })(AreaSearchApplicationRootPage)
+  })(AreaSearchApplicationRootPage),
 );

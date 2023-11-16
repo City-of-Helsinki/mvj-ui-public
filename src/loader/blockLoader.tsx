@@ -1,5 +1,5 @@
 import { LoadingSpinner } from 'hds-react';
-import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 
 const BlockLoader = (): JSX.Element => {

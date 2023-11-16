@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { InjectedFormProps } from 'redux-form';
 
@@ -90,7 +89,7 @@ export const getPartialRouteById = (id: string, parentId: string): string => {
 
   if (!target.startsWith(parent)) {
     throw new Error(
-      `Invalid route nesting pattern! ${target} is not a subroute of ${parent}.`
+      `Invalid route nesting pattern! ${target} is not a subroute of ${parent}.`,
     );
   }
 
@@ -183,21 +182,21 @@ const SiteRoutes = (): JSX.Element => {
                   <Route
                     path={getPartialRouteById(
                       AppRoutes.APPLICATION_FORM,
-                      AppRoutes.APPLICATION_ROOT
+                      AppRoutes.APPLICATION_ROOT,
                     )}
                     element={<ApplicationPage />}
                   />
                   <Route
                     path={getPartialRouteById(
                       AppRoutes.APPLICATION_PREVIEW,
-                      AppRoutes.APPLICATION_ROOT
+                      AppRoutes.APPLICATION_ROOT,
                     )}
                     element={<ApplicationPreviewPage />}
                   />
                   <Route
                     path={getPartialRouteById(
                       AppRoutes.APPLICATION_SUBMIT,
-                      AppRoutes.APPLICATION_ROOT
+                      AppRoutes.APPLICATION_ROOT,
                     )}
                     element={<ApplicationSuccessPage />}
                   />
@@ -228,28 +227,28 @@ const SiteRoutes = (): JSX.Element => {
                     <Route
                       path={getPartialRouteById(
                         AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT,
                       )}
                       element={<AreaSearchSpecsPage valid={valid} />}
                     />
                     <Route
                       path={getPartialRouteById(
                         AppRoutes.AREA_SEARCH_APPLICATION_FORM,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT,
                       )}
                       element={<AreaSearchApplicationPage />}
                     />
                     <Route
                       path={getPartialRouteById(
                         AppRoutes.AREA_SEARCH_APPLICATION_FORM_PREVIEW,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT,
                       )}
                       element={<AreaSearchApplicationPreview />}
                     />
                     <Route
                       path={getPartialRouteById(
                         AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
+                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT,
                       )}
                       element={<AreaSearchApplicationSuccessPage />}
                     />
@@ -259,7 +258,7 @@ const SiteRoutes = (): JSX.Element => {
                         <Navigate
                           replace
                           to={getRouteById(
-                            AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC
+                            AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC,
                           )}
                         />
                       }

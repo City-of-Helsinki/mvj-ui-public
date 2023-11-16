@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { Helmet } from 'react-helmet';
@@ -94,13 +94,13 @@ const MapSearchPage = (props: Props): JSX.Element => {
     case 'plot_search':
       pageTitle = t(
         'plotSearchAndCompetitions.mapView.plotSearches.pageTitle',
-        'Plot searches and competitions'
+        'Plot searches and competitions',
       );
       break;
     case 'other_search':
       pageTitle = t(
         'plotSearchAndCompetitions.mapView.otherSearches.pageTitle',
-        'Other competitions and searches'
+        'Other competitions and searches',
       );
       break;
   }
@@ -109,12 +109,12 @@ const MapSearchPage = (props: Props): JSX.Element => {
     if (id) {
       const target = plotSearches
         .filter((plotSearch) =>
-          plotSearch.plot_search_targets.some((t) => t.id.toString() === id)
+          plotSearch.plot_search_targets.some((t) => t.id.toString() === id),
         )
         .map((p) => ({
           plotSearch: p,
           target: p.plot_search_targets.filter(
-            (t) => t.id.toString() === id
+            (t) => t.id.toString() === id,
           )[0],
         }))[0];
 
@@ -140,7 +140,7 @@ const MapSearchPage = (props: Props): JSX.Element => {
 
     if (newOptions) {
       newOptions = newOptions.filter((option) =>
-        plotSearches.some((plotSearch) => plotSearch.type?.id === option.id)
+        plotSearches.some((plotSearch) => plotSearch.type?.id === option.id),
       );
 
       setCategoryOptions(
@@ -149,21 +149,21 @@ const MapSearchPage = (props: Props): JSX.Element => {
           name: option.name,
           subtypes: option.subtypes,
           symbol: String.fromCharCode('A'.charCodeAt(0) + index),
-        }))
+        })),
       );
 
       setCategoryVisibilities(
         newOptions.reduce((acc, next) => {
           acc[Number(next.id)] = true;
           return acc;
-        }, {} as CategoryVisibilities)
+        }, {} as CategoryVisibilities),
       );
     }
   }, [plotSearchTypes, plotSearches, favourite]);
 
   const onToggleCategoryVisibility = (
     categoryId: number,
-    isVisible: boolean
+    isVisible: boolean,
   ) => {
     setCategoryVisibilities(
       Object.keys(categoryVisibilities).reduce((acc, key) => {
@@ -171,12 +171,12 @@ const MapSearchPage = (props: Props): JSX.Element => {
         acc[keyIdx] =
           keyIdx === categoryId ? isVisible : categoryVisibilities[keyIdx];
         return acc;
-      }, {} as CategoryVisibilities)
+      }, {} as CategoryVisibilities),
     );
   };
 
   const filteredPlotSearches = plotSearches.filter(
-    (s) => s.search_class === 'plot_search'
+    (s) => s.search_class === 'plot_search',
   );
 
   const onSelectTarget = (target: SelectedTarget | null) => {

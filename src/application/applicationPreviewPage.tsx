@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { Button, Notification } from 'hds-react';
@@ -95,12 +95,12 @@ const ApplicationPreviewPage = ({
 
   return (
     <AuthDependentContent>
-      {(loading, loggedIn) => (
+      {(loading: boolean, loggedIn: boolean) => (
         <MainContentElement className="ApplicationPreviewPage">
           <Helmet>
             <title>
               {getPageTitle(
-                t('application.preview.pageTitle', 'Plot application')
+                t('application.preview.pageTitle', 'Plot application'),
               )}
             </title>
           </Helmet>
@@ -150,13 +150,13 @@ const ApplicationPreviewPage = ({
                   isLoading={isSubmitting}
                   loadingText={t(
                     'application.submitInProcess',
-                    'Submitting...'
+                    'Submitting...',
                   )}
                   className="ApplicationPreviewPage__submission-button"
                 >
                   {t('application.submit', 'Submit application')}
                 </Button>
-                {lastError && (
+                {!!lastError && (
                   <Notification
                     size="small"
                     type="error"
@@ -164,7 +164,7 @@ const ApplicationPreviewPage = ({
                   >
                     {t(
                       'application.error.generic',
-                      'The application could not be submitted correctly. Please try again later.'
+                      'The application could not be submitted correctly. Please try again later.',
                     )}
                   </Notification>
                 )}
@@ -174,7 +174,7 @@ const ApplicationPreviewPage = ({
                     type="error"
                     label={t(
                       'application.error.preparation.label',
-                      'Preparation error'
+                      'Preparation error',
                     )}
                   >
                     {getClientErrorMessage(lastClientError)}
@@ -204,5 +204,5 @@ export default connect(
   }),
   {
     submitApplication,
-  }
+  },
 )(ApplicationPreviewPage);

@@ -45,50 +45,51 @@ const plotSearchSlice = createSlice({
   name: 'plotSearch',
   initialState,
   reducers: {},
-  extraReducers: {
-    [RECEIVE_PLOT_SEARCHES]: (
-      state,
-      { payload }: ReceivePlotSearchesAction
-    ) => {
-      state.plotSearches = payload;
-      state.isFetchingPlotSearches = false;
-    },
-    [FETCH_PLOT_SEARCHES]: (state) => {
-      state.isFetchingPlotSearches = true;
-    },
-    [PLOT_SEARCHES_NOT_FOUND]: (state) => {
-      state.isFetchingPlotSearches = false;
-    },
-    [RECEIVE_PLOT_SEARCH_ATTRIBUTES]: (
-      state,
-      { payload }: ReceivePlotSearchAttributesAction
-    ) => {
-      state.plotSearchAttributes = payload;
-      state.isFetchingPlotSearchAttributes = false;
-    },
-    [FETCH_PLOT_SEARCH_ATTRIBUTES]: (state) => {
-      state.isFetchingPlotSearchAttributes = true;
-    },
-    [RECEIVE_PLOT_SEARCH_TYPES]: (
-      state,
-      { payload }: ReceivePlotSearchTypesAction
-    ) => {
-      state.plotSearchTypes = payload;
-      state.isFetchingPlotSearchTypes = false;
-    },
-    [FETCH_PLOT_SEARCH_TYPES]: (state) => {
-      state.isFetchingPlotSearchTypes = true;
-    },
-    [RECEIVE_PLOT_SEARCH_STAGES]: (
-      state,
-      { payload }: ReceivePlotSearchStagesAction
-    ) => {
-      state.plotSearchStages = payload;
-      state.isFetchingPlotSearchStages = false;
-    },
-    [FETCH_PLOT_SEARCH_STAGES]: (state) => {
-      state.isFetchingPlotSearchStages = true;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        RECEIVE_PLOT_SEARCHES,
+        (state, { payload }: ReceivePlotSearchesAction) => {
+          state.plotSearches = payload;
+          state.isFetchingPlotSearches = false;
+        },
+      )
+      .addCase(FETCH_PLOT_SEARCHES, (state) => {
+        state.isFetchingPlotSearches = true;
+      })
+      .addCase(PLOT_SEARCHES_NOT_FOUND, (state) => {
+        state.isFetchingPlotSearches = false;
+      })
+      .addCase(
+        RECEIVE_PLOT_SEARCH_ATTRIBUTES,
+        (state, { payload }: ReceivePlotSearchAttributesAction) => {
+          state.plotSearchAttributes = payload;
+          state.isFetchingPlotSearchAttributes = false;
+        },
+      )
+      .addCase(FETCH_PLOT_SEARCH_ATTRIBUTES, (state) => {
+        state.isFetchingPlotSearchAttributes = true;
+      })
+      .addCase(
+        RECEIVE_PLOT_SEARCH_TYPES,
+        (state, { payload }: ReceivePlotSearchTypesAction) => {
+          state.plotSearchTypes = payload;
+          state.isFetchingPlotSearchTypes = false;
+        },
+      )
+      .addCase(FETCH_PLOT_SEARCH_TYPES, (state) => {
+        state.isFetchingPlotSearchTypes = true;
+      })
+      .addCase(
+        RECEIVE_PLOT_SEARCH_STAGES,
+        (state, { payload }: ReceivePlotSearchStagesAction) => {
+          state.plotSearchStages = payload;
+          state.isFetchingPlotSearchStages = false;
+        },
+      )
+      .addCase(FETCH_PLOT_SEARCH_STAGES, (state) => {
+        state.isFetchingPlotSearchStages = true;
+      });
   },
 });
 
