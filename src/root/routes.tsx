@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { InjectedFormProps } from 'redux-form';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import App from '../App';
 import FrontPage from '../frontPage/frontPage';
@@ -14,13 +13,7 @@ import ApplicationRootPage from '../application/applicationRootPage';
 import ApplicationSuccessPage from '../application/applicationSuccessPage';
 import ApplicationPreviewPage from '../application/applicationPreviewPage';
 import AreaSearchLandingPage from '../areaSearch/areaSearchLandingPage';
-import AreaSearchApplicationRootPage, {
-  Props as AreaSearchApplicationRootPageProps,
-} from '../areaSearch/areaSearchApplicationRootPage';
-import AreaSearchApplicationPage from '../areaSearch/areaSearchApplicationPage';
-import AreaSearchApplicationPreview from '../areaSearch/areaSearchApplicationPreview';
-import AreaSearchSpecsPage from '../areaSearch/areaSearchSpecsPage';
-import AreaSearchApplicationSuccessPage from '../areaSearch/areaSearchApplicationSuccessPage';
+import AreaSearchApplicationRootPage from '../areaSearch/areaSearchApplicationRootPage';
 import DirectReservationPage from '../directReservation/directReservationPage';
 import { AppRoutes } from '../application/helpers';
 
@@ -192,59 +185,7 @@ const SiteRoutes = (): JSX.Element => {
           />
           <Route
             path={getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_ROOT) + '/*'}
-            element={
-              <AreaSearchApplicationRootPage>
-                {({
-                  valid,
-                }: InjectedFormProps<
-                  unknown,
-                  AreaSearchApplicationRootPageProps
-                >) => (
-                  <Routes>
-                    <Route
-                      path={getPartialRouteById(
-                        AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT,
-                      )}
-                      element={<AreaSearchSpecsPage valid={valid} />}
-                    />
-                    <Route
-                      path={getPartialRouteById(
-                        AppRoutes.AREA_SEARCH_APPLICATION_FORM,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT,
-                      )}
-                      element={<AreaSearchApplicationPage />}
-                    />
-                    <Route
-                      path={getPartialRouteById(
-                        AppRoutes.AREA_SEARCH_APPLICATION_FORM_PREVIEW,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT,
-                      )}
-                      element={<AreaSearchApplicationPreview />}
-                    />
-                    <Route
-                      path={getPartialRouteById(
-                        AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT,
-                      )}
-                      element={<AreaSearchApplicationSuccessPage />}
-                    />
-                    <Route
-                      path=""
-                      element={
-                        <Navigate
-                          replace
-                          to={getRouteById(
-                            AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC,
-                          )}
-                        />
-                      }
-                    />
-                    <Route path="*" element={<ErrorPage />} />
-                  </Routes>
-                )}
-              </AreaSearchApplicationRootPage>
-            }
+            element={<AreaSearchApplicationRootPage />}
           />
           <Route
             path={getRouteById(AppRoutes.DIRECT_RESERVATION) + ':id'}

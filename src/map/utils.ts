@@ -124,6 +124,22 @@ export const convertPolygonArrayToMultiPolygon = (
   };
 };
 
+export const convertGeoJSONArrayForLeaflet = (
+  coordinates: Array<any>,
+): Array<any> => {
+  const reverseLngLat = (lngLat: Array<number>) => [lngLat[1], lngLat[0]];
+  const transformCoordinates = (item: Array<any>): Array<any> => {
+    if (!item.length) return [];
+
+    if (typeof item[0] === 'number') {
+      return reverseLngLat(item);
+    } else {
+      return item.map(transformCoordinates);
+    }
+  };
+  return coordinates.map(transformCoordinates);
+};
+
 export const attachMapResizeObserver = (map: L.Map): void => {
   const resizeObserver = new ResizeObserver(() => {
     const panes = map.getPanes();

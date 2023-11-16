@@ -1,15 +1,20 @@
 import { RefObject, useEffect, useState, memo } from 'react';
 import { EditControl } from 'react-leaflet-draw';
-import { FeatureGroup } from 'leaflet';
+import { FeatureGroup, polygon } from 'leaflet';
 import 'leaflet-measure-path';
 import { useThrottleCallback } from '@react-hook/throttle';
 
 import i18n from '../i18n';
-import { setDrawToolLocalizations } from './utils';
+import {
+  convertGeoJSONArrayForLeaflet,
+  setDrawToolLocalizations,
+} from './utils';
+import { MultiPolygon } from 'geojson';
 
 interface Props {
   onChange: () => void;
   featureGroup: RefObject<FeatureGroup>;
+  value?: MultiPolygon;
 }
 
 const SHAPE_COLOR = '#9d27b0';
@@ -19,7 +24,7 @@ const updateComponent = (prevProps: Props, nextProps: Props): boolean => {
 };
 
 const DrawTools = memo<Props>((props: Props): JSX.Element | null => {
-  const { featureGroup, onChange } = props;
+  const { featureGroup, onChange, value } = props;
   const [l10nReady, setl10nReady] = useState<boolean>(false);
 
   // Fixes the bug in leaflet-draw lib: https://github.com/Leaflet/Leaflet.draw/issues/1026
@@ -53,6 +58,19 @@ const DrawTools = memo<Props>((props: Props): JSX.Element | null => {
     updateAllMeasurements();
   };
 
+  // If the input field already has data
+  // draw it automatically when the component mounts
+  const handleExistingInput = () => {
+    const group = featureGroup.current;
+    const coordinates = value?.coordinates;
+    if (group && coordinates) {
+      // Create a polygon for each selected area
+      coordinates.map((selectedArea) => {
+        polygon(convertGeoJSONArrayForLeaflet(selectedArea)).addTo(group);
+      });
+    }
+  };
+
   useEffect(() => {
     setDrawToolLocalizations();
     setl10nReady(true);
@@ -72,6 +90,7 @@ const DrawTools = memo<Props>((props: Props): JSX.Element | null => {
       onEditVertex={handleNonCommittedChange}
       onEditStop={handleNonCommittedChange}
       onDeleteStop={handleNonCommittedChange}
+      onMounted={handleExistingInput}
       draw={{
         circlemarker: false,
         circle: false,
