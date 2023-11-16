@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initialize, reduxForm, InjectedFormProps } from 'redux-form';
 
@@ -6,27 +6,69 @@ import { fetchFormAttributes } from '../application/actions';
 import { AreaSearch, AREA_SEARCH_FORM_NAME } from './types';
 import { initializeAreaSearchForm } from './helpers';
 import { RootState } from '../root/rootReducer';
-import ScrollToTop from '../common/ScrollToTop';
+import { StepState, Stepper } from 'hds-react';
+import AreaSearchSpecsPage from './areaSearchSpecsPage';
+import AreaSearchApplicationPage from './areaSearchApplicationPage';
+import AreaSearchApplicationPreview from './areaSearchApplicationPreview';
+import AreaSearchApplicationSuccessPage from './areaSearchApplicationSuccessPage';
 
 interface State {
   areaSearchForm: null;
   lastSubmission: AreaSearch | null;
 }
 
+interface Step {
+  label: string;
+  state: number;
+}
+
 export interface Props {
   lastSubmission: AreaSearch | null;
   initializeForm: typeof initialize;
   fetchFormAttributes: () => void;
-  children: (props: InjectedFormProps<unknown, Props>) => JSX.Element;
 }
 
 const AreaSearchApplicationRootPage = ({
   lastSubmission,
-  children,
   initializeForm,
   fetchFormAttributes,
-  ...rest
 }: Props & InjectedFormProps<unknown, Props>): JSX.Element => {
+  const [currentStep, setCurrentStep] = useState<number>(0);
+
+  const [steps, setSteps] = useState<Step[]>([
+    {
+      label: 'Alueen valinta',
+      state: StepState.available,
+    },
+    {
+      label: 'Hakemuksen täyttö',
+      state: StepState.available,
+    },
+    {
+      label: 'Esikatselu',
+      state: StepState.available,
+    },
+    {
+      label: 'Lähetys',
+      state: StepState.available,
+    },
+  ]);
+
+  const renderCurrentStep = () => {
+    switch (steps[currentStep].label) {
+      case 'Alueen valinta':
+        return <AreaSearchSpecsPage valid={false} />;
+      case 'Hakemuksen täyttö':
+        return <AreaSearchApplicationPage />;
+      case 'Esikatselu':
+        return <AreaSearchApplicationPreview />;
+      case 'Lähetys':
+        return <AreaSearchApplicationSuccessPage />;
+      default:
+        return null;
+    }
+  };
+
   useEffect(() => {
     initializeForm(AREA_SEARCH_FORM_NAME, initializeAreaSearchForm());
   }, [lastSubmission]);
@@ -37,8 +79,13 @@ const AreaSearchApplicationRootPage = ({
 
   return (
     <div>
-      <ScrollToTop />
-      {children(rest)}
+      <Stepper
+        steps={steps}
+        language="en"
+        selectedStep={currentStep}
+        onStepClick={(_, nextPageIndex) => setCurrentStep(nextPageIndex)}
+      />
+      {renderCurrentStep()}
     </div>
   );
 };

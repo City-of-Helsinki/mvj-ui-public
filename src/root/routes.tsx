@@ -23,6 +23,7 @@ import AreaSearchApplicationPreview from '../areaSearch/areaSearchApplicationPre
 import AreaSearchSpecsPage from '../areaSearch/areaSearchSpecsPage';
 import AreaSearchApplicationSuccessPage from '../areaSearch/areaSearchApplicationSuccessPage';
 import DirectReservationPage from '../directReservation/directReservationPage';
+import { StepState, Stepper } from 'hds-react';
 
 export const AppRoutes = {
   HOME: 'home',
@@ -216,59 +217,7 @@ const SiteRoutes = (): JSX.Element => {
           />
           <Route
             path={getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_ROOT) + '/*'}
-            element={
-              <AreaSearchApplicationRootPage>
-                {({
-                  valid,
-                }: InjectedFormProps<
-                  unknown,
-                  AreaSearchApplicationRootPageProps
-                >) => (
-                  <Routes>
-                    <Route
-                      path={getPartialRouteById(
-                        AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
-                      )}
-                      element={<AreaSearchSpecsPage valid={valid} />}
-                    />
-                    <Route
-                      path={getPartialRouteById(
-                        AppRoutes.AREA_SEARCH_APPLICATION_FORM,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
-                      )}
-                      element={<AreaSearchApplicationPage />}
-                    />
-                    <Route
-                      path={getPartialRouteById(
-                        AppRoutes.AREA_SEARCH_APPLICATION_FORM_PREVIEW,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
-                      )}
-                      element={<AreaSearchApplicationPreview />}
-                    />
-                    <Route
-                      path={getPartialRouteById(
-                        AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT,
-                        AppRoutes.AREA_SEARCH_APPLICATION_ROOT
-                      )}
-                      element={<AreaSearchApplicationSuccessPage />}
-                    />
-                    <Route
-                      path=""
-                      element={
-                        <Navigate
-                          replace
-                          to={getRouteById(
-                            AppRoutes.AREA_SEARCH_APPLICATION_AREA_SPEC
-                          )}
-                        />
-                      }
-                    />
-                    <Route path="*" element={<ErrorPage />} />
-                  </Routes>
-                )}
-              </AreaSearchApplicationRootPage>
-            }
+            element={<AreaSearchApplicationRootPage />}
           />
           <Route
             path={getRouteById(AppRoutes.DIRECT_RESERVATION) + ':id'}
