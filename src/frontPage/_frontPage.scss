@@ -28,7 +28,7 @@
       align-items: center;
       text-align: center;
 
-      h3 {
+      h1 {
         padding: 0 15%;
         font-weight: $semibold;
         font-size: $fontsize-heading-xl;
@@ -51,7 +51,7 @@
     align-items: center;
     text-align: center;
 
-    h4 {
+    > h2 {
       padding: 0 15%;
       font-weight: $semibold;
       font-size: $fontsize-heading-l;
@@ -64,7 +64,7 @@
       }
     }
 
-    h5 {
+    > h3 {
       margin-top: $spacing-m;
       margin-bottom: 0;
       font-size: $fontsize-heading-l;

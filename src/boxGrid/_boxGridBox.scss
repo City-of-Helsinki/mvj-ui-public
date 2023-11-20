@@ -58,8 +58,7 @@
   }
 
   .BoxGridBox__label {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     width: 75%;
     font-size: $fontsize-heading-m;
     font-weight: $semibold;
