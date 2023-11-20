@@ -36,11 +36,11 @@ interface State {
   fieldTypeMapping: FieldTypeMapping;
   submittedAnswerId: number;
   lastError: unknown;
+  isSubmitting: boolean;
 }
 
 interface Props extends State {
   submitApplication: (data: AreaSearchApplicationSubmission) => void;
-  isSubmitting?: boolean;
 }
 
 const AreaSearchApplicationPreview = ({
@@ -48,7 +48,7 @@ const AreaSearchApplicationPreview = ({
   lastSubmission,
   formValues,
   lastError,
-  isSubmitting = false,
+  isSubmitting,
   submittedAnswerId,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
@@ -192,6 +192,7 @@ export default connect(
     lastSubmission: state.areaSearch.lastSubmission,
     submittedAnswerId: state.areaSearch.lastApplicationSubmissionId,
     lastError: state.areaSearch.lastApplicationError,
+    isSubmitting: state.areaSearch.isSubmittingAreaSearchApplication,
   }),
   {
     submitApplication: submitAreaSearchApplication,

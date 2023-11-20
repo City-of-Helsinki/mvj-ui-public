@@ -41,6 +41,7 @@ export type FieldRendererProps = WrappedFieldProps & {
   field: FormField;
   setValues: (newValues: Partial<ApplicationField>) => void;
   fieldType: SupportedFieldTypes | null;
+  displayError: boolean;
 };
 
 export enum ApplicationSectionKeys {
@@ -203,6 +204,8 @@ export const TARGET_SECTION_IDENTIFIER = 'haettava-kohde';
 export const CONFIRMATION_SECTION_IDENTIFIER = 'vahvistukset';
 
 export const APPLICANT_TYPE_FIELD_IDENTIFIER = 'hakija';
+export const CONTROL_SHARE_FIELD_IDENTIFIER = 'hallintaosuus';
+export const EMAIL_FIELD_IDENTIFIER = 'sahkoposti';
 
 export type ApplicationField = {
   value: NestedFieldLeaf;

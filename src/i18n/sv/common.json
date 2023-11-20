@@ -24,6 +24,9 @@
         "noApplicantIdentifierFound": "",
         "noApplicantTypeSet": "",
         "unknown": ""
+      },
+      "summary": {
+        "header": ""
       }
     },
     "fileUpload": {
@@ -208,6 +211,14 @@
       "showFullDesc": {
         "hide": "",
         "show": ""
+      }
+    }
+  },
+  "components": {
+    "form": {
+      "fractionalFieldset": {
+        "denominator": "",
+        "numerator": ""
       }
     }
   },
@@ -541,11 +552,24 @@
   },
   "validation": {
     "errors": {
+      "companyIdentifier": {
+        "checkNumber": "",
+        "generic": ""
+      },
+      "controlShare": {
+        "generic": "",
+        "invalidSum": ""
+      },
       "dateAfter": "",
       "dateBefore": "",
+      "email": "",
       "greaterThan": "",
       "lessThan": "",
       "nonEmptyGeometry": "",
+      "personalIdentifier": {
+        "checkChar": "",
+        "generic": ""
+      },
       "requiredArray": "",
       "requiredValue": ""
     }

@@ -9,4 +9,9 @@
       margin-left: $spacing-s;
     }
   }
+
+  .ApplicationPage__notifications > div > * {
+    margin-top: $spacing-s;
+    margin-bottom: $spacing-s;
+  }
 }

@@ -6,7 +6,8 @@ import ApplicationFieldsetHelperText from './applicationFieldsetHelperText';
 const ApplicationCheckboxFieldset = (
   props: FieldRendererProps,
 ): JSX.Element => {
-  const { field, id, input, meta, setValues } = props;
+  const { field, id, input, meta, setValues, displayError } = props;
+
   return (
     <div className="ApplicationCheckboxFieldset">
       {field.choices && field.choices.length > 0 ? (
@@ -14,13 +15,17 @@ const ApplicationCheckboxFieldset = (
           <SelectionGroup
             label={field.label}
             required={field.required}
-            errorText={meta.error}
+            errorText={displayError && meta.error?.value}
             className="ApplicationCheckboxFieldset__selection-group"
           >
             {field.choices.map((option, index) => (
-              <div className="ApplicationCheckboxFieldset__option" key={index}>
+              <div
+                className="ApplicationCheckboxFieldset__option"
+                id={`ApplicationCheckboxFieldSet_${input.name}_${index}_div`}
+                key={index}
+              >
                 <Checkbox
-                  id={`ApplicationCheckboxFieldSet_${id}_${index}`}
+                  id={`ApplicationCheckboxFieldSet_${input.name}_${index}`}
                   checked={input.value?.value?.includes(option.value)}
                   onChange={(event) => {
                     if (event.target.checked) {
@@ -39,6 +44,7 @@ const ApplicationCheckboxFieldset = (
                       });
                     }
                   }}
+                  onBlur={() => input.onBlur(input.value)}
                   label={option.text}
                 />
                 {option.has_text_input && (
@@ -63,9 +69,10 @@ const ApplicationCheckboxFieldset = (
               input.value.value instanceof Array ? false : input.value.value
             }
             required={field.required}
-            errorText={meta.error}
+            errorText={displayError && meta.error?.value}
             label={field.label}
             onChange={(e) => setValues({ value: e.target.checked })}
+            onBlur={() => input.onBlur(input.value)}
           />
           <ApplicationFieldsetHelperText>
             {field.hint_text}

@@ -21,7 +21,6 @@ const ApplicationExtraTextField = ({
         onChange={(e) => setValues({ extraValue: e.target.value })}
         invalid={meta.invalid}
         required
-        errorText={meta.error}
         aria-labelledby={parentId}
         disabled={disabled}
       />

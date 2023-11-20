@@ -24,6 +24,9 @@
         "noApplicantIdentifierFound": "Yhden tai useamman hakijan tunnistetieto puuttuu. Ole hyvä ja varmista, että henkilöhakijoiden henkilötunnukset ja yrityshakijoiden Y-tunnukset on täytetty.",
         "noApplicantTypeSet": "Yhden tai useamman hakijan tyyppi on valitsematta. Ole hyvä ja tarkista, että kaikki tarvittavat hakijoiden tiedot on täytetty.",
         "unknown": "Lähetyksen valmistelu ei onnistunut tuntemattomasta syystä. Ole hyvä ja yritä myöhemmin uudelleen."
+      },
+      "summary": {
+        "header": "Tarkistathan seuraavien kenttien arvot ennen jatkamista."
       }
     },
     "fileUpload": {
@@ -208,6 +211,14 @@
       "showFullDesc": {
         "hide": "Piilota kohteen tarkemmat tiedot",
         "show": "Näytä kohteen tarkemmat tiedot"
+      }
+    }
+  },
+  "components": {
+    "form": {
+      "fractionalFieldset": {
+        "denominator": "Nimittäjä",
+        "numerator": "Osoittaja"
       }
     }
   },
@@ -541,11 +552,24 @@
   },
   "validation": {
     "errors": {
+      "companyIdentifier": {
+        "checkNumber": "Tarkistusmerkki ei täsmää.",
+        "generic": "Virheellinen Y-tunnus."
+      },
+      "controlShare": {
+        "generic": "Virheellinen hallintaosuus.",
+        "invalidSum": "Hakijoiden hallintaosuuksien yhteenlasketun määrän on oltava 100 %."
+      },
       "dateAfter": "Aikaisin sallittu päivämäärä on {{date}}.",
       "dateBefore": "Myöhäisin sallittu päivämäärä on {{date}}.",
+      "email": "Virheellinen sähköpostiosoite.",
       "greaterThan": "Arvon on oltava suurempi kuin {{number}}.",
       "lessThan": "Arvon on oltava pienempi kuin {{number}}.",
       "nonEmptyGeometry": "Aluetta ei ole vielä valittu.",
+      "personalIdentifier": {
+        "checkChar": "Tarkistusmerkki ei täsmää.",
+        "generic": "Virheellinen henkilötunnus."
+      },
       "requiredArray": "Valitse vähintään yksi vaihtoehto.",
       "requiredValue": "Tämä tieto on pakollinen."
     }

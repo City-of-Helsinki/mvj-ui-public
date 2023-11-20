@@ -1,8 +1,10 @@
 .ApplicationFractionField {
   fieldset {
-    display: flex;
-    margin-inline-end: 0;
-    margin-inline-start: 0;
+    .ApplicationFractionField__fields {
+      display: flex;
+      margin-inline-end: 0;
+      margin-inline-start: 0;
+    }
     legend {
       font-weight: 500;
     }
