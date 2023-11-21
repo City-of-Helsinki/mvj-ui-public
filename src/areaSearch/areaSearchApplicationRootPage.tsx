@@ -32,8 +32,17 @@ const AreaSearchApplicationRootPage = ({
   lastSubmission,
   initializeForm,
   fetchFormAttributes,
+  valid,
 }: Props & InjectedFormProps<unknown, Props>): JSX.Element => {
   const [currentStep, setCurrentStep] = useState<number>(0);
+
+  const setNextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const setPreviousStep = () => {
+    setCurrentStep(currentStep - 1);
+  };
 
   const [steps, setSteps] = useState<Step[]>([
     {
@@ -42,22 +51,22 @@ const AreaSearchApplicationRootPage = ({
     },
     {
       label: 'Hakemuksen täyttö',
-      state: StepState.available,
+      state: StepState.disabled,
     },
     {
       label: 'Esikatselu',
-      state: StepState.available,
+      state: StepState.disabled,
     },
     {
       label: 'Lähetys',
-      state: StepState.available,
+      state: StepState.disabled,
     },
   ]);
 
   const renderCurrentStep = () => {
     switch (steps[currentStep].label) {
       case 'Alueen valinta':
-        return <AreaSearchSpecsPage valid={false} />;
+        return <AreaSearchSpecsPage valid={valid} setNextStep={setNextStep} />;
       case 'Hakemuksen täyttö':
         return <AreaSearchApplicationPage />;
       case 'Esikatselu':
@@ -69,6 +78,18 @@ const AreaSearchApplicationRootPage = ({
     }
   };
 
+  const toggleValidSpecs = () => {
+    if (valid && steps[1].state !== StepState.available) {
+      const newSteps = [...steps];
+      newSteps[1].state = StepState.available;
+      setSteps(newSteps);
+    } else if (!valid && steps[1].state === StepState.available) {
+      const newSteps = [...steps];
+      newSteps[1].state = StepState.disabled;
+      setSteps(newSteps);
+    }
+  };
+
   useEffect(() => {
     initializeForm(AREA_SEARCH_FORM_NAME, initializeAreaSearchForm());
   }, [lastSubmission]);
@@ -76,6 +97,10 @@ const AreaSearchApplicationRootPage = ({
   useEffect(() => {
     fetchFormAttributes();
   }, []);
+
+  useEffect(() => {
+    toggleValidSpecs();
+  }, [valid, toggleValidSpecs]);
 
   return (
     <div>

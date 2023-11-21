@@ -72,6 +72,7 @@ interface OwnProps {
   valid: boolean;
   touch(...field: string[]): void;
   lastSubmissionError: unknown;
+  setNextStep: any;
 }
 
 type Props = OwnProps & State;
@@ -94,6 +95,7 @@ const AreaSearchSpecsPage = ({
   lastSubmissionError,
   applicationFormTemplate,
   change,
+  setNextStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -189,6 +191,7 @@ const AreaSearchSpecsPage = ({
               submitAreaSearch(
                 prepareAreaSearchSubmission(files['search.attachments'])
               );
+              setNextStep();
             } else {
               if (touch) {
                 touch(
