@@ -89,7 +89,7 @@ const ApplicationFractionalFieldset = ({
             onBlur={blurHandler}
           />
         </div>
-        <ApplicationFieldError error={displayError && meta.error.value} />
+        <ApplicationFieldError error={displayError && meta.error?.value} />
       </Fieldset>
     </div>
   );
