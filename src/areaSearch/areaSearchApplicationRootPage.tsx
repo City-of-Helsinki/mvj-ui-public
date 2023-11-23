@@ -11,6 +11,11 @@ import AreaSearchSpecsPage from './areaSearchSpecsPage';
 import AreaSearchApplicationPage from './areaSearchApplicationPage';
 import AreaSearchApplicationPreview from './areaSearchApplicationPreview';
 import AreaSearchApplicationSuccessPage from './areaSearchApplicationSuccessPage';
+import MainContentElement from '../a11y/MainContentElement';
+import { Helmet } from 'react-helmet';
+import { getPageTitle } from '../root/helpers';
+import { t } from 'i18next';
+import { Container } from 'react-grid-system';
 
 interface State {
   areaSearchForm: null;
@@ -103,15 +108,24 @@ const AreaSearchApplicationRootPage = ({
   }, [valid, toggleValidSpecs]);
 
   return (
-    <div>
-      <Stepper
-        steps={steps}
-        language="en"
-        selectedStep={currentStep}
-        onStepClick={(_, nextPageIndex) => setCurrentStep(nextPageIndex)}
-      />
-      {renderCurrentStep()}
-    </div>
+    <MainContentElement className="AreaSearchSpecsPage">
+      <Helmet>
+        <title>
+          {getPageTitle(t('areaSearch.specs.pageTitle', 'Area search'))}
+        </title>
+      </Helmet>
+      <Container>
+        <div className="AreaSearchStepperWrapper">
+          <Stepper
+            steps={steps}
+            language="en"
+            selectedStep={currentStep}
+            onStepClick={(_, nextPageIndex) => setCurrentStep(nextPageIndex)}
+          />
+        </div>
+        {renderCurrentStep()}
+      </Container>
+    </MainContentElement>
   );
 };
 

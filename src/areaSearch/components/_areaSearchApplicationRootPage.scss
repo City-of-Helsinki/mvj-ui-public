@@ -1,0 +1,8 @@
+.AreaSearchStepperWrapper {
+  @media (min-width: $breakpoint-m) {
+    margin: 0 15% 0;
+  }
+  @media (max-width: $breakpoint-s) {
+    display: none;
+  }
+}
