@@ -23,15 +23,16 @@ interface State {
 
 interface Props extends State {
   openLoginModal: () => void;
+  setNextStep: any;
 }
 
 const AreaSearchApplicationPage = ({
   openLoginModal,
   isSubmittingAreaSearch,
   lastSubmission,
+  setNextStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   return (
     <AuthDependentContent>
@@ -83,13 +84,7 @@ const AreaSearchApplicationPage = ({
                                     <Col xs={12}>
                                       <Button
                                         variant="primary"
-                                        onClick={() =>
-                                          navigate(
-                                            getRouteById(
-                                              AppRoutes.AREA_SEARCH_APPLICATION_FORM_PREVIEW
-                                            )
-                                          )
-                                        }
+                                        onClick={() => setNextStep()}
                                         disabled={false}
                                       >
                                         {t(
