@@ -1,5 +1,5 @@
+/*eslint no-debugger: off */
 import React, { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router';
 import { Container } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
@@ -26,7 +26,6 @@ import {
 } from './types';
 import { submitAreaSearchApplication } from './actions';
 import ApplicationPreviewSubsection from '../application/components/applicationPreviewSubsection';
-import { AppRoutes, getRouteById } from '../root/routes';
 import { getClientErrorMessage } from '../application/helpers';
 import { prepareAreaSearchApplicationForSubmission } from './helpers';
 
@@ -41,6 +40,8 @@ interface State {
 interface Props extends State {
   submitApplication: (data: AreaSearchApplicationSubmission) => void;
   isSubmitting?: boolean;
+  setNextStep: any;
+  setPreviousStep: any;
 }
 
 const AreaSearchApplicationPreview = ({
@@ -50,9 +51,10 @@ const AreaSearchApplicationPreview = ({
   lastError,
   isSubmitting = false,
   submittedAnswerId,
+  setNextStep,
+  setPreviousStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const [lastClientError, setLastClientError] =
     useState<ApplicationPreparationError | null>(null);
@@ -61,7 +63,7 @@ const AreaSearchApplicationPreview = ({
 
   useEffect(() => {
     if (submittedAnswerId !== previousAnswerId) {
-      navigate(getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT));
+      setPreviousStep();
     }
   }, [submittedAnswerId]);
 
@@ -73,6 +75,31 @@ const AreaSearchApplicationPreview = ({
       );
     } catch (e) {
       setLastClientError(e as ApplicationPreparationError);
+    }
+  };
+
+  const renderSectionPreviewsOrGoBack = (loggedIn: boolean) => {
+    if (
+      loggedIn &&
+      lastSubmission?.form?.sections &&
+      formValues.form[ApplicationSectionKeys.Subsections]
+    ) {
+      debugger;
+      return lastSubmission.form.sections.map((section) => (
+        <ApplicationPreviewSubsection
+          key={section.identifier}
+          section={section}
+          answers={
+            formValues.form[ApplicationSectionKeys.Subsections][
+              section.identifier
+            ]
+          }
+          headerTag={'h2'}
+          pendingUploads={[]}
+        />
+      ));
+    } else {
+      setPreviousStep();
     }
   };
 
@@ -104,35 +131,10 @@ const AreaSearchApplicationPreview = ({
               <BlockLoader />
             ) : (
               <div className="ApplicationPreviewPage__top-level-sections">
-                {loggedIn &&
-                lastSubmission?.form?.sections &&
-                formValues.form[ApplicationSectionKeys.Subsections] ? (
-                  lastSubmission.form.sections.map((section) => (
-                    <ApplicationPreviewSubsection
-                      key={section.identifier}
-                      section={section}
-                      answers={
-                        formValues.form[ApplicationSectionKeys.Subsections][
-                          section.identifier
-                        ]
-                      }
-                      headerTag={'h2'}
-                      pendingUploads={[]}
-                    />
-                  ))
-                ) : (
-                  <Navigate
-                    replace
-                    to={getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM)}
-                  />
-                )}
+                {renderSectionPreviewsOrGoBack(loggedIn)}
                 <Button
                   variant="secondary"
-                  onClick={() =>
-                    navigate(
-                      getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM)
-                    )
-                  }
+                  onClick={() => setPreviousStep()}
                   disabled={isSubmitting}
                   className="ApplicationPreviewPage__submission-button"
                 >
