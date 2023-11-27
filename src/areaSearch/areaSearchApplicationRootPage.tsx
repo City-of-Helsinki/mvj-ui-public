@@ -77,9 +77,14 @@ const AreaSearchApplicationRootPage = ({
       case 'Alueen valinta':
         return <AreaSearchSpecsPage valid={valid} setNextStep={setNextStep} />;
       case 'Hakemuksen täyttö':
-        return <AreaSearchApplicationPage />;
+        return <AreaSearchApplicationPage setNextStep={setNextStep} />;
       case 'Esikatselu':
-        return <AreaSearchApplicationPreview />;
+        return (
+          <AreaSearchApplicationPreview
+            setPreviousStep={setPreviousStep}
+            setNextStep={setNextStep}
+          />
+        );
       case 'Lähetys':
         return <AreaSearchApplicationSuccessPage />;
       default:

@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { isValid } from 'redux-form';
-import { useNavigate } from 'react-router';
 
 import MainContentElement from '../a11y/MainContentElement';
 import AuthDependentContent from '../auth/components/authDependentContent';
@@ -16,7 +15,6 @@ import { RootState } from '../root/rootReducer';
 import { AreaSearch, AREA_SEARCH_FORM_NAME } from './types';
 import AreaSearchTargetSummary from './components/areaSearchTargetSummary';
 import ApplicationForm from './components/applicationForm';
-import { AppRoutes, getRouteById } from '../root/routes';
 import ApplicationErrorsSummary from '../application/components/ApplicationErrorsSummary';
 
 interface State {
@@ -27,6 +25,7 @@ interface State {
 
 interface Props extends State {
   openLoginModal: () => void;
+  setNextStep: any;
 }
 
 const AreaSearchApplicationPage = ({
@@ -34,16 +33,16 @@ const AreaSearchApplicationPage = ({
   isSubmittingAreaSearch,
   lastSubmission,
   isFormValid,
+  setNextStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [isSaveClicked, setSaveClicked] = useState<boolean>(false);
 
   const openPreview = () => {
     setSaveClicked(true);
 
     if (isFormValid) {
-      navigate(getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM_PREVIEW));
+      setNextStep();
     }
   };
 
