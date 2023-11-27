@@ -10,13 +10,28 @@ const ApplicationFractionalFieldset = ({
   setValues,
 }: FieldRendererProps): JSX.Element => {
   const changeHandler = (value: string, fieldType: FieldType): void => {
-    const values = input.value.value.split(SPLITTER);
-    values[fieldType] = value;
-    setValues({
-      value: `${values[FieldType.NUMERATOR] || ''}${SPLITTER}${
-        values[FieldType.DENOMINATOR] || ''
-      }`,
-    });
+    if (!value) {
+      value = '0';
+    }
+
+    if (!input.value?.value) {
+      const newValue = '1 / 1';
+      const values = newValue.split(SPLITTER);
+      values[fieldType] = value;
+      setValues({
+        value: `${values[FieldType.NUMERATOR] || ''}${SPLITTER}${
+          values[FieldType.DENOMINATOR] || ''
+        }`,
+      });
+    } else {
+      const values = input.value.value.split(SPLITTER);
+      values[fieldType] = value;
+      setValues({
+        value: `${values[FieldType.NUMERATOR] || ''}${SPLITTER}${
+          values[FieldType.DENOMINATOR] || ''
+        }`,
+      });
+    }
   };
 
   const parseValue = (fieldType: FieldType): string => {
