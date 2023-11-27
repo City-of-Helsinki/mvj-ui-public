@@ -59,10 +59,14 @@ const AreaSearchLandingPage = (): JSX.Element => {
               'areaSearch.landingPage.areaSearches.label',
               'Area search',
             )}
-            bottomText={t(
-              'areaSearch.landingPage.areaSearches.blurb',
-              'You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.',
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'areaSearch.landingPage.areaSearches.blurb',
+                  'You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.',
+                )}
+              </p>
+            }
             color="yellow"
             actions={
               <>
@@ -83,6 +87,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
               </>
             }
             image={<AreaSearchImage />}
+            headerComponent="h3"
           />
         </BoxGrid>
 
@@ -95,10 +100,14 @@ const AreaSearchLandingPage = (): JSX.Element => {
               'areaSearch.landingPage.otherUses.otherConstruction.label',
               'Construction on streets or in parks',
             )}
-            bottomText={t(
-              'areaSearch.landingPage.otherUses.otherConstruction.blurb',
-              'You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.',
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'areaSearch.landingPage.otherUses.otherConstruction.blurb',
+                  'You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.',
+                )}
+              </p>
+            }
             color="blue"
             actions={
               <>
@@ -117,10 +126,14 @@ const AreaSearchLandingPage = (): JSX.Element => {
               'areaSearch.landingPage.otherUses.permanentFixtures.label',
               'Permanent fixture installations on streets or in parks',
             )}
-            bottomText={t(
-              'areaSearch.landingPage.otherUses.permanentFixtures.blurb',
-              'In order to place permanent fixtures such as pipes, cables, wells, building foundations, fences or walls to public areas like streets, parks and marketplaces, a permit must be acquired.',
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'areaSearch.landingPage.otherUses.permanentFixtures.blurb',
+                  'In order to place permanent fixtures such as pipes, cables, wells, building foundations, fences or walls to public areas like streets, parks and marketplaces, a permit must be acquired.',
+                )}
+              </p>
+            }
             color="blue"
             actions={
               <>
@@ -133,16 +146,21 @@ const AreaSearchLandingPage = (): JSX.Element => {
               </>
             }
             image={<PermanentFixturesImage />}
+            headerComponent="h3"
           />
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.terraceOrParklet.label',
               'Terraces and parklets',
             )}
-            bottomText={t(
-              'areaSearch.landingPage.otherUses.terraceOrParklet.blurb',
-              'Setting up an outdoor serving area for a restaurant or café requires a terrace permit if the terrace is set up in a public street or park area. Setting up a glazed street terrace also requires a building or action permit. A parklet means a parking space that is temporarily re-purposed for other use.',
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'areaSearch.landingPage.otherUses.terraceOrParklet.blurb',
+                  'Setting up an outdoor serving area for a restaurant or café requires a terrace permit if the terrace is set up in a public street or park area. Setting up a glazed street terrace also requires a building or action permit. A parklet means a parking space that is temporarily re-purposed for other use.',
+                )}
+              </p>
+            }
             color="blue"
             actions={
               <>
@@ -155,16 +173,21 @@ const AreaSearchLandingPage = (): JSX.Element => {
               </>
             }
             image={<TerracesAndParkletsImage />}
+            headerComponent="h3"
           />
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.outdoorEvent.label',
               'Organizing an outdoor event',
             )}
-            bottomText={t(
-              'areaSearch.landingPage.otherUses.outdoorEvent.blurb',
-              'You need a permit to organize an event on a street, square or park if the event restricts the public use of the area. A permit is required if the event involves bringing marquee tents, tables, chairs, stages, fences or other structures to the area, for example.',
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'areaSearch.landingPage.otherUses.outdoorEvent.blurb',
+                  'You need a permit to organize an event on a street, square or park if the event restricts the public use of the area. A permit is required if the event involves bringing marquee tents, tables, chairs, stages, fences or other structures to the area, for example.',
+                )}
+              </p>
+            }
             color="blue"
             actions={
               <>
@@ -177,16 +200,21 @@ const AreaSearchLandingPage = (): JSX.Element => {
               </>
             }
             image={<OutdoorEventImage />}
+            headerComponent="h3"
           />
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.commercialUses.label',
               'Commercial and advertising spaces',
             )}
-            bottomText={t(
-              'areaSearch.landingPage.otherUses.commercialUses.blurb',
-              'This includes A frames, advertising spaces on bridges, outdoor advertising devices and election advertisements.',
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'areaSearch.landingPage.otherUses.commercialUses.blurb',
+                  'This includes A frames, advertising spaces on bridges, outdoor advertising devices and election advertisements.',
+                )}
+              </p>
+            }
             color="blue"
             actions={
               <>
@@ -199,16 +227,21 @@ const AreaSearchLandingPage = (): JSX.Element => {
               </>
             }
             image={<CommercialUsesImage />}
+            headerComponent="h3"
           />
           <BoxGridBox
             label={t(
               'areaSearch.landingPage.otherUses.misc.label',
               'Other land use arrangements',
             )}
-            bottomText={t(
-              'areaSearch.landingPage.otherUses.misc.blurb',
-              'For example city farming, dog training fields, bee farming, other land use and leasing, hunting licenses, kindergarten outdoor areas, water area leasing.',
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'areaSearch.landingPage.otherUses.misc.blurb',
+                  'For example city farming, dog training fields, bee farming, other land use and leasing, hunting licenses, kindergarten outdoor areas, water area leasing.',
+                )}
+              </p>
+            }
             color="blue"
             actions={
               <>
@@ -221,6 +254,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
               </>
             }
             image={<MiscUsesImage />}
+            headerComponent="h3"
           />
         </BoxGrid>
       </Container>

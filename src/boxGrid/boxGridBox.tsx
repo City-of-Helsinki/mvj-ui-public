@@ -1,15 +1,23 @@
-import { ReactNode } from 'react';
+import {
+  ComponentType,
+  ElementType,
+  PropsWithChildren,
+  ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 interface Props {
   topLabel?: string;
   label: string;
-  bottomText: string;
+  bottomText: ReactNode;
   color?: 'pink' | 'gray' | 'yellow' | 'blue';
   image?: ReactNode;
   actions?: ReactNode;
   url?: string;
+  headerComponent?:
+    | ComponentType<PropsWithChildren<{ className: string }>>
+    | ElementType;
 }
 
 const BoxGridBox = ({
@@ -20,12 +28,13 @@ const BoxGridBox = ({
   image,
   actions,
   url,
+  headerComponent: HComponent = 'div',
 }: Props): JSX.Element => {
   const children = (
     <>
       {topLabel && <div className="BoxGridBox__top-label">{topLabel}</div>}
       {image && <div className="BoxGridBox__image">{image}</div>}
-      <div className="BoxGridBox__label">{label}</div>
+      <HComponent className="BoxGridBox__label">{label}</HComponent>
       <div className="BoxGridBox__bottom-text">{bottomText}</div>
       {actions && <div className="BoxGridBox__actions">{actions}</div>}
     </>
