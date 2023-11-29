@@ -1,4 +1,3 @@
-/*eslint no-debugger: off */
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
@@ -84,7 +83,6 @@ const AreaSearchApplicationPreview = ({
       lastSubmission?.form?.sections &&
       formValues.form[ApplicationSectionKeys.Subsections]
     ) {
-      debugger;
       return lastSubmission.form.sections.map((section) => (
         <ApplicationPreviewSubsection
           key={section.identifier}
