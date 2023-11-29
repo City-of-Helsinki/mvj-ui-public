@@ -64,17 +64,23 @@ interface HelsinkiMapData {
   CRS: CRS;
 }
 
-const getCRS = (bounds: L.Bounds): L.Proj.CRS =>
-  new L.Proj.CRS(
+const getCRS = (bounds: L.Bounds): L.Proj.CRS => {
+  // Resolutions at which tiles are available: how many units each pixel on the map represents.
+  // In this case how many meters each pixel represents.
+  const resolutions: L.Proj.ProjCRSOptions['resolutions'] = [
+    256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125, 0.0625, 0.03125,
+    0.015625, 0.0078125, 0.00390625, 0.001953125,
+  ];
+  const coordinateReferenceSystem = new L.Proj.CRS(
     'EPSG:3879',
     '+proj=tmerc +lat_0=0 +lon_0=25 +k=1 +x_0=25500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
     {
-      resolutions: [
-        256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125, 0.0625, 0.03125,
-      ],
+      resolutions,
       bounds,
     },
   );
+  return coordinateReferenceSystem;
+};
 
 export const initializeHelsinkiMap = (): HelsinkiMapData => {
   const southWest = new LatLng(60.079029, 24.646353);
