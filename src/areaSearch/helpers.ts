@@ -25,6 +25,13 @@ import {
   TARGET_SECTION_IDENTIFIER,
 } from '../application/types';
 
+type ApplicationFormNodeResult = {
+  fields: ApplicationFormFields;
+  sections?: ApplicationFormSections;
+  metadata?: Record<string, unknown>;
+  sectionRestrictions?: Record<string, ApplicantTypes>;
+};
+
 export const selectAttachmentIds = (state: RootState): Array<number> => {
   return state.areaSearch.areaSearchAttachments.map(
     (attachment) => attachment.id as number
@@ -166,21 +173,31 @@ export const prepareAreaSearchApplicationForSubmission = (
   ): ApplicationFormSections => {
     return Object.keys(section).reduce((acc, sectionName) => {
       const subsection = section[sectionName];
-      let result: ApplicationFormNode | Array<ApplicationFormNode>;
+      let result: ApplicationFormNodeResult | Array<ApplicationFormNodeResult>;
 
       if (subsection instanceof Array) {
         result = subsection.map(
-          ({ sections, sectionRestrictions, ...rest }) => ({
-            sections: purgeUIFields(sections),
-            ...rest,
-          })
+          ({ sections, sectionRestrictions, ...rest }) => {
+            return sections
+              ? {
+                  sections: purgeUIFields(sections),
+                  ...rest,
+                }
+              : {
+                  ...rest,
+                };
+          }
         );
       } else {
         const { sections, sectionRestrictions, ...rest } = subsection;
-        result = {
-          sections: purgeUIFields(sections),
-          ...rest,
-        };
+        result = sections
+          ? {
+              sections: purgeUIFields(sections),
+              ...rest,
+            }
+          : {
+              ...rest,
+            };
       }
 
       return {
