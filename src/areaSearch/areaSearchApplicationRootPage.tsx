@@ -106,7 +106,7 @@ const AreaSearchApplicationRootPage = ({
 
   useEffect(() => {
     initializeForm(AREA_SEARCH_FORM_NAME, initializeAreaSearchForm());
-  }, [lastSubmission]);
+  }, []);
 
   useEffect(() => {
     fetchFormAttributes();
