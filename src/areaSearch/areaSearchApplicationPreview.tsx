@@ -27,14 +27,15 @@ import { submitAreaSearchApplication } from './actions';
 import ApplicationPreviewSubsection from '../application/components/applicationPreviewSubsection';
 import { getClientErrorMessage } from '../application/helpers';
 import { prepareAreaSearchApplicationForSubmission } from './helpers';
+import ScrollToTop from '../common/ScrollToTop';
 
 interface State {
   lastSubmission: AreaSearch | null;
   formValues: AreaSearchFormRoot;
   fieldTypeMapping: FieldTypeMapping;
   submittedAnswerId: number;
-  lastError: unknown;
-  isSubmitting: boolean;
+  lastError?: any;
+  isSubmitting?: boolean;
 }
 
 interface Props extends State {
@@ -103,84 +104,87 @@ const AreaSearchApplicationPreview = ({
   };
 
   return (
-    <AuthDependentContent>
-      {(loading: boolean, loggedIn: boolean) => (
-        <MainContentElement className="ApplicationPreviewPage">
-          <Helmet>
-            <title>
-              {getPageTitle(
-                t(
-                  'areaSearch.application.preview.pageTitle',
-                  'Area search application',
-                ),
-              )}
-            </title>
-          </Helmet>
-          <Container>
-            <h1>
-              {t(
-                'areaSearch.application.preview.heading',
-                'Area search application preview',
-              )}
-            </h1>
+    <>
+      <ScrollToTop />
+      <AuthDependentContent>
+        {(loading, loggedIn) => (
+          <MainContentElement className="ApplicationPreviewPage">
+            <Helmet>
+              <title>
+                {getPageTitle(
+                  t(
+                    'areaSearch.application.preview.pageTitle',
+                    'Area search application'
+                  )
+                )}
+              </title>
+            </Helmet>
+            <Container>
+              <h1>
+                {t(
+                  'areaSearch.application.preview.heading',
+                  'Area search application preview'
+                )}
+              </h1>
 
-            <AreaSearchTargetSummary />
+              <AreaSearchTargetSummary />
 
-            {loading ? (
-              <BlockLoader />
-            ) : (
-              <div className="ApplicationPreviewPage__top-level-sections">
-                {renderSectionPreviewsOrGoBack(loggedIn)}
-                <Button
-                  variant="secondary"
-                  onClick={() => setPreviousStep()}
-                  disabled={isSubmitting}
-                  className="ApplicationPreviewPage__submission-button"
-                >
-                  {t('application.returnToForm', 'Edit application')}
-                </Button>
-                <Button
-                  variant="primary"
-                  onClick={submit}
-                  isLoading={isSubmitting}
-                  loadingText={t(
-                    'application.submitInProcess',
-                    'Submitting...',
+              {loading ? (
+                <BlockLoader />
+              ) : (
+                <div className="ApplicationPreviewPage__top-level-sections">
+                  {renderSectionPreviewsOrGoBack(loggedIn)}
+                  <Button
+                    variant="secondary"
+                    onClick={() => setPreviousStep()}
+                    disabled={isSubmitting}
+                    className="ApplicationPreviewPage__submission-button"
+                  >
+                    {t('application.returnToForm', 'Edit application')}
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={submit}
+                    isLoading={isSubmitting}
+                    loadingText={t(
+                      'application.submitInProcess',
+                      'Submitting...'
+                    )}
+                    className="ApplicationPreviewPage__submission-button"
+                  >
+                    {t('application.submit', 'Submit application')}
+                  </Button>
+                  {lastError && (
+                    <Notification
+                      size="small"
+                      type="error"
+                      label={t('application.error.label', 'Submission error')}
+                    >
+                      {t(
+                        'application.error.generic',
+                        'The application could not be submitted correctly. Please try again later.'
+                      )}
+                    </Notification>
                   )}
-                  className="ApplicationPreviewPage__submission-button"
-                >
-                  {t('application.submit', 'Submit application')}
-                </Button>
-                {!!lastError && (
-                  <Notification
-                    size="small"
-                    type="error"
-                    label={t('application.error.label', 'Submission error')}
-                  >
-                    {t(
-                      'application.error.generic',
-                      'The application could not be submitted correctly. Please try again later.',
-                    )}
-                  </Notification>
-                )}
-                {lastClientError !== null && (
-                  <Notification
-                    size="small"
-                    type="error"
-                    label={t(
-                      'application.error.preparation.label',
-                      'Preparation error',
-                    )}
-                  >
-                    {getClientErrorMessage(lastClientError)}
-                  </Notification>
-                )}
-              </div>
-            )}
-          </Container>
-        </MainContentElement>
-      )}
-    </AuthDependentContent>
+                  {lastClientError !== null && (
+                    <Notification
+                      size="small"
+                      type="error"
+                      label={t(
+                        'application.error.preparation.label',
+                        'Preparation error'
+                      )}
+                    >
+                      {getClientErrorMessage(lastClientError)}
+                    </Notification>
+                  )}
+                </div>
+              )}
+            </Container>
+          </MainContentElement>
+        )}
+      </AuthDependentContent>
+    </>
   );
 };
 

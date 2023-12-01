@@ -4,26 +4,35 @@ import { Helmet } from 'react-helmet';
 
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
+import ScrollToTop from '../common/ScrollToTop';
 
 const AreaSearchApplicationSuccessPage = (): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <MainContentElement className="ApplicationSuccessPage">
-      <Helmet>
-        <title>
-          {getPageTitle(t('application.success.pageTitle', 'Application sent'))}
-        </title>
-      </Helmet>
-      <Container>
-        <h1>
-          {t('application.success.heading', 'Thank you for your application')}
-        </h1>
-        <p>
-          {t('application.success.body', 'Your application has been received.')}
-        </p>
-      </Container>
-    </MainContentElement>
+    <>
+      <ScrollToTop />
+      <MainContentElement className="ApplicationSuccessPage">
+        <Helmet>
+          <title>
+            {getPageTitle(
+              t('application.success.pageTitle', 'Application sent')
+            )}
+          </title>
+        </Helmet>
+        <Container>
+          <h1>
+            {t('application.success.heading', 'Thank you for your application')}
+          </h1>
+          <p>
+            {t(
+              'application.success.body',
+              'Your application has been received.'
+            )}
+          </p>
+        </Container>
+      </MainContentElement>
+    </>
   );
 };
 
