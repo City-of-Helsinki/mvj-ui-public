@@ -6,7 +6,7 @@ import { fetchFormAttributes } from '../application/actions';
 import { AreaSearch, AREA_SEARCH_FORM_NAME } from './types';
 import { initializeAreaSearchForm } from './helpers';
 import { RootState } from '../root/rootReducer';
-import { StepState, Stepper } from 'hds-react';
+import { Button, StepState, Stepper } from 'hds-react';
 import AreaSearchSpecsPage from './areaSearchSpecsPage';
 import AreaSearchApplicationPage from './areaSearchApplicationPage';
 import AreaSearchApplicationPreview from './areaSearchApplicationPreview';
@@ -16,6 +16,9 @@ import { Helmet } from 'react-helmet';
 import { getPageTitle } from '../root/helpers';
 import { t } from 'i18next';
 import { Container } from 'react-grid-system';
+import AuthDependentContent from '../auth/components/authDependentContent';
+import { openLoginModal } from '../login/actions';
+import ScrollToTop from '../common/ScrollToTop';
 
 interface State {
   areaSearchForm: null;
@@ -28,12 +31,14 @@ interface Step {
 }
 
 export interface Props {
+  openLoginModal: () => void;
   lastSubmission: AreaSearch | null;
   initializeForm: typeof initialize;
   fetchFormAttributes: () => void;
 }
 
 const AreaSearchApplicationRootPage = ({
+  openLoginModal,
   lastSubmission,
   initializeForm,
   fetchFormAttributes,
@@ -56,7 +61,7 @@ const AreaSearchApplicationRootPage = ({
     },
     {
       label: 'Hakemuksen täyttö',
-      state: StepState.disabled,
+      state: StepState.available,
     },
     {
       label: 'Esikatselu',
@@ -89,15 +94,17 @@ const AreaSearchApplicationRootPage = ({
   };
 
   const toggleValidSpecs = () => {
-    if (valid && steps[1].state !== StepState.available) {
-      const newSteps = [...steps];
-      newSteps[1].state = StepState.available;
-      setSteps(newSteps);
-    } else if (!valid && steps[1].state === StepState.available) {
-      const newSteps = [...steps];
+    const newSteps = [...steps];
+
+    if (!valid || !lastSubmission) {
       newSteps[1].state = StepState.disabled;
-      setSteps(newSteps);
+      newSteps[2].state = StepState.disabled;
+    } else if (valid && lastSubmission) {
+      newSteps[1].state = StepState.available;
+      newSteps[2].state = StepState.available;
     }
+
+    setSteps(newSteps);
   };
 
   useEffect(() => {
@@ -120,15 +127,41 @@ const AreaSearchApplicationRootPage = ({
         </title>
       </Helmet>
       <Container>
-        <div className="AreaSearchStepperWrapper">
-          <Stepper
-            steps={steps}
-            language="en"
-            selectedStep={currentStep}
-            onStepClick={(_, nextPageIndex) => setCurrentStep(nextPageIndex)}
-          />
-        </div>
-        {renderCurrentStep()}
+        <AuthDependentContent>
+          {(_, loggedIn) =>
+            loggedIn ? (
+              <>
+                <div className="AreaSearchStepperWrapper">
+                  <Stepper
+                    steps={steps}
+                    language="en"
+                    selectedStep={currentStep}
+                    onStepClick={(_, nextPageIndex) =>
+                      setCurrentStep(nextPageIndex)
+                    }
+                  />
+                </div>
+                {renderCurrentStep()}
+              </>
+            ) : (
+              <>
+                <ScrollToTop />
+                <h1>
+                  {t('areaSearch.specs.heading', 'Apply for a land area lease')}
+                </h1>
+                <p>
+                  {t(
+                    'areaSearch.specs.notLoggedIn',
+                    'To apply, please log in first.'
+                  )}
+                </p>
+                <Button variant="primary" onClick={() => openLoginModal()}>
+                  {t('areaSearch.specs.loginButton', 'Log in')}
+                </Button>
+              </>
+            )
+          }
+        </AuthDependentContent>
       </Container>
     </MainContentElement>
   );
@@ -140,6 +173,7 @@ export default connect(
     lastSubmission: state.areaSearch.lastSubmission,
   }),
   {
+    openLoginModal,
     initializeForm: initialize,
     fetchFormAttributes,
   }
