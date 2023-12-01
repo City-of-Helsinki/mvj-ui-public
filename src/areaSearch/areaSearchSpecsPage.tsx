@@ -1,3 +1,4 @@
+/*eslint no-debugger: off */
 import React, { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -42,8 +43,6 @@ import {
 import { prepareAreaSearchSubmission } from './helpers';
 import { getFieldNamesFromFormErrors, ReduxFormError } from '../form/helpers';
 import AreaSearchMap from './components/AreaSearchMap';
-import { useNavigate } from 'react-router';
-import { AppRoutes, getRouteById } from '../root/routes';
 import { getInitialAreaSearchApplicationForm } from './helpers';
 import { ApplicationFormRoot } from '../application/types';
 
@@ -95,7 +94,6 @@ const AreaSearchSpecsPage = ({
   setNextStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const prevSubmissionIdRef = useRef<number>(lastSubmissionId);
 
@@ -160,7 +158,7 @@ const AreaSearchSpecsPage = ({
       prevSubmissionIdRef.current = lastSubmissionId;
       setSubmitSucceeded(AREA_SEARCH_FORM_NAME);
       change(AREA_SEARCH_FORM_NAME, 'form', applicationFormTemplate, true);
-      navigate(getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM));
+      setNextStep();
     }
   }, [lastSubmissionId]);
 
@@ -188,7 +186,6 @@ const AreaSearchSpecsPage = ({
               submitAreaSearch(
                 prepareAreaSearchSubmission(files['search.attachments'])
               );
-              setNextStep();
             } else {
               if (touch) {
                 touch(
