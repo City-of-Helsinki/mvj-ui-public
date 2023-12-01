@@ -1,4 +1,3 @@
-/*eslint no-debugger: off */
 import React, { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
