@@ -62,7 +62,7 @@ const AreaSearchApplicationPreview = ({
 
   useEffect(() => {
     if (submittedAnswerId !== previousAnswerId) {
-      setPreviousStep();
+      setNextStep();
     }
   }, [submittedAnswerId]);
 
