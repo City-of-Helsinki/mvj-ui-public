@@ -120,6 +120,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
               </>
             }
             image={<OtherConstructionImage />}
+            headerComponent="h3"
           />
           <BoxGridBox
             label={t(
