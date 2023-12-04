@@ -100,10 +100,10 @@ const AreaSearchApplicationRootPage = ({
   const toggleValidSpecs = () => {
     const newSteps = [...steps];
 
-    if (!valid || !lastSubmission) {
+    if (!valid) {
       newSteps[1].state = StepState.disabled;
       newSteps[2].state = StepState.disabled;
-    } else if (valid && lastSubmission) {
+    } else if (valid) {
       newSteps[1].state = StepState.available;
       newSteps[2].state = StepState.available;
     }
@@ -121,7 +121,7 @@ const AreaSearchApplicationRootPage = ({
 
   useEffect(() => {
     toggleValidSpecs();
-  }, [valid, toggleValidSpecs]);
+  }, [valid]);
 
   return (
     <MainContentElement className="AreaSearchSpecsPage">
