@@ -42,6 +42,10 @@
 
     .MapSearchComponent__accordion-body {
       background-color: $color-black-5;
+
+      div[role='list'] {
+        overflow: auto;
+      }
     }
 
     .MapSearchComponent__target {
@@ -60,6 +64,11 @@
       &--hover {
         background-color: $color-info-dark;
         color: white;
+
+        tr,
+        td {
+          border-color: $color-info-dark;
+        }
       }
     }
 
@@ -105,6 +114,18 @@
     display: inline-block;
   }
 
+  &__plot-search-table {
+    border-collapse: collapse;
+    min-width: 580px;
+
+    tr,
+    th,
+    td {
+      padding: calc($spacing-xs / 2) $spacing-xs;
+      vertical-align: top;
+    }
+  }
+
   &__plot-search-heading {
     background-color: $color-black-20;
     padding: calc($spacing-s / 2) $spacing-xs;
@@ -112,6 +133,7 @@
 
     h4 {
       margin: 0;
+      text-align: left;
 
       + span {
         display: block;
@@ -127,6 +149,10 @@
     padding: calc($spacing-xs / 2) $spacing-xs;
     margin-left: 0;
     margin-right: 0;
+
+    th {
+      text-align: left;
+    }
   }
 
   &__notification {
