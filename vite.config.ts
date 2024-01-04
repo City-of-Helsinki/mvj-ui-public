@@ -12,6 +12,13 @@ export default defineConfig({
   build: {
     outDir: 'build'
   },
+  resolve: {
+    alias: {
+      // redux-oidc wraps oidc-client, but app needs to use oidc-client-ts for PKCE support,
+      // this resolves oidc-client as oidc-client-ts for redux-oidc 
+      'oidc-client': 'oidc-client-ts'
+    }
+  },
   test: {
     include: ['**/*{test,spec}.?(c|m)[jt]s?(x)',],
     globals: true,
@@ -23,6 +30,8 @@ export default defineConfig({
           src: 'node_modules/leaflet-draw/dist/images/*',
           dest: 'assets/images/.'
         },
+        // Copy oidc-client-ts to be used in silent_renew.html
+        { src: 'node_modules/oidc-client-ts/dist/browser/oidc-client-ts.min.js', dest: '' },
       ]
     }),
     react(),

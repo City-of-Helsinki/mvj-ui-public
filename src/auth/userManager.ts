@@ -1,8 +1,9 @@
 import { createUserManager } from 'redux-oidc';
-import { WebStorageStateStore } from 'oidc-client';
+import { WebStorageStateStore } from 'oidc-client-ts';
+import type { UserManagerSettings } from 'oidc-client-ts';
 import { AppRoutes, getRouteById } from '../root/routes';
 
-const settings = {
+const settings: UserManagerSettings = {
   authority:
     import.meta.env.REACT_APP_OPENID_CONNECT_AUTHORITY_URL ||
     'https://api.hel.fi/sso/openid/',
@@ -11,7 +12,7 @@ const settings = {
   filterProtocolClaims: true,
   loadUserInfo: true,
   redirect_uri: `${location.origin}${getRouteById(AppRoutes.OIDC_CALLBACK)}`,
-  response_type: 'id_token token',
+  response_mode: 'query',
   scope:
     import.meta.env.REACT_APP_OPENID_CONNECT_SCOPE ||
     'openid profile https://api.hel.fi/auth/mvj',

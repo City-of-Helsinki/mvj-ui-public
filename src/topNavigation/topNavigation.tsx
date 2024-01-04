@@ -10,7 +10,7 @@ import {
 } from 'hds-react';
 import { useMatch } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { User } from 'oidc-client';
+import type { User } from 'oidc-client-ts';
 
 import { AppRoutes, getRouteById } from '../root/routes';
 import { openLoginModal } from '../login/actions';

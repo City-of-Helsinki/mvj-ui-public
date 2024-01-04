@@ -4,9 +4,12 @@
     <title></title>
 </head>
 <body>
-    <script src="/oidc-client.min.js"></script>
+    <script src="/oidc-client-ts.min.js"></script>
     <script>
-      new Oidc.UserManager().signinSilentCallback().then()
+      var mgr = new oidc.UserManager()
+      mgr.signinSilentCallback().catch(error => {
+        console.error('silent_renew.html error', error);
+      });
     </script>
 </body>
 </html>

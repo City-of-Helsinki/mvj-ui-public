@@ -4,7 +4,7 @@ import { Col, Container, Row } from 'react-grid-system';
 import { Trans, useTranslation } from 'react-i18next';
 import { Notification, Link, Button } from 'hds-react';
 import { useNavigate } from 'react-router-dom';
-import { User } from 'oidc-client';
+import type { User } from 'oidc-client-ts';
 import { Helmet } from 'react-helmet';
 
 import { Favourite } from '../favourites/types';

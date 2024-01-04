@@ -33,3 +33,4 @@ yarn-error.log*
 
 # dynamically copied over from the deps
 public/oidc-client.min.js
+public/oidc-client-ts.min.js

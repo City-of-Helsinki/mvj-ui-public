@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { User, Log } from 'oidc-client';
+import { Log } from 'oidc-client-ts';
+import type { User } from 'oidc-client-ts';
 import { setConfiguration as setGridSystemConfiguration } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 
@@ -37,7 +38,7 @@ interface Props {
   isFetchingToken: boolean;
 }
 
-Log.logger = console;
+Log.setLogger(console);
 
 const App = ({
   children,
