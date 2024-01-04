@@ -12,6 +12,7 @@ const settings: UserManagerSettings = {
   filterProtocolClaims: true,
   loadUserInfo: true,
   redirect_uri: `${location.origin}${getRouteById(AppRoutes.OIDC_CALLBACK)}`,
+  response_type: 'code',
   response_mode: 'query',
   scope:
     import.meta.env.REACT_APP_OPENID_CONNECT_SCOPE ||
