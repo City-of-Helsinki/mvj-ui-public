@@ -68,9 +68,6 @@ const App = ({
           ),
         );
       }
-      if (!isFetchingFavourite) {
-        fetchFavourite();
-      }
     } else {
       if (tokenRefreshTimeout) {
         clearTimeout(tokenRefreshTimeout);
@@ -80,6 +77,12 @@ const App = ({
       }
     }
   }, [user, tokenOutdated, isFetchingToken]);
+
+  useEffect(() => {
+    if (!isFetchingFavourite && !isFetchingToken && user) {
+      fetchFavourite();
+    }
+  }, [isFetchingToken, user]);
 
   return (
     <div className="App">
