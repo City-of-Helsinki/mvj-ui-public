@@ -236,19 +236,33 @@ const AreaSearchLandingPage = (): JSX.Element => {
               'Other land use arrangements',
             )}
             bottomText={
-              <p>
-                {t(
-                  'areaSearch.landingPage.otherUses.misc.blurb',
-                  'For example city farming, dog training fields, bee farming, other land use and leasing, hunting licenses, kindergarten outdoor areas, water area leasing.',
-                )}
-              </p>
+              <div>
+                <p>
+                  {t(
+                    'areaSearch.landingPage.otherUses.misc.dogs.blurb',
+                    'For example city farming, dog training fields, bee farming, other land use and leasing, hunting licenses, kindergarten outdoor areas, water area leasing.',
+                  )}
+                </p>
+                <ReadMoreButton
+                  target={t(
+                    'areaSearch.landingPage.otherUses.misc.dogs.link',
+                    'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas',
+                  )}
+                />
+                <p>
+                  {t(
+                    'areaSearch.landingPage.otherUses.misc.gardening.blurb',
+                    'For example city farming, dog training fields, bee farming, other land use and leasing, hunting licenses, kindergarten outdoor areas, water area leasing.',
+                  )}
+                </p>
+              </div>
             }
             color="blue"
             actions={
               <>
                 <ReadMoreButton
                   target={t(
-                    'areaSearch.landingPage.otherUses.misc.link',
+                    'areaSearch.landingPage.otherUses.misc.gardening.link',
                     'https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas',
                   )}
                 />
