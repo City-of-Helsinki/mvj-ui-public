@@ -32,9 +32,10 @@ import {
   addFavouriteTarget,
   removeFavouriteTarget,
 } from '../favourites/actions';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import { RootState } from '../root/rootReducer';
 import { ApiAttributes } from '../api/types';
+import { AppRoutes } from '../application/helpers';
 
 interface MapSearchComponentAccordionProps {
   isHidden: boolean;

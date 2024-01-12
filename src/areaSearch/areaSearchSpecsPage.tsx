@@ -46,9 +46,10 @@ import { getFieldNamesFromFormErrors, ReduxFormError } from '../form/helpers';
 import { getPageTitle } from '../root/helpers';
 import AreaSearchMap from './components/AreaSearchMap';
 import { useNavigate } from 'react-router';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import { getInitialAreaSearchApplicationForm } from './helpers';
 import { ApplicationFormRoot } from '../application/types';
+import { AppRoutes } from '../application/helpers';
 
 interface State {
   startDate?: string;

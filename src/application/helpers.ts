@@ -26,7 +26,7 @@ import { FavouriteTarget } from '../favourites/types';
 import { useTranslation } from 'react-i18next';
 
 export const getInitialApplicationForm = (
-  state: RootState
+  state: RootState,
 ): ApplicationFormRoot => {
   const plotSearch = getPlotSearchFromFavourites(state);
   const root: ApplicationFormRoot = {
@@ -45,7 +45,7 @@ export const getInitialApplicationForm = (
 
   const buildSection = (
     section: FormSection,
-    parent: ApplicationFormSections = root.sections
+    parent: ApplicationFormSections = root.sections,
   ): void => {
     if (!section.visible) {
       return;
@@ -71,7 +71,7 @@ export const getInitialApplicationForm = (
       });
     }
     section.subsections.forEach((subsection) =>
-      buildSection(subsection, workingItem.sections)
+      buildSection(subsection, workingItem.sections),
     );
     section.fields.forEach((field) => buildField(field, workingItem.fields));
 
@@ -86,7 +86,7 @@ export const getInitialApplicationForm = (
                   identifier: target.plot_search_target.id,
                 },
               };
-            }
+            },
           );
       } else {
         parent[section.identifier] = [workingItem];
@@ -99,7 +99,7 @@ export const getInitialApplicationForm = (
 
   const buildField = (
     field: FormField,
-    parent: ApplicationFormFields
+    parent: ApplicationFormFields,
   ): void => {
     if (!field.enabled) {
       return;
@@ -158,19 +158,19 @@ export const getInitialApplicationForm = (
 export const getSectionTemplate = (
   identifier: string,
   formName: string,
-  path = ''
+  path = '',
 ): ApplicationFormNode => {
   const state = store.getState();
   const templates = formValueSelector(formName)(
     state,
-    `${path !== '' ? path + '.' : ''}sectionTemplates`
+    `${path !== '' ? path + '.' : ''}sectionTemplates`,
   );
 
   return templates[identifier] || {};
 };
 
 export const prepareApplicationForSubmission = (
-  formName: string
+  formName: string,
 ): ApplicationSubmission => {
   const state: RootState = store.getState();
   const sections = formValueSelector(formName)(state, 'sections');
@@ -184,7 +184,7 @@ export const prepareApplicationForSubmission = (
   }
 
   const attachMeta = (
-    rootLevelSections: ApplicationFormSections
+    rootLevelSections: ApplicationFormSections,
   ): ApplicationFormSections => {
     return Object.keys(rootLevelSections).reduce((acc, sectionName) => {
       const section: ApplicationFormNode | ApplicationFormNode[] =
@@ -209,7 +209,7 @@ export const prepareApplicationForSubmission = (
                         ApplicantTypes | undefined
                       >
                     ).includes(
-                      applicant.sectionRestrictions?.[sectionIdentifier]
+                      applicant.sectionRestrictions?.[sectionIdentifier],
                     )
                   ) {
                     return acc;
@@ -222,7 +222,7 @@ export const prepareApplicationForSubmission = (
                     },
                   };
                 },
-                {} as ApplicationFormSections
+                {} as ApplicationFormSections,
               );
 
               const identifiers = APPLICANT_MAIN_IDENTIFIERS[applicantType];
@@ -247,7 +247,7 @@ export const prepareApplicationForSubmission = (
                 },
                 sections: enabledSections,
               };
-            }
+            },
           );
           return {
             ...acc,
@@ -264,7 +264,7 @@ export const prepareApplicationForSubmission = (
   };
 
   const purgeUIFields = (
-    section: ApplicationFormSections
+    section: ApplicationFormSections,
   ): ApplicationFormSections => {
     return Object.keys(section).reduce((acc, sectionName) => {
       const subsection: ApplicationFormNode | ApplicationFormNode[] =
@@ -276,7 +276,7 @@ export const prepareApplicationForSubmission = (
           ({ sections, sectionRestrictions, ...rest }) => ({
             sections: purgeUIFields(sections),
             ...rest,
-          })
+          }),
         );
       } else {
         const { sections, sectionRestrictions, ...rest } = subsection;
@@ -304,7 +304,7 @@ export const prepareApplicationForSubmission = (
 };
 
 export const getSectionFavouriteTarget = (
-  id?: number
+  id?: number,
 ): FavouriteTarget | null => {
   if (!id) {
     return null;
@@ -313,7 +313,7 @@ export const getSectionFavouriteTarget = (
   const state: RootState = store.getState();
   return (
     state.favourite?.favourite?.targets?.find(
-      (target) => target.plot_search_target.id === id
+      (target) => target.plot_search_target.id === id,
     ) || null
   );
 };
@@ -333,7 +333,7 @@ export const getSectionApplicantType = (
   state: RootState,
   section: FormSection,
   reduxFormPath: string,
-  formName: string
+  formName: string,
 ): ApplicantTypes => {
   if (section.identifier !== APPLICANT_SECTION_IDENTIFIER) {
     return ApplicantTypes.NOT_APPLICABLE;
@@ -342,7 +342,7 @@ export const getSectionApplicantType = (
   return (
     formValueSelector(formName)(
       state,
-      `${reduxFormPath}.metadata.applicantType`
+      `${reduxFormPath}.metadata.applicantType`,
     ) || ApplicantTypes.UNSELECTED
   );
 };
@@ -350,7 +350,7 @@ export const getSectionApplicantType = (
 export const getFieldFileIds = (
   state: RootState,
   fieldPath: string,
-  formName: string
+  formName: string,
 ): Array<number> => {
   const fieldValue = formValueSelector(formName)(state, fieldPath);
   return fieldValue?.value || [];
@@ -359,13 +359,13 @@ export const getFieldFileIds = (
 export const getFieldValue = (
   state: RootState,
   fieldPath: string,
-  formName: string
+  formName: string,
 ): FieldValue => {
   return formValueSelector(formName)(state, fieldPath);
 };
 
 export const getClientErrorMessage = (
-  lastClientError: ApplicationPreparationError | null
+  lastClientError: ApplicationPreparationError | null,
 ): string => {
   const { t } = useTranslation();
 
@@ -373,31 +373,31 @@ export const getClientErrorMessage = (
     case ApplicationPreparationError.NoApplicantTypeSet:
       return t(
         'application.error.preparation.noApplicantTypeSet',
-        'An applicant with no selected type was encountered. Please verify that all applicant data is filled correctly.'
+        'An applicant with no selected type was encountered. Please verify that all applicant data is filled correctly.',
       );
       break;
     case ApplicationPreparationError.NoApplicantIdentifierFound:
       return t(
         'application.error.preparation.noApplicantIdentifierFound',
-        'An applicant with missing identifier data was encountered. Please verify that each applicant has either the personal identification number or company ID number set.'
+        'An applicant with missing identifier data was encountered. Please verify that each applicant has either the personal identification number or company ID number set.',
       );
       break;
     case ApplicationPreparationError.MisconfiguredPlotSearch:
       return t(
         'application.error.preparation.misconfiguredPlotSearch',
-        "A problem with the search you're applying to was encountered. Please try again later."
+        "A problem with the search you're applying to was encountered. Please try again later.",
       );
       break;
     case ApplicationPreparationError.NoAreaSearchFound:
       return t(
         'areaSearch.application.error.preparation.misconfiguredPlotSearch',
-        "An area search you're applying to is not found. Please try to define the area again."
+        "An area search you're applying to is not found. Please try to define the area again.",
       );
       break;
     default:
       return t(
         'application.error.preparation.unknown',
-        'An unexpected error occurred while preparing the application data for submission. Please try again later.'
+        'An unexpected error occurred while preparing the application data for submission. Please try again later.',
       );
       break;
   }
@@ -514,4 +514,28 @@ export const set = (obj: unknown, path: string, value: unknown): void => {
       }
     }
   }
+};
+
+export const AppRoutes = {
+  HOME: 'home',
+  ERROR: 'error',
+  PLOT_SEARCH_AND_COMPETITIONS: 'plot-search-and-competitions',
+  PLOT_SEARCH_AND_COMPETITIONS_TARGET: 'plot-search-and-competitions-target',
+  OTHER_COMPETITIONS_AND_SEARCHES: 'other-competitions-and-searches',
+  AREA_SEARCH_LANDING: 'area-search',
+  AREA_SEARCH_APPLICATION_ROOT: 'area-search-application-root',
+  AREA_SEARCH_APPLICATION_AREA_SPEC: 'area-search-application-area-spec',
+  AREA_SEARCH_APPLICATION_FORM: 'area-search-application-form',
+  AREA_SEARCH_APPLICATION_SUBMIT: 'area-search-application-submit',
+  AREA_SEARCH_APPLICATION_FORM_PREVIEW: 'area-search-application-form-preview',
+  LEASES: 'leases',
+  APPLICATIONS: 'applications',
+  MESSAGES: 'messages',
+  FAVOURITES: 'favourites',
+  OIDC_CALLBACK: 'oidc-callback',
+  APPLICATION_ROOT: 'application-root',
+  APPLICATION_FORM: 'application-form',
+  APPLICATION_PREVIEW: 'application-preview',
+  APPLICATION_SUBMIT: 'application-submit',
+  DIRECT_RESERVATION: 'direct-reservation',
 };

@@ -12,7 +12,7 @@ import { useMatch } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { User } from 'oidc-client';
 
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import { openLoginModal } from '../login/actions';
 import { Language } from '../i18n/types';
 import TopNavigationFavouritesIcon from './components/topNavigationFavouritesIcon';
@@ -21,6 +21,7 @@ import { getUser } from '../auth/selectors';
 import { userManager } from '../auth/userManager';
 import { MVJ_FAVOURITE } from '../favourites/types';
 import { getFavouriteCount } from '../favourites/selectors';
+import { AppRoutes } from '../application/helpers';
 
 interface Dispatch {
   openLoginModal: () => void;
@@ -40,8 +41,27 @@ interface State {
 interface TopNavigationLinkProps {
   to: string;
   label: string;
+  default?: string;
   className?: string;
 }
+
+export const NaviLinks: TopNavigationLinkProps[] = [
+  {
+    to: AppRoutes.PLOT_SEARCH_AND_COMPETITIONS,
+    label: 'topNavigation.tabs.plotSearchAndCompetitions',
+    default: 'Plot search and competitions',
+  },
+  {
+    to: AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES,
+    label: 'topNavigation.tabs.otherCompetitionsAndSearches',
+    default: 'Other competitions and searches',
+  },
+  {
+    to: AppRoutes.AREA_SEARCH_LANDING,
+    label: 'topNavigation.tabs.areaSearch',
+    default: 'Area search',
+  },
+];
 
 const TopNavigationLink = ({
   to,
@@ -68,27 +88,6 @@ const TopNavigation = ({
 }: TopNavigationProps): JSX.Element => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-
-  const naviLinks: TopNavigationLinkProps[] = [
-    {
-      to: getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS),
-      label: t(
-        'topNavigation.tabs.plotSearchAndCompetitions',
-        'Plot search and competitions',
-      ),
-    },
-    {
-      to: getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES),
-      label: t(
-        'topNavigation.tabs.otherCompetitionsAndSearches',
-        'Other competitions and searches',
-      ),
-    },
-    {
-      to: getRouteById(AppRoutes.AREA_SEARCH_LANDING),
-      label: t('topNavigation.tabs.areaSearch', 'Area search'),
-    },
-  ];
 
   const languages: LanguageOption[] = [
     {
@@ -180,8 +179,12 @@ const TopNavigation = ({
         />
       </Header.ActionBar>
       <Header.NavigationMenu>
-        {naviLinks.map((link) => (
-          <TopNavigationLink key={link.to} to={link.to} label={link.label} />
+        {NaviLinks.map((link) => (
+          <TopNavigationLink
+            key={getRouteById(link.to)}
+            to={getRouteById(link.to)}
+            label={t(link.label, link.default || '')}
+          />
         ))}
       </Header.NavigationMenu>
     </Header>
