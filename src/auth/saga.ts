@@ -1,9 +1,17 @@
 import { all, fork, put, takeEvery, call } from 'redux-saga/effects';
-import { logError } from '../root/helpers';
+import { jwtDecode } from 'jwt-decode';
 
+import { logError } from '../root/helpers';
 import { receiveApiToken, tokenNotFound } from './actions';
-import { FETCH_API_TOKEN, fetchApiTokenActionType } from './types';
+import {
+  FETCH_API_TOKEN,
+  fetchApiTokenActionType,
+  RECEIVE_API_TOKEN,
+  receiveApiTokenActionType,
+  STORE_API_TOKEN_SUCCESS,
+} from './types';
 import { userManager } from './userManager';
+import { setApiToken, setApiTokenExpirationTime } from './helpers';
 
 export function* fetchApiTokenSaga({
   payload: accessToken,
@@ -55,10 +63,25 @@ export function* fetchApiTokenSaga({
   }
 }
 
+function* handleReceiveApiToken({
+  payload: token,
+}: ReturnType<typeof receiveApiTokenActionType>): Generator {
+  const decodedToken = jwtDecode(token);
+  const exp = decodedToken?.exp ?? null;
+  // Store the token and exp in localStorage
+  setApiToken(token);
+  if (exp !== null) {
+    setApiTokenExpirationTime(exp.toString());
+  }
+
+  yield put({ type: STORE_API_TOKEN_SUCCESS, payload: token });
+}
+
 export default function* authSaga(): Generator {
   yield all([
     fork(function* (): Generator {
       yield takeEvery(FETCH_API_TOKEN, fetchApiTokenSaga);
+      yield takeEvery(RECEIVE_API_TOKEN, handleReceiveApiToken);
     }),
   ]);
 }

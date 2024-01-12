@@ -5,7 +5,7 @@ import FrontPage from '../frontPage/frontPage';
 import ErrorPage from '../errorPage/errorPage';
 import MapSearchPage from '../mapSearch/mapSearchPage';
 import FavouritesPage from '../favouritesPage/favouritesPage';
-import FinalizeLogin from '../auth/components/finalizeLogin';
+import { FinalizeLogin } from '../auth/components/finalizeLogin';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
 import ApplicationPage from '../application/applicationPage';

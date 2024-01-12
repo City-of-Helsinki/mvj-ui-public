@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { OidcProvider } from 'redux-oidc';
+import { OidcProvider } from './auth/components/oidcProvider';
 import { Provider } from 'react-redux';
 
 import './i18n';
@@ -45,7 +45,6 @@ const root = createRoot(container as Element);
 
 root.render(
   <Provider store={store}>
-    {/* @ts-expect-error: TS2769: No overload matches this call */}
     <OidcProvider store={store} userManager={userManager}>
       <SiteRoutes />
     </OidcProvider>
