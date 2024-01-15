@@ -1,4 +1,3 @@
-import React from 'react';
 import { TextInput } from 'hds-react';
 import { FieldRendererProps } from '../types';
 
@@ -22,7 +21,6 @@ const ApplicationExtraTextField = ({
         onChange={(e) => setValues({ extraValue: e.target.value })}
         invalid={meta.invalid}
         required
-        errorText={meta.error}
         aria-labelledby={parentId}
         disabled={disabled}
       />

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { TextInput } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ const LoginForm: FunctionComponent = () => {
         label={t('login.form.username.label', 'Username')}
         placeholder={t(
           'login.form.username.placeholder',
-          'Please type your username'
+          'Please type your username',
         )}
         required
       />
@@ -22,7 +22,7 @@ const LoginForm: FunctionComponent = () => {
         label={t('login.form.password.label', 'Password')}
         placeholder={t(
           'login.form.password.placeholder',
-          'Please type your password'
+          'Please type your password',
         )}
         required
       />

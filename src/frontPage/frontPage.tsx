@@ -1,5 +1,5 @@
 import { Koros } from 'hds-react';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -7,9 +7,9 @@ import BoxGrid from '../boxGrid/boxGrid';
 import BoxGridBox from '../boxGrid/boxGridBox';
 import FaqAccordion from '../faq/faqAccordion';
 import MainContentElement from '../a11y/MainContentElement';
-import { ReactComponent as PlotSearchesImage } from '../assets/images/frontPage/plotSearches.svg';
-import { ReactComponent as OtherSearchesImage } from '../assets/images/frontPage/otherSearches.svg';
-import { ReactComponent as AreaSearchesImage } from '../assets/images/areaSearch/areaSearch.svg';
+import AreaSearchesImage from '../assets/images/areaSearch/areaSearch.svg?react';
+import PlotSearchesImage from '../assets/images/frontPage/plotSearches.svg?react';
+import OtherSearchesImage from '../assets/images/frontPage/otherSearches.svg?react';
 import { AppRoutes, getRouteById } from '../root/routes';
 import { RootState } from '../root/rootReducer';
 import { fetchUiData } from './actions';
@@ -47,87 +47,102 @@ const FrontPage = ({
     <MainContentElement className="FrontPage">
       <div className="FrontPage__banner">
         <div className="FrontPage__heading-container">
-          <h3>
+          <h1>
             {t(
               'frontPage.bannerText',
-              'City of Helsinki plot, land, area and lorem ipsum rental'
+              'City of Helsinki plot, land, area and lorem ipsum rental',
             )}
-          </h3>
+          </h1>
         </div>
         <Koros className="FrontPage__banner-koros" type="basic" />
       </div>
       <div className="FrontPage__content">
-        <h4>
+        <h2>
           {t(
             'frontPage.contentHeader',
-            'How can we help with your rental needs?'
+            'How can we help with your rental needs?',
           )}
-        </h4>
+        </h2>
         <BoxGrid>
           <BoxGridBox
             topLabel={
               isFetchingUiData || fetchingFailed || uiDataNotFound
                 ? t(
                     'frontPage.plotSearchAndCompetitions.counterFailed',
-                    'Plot search and competitions'
+                    'Plot search and competitions',
                   )
                 : t(
                     'frontPage.plotSearchAndCompetitions.counter',
                     'Plot search and competitions: {{count}}',
                     {
                       count: uiData.plot_search,
-                    }
+                    },
                   )
             }
             label={t(
               'frontPage.plotSearchAndCompetitions.label',
-              'I want to participate in a plot search or competition'
+              'I want to participate in a plot search or competition',
             )}
-            bottomText={t(
-              'frontPage.plotSearchAndCompetitions.explanation',
-              'Plots for long-term housing or industrial activities'
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'frontPage.plotSearchAndCompetitions.explanation',
+                  'Plots for long-term housing or industrial activities',
+                )}
+              </p>
+            }
             color="pink"
             image={<PlotSearchesImage />}
             url={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
+            headerComponent="h3"
           />
           <BoxGridBox
             topLabel={
               isFetchingUiData || fetchingFailed || uiDataNotFound
                 ? t(
                     'frontPage.otherCompetitionsAndSearches.counterFailed',
-                    'Other competitions and searches'
+                    'Other competitions and searches',
                   )
                 : t(
                     'frontPage.otherCompetitionsAndSearches.counter',
                     'Other competitions and searches: {{count}}',
                     {
                       count: uiData.other_search,
-                    }
+                    },
                   )
             }
             label={t(
               'frontPage.otherCompetitionsAndSearches.label',
-              'I want to participate in another area search or competition'
+              'I want to participate in another area search or competition',
             )}
-            bottomText={t(
-              'frontPage.otherCompetitionsAndSearches.explanation',
-              'Other ongoing area searches and competitions'
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'frontPage.otherCompetitionsAndSearches.explanation',
+                  'Other ongoing area searches and competitions',
+                )}
+              </p>
+            }
             color="gray"
             image={<OtherSearchesImage />}
             url={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
+            headerComponent="h3"
           />
           <BoxGridBox
             topLabel={t('frontPage.areaSearch.counter', 'Area search')}
             label={t('frontPage.areaSearch.label', 'I want to rent an area')}
-            bottomText={t(
-              'frontPage.areaSearch.explanation',
-              'Land and water area leases'
-            )}
+            bottomText={
+              <p>
+                {t(
+                  'frontPage.areaSearch.explanation',
+                  'Land and water area leases',
+                )}
+              </p>
+            }
             color="yellow"
             image={<AreaSearchesImage />}
             url={getRouteById(AppRoutes.AREA_SEARCH_LANDING)}
+            headerComponent="h3"
           />
         </BoxGrid>
         <FaqAccordion />

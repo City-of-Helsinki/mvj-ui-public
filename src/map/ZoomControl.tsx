@@ -1,4 +1,3 @@
-import React from 'react';
 import { ZoomControl as LeafletZoomControl } from 'react-leaflet';
 
 import i18n from '../i18n';

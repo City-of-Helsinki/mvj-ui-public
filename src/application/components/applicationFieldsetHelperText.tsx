@@ -1,8 +1,8 @@
-import React, { PropsWithChildren, ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
 const ApplicationFieldsetHelperText = ({
   children,
-}: PropsWithChildren<ReactNode>): JSX.Element | null => {
+}: PropsWithChildren<Record<never, never>>): JSX.Element | null => {
   if (!children) {
     return null;
   }

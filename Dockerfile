@@ -1,4 +1,4 @@
-FROM node:16-slim AS appbase
+FROM node:18-slim AS appbase
 
 COPY tools /tools
 COPY scripts /scripts
@@ -61,9 +61,6 @@ ENV NODE_ENV $NODE_ENV
 
 # copy in our source code last, as it changes the most
 COPY --chown=appuser:appuser . .
-
-# Bake package.json start command into the image
-CMD ["react-scripts", "start"]
 
 # ===================================
 FROM appbase as staticbuilder

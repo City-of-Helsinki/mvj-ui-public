@@ -1,4 +1,3 @@
-import React from 'react';
 import { FieldRendererProps } from '../types';
 import { Select } from 'hds-react';
 
@@ -8,6 +7,7 @@ const ApplicationSelectField = ({
   id,
   meta,
   setValues,
+  displayError,
 }: FieldRendererProps): JSX.Element => {
   type OptionType = {
     label: string;
@@ -30,12 +30,14 @@ const ApplicationSelectField = ({
         onChange={(newValue: OptionType | null) =>
           setValues({ value: newValue?.value || null })
         }
-        invalid={meta.invalid}
+        onBlur={() => input.onBlur(input.value)}
+        invalid={displayError && meta.invalid}
         required={field.required}
         clearable={!field.required}
         label={field.label}
         options={options}
         helper={field.hint_text}
+        error={displayError && meta.error?.value}
       />
     </div>
   );

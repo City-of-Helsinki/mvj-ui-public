@@ -1,4 +1,3 @@
-import React from 'react';
 import { Col, Row } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 
@@ -33,7 +32,7 @@ const ApplicationFormTargetSummary = ({
     plotSearchAttributes,
     target.plot_search_target,
     null,
-    t
+    t,
   );
 
   return (
@@ -66,5 +65,5 @@ const ApplicationFormTargetSummary = ({
 export default connect(
   (state: RootState): State => ({
     plotSearchAttributes: state.plotSearch.plotSearchAttributes,
-  })
+  }),
 )(ApplicationFormTargetSummary);

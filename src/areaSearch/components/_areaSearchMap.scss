@@ -9,10 +9,6 @@
   }
 
   &__error {
-    display: flex;
-    align-items: center;
-    color: var(--color-error);
-    padding: ($spacing-xs / 2) 0 $spacing-xs;
-    gap: $spacing-xs / 2;
+    margin-bottom: $spacing-2-xs;
   }
 }

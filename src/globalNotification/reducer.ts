@@ -19,22 +19,33 @@ const notificationsSlice = createSlice({
   name: 'notifications',
   initialState,
   reducers: {},
-  extraReducers: {
-    [PUSH_NOTIFICATION]: (state, { payload }: PushNotificationAction) => {
-      const index = state.notifications.findIndex((n) => n.id === payload.id);
-      if (index) {
-        state.notifications.splice(index, 1);
-      }
-      state.notifications.push(payload);
-    },
-    [POP_NOTIFICATION]: (state, { payload }: PopNotificationAction) => {
-      if (payload) {
-        const index = state.notifications.findIndex((n) => n.id === payload);
-        state.notifications.splice(index, 1);
-        return;
-      }
-      state.notifications.pop();
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        PUSH_NOTIFICATION,
+        (state, { payload }: PushNotificationAction) => {
+          const index = state.notifications.findIndex(
+            (n) => n.id === payload.id,
+          );
+          if (index) {
+            state.notifications.splice(index, 1);
+          }
+          state.notifications.push(payload);
+        },
+      )
+      .addCase(
+        POP_NOTIFICATION,
+        (state, { payload }: PopNotificationAction) => {
+          if (payload) {
+            const index = state.notifications.findIndex(
+              (n) => n.id === payload,
+            );
+            state.notifications.splice(index, 1);
+            return;
+          }
+          state.notifications.pop();
+        },
+      );
   },
 });
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { RadioButton, SelectionGroup } from 'hds-react';
 import { FieldRendererProps, SupportedFieldTypes } from '../types';
 import ApplicationExtraTextField from './applicationExtraTextField';
@@ -6,15 +5,14 @@ import ApplicationFieldsetHelperText from './applicationFieldsetHelperText';
 import classNames from 'classnames';
 
 const ApplicationRadioButtonFieldset = (
-  props: FieldRendererProps
+  props: FieldRendererProps,
 ): JSX.Element => {
-  const { id, input, field, fieldType, setValues } = props;
+  const { id, input, meta, field, fieldType, setValues, displayError } = props;
 
   const orientation =
     fieldType === SupportedFieldTypes.RadioButtonInline
       ? 'horizontal'
       : 'vertical';
-
   return (
     <div className="ApplicationRadioButtonFieldset">
       <SelectionGroup
@@ -22,14 +20,19 @@ const ApplicationRadioButtonFieldset = (
         direction={orientation}
         className={classNames(
           'ApplicationRadioButtonFieldset__selection-group',
-          `ApplicationRadioButtonFieldset__selection-group--${orientation}`
+          `ApplicationRadioButtonFieldset__selection-group--${orientation}`,
         )}
         name={input.name}
+        errorText={displayError && meta.error?.value}
       >
         {field.choices.map((option, index) => (
-          <div className="ApplicationRadioButtonFieldset__option" key={index}>
+          <div
+            className="ApplicationRadioButtonFieldset__option"
+            id={`ApplicationRadioButtonFieldset_${input.name}_${index}_div`}
+            key={option.value}
+          >
             <RadioButton
-              id={`ApplicationRadiobuttonFieldSet_${input.name}_${id}_${index}`}
+              id={`ApplicationRadiobuttonFieldSet_${input.name}_${index}`}
               checked={input.value.value === option.value}
               value={input.value.value}
               onChange={() =>
@@ -43,6 +46,7 @@ const ApplicationRadioButtonFieldset = (
               }
               required={field.required}
               label={option.text}
+              onBlur={() => input.onBlur(input.value)}
             />
             {option.has_text_input && (
               <ApplicationExtraTextField
@@ -53,10 +57,10 @@ const ApplicationRadioButtonFieldset = (
             )}
           </div>
         ))}
-        <ApplicationFieldsetHelperText>
-          {field.hint_text}
-        </ApplicationFieldsetHelperText>
       </SelectionGroup>
+      <ApplicationFieldsetHelperText>
+        {field.hint_text}
+      </ApplicationFieldsetHelperText>
     </div>
   );
 };

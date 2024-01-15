@@ -24,6 +24,9 @@
         "noApplicantIdentifierFound": "An applicant with missing identifier data was encountered. Please verify that each applicant has either the personal identification number or company ID number set.",
         "noApplicantTypeSet": "An applicant with no selected type was encountered. Please verify that all applicant data is filled correctly.",
         "unknown": "An unexpected error occurred while preparing the application data for submission. Please try again later."
+      },
+      "summary": {
+        "header": "Please correct these fields before proceeding."
       }
     },
     "fileUpload": {
@@ -211,6 +214,14 @@
       }
     }
   },
+  "components": {
+    "form": {
+      "fractionalFieldset": {
+        "denominator": "Denominator",
+        "numerator": "Numerator"
+      }
+    }
+  },
   "directReservation": {
     "buttons": {
       "login": "Log in"
@@ -285,6 +296,9 @@
       "holder": "Copyright",
       "text": "All rights reserved"
     },
+    "logo": {
+      "alt": "Helsinki logo"
+    },
     "text": "Footer lorem ipsum"
   },
   "frontPage": {
@@ -295,6 +309,7 @@
     },
     "bannerText": "City of Helsinki plot, land, area and lorem ipsum rental",
     "contentHeader": "How can we help with your rental needs?",
+    "label": "Front page",
     "otherCompetitionsAndSearches": {
       "counter_one": "Other competitions and searches: {{count}}",
       "counter_other": "Other competitions and searches: {{count}}",
@@ -314,6 +329,20 @@
     "notification": {
       "close": "Close"
     }
+  },
+  "header": {
+    "actions": {
+      "favourites": {
+        "title": "Favourites"
+      },
+      "userManagement": {
+        "logIn": "Log in",
+        "logOut": "Log out"
+      }
+    }
+  },
+  "language": {
+    "languageSelection": "Language"
   },
   "loader": {
     "loading": "Please wait, content is loading..."
@@ -514,9 +543,6 @@
     }
   },
   "topNavigation": {
-    "menuLabel": "Menu",
-    "signIn": "Sign in",
-    "signOut": "Sign out",
     "skipToContent": "Skip to content",
     "tabs": {
       "areaSearch": "Area search",
@@ -526,11 +552,24 @@
   },
   "validation": {
     "errors": {
+      "companyIdentifier": {
+        "checkNumber": "Check character doesn't match.",
+        "generic": "Invalid company identifier."
+      },
+      "controlShare": {
+        "generic": "Invalid control share fraction.",
+        "invalidSum": "Control shares of applicants must sum up to 100%."
+      },
       "dateAfter": "The selected date cannot be before {{date}}.",
       "dateBefore": "The selected date cannot be after {{date}}.",
+      "email": "Invalid email address format.",
       "greaterThan": "Please enter a value greater than {{number}}.",
       "lessThan": "Please enter a value less than {{number}}.",
       "nonEmptyGeometry": "No area has yet been selected.",
+      "personalIdentifier": {
+        "checkChar": "Check character doesn't match.",
+        "generic": "Invalid personal identifier."
+      },
       "requiredArray": "One or more options must be selected.",
       "requiredValue": "This field is required."
     }

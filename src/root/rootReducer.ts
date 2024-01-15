@@ -33,7 +33,7 @@ export let rootReducer = combineReducers({
 });
 
 export default function createReducer(
-  injectedReducers = {}
+  injectedReducers = {},
 ): typeof rootReducer {
   rootReducer = combineReducers({
     ...allReducers,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Card } from 'hds-react';
 import { Row, Col } from 'react-grid-system';
 import { IconCrossCircle, IconArrowDown, IconArrowUp } from 'hds-react';
@@ -32,7 +32,7 @@ const FavouriteCard = (props: Props): JSX.Element => {
     plotSearchAttributes,
     target,
     plotSearch as PlotSearch,
-    t
+    t,
   );
 
   return (
@@ -63,7 +63,7 @@ const FavouriteCard = (props: Props): JSX.Element => {
               >
                 {t(
                   'favouritesPage.targetCard.removeButton',
-                  'Remove from list'
+                  'Remove from list',
                 )}
               </Button>
             </Col>
@@ -84,7 +84,7 @@ const FavouriteCard = (props: Props): JSX.Element => {
                   <h3>
                     {t(
                       'plotSearchAndCompetitions.mapView.sidebar.singleTarget.infoLinks',
-                      'Details'
+                      'Details',
                     )}
                   </h3>
                   <InfoLinks target={target} />
@@ -109,11 +109,11 @@ const FavouriteCard = (props: Props): JSX.Element => {
                 {fullDescription
                   ? t(
                       'favouritesPage.targetCard.showFullDesc.hide',
-                      'Hide additional details'
+                      'Hide additional details',
                     )
                   : t(
                       'favouritesPage.targetCard.showFullDesc.show',
-                      'Show additional details'
+                      'Show additional details',
                     )}
               </Button>
             </Col>
@@ -127,5 +127,5 @@ const FavouriteCard = (props: Props): JSX.Element => {
 export default connect(
   (state: RootState): State => ({
     plotSearchAttributes: state.plotSearch.plotSearchAttributes,
-  })
+  }),
 )(FavouriteCard);

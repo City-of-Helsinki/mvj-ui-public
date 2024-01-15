@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Col, Container, Row } from 'react-grid-system';
 import { Button, Notification } from 'hds-react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { isPristine, isValid } from 'redux-form';
 
 import { RootState } from '../root/rootReducer';
 import { PlotSearch } from '../plotSearch/types';
@@ -18,12 +19,16 @@ import { AppRoutes, getRouteById } from '../root/routes';
 import ApplicationTargetList from './components/applicationTargetList';
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
+import { APPLICATION_FORM_NAME, TARGET_SECTION_IDENTIFIER } from './types';
+import ApplicationErrorsSummary from './components/ApplicationErrorsSummary';
 
 interface State {
   relevantPlotSearch: PlotSearch | null;
   isFetchingFormAttributes: boolean;
   isFetchingPlotSearches: boolean;
   isPerformingFileOperation: boolean;
+  isTargetsPagePristine: boolean;
+  isFormValid: boolean;
 }
 
 interface Props {
@@ -33,6 +38,8 @@ interface Props {
   openLoginModal: () => void;
   isPerformingFileOperation: boolean;
   fetchPendingUploads: () => void;
+  isTargetsPagePristine: boolean;
+  isFormValid: boolean;
 }
 
 const ApplicationPage = ({
@@ -42,6 +49,8 @@ const ApplicationPage = ({
   openLoginModal,
   isPerformingFileOperation,
   fetchPendingUploads,
+  isTargetsPagePristine,
+  isFormValid,
 }: Props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -51,7 +60,26 @@ const ApplicationPage = ({
   const [hasDismissedTargetsAlert, setHasDismissedTargetsAlert] =
     useState<boolean>(false);
 
-  const targetTabRef = useRef<HTMLSpanElement | null>(null);
+  useEffect(() => {
+    if (!isTargetsPagePristine) {
+      setHasVisitedTargetsTab(true);
+    }
+  }, [isTargetsPagePristine]);
+
+  const [isSaveClicked, setSaveClicked] = useState<boolean>(false);
+
+  const hasTargetTab =
+    relevantPlotSearch?.form?.sections.findIndex(
+      (section) => section.identifier === TARGET_SECTION_IDENTIFIER
+    ) !== -1;
+
+  const openPreview = () => {
+    setSaveClicked(true);
+
+    if (isFormValid) {
+      navigate(getRouteById(AppRoutes.APPLICATION_PREVIEW));
+    }
+  };
 
   return (
     <AuthDependentContent>
@@ -67,7 +95,7 @@ const ApplicationPage = ({
             <Helmet>
               <title>
                 {getPageTitle(
-                  t('application.form.pageTitle', 'Plot application')
+                  t('application.form.pageTitle', 'Plot application'),
                 )}
               </title>
             </Helmet>
@@ -88,16 +116,19 @@ const ApplicationPage = ({
                           <>
                             <ApplicationForm
                               baseForm={relevantPlotSearch.form}
-                              parentTargetTabRef={targetTabRef}
-                              onTargetTabVisit={() =>
-                                setHasVisitedTargetsTab(true)
-                              }
+                              isSaveClicked={isSaveClicked}
                             />
 
-                            <Row className="ApplicationPage__action-buttons">
+                            <Row className="ApplicationPage__notifications">
                               <Col xs={12}>
+                                <ApplicationErrorsSummary
+                                  baseForm={relevantPlotSearch.form}
+                                  formName={APPLICATION_FORM_NAME}
+                                  isSaveClicked={isSaveClicked}
+                                  pathPrefix=""
+                                />
                                 {!hasVisitedTargetsTab &&
-                                  !!targetTabRef.current &&
+                                  hasTargetTab &&
                                   !hasDismissedTargetsAlert && (
                                     <Notification
                                       type="error"
@@ -105,14 +136,14 @@ const ApplicationPage = ({
                                         <>
                                           {t(
                                             'application.mustVisitTargetPage.title',
-                                            'Attention!'
+                                            'Attention!',
                                           )}
                                         </>
                                       }
                                       closeButtonLabelText={
                                         t(
                                           'application.mustVisitTargetPage.close',
-                                          'Close'
+                                          'Close',
                                         ) as string
                                       }
                                       onClose={() =>
@@ -122,11 +153,15 @@ const ApplicationPage = ({
                                     >
                                       {t(
                                         'application.mustVisitTargetPage.text',
-                                        "You must first fill the required details for the targets you're applying to in the second tab. You can open that tab by clicking the button below."
+                                        "You must first fill the required details for the targets you're applying to in the second tab. You can open that tab by clicking the button below.",
                                       )}
                                     </Notification>
                                   )}
+                              </Col>
+                            </Row>
 
+                            <Row className="ApplicationPage__action-buttons">
+                              <Col xs={12}>
                                 <Button
                                   variant="secondary"
                                   onClick={() =>
@@ -138,47 +173,43 @@ const ApplicationPage = ({
                                 </Button>
                                 <Button
                                   variant="primary"
-                                  onClick={() =>
-                                    navigate(
-                                      getRouteById(
-                                        AppRoutes.APPLICATION_PREVIEW
-                                      )
-                                    )
-                                  }
+                                  onClick={openPreview}
                                   disabled={
                                     isPerformingFileOperation ||
-                                    (!hasVisitedTargetsTab &&
-                                      !!targetTabRef.current)
+                                    (!hasVisitedTargetsTab && hasTargetTab) ||
+                                    (isSaveClicked && !isFormValid)
                                   }
                                 >
                                   {t(
                                     'application.buttons.preview',
-                                    'Preview submission'
+                                    'Preview submission',
                                   )}
                                 </Button>
-                                {!hasVisitedTargetsTab &&
-                                  !!targetTabRef.current && (
-                                    <Button
-                                      variant="primary"
-                                      onClick={() => {
-                                        if (!targetTabRef.current) {
-                                          return;
-                                        }
+                                {!hasVisitedTargetsTab && hasTargetTab && (
+                                  <Button
+                                    variant="primary"
+                                    onClick={() => {
+                                      const targetTab = document.getElementById(
+                                        'ApplicationForm-TargetsTabAnchor'
+                                      );
+                                      if (!targetTab) {
+                                        return;
+                                      }
 
-                                        // The element itself gets covered by the top navigation bar since we're not
-                                        // offsetting its height, but that's perfectly fine in this case.
-                                        targetTabRef.current.scrollIntoView();
-                                        targetTabRef.current.click();
-                                        setHasVisitedTargetsTab(true);
-                                      }}
-                                      disabled={isPerformingFileOperation}
-                                    >
-                                      {t(
-                                        'application.buttons.viewTargets',
-                                        'View targets'
-                                      )}
-                                    </Button>
-                                  )}
+                                      // The element itself gets covered by the top navigation bar since we're not
+                                      // offsetting its height, but that's perfectly fine in this case.
+                                      targetTab.scrollIntoView();
+                                      targetTab.click();
+                                      setHasVisitedTargetsTab(true);
+                                    }}
+                                    disabled={isPerformingFileOperation}
+                                  >
+                                    {t(
+                                      'application.buttons.viewTargets',
+                                      'View targets',
+                                    )}
+                                  </Button>
+                                )}
                               </Col>
                             </Row>
                           </>
@@ -187,7 +218,7 @@ const ApplicationPage = ({
                           <p>
                             {t(
                               'application.error.noPlotsSelected',
-                              'To submit a plot application, you have to pick plots on the plot searches page first.'
+                              'To submit a plot application, you have to pick plots on the plot searches page first.',
                             )}
                           </p>
                         )}
@@ -195,7 +226,7 @@ const ApplicationPage = ({
                           <p>
                             {t(
                               'application.error.noFormAvailable',
-                              "No application form has been specified for the plots you have selected yet. Please be in contact and we'll look into it."
+                              "No application form has been specified for the plots you have selected yet. Please be in contact and we'll look into it.",
                             )}
                           </p>
                         )}
@@ -205,7 +236,7 @@ const ApplicationPage = ({
                         <p>
                           {t(
                             'application.error.notLoggedIn',
-                            'Please log in first in order to apply for plots.'
+                            'Please log in first in order to apply for plots.',
                           )}
                         </p>
                         <Button
@@ -233,9 +264,14 @@ export default connect(
     isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,
     isFetchingFormAttributes: state.application.isFetchingFormAttributes,
     isPerformingFileOperation: state.application.isPerformingFileOperation,
+    isTargetsPagePristine: isPristine(APPLICATION_FORM_NAME)(
+      state,
+      `sections.${TARGET_SECTION_IDENTIFIER}`
+    ),
+    isFormValid: isValid(APPLICATION_FORM_NAME)(state),
   }),
   {
     openLoginModal,
     fetchPendingUploads,
-  }
+  },
 )(ApplicationPage);

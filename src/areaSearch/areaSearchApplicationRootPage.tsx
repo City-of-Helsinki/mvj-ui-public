@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { initialize, reduxForm, InjectedFormProps } from 'redux-form';
 
@@ -7,6 +7,10 @@ import { AreaSearch, AREA_SEARCH_FORM_NAME } from './types';
 import { initializeAreaSearchForm } from './helpers';
 import { RootState } from '../root/rootReducer';
 import ScrollToTop from '../common/ScrollToTop';
+import {
+  shouldApplicationFormValidate,
+  validateApplicationForm,
+} from '../application/validations';
 
 interface State {
   areaSearchForm: null;
@@ -51,9 +55,13 @@ export default connect(
   {
     initializeForm: initialize,
     fetchFormAttributes,
-  }
+  },
 )(
   reduxForm<unknown, Props>({
     form: AREA_SEARCH_FORM_NAME,
-  })(AreaSearchApplicationRootPage)
+    shouldError: (...args) =>
+      shouldApplicationFormValidate<unknown, Props>(...args),
+    validate: (values, props) =>
+      validateApplicationForm('form')(values, props.lastSubmission?.form),
+  })(AreaSearchApplicationRootPage),
 );

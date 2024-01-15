@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -57,7 +57,7 @@ const DirectReservationPage = ({
             <Helmet>
               <title>
                 {getPageTitle(
-                  t('directReservation.pageTitle', 'Direct reservation')
+                  t('directReservation.pageTitle', 'Direct reservation'),
                 )}
               </title>
             </Helmet>
@@ -67,7 +67,7 @@ const DirectReservationPage = ({
                   <p>
                     {t(
                       'directReservation.error.notLoggedIn',
-                      'Please log in first in order to apply for direct reservation plots.'
+                      'Please log in first in order to apply for direct reservation plots.',
                     )}
                   </p>
                   <Button variant="primary" onClick={openLoginModal}>
@@ -81,7 +81,7 @@ const DirectReservationPage = ({
                 <Notification type="error">
                   {t(
                     'directReservation.errors.favouriteGenerationError',
-                    'Something went wrong! Try again later or contact the city official you received the direct reservation link from.'
+                    'Something went wrong! Try again later or contact the city official you received the direct reservation link from.',
                   )}
                 </Notification>
               )}

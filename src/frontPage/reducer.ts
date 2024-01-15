@@ -29,28 +29,29 @@ const frontPageReducer = createSlice({
   name: 'uiData',
   initialState,
   reducers: {},
-  extraReducers: {
-    [RECEIVE_UI_DATA]: (state, { payload }: ReceiveUiDataAction) => {
-      state.uiData = payload;
-      state.isFetchingUiData = false;
-      state.fetchingFailed = false;
-      state.uiDataNotFound = false;
-    },
-    [FETCH_UI_DATA]: (state) => {
-      state.isFetchingUiData = true;
-      state.fetchingFailed = false;
-      state.uiDataNotFound = false;
-    },
-    [UI_DATA_NOT_FOUND]: (state) => {
-      state.isFetchingUiData = false;
-      state.fetchingFailed = false;
-      state.uiDataNotFound = true;
-    },
-    [FETCH_UI_DATA_ERROR]: (state) => {
-      state.isFetchingUiData = false;
-      state.fetchingFailed = true;
-      state.uiDataNotFound = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(RECEIVE_UI_DATA, (state, { payload }: ReceiveUiDataAction) => {
+        state.uiData = payload;
+        state.isFetchingUiData = false;
+        state.fetchingFailed = false;
+        state.uiDataNotFound = false;
+      })
+      .addCase(FETCH_UI_DATA, (state) => {
+        state.isFetchingUiData = true;
+        state.fetchingFailed = false;
+        state.uiDataNotFound = false;
+      })
+      .addCase(UI_DATA_NOT_FOUND, (state) => {
+        state.isFetchingUiData = false;
+        state.fetchingFailed = false;
+        state.uiDataNotFound = true;
+      })
+      .addCase(FETCH_UI_DATA_ERROR, (state) => {
+        state.isFetchingUiData = false;
+        state.fetchingFailed = true;
+        state.uiDataNotFound = false;
+      });
   },
 });
 

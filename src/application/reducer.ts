@@ -56,66 +56,69 @@ const applicationSlice = createSlice({
   name: APPLICATION_FORM_NAME,
   initialState,
   reducers: {},
-  extraReducers: {
-    [RECEIVE_FORM_ATTRIBUTES]: (
-      state,
-      { payload }: ReceiveFormAttributesAction
-    ) => {
-      state.formAttributes = payload;
-      state.isFetchingFormAttributes = false;
-      state.fieldTypeMapping =
-        payload.sections?.child?.children.fields?.child?.children.type?.choices?.reduce(
-          (acc, choice) => {
-            acc[choice.value as number] = choice.display_name;
-            return acc;
-          },
-          {} as FieldTypeMapping
-        ) || {};
-    },
-    [FETCH_FORM_ATTRIBUTES]: (state) => {
-      state.isFetchingFormAttributes = true;
-      state.fieldTypeMapping = {};
-    },
-    [FORM_ATTRIBUTES_NOT_FOUND]: (state) => {
-      state.isFetchingFormAttributes = false;
-    },
-    [SUBMIT_APPLICATION]: (state) => {
-      state.isSubmittingApplication = true;
-      state.lastError = null;
-    },
-    [RECEIVE_APPLICATION_SAVED]: (
-      state,
-      { payload }: ReceiveApplicationSavedAction
-    ) => {
-      state.isSubmittingApplication = false;
-      state.submittedAnswer = payload;
-    },
-    [APPLICATION_SUBMISSION_FAILED]: (
-      state,
-      { payload }: ApplicationSubmissionFailedAction
-    ) => {
-      state.isSubmittingApplication = false;
-      state.lastError = payload;
-    },
-    [RECEIVE_PENDING_UPLOADS]: (
-      state,
-      { payload }: ReceivePendingUploadsAction
-    ) => {
-      // TODO: filtering should probably be done server-side already
-      state.pendingUploads = payload.filter((upload) => upload.answer === null);
-    },
-    [UPLOAD_FILE]: (state) => {
-      state.isPerformingFileOperation = true;
-    },
-    [DELETE_UPLOAD]: (state) => {
-      state.isPerformingFileOperation = true;
-    },
-    [FILE_OPERATION_FINISHED]: (state) => {
-      state.isPerformingFileOperation = false;
-    },
-    [FILE_UPLOAD_FAILED]: (state) => {
-      state.isPerformingFileOperation = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        RECEIVE_FORM_ATTRIBUTES,
+        (state, { payload }: ReceiveFormAttributesAction) => {
+          state.formAttributes = payload;
+          state.isFetchingFormAttributes = false;
+          state.fieldTypeMapping =
+            payload.sections?.child?.children.fields?.child?.children.type?.choices?.reduce(
+              (acc, choice) => {
+                acc[choice.value as number] = choice.display_name;
+                return acc;
+              },
+              {} as FieldTypeMapping,
+            ) || {};
+        },
+      )
+      .addCase(FETCH_FORM_ATTRIBUTES, (state) => {
+        state.isFetchingFormAttributes = true;
+        state.fieldTypeMapping = {};
+      })
+      .addCase(FORM_ATTRIBUTES_NOT_FOUND, (state) => {
+        state.isFetchingFormAttributes = false;
+      })
+      .addCase(SUBMIT_APPLICATION, (state) => {
+        state.isSubmittingApplication = true;
+        state.lastError = null;
+      })
+      .addCase(
+        RECEIVE_APPLICATION_SAVED,
+        (state, { payload }: ReceiveApplicationSavedAction) => {
+          state.isSubmittingApplication = false;
+          state.submittedAnswer = payload;
+        },
+      )
+      .addCase(
+        APPLICATION_SUBMISSION_FAILED,
+        (state, { payload }: ApplicationSubmissionFailedAction) => {
+          state.isSubmittingApplication = false;
+          state.lastError = payload;
+        },
+      )
+      .addCase(
+        RECEIVE_PENDING_UPLOADS,
+        (state, { payload }: ReceivePendingUploadsAction) => {
+          // TODO: filtering should probably be done server-side already
+          state.pendingUploads = payload.filter(
+            (upload) => upload.answer === null,
+          );
+        },
+      )
+      .addCase(UPLOAD_FILE, (state) => {
+        state.isPerformingFileOperation = true;
+      })
+      .addCase(DELETE_UPLOAD, (state) => {
+        state.isPerformingFileOperation = true;
+      })
+      .addCase(FILE_OPERATION_FINISHED, (state) => {
+        state.isPerformingFileOperation = false;
+      })
+      .addCase(FILE_UPLOAD_FAILED, (state) => {
+        state.isPerformingFileOperation = false;
+      });
   },
 });
 

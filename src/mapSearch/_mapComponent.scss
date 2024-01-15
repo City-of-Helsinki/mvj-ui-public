@@ -1,10 +1,10 @@
 .MapComponent {
-  height: calc(100vh - #{$spacing-3-xl});
+  height: calc(100vh - #{$spacing-layout-2-xl});
   z-index: 10;
 
   .leaflet-control-container {
     .leaflet-bottom {
-      margin-bottom: $spacing-s;
+      margin-bottom: $spacing-m;
     }
   }
 

@@ -3,7 +3,7 @@ import AbstractProvider, {
   ParseArgument,
   SearchArgument,
   SearchResult,
-} from 'leaflet-geosearch/lib/providers/provider';
+} from 'leaflet-geosearch/lib/providers/provider.js';
 
 import {
   HelsinkiGeocoderResponse,
@@ -17,7 +17,8 @@ export default class HelsinkiProvider extends AbstractProvider<
   getParamString(params: Record<string, string | number | boolean>): string {
     return Object.keys(params)
       .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+        (key) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
       )
       .join('&');
   }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Col, Row } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -61,7 +60,7 @@ const AreaSearchTargetSummary = ({
     {
       key: t(
         'areaSearch.application.target.areaDescription',
-        'Area description'
+        'Area description',
       ),
       value: lastSubmission?.description_area
         ? lastSubmission.description_area
@@ -95,7 +94,7 @@ const AreaSearchTargetSummary = ({
 
     return t(
       'areaSearch.application.target.addressNotFound',
-      'No address found for the selected area'
+      'No address found for the selected area',
     );
   };
 
@@ -105,7 +104,7 @@ const AreaSearchTargetSummary = ({
         <h2>
           {t(
             'areaSearch.application.target.screenReaderHeading',
-            'Selected area:'
+            'Selected area:',
           )}
         </h2>
       </ScreenReaderText>
@@ -128,5 +127,5 @@ export default connect(
   (state: RootState): State => ({
     lastSubmission: state.areaSearch.lastSubmission,
     areaSearchAttachments: state.areaSearch.areaSearchAttachments,
-  })
+  }),
 )(AreaSearchTargetSummary);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Dialog, IconQuestionCircle } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 
@@ -18,7 +18,7 @@ const ApplicationProcedureInfo = (): JSX.Element => {
       >
         {t(
           'application.procedure.link',
-          'Information about the application review process'
+          'Information about the application review process',
         )}
       </Button>
       <Dialog
@@ -29,14 +29,14 @@ const ApplicationProcedureInfo = (): JSX.Element => {
         close={closeModal}
         closeButtonLabelText={t(
           'application.procedure.popup.closeButton',
-          'Close'
+          'Close',
         )}
       >
         <Dialog.Header
           id="ApplicationProcedureInfoPopup_Header"
           title={t(
             'application.procedure.popup.title',
-            'How the application review process works'
+            'How the application review process works',
           )}
         />
         <Dialog.Content>
@@ -44,31 +44,31 @@ const ApplicationProcedureInfo = (): JSX.Element => {
             <li>
               {t(
                 'application.procedure.popup.stages.submission',
-                'The applicant submits their application.'
+                'The applicant submits their application.',
               )}
             </li>
             <li>
               {t(
                 'application.procedure.popup.stages.forwarding',
-                'The application is forwarded to the correct city department for processing.'
+                'The application is forwarded to the correct city department for processing.',
               )}
             </li>
             <li>
               {t(
                 'application.procedure.popup.stages.review',
-                'The city confirms if the area is eligible to be leased for the applied-for use case and requests further information from the applicant if necessary. Other parties relevant to the decision might be consulted at this stage as well.'
+                'The city confirms if the area is eligible to be leased for the applied-for use case and requests further information from the applicant if necessary. Other parties relevant to the decision might be consulted at this stage as well.',
               )}
             </li>
             <li>
               {t(
                 'application.procedure.popup.stages.offer',
-                'If the city decides to lease the area to the applicant, a draft contract will be sent to them for commenting.'
+                'If the city decides to lease the area to the applicant, a draft contract will be sent to them for commenting.',
               )}
             </li>
             <li>
               {t(
                 'application.procedure.popup.stages.decision',
-                'The city will make a formal lease decision and the lease contract will be signed.'
+                'The city will make a formal lease decision and the lease contract will be signed.',
               )}
             </li>
           </ol>

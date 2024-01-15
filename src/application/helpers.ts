@@ -402,3 +402,116 @@ export const getClientErrorMessage = (
       break;
   }
 };
+
+type PathPart = {
+  kind: 'objectKey' | 'arrayKey' | 'index';
+  value: string;
+};
+
+const getPathParts = (path: string): Array<PathPart> => {
+  const result: Array<PathPart> = [];
+  const dotParts = path.split('.');
+
+  if (dotParts[0] === '') {
+    dotParts.shift();
+  }
+  dotParts.forEach((part) => {
+    const maybeArrayComponents = /^(.+)\[(\d+)]$/.exec(part);
+    if (maybeArrayComponents) {
+      result.push({ kind: 'arrayKey', value: maybeArrayComponents[1] });
+      result.push({ kind: 'index', value: maybeArrayComponents[2] });
+    } else {
+      result.push({ kind: 'objectKey', value: part });
+    }
+  });
+
+  return result;
+};
+
+export const get = (obj: unknown, path: string): unknown => {
+  let node: unknown = obj;
+  const pathParts = getPathParts(path);
+
+  for (let i = 0; i < pathParts.length; ++i) {
+    const part = pathParts[i];
+
+    if (part.kind === 'index') {
+      if (node instanceof Array) {
+        node = node[parseInt(part.value)];
+      } else {
+        return;
+      }
+    } else {
+      if (node instanceof Object) {
+        if (part.value in node) {
+          node = (node as Record<string, unknown>)[part.value];
+        } else {
+          return;
+        }
+      }
+    }
+  }
+
+  return node;
+};
+
+export const set = (obj: unknown, path: string, value: unknown): void => {
+  let node: unknown = obj;
+  const pathParts = getPathParts(path);
+
+  for (let i = 0; i < pathParts.length; ++i) {
+    const part = pathParts[i];
+    const isLast = i + 1 === pathParts.length;
+
+    // end of path, set the value onto the final node
+    if (isLast) {
+      if (part.kind === 'index' && node instanceof Array) {
+        node[parseInt(part.value)] = value;
+      } else if (part.kind !== 'index' && node instanceof Object) {
+        (node as Record<string, unknown>)[part.value] = value;
+      } else {
+        // invalid path
+        return;
+      }
+    }
+
+    // find next level node, create it if it doesn't exist
+    if (part.kind === 'objectKey') {
+      if (node instanceof Object) {
+        if (!(node as Record<string, unknown>)[part.value]) {
+          (node as Record<string, unknown>)[part.value] = {};
+        }
+        node = (node as Record<string, unknown>)[part.value];
+      } else {
+        // invalid path
+        return;
+      }
+    } else if (part.kind === 'arrayKey') {
+      if (node instanceof Object) {
+        if (!(node as Record<string, unknown>)[part.value]) {
+          (node as Record<string, unknown>)[part.value] = [];
+        }
+        node = (node as Record<string, unknown>)[part.value];
+      } else {
+        // invalid path
+        return;
+      }
+    } else {
+      if (node instanceof Array) {
+        if (!node[parseInt(part.value)]) {
+          // peek next node
+          const nextPart = pathParts[i + 1];
+          if (nextPart.kind === 'index') {
+            node[parseInt(part.value)] = [];
+          } else {
+            node[parseInt(part.value)] = {};
+          }
+        }
+        node = node[parseInt(part.value)];
+      } else {
+        // invalid path
+        return;
+      }
+    }
+  }
+};

@@ -1,5 +1,4 @@
 import { WrappedFieldProps } from 'redux-form';
-
 import { ApiAttributes } from '../api/types';
 import { FormField } from '../plotSearch/types';
 import { Geometry } from 'geojson';
@@ -14,7 +13,6 @@ export type NestedFieldLeaf =
 
 // A type definition cannot contain circular references, but an interface definition can,
 // thus this is implemented this way.
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NestedField
   extends Record<string, NestedFieldLeaf | NestedField | Array<NestedField>> {}
 
@@ -43,6 +41,7 @@ export type FieldRendererProps = WrappedFieldProps & {
   field: FormField;
   setValues: (newValues: Partial<ApplicationField>) => void;
   fieldType: SupportedFieldTypes | null;
+  displayError: boolean;
 };
 
 export enum ApplicationSectionKeys {
@@ -205,6 +204,8 @@ export const TARGET_SECTION_IDENTIFIER = 'haettava-kohde';
 export const CONFIRMATION_SECTION_IDENTIFIER = 'vahvistukset';
 
 export const APPLICANT_TYPE_FIELD_IDENTIFIER = 'hakija';
+export const CONTROL_SHARE_FIELD_IDENTIFIER = 'hallintaosuus';
+export const EMAIL_FIELD_IDENTIFIER = 'sahkoposti';
 
 export type ApplicationField = {
   value: NestedFieldLeaf;

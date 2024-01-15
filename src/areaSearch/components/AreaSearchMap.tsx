@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { FeatureGroup, MapContainer, useMapEvents } from 'react-leaflet';
 import { FeatureGroup as FeatureGroupType } from 'leaflet';
 import { blur, focus, WrappedFieldProps } from 'redux-form';
 import { Feature } from 'geojson';
 import { connect } from 'react-redux';
-import { IconAlertCircleFill } from 'hds-react';
 
 import { StandardMapLayersControl } from '../../map/StandardMapLayersControl';
 import {
@@ -18,6 +17,8 @@ import { MapLayer } from '../../map/types';
 import ZoomControl from '../../map/ZoomControl';
 import DrawTools from '../../map/DrawTools';
 import GeoSearch from '../../map/GeoSearch';
+import MapReadyHandler from '../../map/MapReadyHandler';
+import ApplicationFieldError from '../../application/components/ApplicationFieldError';
 
 type Props = {
   focus: typeof focus;
@@ -75,8 +76,8 @@ const AreaSearchMap = ({
         maxZoom={12}
         crs={CRS}
         zoomControl={false}
-        whenCreated={attachMapResizeObserver}
       >
+        <MapReadyHandler whenCreated={attachMapResizeObserver} />
         <ZoomControl />
         <EventHandler />
         <StandardMapLayersControl
@@ -94,10 +95,7 @@ const AreaSearchMap = ({
         </FeatureGroup>
       </MapContainer>
       {touched && !valid && (
-        <div className="AreaSearchMap__error" role="alert">
-          <IconAlertCircleFill />
-          <span>{error}</span>
-        </div>
+        <ApplicationFieldError className="AreaSearchMap__error" error={error} />
       )}
     </div>
   );

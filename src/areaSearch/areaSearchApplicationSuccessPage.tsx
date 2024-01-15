@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Container } from 'react-grid-system';
 import { Helmet } from 'react-helmet';

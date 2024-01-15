@@ -11,6 +11,8 @@ import {
   Polyline,
 } from 'leaflet';
 import * as L from 'leaflet';
+import 'leaflet-draw';
+import 'proj4leaflet';
 import proj4 from 'proj4';
 import i18n from 'i18next';
 import { PlotSearchTarget } from '../plotSearch/types';
@@ -48,7 +50,7 @@ export const getCentroid = (geometry: Geometry): LatLngExpression | null => {
 };
 
 export const getTargetCentroid = (
-  target: PlotSearchTarget
+  target: PlotSearchTarget,
 ): LatLngExpression | null => {
   if (target.target_plan?.geometry) {
     return getCentroid(target.target_plan.geometry);
@@ -62,17 +64,23 @@ interface HelsinkiMapData {
   CRS: CRS;
 }
 
-const getCRS = (bounds: L.Bounds): L.Proj.CRS =>
-  new L.Proj.CRS(
+const getCRS = (bounds: L.Bounds): L.Proj.CRS => {
+  // Resolutions at which tiles are available: how many units each pixel on the map represents.
+  // In this case how many meters each pixel represents.
+  const resolutions: L.Proj.ProjCRSOptions['resolutions'] = [
+    256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125, 0.0625, 0.03125,
+    0.015625, 0.0078125, 0.00390625, 0.001953125,
+  ];
+  const coordinateReferenceSystem = new L.Proj.CRS(
     'EPSG:3879',
     '+proj=tmerc +lat_0=0 +lon_0=25 +k=1 +x_0=25500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
     {
-      resolutions: [
-        256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5, 0.25, 0.125, 0.0625, 0.03125,
-      ],
+      resolutions,
       bounds,
-    }
+    },
   );
+  return coordinateReferenceSystem;
+};
 
 export const initializeHelsinkiMap = (): HelsinkiMapData => {
   const southWest = new LatLng(60.079029, 24.646353);
@@ -83,28 +91,28 @@ export const initializeHelsinkiMap = (): HelsinkiMapData => {
 
   proj4.defs(
     'EPSG:3879',
-    '+proj=tmerc +lat_0=0 +lon_0=25 +k=1 +x_0=25500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs'
+    '+proj=tmerc +lat_0=0 +lon_0=25 +k=1 +x_0=25500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
   );
   proj4.defs(
     'WGS84',
-    '+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees'
+    '+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees',
   );
 
   return { latLonBounds, CRS };
 };
 
 export const drawnShapeLayerPredicate = (
-  layer: Layer
+  layer: Layer,
 ): layer is LayerGroup | Polyline | CircleMarker | Marker =>
   (layer as LayerGroup | Polyline | CircleMarker | Marker).toGeoJSON !==
   undefined;
 
 export const polygonFeaturePredicate = (
-  feature: Feature
+  feature: Feature,
 ): feature is Feature<Polygon> => feature.geometry !== undefined;
 
 export const convertPolygonArrayToMultiPolygon = (
-  polygons: Array<Feature>
+  polygons: Array<Feature>,
 ): MultiPolygon => {
   // Both freeform shapes and rectangles drawn on the map should be polygon-type features.
   // If other types are passed in, they are ignored.
@@ -117,151 +125,155 @@ export const convertPolygonArrayToMultiPolygon = (
 };
 
 export const attachMapResizeObserver = (map: L.Map): void => {
-  new ResizeObserver(() => {
-    map.invalidateSize(false);
-  }).observe(map.getContainer());
+  const resizeObserver = new ResizeObserver(() => {
+    const panes = map.getPanes();
+    if ('mapPane' in panes) {
+      map.invalidateSize(false);
+    }
+  });
+  resizeObserver.observe(map.getContainer());
 };
 
 export const setDrawToolLocalizations = (): void => {
   L.drawLocal.draw.handlers.circle.tooltip.start = i18n.t(
     'map.drawTools.draw.handlers.circle.tooltip.start',
-    'Click and drag to draw a circle.'
+    'Click and drag to draw a circle.',
   );
   L.drawLocal.draw.handlers.circle.radius = i18n.t(
     'map.drawTools.draw.handlers.circle.radius',
-    'Radius'
+    'Radius',
   );
   L.drawLocal.draw.handlers.polygon.tooltip.start = i18n.t(
     'map.drawTools.draw.handlers.polygon.tooltip.start',
-    'Click to start drawing a shape.'
+    'Click to start drawing a shape.',
   );
   L.drawLocal.draw.handlers.polygon.tooltip.cont = i18n.t(
     'map.drawTools.draw.handlers.polygon.tooltip.cont',
-    'Click to continue drawing a shape.'
+    'Click to continue drawing a shape.',
   );
   L.drawLocal.draw.handlers.polygon.tooltip.end = i18n.t(
     'map.drawTools.draw.handlers.polygon.tooltip.end',
-    'Click the first point to close this shape.'
+    'Click the first point to close this shape.',
   );
   L.drawLocal.draw.handlers.polyline.error = i18n.t(
     'map.drawTools.draw.handlers.polyline.error',
-    '<strong>Error:</strong> shape edges cannot cross!'
+    '<strong>Error:</strong> shape edges cannot cross!',
   );
   L.drawLocal.draw.handlers.polyline.tooltip.start = i18n.t(
     'map.drawTools.draw.handlers.polyline.tooltip.start',
-    'Click to start drawing a line.'
+    'Click to start drawing a line.',
   );
   L.drawLocal.draw.handlers.polyline.tooltip.cont = i18n.t(
     'map.drawTools.draw.handlers.polyline.tooltip.cont',
-    'Click to continue drawing a line.'
+    'Click to continue drawing a line.',
   );
   L.drawLocal.draw.handlers.polyline.tooltip.end = i18n.t(
     'map.drawTools.draw.handlers.polyline.tooltip.end',
-    'Click the last point to finish the line.'
+    'Click the last point to finish the line.',
   );
   L.drawLocal.draw.handlers.rectangle.tooltip.start = i18n.t(
     'map.drawTools.draw.handlers.rectangle.tooltip.start',
-    'Click and drag to draw a rectangle.'
+    'Click and drag to draw a rectangle.',
   );
   L.drawLocal.draw.handlers.simpleshape.tooltip.end = i18n.t(
     'map.drawTools.draw.handlers.simpleshape.tooltip.end',
-    'Release the mouse button to finish drawing.'
+    'Release the mouse button to finish drawing.',
   );
 
   L.drawLocal.edit.handlers.edit.tooltip.text = i18n.t(
     'map.drawTools.edit.handlers.edit.tooltip.text',
-    'Drag handles or markers to edit features.'
+    'Drag handles or markers to edit features.',
   );
   L.drawLocal.edit.handlers.edit.tooltip.subtext = i18n.t(
     'map.drawTools.edit.handlers.edit.tooltip.subtext',
-    'Click cancel to undo changes.'
+    'Click cancel to undo changes.',
   );
   L.drawLocal.edit.handlers.remove.tooltip.text = i18n.t(
     'map.drawTools.edit.handlers.remove.tooltip.text',
-    'Click on a feature to remove.'
+    'Click on a feature to remove.',
   );
 
   L.drawLocal.draw.toolbar.actions.title = i18n.t(
     'map.drawTools.draw.toolbar.actions.title',
-    'Cancel drawing'
+    'Cancel drawing',
   );
   L.drawLocal.draw.toolbar.actions.text = i18n.t(
     'map.drawTools.draw.toolbar.actions.text',
-    'Cancel'
+    'Cancel',
   );
   L.drawLocal.draw.toolbar.finish.title = i18n.t(
     'map.drawTools.draw.toolbar.finish.title',
-    'Finish drawing'
+    'Finish drawing',
   );
   L.drawLocal.draw.toolbar.finish.text = i18n.t(
     'map.drawTools.draw.toolbar.finish.text',
-    'Finish'
+    'Finish',
   );
   L.drawLocal.draw.toolbar.undo.title = i18n.t(
     'map.drawTools.draw.toolbar.undo.title',
-    'Delete the last point drawn'
+    'Delete the last point drawn',
   );
   L.drawLocal.draw.toolbar.undo.text = i18n.t(
     'map.drawTools.draw.toolbar.undo.text',
-    'Delete last point'
+    'Delete last point',
   );
 
   L.drawLocal.edit.toolbar.actions.save.title = i18n.t(
     'map.drawTools.edit.toolbar.actions.save.title',
-    'Save changes'
+    'Save changes',
   );
   L.drawLocal.edit.toolbar.actions.save.text = i18n.t(
     'map.drawTools.edit.toolbar.actions.save.text',
-    'Save'
+    'Save',
   );
   L.drawLocal.edit.toolbar.actions.cancel.title = i18n.t(
     'map.drawTools.edit.toolbar.actions.cancel.title',
-    'Cancel editing, discards all changes'
+    'Cancel editing, discards all changes',
   );
   L.drawLocal.edit.toolbar.actions.cancel.text = i18n.t(
     'map.drawTools.edit.toolbar.actions.cancel.text',
-    'Cancel'
+    'Cancel',
   );
   L.drawLocal.edit.toolbar.actions.clearAll.title = i18n.t(
     'map.drawTools.edit.toolbar.actions.clearAll.title',
-    'Clear all layers'
+    'Clear all layers',
   );
   L.drawLocal.edit.toolbar.actions.clearAll.text = i18n.t(
     'map.drawTools.edit.toolbar.actions.clearAll.text',
-    'Clear All'
+    'Clear All',
   );
 
   L.drawLocal.draw.toolbar.buttons.polyline = i18n.t(
     'map.drawTools.draw.toolbar.buttons.polyline',
-    'Draw a polyline'
+    'Draw a polyline',
   );
   L.drawLocal.draw.toolbar.buttons.polygon = i18n.t(
     'map.drawTools.draw.toolbar.buttons.polygon',
-    'Draw a polygon'
+    'Draw a polygon',
   );
   L.drawLocal.draw.toolbar.buttons.rectangle = i18n.t(
     'map.drawTools.draw.toolbar.buttons.rectangle',
-    'Draw a rectangle'
+    'Draw a rectangle',
   );
   L.drawLocal.draw.toolbar.buttons.circle = i18n.t(
     'map.drawTools.draw.toolbar.buttons.circle',
-    'Draw a circle'
+    'Draw a circle',
   );
   L.drawLocal.edit.toolbar.buttons.edit = i18n.t(
     'map.drawTools.edit.toolbar.buttons.edit',
-    'Edit layers'
+    'Edit layers',
   );
   L.drawLocal.edit.toolbar.buttons.editDisabled = i18n.t(
     'map.drawTools.edit.toolbar.buttons.editDisabled',
-    'No layers to edit'
+    'No layers to edit',
   );
   L.drawLocal.edit.toolbar.buttons.remove = i18n.t(
     'map.drawTools.edit.toolbar.buttons.remove',
-    'Delete layers'
+    'Delete layers',
   );
   L.drawLocal.edit.toolbar.buttons.removeDisabled = i18n.t(
     'map.drawTools.edit.toolbar.buttons.removeDisabled',
-    'No layers to delete'
+    'No layers to delete',
   );
 };
 

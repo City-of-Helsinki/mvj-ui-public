@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Col, Container, Row } from 'react-grid-system';
 import { Trans, useTranslation } from 'react-i18next';
@@ -72,8 +72,9 @@ const FavouritesPage = (props: Props): JSX.Element => {
 
     setPlotSearch(
       props.plotSearches.filter(
-        (plotSearch) => plotSearch.id === props.favourite.targets[0].plot_search
-      )[0]
+        (plotSearch) =>
+          plotSearch.id === props.favourite.targets[0].plot_search,
+      )[0],
     );
   }, [props.favourite]);
 
@@ -91,7 +92,7 @@ const FavouritesPage = (props: Props): JSX.Element => {
               <h1>
                 {t(
                   'favouritesPage.title',
-                  'You are applying for the following plot searches'
+                  'You are applying for the following plot searches',
                 )}
               </h1>
             )}
@@ -128,7 +129,7 @@ const FavouritesPage = (props: Props): JSX.Element => {
                     position="inline"
                     label={t(
                       'favouritesPage.notification.title',
-                      'Do you want to search for more targets?'
+                      'Do you want to search for more targets?',
                     )}
                   >
                     <Trans i18nKey="favouritesPage.notification.body">
@@ -141,7 +142,7 @@ const FavouritesPage = (props: Props): JSX.Element => {
                       <Link href={props.searchPageLink} size="M">
                         {t(
                           'favouritesPage.notification.link',
-                          'Return to plot search page'
+                          'Return to plot search page',
                         )}
                       </Link>
                     </p>

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, initialize } from 'redux-form';
 
@@ -12,10 +12,16 @@ import {
   resetLastApplicationSubmissionError,
 } from './actions';
 import ScrollToTop from '../common/ScrollToTop';
+import {
+  shouldApplicationFormValidate,
+  validateApplicationForm,
+} from './validations';
+import { getPlotSearchFromFavourites } from '../favourites/helpers';
 
 interface State {
   formTemplate: ApplicationFormRoot;
   plotSearches: Array<PlotSearch>;
+  relevantPlotSearch: PlotSearch | null;
 }
 
 interface Props {
@@ -25,6 +31,7 @@ interface Props {
   fetchPlotSearches: () => void;
   fetchFormAttributes: () => void;
   resetLastApplicationSubmissionError: () => void;
+  relevantPlotSearch: PlotSearch | null;
 }
 
 const ApplicationRootPage = ({
@@ -58,15 +65,20 @@ export default connect(
   (state: RootState): State => ({
     formTemplate: getInitialApplicationForm(state),
     plotSearches: state.plotSearch.plotSearches,
+    relevantPlotSearch: getPlotSearchFromFavourites(state),
   }),
   {
     initializeForm: initialize,
     fetchPlotSearches,
     fetchFormAttributes,
     resetLastApplicationSubmissionError,
-  }
+  },
 )(
   reduxForm<unknown, PropsWithChildren<Props>>({
     form: APPLICATION_FORM_NAME,
-  })(ApplicationRootPage)
+    shouldError: (...args) =>
+      shouldApplicationFormValidate<unknown, Props>(...args),
+    validate: (values, props) =>
+      validateApplicationForm('')(values, props.relevantPlotSearch?.form),
+  })(ApplicationRootPage),
 );

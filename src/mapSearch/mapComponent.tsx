@@ -1,4 +1,3 @@
-import React from 'react';
 import { MapContainer } from 'react-leaflet';
 import 'proj4leaflet';
 
@@ -18,6 +17,7 @@ import { Favourite } from '../favourites/types';
 import { StandardMapLayersControl } from '../map/StandardMapLayersControl';
 import { MapLayer } from '../map/types';
 import ZoomControl from '../map/ZoomControl';
+import MapReadyHandler from '../map/MapReadyHandler';
 
 interface Props {
   plotSearches: Array<PlotSearch>;
@@ -40,7 +40,7 @@ const MapComponent = (props: Props): JSX.Element => {
   const plotSearchesByCategory = props.categoryOptions.map((category) => ({
     category,
     plotSearches: props.plotSearches?.filter(
-      (plotSearch) => plotSearch.type?.id === category.id
+      (plotSearch) => plotSearch.type?.id === category.id,
     ),
   }));
 
@@ -56,8 +56,8 @@ const MapComponent = (props: Props): JSX.Element => {
       maxZoom={12}
       crs={CRS}
       zoomControl={false}
-      whenCreated={attachMapResizeObserver}
     >
+      <MapReadyHandler whenCreated={attachMapResizeObserver} />
       <StandardMapLayersControl
         enabledLayers={[
           MapLayer.generalMap,
@@ -89,7 +89,7 @@ const MapComponent = (props: Props): JSX.Element => {
                 />
               );
             }
-          })
+          }),
       )}
     </MapContainer>
   );

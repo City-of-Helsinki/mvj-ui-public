@@ -1,6 +1,11 @@
 .GlobalNotificationContainer {
   &__notification {
-    margin-top: $spacing-5-xl;
+    position: absolute;
+    margin-top: $spacing-layout-2-xl + $spacing-m;
+
+    &--fixed {
+      position: fixed;
+    }
   }
 
   &__notification-icon {

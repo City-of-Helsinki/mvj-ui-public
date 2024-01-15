@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Accordion, Notification } from 'hds-react';
 import { connect } from 'react-redux';
 import { RootState } from '../root/rootReducer';
@@ -51,7 +51,7 @@ const FaqAccordion = ({
                 <Notification type="error">
                   {t(
                     'faq.notification.error',
-                    'Something went wrong while fetching frequently asked questions.'
+                    'Something went wrong while fetching frequently asked questions.',
                   )}
                 </Notification>
               ) : (

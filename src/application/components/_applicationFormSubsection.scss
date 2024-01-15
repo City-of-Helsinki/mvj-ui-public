@@ -41,7 +41,7 @@
     .ApplicationFormSubsectionFieldArray__remove-button {
       position: absolute;
       right: $spacing-m;
-      top: $spacing-m + ($lineheight-l - $lineheight-s) / 2;
+      top: $spacing-m + calc(($lineheight-l - $lineheight-s) / 2);
     }
   }
 

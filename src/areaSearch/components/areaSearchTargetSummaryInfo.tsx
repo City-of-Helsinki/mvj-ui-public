@@ -1,5 +1,5 @@
 import { Button, IconArrowDown, IconArrowUp } from 'hds-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Info } from '../../favouritesPage/utils';
 
@@ -59,11 +59,11 @@ const AreaSearchTargetSummaryInfo = ({ infoCols }: Props): JSX.Element => {
         {isFullDesc
           ? t(
               'areaSearch.targetCard.showFullDesc.hide',
-              'Hide additional details'
+              'Hide additional details',
             )
           : t(
               'areaSearch.targetCard.showFullDesc.show',
-              'Show additional details'
+              'Show additional details',
             )}
       </Button>
     </div>

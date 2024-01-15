@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { PlotSearchTarget } from '../plotSearch/types';
 
@@ -12,7 +11,7 @@ const InfoLinks = (props: Props): JSX.Element | null => {
   const { i18n } = useTranslation();
   const currentLanguageInfoLinks = target.target_plan.info_links
     ? target.target_plan.info_links.filter(
-        (link) => link.language === i18n.language
+        (link) => link.language === i18n.language,
       )
     : [];
 

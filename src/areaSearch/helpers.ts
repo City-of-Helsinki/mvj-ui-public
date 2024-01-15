@@ -27,7 +27,7 @@ import {
 
 export const selectAttachmentIds = (state: RootState): Array<number> => {
   return state.areaSearch.areaSearchAttachments.map(
-    (attachment) => attachment.id as number
+    (attachment) => attachment.id as number,
   );
 };
 
@@ -53,10 +53,10 @@ export const initializeAreaSearchForm = (): AreaSearchFormRoot => {
 };
 
 export const prepareAreaSearchSubmission = (
-  files: Array<number> | Array<File>
+  files: Array<number> | Array<File>,
 ): AreaSearchSubmission => {
   const formData = getFormValues(AREA_SEARCH_FORM_NAME)(
-    store.getState()
+    store.getState(),
   ) as AreaSearchFormRoot;
   const { intended_use_category, intended_use, end_date, ...rest } =
     formData.search;
@@ -71,7 +71,7 @@ export const prepareAreaSearchSubmission = (
 };
 
 export const prepareAreaSearchApplicationForSubmission = (
-  formName: string
+  formName: string,
 ): AreaSearchApplicationSubmission => {
   const state: RootState = store.getState();
   const sections = formValueSelector(formName)(state, 'form.sections');
@@ -83,7 +83,7 @@ export const prepareAreaSearchApplicationForSubmission = (
   }
 
   const attachMeta = (
-    rootLevelSections: ApplicationFormSections
+    rootLevelSections: ApplicationFormSections,
   ): ApplicationFormSections => {
     return Object.keys(rootLevelSections).reduce((acc, sectionName) => {
       const section = rootLevelSections[sectionName];
@@ -121,7 +121,7 @@ export const prepareAreaSearchApplicationForSubmission = (
                   },
                 };
               },
-              {} as ApplicationFormSections
+              {} as ApplicationFormSections,
             );
 
             const identifiers = APPLICANT_MAIN_IDENTIFIERS[applicantType];
@@ -162,7 +162,7 @@ export const prepareAreaSearchApplicationForSubmission = (
   };
 
   const purgeUIFields = (
-    section: ApplicationFormSections
+    section: ApplicationFormSections,
   ): ApplicationFormSections => {
     return Object.keys(section).reduce((acc, sectionName) => {
       const subsection = section[sectionName];
@@ -173,7 +173,7 @@ export const prepareAreaSearchApplicationForSubmission = (
           ({ sections, sectionRestrictions, ...rest }) => ({
             sections: purgeUIFields(sections),
             ...rest,
-          })
+          }),
         );
       } else {
         const { sections, sectionRestrictions, ...rest } = subsection;
@@ -200,7 +200,7 @@ export const prepareAreaSearchApplicationForSubmission = (
 };
 
 export const getInitialAreaSearchApplicationForm = (
-  state: RootState
+  state: RootState,
 ): ApplicationFormRoot => {
   const areaSearch = state.areaSearch.lastSubmission;
   const root: ApplicationFormRoot = {
@@ -219,7 +219,7 @@ export const getInitialAreaSearchApplicationForm = (
 
   const buildSection = (
     section: FormSection,
-    parent: ApplicationFormSections = root.sections
+    parent: ApplicationFormSections = root.sections,
   ): void => {
     if (!section.visible) {
       return;
@@ -245,7 +245,7 @@ export const getInitialAreaSearchApplicationForm = (
       });
     }
     section.subsections.forEach((subsection) =>
-      buildSection(subsection, workingItem.sections)
+      buildSection(subsection, workingItem.sections),
     );
     section.fields.forEach((field) => buildField(field, workingItem.fields));
 
@@ -268,7 +268,7 @@ export const getInitialAreaSearchApplicationForm = (
 
   const buildField = (
     field: FormField,
-    parent: ApplicationFormFields
+    parent: ApplicationFormFields,
   ): void => {
     if (!field.enabled) {
       return;
@@ -324,9 +324,9 @@ export const getInitialAreaSearchApplicationForm = (
 };
 
 export const generateAttachmentLink = (
-  attachment: AreaSearchAttachment
+  attachment: AreaSearchAttachment,
 ): string => {
-  return `${process.env.REACT_APP_API_URL || ''}/area_search_attachment/${
+  return `${import.meta.env.REACT_APP_API_URL || ''}/area_search_attachment/${
     attachment.id
   }/download`;
 };

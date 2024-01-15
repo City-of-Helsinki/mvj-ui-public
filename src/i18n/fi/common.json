@@ -24,6 +24,9 @@
         "noApplicantIdentifierFound": "Yhden tai useamman hakijan tunnistetieto puuttuu. Ole hyvä ja varmista, että henkilöhakijoiden henkilötunnukset ja yrityshakijoiden Y-tunnukset on täytetty.",
         "noApplicantTypeSet": "Yhden tai useamman hakijan tyyppi on valitsematta. Ole hyvä ja tarkista, että kaikki tarvittavat hakijoiden tiedot on täytetty.",
         "unknown": "Lähetyksen valmistelu ei onnistunut tuntemattomasta syystä. Ole hyvä ja yritä myöhemmin uudelleen."
+      },
+      "summary": {
+        "header": "Tarkistathan seuraavien kenttien arvot ennen jatkamista."
       }
     },
     "fileUpload": {
@@ -211,6 +214,14 @@
       }
     }
   },
+  "components": {
+    "form": {
+      "fractionalFieldset": {
+        "denominator": "Nimittäjä",
+        "numerator": "Osoittaja"
+      }
+    }
+  },
   "directReservation": {
     "buttons": {
       "login": "Kirjaudu sisään"
@@ -285,7 +296,10 @@
       "holder": "Copyright",
       "text": "All rights reserved"
     },
-    "text": ""
+    "logo": {
+      "alt": "Helsinki logo"
+    },
+    "text": "Footer lorem ipsum"
   },
   "frontPage": {
     "areaSearch": {
@@ -295,6 +309,7 @@
     },
     "bannerText": "Helsingin kaupungin tonttien, maan, tilojen ja lorem ipsum vuokraus",
     "contentHeader": "Miten voimme auttaa vuokraustarpeissasi?",
+    "label": "Front page",
     "otherCompetitionsAndSearches": {
       "counter_one": "Muut kilpailut ja haut: {{count}} kpl",
       "counter_other": "Muut kilpailut ja haut: {{count}} kpl",
@@ -314,6 +329,20 @@
     "notification": {
       "close": "Sulje"
     }
+  },
+  "header": {
+    "actions": {
+      "favourites": {
+        "title": "Suosikit"
+      },
+      "userManagement": {
+        "logIn": "Kirjaudu sisään",
+        "logOut": "Kirjaudu ulos"
+      }
+    }
+  },
+  "language": {
+    "languageSelection": "Kielivalinta"
   },
   "loader": {
     "loading": "Sisältöä ladataan, odota hetki..."
@@ -459,8 +488,8 @@
       "sidebar": {
         "addToApplication": "Lisää hakemukselle",
         "legend": {
-          "arrow": "= lisää hakemukselle",
-          "star": "= lisätietoja"
+          "arrow": "= lisätietoja",
+          "star": "= lisää hakemukselle"
         },
         "navigateToTarget": "Avaa tämän kohteen tiedot",
         "notification": {
@@ -514,9 +543,6 @@
     }
   },
   "topNavigation": {
-    "menuLabel": "Valikko",
-    "signIn": "Kirjaudu sisään",
-    "signOut": "Kirjaudu ulos",
     "skipToContent": "Siirry sisältöön",
     "tabs": {
       "areaSearch": "Aluehaku",
@@ -526,11 +552,24 @@
   },
   "validation": {
     "errors": {
+      "companyIdentifier": {
+        "checkNumber": "Tarkistusmerkki ei täsmää.",
+        "generic": "Virheellinen Y-tunnus."
+      },
+      "controlShare": {
+        "generic": "Virheellinen hallintaosuus.",
+        "invalidSum": "Hakijoiden hallintaosuuksien yhteenlasketun määrän on oltava 100 %."
+      },
       "dateAfter": "Aikaisin sallittu päivämäärä on {{date}}.",
       "dateBefore": "Myöhäisin sallittu päivämäärä on {{date}}.",
+      "email": "Virheellinen sähköpostiosoite.",
       "greaterThan": "Arvon on oltava suurempi kuin {{number}}.",
       "lessThan": "Arvon on oltava pienempi kuin {{number}}.",
       "nonEmptyGeometry": "Aluetta ei ole vielä valittu.",
+      "personalIdentifier": {
+        "checkChar": "Tarkistusmerkki ei täsmää.",
+        "generic": "Virheellinen henkilötunnus."
+      },
       "requiredArray": "Valitse vähintään yksi vaihtoehto.",
       "requiredValue": "Tämä tieto on pakollinen."
     }
