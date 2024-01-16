@@ -142,9 +142,15 @@
         },
         "heading": "Other land uses",
         "misc": {
-          "blurb": "For example city farming, dog training fields, bee farming, other land use and leasing, hunting licenses, kindergarten outdoor areas, water area leasing.",
           "label": "Other land use arrangements",
-          "link": "https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas"
+          "dogs": {
+            "blurb": "",
+            "link": "https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas"
+          },
+          "gardening": {
+            "blurb": "",
+            "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden"
+          }
         },
         "otherConstruction": {
           "blurb": "You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.",

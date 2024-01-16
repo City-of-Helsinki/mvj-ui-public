@@ -142,9 +142,15 @@
         },
         "heading": "",
         "misc": {
-          "blurb": "",
           "label": "",
-          "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden"
+          "dogs": {
+            "blurb": "",
+            "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden"
+          },
+          "gardening": {
+            "blurb": "",
+            "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden"
+          }
         },
         "otherConstruction": {
           "blurb": "",
