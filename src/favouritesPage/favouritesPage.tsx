@@ -14,12 +14,13 @@ import FavouriteCard from './components/favouriteCard';
 import { PlotSearch } from '../plotSearch/types';
 import { fetchPlotSearches } from '../plotSearch/actions';
 import BlockLoader from '../loader/blockLoader';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import { getIsLoadingUser, getUser } from '../auth/selectors';
 import { openLoginModal } from '../login/actions';
 import { getPageForCurrentPlotSearch } from '../plotSearch/helpers';
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
+import { AppRoutes } from '../application/helpers';
 
 interface State {
   favourite: Favourite;

@@ -305,7 +305,27 @@
     "logo": {
       "alt": ""
     },
-    "text": ""
+    "text": "",
+    "customerService": "",
+    "some": {
+      "facebook": "",
+      "twitter": "",
+      "instagram": "",
+      "linkedin": ""
+    },
+    "moveToTop": "",
+    "accessabilityStatement": {
+      "label": "",
+      "url": ""
+    },
+    "dataProtection": {
+      "label": "",
+      "url": ""
+    },
+    "registerStatement": {
+      "label": "",
+      "url": ""
+    }
   },
   "frontPage": {
     "areaSearch": {

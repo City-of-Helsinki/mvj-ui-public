@@ -9,10 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { PlotSearchTarget } from '../../plotSearch/types';
 import { attachMapResizeObserver, getTargetCentroid } from '../../map/utils';
 import { initializeHelsinkiMap } from '../../map/utils';
-import { AppRoutes, getRouteById } from '../../root/routes';
+import { getRouteById } from '../../root/routes';
 import { StandardMapLayer } from '../../map/StandardMapLayersControl';
 import { MapLayer, MapLayers } from '../../map/types';
 import MapReadyHandler from '../../map/MapReadyHandler';
+import { AppRoutes } from '../../application/helpers';
 
 interface Props {
   target: PlotSearchTarget;

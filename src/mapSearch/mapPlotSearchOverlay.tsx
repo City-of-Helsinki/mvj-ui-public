@@ -8,7 +8,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import MapSymbol from './mapSymbol';
 import { FavouriteTarget } from '../favourites/types';
 import { useNavigate } from 'react-router';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
+import { AppRoutes } from '../application/helpers';
 
 interface Props {
   plotSearchTargets: PlotSearchTarget[];

@@ -299,13 +299,33 @@
   },
   "footer": {
     "copyright": {
-      "holder": "Copyright",
-      "text": "All rights reserved"
+      "holder": "Helsingin kaupunki",
+      "text": ""
     },
     "logo": {
       "alt": "Helsinki logo"
     },
-    "text": "Footer lorem ipsum"
+    "text": "Tonttihaku",
+    "customerService": "Kaupunkiympäristön asiakaspalvelu",
+    "some": {
+      "facebook": "Helsingin kaupunki Facebookissa",
+      "twitter": "Helsingin kaupunki X:ssä",
+      "instagram": "Helsingin kaupunki Instagramissa",
+      "linkedin": "Helsingin kaupunki LinkedInissä"
+    },
+    "moveToTop": "Siirry ylös",
+    "accessabilityStatement": {
+      "label": "Saavutettavuusseloste",
+      "url": "https://www.hel.fi/saavutettavuus"
+    },
+    "dataProtection": {
+      "label": "Tietosuoja",
+      "url": "https://www.hel.fi/fi/paatoksenteko-ja-hallinto/tietoa-helsingista/tietosuoja-ja-tiedonhallinta/tietosuoja"
+    },
+    "registerStatement": {
+      "label": "Rekisteriseloste",
+      "url": "#"
+    }
   },
   "frontPage": {
     "areaSearch": {

@@ -11,8 +11,9 @@ import { getPageTitle } from '../root/helpers';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import { generateFavourite } from './actions';
 import { RootState } from '../root/rootReducer';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import BlockLoader from '../loader/blockLoader';
+import { AppRoutes } from '../application/helpers';
 
 interface State {
   isGeneratingFavourite: boolean;

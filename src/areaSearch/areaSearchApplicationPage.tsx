@@ -16,8 +16,9 @@ import { RootState } from '../root/rootReducer';
 import { AreaSearch, AREA_SEARCH_FORM_NAME } from './types';
 import AreaSearchTargetSummary from './components/areaSearchTargetSummary';
 import ApplicationForm from './components/applicationForm';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import ApplicationErrorsSummary from '../application/components/ApplicationErrorsSummary';
+import { AppRoutes } from '../application/helpers';
 
 interface State {
   lastSubmission: AreaSearch | null;

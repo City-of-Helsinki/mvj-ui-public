@@ -1,6 +1,7 @@
 import { createUserManager } from 'redux-oidc';
 import { WebStorageStateStore } from 'oidc-client';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
+import { AppRoutes } from '../application/helpers';
 
 const settings = {
   authority:
