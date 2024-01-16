@@ -45,7 +45,7 @@ interface TopNavigationLinkProps {
   className?: string;
 }
 
-export const NaviLinks: TopNavigationLinkProps[] = [
+export const naviLinks: TopNavigationLinkProps[] = [
   {
     to: AppRoutes.PLOT_SEARCH_AND_COMPETITIONS,
     label: 'topNavigation.tabs.plotSearchAndCompetitions',
@@ -179,7 +179,7 @@ const TopNavigation = ({
         />
       </Header.ActionBar>
       <Header.NavigationMenu>
-        {NaviLinks.map((link) => (
+        {naviLinks.map((link) => (
           <TopNavigationLink
             key={getRouteById(link.to)}
             to={getRouteById(link.to)}

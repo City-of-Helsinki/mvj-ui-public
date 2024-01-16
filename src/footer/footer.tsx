@@ -8,7 +8,7 @@ import {
   IconLinkedin,
 } from 'hds-react';
 import { useTranslation } from 'react-i18next';
-import { NaviLinks } from '../topNavigation/topNavigation';
+import { naviLinks } from '../topNavigation/topNavigation';
 import { getRouteById } from '../root/routes';
 
 const FooterComponent = (): JSX.Element => {
@@ -21,7 +21,7 @@ const FooterComponent = (): JSX.Element => {
       className="Footer"
     >
       <Footer.Navigation>
-        {NaviLinks.map((link) => (
+        {naviLinks.map((link) => (
           <Footer.Link
             key={getRouteById(link.to)}
             href={getRouteById(link.to)}
