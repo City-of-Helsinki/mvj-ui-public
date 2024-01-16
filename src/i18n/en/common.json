@@ -299,7 +299,27 @@
     "logo": {
       "alt": "Helsinki logo"
     },
-    "text": "Footer lorem ipsum"
+    "text": "Plot search",
+    "customerService": "Urban Environment Customer Service",
+    "some": {
+      "facebook": "City of Helsinki on Facebook",
+      "twitter": "City of Helsinki on X",
+      "instagram": "City of Helsinki on Instagram",
+      "linkedin": "City of Helsinki on LinkedIn"
+    },
+    "moveToTop": "Move to top",
+    "accessabilityStatement": {
+      "label": "Accessability statement",
+      "url": "https://www.hel.fi/saavutettavuus"
+    },
+    "dataProtection": {
+      "label": "Data protection",
+      "url": "https://www.hel.fi/fi/paatoksenteko-ja-hallinto/tietoa-helsingista/tietosuoja-ja-tiedonhallinta/tietosuoja"
+    },
+    "registerStatement": {
+      "label": "Register statement",
+      "url": "#"
+    }
   },
   "frontPage": {
     "areaSearch": {

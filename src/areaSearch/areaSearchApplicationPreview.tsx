@@ -26,8 +26,8 @@ import {
 } from './types';
 import { submitAreaSearchApplication } from './actions';
 import ApplicationPreviewSubsection from '../application/components/applicationPreviewSubsection';
-import { AppRoutes, getRouteById } from '../root/routes';
-import { getClientErrorMessage } from '../application/helpers';
+import { getRouteById } from '../root/routes';
+import { AppRoutes, getClientErrorMessage } from '../application/helpers';
 import { prepareAreaSearchApplicationForSubmission } from './helpers';
 
 interface State {

@@ -1,4 +1,4 @@
-import { AppRoutes } from '../root/routes';
+import { AppRoutes } from '../application/helpers';
 
 const REDIRECT_URL_KEY = 'redirectURL';
 

@@ -22,9 +22,10 @@ import {
   PlotSearchType,
 } from '../plotSearch/types';
 import { Favourite } from '../favourites/types';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
+import { AppRoutes } from '../application/helpers';
 
 interface State {
   isFetchingPlotSearches: boolean;

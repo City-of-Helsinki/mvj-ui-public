@@ -1,5 +1,15 @@
-import { Footer, Logo, logoFi } from 'hds-react';
+import {
+  Footer,
+  Logo,
+  logoFiDark,
+  IconFacebook,
+  IconTwitter,
+  IconInstagram,
+  IconLinkedin,
+} from 'hds-react';
 import { useTranslation } from 'react-i18next';
+import { naviLinks } from '../topNavigation/topNavigation';
+import { getRouteById } from '../root/routes';
 
 const FooterComponent = (): JSX.Element => {
   const { t } = useTranslation();
@@ -7,19 +17,86 @@ const FooterComponent = (): JSX.Element => {
   return (
     <Footer
       title={t('footer.text', 'Footer lorem ipsum')}
-      theme={{
-        '--footer-background': 'var(--color-gold)',
-        '--footer-color': 'var(--color-white)',
-        '--footer-divider-color': 'var(--color-white)',
-        '--footer-focus-outline-color': 'var(--color-white)',
-      }}
+      theme="dark"
       className="Footer"
     >
+      <Footer.Navigation>
+        {naviLinks.map((link) => (
+          <Footer.Link
+            key={getRouteById(link.to)}
+            href={getRouteById(link.to)}
+            label={t(link.label, link.default || '')}
+          />
+        ))}
+      </Footer.Navigation>
+      <Footer.Utilities
+        soMeLinks={[
+          <Footer.Link
+            href="https://facebook.com/helsinginkaupunki"
+            title={t(
+              'footer.some.facebook',
+              'Helsingin kaupungin Facebook-tili',
+            )}
+            icon={<IconFacebook />}
+          />,
+          <Footer.Link
+            href="https://twitter.com/helsinki"
+            title={t('footer.some.twitter', 'Helsingin kaupungin Twitter-tili')}
+            icon={<IconTwitter />}
+          />,
+          <Footer.Link
+            href="https://instagram.com/helsinki"
+            title={t(
+              'footer.some.instagram',
+              'Helsingin kaupungin Instagram-tili',
+            )}
+            icon={<IconInstagram />}
+          />,
+          <Footer.Link
+            href="https://www.linkedin.com/company/city-of-helsinki"
+            title={t(
+              'footer.some.linkedin',
+              'Helsingin kaupungin LinkedIn-tili',
+            )}
+            icon={<IconLinkedin />}
+          />,
+        ]}
+      >
+        {t('footer.customerService', 'Kaupunkiympäristön asiakaspalvelu')}
+      </Footer.Utilities>
       <Footer.Base
-        logo={<Logo src={logoFi} alt={t('footer.logo.alt', 'Helsinki logo')} />}
+        logo={
+          <Logo
+            src={logoFiDark}
+            size="medium"
+            alt={t('footer.logo.alt', 'Helsinki logo')}
+          />
+        }
         copyrightHolder={t('footer.copyright.holder', 'Copyright')}
-        copyrightText={t('footer.copyright.text', 'All rights reserved')}
-      />
+        backToTopLabel={t('footer.moveToTop', 'Siirry ylös')}
+      >
+        <Footer.Link
+          label={t(
+            'footer.accessabilityStatement.label',
+            'Saavutettavuusseloste',
+          )}
+          href={t(
+            'footer.accessabilityStatement.url',
+            'https://www.hel.fi/saavutettavuus',
+          )}
+        />
+        <Footer.Link
+          label={t('footer.dataProtection.label', 'Tietosuoja')}
+          href={t(
+            'footer.accessabilityStatement.url',
+            'https://www.hel.fi/fi/paatoksenteko-ja-hallinto/tietoa-helsingista/tietosuoja-ja-tiedonhallinta/tietosuoja',
+          )}
+        />
+        <Footer.Link
+          label={t('footer.registerStatement.label', 'Rekisteriseloste')}
+          href={t('footer.accessabilityStatement.url', '#')}
+        />
+      </Footer.Base>
     </Footer>
   );
 };

@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet';
 
 import { RootState } from '../root/rootReducer';
 import {
+  AppRoutes,
   getClientErrorMessage,
   prepareApplicationForSubmission,
 } from './helpers';
@@ -22,7 +23,7 @@ import {
   FieldTypeMapping,
   UploadedFileMeta,
 } from './types';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
 import { Favourite } from '../favourites/types';
 import { PlotSearch } from '../plotSearch/types';

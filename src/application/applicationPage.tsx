@@ -15,12 +15,13 @@ import BlockLoader from '../loader/blockLoader';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import { openLoginModal } from '../login/actions';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import ApplicationTargetList from './components/applicationTargetList';
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
 import { APPLICATION_FORM_NAME, TARGET_SECTION_IDENTIFIER } from './types';
 import ApplicationErrorsSummary from './components/ApplicationErrorsSummary';
+import { AppRoutes } from './helpers';
 
 interface State {
   relevantPlotSearch: PlotSearch | null;
@@ -70,7 +71,7 @@ const ApplicationPage = ({
 
   const hasTargetTab =
     relevantPlotSearch?.form?.sections.findIndex(
-      (section) => section.identifier === TARGET_SECTION_IDENTIFIER
+      (section) => section.identifier === TARGET_SECTION_IDENTIFIER,
     ) !== -1;
 
   const openPreview = () => {
@@ -190,7 +191,7 @@ const ApplicationPage = ({
                                     variant="primary"
                                     onClick={() => {
                                       const targetTab = document.getElementById(
-                                        'ApplicationForm-TargetsTabAnchor'
+                                        'ApplicationForm-TargetsTabAnchor',
                                       );
                                       if (!targetTab) {
                                         return;
@@ -266,7 +267,7 @@ export default connect(
     isPerformingFileOperation: state.application.isPerformingFileOperation,
     isTargetsPagePristine: isPristine(APPLICATION_FORM_NAME)(
       state,
-      `sections.${TARGET_SECTION_IDENTIFIER}`
+      `sections.${TARGET_SECTION_IDENTIFIER}`,
     ),
     isFormValid: isValid(APPLICATION_FORM_NAME)(state),
   }),

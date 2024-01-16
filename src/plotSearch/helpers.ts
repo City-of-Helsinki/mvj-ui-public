@@ -1,4 +1,4 @@
-import { AppRoutes, getRouteById } from '../root/routes';
+import { getRouteById } from '../root/routes';
 import { RootState } from '../root/rootReducer';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
 import {
@@ -13,9 +13,10 @@ import {
   PlotSearchTargetInfoLink,
 } from './types';
 import { ApiAttributeChoice, ApiAttributes } from '../api/types';
+import { AppRoutes } from '../application/helpers';
 
 export const getPageForCurrentPlotSearch = (
-  state: RootState
+  state: RootState,
 ): string | null => {
   const plotSearch = getPlotSearchFromFavourites(state);
 
@@ -30,7 +31,7 @@ export const getPageForCurrentPlotSearch = (
 };
 
 export const parseTargetPlanToCustomDetailedPlan = (
-  targetPlan: TargetPlan
+  targetPlan: TargetPlan,
 ): CustomDetailedPlan => {
   return {
     identifier: targetPlan.identifier || '',
@@ -55,7 +56,7 @@ export const parseTargetPlanToCustomDetailedPlan = (
 };
 
 export const parseTargetPlanKeyToCustomDetailedPlanKey = (
-  targetPlanKey: keyof TargetPlan
+  targetPlanKey: keyof TargetPlan,
 ): keyof CustomDetailedPlan => {
   const differingKeys = {
     plan_unit_intended_use: 'intended_use',
@@ -75,7 +76,7 @@ export const parseTargetPlanKeyToCustomDetailedPlanKey = (
 
 export const parseCustomDetailedPlanToTargetPlan = (
   customDetailedPlanId: number,
-  customDetailedPlan: CustomDetailedPlan
+  customDetailedPlan: CustomDetailedPlan,
 ): TargetPlan => {
   return {
     id: customDetailedPlanId,
@@ -113,7 +114,7 @@ export const parsePlanUnitToTargetPlan = (
   planUnitId: number,
   planUnit: PlanUnit,
   address: string,
-  infoLinks: Array<PlotSearchTargetInfoLink>
+  infoLinks: Array<PlotSearchTargetInfoLink>,
 ): TargetPlan => {
   return {
     id: planUnitId,
@@ -145,7 +146,7 @@ export const parsePlanUnitToTargetPlan = (
 };
 
 export const parseTargetPlan = (
-  targetToParse: PlotSearchTargetFromBackend
+  targetToParse: PlotSearchTargetFromBackend,
 ): PlotSearchTarget => {
   let targetPlan: TargetPlan;
   let targetPlanType: TargetPlanType;
@@ -157,7 +158,7 @@ export const parseTargetPlan = (
     const targetId = targetToParse.custom_detailed_plan_id;
     targetPlan = parseCustomDetailedPlanToTargetPlan(
       targetId,
-      targetToParse.custom_detailed_plan
+      targetToParse.custom_detailed_plan,
     );
     targetPlanType = TargetPlanType.CustomDetailedPlan;
   } else {
@@ -167,7 +168,7 @@ export const parseTargetPlan = (
       targetId as number,
       targetToParse.plan_unit as PlanUnit,
       targetToParse.lease_address.address,
-      targetToParse.info_links
+      targetToParse.info_links,
     );
     targetPlanType = TargetPlanType.PlanUnit;
   }
@@ -180,7 +181,7 @@ export const parseTargetPlan = (
 };
 
 export const parseTargetPlans = (
-  targetsToParse: Array<PlotSearchTargetFromBackend>
+  targetsToParse: Array<PlotSearchTargetFromBackend>,
 ): Array<PlotSearchTarget> => {
   const parsedTargets: Array<PlotSearchTarget> = [];
 
@@ -192,7 +193,7 @@ export const parseTargetPlans = (
 };
 
 export const parsePlotSearches = (
-  plotSearches: Array<PlotSearchFromBackend>
+  plotSearches: Array<PlotSearchFromBackend>,
 ): Array<PlotSearch> => {
   return plotSearches.map((plotSearch) => ({
     ...plotSearch,
@@ -203,13 +204,13 @@ export const parsePlotSearches = (
 export const getPlanUnitOptionTitle = (
   attributes: ApiAttributes,
   field: keyof PlanUnit,
-  planUnit: PlanUnit
+  planUnit: PlanUnit,
 ): string => {
   return (
     attributes.plot_search_targets?.child?.children?.plan_unit?.children?.[
       field
     ]?.choices?.find(
-      (choice: ApiAttributeChoice) => choice.value === planUnit[field]
+      (choice: ApiAttributeChoice) => choice.value === planUnit[field],
     )?.display_name || '???'
   );
 };
@@ -217,7 +218,7 @@ export const getPlanUnitOptionTitle = (
 export const getCustomDetailedPlanOptionTitle = (
   attributes: ApiAttributes,
   field: keyof CustomDetailedPlan,
-  customDetailedPlan: CustomDetailedPlan
+  customDetailedPlan: CustomDetailedPlan,
 ): string => {
   const value =
     field === 'intended_use' || field === 'state' || field === 'type'
@@ -235,19 +236,19 @@ export const getTargetPlanOptionTitle = (
   attributes: ApiAttributes,
   field: keyof TargetPlan,
   targetType: TargetPlanType,
-  targetPlan: TargetPlan
+  targetPlan: TargetPlan,
 ): string => {
   if (targetType === TargetPlanType.PlanUnit) {
     return getPlanUnitOptionTitle(
       attributes,
       field as keyof PlanUnit,
-      targetPlan as PlanUnit
+      targetPlan as PlanUnit,
     );
   }
 
   return getCustomDetailedPlanOptionTitle(
     attributes,
     parseTargetPlanKeyToCustomDetailedPlanKey(field),
-    parseTargetPlanToCustomDetailedPlan(targetPlan)
+    parseTargetPlanToCustomDetailedPlan(targetPlan),
   );
 };
