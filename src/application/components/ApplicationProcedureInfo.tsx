@@ -2,13 +2,13 @@ import { useRef, useState } from 'react';
 import { Button, Dialog, IconQuestionCircle } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 
-interface Props {
+interface ApplicationProcedureInfoProps {
   showOnlyContent?: boolean;
 }
 
 const ApplicationProcedureInfo = ({
   showOnlyContent = false,
-}: Props): JSX.Element => {
+}: ApplicationProcedureInfoProps): JSX.Element => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
