@@ -1,5 +1,16 @@
 .ApplicationProcedureInfo {
-  float: right;
+  [type='button'] {
+    padding: 0;
+    margin-left: -16px;
+
+    svg {
+      color: $color-black;
+    }
+  }
+
+  span {
+    text-decoration: underline;
+  }
 }
 
 .ApplicationProcedureInfo__popup {
@@ -31,4 +42,16 @@
       }
     }
   }
+}
+
+.ApplicationProcedureInfo__content-only {
+  padding-top: 0.5em;
+
+  .ApplicationProcedureInfo__popup {
+    padding-top: 0.5em;
+  }
+}
+
+#dialog-target-ref div {
+  z-index: 2100;
 }

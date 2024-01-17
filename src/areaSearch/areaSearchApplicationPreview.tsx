@@ -29,6 +29,7 @@ import ApplicationPreviewSubsection from '../application/components/applicationP
 import { getRouteById } from '../root/routes';
 import { AppRoutes, getClientErrorMessage } from '../application/helpers';
 import { prepareAreaSearchApplicationForSubmission } from './helpers';
+import ApplicationProcedureInfo from '../application/components/ApplicationProcedureInfo';
 
 interface State {
   lastSubmission: AreaSearch | null;
@@ -91,12 +92,17 @@ const AreaSearchApplicationPreview = ({
             </title>
           </Helmet>
           <Container>
-            <h1>
-              {t(
-                'areaSearch.application.preview.heading',
-                'Area search application preview',
-              )}
-            </h1>
+            <div className="title-container">
+              <div className="procedure-info">
+                <ApplicationProcedureInfo />
+              </div>
+              <h1>
+                {t(
+                  'areaSearch.application.preview.heading',
+                  'Area search application preview',
+                )}
+              </h1>
+            </div>
 
             <AreaSearchTargetSummary />
 

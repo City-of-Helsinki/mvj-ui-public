@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
+import ApplicationProcedureInfo from '../application/components/ApplicationProcedureInfo';
 
 const AreaSearchApplicationSuccessPage = (): JSX.Element => {
   const { t } = useTranslation();
@@ -22,6 +23,7 @@ const AreaSearchApplicationSuccessPage = (): JSX.Element => {
         <p>
           {t('application.success.body', 'Your application has been received.')}
         </p>
+        <ApplicationProcedureInfo showOnlyContent={true} />
       </Container>
     </MainContentElement>
   );
