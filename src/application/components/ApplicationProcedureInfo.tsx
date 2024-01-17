@@ -85,7 +85,7 @@ const ApplicationProcedureInfo = ({
               'Close',
             )}
             focusAfterCloseRef={openInfoDialogButtonRef}
-            targetElement={dialogTargetRef.current}
+            targetElement={dialogTargetRef.current || undefined}
           >
             <Dialog.Header
               id="ApplicationProcedureInfoPopup_Header"
