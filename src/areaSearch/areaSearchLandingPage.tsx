@@ -18,6 +18,7 @@ import OutdoorEventImage from '../assets/images/areaSearch/outdoorEvent.svg?reac
 import CommercialUsesImage from '../assets/images/areaSearch/commercialUses.svg?react';
 import MiscUsesImage from '../assets/images/areaSearch/misc.svg?react';
 import { AppRoutes } from '../application/helpers';
+import ApplicationProcedureInfo from '../application/components/ApplicationProcedureInfo';
 
 const AreaSearchLandingPage = (): JSX.Element => {
   const { t } = useTranslation();
@@ -51,6 +52,7 @@ const AreaSearchLandingPage = (): JSX.Element => {
             'The City of Helsinki offers vacant land or water areas for rent for various types of activities (e.g. for placing masts, agricultural uses, additional courtyards, sand silos, collection boxes or exercising parks).',
           )}
         </p>
+        <ApplicationProcedureInfo />
         <h2>
           {t('areaSearch.landingPage.areaSearches.heading', 'Area search')}
         </h2>
