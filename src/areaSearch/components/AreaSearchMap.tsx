@@ -91,6 +91,7 @@ const AreaSearchMap = ({
           <DrawTools
             onChange={updateFieldValue}
             featureGroup={featureGroupRef}
+            value={value}
           />
         </FeatureGroup>
       </MapContainer>

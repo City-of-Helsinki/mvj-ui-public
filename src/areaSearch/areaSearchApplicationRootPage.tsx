@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initialize, reduxForm, InjectedFormProps } from 'redux-form';
 
@@ -6,44 +6,178 @@ import { fetchFormAttributes } from '../application/actions';
 import { AreaSearch, AREA_SEARCH_FORM_NAME } from './types';
 import { initializeAreaSearchForm } from './helpers';
 import { RootState } from '../root/rootReducer';
-import ScrollToTop from '../common/ScrollToTop';
 import {
   shouldApplicationFormValidate,
   validateApplicationForm,
 } from '../application/validations';
+import { Button, StepState, Stepper } from 'hds-react';
+import AreaSearchSpecsPage from './areaSearchSpecsPage';
+import AreaSearchApplicationPage from './areaSearchApplicationPage';
+import AreaSearchApplicationPreview from './areaSearchApplicationPreview';
+import AreaSearchApplicationSuccessPage from './areaSearchApplicationSuccessPage';
+import MainContentElement from '../a11y/MainContentElement';
+import { Helmet } from 'react-helmet';
+import { getPageTitle } from '../root/helpers';
+import { t } from 'i18next';
+import { Container } from 'react-grid-system';
+import AuthDependentContent from '../auth/components/authDependentContent';
+import { openLoginModal } from '../login/actions';
+import ScrollToTop from '../common/ScrollToTop';
 
 interface State {
   areaSearchForm: null;
   lastSubmission: AreaSearch | null;
 }
 
-export interface Props {
-  lastSubmission: AreaSearch | null;
+interface Step {
+  label: string;
+  state: number;
+}
+
+export interface Props extends State {
+  openLoginModal: () => void;
   initializeForm: typeof initialize;
   fetchFormAttributes: () => void;
-  children: (props: InjectedFormProps<unknown, Props>) => JSX.Element;
 }
 
 const AreaSearchApplicationRootPage = ({
-  lastSubmission,
-  children,
+  openLoginModal,
   initializeForm,
   fetchFormAttributes,
-  ...rest
+  valid,
 }: Props & InjectedFormProps<unknown, Props>): JSX.Element => {
+  const [currentStep, setCurrentStep] = useState<number>(0);
+
+  const setNextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const setPreviousStep = () => {
+    setCurrentStep(currentStep - 1);
+  };
+
+  const [steps, setSteps] = useState<Step[]>([
+    {
+      label: 'Alueen valinta',
+      state: StepState.available,
+    },
+    {
+      label: 'Hakemuksen täyttö',
+      state: StepState.disabled,
+    },
+    {
+      label: 'Esikatselu',
+      state: StepState.disabled,
+    },
+    {
+      label: 'Lähetys',
+      state: StepState.disabled,
+    },
+  ]);
+
+  const renderCurrentStep = () => {
+    switch (steps[currentStep].label) {
+      case 'Alueen valinta':
+        return <AreaSearchSpecsPage valid={valid} setNextStep={setNextStep} />;
+      case 'Hakemuksen täyttö':
+        return <AreaSearchApplicationPage setNextStep={setNextStep} />;
+      case 'Esikatselu':
+        return (
+          <AreaSearchApplicationPreview
+            setPreviousStep={setPreviousStep}
+            setNextStep={setNextStep}
+          />
+        );
+      case 'Lähetys':
+        return <AreaSearchApplicationSuccessPage />;
+      default:
+        return null;
+    }
+  };
+
+  const updateStepAvailability = () => {
+    const newSteps = [...steps];
+
+    switch (currentStep) {
+      case 0:
+        newSteps[1].state = StepState.disabled;
+        newSteps[2].state = StepState.disabled;
+        break;
+      case 1:
+        newSteps[1].state = StepState.available;
+        if (valid) {
+          newSteps[2].state = StepState.available;
+        } else {
+          newSteps[2].state = StepState.disabled;
+        }
+        break;
+      case 2:
+        break;
+      case 3:
+        newSteps.forEach((step) => (step.state = StepState.disabled));
+        break;
+    }
+
+    setSteps(newSteps);
+  };
+
   useEffect(() => {
     initializeForm(AREA_SEARCH_FORM_NAME, initializeAreaSearchForm());
-  }, [lastSubmission]);
+  }, []);
 
   useEffect(() => {
     fetchFormAttributes();
   }, []);
 
+  useEffect(() => {
+    updateStepAvailability();
+  }, [valid, currentStep]);
+
   return (
-    <div>
-      <ScrollToTop />
-      {children(rest)}
-    </div>
+    <MainContentElement className="AreaSearchSpecsPage">
+      <Helmet>
+        <title>
+          {getPageTitle(t('areaSearch.specs.pageTitle', 'Area search'))}
+        </title>
+      </Helmet>
+      <Container>
+        <AuthDependentContent>
+          {(_, loggedIn) =>
+            loggedIn ? (
+              <>
+                <div className="AreaSearchStepperWrapper">
+                  <Stepper
+                    steps={steps}
+                    language="en"
+                    selectedStep={currentStep}
+                    onStepClick={(_, nextPageIndex) =>
+                      setCurrentStep(nextPageIndex)
+                    }
+                  />
+                </div>
+                {renderCurrentStep()}
+              </>
+            ) : (
+              <>
+                <ScrollToTop />
+                <h1>
+                  {t('areaSearch.specs.heading', 'Apply for a land area lease')}
+                </h1>
+                <p>
+                  {t(
+                    'areaSearch.specs.notLoggedIn',
+                    'To apply, please log in first.',
+                  )}
+                </p>
+                <Button variant="primary" onClick={() => openLoginModal()}>
+                  {t('areaSearch.specs.loginButton', 'Log in')}
+                </Button>
+              </>
+            )
+          }
+        </AuthDependentContent>
+      </Container>
+    </MainContentElement>
   );
 };
 
@@ -53,6 +187,7 @@ export default connect(
     lastSubmission: state.areaSearch.lastSubmission,
   }),
   {
+    openLoginModal,
     initializeForm: initialize,
     fetchFormAttributes,
   },

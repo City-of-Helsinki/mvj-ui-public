@@ -20,7 +20,7 @@ const DateInputFormField = ({
 }: WrappedFieldProps & Props & DateInputProps): JSX.Element => {
   const { i18n } = useTranslation();
   const [internalValue, setInternalValue] = useState<string>(
-    input.value ? renderDate(input.value) : '',
+    input.value ? renderDate(new Date(input.value)) : '',
   );
 
   const onChangeHandler = (value: string, valueAsDate: Date): void => {

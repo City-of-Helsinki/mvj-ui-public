@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router';
 import { Container } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
@@ -26,10 +25,10 @@ import {
 } from './types';
 import { submitAreaSearchApplication } from './actions';
 import ApplicationPreviewSubsection from '../application/components/applicationPreviewSubsection';
-import { getRouteById } from '../root/routes';
-import { AppRoutes, getClientErrorMessage } from '../application/helpers';
+import { getClientErrorMessage } from '../application/helpers';
 import { prepareAreaSearchApplicationForSubmission } from './helpers';
 import ApplicationProcedureInfo from '../application/components/ApplicationProcedureInfo';
+import ScrollToTop from '../common/ScrollToTop';
 
 interface State {
   lastSubmission: AreaSearch | null;
@@ -37,11 +36,14 @@ interface State {
   fieldTypeMapping: FieldTypeMapping;
   submittedAnswerId: number;
   lastError: unknown;
-  isSubmitting: boolean;
+  isSubmitting?: boolean;
 }
 
 interface Props extends State {
   submitApplication: (data: AreaSearchApplicationSubmission) => void;
+  isSubmitting?: boolean;
+  setNextStep: Function;
+  setPreviousStep: Function;
 }
 
 const AreaSearchApplicationPreview = ({
@@ -51,9 +53,10 @@ const AreaSearchApplicationPreview = ({
   lastError,
   isSubmitting,
   submittedAnswerId,
+  setNextStep,
+  setPreviousStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const [lastClientError, setLastClientError] =
     useState<ApplicationPreparationError | null>(null);
@@ -62,7 +65,7 @@ const AreaSearchApplicationPreview = ({
 
   useEffect(() => {
     if (submittedAnswerId !== previousAnswerId) {
-      navigate(getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_SUBMIT));
+      setNextStep();
     }
   }, [submittedAnswerId]);
 
@@ -77,115 +80,117 @@ const AreaSearchApplicationPreview = ({
     }
   };
 
+  const renderSectionPreviewsOrGoBack = (loggedIn: boolean) => {
+    if (
+      loggedIn &&
+      lastSubmission?.form?.sections &&
+      formValues.form[ApplicationSectionKeys.Subsections]
+    ) {
+      return lastSubmission.form.sections.map((section) => (
+        <ApplicationPreviewSubsection
+          key={section.identifier}
+          section={section}
+          answers={
+            formValues.form[ApplicationSectionKeys.Subsections][
+              section.identifier
+            ]
+          }
+          headerTag={'h2'}
+          pendingUploads={[]}
+        />
+      ));
+    } else {
+      setPreviousStep();
+    }
+  };
+
   return (
-    <AuthDependentContent>
-      {(loading: boolean, loggedIn: boolean) => (
-        <MainContentElement className="ApplicationPreviewPage">
-          <Helmet>
-            <title>
-              {getPageTitle(
-                t(
-                  'areaSearch.application.preview.pageTitle',
-                  'Area search application',
-                ),
-              )}
-            </title>
-          </Helmet>
-          <Container>
-            <div className="title-container">
-              <div className="procedure-info">
-                <ApplicationProcedureInfo />
-              </div>
-              <h1>
-                {t(
-                  'areaSearch.application.preview.heading',
-                  'Area search application preview',
+    <>
+      <ScrollToTop />
+      <AuthDependentContent>
+        {(loading, loggedIn) => (
+          <MainContentElement className="ApplicationPreviewPage">
+            <Helmet>
+              <title>
+                {getPageTitle(
+                  t(
+                    'areaSearch.application.preview.pageTitle',
+                    'Area search application',
+                  ),
                 )}
-              </h1>
-            </div>
-
-            <AreaSearchTargetSummary />
-
-            {loading ? (
-              <BlockLoader />
-            ) : (
-              <div className="ApplicationPreviewPage__top-level-sections">
-                {loggedIn &&
-                lastSubmission?.form?.sections &&
-                formValues.form[ApplicationSectionKeys.Subsections] ? (
-                  lastSubmission.form.sections.map((section) => (
-                    <ApplicationPreviewSubsection
-                      key={section.identifier}
-                      section={section}
-                      answers={
-                        formValues.form[ApplicationSectionKeys.Subsections][
-                          section.identifier
-                        ]
-                      }
-                      headerTag={'h2'}
-                      pendingUploads={[]}
-                    />
-                  ))
-                ) : (
-                  <Navigate
-                    replace
-                    to={getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM)}
-                  />
-                )}
-                <Button
-                  variant="secondary"
-                  onClick={() =>
-                    navigate(
-                      getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_FORM),
-                    )
-                  }
-                  disabled={isSubmitting}
-                  className="ApplicationPreviewPage__submission-button"
-                >
-                  {t('application.returnToForm', 'Edit application')}
-                </Button>
-                <Button
-                  variant="primary"
-                  onClick={submit}
-                  isLoading={isSubmitting}
-                  loadingText={t(
-                    'application.submitInProcess',
-                    'Submitting...',
+              </title>
+            </Helmet>
+            <Container>
+              <div className="title-container">
+                <div className="procedure-info">
+                  <ApplicationProcedureInfo />
+                </div>
+                <h1>
+                  {t(
+                    'areaSearch.application.preview.heading',
+                    'Area search application preview',
                   )}
-                  className="ApplicationPreviewPage__submission-button"
-                >
-                  {t('application.submit', 'Submit application')}
-                </Button>
-                {!!lastError && (
-                  <Notification
-                    size="small"
-                    type="error"
-                    label={t('application.error.label', 'Submission error')}
-                  >
-                    {t(
-                      'application.error.generic',
-                      'The application could not be submitted correctly. Please try again later.',
-                    )}
-                  </Notification>
-                )}
-                {lastClientError !== null && (
-                  <Notification
-                    size="small"
-                    type="error"
-                    label={t(
-                      'application.error.preparation.label',
-                      'Preparation error',
-                    )}
-                  >
-                    {getClientErrorMessage(lastClientError)}
-                  </Notification>
-                )}
+                </h1>
               </div>
-            )}
-          </Container>
-        </MainContentElement>
-      )}
-    </AuthDependentContent>
+
+              <AreaSearchTargetSummary />
+
+              {loading ? (
+                <BlockLoader />
+              ) : (
+                <div className="ApplicationPreviewPage__top-level-sections">
+                  {renderSectionPreviewsOrGoBack(loggedIn)}
+                  <Button
+                    variant="secondary"
+                    onClick={() => setPreviousStep()}
+                    disabled={isSubmitting}
+                    className="ApplicationPreviewPage__submission-button"
+                  >
+                    {t('application.returnToForm', 'Edit application')}
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={submit}
+                    isLoading={isSubmitting}
+                    loadingText={t(
+                      'application.submitInProcess',
+                      'Submitting...',
+                    )}
+                    className="ApplicationPreviewPage__submission-button"
+                  >
+                    {t('application.submit', 'Submit application')}
+                  </Button>
+                  {!!lastError && (
+                    <Notification
+                      size="small"
+                      type="error"
+                      label={t('application.error.label', 'Submission error')}
+                    >
+                      {t(
+                        'application.error.generic',
+                        'The application could not be submitted correctly. Please try again later.',
+                      )}
+                    </Notification>
+                  )}
+                  {lastClientError !== null && (
+                    <Notification
+                      size="small"
+                      type="error"
+                      label={t(
+                        'application.error.preparation.label',
+                        'Preparation error',
+                      )}
+                    >
+                      {getClientErrorMessage(lastClientError)}
+                    </Notification>
+                  )}
+                </div>
+              )}
+            </Container>
+          </MainContentElement>
+        )}
+      </AuthDependentContent>
+    </>
   );
 };
 
