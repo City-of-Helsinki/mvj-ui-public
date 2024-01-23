@@ -10,6 +10,10 @@ export const getIdentityToken: Selector<RootState, string | null> = (
   state: RootState,
 ): string | null => state.oidc.user?.id_token || null;
 
+export const getAccessToken: Selector<RootState, string | null> = (
+  state: RootState,
+): string | null => state.oidc.user?.access_token || null;
+
 export const getUser: Selector<RootState, User | null> = (
   state: RootState,
 ): User | null => state.oidc.user || null;

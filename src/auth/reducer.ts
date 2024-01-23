@@ -20,8 +20,8 @@ type OidcState = {
   isLoadingUser: boolean;
 };
 
-type CurrentDisplayState = {
-  apiToken: string;
+type CurrentAuthDisplayState = {
+  apiToken: string | null;
   isFetching: boolean;
 };
 
@@ -62,8 +62,8 @@ const oidcSlice = createSlice({
   },
 });
 
-const initialAuthState: CurrentDisplayState = {
-  apiToken: '',
+const initialAuthState: CurrentAuthDisplayState = {
+  apiToken: null,
   isFetching: false,
 };
 

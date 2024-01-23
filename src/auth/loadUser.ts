@@ -35,7 +35,7 @@ export function errorCallback(error: Error): void {
 
 // function to load the current user into the store
 // NOTE: use only when silent renew is configured
-export const loadUser = (store: Store, userManager: UserManager) => {
+export const loadUser = async (store: Store, userManager: UserManager) => {
   if (!store || !store.dispatch) {
     throw new Error(
       'auth: You need to pass the redux store into the loadUser helper!',

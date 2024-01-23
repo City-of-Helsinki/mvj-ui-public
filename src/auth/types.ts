@@ -3,7 +3,6 @@ import type { User } from 'oidc-client-ts';
 
 export const FETCH_API_TOKEN = 'auth/FETCH_API_TOKEN';
 export const RECEIVE_API_TOKEN = 'auth/RECEIVE_API_TOKEN';
-export const STORE_API_TOKEN_SUCCESS = 'auth/STORE_API_TOKEN_SUCCESS';
 export const TOKEN_NOT_FOUND = 'auth/TOKEN_NOT_FOUND';
 export const USER_EXPIRED = 'auth/USER_EXPIRED';
 export const SILENT_RENEW_ERROR = 'auth/SILENT_RENEW_ERROR';
@@ -31,8 +30,8 @@ export interface ReceiveApiTokenAction {
 }
 
 export const receiveApiTokenActionType = (
-  payload: string,
-): ReceiveApiTokenAction => {
+  payload: ReceiveApiTokenAction['payload'],
+): Action<string> => {
   return {
     type: RECEIVE_API_TOKEN,
     payload,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { User, Log } from 'oidc-client-ts';
 import { setConfiguration as setGridSystemConfiguration } from 'react-grid-system';
@@ -8,13 +8,17 @@ import TopNavigation from './topNavigation/topNavigation';
 import Footer from './footer/footer';
 import LoginModal from './login/loginModal';
 import { RootState } from './root/rootReducer';
-import { getIsFetchingApiToken, getUser } from './auth/selectors';
+import {
+  getIsFetchingApiToken,
+  getUser,
+  hasApiToken,
+  getApiToken,
+} from './auth/selectors';
 import { fetchApiToken, receiveApiToken } from './auth/actions';
 import { fetchFavourite } from './favourites/actions';
 import GlobalNotificationContainer from './globalNotification/globalNotificationContainer';
 import { getIsFetchingFavourite } from './favourites/selectors';
 import { getPageTitle } from './root/helpers';
-import { getApiTokenExpirationTime } from './auth/helpers';
 
 // https://hds.hel.fi/design-tokens/breakpoints
 // (container widths adjusted with gutters included)
@@ -28,14 +32,16 @@ setGridSystemConfiguration({
 import 'hds-core';
 import './main.scss';
 
-interface Props {
+interface AppProps {
   children?: JSX.Element;
   user: User | null;
   fetchApiToken: (accessToken: string) => void;
   fetchFavourite: () => void;
   isFetchingFavourite: boolean;
-  receiveApiToken: (token: string) => void;
-  isFetchingToken: boolean;
+  receiveApiToken: (apiToken: string) => void;
+  isFetchingApiToken: boolean;
+  hasApiToken: boolean;
+  getApiToken: string | null;
 }
 
 Log.setLogger(console);
@@ -46,58 +52,21 @@ const App = ({
   fetchApiToken,
   fetchFavourite,
   isFetchingFavourite,
-  receiveApiToken,
-  isFetchingToken,
-}: Props): JSX.Element => {
-  const [tokenOutdated, setTokenOutdated] = useState<boolean | null>(null);
-  const [tokenRefreshTimeout, setTokenRefreshTimeout] = useState<ReturnType<
-    typeof setTimeout
-  > | null>(null);
-
+  isFetchingApiToken,
+  hasApiToken,
+  getApiToken,
+}: AppProps): JSX.Element => {
   useEffect(() => {
-    if (user) {
-      const storedTokenExp = getApiTokenExpirationTime();
-      const currentTime = Math.floor(Date.now() / 1000);
-      const isStoredApiTokenExpired =
-        Number(storedTokenExp) < currentTime &&
-        !isFetchingToken &&
-        !tokenOutdated;
-      if (isStoredApiTokenExpired) {
-        setTokenOutdated(true);
-      }
-
-      if (tokenOutdated && !isFetchingToken) {
-        fetchApiToken(user.access_token);
-        setTokenOutdated(false);
-
-        const ONE_DAY = 1000 * 60 * 60 * 24; // One day in milliseconds
-        // Check 60 seconds before it's supposed to expire
-        // Cap it to one day to not exceed 32-bit signed integer max value
-        const timeout = Math.min(
-          (Number(storedTokenExp) - currentTime - 60) * 1000,
-          ONE_DAY,
-        );
-        setTokenRefreshTimeout(
-          setTimeout(() => {
-            setTokenOutdated(true);
-          }, timeout),
-        );
-      }
-    } else {
-      if (tokenRefreshTimeout) {
-        clearTimeout(tokenRefreshTimeout);
-        setTokenRefreshTimeout(null);
-        setTokenOutdated(true);
-        receiveApiToken('');
-      }
+    if (user && !hasApiToken && !isFetchingApiToken) {
+      fetchApiToken(user.access_token);
     }
-  }, [user, tokenOutdated, isFetchingToken]);
+  }, [user, getApiToken]);
 
   useEffect(() => {
-    if (!isFetchingFavourite && !isFetchingToken && !tokenOutdated && user) {
+    if (!isFetchingFavourite && !isFetchingApiToken && hasApiToken) {
       fetchFavourite();
     }
-  }, [isFetchingToken, user]);
+  }, [isFetchingApiToken]);
 
   return (
     <div className="App">
@@ -116,8 +85,10 @@ const App = ({
 export default connect(
   (state: RootState) => ({
     user: getUser(state),
-    isFetchingToken: getIsFetchingApiToken(state),
+    isFetchingApiToken: getIsFetchingApiToken(state),
     isFetchingFavourite: getIsFetchingFavourite(state),
+    hasApiToken: hasApiToken(state),
+    getApiToken: getApiToken(state),
   }),
   { fetchApiToken, receiveApiToken, fetchFavourite },
 )(App);

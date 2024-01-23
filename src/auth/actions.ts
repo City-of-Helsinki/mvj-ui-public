@@ -19,8 +19,8 @@ import {
 export const fetchApiToken = (accessToken: string): Action<string> =>
   createAction(FETCH_API_TOKEN)(accessToken);
 
-export const receiveApiToken = (token: string): Action<string> =>
-  createAction(RECEIVE_API_TOKEN)(token);
+export const receiveApiToken = (apiToken: string): Action<string> =>
+  createAction(RECEIVE_API_TOKEN)(apiToken);
 
 export const tokenNotFound = (): Action<string> =>
   createAction(TOKEN_NOT_FOUND)();
