@@ -3,7 +3,7 @@ import {
   Logo,
   logoFiDark,
   IconFacebook,
-  IconTwitter,
+  IconX,
   IconInstagram,
   IconLinkedin,
 } from 'hds-react';
@@ -32,7 +32,7 @@ const FooterComponent = (): JSX.Element => {
       <Footer.Utilities
         soMeLinks={[
           <Footer.Link
-            href="https://facebook.com/helsinginkaupunki"
+            href="https://www.facebook.com/kaupunkiymparisto"
             title={t(
               'footer.some.facebook',
               'Helsingin kaupungin Facebook-tili',
@@ -40,12 +40,12 @@ const FooterComponent = (): JSX.Element => {
             icon={<IconFacebook />}
           />,
           <Footer.Link
-            href="https://twitter.com/helsinki"
+            href="https://twitter.com/HelsinkiKymp"
             title={t('footer.some.twitter', 'Helsingin kaupungin Twitter-tili')}
-            icon={<IconTwitter />}
+            icon={<IconX />}
           />,
           <Footer.Link
-            href="https://instagram.com/helsinki"
+            href="https://www.instagram.com/kaupunkiymparisto"
             title={t(
               'footer.some.instagram',
               'Helsingin kaupungin Instagram-tili',
@@ -53,7 +53,7 @@ const FooterComponent = (): JSX.Element => {
             icon={<IconInstagram />}
           />,
           <Footer.Link
-            href="https://www.linkedin.com/company/city-of-helsinki"
+            href="https://www.linkedin.com/company/kaupunkiymparisto"
             title={t(
               'footer.some.linkedin',
               'Helsingin kaupungin LinkedIn-tili',
