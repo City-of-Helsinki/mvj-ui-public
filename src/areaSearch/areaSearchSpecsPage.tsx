@@ -68,7 +68,6 @@ interface OwnProps {
   valid: boolean;
   touch(...field: string[]): void;
   lastSubmissionError: unknown;
-  setNextStep: any;
 }
 
 type Props = OwnProps & State;
@@ -91,7 +90,6 @@ const AreaSearchSpecsPage = ({
   lastSubmissionError,
   applicationFormTemplate,
   change,
-  setNextStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
 
@@ -160,7 +158,7 @@ const AreaSearchSpecsPage = ({
     if (lastSubmissionId > prevSubmissionIdRef.current) {
       prevSubmissionIdRef.current = lastSubmissionId;
       setSubmitSucceeded(AREA_SEARCH_FORM_NAME);
-      setNextStep();
+      // setNextStep();
     }
   }, [lastSubmissionId]);
 
@@ -187,9 +185,12 @@ const AreaSearchSpecsPage = ({
               if (valid) {
                 startSubmit(AREA_SEARCH_FORM_NAME);
                 setHasSubmitErrors(false);
-                submitAreaSearch(
-                  prepareAreaSearchSubmission(files['search.attachments']),
-                );
+                let currentAreaSearchId = lastSubmissionId && lastSubmissionId;
+                const submitParams = {
+                  ...prepareAreaSearchSubmission(files['search.attachments']),
+                  id: currentAreaSearchId,
+                };
+                submitAreaSearch(submitParams);
               } else {
                 if (touch) {
                   touch(

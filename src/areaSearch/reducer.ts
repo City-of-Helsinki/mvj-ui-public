@@ -21,9 +21,11 @@ import {
   RECEIVE_AREA_SEARCH_ATTACHMENT_SAVED,
   INITIALIZE_AREA_SEARCH_ATTACHMENTS,
   AreaSearchAttachmentSubmissionFailed,
+  SET_NEXT_AREA_SEARCH_APPLICATION_STEP,
 } from './types';
 
 type CurrentDisplayState = {
+  currentStep: number;
   isSubmittingAreaSearch: boolean;
   lastError: unknown | null;
   lastSubmissionId: number;
@@ -38,6 +40,7 @@ type CurrentDisplayState = {
 };
 
 const initialState: CurrentDisplayState = {
+  currentStep: 0,
   isSubmittingAreaSearch: false,
   lastError: null,
   lastSubmissionId: 0,
@@ -61,6 +64,9 @@ const areaSearchSlice = createSlice({
         state.areaSearchAttachmentError = null;
         state.isSubmittingAreaSearchAttachments = false;
         state.areaSearchAttachments = [];
+      })
+      .addCase(SET_NEXT_AREA_SEARCH_APPLICATION_STEP, (state) => {
+        state.currentStep += 1;
       })
       .addCase(SUBMIT_AREA_SEARCH_ATTACHMENT, (state) => {
         state.isSubmittingAreaSearchAttachments = true;

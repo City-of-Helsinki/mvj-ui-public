@@ -42,8 +42,6 @@ interface State {
 interface Props extends State {
   submitApplication: (data: AreaSearchApplicationSubmission) => void;
   isSubmitting?: boolean;
-  setNextStep: Function;
-  setPreviousStep: Function;
 }
 
 const AreaSearchApplicationPreview = ({
@@ -53,8 +51,6 @@ const AreaSearchApplicationPreview = ({
   lastError,
   isSubmitting,
   submittedAnswerId,
-  setNextStep,
-  setPreviousStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
 
@@ -65,7 +61,7 @@ const AreaSearchApplicationPreview = ({
 
   useEffect(() => {
     if (submittedAnswerId !== previousAnswerId) {
-      setNextStep();
+      // setNextStep();
     }
   }, [submittedAnswerId]);
 
@@ -100,7 +96,7 @@ const AreaSearchApplicationPreview = ({
         />
       ));
     } else {
-      setPreviousStep();
+      // setPreviousStep();
     }
   };
 
@@ -142,7 +138,7 @@ const AreaSearchApplicationPreview = ({
                   {renderSectionPreviewsOrGoBack(loggedIn)}
                   <Button
                     variant="secondary"
-                    onClick={() => setPreviousStep()}
+                    onClick={() => console.log('setPreviousStep')}
                     disabled={isSubmitting}
                     className="ApplicationPreviewPage__submission-button"
                   >

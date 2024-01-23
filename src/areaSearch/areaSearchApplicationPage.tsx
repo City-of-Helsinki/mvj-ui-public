@@ -26,7 +26,6 @@ interface State {
 
 interface Props extends State {
   openLoginModal: () => void;
-  setNextStep: any;
 }
 
 const AreaSearchApplicationPage = ({
@@ -34,7 +33,6 @@ const AreaSearchApplicationPage = ({
   isSubmittingAreaSearch,
   lastSubmission,
   isFormValid,
-  setNextStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
   const [isSaveClicked, setSaveClicked] = useState<boolean>(false);
@@ -43,7 +41,7 @@ const AreaSearchApplicationPage = ({
     setSaveClicked(true);
 
     if (isFormValid) {
-      setNextStep();
+      // setNextStep();
     }
   };
 

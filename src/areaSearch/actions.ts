@@ -20,10 +20,11 @@ import {
   AREA_SEARCH_ATTACHMENT_SUBMISSION_FAILED,
   RECEIVE_AREA_SEARCH_ATTACHMENT_SAVED,
   INITIALIZE_AREA_SEARCH_ATTACHMENTS,
+  SET_NEXT_AREA_SEARCH_APPLICATION_STEP,
 } from './types';
 
 export const submitAreaSearch = (
-  payload: AreaSearchSubmission
+  payload: AreaSearchSubmission,
 ): Action<string> => createAction(SUBMIT_AREA_SEARCH)(payload);
 
 export const submitAreaSearchAttachment = (payload: {
@@ -37,13 +38,16 @@ export const submitAreaSearchAttachment = (payload: {
 export const initializeAreaSearchAttachments = (): Action<string> =>
   createAction(INITIALIZE_AREA_SEARCH_ATTACHMENTS)();
 
+export const setNextStep = (): Action<string> =>
+  createAction(SET_NEXT_AREA_SEARCH_APPLICATION_STEP)();
+
 export const areaSearchAttachmentSubmissionFailed = (
-  payload: unknown
+  payload: unknown,
 ): Action<string> =>
   createAction(AREA_SEARCH_ATTACHMENT_SUBMISSION_FAILED)(payload);
 
 export const receiveAreaSearchAttachmentSaved = (
-  payload: File
+  payload: File,
 ): Action<string> =>
   createAction(RECEIVE_AREA_SEARCH_ATTACHMENT_SAVED)(payload);
 
@@ -54,16 +58,16 @@ export const areaSearchSubmissionFailed = (payload: unknown): Action<string> =>
   createAction(AREA_SEARCH_SUBMISSION_FAILED)(payload);
 
 export const submitAreaSearchApplication = (
-  payload: AreaSearchApplicationSubmission
+  payload: AreaSearchApplicationSubmission,
 ): Action<string> => createAction(SUBMIT_AREA_SEARCH_APPLICATION)(payload);
 
 export const receiveAreaSearchApplicationSaved = (
-  payload: AreaSearch
+  payload: AreaSearch,
 ): Action<string> =>
   createAction(RECEIVE_AREA_SEARCH_APPLICATION_SAVED)(payload);
 
 export const areaSearchApplicationSubmissionFailed = (
-  payload: unknown
+  payload: unknown,
 ): Action<string> =>
   createAction(AREA_SEARCH_APPLICATION_SUBMISSION_FAILED)(payload);
 
@@ -71,7 +75,7 @@ export const fetchIntendedUses = (): Action<string> =>
   createAction(FETCH_INTENDED_USES)();
 
 export const receiveIntendedUses = (
-  payload: Array<IntendedUse>
+  payload: Array<IntendedUse>,
 ): Action<string> => createAction(RECEIVE_INTENDED_USES)(payload);
 
 export const intendedUsesNotFound = (): Action<string> =>

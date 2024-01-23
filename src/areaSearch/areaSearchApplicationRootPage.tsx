@@ -27,6 +27,7 @@ import ScrollToTop from '../common/ScrollToTop';
 interface State {
   areaSearchForm: null;
   lastSubmission: AreaSearch | null;
+  currentStep: number;
 }
 
 interface Step {
@@ -45,16 +46,17 @@ const AreaSearchApplicationRootPage = ({
   initializeForm,
   fetchFormAttributes,
   valid,
+  currentStep,
 }: Props & InjectedFormProps<unknown, Props>): JSX.Element => {
-  const [currentStep, setCurrentStep] = useState<number>(0);
+  // const [currentStep, setCurrentStep] = useState<number>(0);
 
-  const setNextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
+  // const setNextStep = () => {
+  //   setCurrentStep(currentStep + 1);
+  // };
 
-  const setPreviousStep = () => {
-    setCurrentStep(currentStep - 1);
-  };
+  // const setPreviousStep = () => {
+  //   setCurrentStep(currentStep - 1);
+  // };
 
   const [steps, setSteps] = useState<Step[]>([
     {
@@ -78,16 +80,11 @@ const AreaSearchApplicationRootPage = ({
   const renderCurrentStep = () => {
     switch (steps[currentStep].label) {
       case 'Alueen valinta':
-        return <AreaSearchSpecsPage valid={valid} setNextStep={setNextStep} />;
+        return <AreaSearchSpecsPage valid={valid} />;
       case 'Hakemuksen täyttö':
-        return <AreaSearchApplicationPage setNextStep={setNextStep} />;
+        return <AreaSearchApplicationPage />;
       case 'Esikatselu':
-        return (
-          <AreaSearchApplicationPreview
-            setPreviousStep={setPreviousStep}
-            setNextStep={setNextStep}
-          />
-        );
+        return <AreaSearchApplicationPreview />;
       case 'Lähetys':
         return <AreaSearchApplicationSuccessPage />;
       default:
@@ -150,8 +147,8 @@ const AreaSearchApplicationRootPage = ({
                     steps={steps}
                     language="en"
                     selectedStep={currentStep}
-                    onStepClick={(_, nextPageIndex) =>
-                      setCurrentStep(nextPageIndex)
+                    onStepClick={() =>
+                      console.log('setCurrentStep(nextPageIndex')
                     }
                   />
                 </div>
@@ -185,6 +182,7 @@ export default connect(
   (state: RootState): State => ({
     areaSearchForm: null,
     lastSubmission: state.areaSearch.lastSubmission,
+    currentStep: state.areaSearch.currentStep,
   }),
   {
     openLoginModal,

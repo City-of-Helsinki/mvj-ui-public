@@ -61,6 +61,8 @@ export type AreaSearchSubmission = {
   intended_use: number;
   geometry: Geometry | null;
   area_search_attachments: Array<number> | Array<File>;
+  id?: number; // For PUT operations
+  setNextStep: Function;
 };
 
 export type AreaSearchApplicationSubmission = {
@@ -73,6 +75,12 @@ export type IntendedUse = {
   id: number;
   name: string;
 };
+
+export const SET_NEXT_AREA_SEARCH_APPLICATION_STEP =
+  'areaSearch/SET_NEXT_AREA_SEARCH_APPLICATION_STEP';
+export interface SetNextAreaSearchStepAction {
+  type: typeof SET_NEXT_AREA_SEARCH_APPLICATION_STEP;
+}
 
 export const SUBMIT_AREA_SEARCH = 'areaSearch/SUBMIT_AREA_SEARCH';
 export interface SubmitAreaSearchAction {
