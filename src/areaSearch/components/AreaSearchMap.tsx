@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { StandardMapLayersControl } from '../../map/StandardMapLayersControl';
 import {
   attachMapResizeObserver,
+  convertGeoJSONArrayForLeaflet,
   convertPolygonArrayToMultiPolygon,
   drawnShapeLayerPredicate,
   HELSINKI_CENTRAL_COORDINATES,
@@ -31,10 +32,27 @@ const AreaSearchMap = ({
   blur,
   focus,
 }: WrappedFieldProps & Props) => {
-  const initialPosition = HELSINKI_CENTRAL_COORDINATES;
   const { latLonBounds, CRS } = initializeHelsinkiMap();
 
   const featureGroupRef = useRef<FeatureGroupType>(null);
+
+  const getSelectionAreaCenter = () => {
+    const { coordinates } = value;
+    if (!coordinates) return HELSINKI_CENTRAL_COORDINATES;
+
+    // all coordinate points to a single array
+    const latLngCoord = convertGeoJSONArrayForLeaflet(coordinates).flat(2);
+
+    if (!latLngCoord.length) return HELSINKI_CENTRAL_COORDINATES;
+
+    const center = latLngCoord
+      .reduce((previous: Array<any>, current: Array<any>) => {
+        return [previous[0] + current[0], previous[1] + current[1]];
+      })
+      .map((item: number) => item / latLngCoord.length);
+
+    return center;
+  };
 
   const updateFieldValue = (): void => {
     const group = featureGroupRef.current;
@@ -67,7 +85,7 @@ const AreaSearchMap = ({
     <div className="AreaSearchMap">
       <MapContainer
         className="AreaSearchMap__map"
-        center={initialPosition}
+        center={getSelectionAreaCenter()}
         zoom={6}
         scrollWheelZoom={true}
         maxBounds={latLonBounds}

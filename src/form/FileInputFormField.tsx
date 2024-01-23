@@ -50,10 +50,11 @@ const FileInputFormField = ({
   Props &
   Omit<FileInputProps, 'onChange'>): JSX.Element => {
   const { i18n } = useTranslation();
-  const fileContext = useFileUploads();
+  const { files, setFieldFiles } = useFileUploads();
+  const filesArray = files['search.attachments'];
 
   const onChangeHandler = (files: Array<File>): void => {
-    fileContext.setFieldFiles(input.name, files);
+    setFieldFiles(input.name, files);
     focus(meta.form, input.name);
     touch(meta.form, input.name);
     blur(meta.form, input.name, files.length);
@@ -65,6 +66,7 @@ const FileInputFormField = ({
       onChange={onChangeHandler}
       language={i18n.language as Language}
       errorText={meta.touched && meta.error}
+      defaultValue={filesArray}
       {...rest}
     />
   );

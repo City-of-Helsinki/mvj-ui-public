@@ -47,7 +47,7 @@ function* submitAreaSearchSaga({
               try {
                 const { response, bodyAsJson } = yield call(
                   submitAreaSearchAttachmentRequest,
-                  fileData
+                  fileData,
                 );
                 switch (response.status) {
                   case 200:
@@ -62,7 +62,7 @@ function* submitAreaSearchSaga({
                     failedAttachmentUploads.push(
                       typeof attachment === 'number'
                         ? String(attachment)
-                        : attachment.name
+                        : attachment.name,
                     );
                     break;
                 }
@@ -72,7 +72,7 @@ function* submitAreaSearchSaga({
                 failedAttachmentUploads.push(
                   typeof attachment === 'number'
                     ? String(attachment)
-                    : attachment.name
+                    : attachment.name,
                 );
                 throw e;
               }
@@ -83,9 +83,9 @@ function* submitAreaSearchSaga({
                 file: attachment,
               },
               callback: (file: UploadedFileMeta) => pushAttachmentIds(file.id),
-            }
-          )
-        )
+            },
+          ),
+        ),
       );
     }
 
@@ -93,7 +93,7 @@ function* submitAreaSearchSaga({
       yield put(
         areaSearchSubmissionFailed({
           failedAttachments: failedAttachmentUploads,
-        })
+        }),
       );
       return;
     }
@@ -102,7 +102,7 @@ function* submitAreaSearchSaga({
 
     const { response, bodyAsJson } = yield call(
       submitAreaSearchRequest,
-      newPayload
+      newPayload,
     );
 
     switch (response.status) {
@@ -126,7 +126,7 @@ function* submitAreaSearchApplicationSaga({
   try {
     const { response, bodyAsJson } = yield call(
       submitAreaSearchApplicationRequest,
-      payload
+      payload,
     );
 
     switch (response.status) {
@@ -155,7 +155,7 @@ export function* fetchIntendedUsesSaga(): Generator<
     switch (response.status) {
       case 200:
         yield put(
-          receiveIntendedUses(bodyAsJson.results as Array<IntendedUse>)
+          receiveIntendedUses(bodyAsJson.results as Array<IntendedUse>),
         );
         break;
       default:
@@ -173,7 +173,7 @@ export default function* areaSearchSaga(): Generator {
       yield takeLatest(SUBMIT_AREA_SEARCH, submitAreaSearchSaga);
       yield takeLatest(
         SUBMIT_AREA_SEARCH_APPLICATION,
-        submitAreaSearchApplicationSaga
+        submitAreaSearchApplicationSaga,
       );
       yield takeLatest(FETCH_INTENDED_USES, fetchIntendedUsesSaga);
     }),

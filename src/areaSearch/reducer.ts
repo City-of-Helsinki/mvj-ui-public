@@ -21,9 +21,15 @@ import {
   RECEIVE_AREA_SEARCH_ATTACHMENT_SAVED,
   INITIALIZE_AREA_SEARCH_ATTACHMENTS,
   AreaSearchAttachmentSubmissionFailed,
+  SET_AREA_SEARCH_STEP,
+  SetAreaSearchStepAction,
+  RESET_AREA_SEARCH_STATE,
+  SET_UP_AREA_SEARCH_APPLICATION_FORM,
 } from './types';
+import { AreaSearchStepperPageIndex } from './helpers';
 
 type CurrentDisplayState = {
+  currentStep: number;
   isSubmittingAreaSearch: boolean;
   lastError: unknown | null;
   lastSubmissionId: number;
@@ -35,9 +41,11 @@ type CurrentDisplayState = {
   isSubmittingAreaSearchAttachments: boolean;
   areaSearchAttachments: Array<AreaSearchAttachment>;
   areaSearchAttachmentError: unknown;
+  areaSearchApplicationFormSetUp: boolean;
 };
 
-const initialState: CurrentDisplayState = {
+export const initialState: CurrentDisplayState = {
+  currentStep: 0,
   isSubmittingAreaSearch: false,
   lastError: null,
   lastSubmissionId: 0,
@@ -49,6 +57,7 @@ const initialState: CurrentDisplayState = {
   areaSearchAttachments: [],
   areaSearchAttachmentError: null,
   isSubmittingAreaSearchAttachments: false,
+  areaSearchApplicationFormSetUp: false,
 };
 
 const areaSearchSlice = createSlice({
@@ -62,6 +71,7 @@ const areaSearchSlice = createSlice({
         state.isSubmittingAreaSearchAttachments = false;
         state.areaSearchAttachments = [];
       })
+      .addCase(RESET_AREA_SEARCH_STATE, () => initialState)
       .addCase(SUBMIT_AREA_SEARCH_ATTACHMENT, (state) => {
         state.isSubmittingAreaSearchAttachments = true;
         state.areaSearchAttachmentError = null;
@@ -88,9 +98,19 @@ const areaSearchSlice = createSlice({
         state.lastError = null;
       })
       .addCase(
+        SET_AREA_SEARCH_STEP,
+        (state, { payload }: SetAreaSearchStepAction) => {
+          state.currentStep = payload;
+        },
+      )
+      .addCase(SET_UP_AREA_SEARCH_APPLICATION_FORM, (state) => {
+        state.areaSearchApplicationFormSetUp = true;
+      })
+      .addCase(
         RECEIVE_AREA_SEARCH_SAVED,
         (state, { payload }: ReceiveAreaSearchSavedAction) => {
           state.isSubmittingAreaSearch = false;
+          state.currentStep = AreaSearchStepperPageIndex.APPLICATION;
           state.lastSubmissionId = payload.id;
           state.lastSubmission = payload;
         },
