@@ -32,7 +32,7 @@ import {
   requiredValidatorGenerator,
 } from '../form/validators';
 import { RootState } from '../root/rootReducer';
-import { AREA_SEARCH_FORM_NAME, IntendedUse } from './types';
+import { AREA_SEARCH_FORM_NAME, AreaSearch, IntendedUse } from './types';
 import {
   fetchIntendedUses,
   initializeAreaSearchAttachments,
@@ -50,6 +50,7 @@ interface State {
   startDate?: string;
   endDate?: string;
   intendedUses: Array<IntendedUse> | null;
+  lastSubmission: AreaSearch | null;
   lastSubmissionId: number;
   errors: FormErrors;
   applicationFormTemplate: ApplicationFormRoot;
@@ -86,6 +87,7 @@ const AreaSearchSpecsPage = ({
   setSubmitSucceeded,
   fetchIntendedUses,
   intendedUses,
+  lastSubmission,
   lastSubmissionId,
   lastSubmissionError,
   applicationFormTemplate,
@@ -155,12 +157,16 @@ const AreaSearchSpecsPage = ({
     if (!prevSubmissionIdRef.current) {
       change(AREA_SEARCH_FORM_NAME, 'form', applicationFormTemplate, true);
     }
+  }, []);
+
+  useEffect(() => {
     if (lastSubmissionId > prevSubmissionIdRef.current) {
       prevSubmissionIdRef.current = lastSubmissionId;
       setSubmitSucceeded(AREA_SEARCH_FORM_NAME);
       // setNextStep();
     }
-  }, [lastSubmissionId]);
+    console.log('HEP');
+  }, [lastSubmissionId, lastSubmission]);
 
   return (
     <>
@@ -445,6 +451,7 @@ export default connect(
     endDate: selector(state, 'search.end_date'),
     intendedUses: state.areaSearch.intendedUses,
     isSubmittingAreaSearch: state.areaSearch.isSubmittingAreaSearch,
+    lastSubmission: state.areaSearch.lastSubmission,
     lastSubmissionId: state.areaSearch.lastSubmissionId,
     lastSubmissionError: state.areaSearch.lastError,
     errors: getFormSyncErrors(AREA_SEARCH_FORM_NAME)(state),

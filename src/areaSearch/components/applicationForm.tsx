@@ -22,6 +22,8 @@ const ApplicationForm = ({
     (section) => section.identifier === APPLICANT_SECTION_IDENTIFIER,
   );
 
+  console.log('applicant section', applicantSection);
+
   const confirmationSection = baseForm.sections.find(
     (section) => section.identifier === CONFIRMATION_SECTION_IDENTIFIER,
   );
@@ -36,17 +38,20 @@ const ApplicationForm = ({
   return (
     <form className="AreaSearchApplicationForm">
       {applicantSection && (
-        <div className="AreaSearchApplicationForm__section">
-          <ApplicationFormSubsection
-            key={applicantSection.identifier}
-            formName={formName}
-            path={['form', ApplicationSectionKeys.Subsections]}
-            section={applicantSection}
-            headerTag="h2"
-            flavor={ApplicationFormTopLevelSectionFlavor.APPLICANT}
-            isSaveClicked={isSaveClicked}
-          />
-        </div>
+        <>
+          <p>Hello there!</p>
+          <div className="AreaSearchApplicationForm__section">
+            <ApplicationFormSubsection
+              key={applicantSection.identifier}
+              formName={formName}
+              path={['form', ApplicationSectionKeys.Subsections]}
+              section={applicantSection}
+              headerTag="h2"
+              flavor={ApplicationFormTopLevelSectionFlavor.APPLICANT}
+              isSaveClicked={isSaveClicked}
+            />
+          </div>
+        </>
       )}
       {extraSections.length > 0 && (
         <div className="AreaSearchApplicationForm__section">
