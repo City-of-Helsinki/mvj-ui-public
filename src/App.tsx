@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { User, Log } from 'oidc-client-ts';
 import { setConfiguration as setGridSystemConfiguration } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
-
 import TopNavigation from './topNavigation/topNavigation';
 import Footer from './footer/footer';
 import LoginModal from './login/loginModal';

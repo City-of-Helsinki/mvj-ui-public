@@ -1,6 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
-import { AppRoutes } from '../application/helpers';
-
+import { AppRoutes } from '../root/helpers';
 
 const REDIRECT_URL_KEY = 'redirectURL';
 

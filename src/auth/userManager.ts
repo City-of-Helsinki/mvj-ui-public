@@ -1,8 +1,6 @@
 import { WebStorageStateStore, UserManager } from 'oidc-client-ts';
 import type { UserManagerSettings } from 'oidc-client-ts';
-import { getRouteById } from '../root/routes';
-import { AppRoutes } from '../application/helpers';
-
+import { getRouteById, AppRoutes } from '../root/helpers';
 
 const settings = {
   authority:

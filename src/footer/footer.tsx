@@ -9,7 +9,7 @@ import {
 } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { naviLinks } from '../topNavigation/topNavigation';
-import { getRouteById } from '../root/routes';
+import { getRouteById } from '../root/helpers';
 
 const FooterComponent = (): JSX.Element => {
   const { t } = useTranslation();

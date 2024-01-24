@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 
 import BoxGrid from '../boxGrid/boxGrid';
 import BoxGridBox from '../boxGrid/boxGridBox';
-import { getRouteById } from '../root/routes';
+import { getRouteById, AppRoutes } from '../root/helpers';
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
 
@@ -17,7 +17,6 @@ import TerracesAndParkletsImage from '../assets/images/areaSearch/terracesAndPar
 import OutdoorEventImage from '../assets/images/areaSearch/outdoorEvent.svg?react';
 import CommercialUsesImage from '../assets/images/areaSearch/commercialUses.svg?react';
 import MiscUsesImage from '../assets/images/areaSearch/misc.svg?react';
-import { AppRoutes } from '../application/helpers';
 import ApplicationProcedureInfo from '../application/components/ApplicationProcedureInfo';
 
 const AreaSearchLandingPage = (): JSX.Element => {

@@ -12,9 +12,8 @@ import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 import { defaultLanguage } from '../i18n';
 import { renderDateTime } from '../i18n/utils';
 import InfoLinks from './infoLinks';
-import { getRouteById } from '../root/routes';
+import { getRouteById, AppRoutes } from '../root/helpers';
 import { getTargetPlanOptionTitle } from '../plotSearch/helpers';
-import { AppRoutes } from '../application/helpers';
 
 interface State {
   plotSearchAttributes: ApiAttributes;

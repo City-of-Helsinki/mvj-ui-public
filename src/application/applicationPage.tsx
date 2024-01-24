@@ -15,13 +15,12 @@ import BlockLoader from '../loader/blockLoader';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import { openLoginModal } from '../login/actions';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
-import { getRouteById } from '../root/routes';
+import { getRouteById, AppRoutes } from '../root/helpers';
 import ApplicationTargetList from './components/applicationTargetList';
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
 import { APPLICATION_FORM_NAME, TARGET_SECTION_IDENTIFIER } from './types';
 import ApplicationErrorsSummary from './components/ApplicationErrorsSummary';
-import { AppRoutes } from './helpers';
 
 interface State {
   relevantPlotSearch: PlotSearch | null;
