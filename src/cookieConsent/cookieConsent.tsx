@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { CookieModal } from 'hds-react';
 import type { ContentSource } from 'hds-react';
 import { isSupportedLanguage } from '../i18n';
-import { SupportedLanguage } from '../i18n';
+import type { SupportedLanguage } from '../i18n';
 
 export const CookieConsent = (): JSX.Element => {
   const { t, i18n } = useTranslation();

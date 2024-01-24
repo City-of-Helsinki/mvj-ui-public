@@ -38,11 +38,13 @@ const FooterComponent = (): JSX.Element => {
               'Helsingin kaupungin Facebook-tili',
             )}
             icon={<IconFacebook />}
+            key="facebook"
           />,
           <Footer.Link
             href="https://twitter.com/helsinki"
             title={t('footer.some.twitter', 'Helsingin kaupungin Twitter-tili')}
             icon={<IconTwitter />}
+            key="twitter"
           />,
           <Footer.Link
             href="https://instagram.com/helsinki"
@@ -51,6 +53,7 @@ const FooterComponent = (): JSX.Element => {
               'Helsingin kaupungin Instagram-tili',
             )}
             icon={<IconInstagram />}
+            key="instragram"
           />,
           <Footer.Link
             href="https://www.linkedin.com/company/city-of-helsinki"
@@ -59,6 +62,7 @@ const FooterComponent = (): JSX.Element => {
               'Helsingin kaupungin LinkedIn-tili',
             )}
             icon={<IconLinkedin />}
+            key="linkedin"
           />,
         ]}
       >
