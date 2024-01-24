@@ -6,6 +6,14 @@ import fi from './i18n/fi/common.json';
 import sv from './i18n/sv/common.json';
 
 export const defaultLanguage = 'fi';
+export const SUPPORTED_LANGUAGES = ['en', 'fi', 'sv'] as const;
+export type SupportedLanguage = typeof SUPPORTED_LANGUAGES[number];
+
+export const isSupportedLanguage = (
+  lang: string,
+): lang is SupportedLanguage => {
+  return (SUPPORTED_LANGUAGES as ReadonlyArray<string>).includes(lang);
+};
 
 i18n
   .use(initReactI18next)
@@ -17,7 +25,7 @@ i18n
       sv: { common: sv },
     },
     fallbackLng: 'en',
-    supportedLngs: ['en', 'fi', 'sv'],
+    supportedLngs: SUPPORTED_LANGUAGES,
     interpolation: {
       escapeValue: false,
     },
