@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { User } from 'oidc-client';
+import type { User } from 'oidc-client-ts';
 
 import { RootState } from '../../root/rootReducer';
 import {

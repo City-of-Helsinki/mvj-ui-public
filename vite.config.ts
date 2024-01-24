@@ -23,6 +23,10 @@ export default defineConfig({
           src: 'node_modules/leaflet-draw/dist/images/*',
           dest: 'assets/images/.'
         },
+        {
+          src: 'node_modules/oidc-client-ts/dist/browser/oidc-client-ts.min.js',
+          dest: 'assets/js/.'
+        }
       ]
     }),
     react(),

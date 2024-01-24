@@ -1,10 +1,16 @@
-import { all, fork, put, takeEvery, call } from 'redux-saga/effects';
+import { all, put, takeLatest, call, delay, select } from 'redux-saga/effects';
+import type { Effect } from 'redux-saga/effects';
+
 import { logError } from '../root/helpers';
-
-import { receiveApiToken, tokenNotFound } from './actions';
-import { FETCH_API_TOKEN, fetchApiTokenActionType } from './types';
+import { receiveApiToken, tokenNotFound, fetchApiToken } from './actions';
+import { getAccessToken, getApiToken } from './selectors';
+import {
+  FETCH_API_TOKEN,
+  fetchApiTokenActionType,
+  RECEIVE_API_TOKEN,
+} from './types';
 import { userManager } from './userManager';
-
+import { isApiTokenExpired } from './util';
 export function* fetchApiTokenSaga({
   payload: accessToken,
 }: ReturnType<typeof fetchApiTokenActionType>): Generator {
@@ -33,13 +39,11 @@ export function* fetchApiTokenSaga({
           string,
           string
         >;
-        yield put(
-          receiveApiToken(
-            bodyAsJson[
-              import.meta.env.REACT_APP_OPENID_CONNECT_API_TOKEN_KEY as string
-            ],
-          ),
-        );
+        const apiToken =
+          bodyAsJson[
+            import.meta.env.REACT_APP_OPENID_CONNECT_API_TOKEN_KEY as string
+          ];
+        yield put(receiveApiToken(apiToken));
         break;
       }
       default: {
@@ -55,10 +59,25 @@ export function* fetchApiTokenSaga({
   }
 }
 
-export default function* authSaga(): Generator {
+function* refreshApiTokenSaga(): Generator<Effect, void, string> {
+  const TOKEN_CHECK_INTERVAL = 5 * 60 * 1000; // 5 minute
+
+  while (true) {
+    const apiToken = yield select(getApiToken);
+
+    if (!apiToken || isApiTokenExpired(apiToken)) {
+      const accessToken = yield select(getAccessToken);
+      if (accessToken) {
+        yield put(fetchApiToken(accessToken));
+      }
+    }
+    yield delay(TOKEN_CHECK_INTERVAL);
+  }
+}
+
+export function* watchAuthSaga(): Generator {
   yield all([
-    fork(function* (): Generator {
-      yield takeEvery(FETCH_API_TOKEN, fetchApiTokenSaga);
-    }),
+    takeLatest(FETCH_API_TOKEN, fetchApiTokenSaga),
+    takeLatest(RECEIVE_API_TOKEN, refreshApiTokenSaga),
   ]);
 }

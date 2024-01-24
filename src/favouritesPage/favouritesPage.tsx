@@ -4,7 +4,7 @@ import { Col, Container, Row } from 'react-grid-system';
 import { Trans, useTranslation } from 'react-i18next';
 import { Notification, Link, Button } from 'hds-react';
 import { useNavigate } from 'react-router-dom';
-import { User } from 'oidc-client';
+import type { User } from 'oidc-client-ts';
 import { Helmet } from 'react-helmet';
 
 import { Favourite } from '../favourites/types';
@@ -14,13 +14,12 @@ import FavouriteCard from './components/favouriteCard';
 import { PlotSearch } from '../plotSearch/types';
 import { fetchPlotSearches } from '../plotSearch/actions';
 import BlockLoader from '../loader/blockLoader';
-import { getRouteById } from '../root/routes';
+import { getRouteById, AppRoutes } from '../root/helpers';
 import { getIsLoadingUser, getUser } from '../auth/selectors';
 import { openLoginModal } from '../login/actions';
 import { getPageForCurrentPlotSearch } from '../plotSearch/helpers';
 import MainContentElement from '../a11y/MainContentElement';
 import { getPageTitle } from '../root/helpers';
-import { AppRoutes } from '../application/helpers';
 
 interface State {
   favourite: Favourite;

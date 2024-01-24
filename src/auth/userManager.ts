@@ -1,7 +1,6 @@
-import { createUserManager } from 'redux-oidc';
-import { WebStorageStateStore } from 'oidc-client';
-import { getRouteById } from '../root/routes';
-import { AppRoutes } from '../application/helpers';
+import { WebStorageStateStore, UserManager } from 'oidc-client-ts';
+import type { UserManagerSettings } from 'oidc-client-ts';
+import { getRouteById, AppRoutes } from '../root/helpers';
 
 const settings = {
   authority:
@@ -12,12 +11,16 @@ const settings = {
   filterProtocolClaims: true,
   loadUserInfo: true,
   redirect_uri: `${location.origin}${getRouteById(AppRoutes.OIDC_CALLBACK)}`,
-  response_type: 'id_token token',
+  response_type: 'code',
   scope:
     import.meta.env.REACT_APP_OPENID_CONNECT_SCOPE ||
     'openid profile https://api.hel.fi/auth/mvj',
   silent_redirect_uri: `${location.origin}/silent_renew.html`,
   userStore: new WebStorageStateStore({ store: window.localStorage }),
+};
+
+const createUserManager = (settings: UserManagerSettings): UserManager => {
+  return new UserManager(settings);
 };
 
 export const userManager = createUserManager(settings);

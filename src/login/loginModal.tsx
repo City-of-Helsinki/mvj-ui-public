@@ -7,9 +7,8 @@ import { RootState } from '../root/rootReducer';
 import { hideLoginModal } from './actions';
 // import LoginForm from './components/loginForm';
 import { userManager } from '../auth/userManager';
-import { getRouteById } from '../root/routes';
+import { getRouteById, AppRoutes } from '../root/helpers';
 import { setRedirectUrlToSessionStorage } from '../auth/util';
-import { AppRoutes } from '../application/helpers';
 
 interface State {
   isLoginModalOpen: boolean;

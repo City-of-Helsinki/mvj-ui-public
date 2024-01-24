@@ -10,9 +10,9 @@ import {
 } from 'hds-react';
 import { useMatch } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { User } from 'oidc-client';
+import type { User } from 'oidc-client-ts';
 
-import { getRouteById } from '../root/routes';
+import { AppRoutes, getRouteById } from '../root/helpers';
 import { openLoginModal } from '../login/actions';
 import { Language } from '../i18n/types';
 import TopNavigationFavouritesIcon from './components/topNavigationFavouritesIcon';
@@ -21,7 +21,6 @@ import { getUser } from '../auth/selectors';
 import { userManager } from '../auth/userManager';
 import { MVJ_FAVOURITE } from '../favourites/types';
 import { getFavouriteCount } from '../favourites/selectors';
-import { AppRoutes } from '../application/helpers';
 
 interface Dispatch {
   openLoginModal: () => void;
