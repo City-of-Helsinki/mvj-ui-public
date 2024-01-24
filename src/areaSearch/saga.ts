@@ -10,8 +10,6 @@ import {
   AreaSearch,
   SUBMIT_AREA_SEARCH_APPLICATION,
   SubmitAreaSearchApplicationAction,
-  SET_NEXT_AREA_SEARCH_APPLICATION_STEP,
-  RECEIVE_AREA_SEARCH_SAVED,
 } from './types';
 import {
   fetchIntendedUsesRequest,
@@ -28,7 +26,6 @@ import {
   receiveAreaSearchAttachmentSaved,
   receiveAreaSearchSaved,
   receiveIntendedUses,
-  setNextStep,
 } from './actions';
 import { UploadedFileMeta } from '../application/types';
 
@@ -112,7 +109,6 @@ function* submitAreaSearchSaga({
       case 200:
       case 201:
         yield put(receiveAreaSearchSaved(bodyAsJson as AreaSearch));
-        yield put(setNextStep());
         break;
       default:
         yield put(areaSearchSubmissionFailed(bodyAsJson));
@@ -123,10 +119,6 @@ function* submitAreaSearchSaga({
     yield put(areaSearchSubmissionFailed(e));
   }
 }
-
-// function* setNextStepSaga() {
-//   yield call(setNextStep)
-// }
 
 function* submitAreaSearchApplicationSaga({
   payload,

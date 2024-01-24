@@ -20,7 +20,6 @@ import {
   AREA_SEARCH_ATTACHMENT_SUBMISSION_FAILED,
   RECEIVE_AREA_SEARCH_ATTACHMENT_SAVED,
   INITIALIZE_AREA_SEARCH_ATTACHMENTS,
-  SET_NEXT_AREA_SEARCH_APPLICATION_STEP,
 } from './types';
 
 export const submitAreaSearch = (
@@ -37,9 +36,6 @@ export const submitAreaSearchAttachment = (payload: {
 
 export const initializeAreaSearchAttachments = (): Action<string> =>
   createAction(INITIALIZE_AREA_SEARCH_ATTACHMENTS)();
-
-export const setNextStep = (): Action<string> =>
-  createAction(SET_NEXT_AREA_SEARCH_APPLICATION_STEP)();
 
 export const areaSearchAttachmentSubmissionFailed = (
   payload: unknown,

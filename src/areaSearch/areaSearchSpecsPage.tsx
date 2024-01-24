@@ -159,14 +159,12 @@ const AreaSearchSpecsPage = ({
     }
   }, []);
 
-  useEffect(() => {
-    if (lastSubmissionId > prevSubmissionIdRef.current) {
-      prevSubmissionIdRef.current = lastSubmissionId;
-      setSubmitSucceeded(AREA_SEARCH_FORM_NAME);
-      // setNextStep();
-    }
-    console.log('HEP');
-  }, [lastSubmissionId, lastSubmission]);
+  // useEffect(() => {
+  //   if (lastSubmissionId > prevSubmissionIdRef.current) {
+  //     prevSubmissionIdRef.current = lastSubmissionId;
+  //     setSubmitSucceeded(AREA_SEARCH_FORM_NAME);
+  //   }
+  // }, [lastSubmissionId]);
 
   return (
     <>
