@@ -179,32 +179,52 @@
     "specs": {
       "area": {
         "areaDescription": "Tarkempi kuvaus alueesta",
+        "areaDescriptionHelpText": "Vuokra-alue mahdollisimman tarkasti määriteltynä.",
         "drawOnMap": {
           "explanation": "Alueen valinta on lähtökohtana neuvotteluille. Piirtämäsi alue on viitteellinen. Hakemuksen käsittelyvaiheessa olemme sinuun yhteydessä vuokra-alueen rajauksesta.",
-          "heading": "Piirrä alue kartalle"
+          "heading": "Piirrä alue kartalle",
+          "helpTexts": {
+            "label": "Karttatyökalu",
+            "phase1": "Aloita etsimällä kartalta sijainti käyttämällä osoitehakua tai lähentäminen ja loitontaminen -työkalua.",
+            "phase2": "Piirrä haluamasi alue kartalle käyttämällä piirtotyökaluja. Voit piirtää joko monikulmion tai suorakaiteen muotoisia alueita. Alueita voi piirtää useita.",
+            "phase3": "Piirtämäsi alueet talentuvat kartalle automaattisesti ja voit jatkaa hakemuksen täyttämistä.",
+            "phase4": "Voit muokata piirtämääsi aluetta painamalla muokkauspainiketta. Poistonappia painamalla voit poistaa yhden tai useita kohteita.",
+            "zoomTools": "= lähentäminen ja loitontaminen",
+            "zoomToolsAlt": "Lähennä ja loitonna karttaa",
+            "drawTools": "= piirtotyökalut",
+            "drawToolsAlt": "Piirrä alue kartalle",
+            "editTools": "= muokkaa ja poista",
+            "editToolsAlt": "Muokkauspainikkeet",
+            "mapLayers": "= karttatasot",
+            "mapLayersAlt": "Karttatasot"
+          }
         },
         "heading": "Kerro meille, mistä haluat vuokrata alueen"
       },
       "attachments": {
         "heading": "Liitteet",
-        "input": "Voit myös lisätä vapaavalintaisia liitteitä, jos haluat. Esim. valokuva alueesta."
+        "input": "Jos sinua on ohjeistettu liittämään liitteitä hakemukseen, esim. asemapiirros ja pohjapiirustus, liitä ne tässä. Voit myös lisätä vapaavalintaisia liitteitä.",
+        "inputHelpText": "Toivomme ensisijaisesti .pdf-muotoisia tiedostoja."
       },
-      "continueButton": "Hae tätä aluetta",
+      "continueButton": "Jatka",
       "errors": {
         "attachment": "Liitteiden tallennus ei onnistunut! Ole hyvä ja yritä uudelleen.",
         "endDateAfterStartDate": "Päättymispäivämäärän on oltava alkamispäivämäärän jälkeen.",
         "other": "Aluehaun tallennus ei onnistunut tuntemattomasta syystä. Ole hyvä ja yritä uudelleen.",
         "startDateBeforeEndDate": "Alkamispäivämäärän on oltava ennen päättymispäivämäärää.",
-        "validation": "Tarkista, että merkityt kentät on täytetty oikein."
+        "validation": "Tarkista, että merkityt kentät on täytetty oikein.",
+        "eitherPolygonOrDescription": "Jatkaaksesi esikatseluun sinun tulee olla joko A) valinnut vuokra-alueen kartalla tai B) kuvaillut vuokra-aluetta sanallisesti."
       },
       "explanation": "Jatka täyttämällä hakemuslomake, jos haluat vuokrata alueen. Kerro meille toiveesi alueesta, vuokrauksen käyttötarkoituksesta ja vuokra-ajasta. Olemme sinuun yhteydessä mahdollisimman pian. Tähdellä merkityt kentät ovat pakollisia. ",
-      "heading": "Hae vuokra-aluetta",
+      "heading": "1. Alueen valinta",
       "intendedUse": {
         "endDate": "Vuokrauksen päättymispäivämäärä",
         "endDateHelpText": "Jos et tiedä vuokrauksen päättymisajankohtaa tai haluat vuokrata alueen toistaiseksi, kuvaile asiaasi tarkemmassa kuvauksessa.",
         "heading": "Valitse käyttötarkoitus ja toivottu vuokra-aika",
         "mainType": "Käyttötarkoitus",
+        "mainTypePlaceholder": "Valitse käyttötarkoitus",
         "projectDescription": "Tarkempi kuvaus käyttötarkoituksesta",
+        "projectDescriptionHelpText": "Minkälaista toimintaa vuokrakohteessa on tarkoitus järjestää? Minkälaisia rakenteita vuokra-alueelle on tulossa? Kuvaile, ketkä käyttävät aluetta? Onko kyseessä jatkohakemus voimassa olevalle vuokraukselle (jos on, ilmoita vuokraustunnus)?",
         "startDate": "Vuokrauksen alkamispäivämäärä",
         "startDateHelpText": "Huomioithan alkamispäivää merkitessäsi, että hakemukset käsitellään saapumisjärjestyksessä."
       },
