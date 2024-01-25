@@ -2668,25 +2668,20 @@ hasown@^2.0.0:
   dependencies:
     function-bind "^1.1.2"
 
-hds-core@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/hds-core/-/hds-core-3.0.0.tgz#fa6d17b5d739081357c26ab4b127de98c2e06829"
-  integrity sha512-KJyu85gOOpI7W/pTDk5MzGE1XDYswM22/ABrCqU6gs+ILcd1RFFk+1bVm5LgPYncPFiqU11OKLuKs0YkgRGaXg==
+hds-core@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/hds-core/-/hds-core-3.4.0.tgz#8a221c1a219c78818f04c65ffecb2fe81e1fe447"
+  integrity sha512-1tmSdUkDlknonDOjjuIdl6ifT2t6ZM3BxVsPCHsAk1JfrJJIFRPekB6jH8xOqt9g98AQGKtNNzYjvFpPPKDYUQ==
 
-hds-core@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/hds-core/-/hds-core-3.1.0.tgz#7b1112f9e30ce21cd49e8bd4f902ad01c510d5e5"
-  integrity sha512-md+b+2dlTABN3VVTWzbsUyOmXjCzBhzZkH8ANu+H0sSTHXBbEOWFkrdMwwvKSEWNeXoVMf5pHo/NDAURubepMA==
+hds-design-tokens@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/hds-design-tokens/-/hds-design-tokens-3.4.0.tgz#6b50c04dcceaafc0101c798c850d459106ca8c05"
+  integrity sha512-BFu7CI4ID3bqSOMzNVymSAj/eSixph4JWKKvYPIlQKV2JJOiUmxvCkHZoPVwXckAFv2Ur5xiEtLOOll87dCN3Q==
 
-hds-design-tokens@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/hds-design-tokens/-/hds-design-tokens-3.0.0.tgz#14979d91d0d6711fb1d54f6b4f4c0d69f58d2089"
-  integrity sha512-p4Vfv4NMZtDBsxldJBLFCVR7qJS7wQlTKjfDS7habc2iib0TA1EM20S9EmscqfQ4nYWRk5lt/QopKkL6zRm5IQ==
-
-hds-react@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/hds-react/-/hds-react-3.1.0.tgz#4a8e7bebe5d735bf70f7b12bd33747fdbce86a74"
-  integrity sha512-N6QZe4XP9CYDfmWbVd6khQ0QwrlDAKZnhryr3SBWfI3wsXgRGa1cYAdJQ4+Vh08sXkg55M15bPHJgsi9Mn0fww==
+hds-react@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/hds-react/-/hds-react-3.4.0.tgz#e9d8cfa8ebd81d0a5694bb3ee846c6a493ab7fe9"
+  integrity sha512-4hK2N0CqA7t7YHDXMJi7a8UGHL4Qjc0bLOGARdQZh1iXSATY83rVClb2M9SZlE4gvhtlvTpgWedjDnh/1fWmiw==
   dependencies:
     "@babel/runtime" "7.17.9"
     "@emotion/styled-base" "^11.0.0"
@@ -2701,7 +2696,7 @@ hds-react@^3.1.0:
     crc-32 "1.2.0"
     date-fns "2.16.1"
     downshift "6.0.6"
-    hds-core "3.1.0"
+    hds-core "3.4.0"
     http-status-typed "^1.0.1"
     jwt-decode "^3.1.2"
     kashe "1.0.4"
