@@ -1,4 +1,10 @@
-import { Feature, Geometry, MultiPolygon, Polygon } from 'geojson';
+import type {
+  Feature,
+  Geometry,
+  MultiPolygon,
+  Polygon,
+  Position,
+} from 'geojson';
 import {
   CircleMarker,
   CRS,
@@ -10,6 +16,7 @@ import {
   Marker,
   Polyline,
 } from 'leaflet';
+import type { LatLngTuple } from 'leaflet';
 import * as L from 'leaflet';
 import 'leaflet-draw';
 import 'proj4leaflet';
@@ -124,20 +131,30 @@ export const convertPolygonArrayToMultiPolygon = (
   };
 };
 
-export const convertGeoJSONArrayForLeaflet = (
-  coordinates: Array<any>,
-): Array<any> => {
-  const reverseLngLat = (lngLat: Array<number>) => [lngLat[1], lngLat[0]];
-  const transformCoordinates = (item: Array<any>): Array<any> => {
-    if (!item.length) return [];
+type RecursivePosition = Position | RecursivePosition[];
 
-    if (typeof item[0] === 'number') {
-      return reverseLngLat(item);
+export const convertGeoJSONArrayForLeaflet = (
+  coordinates: Position[][],
+): LatLngTuple[][] => {
+  const reverseLngLat = ([
+    longitude,
+    latitude,
+    altitude,
+  ]: Position): LatLngTuple => [latitude, longitude, altitude];
+
+  const transformCoordinates = (
+    items: RecursivePosition,
+  ): LatLngTuple | LatLngTuple[] => {
+    if (!items.length) return [];
+    if (typeof items[0] === 'number') {
+      return reverseLngLat(items as Position);
     } else {
-      return item.map(transformCoordinates);
+      return (items as RecursivePosition[]).map(
+        transformCoordinates,
+      ) as LatLngTuple[];
     }
   };
-  return coordinates.map(transformCoordinates);
+  return coordinates.map(transformCoordinates) as LatLngTuple[][];
 };
 
 export const attachMapResizeObserver = (map: L.Map): void => {
