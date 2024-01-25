@@ -10,11 +10,10 @@ import MainContentElement from '../a11y/MainContentElement';
 import AreaSearchesImage from '../assets/images/areaSearch/areaSearch.svg?react';
 import PlotSearchesImage from '../assets/images/frontPage/plotSearches.svg?react';
 import OtherSearchesImage from '../assets/images/frontPage/otherSearches.svg?react';
-import { getRouteById } from '../root/routes';
+import { getRouteById, AppRoutes } from '../root/helpers';
 import { RootState } from '../root/rootReducer';
 import { fetchUiData } from './actions';
 import { UiData } from './types';
-import { AppRoutes } from '../application/helpers';
 
 interface State {
   uiData: UiData;

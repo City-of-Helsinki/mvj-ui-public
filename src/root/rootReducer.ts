@@ -1,8 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { reducer as oidcReducer } from 'redux-oidc';
 import { reducer as formReducer } from 'redux-form';
-
-import authReducer from '../auth/reducer';
+import { authReducer, oidcReducer } from '../auth/reducer';
 import loginReducer from '../login/reducer';
 import plotSearchReducer from '../plotSearch/reducer';
 import favouriteReducer from '../favourites/reducer';

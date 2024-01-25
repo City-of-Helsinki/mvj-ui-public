@@ -1,4 +1,4 @@
-import { getRouteById } from '../root/routes';
+import { getRouteById, AppRoutes } from '../root/helpers';
 import { RootState } from '../root/rootReducer';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
 import {
@@ -13,7 +13,6 @@ import {
   PlotSearchTargetInfoLink,
 } from './types';
 import { ApiAttributeChoice, ApiAttributes } from '../api/types';
-import { AppRoutes } from '../application/helpers';
 
 export const getPageForCurrentPlotSearch = (
   state: RootState,

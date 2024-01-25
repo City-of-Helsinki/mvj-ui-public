@@ -515,27 +515,3 @@ export const set = (obj: unknown, path: string, value: unknown): void => {
     }
   }
 };
-
-export const AppRoutes = {
-  HOME: 'home',
-  ERROR: 'error',
-  PLOT_SEARCH_AND_COMPETITIONS: 'plot-search-and-competitions',
-  PLOT_SEARCH_AND_COMPETITIONS_TARGET: 'plot-search-and-competitions-target',
-  OTHER_COMPETITIONS_AND_SEARCHES: 'other-competitions-and-searches',
-  AREA_SEARCH_LANDING: 'area-search',
-  AREA_SEARCH_APPLICATION_ROOT: 'area-search-application-root',
-  AREA_SEARCH_APPLICATION_AREA_SPEC: 'area-search-application-area-spec',
-  AREA_SEARCH_APPLICATION_FORM: 'area-search-application-form',
-  AREA_SEARCH_APPLICATION_SUBMIT: 'area-search-application-submit',
-  AREA_SEARCH_APPLICATION_FORM_PREVIEW: 'area-search-application-form-preview',
-  LEASES: 'leases',
-  APPLICATIONS: 'applications',
-  MESSAGES: 'messages',
-  FAVOURITES: 'favourites',
-  OIDC_CALLBACK: 'oidc-callback',
-  APPLICATION_ROOT: 'application-root',
-  APPLICATION_FORM: 'application-form',
-  APPLICATION_PREVIEW: 'application-preview',
-  APPLICATION_SUBMIT: 'application-submit',
-  DIRECT_RESERVATION: 'direct-reservation',
-};

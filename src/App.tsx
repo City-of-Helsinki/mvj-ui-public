@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { User, Log } from 'oidc-client';
+import { User, Log } from 'oidc-client-ts';
 import { setConfiguration as setGridSystemConfiguration } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
-
 import TopNavigation from './topNavigation/topNavigation';
 import Footer from './footer/footer';
 import LoginModal from './login/loginModal';
+import { CookieConsent } from './cookieConsent/cookieConsent';
 import { RootState } from './root/rootReducer';
-import { getIsFetchingApiToken, getUser } from './auth/selectors';
+import {
+  getIsFetchingApiToken,
+  getUser,
+  hasApiToken,
+  getApiToken,
+} from './auth/selectors';
 import { fetchApiToken, receiveApiToken } from './auth/actions';
 import { fetchFavourite } from './favourites/actions';
 import GlobalNotificationContainer from './globalNotification/globalNotificationContainer';
@@ -27,17 +32,19 @@ setGridSystemConfiguration({
 import 'hds-core';
 import './main.scss';
 
-interface Props {
+interface AppProps {
   children?: JSX.Element;
   user: User | null;
   fetchApiToken: (accessToken: string) => void;
   fetchFavourite: () => void;
   isFetchingFavourite: boolean;
-  receiveApiToken: (token: string) => void;
-  isFetchingToken: boolean;
+  receiveApiToken: (apiToken: string) => void;
+  isFetchingApiToken: boolean;
+  hasApiToken: boolean;
+  getApiToken: string | null;
 }
 
-Log.logger = console;
+Log.setLogger(console);
 
 const App = ({
   children,
@@ -45,44 +52,21 @@ const App = ({
   fetchApiToken,
   fetchFavourite,
   isFetchingFavourite,
-  receiveApiToken,
-  isFetchingToken,
-}: Props): JSX.Element => {
-  const [tokenOutdated, setTokenOutdated] = useState<boolean>(true);
-  const [tokenRefreshTimeout, setTokenRefreshTimeout] = useState<ReturnType<
-    typeof setTimeout
-  > | null>(null);
-
+  isFetchingApiToken,
+  hasApiToken,
+  getApiToken,
+}: AppProps): JSX.Element => {
   useEffect(() => {
-    if (user) {
-      if (tokenOutdated && !isFetchingToken) {
-        fetchApiToken(user.access_token);
-        setTokenOutdated(false);
-
-        setTokenRefreshTimeout(
-          setTimeout(
-            () => {
-              setTokenOutdated(true);
-            },
-            1000 * 60 * 10,
-          ),
-        );
-      }
-    } else {
-      if (tokenRefreshTimeout) {
-        clearTimeout(tokenRefreshTimeout);
-        setTokenRefreshTimeout(null);
-        setTokenOutdated(true);
-        receiveApiToken('');
-      }
+    if (user && !hasApiToken && !isFetchingApiToken) {
+      fetchApiToken(user.access_token);
     }
-  }, [user, tokenOutdated, isFetchingToken]);
+  }, [user, getApiToken]);
 
   useEffect(() => {
-    if (!isFetchingFavourite && !isFetchingToken && user) {
+    if (!isFetchingFavourite && !isFetchingApiToken && hasApiToken) {
       fetchFavourite();
     }
-  }, [isFetchingToken, user]);
+  }, [isFetchingApiToken]);
 
   return (
     <div className="App">
@@ -92,6 +76,7 @@ const App = ({
       <LoginModal />
       <TopNavigation />
       <GlobalNotificationContainer />
+      <CookieConsent />
       <main>{children}</main>
       <Footer />
     </div>
@@ -101,8 +86,10 @@ const App = ({
 export default connect(
   (state: RootState) => ({
     user: getUser(state),
-    isFetchingToken: getIsFetchingApiToken(state),
+    isFetchingApiToken: getIsFetchingApiToken(state),
     isFetchingFavourite: getIsFetchingFavourite(state),
+    hasApiToken: hasApiToken(state),
+    getApiToken: getApiToken(state),
   }),
   { fetchApiToken, receiveApiToken, fetchFavourite },
 )(App);

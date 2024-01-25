@@ -9,7 +9,7 @@ import {
 } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { naviLinks } from '../topNavigation/topNavigation';
-import { getRouteById } from '../root/routes';
+import { getRouteById } from '../root/helpers';
 
 const FooterComponent = (): JSX.Element => {
   const { t } = useTranslation();
@@ -38,11 +38,13 @@ const FooterComponent = (): JSX.Element => {
               'Helsingin kaupungin Facebook-tili',
             )}
             icon={<IconFacebook />}
+            key="facebook"
           />,
           <Footer.Link
             href="https://twitter.com/HelsinkiKymp"
             title={t('footer.some.twitter', 'Helsingin kaupungin Twitter-tili')}
             icon={<IconX />}
+            key="twitter"
           />,
           <Footer.Link
             href="https://www.instagram.com/kaupunkiymparisto"
@@ -51,6 +53,7 @@ const FooterComponent = (): JSX.Element => {
               'Helsingin kaupungin Instagram-tili',
             )}
             icon={<IconInstagram />}
+            key="instragram"
           />,
           <Footer.Link
             href="https://www.linkedin.com/company/kaupunkiymparisto"
@@ -59,6 +62,7 @@ const FooterComponent = (): JSX.Element => {
               'Helsingin kaupungin LinkedIn-tili',
             )}
             icon={<IconLinkedin />}
+            key="linkedin"
           />,
         ]}
       >
