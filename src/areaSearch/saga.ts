@@ -1,4 +1,12 @@
-import { all, call, Effect, fork, put, takeLatest } from 'redux-saga/effects';
+import {
+  all,
+  call,
+  Effect,
+  fork,
+  put,
+  take,
+  takeLatest,
+} from 'redux-saga/effects';
 
 import { ApiCallResult } from '../api/callApi';
 import { logError } from '../root/helpers';
@@ -10,6 +18,8 @@ import {
   AreaSearch,
   SUBMIT_AREA_SEARCH_APPLICATION,
   SubmitAreaSearchApplicationAction,
+  RECEIVE_AREA_SEARCH_SAVED,
+  AREA_SEARCH_FORM_NAME,
 } from './types';
 import {
   fetchIntendedUsesRequest,
@@ -28,6 +38,7 @@ import {
   receiveIntendedUses,
 } from './actions';
 import { UploadedFileMeta } from '../application/types';
+import { setSubmitSucceeded } from 'redux-form';
 
 function* submitAreaSearchSaga({
   payload,
@@ -167,10 +178,15 @@ export function* fetchIntendedUsesSaga(): Generator<
   }
 }
 
+function* jee(): Generator {
+  yield put(setSubmitSucceeded(AREA_SEARCH_FORM_NAME));
+}
+
 export default function* areaSearchSaga(): Generator {
   yield all([
     fork(function* (): Generator {
       yield takeLatest(SUBMIT_AREA_SEARCH, submitAreaSearchSaga);
+      yield takeLatest(RECEIVE_AREA_SEARCH_SAVED, jee);
       yield takeLatest(
         SUBMIT_AREA_SEARCH_APPLICATION,
         submitAreaSearchApplicationSaga,

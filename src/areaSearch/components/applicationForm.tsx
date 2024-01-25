@@ -39,7 +39,6 @@ const ApplicationForm = ({
     <form className="AreaSearchApplicationForm">
       {applicantSection && (
         <>
-          <p>Hello there!</p>
           <div className="AreaSearchApplicationForm__section">
             <ApplicationFormSubsection
               key={applicantSection.identifier}

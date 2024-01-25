@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { Button } from 'hds-react';
 import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
+import { isValid, setSubmitSucceeded } from 'redux-form';
 
 import MainContentElement from '../a11y/MainContentElement';
 import AuthDependentContent from '../auth/components/authDependentContent';
@@ -22,6 +22,7 @@ interface State {
   lastSubmission: AreaSearch | null;
   isSubmittingAreaSearch: boolean;
   isFormValid: boolean;
+  currentStep: number;
 }
 
 interface Props extends State {
@@ -33,9 +34,11 @@ const AreaSearchApplicationPage = ({
   isSubmittingAreaSearch,
   lastSubmission,
   isFormValid,
+  currentStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
   const [isSaveClicked, setSaveClicked] = useState<boolean>(false);
+  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const openPreview = () => {
     setSaveClicked(true);
@@ -45,7 +48,16 @@ const AreaSearchApplicationPage = ({
     }
   };
 
-  const renderApplicationForm = (loading: boolean, loggedIn: boolean) => {
+  useEffect(() => {
+    forceUpdate();
+  }, [currentStep]);
+
+  const renderApplicationForm = (
+    lastSubmission: AreaSearch,
+    loading: boolean,
+    loggedIn: boolean,
+  ) => {
+    console.log('HEP');
     if (loading || isSubmittingAreaSearch) {
       return <BlockLoader />;
     } else if (loggedIn) {
@@ -111,6 +123,7 @@ const AreaSearchApplicationPage = ({
       <ScrollToTop />
       <AuthDependentContent>
         {(loading, loggedIn) => {
+          console.log('auth lastsub', lastSubmission);
           return (
             <>
               <MainContentElement className="ApplicationPage">
@@ -133,7 +146,8 @@ const AreaSearchApplicationPage = ({
                   </h1>
                   {lastSubmission && <AreaSearchTargetSummary />}
                   <div className="ApplicationPage__form-container">
-                    {renderApplicationForm(loading, loggedIn)}
+                    {lastSubmission &&
+                      renderApplicationForm(lastSubmission, loading, loggedIn)}
                   </div>
                 </Container>
               </MainContentElement>
@@ -150,6 +164,7 @@ export default connect(
     lastSubmission: state.areaSearch.lastSubmission,
     isSubmittingAreaSearch: state.areaSearch.isSubmittingAreaSearch,
     isFormValid: isValid(AREA_SEARCH_FORM_NAME)(state),
+    currentStep: state.areaSearch.currentStep,
   }),
   {
     openLoginModal,

@@ -130,6 +130,8 @@ const AreaSearchApplicationRootPage = ({
     updateStepAvailability();
   }, [valid, currentStep]);
 
+  console.log('ROOT HEP');
+
   return (
     <MainContentElement className="AreaSearchSpecsPage">
       <Helmet>

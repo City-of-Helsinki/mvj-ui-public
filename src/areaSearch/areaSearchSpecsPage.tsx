@@ -52,6 +52,7 @@ interface State {
   intendedUses: Array<IntendedUse> | null;
   lastSubmission: AreaSearch | null;
   lastSubmissionId: number;
+  currentStep: number;
   errors: FormErrors;
   applicationFormTemplate: ApplicationFormRoot;
 }
@@ -89,6 +90,7 @@ const AreaSearchSpecsPage = ({
   intendedUses,
   lastSubmission,
   lastSubmissionId,
+  currentStep,
   lastSubmissionError,
   applicationFormTemplate,
   change,
@@ -159,12 +161,12 @@ const AreaSearchSpecsPage = ({
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (lastSubmissionId > prevSubmissionIdRef.current) {
-  //     prevSubmissionIdRef.current = lastSubmissionId;
-  //     setSubmitSucceeded(AREA_SEARCH_FORM_NAME);
-  //   }
-  // }, [lastSubmissionId]);
+  useEffect(() => {
+    if (lastSubmissionId > prevSubmissionIdRef.current) {
+      prevSubmissionIdRef.current = lastSubmissionId;
+      setSubmitSucceeded(AREA_SEARCH_FORM_NAME);
+    }
+  }, [lastSubmissionId]);
 
   return (
     <>
@@ -452,6 +454,7 @@ export default connect(
     lastSubmission: state.areaSearch.lastSubmission,
     lastSubmissionId: state.areaSearch.lastSubmissionId,
     lastSubmissionError: state.areaSearch.lastError,
+    currentStep: state.areaSearch.currentStep,
     errors: getFormSyncErrors(AREA_SEARCH_FORM_NAME)(state),
     applicationFormTemplate: getInitialAreaSearchApplicationForm(state),
   }),

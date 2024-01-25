@@ -160,6 +160,7 @@ const ApplicationFormSubsectionFields = connect(
 
       useEffect(() => {
         // set default value if exists and current value is empty
+        console.log('applicationFormSubsection useEffect', field);
         if (
           field.default_value !== null &&
           !getValue(`${identifier}.fields.${field.identifier}.value`)
@@ -281,7 +282,7 @@ const ApplicationFormSubsectionFields = connect(
 
   const checkSpecialValues = (
     field: FormField,
-    newValues: Partial<ApplicationField>
+    newValues: Partial<ApplicationField>,
   ) => {
     if (
       section.identifier === APPLICANT_SECTION_IDENTIFIER &&
@@ -291,7 +292,7 @@ const ApplicationFormSubsectionFields = connect(
       change(
         formName,
         `${identifier}.metadata.applicantType`,
-        valueToApplicantType(newValues.value as string)
+        valueToApplicantType(newValues.value as string),
       );
     }
   };
@@ -494,6 +495,17 @@ const ApplicationFormSubsection = ({
   const isArray = section.add_new_allowed;
   const pathName = [...path, section.identifier].join('.');
 
+  console.log('ApplicationFormSubsection formName', formName);
+  console.log('ApplicationFormSubsection path', path);
+  console.log('ApplicationFormSubsection section', section);
+  console.log('ApplicationFormSubsection headerTag', HeaderTag);
+  console.log('ApplicationFormSubsection flavor ', flavor);
+  console.log(
+    'ApplicationFormSubsection parentApplicantType',
+    parentApplicantType,
+  );
+  console.log('ApplicationFormSubsection isSaveClicked', isSaveClicked);
+
   return (
     <div
       className={classNames(
@@ -501,6 +513,7 @@ const ApplicationFormSubsection = ({
         `ApplicationFormSubsection--${flavor}`,
       )}
     >
+      <p>ApplicationFormSubsection</p>
       {isArray ? (
         <FieldArray<
           ApplicationFormSubsectionFieldArrayProps,
