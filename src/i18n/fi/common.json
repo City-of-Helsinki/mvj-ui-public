@@ -87,7 +87,7 @@
     "submitInProcess": "Hakemusta lähetetään...",
     "success": {
       "body": "Hakemuksesi on lähetetty.",
-      "body_one": "Hakemuksesi on lähetetty. Hakemusnumero on {{applicationIdentifiers}}. Sinulle on lähetetty antamaasi sähköpostiosoitteeseen kopio hakemuksesta.",
+      "body_one": "Hakemuksesi on lähetetty, hakemusnumero on {{applicationIdentifiers}}. Sinulle on lähetetty antamaasi sähköpostiosoitteeseen kopio hakemuksesta.",
       "body_other": "Hakemuksesi on lähetetty. Hakemusnumerot ovat {{applicationIdentifiers}}. Sinulle on lähetetty antamaasi sähköpostiosoitteeseen kopio hakemuksesta.",
       "heading": "Kiitos hakemuksestasi",
       "pageTitle": "Hakemus lähetetty"

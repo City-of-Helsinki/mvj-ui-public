@@ -15,16 +15,30 @@ import { initializeAreaSearchForm } from './helpers';
 
 export interface Props {
   initializeForm: typeof initialize;
+  applicationIdentifiers: string;
 }
 
 const AreaSearchApplicationSuccessPage = ({
   initializeForm,
+  applicationIdentifiers,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
 
   useEffect(() => {
     initializeForm(AREA_SEARCH_FORM_NAME, initializeAreaSearchForm());
   }, []);
+
+  let successMessage = t(
+    'application.success.body',
+    'Your application has been received.',
+  );
+  if (applicationIdentifiers) {
+    successMessage = t(
+      'application.success.body_one',
+      'Your application has been received.',
+      { applicationIdentifiers },
+    );
+  }
 
   return (
     <>
@@ -41,12 +55,7 @@ const AreaSearchApplicationSuccessPage = ({
           <h1>
             {t('application.success.heading', 'Thank you for your application')}
           </h1>
-          <p>
-            {t(
-              'application.success.body',
-              'Your application has been received.',
-            )}
-          </p>
+          <p>{successMessage}</p>
           <ApplicationProcedureInfo showOnlyContent={true} />
         </Container>
       </MainContentElement>
