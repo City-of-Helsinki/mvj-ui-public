@@ -3,3 +3,21 @@
     margin: $spacing-l 0;
   }
 }
+
+// Selects the divs that are direct children of the root ApplicationPreviewSubsection,
+// excludes child ApplicationPreviewSubsections up to 4 levels deep
+.ApplicationPreviewSubsection:not(
+    .ApplicationPreviewSubsection .ApplicationPreviewSubsection
+  ):not(
+    .ApplicationPreviewSubsection
+      .ApplicationPreviewSubsection
+      .ApplicationPreviewSubsection
+  ):not(
+    .ApplicationPreviewSubsection
+      .ApplicationPreviewSubsection
+      .ApplicationPreviewSubsection
+      .ApplicationPreviewSubsection
+  )
+  > div {
+  margin-bottom: 4em;
+}
