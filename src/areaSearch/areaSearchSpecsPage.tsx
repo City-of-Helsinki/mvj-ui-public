@@ -28,6 +28,7 @@ import FileInputFormField from '../form/FileInputFormField';
 import {
   dateAfterOrEqualValidatorGenerator,
   dateBeforeOrEqualValidatorGenerator,
+  eitherMultiPolygonOrRequiredValidatorGenerator,
   nonEmptyMultiPolygonValidatorGenerator,
   requiredValidatorGenerator,
 } from '../form/validators';
@@ -45,10 +46,13 @@ import AreaSearchMap from './components/AreaSearchMap';
 import { getInitialAreaSearchApplicationForm } from './helpers';
 import { ApplicationFormRoot } from '../application/types';
 import ScrollToTop from '../common/ScrollToTop';
+import type { MultiPolygon } from 'geojson';
 
 interface State {
   startDate?: string;
   endDate?: string;
+  geometry?: MultiPolygon | null;
+  descriptionArea?: string;
   intendedUses: Array<IntendedUse> | null;
   lastSubmissionId: number;
   errors: FormErrors;
@@ -83,6 +87,8 @@ const AreaSearchSpecsPage = ({
   errors,
   startDate,
   endDate,
+  geometry,
+  descriptionArea,
   startSubmit,
   setSubmitSucceeded,
   fetchIntendedUses,
@@ -151,6 +157,19 @@ const AreaSearchSpecsPage = ({
         ),
       ),
     [startDate, endDate],
+  );
+  const polygonOrDescriptionRequired = useMemo<
+    ReturnType<typeof eitherMultiPolygonOrRequiredValidatorGenerator>
+  >(
+    () =>
+      eitherMultiPolygonOrRequiredValidatorGenerator(
+        geometry,
+        t(
+          'areaSearch.specs.errors.eitherPolygonOrDescription',
+          'Select either polygon or description.',
+        ),
+      ),
+    [geometry, descriptionArea],
   );
 
   useEffect(() => {
@@ -223,7 +242,7 @@ const AreaSearchSpecsPage = ({
                         )}
                       </h2>
 
-                      <Row>
+                      <Row className="row">
                         <Col xs={12} lg={6} xl={4}>
                           <Field
                             name="search.intended_use"
@@ -238,10 +257,14 @@ const AreaSearchSpecsPage = ({
                               'Intended use',
                             )}
                             validate={[simpleRequiredValidator]}
+                            placeholder={t(
+                              'areaSearch.specs.intendedUse.mainTypePlaceholder',
+                              'Intended use',
+                            )}
                           />
                         </Col>
                       </Row>
-                      <Row>
+                      <Row className="row">
                         <Col xs={12} xl={8}>
                           <Field
                             id="description_intended_use"
@@ -253,10 +276,14 @@ const AreaSearchSpecsPage = ({
                               'Detailed description of intended use',
                             )}
                             validate={[simpleRequiredValidator]}
+                            helperText={t(
+                              'areaSearch.specs.intendedUse.projectDescriptionHelpText',
+                              'What kind of activity would you like to carry out on the area? Please describe the project in as much detail as possible.',
+                            )}
                           />
                         </Col>
                       </Row>
-                      <Row>
+                      <Row className="row">
                         <Col xs={12} lg={6} xl={4}>
                           <Field
                             id="start_date"
@@ -278,6 +305,7 @@ const AreaSearchSpecsPage = ({
                               dateAfterPageLoadValidator,
                               isBeforeEndDateValidator,
                             ]}
+                            placeholder="1.1.2021"
                           />
                         </Col>
                         <Col xs={12} lg={6} xl={4}>
@@ -300,6 +328,7 @@ const AreaSearchSpecsPage = ({
                               isAfterStartDateValidator,
                             ]}
                             initialMonth={startDateObject || dateNow}
+                            placeholder="1.1.2021"
                           />
                         </Col>
                       </Row>
@@ -323,17 +352,127 @@ const AreaSearchSpecsPage = ({
                           "Note that the area you specify will be precursory only. We'll contact you to determine the exact area later during the application handling process. Areas colored in dark gray are not owned by the City of Helsinki.",
                         )}
                       </p>
-                      <Row>
+                      <Row className="row">
+                        <Col xs={12}>
+                          <Notification
+                            label={t(
+                              'areaSearch.specs.area.drawOnMap.helpTexts.label',
+                              'Map',
+                            )}
+                          >
+                            <ol>
+                              <li>
+                                {t(
+                                  'areaSearch.specs.area.drawOnMap.helpTexts.phase1',
+                                  'Start by searching',
+                                )}
+                              </li>
+                              <li>
+                                {t(
+                                  'areaSearch.specs.area.drawOnMap.helpTexts.phase2',
+                                  'Draw area',
+                                )}
+                              </li>
+                              <li>
+                                {t(
+                                  'areaSearch.specs.area.drawOnMap.helpTexts.phase3',
+                                  'Drawing is saved automatically',
+                                )}
+                              </li>
+                              <li>
+                                {t(
+                                  'areaSearch.specs.area.drawOnMap.helpTexts.phase4',
+                                  'You can edit your drawing',
+                                )}
+                              </li>
+                            </ol>
+                            <div className="map-icon-container">
+                              <div className="map-icon-container_column">
+                                <div className="map-icon-container_row">
+                                  <img
+                                    src="/zoom-in-out.png"
+                                    alt={t(
+                                      'areaSearch.specs.area.drawOnMap.helpTexts.zoomToolsAlt',
+                                      'Zoom in and out',
+                                    )}
+                                    className="map-icon"
+                                  />
+                                  <span>
+                                    {t(
+                                      'areaSearch.specs.area.drawOnMap.helpTexts.zoomTools',
+                                      'Zoom in and out',
+                                    )}
+                                  </span>
+                                </div>
+                                <div className="map-icon-container_row">
+                                  <img
+                                    src="/draw-tools.png"
+                                    alt={t(
+                                      'areaSearch.specs.area.drawOnMap.helpTexts.drawToolsAlt',
+                                      'Drawing tools',
+                                    )}
+                                    className="map-icon"
+                                  />
+                                  <span>
+                                    {t(
+                                      'areaSearch.specs.area.drawOnMap.helpTexts.drawTools',
+                                      'Drawing tools',
+                                    )}
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="map-icon-container_column">
+                                <div className="map-icon-container_row">
+                                  <img
+                                    src="/edit-tools.png"
+                                    alt={t(
+                                      'areaSearch.specs.area.drawOnMap.helpTexts.editTools',
+                                      'Edit and delete',
+                                    )}
+                                    className="map-icon"
+                                  />
+                                  <span>
+                                    {t(
+                                      'areaSearch.specs.area.drawOnMap.helpTexts.editTools',
+                                      'Edit and delete',
+                                    )}
+                                  </span>
+                                </div>
+                                <div className="map-icon-container_row">
+                                  <img
+                                    src="/map-layers.png"
+                                    alt={t(
+                                      'areaSearch.specs.area.drawOnMap.helpTexts.mapLayers',
+                                      'Map layers',
+                                    )}
+                                    className="map-icon-squared"
+                                  />
+                                  <span>
+                                    {t(
+                                      'areaSearch.specs.area.drawOnMap.helpTexts.mapLayers',
+                                      'Map layers',
+                                    )}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </Notification>
+                        </Col>
+                      </Row>
+                      <Row className="row">
                         <Col xs={12}>
                           <Field
                             id="geometry"
                             name="search.geometry"
                             component={AreaSearchMap}
-                            validate={[nonEmptyMultiPolygonValidator]}
+                            validate={[
+                              nonEmptyMultiPolygonValidator,
+                              polygonOrDescriptionRequired,
+                            ]}
                           />
                         </Col>
                       </Row>
-                      <Row>
+                      <Row className="row">
                         <Col xs={12} xl={8}>
                           <Field
                             id="description_area"
@@ -343,6 +482,11 @@ const AreaSearchSpecsPage = ({
                               'areaSearch.specs.area.areaDescription',
                               'Detailed description of desired area',
                             )}
+                            helperText={t(
+                              'areaSearch.specs.area.areaDescriptionHelpText',
+                              'Detailed desciption of desired area',
+                            )}
+                            validate={[polygonOrDescriptionRequired]}
                           />
                         </Col>
                       </Row>
@@ -365,7 +509,24 @@ const AreaSearchSpecsPage = ({
                         dragAndDrop
                         multiple
                         maxSize={20 * 1024 * 1024}
+                        helperText={t(
+                          'areaSearch.specs.attachments.inputHelpText',
+                          'Please use PDF files primarily.',
+                        )}
                       />
+                    </section>
+                    <section className="no-padding">
+                      {hasSubmitErrors && !valid && (
+                        <Notification
+                          className="AreaSearchSpecsPage__submit-error"
+                          type="error"
+                        >
+                          {t(
+                            'areaSearch.specs.errors.validation',
+                            'Please check the marked fields before proceeding.',
+                          )}
+                        </Notification>
+                      )}
                     </section>
                     <Button
                       variant="primary"
@@ -382,17 +543,6 @@ const AreaSearchSpecsPage = ({
                         'Apply for this area',
                       )}
                     </Button>
-                    {hasSubmitErrors && !valid && (
-                      <Notification
-                        className="AreaSearchSpecsPage__submit-error"
-                        type="error"
-                      >
-                        {t(
-                          'areaSearch.specs.errors.validation',
-                          'Please check the marked fields before proceeding.',
-                        )}
-                      </Notification>
-                    )}
                     {lastSubmissionError && (
                       <Notification
                         className="AreaSearchSpecsPage__submit-error"
@@ -442,6 +592,8 @@ export default connect(
   (state: RootState) => ({
     startDate: selector(state, 'search.start_date'),
     endDate: selector(state, 'search.end_date'),
+    geometry: selector(state, 'search.geometry'),
+    descriptionArea: selector(state, 'search.description_area'),
     intendedUses: state.areaSearch.intendedUses,
     isSubmittingAreaSearch: state.areaSearch.isSubmittingAreaSearch,
     lastSubmissionId: state.areaSearch.lastSubmissionId,

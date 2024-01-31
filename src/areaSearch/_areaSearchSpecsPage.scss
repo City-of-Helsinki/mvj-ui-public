@@ -7,7 +7,40 @@
     background-color: $color-black-5;
   }
 
+  .no-padding {
+    padding: 0 !important;
+  }
+
   .AreaSearchSpecsPage__submit-error {
     margin-top: $spacing-layout-xs;
+  }
+}
+
+.row {
+  margin-bottom: 1em;
+}
+
+.map-icon-container {
+  display: flex;
+
+  &_column {
+    margin: 0 2em;
+  }
+
+  &_row {
+    align-items: center;
+    display: flex;
+    margin: 1em 0;
+
+    img.map-icon {
+      width: 1.6em;
+      margin-right: 0.5em;
+    }
+
+    img.map-icon-squared {
+      width: 2.3em;
+      height: 2.3em;
+      margin-right: 0.5em;
+    }
   }
 }

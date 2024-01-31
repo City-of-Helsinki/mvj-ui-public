@@ -17,7 +17,7 @@ export const requiredValidatorGenerator =
         ? customError ||
             i18n.t(
               'validation.errors.requiredArray',
-              'One or more options must be selected.'
+              'One or more options must be selected.',
             )
         : null;
     }
@@ -46,7 +46,7 @@ export const greaterThanValidatorGenerator =
         i18n.t(
           'validation.errors.greaterThan',
           'Please enter a value greater than {{number}}.',
-          { number: comparisonValue }
+          { number: comparisonValue },
         )
       );
     }
@@ -67,7 +67,7 @@ export const lessThanValidatorGenerator =
         i18n.t(
           'validation.errors.lessThan',
           'Please enter a value less than {{number}}.',
-          { number: comparisonValue }
+          { number: comparisonValue },
         )
       );
     }
@@ -88,7 +88,7 @@ export const dateAfterValidatorGenerator =
           i18n.t(
             'validation.errors.dateAfter',
             'The selected date cannot be before {{date}}.',
-            { date: renderDate(comparisonDate) }
+            { date: renderDate(comparisonDate) },
           )
         );
       }
@@ -110,7 +110,7 @@ export const dateBeforeValidatorGenerator =
           i18n.t(
             'validation.errors.dateBefore',
             'The selected date cannot be after {{date}}.',
-            { date: renderDate(comparisonDate) }
+            { date: renderDate(comparisonDate) },
           )
         );
       }
@@ -162,7 +162,21 @@ export const nonEmptyMultiPolygonValidatorGenerator =
       customError ||
       i18n.t(
         'validation.errors.nonEmptyGeometry',
-        'No area has yet been selected.'
+        'No area has yet been selected.',
       )
     );
+  };
+
+export const eitherMultiPolygonOrRequiredValidatorGenerator =
+  (comparisonValue?: MultiPolygon | null, customError?: string) =>
+  (value?: string): string | null => {
+    if (comparisonValue) return null;
+
+    if (!value)
+      return (
+        customError ||
+        i18n.t('validation.errors.requiredValue', 'This field is required.')
+      );
+
+    return null;
   };

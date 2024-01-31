@@ -179,15 +179,32 @@
     "specs": {
       "area": {
         "areaDescription": "",
+        "areaDescriptionHelpText": "",
         "drawOnMap": {
           "explanation": "",
-          "heading": ""
+          "heading": "",
+          "helpTexts": {
+            "label": "",
+            "phase1": "",
+            "phase2": "",
+            "phase3": "",
+            "phase4": "",
+            "zoomTools": "",
+            "zoomToolsAlt": "",
+            "drawTools": "",
+            "drawToolsAlt": "",
+            "editTools": "",
+            "editToolsAlt": "",
+            "mapLayers": "",
+            "mapLayersAlt": ""
+          }
         },
         "heading": ""
       },
       "attachments": {
         "heading": "",
-        "input": ""
+        "input": "",
+        "inputHelpText": ""
       },
       "continueButton": "",
       "errors": {
@@ -195,7 +212,8 @@
         "endDateAfterStartDate": "",
         "other": "",
         "startDateBeforeEndDate": "",
-        "validation": ""
+        "validation": "",
+        "eitherPolygonOrDescription": ""
       },
       "explanation": "",
       "heading": "",
@@ -204,7 +222,9 @@
         "endDateHelpText": "",
         "heading": "",
         "mainType": "",
+        "mainTypePlaceholder": "",
         "projectDescription": "",
+        "projectDescriptionHelpText": "",
         "startDate": "",
         "startDateHelpText": ""
       },
