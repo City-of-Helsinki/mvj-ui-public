@@ -18,6 +18,6 @@ export const isApiTokenExpired = (apiToken: string): boolean => {
     return false;
   }
   const currentTime = Date.now() / 1000;
-  const BUFFER_TIME = 60; // 1 minute
+  const BUFFER_TIME = 90; // 1.5 minute
   return exp < currentTime + BUFFER_TIME;
 };
