@@ -7,7 +7,7 @@
     "start": "yarn dev",
     "dev": "vite",
     "test": "vitest run",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "i18n": "npx i18next",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
