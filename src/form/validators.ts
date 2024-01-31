@@ -172,8 +172,11 @@ export const eitherMultiPolygonOrRequiredValidatorGenerator =
   (value?: string): string | null => {
     if (comparisonValue) return null;
 
-    return !value
-      ? customError ||
-          i18n.t('validation.errors.requiredValue', 'This field is required.')
-      : null;
+    if (!value)
+      return (
+        customError ||
+        i18n.t('validation.errors.requiredValue', 'This field is required.')
+      );
+
+    return null;
   };

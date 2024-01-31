@@ -46,7 +46,7 @@ import AreaSearchMap from './components/AreaSearchMap';
 import { getInitialAreaSearchApplicationForm } from './helpers';
 import { ApplicationFormRoot } from '../application/types';
 import ScrollToTop from '../common/ScrollToTop';
-import { MultiPolygon } from 'geojson';
+import type { MultiPolygon } from 'geojson';
 
 interface State {
   startDate?: string;
