@@ -28,4 +28,4 @@ export const getIsLoadingUser: Selector<RootState, boolean> = (
 
 export const getIsFetchingApiToken: Selector<RootState, boolean> = (
   state: RootState,
-): boolean => !state.auth.apiToken && state.auth.isFetching;
+): boolean => state.auth.isFetching;

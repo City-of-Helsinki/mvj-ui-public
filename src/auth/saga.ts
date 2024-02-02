@@ -60,7 +60,7 @@ export function* fetchApiTokenSaga({
 }
 
 function* refreshApiTokenSaga(): Generator<Effect, void, string> {
-  const TOKEN_CHECK_INTERVAL = 5 * 60 * 1000; // 5 minute
+  const TOKEN_CHECK_INTERVAL = 1 * 60 * 1000; // 1 minute
 
   while (true) {
     const apiToken = yield select(getApiToken);
