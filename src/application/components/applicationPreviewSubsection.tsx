@@ -90,7 +90,7 @@ const ApplicationPreviewSubsection = ({
                   </>
                 ) : (
                   <>
-                    {section.title} ({i + 1})
+                    {section.title} {i + 1}
                   </>
                 )}
               </HeaderTag>

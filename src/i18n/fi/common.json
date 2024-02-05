@@ -112,14 +112,14 @@
       "heading": "2. Hakemus",
       "loginButton": "Kirjaudu sisään",
       "preview": {
-        "heading": "Aluehaun hakemuksen esikatselu",
+        "heading": "4. Esikatselu",
         "pageTitle": "Aluehaun hakemus"
       },
       "target": {
         "addressNotFound": "Valitsemallasi alueelle ei löytynyt osoitetta",
         "area": "Pinta-ala (m²)",
         "areaDescription": "Tarkempi kuvaus alueesta",
-        "attachments": "Liitteet",
+        "attachments": "Hakemuksen liitteet",
         "intendedUsage": "Käyttötarkoitus",
         "leaseTime": "Vuokra-aika",
         "screenReaderHeading": "Valittu alue:"
@@ -202,7 +202,7 @@
         "heading": "Kerro meille, mistä haluat vuokrata alueen"
       },
       "attachments": {
-        "heading": "Liitteet",
+        "heading": "Hakemuksen liitteet",
         "input": "Jos sinua on ohjeistettu liittämään liitteitä hakemukseen, esim. asemapiirros ja pohjapiirustus, liitä ne tässä. Voit myös lisätä vapaavalintaisia liitteitä.",
         "inputHelpText": "Toivomme ensisijaisesti .pdf-muotoisia tiedostoja."
       },

@@ -1,7 +1,6 @@
 import { Col, Row } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { Link } from 'hds-react';
 import ScreenReaderText from '../../a11y/ScreenReaderText';
 import { Info } from '../../favouritesPage/utils';
 import { renderDate } from '../../i18n/utils';
@@ -10,7 +9,6 @@ import { RootState } from '../../root/rootReducer';
 import { AreaSearch, AreaSearchAttachment } from '../types';
 import AreaSearchTargetSummaryMap from './areaSearchTargetSummaryMap';
 import AreaSearchTargetSummaryInfo from './areaSearchTargetSummaryInfo';
-import { generateAttachmentLink } from '../helpers';
 
 interface State {
   lastSubmission: AreaSearch | null;
@@ -73,11 +71,7 @@ const AreaSearchTargetSummary = ({
     infoCols.push({
       key: t('areaSearch.application.target.attachments', 'Attachments'),
       value: areaSearchAttachments.map((attachment) => (
-        <p key={attachment.id}>
-          <Link href={generateAttachmentLink(attachment)} external openInNewTab>
-            {attachment.name}
-          </Link>
-        </p>
+        <p key={attachment.id}>{attachment.name}</p>
       )),
       fullDescOnly: true,
     });
