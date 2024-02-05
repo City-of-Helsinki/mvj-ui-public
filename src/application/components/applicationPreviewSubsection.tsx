@@ -60,7 +60,7 @@ const ApplicationPreviewSubsection = ({
   };
 
   const getParentApplicantType = (
-    answer: ApplicationFormNode
+    answer: ApplicationFormNode,
   ): ApplicantTypes => {
     if (answer?.metadata) {
       return answer.metadata['applicantType'] as ApplicantTypes;
@@ -84,7 +84,7 @@ const ApplicationPreviewSubsection = ({
                   <>
                     {section.title} (
                     {getTargetTitle(
-                      answer.metadata?.identifier as number | undefined
+                      answer.metadata?.identifier as number | undefined,
                     )}
                     )
                   </>
@@ -104,17 +104,20 @@ const ApplicationPreviewSubsection = ({
                   />
                 ))}
                 {section.subsections.map((subsection) => (
-                  <ApplicationPreviewSubsection
-                    key={subsection.identifier}
-                    section={subsection}
-                    answers={
-                      answer[ApplicationSectionKeys.Subsections][
-                        subsection.identifier
-                      ]
-                    }
-                    parentApplicantType={getParentApplicantType(answer)}
-                    pendingUploads={pendingUploads}
-                  />
+                  <>
+                    <hr className="ApplicationPreviewSubsection__hr" />
+                    <ApplicationPreviewSubsection
+                      key={subsection.identifier}
+                      section={subsection}
+                      answers={
+                        answer[ApplicationSectionKeys.Subsections][
+                          subsection.identifier
+                        ]
+                      }
+                      parentApplicantType={getParentApplicantType(answer)}
+                      pendingUploads={pendingUploads}
+                    />
+                  </>
                 ))}
               </div>
             </div>
@@ -137,19 +140,22 @@ const ApplicationPreviewSubsection = ({
               />
             ))}
             {section.subsections.map((subsection) => (
-              <ApplicationPreviewSubsection
-                key={subsection.identifier}
-                section={subsection}
-                answers={
-                  (answers as ApplicationFormNode)[
-                    ApplicationSectionKeys.Subsections
-                  ][subsection.identifier]
-                }
-                parentApplicantType={getParentApplicantType(
-                  answers as ApplicationFormNode
-                )}
-                pendingUploads={pendingUploads}
-              />
+              <>
+                <hr className="ApplicationPreviewSubsection__hr" />
+                <ApplicationPreviewSubsection
+                  key={subsection.identifier}
+                  section={subsection}
+                  answers={
+                    (answers as ApplicationFormNode)[
+                      ApplicationSectionKeys.Subsections
+                    ][subsection.identifier]
+                  }
+                  parentApplicantType={getParentApplicantType(
+                    answers as ApplicationFormNode,
+                  )}
+                  pendingUploads={pendingUploads}
+                />
+              </>
             ))}
           </div>
         </>
