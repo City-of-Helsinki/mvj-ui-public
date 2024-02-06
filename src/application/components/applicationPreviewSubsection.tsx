@@ -78,7 +78,7 @@ const ApplicationPreviewSubsection = ({
       {isArray ? (
         <>
           {(answers as Array<ApplicationFormNode>).map((answer, i) => (
-            <div key={i}>
+            <div key={`answers-${i}`}>
               <HeaderTag>
                 {section.identifier === TARGET_SECTION_IDENTIFIER ? (
                   <>
@@ -95,19 +95,20 @@ const ApplicationPreviewSubsection = ({
                 )}
               </HeaderTag>
               <div>
-                {section.fields.map((field) => (
+                {section.fields.map((field, i) => (
                   <ApplicationPreviewSubsectionField
-                    key={field.identifier}
+                    key={`subfield-${i}-${field.identifier}`}
                     field={field}
                     sectionAnswers={answer[ApplicationSectionKeys.Fields]}
                     pendingUploads={pendingUploads}
                   />
                 ))}
-                {section.subsections.map((subsection) => (
-                  <>
+                {section.subsections.map((subsection, i) => (
+                  <React.Fragment
+                    key={`subsection-${i}-${subsection.identifier}`}
+                  >
                     <hr className="ApplicationPreviewSubsection__hr" />
                     <ApplicationPreviewSubsection
-                      key={subsection.identifier}
                       section={subsection}
                       answers={
                         answer[ApplicationSectionKeys.Subsections][
@@ -117,7 +118,7 @@ const ApplicationPreviewSubsection = ({
                       parentApplicantType={getParentApplicantType(answer)}
                       pendingUploads={pendingUploads}
                     />
-                  </>
+                  </React.Fragment>
                 ))}
               </div>
             </div>
@@ -127,9 +128,9 @@ const ApplicationPreviewSubsection = ({
         <>
           <HeaderTag>{section.title}</HeaderTag>
           <div>
-            {section.fields.map((field) => (
+            {section.fields.map((field, i) => (
               <ApplicationPreviewSubsectionField
-                key={field.identifier}
+                key={`subfield-${i}-${field.identifier}`}
                 field={field}
                 sectionAnswers={
                   (answers as ApplicationFormNode)[
@@ -139,11 +140,10 @@ const ApplicationPreviewSubsection = ({
                 pendingUploads={pendingUploads}
               />
             ))}
-            {section.subsections.map((subsection) => (
-              <>
+            {section.subsections.map((subsection, i) => (
+              <React.Fragment key={`subsection-${i}-${subsection.identifier}`}>
                 <hr className="ApplicationPreviewSubsection__hr" />
                 <ApplicationPreviewSubsection
-                  key={subsection.identifier}
                   section={subsection}
                   answers={
                     (answers as ApplicationFormNode)[
@@ -155,7 +155,7 @@ const ApplicationPreviewSubsection = ({
                   )}
                   pendingUploads={pendingUploads}
                 />
-              </>
+              </React.Fragment>
             ))}
           </div>
         </>
