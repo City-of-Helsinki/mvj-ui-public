@@ -45,6 +45,7 @@ const AreaSearchApplicationRootPage = ({
   initializeForm,
   fetchFormAttributes,
   valid,
+  lastSubmission,
 }: Props & InjectedFormProps<unknown, Props>): JSX.Element => {
   const [currentStep, setCurrentStep] = useState<number>(0);
 
@@ -89,7 +90,11 @@ const AreaSearchApplicationRootPage = ({
           />
         );
       case 'Lähetys':
-        return <AreaSearchApplicationSuccessPage />;
+        return (
+          <AreaSearchApplicationSuccessPage
+            applicationIdentifiers={lastSubmission?.identifier || ''}
+          />
+        );
       default:
         return null;
     }
