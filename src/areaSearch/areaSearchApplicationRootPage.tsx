@@ -54,6 +54,7 @@ const AreaSearchApplicationRootPage = ({
   currentStep,
   setAreaSearchStep,
   resetAreaSearchState,
+  lastSubmission,
 }: Props & InjectedFormProps<unknown, Props>): JSX.Element => {
   const [steps, setSteps] = useState<Step[]>([
     {
@@ -83,7 +84,11 @@ const AreaSearchApplicationRootPage = ({
       case 'Esikatselu':
         return <AreaSearchApplicationPreview />;
       case 'Lähetys':
-        return <AreaSearchApplicationSuccessPage />;
+        return (
+          <AreaSearchApplicationSuccessPage
+            applicationIdentifiers={lastSubmission?.identifier || ''}
+          />
+        );
       default:
         return null;
     }

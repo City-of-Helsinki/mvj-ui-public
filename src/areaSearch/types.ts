@@ -27,6 +27,7 @@ export type AreaSearchFormRoot = {
 
 export type AreaSearch = {
   id: number;
+  identifier: string;
   start_date: string;
   end_date: string;
   description_area: string;
