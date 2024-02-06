@@ -113,7 +113,8 @@
       "loginButton": "Log in",
       "preview": {
         "heading": "Area search application preview",
-        "pageTitle": "Area search application"
+        "pageTitle": "Area search application",
+        "emailConfirmationNotice": "You will receive a notice with a copy of the application by email."
       },
       "target": {
         "addressNotFound": "No address found for the selected area",

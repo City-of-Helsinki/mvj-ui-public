@@ -113,7 +113,8 @@
       "loginButton": "Kirjaudu sisään",
       "preview": {
         "heading": "4. Esikatselu",
-        "pageTitle": "Aluehaun hakemus"
+        "pageTitle": "Aluehaun hakemus",
+        "emailConfirmationNotice": "Saat vahvistuksen hakemuksen vastaanottamisesta ja kopion hakemuksesta sähköpostiisi."
       },
       "target": {
         "addressNotFound": "Valitsemallasi alueelle ei löytynyt osoitetta",
