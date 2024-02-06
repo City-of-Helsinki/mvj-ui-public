@@ -28,17 +28,16 @@ const AreaSearchApplicationSuccessPage = ({
     initializeForm(AREA_SEARCH_FORM_NAME, initializeAreaSearchForm());
   }, []);
 
-  let successMessage = t(
-    'application.success.body',
-    'Your application has been received.',
-  );
-  if (applicationIdentifiers) {
-    successMessage = t(
-      'application.success.body_one',
-      'Your application has been received.',
-      { applicationIdentifiers },
-    );
-  }
+  const successMessage = () => {
+    if (applicationIdentifiers) {
+      return t(
+        'application.success.body_one',
+        'Your application has been received.',
+        { applicationIdentifiers },
+      );
+    }
+    return t('application.success.body', 'Your application has been received.');
+  };
 
   return (
     <>
@@ -55,7 +54,7 @@ const AreaSearchApplicationSuccessPage = ({
           <h1>
             {t('application.success.heading', 'Thank you for your application')}
           </h1>
-          <p>{successMessage}</p>
+          <p>{successMessage()}</p>
           <ApplicationProcedureInfo showOnlyContent={true} />
         </Container>
       </MainContentElement>
