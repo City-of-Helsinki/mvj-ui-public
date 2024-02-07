@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from 'hds-react';
 import { Col, Container, Row } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
+import { FormAction, change, isValid } from 'redux-form';
 
 import MainContentElement from '../a11y/MainContentElement';
 import AuthDependentContent from '../auth/components/authDependentContent';
@@ -17,24 +17,46 @@ import AreaSearchTargetSummary from './components/areaSearchTargetSummary';
 import ApplicationForm from './components/applicationForm';
 import ScrollToTop from '../common/ScrollToTop';
 import ApplicationErrorsSummary from '../application/components/ApplicationErrorsSummary';
+import {
+  AreaSearchStepperPageIndex,
+  getInitialAreaSearchApplicationForm,
+} from './helpers';
+import { ApplicationFormRoot } from '../application/types';
+import { setUpAreaSearchApplicationForm, setAreaSearchStep } from './actions';
+import { isAreaSearchApplicationFormSetUp } from './selectors';
+import { Action } from 'redux';
 
 interface State {
   lastSubmission: AreaSearch | null;
   isSubmittingAreaSearch: boolean;
   isFormValid: boolean;
+  applicationFormTemplate: ApplicationFormRoot;
+  areaSearchApplicationFormSetUp: boolean;
 }
 
 interface Props extends State {
   openLoginModal: () => void;
-  setNextStep: any;
+  change: (
+    form: string,
+    field: string,
+    value: any,
+    touch?: boolean,
+    persistentSubmitErrors?: boolean,
+  ) => FormAction;
+  setAreaSearchStep: (payload: number) => Action<string>;
+  setUpAreaSearchApplicationForm: () => Action<string>;
 }
 
 const AreaSearchApplicationPage = ({
   openLoginModal,
+  change,
   isSubmittingAreaSearch,
   lastSubmission,
   isFormValid,
-  setNextStep,
+  applicationFormTemplate,
+  setAreaSearchStep,
+  areaSearchApplicationFormSetUp,
+  setUpAreaSearchApplicationForm,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
   const [isSaveClicked, setSaveClicked] = useState<boolean>(false);
@@ -43,9 +65,16 @@ const AreaSearchApplicationPage = ({
     setSaveClicked(true);
 
     if (isFormValid) {
-      setNextStep();
+      setAreaSearchStep(AreaSearchStepperPageIndex.PREVIEW);
     }
   };
+
+  useEffect(() => {
+    if (!areaSearchApplicationFormSetUp) {
+      change(AREA_SEARCH_FORM_NAME, 'form', applicationFormTemplate, true);
+      setUpAreaSearchApplicationForm();
+    }
+  }, []);
 
   const renderApplicationForm = (loading: boolean, loggedIn: boolean) => {
     if (loading || isSubmittingAreaSearch) {
@@ -152,8 +181,13 @@ export default connect(
     lastSubmission: state.areaSearch.lastSubmission,
     isSubmittingAreaSearch: state.areaSearch.isSubmittingAreaSearch,
     isFormValid: isValid(AREA_SEARCH_FORM_NAME)(state),
+    applicationFormTemplate: getInitialAreaSearchApplicationForm(state),
+    areaSearchApplicationFormSetUp: isAreaSearchApplicationFormSetUp(state),
   }),
   {
     openLoginModal,
+    change,
+    setAreaSearchStep,
+    setUpAreaSearchApplicationForm,
   },
 )(AreaSearchApplicationPage);

@@ -186,7 +186,7 @@ export const prepareAreaSearchApplicationForSubmission = (
               : {
                   ...rest,
                 };
-          }
+          },
         );
       } else {
         const { sections, sectionRestrictions, ...rest } = subsection;
@@ -347,3 +347,10 @@ export const generateAttachmentLink = (
     attachment.id
   }/download`;
 };
+
+export enum AreaSearchStepperPageIndex {
+  SPECS = 0,
+  APPLICATION = 1,
+  PREVIEW = 2,
+  SUCCESS = 3,
+}

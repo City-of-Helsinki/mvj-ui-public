@@ -23,12 +23,13 @@ import {
   AreaSearchFormRoot,
   AREA_SEARCH_FORM_NAME,
 } from './types';
-import { submitAreaSearchApplication } from './actions';
+import { setAreaSearchStep, submitAreaSearchApplication } from './actions';
 import ApplicationPreviewSubsection from '../application/components/applicationPreviewSubsection';
 import { getClientErrorMessage } from '../application/helpers';
 import { prepareAreaSearchApplicationForSubmission } from './helpers';
 import ApplicationProcedureInfo from '../application/components/ApplicationProcedureInfo';
 import ScrollToTop from '../common/ScrollToTop';
+import { AreaSearchStepperPageIndex } from './helpers';
 
 interface State {
   lastSubmission: AreaSearch | null;
@@ -38,12 +39,10 @@ interface State {
   lastError: unknown;
   isSubmitting?: boolean;
 }
-
 interface Props extends State {
   submitApplication: (data: AreaSearchApplicationSubmission) => void;
   isSubmitting?: boolean;
-  setNextStep: Function;
-  setPreviousStep: Function;
+  setAreaSearchStep: typeof setAreaSearchStep;
 }
 
 const AreaSearchApplicationPreview = ({
@@ -53,8 +52,7 @@ const AreaSearchApplicationPreview = ({
   lastError,
   isSubmitting,
   submittedAnswerId,
-  setNextStep,
-  setPreviousStep,
+  setAreaSearchStep,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
 
@@ -65,7 +63,7 @@ const AreaSearchApplicationPreview = ({
 
   useEffect(() => {
     if (submittedAnswerId !== previousAnswerId) {
-      setNextStep();
+      setAreaSearchStep(AreaSearchStepperPageIndex.SUCCESS);
     }
   }, [submittedAnswerId]);
 
@@ -100,7 +98,7 @@ const AreaSearchApplicationPreview = ({
         />
       ));
     } else {
-      setPreviousStep();
+      setAreaSearchStep(AreaSearchStepperPageIndex.APPLICATION);
     }
   };
 
@@ -142,7 +140,9 @@ const AreaSearchApplicationPreview = ({
                   {renderSectionPreviewsOrGoBack(loggedIn)}
                   <Button
                     variant="secondary"
-                    onClick={() => setPreviousStep()}
+                    onClick={() =>
+                      setAreaSearchStep(AreaSearchStepperPageIndex.APPLICATION)
+                    }
                     disabled={isSubmitting}
                     className="ApplicationPreviewPage__submission-button"
                   >
@@ -206,6 +206,7 @@ export default connect(
     isSubmitting: state.areaSearch.isSubmittingAreaSearchApplication,
   }),
   {
+    setAreaSearchStep,
     submitApplication: submitAreaSearchApplication,
   },
 )(AreaSearchApplicationPreview);

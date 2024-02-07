@@ -23,10 +23,14 @@ import { Container } from 'react-grid-system';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import { openLoginModal } from '../login/actions';
 import ScrollToTop from '../common/ScrollToTop';
+import { resetAreaSearchState, setAreaSearchStep } from './actions';
+import { AreaSearchStepperPageIndex } from './helpers';
+import { FileUploadsProvider } from '../form/FileUploadsContext';
 
 interface State {
   areaSearchForm: null;
   lastSubmission: AreaSearch | null;
+  currentStep: number;
 }
 
 interface Step {
@@ -38,6 +42,8 @@ export interface Props extends State {
   openLoginModal: () => void;
   initializeForm: typeof initialize;
   fetchFormAttributes: () => void;
+  setAreaSearchStep: typeof setAreaSearchStep;
+  resetAreaSearchState: typeof resetAreaSearchState;
 }
 
 const AreaSearchApplicationRootPage = ({
@@ -45,18 +51,11 @@ const AreaSearchApplicationRootPage = ({
   initializeForm,
   fetchFormAttributes,
   valid,
+  currentStep,
+  setAreaSearchStep,
+  resetAreaSearchState,
   lastSubmission,
 }: Props & InjectedFormProps<unknown, Props>): JSX.Element => {
-  const [currentStep, setCurrentStep] = useState<number>(0);
-
-  const setNextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
-  const setPreviousStep = () => {
-    setCurrentStep(currentStep - 1);
-  };
-
   const [steps, setSteps] = useState<Step[]>([
     {
       label: 'Alueen valinta',
@@ -79,16 +78,11 @@ const AreaSearchApplicationRootPage = ({
   const renderCurrentStep = () => {
     switch (steps[currentStep].label) {
       case 'Alueen valinta':
-        return <AreaSearchSpecsPage valid={valid} setNextStep={setNextStep} />;
+        return <AreaSearchSpecsPage valid={valid} />;
       case 'Hakemuksen täyttö':
-        return <AreaSearchApplicationPage setNextStep={setNextStep} />;
+        return <AreaSearchApplicationPage />;
       case 'Esikatselu':
-        return (
-          <AreaSearchApplicationPreview
-            setPreviousStep={setPreviousStep}
-            setNextStep={setNextStep}
-          />
-        );
+        return <AreaSearchApplicationPreview />;
       case 'Lähetys':
         return (
           <AreaSearchApplicationSuccessPage
@@ -102,23 +96,24 @@ const AreaSearchApplicationRootPage = ({
 
   const updateStepAvailability = () => {
     const newSteps = [...steps];
+    const { SPECS, APPLICATION, PREVIEW, SUCCESS } = AreaSearchStepperPageIndex;
 
     switch (currentStep) {
-      case 0:
-        newSteps[1].state = StepState.disabled;
-        newSteps[2].state = StepState.disabled;
+      case SPECS:
+        newSteps[APPLICATION].state = StepState.disabled;
+        newSteps[PREVIEW].state = StepState.disabled;
         break;
-      case 1:
-        newSteps[1].state = StepState.available;
+      case APPLICATION:
+        newSteps[APPLICATION].state = StepState.available;
         if (valid) {
-          newSteps[2].state = StepState.available;
+          newSteps[PREVIEW].state = StepState.available;
         } else {
-          newSteps[2].state = StepState.disabled;
+          newSteps[PREVIEW].state = StepState.disabled;
         }
         break;
-      case 2:
+      case PREVIEW:
         break;
-      case 3:
+      case SUCCESS:
         newSteps.forEach((step) => (step.state = StepState.disabled));
         break;
     }
@@ -127,11 +122,12 @@ const AreaSearchApplicationRootPage = ({
   };
 
   useEffect(() => {
+    resetAreaSearchState();
     initializeForm(AREA_SEARCH_FORM_NAME, initializeAreaSearchForm());
-  }, []);
-
-  useEffect(() => {
     fetchFormAttributes();
+    return () => {
+      resetAreaSearchState();
+    };
   }, []);
 
   useEffect(() => {
@@ -146,41 +142,46 @@ const AreaSearchApplicationRootPage = ({
         </title>
       </Helmet>
       <Container>
-        <AuthDependentContent>
-          {(_, loggedIn) =>
-            loggedIn ? (
-              <>
-                <div className="AreaSearchStepperWrapper">
-                  <Stepper
-                    steps={steps}
-                    language="en"
-                    selectedStep={currentStep}
-                    onStepClick={(_, nextPageIndex) =>
-                      setCurrentStep(nextPageIndex)
-                    }
-                  />
-                </div>
-                {renderCurrentStep()}
-              </>
-            ) : (
-              <>
-                <ScrollToTop />
-                <h1>
-                  {t('areaSearch.specs.heading', 'Apply for a land area lease')}
-                </h1>
-                <p>
-                  {t(
-                    'areaSearch.specs.notLoggedIn',
-                    'To apply, please log in first.',
-                  )}
-                </p>
-                <Button variant="primary" onClick={() => openLoginModal()}>
-                  {t('areaSearch.specs.loginButton', 'Log in')}
-                </Button>
-              </>
-            )
-          }
-        </AuthDependentContent>
+        <FileUploadsProvider>
+          <AuthDependentContent>
+            {(_, loggedIn) =>
+              loggedIn ? (
+                <>
+                  <div className="AreaSearchStepperWrapper">
+                    <Stepper
+                      steps={steps}
+                      language="en"
+                      selectedStep={currentStep}
+                      onStepClick={(_, targetStepIndex) =>
+                        setAreaSearchStep(targetStepIndex)
+                      }
+                    />
+                  </div>
+                  {renderCurrentStep()}
+                </>
+              ) : (
+                <>
+                  <ScrollToTop />
+                  <h1>
+                    {t(
+                      'areaSearch.specs.heading',
+                      'Apply for a land area lease',
+                    )}
+                  </h1>
+                  <p>
+                    {t(
+                      'areaSearch.specs.notLoggedIn',
+                      'To apply, please log in first.',
+                    )}
+                  </p>
+                  <Button variant="primary" onClick={() => openLoginModal()}>
+                    {t('areaSearch.specs.loginButton', 'Log in')}
+                  </Button>
+                </>
+              )
+            }
+          </AuthDependentContent>
+        </FileUploadsProvider>
       </Container>
     </MainContentElement>
   );
@@ -190,11 +191,14 @@ export default connect(
   (state: RootState): State => ({
     areaSearchForm: null,
     lastSubmission: state.areaSearch.lastSubmission,
+    currentStep: state.areaSearch.currentStep,
   }),
   {
     openLoginModal,
     initializeForm: initialize,
     fetchFormAttributes,
+    setAreaSearchStep,
+    resetAreaSearchState,
   },
 )(
   reduxForm<unknown, Props>({

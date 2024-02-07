@@ -62,6 +62,7 @@ export type AreaSearchSubmission = {
   intended_use: number;
   geometry: Geometry | null;
   area_search_attachments: Array<number> | Array<File>;
+  id?: number; // For PUT operations
 };
 
 export type AreaSearchApplicationSubmission = {
@@ -79,6 +80,18 @@ export const SUBMIT_AREA_SEARCH = 'areaSearch/SUBMIT_AREA_SEARCH';
 export interface SubmitAreaSearchAction {
   type: typeof SUBMIT_AREA_SEARCH;
   payload: AreaSearchSubmission;
+}
+
+export const SET_AREA_SEARCH_STEP = 'areaSearch/SET_AREA_SEARCH_STEP';
+export interface SetAreaSearchStepAction {
+  type: typeof SET_AREA_SEARCH_STEP;
+  payload: number;
+}
+
+export const SET_UP_AREA_SEARCH_APPLICATION_FORM =
+  'areaSearch/SET_UP_AREA_SEARCH_APPLICATION_FORM';
+export interface setUpAreaSearchApplicationFormAction {
+  type: typeof SET_UP_AREA_SEARCH_APPLICATION_FORM;
 }
 
 export const RECEIVE_AREA_SEARCH_SAVED = 'areaSearch/RECEIVE_AREA_SEARCH_SAVED';
@@ -110,6 +123,11 @@ export const INITIALIZE_AREA_SEARCH_ATTACHMENTS =
   'areaSearch/INITIALIZE_AREA_SEARCH_ATTACHMENTS';
 export interface InitializeAreaSearchAttachments {
   type: typeof INITIALIZE_AREA_SEARCH_ATTACHMENTS;
+}
+
+export const RESET_AREA_SEARCH_STATE = 'areaSearch/RESET_AREA_SEARCH_STATE';
+export interface ResetAreaSearchState {
+  type: typeof RESET_AREA_SEARCH_STATE;
 }
 
 export const AREA_SEARCH_ATTACHMENT_SUBMISSION_FAILED =

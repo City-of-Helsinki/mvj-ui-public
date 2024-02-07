@@ -13,15 +13,9 @@ interface SelectFormFieldOption {
   label: string;
 }
 
-// TODO: Fix dirty hacks that work around the complications stemming from the fact that this component
-//  has to juggle both single and multiple values depending on whether the multiselect prop was passed in.
-//  - Explicit function type recast in onChangeHandler because of the selected value resolving to
-//    OptionType & Array<OptionType> (both a single item and an array simultaneously)
-//  - Internal value passed as an any type, again because something demands that the value has to
-//    exhibit properties of both at the same time
-//  A similar case was discussed in Slack on Feb 11, 2022 (keyword: multiselect)
-//  and no good solution was found at that time. That project elected to create separate
-//  single and multiple select components instead.
+// The HDS Select component type requires the inclusion of both OptionType (single select) and Array<OptionType> (multiselect)
+// But this implementation only supports single selects.
+// TODO: Implement a working multiselect logic when it is needed. Currently (Feb 2024), there is no need for it.
 const SelectFormField = <OptionType extends SelectFormFieldOption>({
   input,
   meta,
@@ -50,33 +44,6 @@ const SelectFormField = <OptionType extends SelectFormFieldOption>({
       return getOptionWithValue(input.value);
     }
   });
-
-  // When the list of available options changes, the current selection should be re-evaluated to make sure
-  // any invalidated options no longer remain in use.
-  useEffect(() => {
-    if (!internalValue) {
-      return;
-    }
-
-    if (Array.isArray(internalValue)) {
-      onChangeHandler(
-        options.filter((option) =>
-          internalValue.some(
-            (singleValue) =>
-              singleValue.value && option.label === singleValue.label,
-          ),
-        ),
-      );
-    } else {
-      onChangeHandler(
-        options.find(
-          (option) =>
-            option.value === internalValue.value &&
-            option.label === internalValue.label,
-        ),
-      );
-    }
-  }, [options]);
 
   const onChangeHandler = (
     selected: Array<OptionType> | OptionType | undefined,

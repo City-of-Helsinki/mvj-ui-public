@@ -21,13 +21,14 @@ export const submitAreaSearchAttachmentRequest = ({
       method: 'POST',
       body: formData,
     }),
-    { autoContentType: false }
+    { autoContentType: false },
   );
 };
 
 export const submitAreaSearchRequest = ({
   area_search_attachments,
   geometry,
+  id,
   ...rest
 }: AreaSearchSubmission): Generator<Effect, ApiCallResult, Response> => {
   const payload = {
@@ -36,22 +37,31 @@ export const submitAreaSearchRequest = ({
     ...rest,
   };
 
-  return callApi(
-    new Request(createUrl('area_search/'), {
-      method: 'POST',
-      body: JSON.stringify(payload),
-    })
-  );
+  if (id) {
+    return callApi(
+      new Request(createUrl(`area_search/${id}/`), {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+      }),
+    );
+  } else {
+    return callApi(
+      new Request(createUrl('area_search/'), {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      }),
+    );
+  }
 };
 
 export const submitAreaSearchApplicationRequest = (
-  formData: AreaSearchApplicationSubmission
+  formData: AreaSearchApplicationSubmission,
 ): Generator<Effect, ApiCallResult, Response> => {
   return callApi(
     new Request(createUrl('answer/'), {
       method: 'POST',
       body: JSON.stringify(formData),
-    })
+    }),
   );
 };
 
@@ -64,7 +74,7 @@ export const fetchIntendedUsesRequest = (): Generator<
     new Request(
       createUrl('intended_use/', {
         limit: '9999',
-      })
-    )
+      }),
+    ),
   );
 };
