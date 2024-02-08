@@ -79,6 +79,9 @@ const ApplicationPreviewSubsection = ({
         <>
           {(answers as Array<ApplicationFormNode>).map((answer, i) => (
             <div key={`answers-${i}`}>
+              {HeaderTag === 'h3' && (
+                <hr className="ApplicationPreviewSubsection__hr" />
+              )}
               <HeaderTag>
                 {section.identifier === TARGET_SECTION_IDENTIFIER ? (
                   <>
@@ -107,7 +110,6 @@ const ApplicationPreviewSubsection = ({
                   <React.Fragment
                     key={`subsection-${i}-${subsection.identifier}`}
                   >
-                    <hr className="ApplicationPreviewSubsection__hr" />
                     <ApplicationPreviewSubsection
                       section={subsection}
                       answers={
@@ -126,6 +128,7 @@ const ApplicationPreviewSubsection = ({
         </>
       ) : (
         <>
+          <hr className="ApplicationPreviewSubsection__hr" />
           <HeaderTag>{section.title}</HeaderTag>
           <div>
             {section.fields.map((field, i) => (
@@ -142,7 +145,6 @@ const ApplicationPreviewSubsection = ({
             ))}
             {section.subsections.map((subsection, i) => (
               <React.Fragment key={`subsection-${i}-${subsection.identifier}`}>
-                <hr className="ApplicationPreviewSubsection__hr" />
                 <ApplicationPreviewSubsection
                   section={subsection}
                   answers={
