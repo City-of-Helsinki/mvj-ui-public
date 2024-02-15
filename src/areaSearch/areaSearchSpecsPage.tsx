@@ -38,7 +38,10 @@ import {
   submitAreaSearch,
   submitAreaSearchAttachment,
 } from './actions';
-import { prepareAreaSearchSubmission } from './helpers';
+import {
+  getCurrentDatePlaceholder,
+  prepareAreaSearchSubmission,
+} from './helpers';
 import { getFieldNamesFromFormErrors, ReduxFormError } from '../form/helpers';
 import AreaSearchMap from './components/AreaSearchMap';
 import { getInitialAreaSearchApplicationForm } from './helpers';
@@ -311,7 +314,7 @@ const AreaSearchSpecsPage = ({
                             dateAfterPageLoadValidator,
                             isBeforeEndDateValidator,
                           ]}
-                          placeholder="1.1.2021"
+                          placeholder={getCurrentDatePlaceholder()}
                         />
                       </Col>
                       <Col xs={12} lg={6} xl={4}>
@@ -334,7 +337,7 @@ const AreaSearchSpecsPage = ({
                             isAfterStartDateValidator,
                           ]}
                           initialMonth={startDateObject || dateNow}
-                          placeholder="1.1.2021"
+                          placeholder={getCurrentDatePlaceholder()}
                         />
                       </Col>
                     </Row>

@@ -138,6 +138,13 @@ const AreaSearchApplicationPreview = ({
               ) : (
                 <div className="ApplicationPreviewPage__top-level-sections">
                   {renderSectionPreviewsOrGoBack(loggedIn)}
+                  <p>
+                    {t(
+                      'areaSearch.application.preview.emailConfirmationNotice',
+                      'You will receive a notice with a copy of the application by email.',
+                    )}
+                  </p>
+                  <hr className="ApplicationPreviewSubsection__hr" />
                   <Button
                     variant="secondary"
                     onClick={() =>

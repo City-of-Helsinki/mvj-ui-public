@@ -343,9 +343,9 @@ export const getInitialAreaSearchApplicationForm = (
 export const generateAttachmentLink = (
   attachment: AreaSearchAttachment,
 ): string => {
-  return `${import.meta.env.REACT_APP_API_URL || ''}/area_search_attachment/${
-    attachment.id
-  }/download`;
+  return `${
+    import.meta.env.REACT_APP_API_URL || ''
+  }pub/area_search_attachment/${attachment.id}/download`;
 };
 
 export enum AreaSearchStepperPageIndex {
@@ -354,3 +354,13 @@ export enum AreaSearchStepperPageIndex {
   PREVIEW = 2,
   SUCCESS = 3,
 }
+
+export const getCurrentDatePlaceholder = (): string => {
+  const date = new Date();
+  const day = String(date.getDate());
+  const month = String(date.getMonth() + 1); // Month is 0-indexed
+  const year = date.getFullYear();
+
+  const currentDate = `${day}.${month}.${year}`;
+  return currentDate;
+};

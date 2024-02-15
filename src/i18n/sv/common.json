@@ -113,7 +113,8 @@
       "loginButton": "",
       "preview": {
         "heading": "",
-        "pageTitle": ""
+        "pageTitle": "",
+        "emailConfirmationNotice": ""
       },
       "target": {
         "addressNotFound": "",

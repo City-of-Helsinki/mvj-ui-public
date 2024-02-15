@@ -1,4 +1,5 @@
 .AreaSearchTargetSummary {
+  margin-bottom: 4em;
   .AreaSearchTargetSummary__target {
     padding-left: 0;
     margin-left: 1px;
@@ -6,8 +7,9 @@
     row-gap: $spacing-s;
 
     .AreaSearchTargetSummary__target-address {
-      font-size: $fontsize-heading-s;
+      font-size: $fontsize-heading-m;
       font-weight: bold;
+      margin-bottom: 0.8em;
     }
   }
 }
