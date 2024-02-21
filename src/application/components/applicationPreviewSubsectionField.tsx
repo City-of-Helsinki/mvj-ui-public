@@ -1,21 +1,14 @@
 import { Col, Row } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { RootState } from '../../root/rootReducer';
-import { getFieldTypeMapping } from '../selectors';
 import { FormField } from '../../plotSearch/types';
 import {
   ApplicationField,
-  FieldTypeMapping,
   SupportedFieldTypes,
   UploadedFileMeta,
 } from '../types';
 
-interface State {
-  fieldTypeMapping: FieldTypeMapping;
-}
-
-interface Props extends State {
+interface ApplicationPreviewSubsectionFieldProps {
   field: FormField;
   sectionAnswers: Record<string, ApplicationField>;
   pendingUploads: UploadedFileMeta[];
@@ -24,9 +17,8 @@ interface Props extends State {
 const ApplicationPreviewSubsectionField = ({
   field,
   sectionAnswers,
-  fieldTypeMapping,
   pendingUploads,
-}: Props): JSX.Element | null => {
+}: ApplicationPreviewSubsectionFieldProps): JSX.Element | null => {
   const { t } = useTranslation();
 
   const getDisplayValue = (): string | null => {
@@ -36,7 +28,7 @@ const ApplicationPreviewSubsectionField = ({
 
     const value = sectionAnswers[field.identifier]?.value;
     let displayValue = '' + value;
-    switch (fieldTypeMapping[field.type]) {
+    switch (field.type) {
       case SupportedFieldTypes.TextField:
       case SupportedFieldTypes.TextArea:
         // plain text with no special handling
@@ -149,9 +141,4 @@ const ApplicationPreviewSubsectionField = ({
   );
 };
 
-export default connect(
-  (state: RootState): State => ({
-    fieldTypeMapping: getFieldTypeMapping(state),
-  }),
-  {},
-)(ApplicationPreviewSubsectionField);
+export default connect()(ApplicationPreviewSubsectionField);

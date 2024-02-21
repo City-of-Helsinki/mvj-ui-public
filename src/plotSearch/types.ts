@@ -262,7 +262,7 @@ export type FormSection = {
 export type FormField = {
   id: number;
   identifier: string;
-  type: number;
+  type: string;
   label: string;
   hint_text?: string;
   enabled: boolean;

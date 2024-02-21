@@ -6,9 +6,8 @@ import { Helmet } from 'react-helmet';
 
 import BoxGrid from '../boxGrid/boxGrid';
 import BoxGridBox from '../boxGrid/boxGridBox';
-import { getRouteById, AppRoutes } from '../root/helpers';
+import { getRouteById, getPageTitle, AppRoutes } from '../root/helpers';
 import MainContentElement from '../a11y/MainContentElement';
-import { getPageTitle } from '../root/helpers';
 
 import AreaSearchImage from '../assets/images/areaSearch/areaSearch.svg?react';
 import OtherConstructionImage from '../assets/images/areaSearch/otherConstruction.svg?react';

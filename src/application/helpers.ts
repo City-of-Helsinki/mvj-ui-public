@@ -19,7 +19,6 @@ import {
   TARGET_SECTION_IDENTIFIER,
 } from './types';
 import { FormField, FormSection } from '../plotSearch/types';
-import { getFieldTypeMapping } from './selectors';
 import { store } from '../index';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
 import { FavouriteTarget } from '../favourites/types';
@@ -41,7 +40,6 @@ export const getInitialApplicationForm = (
   }
 
   const form = plotSearch.form;
-  const fieldTypes = getFieldTypeMapping(state);
 
   const buildSection = (
     section: FormSection,
@@ -106,7 +104,7 @@ export const getInitialApplicationForm = (
     }
 
     let initialValue: ApplicationField | null = null;
-    switch (fieldTypes[field.type]) {
+    switch (field.type) {
       case SupportedFieldTypes.FileUpload:
         root.fileFieldIds.push(field.id);
         initialValue = {

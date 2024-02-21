@@ -6,11 +6,9 @@ import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { Notification, Button } from 'hds-react';
 import MainContentElement from '../a11y/MainContentElement';
-import { getFieldTypeMapping } from '../application/selectors';
 import {
   ApplicationPreparationError,
   ApplicationSectionKeys,
-  FieldTypeMapping,
 } from '../application/types';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
@@ -34,7 +32,6 @@ import { AreaSearchStepperPageIndex } from './helpers';
 interface State {
   lastSubmission: AreaSearch | null;
   formValues: AreaSearchFormRoot;
-  fieldTypeMapping: FieldTypeMapping;
   submittedAnswerId: number;
   lastError: unknown;
   isSubmitting?: boolean;
@@ -206,7 +203,6 @@ export default connect(
     formValues: getFormValues(AREA_SEARCH_FORM_NAME)(
       state,
     ) as AreaSearchFormRoot,
-    fieldTypeMapping: getFieldTypeMapping(state),
     lastSubmission: state.areaSearch.lastSubmission,
     submittedAnswerId: state.areaSearch.lastApplicationSubmissionId,
     lastError: state.areaSearch.lastApplicationError,
