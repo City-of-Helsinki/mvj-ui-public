@@ -290,4 +290,10 @@ export enum FieldType {
   DENOMINATOR = 1,
 }
 
+export const OptionalFieldsCheckboxes = {
+  OTHER_THAN_APPLICANT: 'eri-kuin-hakija',
+  APPLICANT_BILLING_ADDRESS: 'laskutusosoite-hakija',
+  OTHER_BILLING_ADDRESS: 'laskutusosoite-muu',
+};
+
 export const SPLITTER = ' / ';

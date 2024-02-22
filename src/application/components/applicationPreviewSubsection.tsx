@@ -4,8 +4,10 @@ import ApplicationPreviewSubsectionField from './applicationPreviewSubsectionFie
 import { getSectionFavouriteTarget } from '../helpers';
 import {
   ApplicantTypes,
+  ApplicationField,
   ApplicationFormNode,
   ApplicationSectionKeys,
+  OptionalFieldsCheckboxes,
   TARGET_SECTION_IDENTIFIER,
   UploadedFileMeta,
 } from '../types';
@@ -73,7 +75,20 @@ const ApplicationPreviewSubsection = ({
     return ApplicantTypes.BOTH;
   };
 
-  return (
+  let optionalFieldsCheckbox: ApplicationField | undefined;
+  let optionalFieldsActive: boolean | undefined;
+  let answerFields = (answers as ApplicationFormNode).fields;
+
+  if (answerFields) {
+    const optionalFieldsCheckboxLabel = Object.keys(answerFields).find((key) =>
+      Object.values(OptionalFieldsCheckboxes).includes(key),
+    );
+    optionalFieldsCheckbox =
+      answerFields[optionalFieldsCheckboxLabel as string];
+    optionalFieldsActive = optionalFieldsCheckbox?.value === true;
+  }
+
+  return optionalFieldsCheckbox && optionalFieldsActive === false ? null : (
     <div className="ApplicationPreviewSubsection">
       {isArray ? (
         <>
