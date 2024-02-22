@@ -100,6 +100,14 @@ const AreaSearchApplicationPage = ({
             <Row className="ApplicationPage__action-buttons">
               <Col xs={12}>
                 <Button
+                  variant="secondary"
+                  onClick={() =>
+                    setAreaSearchStep(AreaSearchStepperPageIndex.SPECS)
+                  }
+                >
+                  {t('areaSearch.application.backButton', 'Back')}
+                </Button>
+                <Button
                   variant="primary"
                   onClick={openPreview}
                   disabled={!isFormValid && isSaveClicked}

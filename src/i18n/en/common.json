@@ -99,6 +99,7 @@
   },
   "areaSearch": {
     "application": {
+      "backButton": "Back",
       "error": {
         "noAreaSelected": "To submit an area application, you have to select the area you're applying for on the area search page first.",
         "notLoggedIn": "Please log in to send an application for an area.",
