@@ -99,6 +99,7 @@
   },
   "areaSearch": {
     "application": {
+      "backButton": "",
       "error": {
         "noAreaSelected": "",
         "notLoggedIn": "",

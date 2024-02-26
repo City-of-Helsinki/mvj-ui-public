@@ -99,6 +99,7 @@
   },
   "areaSearch": {
     "application": {
+      "backButton": "Takaisin",
       "error": {
         "noAreaSelected": "Lähettääksesi hakemuksen, on alueen oltava valittuna aluehakusivulla.",
         "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehakuhakemuksen.",
