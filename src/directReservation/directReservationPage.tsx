@@ -7,11 +7,10 @@ import { Helmet } from 'react-helmet';
 import { Button, Notification } from 'hds-react';
 import { openLoginModal } from '../login/actions';
 import MainContentElement from '../a11y/MainContentElement';
-import { getPageTitle } from '../root/helpers';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import { generateFavourite } from './actions';
 import { RootState } from '../root/rootReducer';
-import { getRouteById, AppRoutes } from '../root/helpers';
+import { getRouteById, getPageTitle, AppRoutes } from '../root/helpers';
 import BlockLoader from '../loader/blockLoader';
 
 interface State {

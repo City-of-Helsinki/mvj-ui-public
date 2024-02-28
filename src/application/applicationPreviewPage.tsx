@@ -19,10 +19,9 @@ import {
   ApplicationSectionKeys,
   ApplicationSubmission,
   APPLICATION_FORM_NAME,
-  FieldTypeMapping,
   UploadedFileMeta,
 } from './types';
-import { getRouteById, AppRoutes } from '../root/helpers';
+import { getRouteById, getPageTitle, AppRoutes } from '../root/helpers';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
 import { Favourite } from '../favourites/types';
 import { PlotSearch } from '../plotSearch/types';
@@ -30,9 +29,7 @@ import AuthDependentContent from '../auth/components/authDependentContent';
 import BlockLoader from '../loader/blockLoader';
 import ApplicationTargetList from './components/applicationTargetList';
 import ApplicationPreviewSubsection from './components/applicationPreviewSubsection';
-import { getFieldTypeMapping } from './selectors';
 import MainContentElement from '../a11y/MainContentElement';
-import { getPageTitle } from '../root/helpers';
 
 interface State {
   favourite: Favourite;
@@ -42,7 +39,6 @@ interface State {
   isSubmitting: boolean;
   submittedAnswerId: number;
   formValues: ApplicationFormRoot;
-  fieldTypeMapping: FieldTypeMapping;
   pendingUploads: Array<UploadedFileMeta>;
   lastError: unknown;
 }
@@ -56,7 +52,6 @@ interface Props {
   submitApplication: (data: ApplicationSubmission) => void;
   submittedAnswerId: number;
   formValues: ApplicationFormRoot;
-  fieldTypeMapping: FieldTypeMapping;
   pendingUploads: Array<UploadedFileMeta>;
   lastError: unknown;
 }
@@ -198,7 +193,6 @@ export default connect(
     relevantPlotSearch: getPlotSearchFromFavourites(state),
     isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,
     isFetchingFormAttributes: state.application.isFetchingFormAttributes,
-    fieldTypeMapping: getFieldTypeMapping(state),
     pendingUploads: state.application.pendingUploads,
     lastError: state.application.lastError,
   }),

@@ -6,7 +6,6 @@ import {
   ApplicationSubmissionFailedAction,
   DELETE_UPLOAD,
   FETCH_FORM_ATTRIBUTES,
-  FieldTypeMapping,
   FILE_OPERATION_FINISHED,
   FILE_UPLOAD_FAILED,
   FORM_ATTRIBUTES_NOT_FOUND,
@@ -26,7 +25,6 @@ import { ApiAttributes } from '../api/types';
 type CurrentDisplayState = {
   formAttributes: ApiAttributes;
   isFetchingFormAttributes: boolean;
-  fieldTypeMapping: FieldTypeMapping;
   isSubmittingApplication: boolean;
   submittedAnswer: ApplicationResponse;
   lastError: unknown;
@@ -37,7 +35,6 @@ type CurrentDisplayState = {
 const initialState: CurrentDisplayState = {
   formAttributes: {},
   isFetchingFormAttributes: false,
-  fieldTypeMapping: {},
   isSubmittingApplication: false,
   lastError: null,
   pendingUploads: [],
@@ -63,19 +60,10 @@ const applicationSlice = createSlice({
         (state, { payload }: ReceiveFormAttributesAction) => {
           state.formAttributes = payload;
           state.isFetchingFormAttributes = false;
-          state.fieldTypeMapping =
-            payload.sections?.child?.children.fields?.child?.children.type?.choices?.reduce(
-              (acc, choice) => {
-                acc[choice.value as number] = choice.display_name;
-                return acc;
-              },
-              {} as FieldTypeMapping,
-            ) || {};
         },
       )
       .addCase(FETCH_FORM_ATTRIBUTES, (state) => {
         state.isFetchingFormAttributes = true;
-        state.fieldTypeMapping = {};
       })
       .addCase(FORM_ATTRIBUTES_NOT_FOUND, (state) => {
         state.isFetchingFormAttributes = false;

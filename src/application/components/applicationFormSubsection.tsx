@@ -22,7 +22,6 @@ import {
   ApplicationFormTopLevelSectionFlavor,
   ApplicationSectionKeys,
   FieldRendererProps,
-  FieldTypeMapping,
   FieldValue,
   SupportedFieldTypes,
 } from '../types';
@@ -35,7 +34,6 @@ import ApplicationRadioButtonFieldset from './applicationRadioButtonFieldset';
 import ApplicationFractionalFieldset from './applicationFractionalFieldset';
 import ApplicationHiddenField from './applicationHiddenField';
 import { RootState } from '../../root/rootReducer';
-import { getFieldTypeMapping } from '../selectors';
 import {
   getSectionApplicantType,
   getSectionFavouriteTarget,
@@ -101,7 +99,6 @@ interface ApplicationFormSubsectionFieldsProps {
 }
 
 interface ApplicationFormSubsectionFieldsInnerProps {
-  fieldTypeMapping: FieldTypeMapping;
   sectionApplicantType: ApplicantTypes;
   change: typeof change;
   getValue: (identifier: string) => FieldValue;
@@ -110,7 +107,6 @@ interface ApplicationFormSubsectionFieldsInnerProps {
 
 const ApplicationFormSubsectionFields = connect(
   (state: RootState, props: ApplicationFormSubsectionFieldsProps) => ({
-    fieldTypeMapping: getFieldTypeMapping(state),
     sectionApplicantType: getSectionApplicantType(
       state,
       props.section,
@@ -126,7 +122,6 @@ const ApplicationFormSubsectionFields = connect(
 )(({
   formName,
   section,
-  fieldTypeMapping,
   identifier,
   change,
   sectionApplicantType,
@@ -185,7 +180,7 @@ const ApplicationFormSubsectionFields = connect(
         ApplicationSectionKeys.Fields,
         field.identifier,
       ].join('.');
-      const fieldType = fieldTypeMapping[field.type];
+      const fieldType = field.type;
 
       // Special cases that use a different submission path and thus different props
       if (fieldType === SupportedFieldTypes.FileUpload) {
@@ -264,9 +259,7 @@ const ApplicationFormSubsectionFields = connect(
           name={fieldName}
           component={ApplicationFormField}
           field={field}
-          fieldType={
-            (fieldTypeMapping[field.type] as SupportedFieldTypes) || null
-          }
+          fieldType={(field.type as SupportedFieldTypes) || null}
           columnWidths={columnWidths}
           innerComponent={component}
           onValueChange={(newValues: Partial<ApplicationField>) =>
@@ -281,7 +274,7 @@ const ApplicationFormSubsectionFields = connect(
 
   const checkSpecialValues = (
     field: FormField,
-    newValues: Partial<ApplicationField>
+    newValues: Partial<ApplicationField>,
   ) => {
     if (
       section.identifier === APPLICANT_SECTION_IDENTIFIER &&
@@ -291,7 +284,7 @@ const ApplicationFormSubsectionFields = connect(
       change(
         formName,
         `${identifier}.metadata.applicantType`,
-        valueToApplicantType(newValues.value as string)
+        valueToApplicantType(newValues.value as string),
       );
     }
   };

@@ -8,7 +8,6 @@ import {
 import { formValueSelector, getFormValues } from 'redux-form';
 import { store } from '../index';
 import { RootState } from '../root/rootReducer';
-import { getFieldTypeMapping } from '../application/selectors';
 import { FormSection, FormField } from '../plotSearch/types';
 import {
   ApplicantTypes,
@@ -232,7 +231,6 @@ export const getInitialAreaSearchApplicationForm = (
   }
 
   const form = areaSearch.form;
-  const fieldTypes = getFieldTypeMapping(state);
 
   const buildSection = (
     section: FormSection,
@@ -292,7 +290,7 @@ export const getInitialAreaSearchApplicationForm = (
     }
 
     let initialValue: ApplicationField | null = null;
-    switch (fieldTypes[field.type]) {
+    switch (field.type) {
       case SupportedFieldTypes.FileUpload:
         root.fileFieldIds.push(field.id);
         initialValue = {

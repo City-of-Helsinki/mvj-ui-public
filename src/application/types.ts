@@ -16,8 +16,6 @@ export type NestedFieldLeaf =
 export interface NestedField
   extends Record<string, NestedFieldLeaf | NestedField | Array<NestedField>> {}
 
-export type FieldTypeMapping = Record<number, string>;
-
 export enum SupportedFieldTypes {
   TextField = 'textbox',
   TextArea = 'textarea',
