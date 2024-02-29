@@ -4,7 +4,8 @@
       "applicantHeader": "Hakijan {{number}} tiedot",
       "genericAddNew": "Lisää uusi",
       "remove": "Poista",
-      "removeTarget": "Poista kohde listalta"
+      "removeTarget": "Poista kohde listalta",
+      "removeApplicant": "Poista hakija"
     },
     "buttons": {
       "cancel": "Peruuta",

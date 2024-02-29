@@ -405,7 +405,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
                   {isTargetRoot
                     ? t('application.arraySection.remove', 'Remove')
                     : t(
-                        'application.arraySection.removeTarget',
+                        'application.arraySection.removeApplicant',
                         'Remove from list',
                       )}
                 </Button>
