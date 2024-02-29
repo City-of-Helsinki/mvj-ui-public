@@ -2,9 +2,18 @@
   "application": {
     "arraySection": {
       "applicantHeader": "Hakijan {{number}} tiedot",
-      "genericAddNew": "Lisää uusi",
-      "remove": "Poista",
-      "removeTarget": "Poista kohde listalta"
+      "add": {
+        "applicant": "Lisää hakija",
+        "target": "Lisää kohde",
+        "confirmation": "Lisää",
+        "general": "Lisää"
+      },
+      "remove": {
+        "applicant": "Poista hakija",
+        "target": "Poista kohde",
+        "confirmation": "Poista",
+        "general": "Poista"
+      }
     },
     "buttons": {
       "cancel": "Peruuta",

@@ -2,9 +2,18 @@
   "application": {
     "arraySection": {
       "applicantHeader": "Details of applicant {{number}}",
-      "genericAddNew": "Add new",
-      "remove": "Remove",
-      "removeTarget": "Remove from list"
+      "add": {
+        "applicant": "Add applicant",
+        "target": "Add target",
+        "confirmation": "Add",
+        "general": "Add"
+      },
+      "remove": {
+        "applicant": "Remove applicant",
+        "target": "Remove target",
+        "confirmation": "Remove",
+        "general": "Remove"
+      }
     },
     "buttons": {
       "cancel": "Cancel",
