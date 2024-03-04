@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SelectProps, Select } from 'hds-react';
 import { focus, blur, WrappedFieldProps } from 'redux-form';
 import { connect } from 'react-redux';
@@ -73,13 +73,28 @@ const SelectFormField = <OptionType extends SelectFormFieldOption>({
     blur(meta.form, input.name, input.value, true);
   };
 
+  const sortOptions = (a: OptionType, b: OptionType) => {
+    if (
+      (typeof a.value === 'number' && typeof b.value === 'number') ||
+      (typeof a.value === 'string' && typeof b.value === 'string')
+    ) {
+      if (a.value < b.value) {
+        return -1;
+      }
+      if (a.value > b.value) {
+        return 1;
+      }
+    }
+    return 0;
+  };
+
   return (
     <Select<OptionType>
       {...inputProps}
       onFocus={onFocusHandler}
       onBlur={onBlurHandler}
       onChange={onChangeHandler}
-      options={options}
+      options={options.sort(sortOptions)}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       value={internalValue || (null as any)}
       invalid={meta.touched && meta.invalid}
