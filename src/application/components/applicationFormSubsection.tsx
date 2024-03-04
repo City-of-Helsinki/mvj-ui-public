@@ -23,6 +23,7 @@ import {
   ApplicationSectionKeys,
   FieldRendererProps,
   FieldValue,
+  OptionalFieldsCheckboxes,
   SupportedFieldTypes,
 } from '../types';
 import ApplicationFileUploadField from './applicationFileUploadField';
@@ -96,6 +97,7 @@ interface ApplicationFormSubsectionFieldsProps {
   identifier: string;
   formName: string;
   isSaveClicked?: boolean;
+  path: Array<string>;
 }
 
 interface ApplicationFormSubsectionFieldsInnerProps {
@@ -127,6 +129,7 @@ const ApplicationFormSubsectionFields = connect(
   sectionApplicantType,
   getValue,
   isSaveClicked,
+  path,
 }: ApplicationFormSubsectionFieldsProps &
   ApplicationFormSubsectionFieldsInnerProps) => {
   const renderField = useCallback(
@@ -153,37 +156,14 @@ const ApplicationFormSubsectionFields = connect(
         return null;
       }
 
-      useEffect(() => {
-        // set default value if exists and current value is empty
-        if (
-          field.default_value !== null &&
-          !getValue(`${identifier}.fields.${field.identifier}.value`)
-        ) {
-          change(
-            formName,
-            `${identifier}.fields.${field.identifier}.value`,
-            field.default_value,
-          );
-          // set the metadata correctly for the section to render
-          if (field.identifier == APPLICANT_TYPE_FIELD_IDENTIFIER) {
-            change(
-              formName,
-              `${identifier}.metadata.applicantType`,
-              valueToApplicantType(field.default_value as string),
-            );
-          }
-        }
-      }, []);
-
       const fieldName = [
         pathName,
         ApplicationSectionKeys.Fields,
         field.identifier,
       ].join('.');
-      const fieldType = field.type;
 
       // Special cases that use a different submission path and thus different props
-      if (fieldType === SupportedFieldTypes.FileUpload) {
+      if (field.type === SupportedFieldTypes.FileUpload) {
         return (
           <Col xs={12} sm={12} md={12} lg={12} xl={12}>
             <ApplicationFileUploadField
@@ -204,7 +184,7 @@ const ApplicationFormSubsectionFields = connect(
         xl: 3,
       };
 
-      switch (fieldType) {
+      switch (field.type) {
         case SupportedFieldTypes.Hidden:
           component = ApplicationHiddenField;
           break;
@@ -289,14 +269,63 @@ const ApplicationFormSubsectionFields = connect(
     }
   };
 
+  const optionalFieldsCheckbox: FormField | undefined = section.fields.find(
+    (field) =>
+      Object.values(OptionalFieldsCheckboxes).includes(field.identifier),
+  );
+
+  let optionalFieldsActive: boolean | undefined;
+
+  if (optionalFieldsCheckbox) {
+    const optionalFieldsCheckboxPath = [
+      ...path,
+      section.identifier,
+      'fields',
+      optionalFieldsCheckbox.identifier,
+      'value',
+    ];
+    optionalFieldsActive =
+      getValue(optionalFieldsCheckboxPath.join('.')) === true;
+  }
+
+  useEffect(() => {
+    // set default value if exists and current value is empty
+    section.fields.forEach((field) => {
+      if (
+        field.default_value !== null &&
+        !getValue(`${identifier}.fields.${field.identifier}.value`)
+      ) {
+        change(
+          formName,
+          `${identifier}.fields.${field.identifier}.value`,
+          field.default_value,
+        );
+        // set the metadata correctly for the section to render
+        if (field.identifier == APPLICANT_TYPE_FIELD_IDENTIFIER) {
+          change(
+            formName,
+            `${identifier}.metadata.applicantType`,
+            valueToApplicantType(field.default_value as string),
+          );
+        }
+      }
+    });
+  }, []);
+
   return (
     <>
       <Row>
-        {section.fields.map((field) => (
-          <Fragment key={field.identifier}>
-            {renderField(identifier, field, isSaveClicked)}
+        {optionalFieldsCheckbox && optionalFieldsActive !== true ? (
+          <Fragment key={optionalFieldsCheckbox.identifier}>
+            {renderField(identifier, optionalFieldsCheckbox, isSaveClicked)}
           </Fragment>
-        ))}
+        ) : (
+          section.fields.map((field) => (
+            <Fragment key={field.identifier}>
+              {renderField(identifier, field, isSaveClicked)}
+            </Fragment>
+          ))
+        )}
       </Row>
       {section.subsections.map((subsection) => (
         <ApplicationFormSubsection
@@ -416,6 +445,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
                 section={section}
                 identifier={identifier}
                 isSaveClicked={isSaveClicked}
+                path={path}
               />
             </div>
           </div>
@@ -518,6 +548,7 @@ const ApplicationFormSubsection = ({
             section={section}
             identifier={pathName}
             isSaveClicked={isSaveClicked}
+            path={path}
           />
         </div>
       )}
