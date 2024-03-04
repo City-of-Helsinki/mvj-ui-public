@@ -15,6 +15,7 @@ import {
   FieldValue,
   NestedField,
   NestedFieldLeaf,
+  OptionalFieldsCheckboxes,
   SupportedFieldTypes,
   TARGET_SECTION_IDENTIFIER,
 } from './types';
@@ -424,6 +425,22 @@ const getPathParts = (path: string): Array<PathPart> => {
   });
 
   return result;
+};
+
+export const hideOptionalFields = (
+  sectionFields: ApplicationFormFields,
+): boolean => {
+  const optionalFieldsCheckboxLabel: string | undefined = Object.keys(
+    sectionFields,
+  ).find((key) => Object.values(OptionalFieldsCheckboxes).includes(key));
+
+  if (optionalFieldsCheckboxLabel) {
+    const optionalFieldsCheckbox: ApplicationField | undefined =
+      sectionFields[optionalFieldsCheckboxLabel];
+    return optionalFieldsCheckbox?.value === false;
+  } else {
+    return false;
+  }
 };
 
 export const get = (obj: unknown, path: string): unknown => {

@@ -9,7 +9,7 @@ import {
 import i18n from '../i18n';
 import { Form, FormSection } from '../plotSearch/types';
 import { ValidateCallback } from 'redux-form';
-import { get, set } from './helpers';
+import { get, hideOptionalFields, set } from './helpers';
 
 const PERSONAL_IDENTIFIER_CHECK_CHAR_LIST = '0123456789ABCDEFHJKLMNPRSTUVWXY';
 // from the rightmost digit to the leftmost
@@ -29,7 +29,7 @@ export const requiredValidator = (value: unknown): string | undefined => {
 
 export const personalIdentifierValidator = (
   value: unknown,
-  error?: string
+  error?: string,
 ): string | undefined => {
   if (value === '') {
     return;
@@ -40,14 +40,14 @@ export const personalIdentifierValidator = (
       error ||
       i18n.t(
         'validation.errors.personalIdentifier.generic',
-        'Invalid personal identifier.'
+        'Invalid personal identifier.',
       )
     );
   }
 
   const result =
     /^(\d{6})([-+ABCDEFUVWXY])(\d{3})([0-9ABCDEFHJKLMNPRSTUVWXY])$/.exec(
-      value.toUpperCase()
+      value.toUpperCase(),
     );
 
   if (!result) {
@@ -55,7 +55,7 @@ export const personalIdentifierValidator = (
       error ||
       i18n.t(
         'validation.errors.personalIdentifier.generic',
-        'Invalid personal identifier.'
+        'Invalid personal identifier.',
       )
     );
   }
@@ -99,7 +99,7 @@ export const personalIdentifierValidator = (
         error ||
         i18n.t(
           'validation.errors.personalIdentifier.generic',
-          'Invalid personal identifier.'
+          'Invalid personal identifier.',
         )
       );
     }
@@ -108,7 +108,7 @@ export const personalIdentifierValidator = (
       error ||
       i18n.t(
         'validation.errors.personalIdentifier.generic',
-        'Invalid personal identifier.'
+        'Invalid personal identifier.',
       )
     );
   }
@@ -123,7 +123,7 @@ export const personalIdentifierValidator = (
       error ||
       i18n.t(
         'validation.errors.personalIdentifier.checkChar',
-        "Check character doesn't match."
+        "Check character doesn't match.",
       )
     );
   }
@@ -131,7 +131,7 @@ export const personalIdentifierValidator = (
 
 export const companyIdentifierValidator = (
   value: unknown,
-  error?: string
+  error?: string,
 ): string | undefined => {
   if (value === '') {
     return;
@@ -142,7 +142,7 @@ export const companyIdentifierValidator = (
       error ||
       i18n.t(
         'validation.errors.companyIdentifier.generic',
-        'Invalid company identifier.'
+        'Invalid company identifier.',
       )
     );
   }
@@ -154,7 +154,7 @@ export const companyIdentifierValidator = (
       error ||
       i18n.t(
         'validation.errors.companyIdentifier.generic',
-        'Invalid company identifier.'
+        'Invalid company identifier.',
       )
     );
   }
@@ -178,7 +178,7 @@ export const companyIdentifierValidator = (
       error ||
       i18n.t(
         'validation.errors.companyIdentifier.generic',
-        'Invalid company identifier.'
+        'Invalid company identifier.',
       )
     );
   } else if (calculatedCheckNumber > 1) {
@@ -190,7 +190,7 @@ export const companyIdentifierValidator = (
       error ||
       i18n.t(
         'validation.errors.companyIdentifier.checkNumber',
-        "Check character doesn't match."
+        "Check character doesn't match.",
       )
     );
   }
@@ -198,7 +198,7 @@ export const companyIdentifierValidator = (
 
 export const emailValidator = (
   value: unknown,
-  error?: string
+  error?: string,
 ): string | undefined => {
   if (!value || typeof value !== 'string') {
     return;
@@ -233,9 +233,14 @@ export const validateApplicationForm =
     const searchSingleSection = (
       formSection: FormSection,
       section: ApplicationFormNode,
-      path: string
+      path: string,
     ) => {
       if (!section) {
+        return;
+      }
+
+      // Hide optional fields if the checkbox is unchecked
+      if (hideOptionalFields(section.fields)) {
         return;
       }
 
@@ -261,7 +266,7 @@ export const validateApplicationForm =
 
           if (field.required) {
             validatorError = requiredValidator(
-              section.fields[field.identifier].value
+              section.fields[field.identifier].value,
             );
           }
           if (validator) {
@@ -272,7 +277,7 @@ export const validateApplicationForm =
 
           if (field.identifier === CONTROL_SHARE_FIELD_IDENTIFIER) {
             const result = /^(\d+)\s*\/\s*(\d+)$/.exec(
-              section.fields[field.identifier].value as string
+              section.fields[field.identifier].value as string,
             );
             if (!result) {
               set(
@@ -280,13 +285,13 @@ export const validateApplicationForm =
                 `${path}.fields.${field.identifier}.value`,
                 i18n.t(
                   'validation.errors.controlShare.generic',
-                  'Invalid control share fraction.'
-                )
+                  'Invalid control share fraction.',
+                ),
               );
             } else {
               controlShareSum += parseInt(result[1]) / parseInt(result[2]);
               controlSharePaths.push(
-                `${path}.fields.${field.identifier}.value`
+                `${path}.fields.${field.identifier}.value`,
               );
             }
           }
@@ -295,7 +300,7 @@ export const validateApplicationForm =
             set(
               errors,
               `${path}.fields.${field.identifier}.value`,
-              validatorError
+              validatorError,
             );
           }
         });
@@ -306,7 +311,7 @@ export const validateApplicationForm =
           if (
             section.sectionRestrictions?.[subsection.identifier] &&
             ![ApplicantTypes.BOTH, section.metadata?.applicantType].includes(
-              section.sectionRestrictions[subsection.identifier]
+              section.sectionRestrictions[subsection.identifier],
             )
           ) {
             return;
@@ -315,7 +320,7 @@ export const validateApplicationForm =
           searchSection(
             subsection,
             section.sections[subsection.identifier],
-            `${path}.sections.${subsection.identifier}`
+            `${path}.sections.${subsection.identifier}`,
           );
         });
       }
@@ -324,11 +329,11 @@ export const validateApplicationForm =
     const searchSection = (
       formSection: FormSection,
       section: ApplicationFormNode | Array<ApplicationFormNode>,
-      path: string
+      path: string,
     ) => {
       if (section instanceof Array) {
         section.forEach((singleSection, i) =>
-          searchSingleSection(formSection, singleSection, `${path}[${i}]`)
+          searchSingleSection(formSection, singleSection, `${path}[${i}]`),
         );
       } else {
         searchSingleSection(formSection, section, path);
@@ -339,8 +344,8 @@ export const validateApplicationForm =
       searchSection(
         formSection,
         root.sections[formSection.identifier],
-        `${pathPrefix}.sections.${formSection.identifier}`
-      )
+        `${pathPrefix}.sections.${formSection.identifier}`,
+      ),
     );
 
     if (Math.abs(controlShareSum - 1) > 1e-9) {
@@ -350,8 +355,8 @@ export const validateApplicationForm =
           path,
           i18n.t(
             'validation.errors.controlShare.invalidSum',
-            'Control shares of applicants must sum up to 100%.'
-          )
+            'Control shares of applicants must sum up to 100%.',
+          ),
         );
       });
     }
@@ -373,7 +378,7 @@ export const shouldApplicationFormValidate = <FormData, P>({
   return (
     !structure.deepEqual(
       props?.registeredFields,
-      nextProps?.registeredFields
+      nextProps?.registeredFields,
     ) || !structure.deepEqual(props?.values, nextProps?.values)
   );
 };
