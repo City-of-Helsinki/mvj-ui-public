@@ -431,12 +431,10 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
                   variant="supplementary"
                   iconLeft={<IconCrossCircle />}
                 >
-                  {isTargetRoot
-                    ? t('application.arraySection.remove', 'Remove')
-                    : t(
-                        'application.arraySection.removeTarget',
-                        'Remove from list',
-                      )}
+                  {t(
+                    `application.arraySection.remove.${flavor || 'general'}`,
+                    'Remove',
+                  )}
                 </Button>
               )}
               {isTargetRoot && <ApplicationFormTargetSummary target={target} />}
@@ -467,7 +465,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
           iconLeft={<IconPlusCircle />}
         >
           {section.add_new_text ||
-            t('application.arraySection.genericAddNew', 'Add new')}
+            t(`application.arraySection.add.${flavor || 'general'}`, 'Add new')}
         </Button>
       )}
     </div>

@@ -2,9 +2,18 @@
   "application": {
     "arraySection": {
       "applicantHeader": "",
-      "genericAddNew": "",
-      "remove": "",
-      "removeTarget": ""
+      "add": {
+        "applicant": "",
+        "target": "",
+        "confirmation": "",
+        "general": ""
+      },
+      "remove": {
+        "applicant": "",
+        "target": "",
+        "confirmation": "",
+        "general": ""
+      }
     },
     "buttons": {
       "cancel": "",
