@@ -21,6 +21,7 @@ import {
   ApplicationFormNode,
   ApplicationFormTopLevelSectionFlavor,
   ApplicationSectionKeys,
+  DECISION_DELIVERY_SECTION_IDENTIFIER,
   FieldRendererProps,
   FieldValue,
   OptionalFieldsCheckboxes,
@@ -44,6 +45,7 @@ import {
 } from '../helpers';
 import { removeFavouriteTarget } from '../../favourites/actions';
 import ApplicationFormTargetSummary from './ApplicationFormTargetSummary';
+import { t } from 'i18next';
 
 interface ApplicationFormFieldProps {
   name?: string | undefined;
@@ -541,6 +543,14 @@ const ApplicationFormSubsection = ({
       ) : (
         <div className="ApplicationFormSubsection__content">
           <HeaderTag>{section.title}</HeaderTag>
+          {section.identifier === DECISION_DELIVERY_SECTION_IDENTIFIER && (
+            <p>
+              {t(
+                'application.confirmation',
+                'Lähettämällä hakemuksen vakuutan tiedot oikeiksi.',
+              )}
+            </p>
+          )}
           <ApplicationFormSubsectionFields
             formName={formName}
             section={section}

@@ -21,6 +21,7 @@
       "preview": "Preview submission",
       "viewTargets": "View targets"
     },
+    "confirmation": "By sending the application I confirm the given information is correct.",
     "error": {
       "generic": "The application could not be submitted correctly. Please try again later.",
       "label": "Submission error",

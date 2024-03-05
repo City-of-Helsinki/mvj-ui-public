@@ -200,6 +200,7 @@ export const APPLICATION_FORM_NAME = 'application';
 export const APPLICANT_SECTION_IDENTIFIER = 'hakijan-tiedot';
 export const TARGET_SECTION_IDENTIFIER = 'haettava-kohde';
 export const CONFIRMATION_SECTION_IDENTIFIER = 'vahvistukset';
+export const DECISION_DELIVERY_SECTION_IDENTIFIER = 'paatoksen-toimitus';
 
 export const APPLICANT_TYPE_FIELD_IDENTIFIER = 'hakija';
 export const CONTROL_SHARE_FIELD_IDENTIFIER = 'hallintaosuus';

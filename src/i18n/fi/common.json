@@ -21,6 +21,7 @@
       "preview": "Siirry esikatseluun",
       "viewTargets": "Haettavat kohteet"
     },
+    "confirmation": "Lähettämällä hakemuksen vakuutan tiedot oikeiksi.",
     "error": {
       "generic": "Hakemuksen lähettäminen epäonnistui. Yritä myöhemmin uudelleen.",
       "label": "Lähetys epäonnistui",
