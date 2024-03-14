@@ -214,8 +214,7 @@
       },
       "attachments": {
         "heading": "Hakemuksen liitteet",
-        "input": "Jos sinua on ohjeistettu liittämään liitteitä hakemukseen, esim. asemapiirros ja pohjapiirustus, liitä ne tässä. Voit myös lisätä vapaavalintaisia liitteitä.",
-        "inputHelpText": "Toivomme ensisijaisesti .pdf-muotoisia tiedostoja."
+        "input": "Jos sinua on ohjeistettu liittämään liitteitä hakemukseen, esim. asemapiirros ja pohjapiirustus, liitä ne tässä. Voit myös lisätä vapaavalintaisia liitteitä."
       },
       "continueButton": "Jatka",
       "errors": {
