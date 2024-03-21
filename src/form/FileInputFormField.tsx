@@ -1,4 +1,3 @@
-import React from 'react';
 import { WrappedFieldProps, blur, focus, touch } from 'redux-form';
 import { FileInput } from 'hds-react';
 import { useTranslation } from 'react-i18next';
@@ -7,36 +6,55 @@ import { connect } from 'react-redux';
 import { Language } from '../i18n/types';
 import { useFileUploads } from './FileUploadsContext';
 
-/* TODO: hds-react doesn't export this; maybe it should */
-export type FileInputProps = {
-  accept?: string;
-  buttonLabel?: string;
-  className?: string;
-  disabled?: boolean;
-  dragAndDrop?: boolean;
-  dragAndDropLabel?: string;
-  dragAndDropInputLabel?: string;
-  errorText?: string;
-  helperText?: string;
-  id: string;
-  infoText?: string;
-  label: string;
-  language?: Language;
-  maxSize?: number;
-  multiple?: boolean;
-  onChange: (files: File[]) => void;
-  required?: boolean;
-  style?: React.CSSProperties;
-  successText?: string;
-  tooltipLabel?: string;
-  tooltipButtonLabel?: string;
-  tooltipText?: string;
-};
+type FileInputProps = React.ComponentProps<typeof FileInput>;
 
 type Props = {
   focus: typeof focus;
   blur: typeof blur;
   touch: typeof touch;
+};
+
+/**
+ * Returns a string of allowed file types, each prefixed with a dot and separated by a comma and a space.
+ * To be used in HDS FileInput component's "accept" prop.
+ *
+ * @returns {string} A string of file types.
+ *
+ * @example
+ * // returns ".pdf,.csv,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.fodt,.ods,.fods,.jpg,.jpeg,.jxl,.png,.gif,.tiff,.bmp,.svg,.webp"
+ * getAllowedFileTypes();
+ */
+export const getAllowedFileTypes = (): string => {
+  const documentTypes = [
+    'pdf',
+    'csv',
+    'txt',
+    // Word
+    'doc',
+    'docx',
+    'xls',
+    'xlsx',
+    'ppt',
+    'pptx',
+    // OpenOffice/LibreOffice
+    'odt',
+    'fodt',
+    'ods',
+    'fods',
+  ];
+  const imageTypes = [
+    'jpg',
+    'jpeg',
+    'jxl',
+    'png',
+    'gif',
+    'tiff',
+    'bmp',
+    'svg',
+    'webp',
+  ];
+  const fileTypes = [...documentTypes, ...imageTypes];
+  return `${fileTypes.map((fileType) => `.${fileType}`).join(', ')}`;
 };
 
 const FileInputFormField = ({
@@ -45,6 +63,7 @@ const FileInputFormField = ({
   blur,
   focus,
   touch,
+  accept,
   ...rest
 }: WrappedFieldProps &
   Props &
@@ -67,6 +86,7 @@ const FileInputFormField = ({
       language={i18n.language as Language}
       errorText={meta.touched && meta.error}
       defaultValue={filesArray}
+      accept={accept || getAllowedFileTypes()}
       {...rest}
     />
   );

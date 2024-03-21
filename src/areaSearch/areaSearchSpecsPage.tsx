@@ -22,7 +22,9 @@ import TextAreaFormField from '../form/TextAreaFormField';
 import DateInputFormField from '../form/DateInputFormField';
 import SelectFormField from '../form/SelectFormField';
 import { useFileUploads } from '../form/FileUploadsContext';
-import FileInputFormField from '../form/FileInputFormField';
+import FileInputFormField, {
+  getAllowedFileTypes,
+} from '../form/FileInputFormField';
 import {
   dateAfterOrEqualValidatorGenerator,
   dateBeforeOrEqualValidatorGenerator,
@@ -514,11 +516,8 @@ const AreaSearchSpecsPage = ({
                       )}
                       dragAndDrop
                       multiple
-                      maxSize={20 * 1024 * 1024}
-                      helperText={t(
-                        'areaSearch.specs.attachments.inputHelpText',
-                        'Please use PDF files primarily.',
-                      )}
+                      maxSize={20 * 1024 * 1024} // 20MB
+                      accept={getAllowedFileTypes()}
                     />
                   </section>
                   <section className="no-padding">
