@@ -1,13 +1,13 @@
 import React from 'react';
 import { FormSection } from '../../plotSearch/types';
 import ApplicationPreviewSubsectionField from './applicationPreviewSubsectionField';
-import { getSectionFavouriteTarget } from '../helpers';
+import { getSectionFavouriteTarget, hideOptionalFields } from '../helpers';
 import {
   ApplicantTypes,
   ApplicationField,
   ApplicationFormNode,
   ApplicationSectionKeys,
-  OptionalFieldsCheckboxes,
+  SHOW_IF_FIELD_IDENTIFIER,
   TARGET_SECTION_IDENTIFIER,
   UploadedFileMeta,
 } from '../types';
@@ -76,19 +76,15 @@ const ApplicationPreviewSubsection = ({
   };
 
   let optionalFieldsCheckbox: ApplicationField | undefined;
-  let optionalFieldsActive: boolean | undefined;
-  let answerFields = (answers as ApplicationFormNode).fields;
+  let optionalFieldsHidden: boolean = false;
+  const answerFields = (answers as ApplicationFormNode).fields;
 
   if (answerFields) {
-    const optionalFieldsCheckboxLabel = Object.keys(answerFields).find((key) =>
-      Object.values(OptionalFieldsCheckboxes).includes(key),
-    );
-    optionalFieldsCheckbox =
-      answerFields[optionalFieldsCheckboxLabel as string];
-    optionalFieldsActive = optionalFieldsCheckbox?.value === true;
+    optionalFieldsHidden = hideOptionalFields(answerFields);
+    optionalFieldsCheckbox = answerFields[SHOW_IF_FIELD_IDENTIFIER];
   }
 
-  return optionalFieldsCheckbox && optionalFieldsActive === false ? null : (
+  return optionalFieldsCheckbox && optionalFieldsHidden ? null : (
     <div className="ApplicationPreviewSubsection">
       {isArray ? (
         <>
