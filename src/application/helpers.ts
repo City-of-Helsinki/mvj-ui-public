@@ -15,7 +15,7 @@ import {
   FieldValue,
   NestedField,
   NestedFieldLeaf,
-  OptionalFieldsCheckboxes,
+  SHOW_IF_FIELD_IDENTIFIER,
   SupportedFieldTypes,
   TARGET_SECTION_IDENTIFIER,
 } from './types';
@@ -430,13 +430,10 @@ const getPathParts = (path: string): Array<PathPart> => {
 export const hideOptionalFields = (
   sectionFields: ApplicationFormFields,
 ): boolean => {
-  const optionalFieldsCheckboxLabel: string | undefined = Object.keys(
-    sectionFields,
-  ).find((key) => Object.values(OptionalFieldsCheckboxes).includes(key));
+  const optionalFieldsCheckbox: ApplicationField | undefined =
+    sectionFields[SHOW_IF_FIELD_IDENTIFIER];
 
-  if (optionalFieldsCheckboxLabel) {
-    const optionalFieldsCheckbox: ApplicationField | undefined =
-      sectionFields[optionalFieldsCheckboxLabel];
+  if (optionalFieldsCheckbox) {
     return optionalFieldsCheckbox?.value === false;
   } else {
     return false;

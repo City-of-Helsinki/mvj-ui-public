@@ -23,7 +23,7 @@ import {
   ApplicationSectionKeys,
   FieldRendererProps,
   FieldValue,
-  OptionalFieldsCheckboxes,
+  SHOW_IF_FIELD_IDENTIFIER,
   SupportedFieldTypes,
 } from '../types';
 import ApplicationFileUploadField from './applicationFileUploadField';
@@ -270,8 +270,7 @@ const ApplicationFormSubsectionFields = connect(
   };
 
   const optionalFieldsCheckbox: FormField | undefined = section.fields.find(
-    (field) =>
-      Object.values(OptionalFieldsCheckboxes).includes(field.identifier),
+    (field) => field.identifier === SHOW_IF_FIELD_IDENTIFIER,
   );
 
   let optionalFieldsActive: boolean | undefined;
@@ -283,9 +282,8 @@ const ApplicationFormSubsectionFields = connect(
       'fields',
       optionalFieldsCheckbox.identifier,
       'value',
-    ];
-    optionalFieldsActive =
-      getValue(optionalFieldsCheckboxPath.join('.')) === true;
+    ].join('.');
+    optionalFieldsActive = getValue(optionalFieldsCheckboxPath) === true;
   }
 
   useEffect(() => {
@@ -316,7 +314,7 @@ const ApplicationFormSubsectionFields = connect(
     <>
       <Row>
         {optionalFieldsCheckbox && optionalFieldsActive !== true ? (
-          <Fragment key={optionalFieldsCheckbox.identifier}>
+          <Fragment>
             {renderField(identifier, optionalFieldsCheckbox, isSaveClicked)}
           </Fragment>
         ) : (
@@ -332,7 +330,12 @@ const ApplicationFormSubsectionFields = connect(
           formName={formName}
           path={[identifier, ApplicationSectionKeys.Subsections]}
           section={subsection}
-          key={subsection.id}
+          key={[
+            ...path,
+            section.identifier,
+            ApplicationSectionKeys.Subsections,
+            subsection.identifier,
+          ].join('.')}
           parentApplicantType={sectionApplicantType}
           isSaveClicked={isSaveClicked}
         />
