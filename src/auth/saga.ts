@@ -43,6 +43,14 @@ export function* fetchApiTokenSaga({
           bodyAsJson[
             import.meta.env.REACT_APP_OPENID_CONNECT_API_TOKEN_KEY as string
           ];
+
+        if (!apiToken) {
+          yield put(tokenNotFound());
+          userManager.removeUser();
+          logError('Error: No api token returned');
+          break;
+        }
+
         yield put(receiveApiToken(apiToken));
         break;
       }
