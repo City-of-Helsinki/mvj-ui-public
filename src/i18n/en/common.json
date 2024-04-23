@@ -26,7 +26,7 @@
       "label": "Submission error",
       "noFormAvailable": "An application form has not been specified for the selected plots. Please contact us and we'll look into it.",
       "noPlotsSelected": "To submit a plot application, first select your target plot(s) on the plot rental page.",
-      "notLoggedIn": "You must log in to apply for plots.",
+      "notLoggedIn": "Log in to apply for plots.",
       "preparation": {
         "label": "Preparation error",
         "misconfiguredPlotSearch": "There was a problem with the application for the selected plots. Please try again later.",
