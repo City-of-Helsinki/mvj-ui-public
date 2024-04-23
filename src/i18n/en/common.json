@@ -18,29 +18,29 @@
     "buttons": {
       "cancel": "Cancel",
       "login": "Log in",
-      "preview": "Preview submission",
+      "preview": "Preview application",
       "viewTargets": "View targets"
     },
     "error": {
-      "generic": "The application could not be submitted correctly. Please try again later.",
+      "generic": "Error in submitting the application. Please try again later.",
       "label": "Submission error",
-      "noFormAvailable": "No application form has been specified for the plots you have selected yet. Please be in contact and we'll look into it.",
-      "noPlotsSelected": "To submit a plot application, you have to pick plots on the plot searches page first.",
-      "notLoggedIn": "Please log in first in order to apply for plots.",
+      "noFormAvailable": "An application form has not been specified for the selected plots. Please contact us and we'll look into it.",
+      "noPlotsSelected": "To submit a plot application, first select your target plot(s) on the plot rental page.",
+      "notLoggedIn": "Log in to apply for plots.",
       "preparation": {
         "label": "Preparation error",
-        "misconfiguredPlotSearch": "A problem with the search you're applying to was encountered. Please try again later.",
-        "noApplicantIdentifierFound": "An applicant with missing identifier data was encountered. Please verify that each applicant has either the personal identification number or company ID number set.",
-        "noApplicantTypeSet": "An applicant with no selected type was encountered. Please verify that all applicant data is filled correctly.",
+        "misconfiguredPlotSearch": "There was a problem with the application for the selected plots. Please try again later.",
+        "noApplicantIdentifierFound": "Identifier data is missing for one or more applicants. Please make sure that the personal or business ID is set for each applicant.",
+        "noApplicantTypeSet": "The type for one or more applicants has not been selected. Please make sure that all applicant data is completed correctly.",
         "unknown": "An unexpected error occurred while preparing the application data for submission. Please try again later."
       },
       "summary": {
-        "header": "Please correct these fields before proceeding."
+        "header": "Please check the following fields before proceeding."
       }
     },
     "fileUpload": {
-      "delete": "Delete",
-      "deleteHeader": "Delete",
+      "delete": "Remove",
+      "deleteHeader": "Remove",
       "error": {
         "exception": "Something went wrong while trying to upload the file. Please try again later.",
         "nonOkResponse": "The file could not be uploaded! Please try again later."
@@ -48,9 +48,9 @@
       "filename": "File",
       "info": "The maximum allowed file size is {{maxSize}} MB.",
       "newFile": "Upload a new file",
-      "noFilesUploaded": "No files have yet been uploaded.",
+      "noFilesUploaded": "No files have been uploaded yet.",
       "number": "Attachment",
-      "rowLabel": "Attachment #{{number}}",
+      "rowLabel": "Attachment {{number}}",
       "uploadedAt": "Uploaded at"
     },
     "form": {
@@ -58,7 +58,7 @@
       "tabs": {
         "applicants_one": "Applicants ({{count}})",
         "applicants_other": "Applicants ({{count}})",
-        "other": "Details",
+        "other": "Additional information",
         "targets_one": "Targets ({{count}})",
         "targets_other": "Targets ({{count}})"
       }
@@ -66,26 +66,26 @@
     "heading": "Plot application",
     "mustVisitTargetPage": {
       "close": "Close",
-      "text": "You must first fill the required details for the targets you're applying to in the second tab. You can open that tab by clicking the button below.",
-      "title": "Attention!"
+      "text": "To preview your application, complete the required details for your targets in the second tab. Open the tab by clicking the button below.",
+      "title": "Note!"
     },
     "preview": {
-      "attachmentNo": "Attachment #{{number}}",
+      "attachmentNo": "Attachment {{number}}",
       "booleanNo": "No",
       "booleanYes": "Yes",
       "heading": "Plot application preview",
       "pageTitle": "Plot application"
     },
-    "previewButton": "Preview submission",
+    "previewButton": "Preview application",
     "procedure": {
       "link": "Information about the application review process",
       "popup": {
         "closeButton": "Close",
         "stages": {
-          "decision": "The city will make a formal lease decision and the lease contract will be signed.",
-          "forwarding": "The application is forwarded to the correct city department for processing.",
-          "offer": "If the city decides to lease the area to the applicant, a draft contract will be sent to them for commenting.",
-          "review": "The city confirms if the area is eligible to be leased for the applied-for use case and requests further information from the applicant if necessary. Other parties relevant to the decision might be consulted at this stage as well.",
+          "decision": "The city will make a formal lease decision, after which the lease contract is signed.",
+          "forwarding": "Each application is forwarded to the correct city department for processing.",
+          "offer": "If the city decides to lease the area to the applicant, a draft contract will be sent to them for comments.",
+          "review": "The city will determine whether it can lease the area to the applicant for the intended use they have indicated and will request any additional information they need from the applicant. The city may need to seek input from other relevant parties to make a decision.",
           "submission": "The applicant submits their application."
         },
         "title": "How the application review process works"
@@ -96,8 +96,8 @@
     "submitInProcess": "Submitting...",
     "success": {
       "body": "Your application has been received.",
-      "body_one": "Your application has been received, application identifier is {{applicationIdentifiers}}. A copy of the application has been sent into your email.",
-      "body_other": "Your application has been received. Application identifiers are {{applicationIdentifiers}}. A copy of the application has been sent into your email.",
+      "body_one": "Your application has been received with application number {{applicationIdentifiers}}. A copy of the application has been sent to you by email.",
+      "body_other": "Your application has been received. Its application numbers are {{applicationIdentifiers}}. A copy of the application has been sent to you by email.",
       "heading": "Thank you for your application",
       "pageTitle": "Application sent"
     },
@@ -110,27 +110,27 @@
     "application": {
       "backButton": "Back",
       "error": {
-        "noAreaSelected": "To submit an area application, you have to select the area you're applying for on the area search page first.",
-        "notLoggedIn": "Please log in to send an application for an area.",
+        "noAreaSelected": "To submit an application, you have to first select the area you're applying for on the area rental page.",
+        "notLoggedIn": "Log in to submit an application for an area rental.",
         "preparation": {
-          "misconfiguredPlotSearch": "An area search you're applying to is not found. Please try to define the area again."
+          "misconfiguredPlotSearch": "The selected area rental could not be found. Please try to define the area again."
         }
       },
       "form": {
-        "pageTitle": "Area search application"
+        "pageTitle": "Area rental application"
       },
       "heading": "2. Application",
       "loginButton": "Log in",
       "preview": {
         "heading": "3. Preview",
-        "pageTitle": "Area search application",
-        "emailConfirmationNotice": "You will receive a notice with a copy of the application by email."
+        "pageTitle": "Area rental application",
+        "emailConfirmationNotice": "You will receive a confirmation of your application and a copy thereof by email."
       },
       "target": {
         "addressNotFound": "No address found for the selected area",
         "area": "Area (m²)",
-        "areaDescription": "Area description",
-        "attachments": "Attachments",
+        "areaDescription": "Detailed area description",
+        "attachments": "Appendices to the application",
         "intendedUsage": "Intended use",
         "leaseTime": "Lease time",
         "screenReaderHeading": "Selected area:"
@@ -139,60 +139,60 @@
     "landingPage": {
       "applyForArea": "Apply for an area",
       "areaSearches": {
-        "blurb": "You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.",
-        "heading": "Area search",
-        "label": "Area search"
+        "blurb": "You can apply to rent any available land and water area for various temporary uses.",
+        "heading": "Area rental",
+        "label": "Rent an area"
       },
       "heading": "Apply for a land area lease",
-      "introduction": "The City of Helsinki offers vacant land or water areas for rent for various types of activities (e.g. for placing masts, agricultural uses, additional courtyards, sand silos, collection boxes or exercising parks).",
+      "introduction": "The City of Helsinki offers vacant land or water areas for rent for various types of activities. Choose your intended use.",
       "otherUses": {
         "commercialUses": {
-          "blurb": "This includes A frames, advertising spaces on bridges, outdoor advertising devices and election advertisements.",
-          "label": "Commercial and advertising spaces",
-          "link": "https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/advertising-spots"
+          "blurb": "You can rent a common area of the city for short-term sales activities, rent your shopfront for demonstration and sales activities, or enter into an agreement for food truck activities. You can rent the city's advertising spots on bridges for short-term advertising and communications.",
+          "label": "Commercial and advertising spots",
+          "link": "https://www.hel.fi/en/business-and-work/businesses-and-entrepreneurs/permits-and-facilities-for-businesses"
         },
-        "heading": "Other land uses",
+        "heading": "Other area use",
         "misc": {
-          "label": "Other land use arrangements",
+          "label": "Other land use agreements",
           "dogs": {
-            "blurb": "",
-            "link": "https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas"
+            "blurb": "Koirankoulutuskentiltä voi vuokrata vakioviikkovuoron koirien koulutukseen.",
+            "link": "https://www.hel.fi/en/urban-environment-and-traffic/protection-of-the-environment-and-nature/animals/pets-and-domestic-animals#dog-training-fields"
           },
           "gardening": {
-            "blurb": "",
-            "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden"
+            "blurb": "Yhdistykset ja yhteisöt voivat vuokrata kaupungilta maa-alaa pienimuotoista kaupunkiviljelyä varten.",
+            "link": "https://www.hel.fi/en/culture-and-leisure/outdoor-activities-parks-and-nature-destinations/parks/gardening-in-the-city"
           }
         },
         "otherConstruction": {
-          "blurb": "You can apply for leasing any available land and water areas for temporary uses, such as for placing masts, for agricultural uses, additional courtyards, further land leasing, sand silos, collection boxes or exercising parks.",
-          "label": "Construction on streets or in parks",
-          "link": "https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/working-on-streets-and-in-parks"
+          "blurb": "You can rent a street or park area as a temporary work area for activities such as construction, lifting, property renovation, moving house, snow removal, or a film or TV production. You need to do this if you want to place equipment such as scaffolding, a hoist, a skip or a shipping container in the area. Notify the city if you are going to excavate in a street or park area.",
+          "label": "Work carried out on streets and in parks",
+          "link": "https://www.hel.fi/en/urban-environment-and-traffic/plots-and-building-permits/permits-and-instructions-for-construction-site/working-on-streets-and-in-parks"
         },
         "outdoorEvent": {
-          "blurb": "You need a permit to organize an event on a street, square or park if the event restricts the public use of the area. A permit is required if the event involves bringing marquee tents, tables, chairs, stages, fences or other structures to the area, for example.",
+          "blurb": "You need a permit to organize an event on a street, square or park if the event restricts the public use of the area.",
           "label": "Organizing an outdoor event",
-          "link": "https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/outdoor-events"
+          "link": "https://www.hel.fi/en/business-and-work/businesses-and-entrepreneurs/organizing-an-event-in-helsinki/event-notifications-and-permits"
         },
         "permanentFixtures": {
-          "blurb": "In order to place permanent fixtures such as pipes, cables, wells, building foundations, fences or walls to public areas like streets, parks and marketplaces, a permit must be acquired.",
-          "label": "Permanent fixture installations on streets or in parks",
-          "link": "https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/working-on-streets-and-in-parks"
+          "blurb": "You will need to make a placement agreement with the city if you want to place permanent structures, such as cable connections, access routes, underground building foundations or fences, on the street or in a park.",
+          "label": "Placement of permanent structures in street or park areas",
+          "link": "https://www.hel.fi/en/urban-environment-and-traffic/plots-and-building-permits/permits-and-instructions-for-construction-site/placement-agreement"
         },
         "terraceOrParklet": {
-          "blurb": "Setting up an outdoor serving area for a restaurant or café requires a terrace permit if the terrace is set up in a public street or park area. Setting up a glazed street terrace also requires a building or action permit. A parklet means a parking space that is temporarily re-purposed for other use.",
+          "blurb": "Setting up an outdoor serving area for a restaurant or café requires a terrace permit if the terrace is set up in a public street or park area. Setting up a glazed street terrace also requires a building permit.",
           "label": "Terraces and parklets",
-          "link": "https://www.hel.fi/helsinki/en/housing/plots-land-buildings/permits-for-public-areas/terraces-and-parklets"
+          "link": "https://www.hel.fi/en/business-and-work/businesses-and-entrepreneurs/permits-and-facilities-for-businesses/outdoor-seating-area-and-parklet-permits"
         }
       },
-      "pageTitle": "Area search",
-      "readMore": "Read more"
+      "pageTitle": "Area rental",
+      "readMore": "Read more:"
     },
     "specs": {
       "area": {
-        "areaDescription": "Detailed description of desired area",
-        "areaDescriptionHelpText": "",
+        "areaDescription": "Detailed area description",
+        "areaDescriptionHelpText": "Vuokra-alue mahdollisimman tarkasti määriteltynä.",
         "drawOnMap": {
-          "explanation": "Note that the area you specify will be precursory only. We'll contact you to determine the exact area later during the application handling process. Areas colored in dark gray are not owned by the City of Helsinki.",
+          "explanation": "Your choice of area is the basis for the negotiation. The area you draw is for reference only. We will contact you regarding the detailed delineation during the application process.",
           "heading": "Draw the desired area on the map",
           "helpTexts": {
             "label": "",
@@ -213,40 +213,41 @@
         "heading": "Tell us which area you'd like to lease"
       },
       "attachments": {
-        "heading": "Attachments",
-        "input": ""
+        "heading": "Appendices to the application",
+        "input": "Jos sinua on ohjeistettu liittämään liitteitä hakemukseen, esim. asemapiirros ja pohjapiirustus, liitä ne tässä. Voit myös lisätä vapaavalintaisia liitteitä.",
+        "inputHelpText": "Toivomme ensisijaisesti .pdf-muotoisia tiedostoja."
       },
       "continueButton": "Continue",
       "errors": {
-        "attachment": "One or more attachments failed to upload! Please try again.",
+        "attachment": "Error in uploading the attachments! Please try again.",
         "endDateAfterStartDate": "End date cannot be before start date.",
-        "other": "An unknown error occurred while submitting the area search. Please try again.",
+        "other": "An unknown error occurred while saving the area rental. Please try again.",
         "startDateBeforeEndDate": "Start date cannot be after end date.",
-        "validation": "Please check the marked fields before proceeding.",
-        "eitherPolygonOrDescription": ""
+        "validation": "Please check that the indicated fields are completed correctly.",
+        "eitherPolygonOrDescription": "Jatkaaksesi esikatseluun sinun tulee olla joko A) valinnut vuokra-alueen kartalla tai B) kuvaillut vuokra-aluetta sanallisesti."
       },
-      "explanation": "If you are willing to lease an area, continue by filling up the application. Please tell us your wishes concerning the area, intended use of the lease and lease time. We will contact you as soon as possible. Fields marked with an asterisk are required.",
+      "explanation": "If you want to lease an area, continue by completing the application form. Tell us which area you require, your intended use, and the lease time. We will contact you as soon as possible. Fields marked with an asterisk are required. ",
       "heading": "1. Area selection",
       "intendedUse": {
         "endDate": "End date for lease",
-        "endDateHelpText": "If you don't yet know the date you'd like the lease to end on or if you'd like to apply for a lease for an indefinite time, please expand on this in the detailed description field above.",
+        "endDateHelpText": "If you don't know the date you'd like the lease to end on yet or if you'd like to apply for a lease for an indefinite time, please expand on this in the detailed description field above.",
         "heading": "Specify the intended use and desired time period for the lease",
         "mainType": "Intended use",
         "mainTypePlaceholder": "Choose intended use",
-        "projectDescription": "Detailed description of intended use",
-        "projectDescriptionHelpText": "",
+        "projectDescription": "Detailed description of the intended use",
+        "projectDescriptionHelpText": "Minkälaista toimintaa vuokrakohteessa on tarkoitus järjestää? Minkälaisia rakenteita vuokra-alueelle on tulossa? Kuvaile, ketkä käyttävät aluetta? Onko kyseessä jatkohakemus voimassa olevalle vuokraukselle (jos on, ilmoita vuokraustunnus)?",
         "startDate": "Start date for lease",
-        "startDateHelpText": "Please note that applications will be processed in the order they were submitted."
+        "startDateHelpText": "Please note that applications are processed on a first come, first served basis."
       },
       "loginButton": "Log in",
-      "notLoggedIn": "To apply, please log in first.",
-      "pageTitle": "Area search",
+      "notLoggedIn": "First, log in to see available area rentals.",
+      "pageTitle": "Area rental",
       "submitting": "Submitting..."
     },
     "targetCard": {
       "showFullDesc": {
-        "hide": "Hide additional details",
-        "show": "Show additional details"
+        "hide": "Hide target details",
+        "show": "Show target details"
       }
     }
   },
@@ -263,10 +264,10 @@
       "login": "Log in"
     },
     "error": {
-      "notLoggedIn": "Please log in first in order to apply for direct reservation plots."
+      "notLoggedIn": "Log in to apply for direct lease targets"
     },
     "errors": {
-      "favouriteGenerationError": "Something went wrong! Try again later or contact the city official you received the direct reservation link from."
+      "favouriteGenerationError": "Something went wrong. Please try again later or contact the city official that sent you the link."
     },
     "pageTitle": "Direct reservation"
   },
@@ -281,7 +282,7 @@
       "heading": "Frequently asked questions"
     },
     "notification": {
-      "error": "Something went wrong while fetching frequently asked questions."
+      "error": "Something went wrong while retrieving the frequently asked questions."
     }
   },
   "favourites": {
@@ -293,50 +294,50 @@
   "favouritesPage": {
     "map": {
       "notAvailable": "Map not available",
-      "showOnMap": "Show on map"
+      "showOnMap": "View on a map"
     },
-    "nextButton": "Apply for these plots",
+    "nextButton": "Continue to complete the application",
     "notification": {
-      "body": "<0>You can find all the selected targets here. You can return to plot search page to add more targets.</0>",
-      "link": "Return to plot search page",
-      "title": "Do you want to search for more targets?"
+      "body": "You can find all the plots on the application here. You can return to plot rental page to add more targets.",
+      "link": "Return to plot rental page",
+      "title": "Do you want to search for more plots?"
     },
     "pageTitle": "Selected plots",
     "targetCard": {
       "removeButton": "Remove from list",
       "showFullDesc": {
-        "hide": "Hide additional details",
-        "show": "Show additional details"
+        "hide": "Hide target details",
+        "show": "Show target details"
       },
       "table": {
         "address": "Address",
-        "applyByDate": "Apply by",
+        "applyByDate": "Application period ends",
         "area": "Area (m²)",
-        "detailedPlanIdentifier": "Detailed plan identifier",
-        "detailedPlanState": "Detailed plan state",
+        "detailedPlanIdentifier": "Detailed plan",
+        "detailedPlanState": "Detailed plan progress",
         "financingMethod": "Financing method",
-        "firstSuitableConstructionYear": "First suitable construction year",
+        "firstSuitableConstructionYear": "Suitable for construction",
         "hitas": "HITAS",
         "intendedUsage": "Intended use",
         "management": "Management method",
-        "permittedBuildArea": "Permitted build floor area (floor-m²)",
-        "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
-        "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
+        "permittedBuildArea": "Zoning right (floor-m²)",
+        "permittedBuildAreaCommercial": "Commercial zoning right (floor-m²)",
+        "permittedBuildAreaResidential": "Residential zoning right (floor-m²)",
         "plot": "Plot"
       }
     },
-    "title": "You are applying for the following plot searches"
+    "title": "You are applying for the following plots"
   },
   "footer": {
     "copyright": {
-      "holder": "Copyright",
+      "holder": "City of Helsinki",
       "text": "All rights reserved"
     },
     "logo": {
       "alt": "Helsinki logo"
     },
-    "text": "Plot search",
-    "customerService": "Urban Environment Customer Service",
+    "text": "Plot rental",
+    "customerService": "Urban Environment Division customer service",
     "some": {
       "facebook": "City of Helsinki on Facebook",
       "twitter": "City of Helsinki on X",
@@ -345,40 +346,40 @@
     },
     "moveToTop": "Move to top",
     "accessabilityStatement": {
-      "label": "Accessability statement",
-      "url": "https://www.hel.fi/saavutettavuus"
+      "label": "Accessibility statement",
+      "url": "https://www.hel.fi/en/decision-making/information-on-helsinki/statistics-and-life-in-helsinki/accessibility"
     },
     "dataProtection": {
       "label": "Data protection",
-      "url": "https://www.hel.fi/fi/paatoksenteko-ja-hallinto/tietoa-helsingista/tietosuoja-ja-tiedonhallinta/tietosuoja"
+      "url": "https://www.hel.fi/en/decision-making/information-on-helsinki/data-protection-and-information-management/data-protection"
     },
     "registerStatement": {
-      "label": "Register statement",
+      "label": "Privacy statement",
       "url": "#"
     }
   },
   "frontPage": {
     "areaSearch": {
-      "counter": "Area search",
+      "counter": "Area rental",
       "explanation": "Land and water area leases",
-      "label": "I want to rent an area"
+      "label": "I want to lease an area"
     },
     "bannerText": "City of Helsinki plot, land, area and lorem ipsum rental",
     "contentHeader": "How can we help with your rental needs?",
     "label": "Front page",
     "otherCompetitionsAndSearches": {
-      "counter_one": "Other competitions and searches: {{count}}",
-      "counter_other": "Other competitions and searches: {{count}}",
-      "counterFailed": "Other competitions and searches",
-      "explanation": "Other ongoing area searches and competitions",
-      "label": "I want to participate in another area search or competition"
+      "counter_one": "Other bids and rentals: {{count}} pcs",
+      "counter_other": "Other bids and rentals: {{count}} pcs",
+      "counterFailed": "Other bids and rentals",
+      "explanation": "Other ongoing rentals and bids",
+      "label": "I want to participate in another area rental or bid"
     },
     "plotSearchAndCompetitions": {
-      "counter_one": "Plot search and competitions: {{count}}",
-      "counter_other": "Plot search and competitions: {{count}}",
-      "counterFailed": "Plot search and competitions",
-      "explanation": "Plots for long-term housing or industrial activities",
-      "label": "I want to participate in a plot search or competition"
+      "counter_one": "Plot rentals and bids: {{count}} pcs",
+      "counter_other": "Plot rentals and bids: {{count}} pcs",
+      "counterFailed": "Plot rentals and bids",
+      "explanation": "Plots for long-term housing or property development",
+      "label": "I want to participate in a plot rental or bid"
     }
   },
   "globalNotifications": {
@@ -406,23 +407,23 @@
   "login": {
     "cancel": "Cancel",
     "close": "Close",
-    "descriptor": "To search plots, please log in through one of the supported services.",
+    "descriptor": "To search for plots, log in with one of the supported service providers.",
     "form": {
       "forgotPasswordLink": "Forgot your password?",
       "newAccountLink": "Create an account",
       "password": {
         "label": "Password",
-        "placeholder": "Please type your password"
+        "placeholder": "Enter your password"
       },
       "username": {
         "label": "Username",
-        "placeholder": "Please type your username"
+        "placeholder": "Enter your username"
       }
     },
     "login": "Log in",
     "title": "Log in"
   },
-  "mainAppTitle": "City of Helsinki plot and land leasing system",
+  "mainAppTitle": "City of Helsinki plot and land renting system",
   "map": {
     "drawTools": {
       "draw": {
@@ -435,9 +436,9 @@
           },
           "polygon": {
             "tooltip": {
-              "cont": "Click to continue drawing a shape.",
+              "cont": "Click to continue drawing the layer.",
               "end": "Click the first point to close this shape.",
-              "start": "Click to start drawing a shape."
+              "start": "Click to start drawing a layer."
             }
           },
           "polyline": {
@@ -461,22 +462,22 @@
         },
         "toolbar": {
           "actions": {
-            "text": "Cancel",
-            "title": "Cancel drawing"
+            "text": "Cancel drawing",
+            "title": "Cancel"
           },
           "buttons": {
             "circle": "Draw a circle",
             "polygon": "Draw a polygon",
-            "polyline": "Draw a polyline",
+            "polyline": "Draw a line",
             "rectangle": "Draw a rectangle"
           },
           "finish": {
-            "text": "Finish",
-            "title": "Finish drawing"
+            "text": "Stop drawing",
+            "title": "Finish"
           },
           "undo": {
-            "text": "Delete last point",
-            "title": "Delete the last point drawn"
+            "text": "Delete last point drawn",
+            "title": "Delete last point"
           }
         }
       },
@@ -484,13 +485,13 @@
         "handlers": {
           "edit": {
             "tooltip": {
-              "subtext": "Click cancel to undo changes.",
-              "text": "Drag handles or markers to edit features."
+              "subtext": "Click Cancel to undo changes",
+              "text": "Drag handles or markers to edit the features"
             }
           },
           "remove": {
             "tooltip": {
-              "text": "Click on a feature to remove."
+              "text": "Click on a layer to remove it"
             }
           }
         },
@@ -498,11 +499,11 @@
           "actions": {
             "cancel": {
               "text": "Cancel",
-              "title": "Cancel editing, discards all changes"
+              "title": "Cancel changes"
             },
             "clearAll": {
-              "text": "Clear All",
-              "title": "Clear all layers"
+              "text": "Clear all",
+              "title": "Clear all"
             },
             "save": {
               "text": "Save",
@@ -519,14 +520,14 @@
       }
     },
     "geoSearch": {
-      "searchLabel": "Search for an address"
+      "searchLabel": "Search by address"
     },
     "mapLayers": {
       "baseMap": "Base map",
-      "cityPlan": "City plan",
-      "generalMap": "Base map",
+      "cityPlan": "Detailed plan",
+      "generalMap": "Map series",
       "helsinkiOwnedAreas": "Areas owned by the City of Helsinki",
-      "ortographic": "Ortographic"
+      "ortographic": "Orthophotograph"
     },
     "zoomControl": {
       "zoomIn": "Zoom in",
@@ -536,10 +537,10 @@
   "plotSearchAndCompetitions": {
     "mapView": {
       "otherSearches": {
-        "pageTitle": "Other competitions and searches"
+        "pageTitle": "Other bids and rentals"
       },
       "plotSearches": {
-        "pageTitle": "Plot searches and competitions"
+        "pageTitle": "Plot rentals and bids"
       },
       "sidebar": {
         "addToApplication": "Add to application",
@@ -550,44 +551,44 @@
         "navigateToTarget": "Open the details for this target",
         "notification": {
           "noTargetsToShow": {
-            "body": "<0>There are no searches of this type that you can apply to available at the moment.</0>",
+            "body": "<0>There are no targets of this type available for application at the moment.</0>",
             "title": "Notice"
           },
           "selectionInAnotherTab": {
-            "body": "<0>You can only apply for one plot search per application.</0><1>Your currently selected targets are of a different search type than the ones shown on this page, and as a result, no targets can be added on this page. <2>See your currently selected targets.</2></1>",
-            "title": "Attention!"
+            "body": "<0>You can only apply for one plot rental per application.</0><1>Your currently selected targets are of a different search type than the ones shown on this page. For this reason, you cannot add targets on this page. <2>See your currently selected targets here.</2></1>",
+            "title": "Please note:"
           },
           "singlePlotSearchAllowed": {
-            "body": "<0>You can only apply for one plot search per application.</0><1>If one plot search contains multiple searchable targets, you can add those in the same application.</1><2>If you want to apply for targets in another plot search, you need to fill a new application for every plot search separately.</2>",
-            "title": "Attention!"
+            "body": "<0>You can only apply for one plot rental per application.</0><1>If one bid includes multiple available targets, you can add them on the same application.</1><2>If you want to participate in other bids or another plot rental, you need to complete a separate application for each of them.</2>",
+            "title": "Please note:"
           }
         },
-        "sectionApplyBy": "Apply by {{date}}",
+        "sectionApplyBy": "Application period ends on {{date}}",
         "singleTarget": {
           "address": "Address",
           "applyButton": "Apply for this plot",
-          "applyByDate": "Apply by",
+          "applyByDate": "Application period ends",
           "area": "Area (m²)",
-          "detailedPlanIdentifier": "Detailed plan identifier",
-          "detailedPlanState": "Detailed plan state",
+          "detailedPlanIdentifier": "Detailed plan",
+          "detailedPlanState": "Detailed plan progress",
           "financingMethod": "Financing method",
-          "firstSuitableConstructionYear": "First suitable construction year",
+          "firstSuitableConstructionYear": "Suitable for construction",
           "hitas": "HITAS",
-          "infoLinks": "Details",
+          "infoLinks": "Addition information",
           "intendedUse": "Intended use",
           "management": "Management method",
-          "permittedBuildArea": "Permitted build floor area (floor-m²)",
-          "permittedBuildAreaCommercial": "Permitted build commercial floor area (floor-m²)",
-          "permittedBuildAreaResidential": "Permitted build residential floor area (floor-m²)",
+          "permittedBuildArea": "Zoning right (floor-m²)",
+          "permittedBuildAreaCommercial": "Commercial zoning right (floor-m²)",
+          "permittedBuildAreaResidential": "Residential zoning right (floor-m²)",
           "plotNumber": "Plot",
           "removeButton": "Remove plot from application",
-          "returnToList": "Return to list"
+          "returnToList": "Back"
         },
         "targetHeadings": {
           "address": "Address",
           "area": "Area (m²)",
           "intendedUse": "Intended use",
-          "permittedBuildArea": "Permitted build floor area (m²)",
+          "permittedBuildArea": "Zoning right (floor-m²)",
           "plotNumber": "Plot",
           "tools": "Tools"
         },
@@ -601,32 +602,32 @@
   "topNavigation": {
     "skipToContent": "Skip to content",
     "tabs": {
-      "areaSearch": "Area search",
-      "otherCompetitionsAndSearches": "Other competitions and searches",
-      "plotSearchAndCompetitions": "Plot search and competitions"
+      "areaSearch": "Area rental",
+      "otherCompetitionsAndSearches": "Other bids and rentals",
+      "plotSearchAndCompetitions": "Plot rentals and bids"
     }
   },
   "validation": {
     "errors": {
       "companyIdentifier": {
-        "checkNumber": "Check character doesn't match.",
-        "generic": "Invalid company identifier."
+        "checkNumber": "Checksum does not match.",
+        "generic": "Invalid Business ID."
       },
       "controlShare": {
-        "generic": "Invalid control share fraction.",
+        "generic": "Invalid control share.",
         "invalidSum": "Control shares of applicants must sum up to 100%."
       },
       "dateAfter": "The selected date cannot be before {{date}}.",
       "dateBefore": "The selected date cannot be after {{date}}.",
-      "email": "Invalid email address format.",
-      "greaterThan": "Please enter a value greater than {{number}}.",
-      "lessThan": "Please enter a value less than {{number}}.",
-      "nonEmptyGeometry": "No area has yet been selected.",
+      "email": "Invalid email address.",
+      "greaterThan": "Enter a value greater than {{number}}.",
+      "lessThan": "Enter a value less than {{number}}.",
+      "nonEmptyGeometry": "An area has not yet been selected.",
       "personalIdentifier": {
-        "checkChar": "Check character doesn't match.",
-        "generic": "Invalid personal identifier."
+        "checkChar": "Checksum does not match.",
+        "generic": "Invalid personal ID."
       },
-      "requiredArray": "One or more options must be selected.",
+      "requiredArray": "Choose at least one option.",
       "requiredValue": "This field is required."
     }
   }

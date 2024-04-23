@@ -1,367 +1,368 @@
 {
   "application": {
     "arraySection": {
-      "applicantHeader": "",
+      "applicantHeader": "Uppgifter om sökande {{number}}",
       "add": {
-        "applicant": "",
-        "target": "",
-        "confirmation": "",
-        "general": ""
+        "applicant": "Lägg till sökande",
+        "target": "Lägg till objekt",
+        "confirmation": "Lägg till",
+        "general": "Lägg till"
       },
       "remove": {
-        "applicant": "",
-        "target": "",
-        "confirmation": "",
-        "general": ""
+        "applicant": "Ta bort sökande",
+        "target": "Ta bort objekt",
+        "confirmation": "Ta bort",
+        "general": "Ta bort"
       }
     },
     "buttons": {
-      "cancel": "",
-      "login": "",
-      "preview": "",
-      "viewTargets": ""
+      "cancel": "Gå tillbaka",
+      "login": "Logga in",
+      "preview": "Gå till förhandsgranskning",
+      "viewTargets": "Objekten som ansöks om"
     },
     "error": {
-      "generic": "",
-      "label": "",
-      "noFormAvailable": "",
-      "noPlotsSelected": "",
-      "notLoggedIn": "",
+      "generic": "Ansökan kunde inte skickas. Försök igen senare.",
+      "label": "Sändning misslyckades",
+      "noFormAvailable": "Det finns ännu ingen ansökningsblankett för de tomter du valt. Kontakta oss så ordnar vi en blankett för tomterna.",
+      "noPlotsSelected": "Du kan fylla in en tomtansökan efter du valt ett eller flera objekt du vill ansöka på ansökningssidan.",
+      "notLoggedIn": "För att ansöka om tomter ska du först logga in.",
       "preparation": {
-        "label": "",
-        "misconfiguredPlotSearch": "",
-        "noApplicantIdentifierFound": "",
-        "noApplicantTypeSet": "",
-        "unknown": ""
+        "label": "Beredning av sändning misslyckades",
+        "misconfiguredPlotSearch": "Det gick inte att hantera ansökningen om utvalda tomter. Vänligen försök igen senare.",
+        "noApplicantIdentifierFound": "Identifieringsuppgifter av en eller flera sökande saknas. Vänligen kontrollera att du har fyllt i personbeteckningar för privata personer och FO-nummer för företag.",
+        "noApplicantTypeSet": "Sökandetyp av en eller flera sökande har inte valts. Vänligen kontrollera att du har fyllt i nödvändiga uppgifter för alla sökande.",
+        "unknown": "Beredning av sändningen misslyckades av en okänd anledning. Vänligen försök igen senare."
       },
       "summary": {
-        "header": ""
+        "header": "Kontrollera följande fälten innan du fortsätter."
       }
     },
     "fileUpload": {
-      "delete": "",
-      "deleteHeader": "",
+      "delete": "Ta bort",
+      "deleteHeader": "Ta bort",
       "error": {
-        "exception": "",
-        "nonOkResponse": ""
+        "exception": "Sändning av bilagan avbröts på grund av ett fel! Vänligen försök igen senare.",
+        "nonOkResponse": "Sändning av bilagan misslyckades! Vänligen försök igen senare."
       },
-      "filename": "",
-      "info": "",
-      "newFile": "",
-      "noFilesUploaded": "",
-      "number": "",
-      "rowLabel": "",
-      "uploadedAt": ""
+      "filename": "Fil",
+      "info": "Den största tillåtna filstorleken är {{maxSize}} Mt.",
+      "newFile": "Lägg till en fil",
+      "noFilesUploaded": "Inga filer har lagts till.",
+      "number": "Bilaga",
+      "rowLabel": "Bilaga {{number}}",
+      "uploadedAt": "Sändning lyckades"
     },
     "form": {
-      "pageTitle": "",
+      "pageTitle": "Tomtansökan",
       "tabs": {
-        "applicants_one": "",
-        "applicants_other": "",
-        "other": "",
-        "targets_one": "",
-        "targets_other": ""
+        "applicants_one": "Sökande ({{count}})",
+        "applicants_other": "Sökande ({{count}})",
+        "other": "Mer information",
+        "targets_one": "Objekten som ansöks ({{count}})",
+        "targets_other": "Objekten som ansöks ({{count}})"
       }
     },
-    "heading": "",
+    "heading": "Tomtansökan",
     "mustVisitTargetPage": {
-      "close": "",
-      "text": "",
-      "title": ""
+      "close": "Stäng",
+      "text": "För att fortsätta till förhandsgranskningen måste du fylla i den information som begärs i fliken för objekten du ansöker om. Du kan gå till fliken från knappen nedan.",
+      "title": "Obs !"
     },
     "preview": {
-      "attachmentNo": "",
-      "booleanNo": "",
-      "booleanYes": "",
-      "heading": "",
-      "pageTitle": ""
+      "attachmentNo": "Bilaga {{number}}",
+      "booleanNo": "Nej",
+      "booleanYes": "Ja",
+      "heading": "Förhandsgranskning – tomtansökan",
+      "pageTitle": "Tomtansökan"
     },
-    "previewButton": "",
+    "previewButton": "Gå till förhandsgranskning",
     "procedure": {
-      "link": "",
+      "link": "Hur framskrider behandlingen av en ansökan?",
       "popup": {
-        "closeButton": "",
+        "closeButton": "Stäng",
         "stages": {
-          "decision": "",
-          "forwarding": "",
-          "offer": "",
-          "review": "",
-          "submission": ""
+          "decision": "Staden gör ett arrendebeslut efter vilket undertecknas arrendeavtalet.",
+          "forwarding": "Ansökan hänvisas till rätt tjänst inom staden för behandling.",
+          "offer": "Sökande får en möjlighet att kommentera avtalsutkastet om ett positiv beslut om arrende fattas.",
+          "review": "Staden utreder om området kan hyras ut till sökanden för det ändamål som sökanden har uppgett och ber sökanden om eventuella tilläggsuppgifter. Staden kan behöva begära synpunkter från andra berörda parter för att fatta beslut.",
+          "submission": "Sökande lämnar in en ansökan."
         },
-        "title": ""
+        "title": "Information om behandlingsprocessen"
       }
     },
-    "returnToForm": "",
-    "submit": "",
-    "submitInProcess": "",
+    "returnToForm": "Redigera ansökan",
+    "submit": "Skicka ansökan",
+    "submitInProcess": "Ansökan skickas...",
     "success": {
-      "body": "",
-      "body_one": "",
-      "body_other": "",
-      "heading": "",
-      "pageTitle": ""
+      "body": "Din ansökan har skickats.",
+      "body_one": "Din ansökan har skickats, ansökningsnumret är {{applicationIdentifiers}}. En kopia av ansökan har skickats till din e-postadress.",
+      "body_other": "Din ansökan har skickats. Ansökningsnumren är {{applicationIdentifiers}}. En kopia av ansökan har skickats till din e-postadress.",
+      "heading": "Tack för din ansökan",
+      "pageTitle": "Ansökan har skickats"
     },
     "targets": {
-      "identifier": "",
-      "screenReaderHeading": ""
+      "identifier": "Tomt",
+      "screenReaderHeading": "Tomter som ansöks om"
     }
   },
   "areaSearch": {
     "application": {
-      "backButton": "",
+      "backButton": "Tillbaka",
       "error": {
-        "noAreaSelected": "",
-        "notLoggedIn": "",
+        "noAreaSelected": "För att kunna skicka en ansökan ska du ha valt området på ansökningssidan.",
+        "notLoggedIn": "För att ansöka om att hyra ett område ska du först logga in.",
         "preparation": {
-          "misconfiguredPlotSearch": ""
+          "misconfiguredPlotSearch": "Din ansökan om områdeshyrning kunde inte hittas, vänligen ange området på nytt."
         }
       },
       "form": {
-        "pageTitle": ""
+        "pageTitle": "Ansökan om att hyra ett område"
       },
-      "heading": "",
-      "loginButton": "",
+      "heading": "2. Ansökan",
+      "loginButton": "Logga in",
       "preview": {
-        "heading": "",
-        "pageTitle": "",
-        "emailConfirmationNotice": ""
+        "heading": "3. Förhandsgranskning",
+        "pageTitle": "Ansökan om att hyra ett område",
+        "emailConfirmationNotice": "Du får bekräftelse på att din ansökan har mottagits och en kopia av ansökan skickas till din e-post."
       },
       "target": {
-        "addressNotFound": "",
-        "area": "",
-        "areaDescription": "",
-        "attachments": "",
-        "intendedUsage": "",
-        "leaseTime": "",
-        "screenReaderHeading": ""
+        "addressNotFound": "Ingen adress hittades för det område du valt",
+        "area": "Area (m²)",
+        "areaDescription": "Närmare beskrivning om området",
+        "attachments": "Bilagor till ansökan",
+        "intendedUsage": "Användningsändamål",
+        "leaseTime": "Hyrestid",
+        "screenReaderHeading": "Valt område:"
       }
     },
     "landingPage": {
-      "applyForArea": "",
+      "applyForArea": "Ansök om område",
       "areaSearches": {
-        "blurb": "",
-        "heading": "",
-        "label": ""
+        "blurb": "Du kan hyra lediga mark- och vattenområden för många olika ändamål.",
+        "heading": "Hyrning av ett område",
+        "label": "Hyr ett område"
       },
-      "heading": "",
-      "introduction": "",
+      "heading": "Ansök om hyresområde",
+      "introduction": "Du kan hyra områden av Helsingfors stad för många olika ändamål. Välj det lämpligaste alternativet för ditt syfte.",
       "otherUses": {
         "commercialUses": {
-          "blurb": "",
-          "label": "",
+          "blurb": "Du kan hyra stadens allmänna område för kortvarig försäljningsverksamhet, hyra området utanför din affärslokal för presentations- och försäljningsverksamhet, ingå avtal för verksamheten av smidig kiosk, dvs. den mobila livsmedelskiosken. Du kan hyra stadens broreklamplatser för kortvarig marknadsföring och information.",
+          "label": "Försäljnings- och reklamplatser",
           "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden/reklam"
         },
-        "heading": "",
+        "heading": "Annan användning av område",
         "misc": {
-          "label": "",
+          "label": "Övriga avtal om användning av ett område",
           "dogs": {
-            "blurb": "",
+            "blurb": "På hundträningsplaner kan man boka en reguljärtid i veckan för att träna sin hund.",
             "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden"
           },
           "gardening": {
-            "blurb": "",
+            "blurb": "Föreningar och samfund kan hyra mark från staden för småskalig stadsodling.",
             "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden"
           }
         },
         "otherConstruction": {
-          "blurb": "",
-          "label": "",
+          "blurb": "Du kan tillfälligt hyra gatu- eller parkområde som arbetsområde till exempel för byggnads- eller lyftarbete, fastighetsrenovering, flyttning, takskottning och film- och tv-produktion eller om du vill placera till exempel en fasadställning, en lyftanordning, ett rullflak eller en container på området. Om du vill utföra grävarbete på gatorna eller i parker, meddela staden om det.",
+          "label": "Arbeten som utförs på gator och i parker",
           "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden/arbete-pa-gatu-eller-parkomraden"
         },
         "outdoorEvent": {
-          "blurb": "",
-          "label": "",
+          "blurb": "Du behöver tillstånd att ordna ett evenemang på gatan, på torget eller i parken, om evenemanget begränsar annan användning av området.",
+          "label": "Ordnande av friluftsevenemang",
           "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden/utomhusevenemang"
         },
         "permanentFixtures": {
-          "blurb": "",
-          "label": "",
+          "blurb": "Du behöver ett placeringsavtal med staden om du vill placera permanenta konstruktioner på en gata eller i en park, till exempel lednings- eller fordonsanslutningar, underjordiska grunder eller ett staket eller stängsel.",
+          "label": "Permanent konstruktion som placeras på gatan eller i parken",
           "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden/arbete-pa-gatu-eller-parkomraden"
         },
         "terraceOrParklet": {
-          "blurb": "",
-          "label": "",
+          "blurb": "Du behöver ett terrasstillstånd för ett uteserveringsområde för en restaurang eller ett kafé om serveringsområdet kommer till stadens offentliga gatu- eller parkområde. För att inrätta en inglasad terrass behöver du dessutom tillstånd av byggnadstillsyn.",
+          "label": "Terrass och parklet",
           "link": "https://www.hel.fi/helsinki/sv/boende-och-miljo/tomter/tillstond-for-allmanna-omraden/terrasser-och-parklet"
         }
       },
-      "pageTitle": "",
-      "readMore": ""
+      "pageTitle": "Ansökan om att hyra ett område",
+      "readMore": "Läs mer"
     },
     "specs": {
       "area": {
-        "areaDescription": "",
-        "areaDescriptionHelpText": "",
+        "areaDescription": "Närmare beskrivning om området",
+        "areaDescriptionHelpText": "Hyresområde definierat så exakt som möjligt.",
         "drawOnMap": {
-          "explanation": "",
-          "heading": "",
+          "explanation": "Områdesvalet är utgångspunkten för förhandlingarna. Området du ritade är ungefärligt. När ansökan behandlas kontaktar vi dig om avgränsningen av hyresområdet.",
+          "heading": "Rita området på kartan",
           "helpTexts": {
-            "label": "",
-            "phase1": "",
-            "phase2": "",
-            "phase3": "",
-            "phase4": "",
-            "zoomTools": "",
-            "zoomToolsAlt": "",
-            "drawTools": "",
-            "drawToolsAlt": "",
-            "editTools": "",
-            "editToolsAlt": "",
-            "mapLayers": "",
-            "mapLayersAlt": ""
+            "label": "Kartverktyget",
+            "phase1": "Börja med att söka läget på kartan med hjälp av adressökning eller genom att zooma in eller ut.",
+            "phase2": "Rita det önskade området på kartan med hjälp av ritverktygen. Du kan rita områden i form av en polygon eller rektangulär. Det är möjligt att rita flera områden.",
+            "phase3": "De områden du ritar sparas automatiskt på kartan och du kan fortsätta att fylla i ansökan.",
+            "phase4": "Du kan ändra det ritade området genom att klicka på redigeringsknappen. Klicka på borttagningsknappen för att ta bort ett eller flera objekt.",
+            "zoomTools": "= zooma in och ut",
+            "zoomToolsAlt": "Zooma in och ut på kartan",
+            "drawTools": "= ritverktyg",
+            "drawToolsAlt": "Rita området på kartan",
+            "editTools": "= redigera och ta bort",
+            "editToolsAlt": "Redigeringsknappar",
+            "mapLayers": "= kartlager",
+            "mapLayersAlt": "Kartlager"
           }
         },
-        "heading": ""
+        "heading": "Berätta oss var du vill hyra ett område"
       },
       "attachments": {
-        "heading": "",
-        "input": ""
+        "heading": "Bilagor till ansökan",
+        "input": "Om du har fått instruktioner att bifoga bilagor till din ansökan, t.ex. en planritning, bifoga dem här. Du kan också lägga till valfria bilagor.",
+        "inputHelpText": "Vi hoppas främst att filerna skickas i pdf-format."
       },
-      "continueButton": "",
+      "continueButton": "Fortsätt",
       "errors": {
-        "attachment": "",
-        "endDateAfterStartDate": "",
-        "other": "",
-        "startDateBeforeEndDate": "",
-        "validation": "",
-        "eitherPolygonOrDescription": ""
+        "attachment": "Sparande av bilagorna misslyckades! Vänligen försök igen senare.",
+        "endDateAfterStartDate": "Slutdatumet ska vara efter startdatumet.",
+        "other": "Sparande av ansökan om att hyra ett område misslyckades av okänd anledning. Vänligen försök igen.",
+        "startDateBeforeEndDate": "Startdatumet ska vara före slutdatumet.",
+        "validation": "Kontrollera att markerade fälten har fyllts i korrekt.",
+        "eitherPolygonOrDescription": "För att fortsätta till förhandsgranskningen måste du antingen ha A) valt hyresområdet på kartan eller B) beskrivit hyresområdet i text."
       },
-      "explanation": "",
-      "heading": "",
+      "explanation": "Om du vill hyra ett område fortsätt genom att fylla i ansökningsblanketten. Berätta för oss om det önskade området, användningsändamålet och hyrestiden. Vi kontaktar dig så snart som möjligt. Fälten markerade med en asterisk är obligatoriska. ",
+      "heading": "1. Val av område",
       "intendedUse": {
-        "endDate": "",
-        "endDateHelpText": "",
-        "heading": "",
-        "mainType": "",
-        "mainTypePlaceholder": "",
-        "projectDescription": "",
-        "projectDescriptionHelpText": "",
-        "startDate": "",
-        "startDateHelpText": ""
+        "endDate": "Slutdatum för hyrning",
+        "endDateHelpText": "Om du inte vet slutdatumet för hyresperioden eller om du vill hyra ett område tills vidare, ange detta i en närmare beskrivning.",
+        "heading": "Välj användningsändamål och önskad hyresperiod",
+        "mainType": "Användningsändamål",
+        "mainTypePlaceholder": "Välj ett användningsändamål",
+        "projectDescription": "Närmare beskrivning om hur området används",
+        "projectDescriptionHelpText": "Vilken typ av verksamhet planerar du att ordna i hyresobjektet? Vilka typer av konstruktioner planerar du att bygga i hyresområdet? Beskriv vilka som använder området. Är det fråga om en ansökan om förlängning av befintliga hyrningen (om ja, ange hyresbeteckningen)?",
+        "startDate": "Startdatum för hyresperioden",
+        "startDateHelpText": "Beakta att vi handlägger ansökningar i ankomstordning."
       },
-      "loginButton": "",
-      "notLoggedIn": "",
-      "pageTitle": "",
-      "submitting": ""
+      "loginButton": "Logga in",
+      "notLoggedIn": "För att ansöka om att hyra ett område ska du först logga in.",
+      "pageTitle": "Ansökan om att hyra ett område",
+      "submitting": "Skickas..."
     },
     "targetCard": {
       "showFullDesc": {
-        "hide": "",
-        "show": ""
+        "hide": "Dölj närmare uppgifter om objektet",
+        "show": "Visa närmare uppgifter om objektet"
       }
     }
   },
   "components": {
     "form": {
       "fractionalFieldset": {
-        "denominator": "",
-        "numerator": ""
+        "denominator": "Nämnaren",
+        "numerator": "Täljaren"
       }
     }
   },
   "directReservation": {
     "buttons": {
-      "login": ""
+      "login": "Logga in"
     },
     "error": {
-      "notLoggedIn": ""
+      "notLoggedIn": "Logga in för att ansöka om objekt som omfattas av förfarandet med direktanvisning."
     },
     "errors": {
-      "favouriteGenerationError": ""
+      "favouriteGenerationError": "Något gick fel. Försök igen eller kontakta tjänstemannen som skickade länken."
     },
-    "pageTitle": ""
+    "pageTitle": "Direktanvisning"
   },
   "errorPage": {
     "notFound": {
-      "explanation": "",
-      "pageTitle": ""
+      "explanation": "404 Sidan hittades inte",
+      "pageTitle": "Sidan hittades inte"
     }
   },
   "faq": {
     "accordion": {
-      "heading": ""
+      "heading": "Vanliga frågor"
     },
     "notification": {
-      "error": ""
+      "error": "Något gick fel vid hämtning av vanliga frågor."
     }
   },
   "favourites": {
     "saga": {
-      "addTarget": "",
-      "removeTarget": ""
+      "addTarget": "Objektet \"{{address}}\" har lagts till ansökan.",
+      "removeTarget": "Objektet \"{{address}}\" har tagits bort från ansökan."
     }
   },
   "favouritesPage": {
     "map": {
-      "notAvailable": "",
-      "showOnMap": ""
+      "notAvailable": "Kartan inte tillgänglig",
+      "showOnMap": "Visa på kartan"
     },
-    "nextButton": "",
+    "nextButton": "Fortsätt till ifyllande av ansökan",
     "notification": {
-      "body": "",
-      "link": "",
-      "title": ""
+      "body": "Du hittar tomterna som lagts till ansökan här. Du kan gå tillbaka till sidan för tomtansökan om du vill lägga till nya objekt.",
+      "link": "Gå tillbaka till sidan för tomtansökan",
+      "title": "Vill du ansöka om flera tomter?"
     },
-    "pageTitle": "",
+    "pageTitle": "Valda tomter",
     "targetCard": {
-      "removeButton": "",
+      "removeButton": "Ta bort från listan",
       "showFullDesc": {
-        "hide": "",
-        "show": ""
+        "hide": "Dölj närmare uppgifter om objektet",
+        "show": "Visa närmare uppgifter om objektet"
       },
       "table": {
-        "address": "",
-        "applyByDate": "",
-        "area": "",
-        "detailedPlanIdentifier": "",
-        "detailedPlanState": "",
-        "financingMethod": "",
-        "firstSuitableConstructionYear": "",
-        "hitas": "",
-        "intendedUsage": "",
-        "management": "",
-        "permittedBuildArea": "",
-        "permittedBuildAreaCommercial": "",
-        "permittedBuildAreaResidential": "",
-        "plot": ""
+        "address": "Adress",
+        "applyByDate": "Ansökningstiden går ut",
+        "area": "Area (m²)",
+        "detailedPlanIdentifier": "Detaljplan",
+        "detailedPlanState": "Behandlingsfas av detaljplan",
+        "financingMethod": "Finansieringsform",
+        "firstSuitableConstructionYear": "Byggbar",
+        "hitas": "HITAS",
+        "intendedUsage": "Användningsändamål",
+        "management": "Upplåtelseform",
+        "permittedBuildArea": "Byggrätt (k-m²)",
+        "permittedBuildAreaCommercial": "Affärsbyggnadsrätt (k-m²)",
+        "permittedBuildAreaResidential": "Bostadsbyggnadsrätt (k-m²)",
+        "plot": "Tomt"
       }
     },
-    "title": ""
+    "title": "Du ansöker om följande tomter"
   },
   "footer": {
     "copyright": {
-      "holder": "",
+      "holder": "Helsingfors stad",
       "text": ""
     },
     "logo": {
-      "alt": ""
+      "alt": "Helsingfors logotyp"
     },
-    "text": "",
-    "customerService": "",
+    "text": "Tomtansökan",
+    "customerService": "Stadsmiljösektorns kundservice",
     "some": {
-      "facebook": "",
-      "twitter": "",
-      "instagram": "",
-      "linkedin": ""
+      "facebook": "Helsingfors stad på Facebook",
+      "twitter": "Helsingfors stad på X",
+      "instagram": "Helsingfors stad på Instagram",
+      "linkedin": "Helsingfors stad på LinkedIn"
     },
-    "moveToTop": "",
+    "moveToTop": "Gå upp",
     "accessabilityStatement": {
-      "label": "",
-      "url": ""
+      "label": "Tillgänglighetsutlåtande",
+      "url": "https://www.hel.fi/sv/beslutsfattande-och-forvaltning/information-om-helsingfors/statistiken-och-livet-i-helsingfors/tillganglighet"
     },
     "dataProtection": {
-      "label": "",
-      "url": ""
+      "label": "Dataskydd",
+      "url": "https://www.hel.fi/sv/beslutsfattande-och-forvaltning/information-om-helsingfors/dataskydd-och-informationshantering/dataskydd"
     },
     "registerStatement": {
-      "label": "",
-      "url": ""
+      "label": "Registerbeskrivning",
+      "url": "#"
     }
   },
   "frontPage": {
     "areaSearch": {
       "counter": "Områdesökning",
-      "explanation": "",
-      "label": ""
+      "explanation": "Uthyrning av mark- eller vattenområden",
+      "label": "Jag vill hyra ett område"
     },
     "bannerText": "Helsingfors stadstomter, mark, lokaler och uthyrning av Lorem ipsum",
     "contentHeader": "Hur kan vi hjälpa till med dina hyresbehov?",
@@ -369,114 +370,114 @@
     "otherCompetitionsAndSearches": {
       "counter_one": "Andra tävlingar och sökningar: {{count}}",
       "counter_other": "Andra tävlingar och sökningar: {{count}}",
-      "counterFailed": "",
-      "explanation": "",
-      "label": ""
+      "counterFailed": "Övriga tävlingar och ansökningar",
+      "explanation": "Övriga pågående tävlingar och ansökningar",
+      "label": "Jag vill delta i någon annan områdesansökan eller tävling"
     },
     "plotSearchAndCompetitions": {
       "counter_one": "Plot sökningar och tävlingar: {{count}}",
       "counter_other": "Plot sökningar och tävlingar: {{count}}",
-      "counterFailed": "",
+      "counterFailed": "Tomtansökningar och -tävlingar",
       "explanation": "Tomter för långtidsbostäder eller industriell verksamhet",
       "label": "Jag vill delta i en tomtsökning eller tävling"
     }
   },
   "globalNotifications": {
     "notification": {
-      "close": ""
+      "close": "Stäng"
     }
   },
   "header": {
     "actions": {
       "favourites": {
-        "title": ""
+        "title": "Favoriter"
       },
       "userManagement": {
-        "logIn": "",
-        "logOut": ""
+        "logIn": "Logga in",
+        "logOut": "Logga ut"
       }
     }
   },
   "language": {
-    "languageSelection": ""
+    "languageSelection": "Språkval"
   },
   "loader": {
-    "loading": ""
+    "loading": "Innehållet laddas ned, vänta en stund..."
   },
   "login": {
     "cancel": "Annullera",
-    "close": "",
-    "descriptor": "",
+    "close": "Stäng",
+    "descriptor": "Vänligen logga in via en tjänsteproducent som stöds för att ansöka om tomter.",
     "form": {
-      "forgotPasswordLink": "",
-      "newAccountLink": "",
+      "forgotPasswordLink": "Glömt lösenord?",
+      "newAccountLink": "Registrera dig",
       "password": {
-        "label": "",
-        "placeholder": ""
+        "label": "Lösenord",
+        "placeholder": "Ange ditt lösenord"
       },
       "username": {
-        "label": "",
-        "placeholder": ""
+        "label": "Användarnamn",
+        "placeholder": "Ange ditt användarnamn"
       }
     },
     "login": "Logga in",
     "title": "Logga in"
   },
-  "mainAppTitle": "",
+  "mainAppTitle": "Helsingfors stads tomt- och markarrendesystem",
   "map": {
     "drawTools": {
       "draw": {
         "handlers": {
           "circle": {
-            "radius": "",
+            "radius": "Radie",
             "tooltip": {
-              "start": ""
+              "start": "Klicka och dra för att rita en cirkel."
             }
           },
           "polygon": {
             "tooltip": {
-              "cont": "",
-              "end": "",
-              "start": ""
+              "cont": "Fortsätt rita området genom att klicka.",
+              "end": "Klicka på den första punkten för att avsluta figuren.",
+              "start": "Fortsätt rita området genom att klicka."
             }
           },
           "polyline": {
-            "error": "",
+            "error": "<strong>Fel:</strong> kanterna på mönstret får inte överlappa varandra!",
             "tooltip": {
-              "cont": "",
-              "end": "",
-              "start": ""
+              "cont": "Fortsätt rita linjen genom att klicka.",
+              "end": "Klicka på den sista punkten för att avsluta linjen.",
+              "start": "Börja rita linjen genom att klicka."
             }
           },
           "rectangle": {
             "tooltip": {
-              "start": ""
+              "start": "Klicka och dra för att rita en rektangel."
             }
           },
           "simpleshape": {
             "tooltip": {
-              "end": ""
+              "end": "Släpp musknappen för att avsluta ritningen."
             }
           }
         },
         "toolbar": {
           "actions": {
-            "text": "",
-            "title": ""
+            "text": "Avbryt ritningen",
+            "title": "Gå tillbaka"
           },
           "buttons": {
-            "circle": "",
-            "polygon": "",
-            "polyline": "",
-            "rectangle": ""
+            "circle": "Rita en cirkel",
+            "polygon": "Rita en polygon",
+            "polyline": "Rita ett streck",
+            "rectangle": "Rita en rektangel"
           },
           "finish": {
-            "text": "",
-            "title": ""
+            "text": "Avsluta ritningen",
+            "title": "Avsluta"
           },
           "undo": {
-            "text": "",
-            "title": ""
+            "text": "Ta bort den senaste ritade punkten",
+            "title": "Ta bort den senaste punkten"
           }
         }
       },
@@ -484,122 +485,122 @@
         "handlers": {
           "edit": {
             "tooltip": {
-              "subtext": "",
-              "text": ""
+              "subtext": "Klicka på Avbryt-knappen för att återkalla ändringar",
+              "text": "Redigera funktioner genom att dra fästen"
             }
           },
           "remove": {
             "tooltip": {
-              "text": ""
+              "text": "Ta bort område genom att klicka på det"
             }
           }
         },
         "toolbar": {
           "actions": {
             "cancel": {
-              "text": "",
-              "title": ""
+              "text": "Gå tillbaka",
+              "title": "Återkalla ändringar"
             },
             "clearAll": {
-              "text": "",
-              "title": ""
+              "text": "Ta bort allt",
+              "title": "Ta bort allt"
             },
             "save": {
-              "text": "",
-              "title": ""
+              "text": "Spara",
+              "title": "Spara ändringar"
             }
           },
           "buttons": {
-            "edit": "",
-            "editDisabled": "",
-            "remove": "",
-            "removeDisabled": ""
+            "edit": "Redigera områden",
+            "editDisabled": "Inga områden som kan redigeras",
+            "remove": "Ta bort områden",
+            "removeDisabled": "Inga områden som kan tas bort"
           }
         }
       }
     },
     "geoSearch": {
-      "searchLabel": ""
+      "searchLabel": "Sök med en adress"
     },
     "mapLayers": {
-      "baseMap": "",
-      "cityPlan": "",
-      "generalMap": "",
-      "helsinkiOwnedAreas": "",
-      "ortographic": ""
+      "baseMap": "Stomkarta",
+      "cityPlan": "Detaljplan",
+      "generalMap": "Kartserie",
+      "helsinkiOwnedAreas": "Områden som ägs av Helsingfors",
+      "ortographic": "Ortoflygbild"
     },
     "zoomControl": {
-      "zoomIn": "",
-      "zoomOut": ""
+      "zoomIn": "Zooma in",
+      "zoomOut": "Zooma ut"
     }
   },
   "plotSearchAndCompetitions": {
     "mapView": {
       "otherSearches": {
-        "pageTitle": ""
+        "pageTitle": "Övriga tävlingar och ansökningar"
       },
       "plotSearches": {
-        "pageTitle": ""
+        "pageTitle": "Tomtansökningar och -tävlingar"
       },
       "sidebar": {
-        "addToApplication": "",
+        "addToApplication": "Lägg till på ansökan",
         "legend": {
-          "arrow": "",
-          "star": ""
+          "arrow": "= mer information",
+          "star": "= lägg till på en ansökan"
         },
-        "navigateToTarget": "",
+        "navigateToTarget": "Öppna uppgifterna om detta objekt",
         "notification": {
           "noTargetsToShow": {
-            "body": "",
-            "title": ""
+            "body": "<0>Inga objekt av den här typen kan ansökas om för närvarande.</0>",
+            "title": "Anmälan"
           },
           "selectionInAnotherTab": {
-            "body": "",
-            "title": ""
+            "body": "<0>Du kan bara skicka in en ansökan för en tävling eller tomtansökning åt gången.</0><1>De objekt du valt för närvarande är inte av samma typ som de objekt som visas på den här sidan, så du kan inte lägga till nya objekt från den här sidan. <2>Se här vilka objekt du valt för närvarande.</2></1>",
+            "title": "Obs!"
           },
           "singlePlotSearchAllowed": {
-            "body": "",
-            "title": ""
+            "body": "<0>Du kan bara skicka in en ansökan för en tävling eller en tomtansökning åt gången.</0><1>Om det i en och samma tävling finns flera tomter som kan ansökas, kan du lägga till dem i samma ansökan.</1><2>Om du vill delta i andra tävlingar eller tomtansökningar, ska du skicka en separat ansökan för dem.</2>",
+            "title": "Obs!"
           }
         },
-        "sectionApplyBy": "",
+        "sectionApplyBy": "Ansökningstiden går ut {{date}}",
         "singleTarget": {
-          "address": "",
-          "applyButton": "",
-          "applyByDate": "",
-          "area": "",
-          "detailedPlanIdentifier": "",
-          "detailedPlanState": "",
-          "financingMethod": "",
-          "firstSuitableConstructionYear": "",
-          "hitas": "",
-          "infoLinks": "",
-          "intendedUse": "",
-          "management": "",
-          "permittedBuildArea": "",
-          "permittedBuildAreaCommercial": "",
-          "permittedBuildAreaResidential": "",
-          "plotNumber": "",
-          "removeButton": "",
-          "returnToList": ""
+          "address": "Adress",
+          "applyButton": "Ansök om ett objekt",
+          "applyByDate": "Ansökningstiden går ut",
+          "area": "Area (m²)",
+          "detailedPlanIdentifier": "Detaljplan",
+          "detailedPlanState": "Behandlingsfas av detaljplan",
+          "financingMethod": "Finansieringsform",
+          "firstSuitableConstructionYear": "Byggbar",
+          "hitas": "HITAS",
+          "infoLinks": "Mer information",
+          "intendedUse": "Användningsändamål",
+          "management": "Upplåtelseform",
+          "permittedBuildArea": "Byggrätt (k-m²)",
+          "permittedBuildAreaCommercial": "Affärsbyggnadsrätt (k-m²)",
+          "permittedBuildAreaResidential": "Bostadsbyggnadsrätt (k-m²)",
+          "plotNumber": "Tomt",
+          "removeButton": "Ta bort ett objekt på ansökan",
+          "returnToList": "Tillbaka"
         },
         "targetHeadings": {
-          "address": "",
-          "area": "",
-          "intendedUse": "",
-          "permittedBuildArea": "",
-          "plotNumber": "",
-          "tools": ""
+          "address": "Adress",
+          "area": "Area (m²)",
+          "intendedUse": "Användningsändamål",
+          "permittedBuildArea": "Byggrätt (k-m²)",
+          "plotNumber": "Tomt",
+          "tools": "Verktyg"
         },
         "typeHeadings": {
-          "showThisType": "",
-          "type": ""
+          "showThisType": "Visa",
+          "type": "Typ"
         }
       }
     }
   },
   "topNavigation": {
-    "skipToContent": "",
+    "skipToContent": "Gå till innehållet",
     "tabs": {
       "areaSearch": "Områdesökning",
       "otherCompetitionsAndSearches": "Andra tävlingar och sökningar",
@@ -609,25 +610,25 @@
   "validation": {
     "errors": {
       "companyIdentifier": {
-        "checkNumber": "",
-        "generic": ""
+        "checkNumber": "Kontrollmärket stämmer inte.",
+        "generic": "Felaktigt FO-nummer."
       },
       "controlShare": {
-        "generic": "",
-        "invalidSum": ""
+        "generic": "Felaktig besittningsandel.",
+        "invalidSum": "Sammanlagd besittningsandel av sökanden ska vara 100 %."
       },
-      "dateAfter": "",
-      "dateBefore": "",
-      "email": "",
-      "greaterThan": "",
-      "lessThan": "",
-      "nonEmptyGeometry": "",
+      "dateAfter": "Det tidigaste tillåtna datumet är {{date}}.",
+      "dateBefore": "Det senaste tillåtna datumet är {{date}}.",
+      "email": "Felaktig e-postadress.",
+      "greaterThan": "Värdet ska vara större än {{number}}.",
+      "lessThan": "Värdet ska vara mindre än {{number}}.",
+      "nonEmptyGeometry": "Området har inte ännu valts ut.",
       "personalIdentifier": {
-        "checkChar": "",
-        "generic": ""
+        "checkChar": "Kontrollmärket stämmer inte.",
+        "generic": "Felaktig personbeteckning."
       },
-      "requiredArray": "",
-      "requiredValue": ""
+      "requiredArray": "Välj minst ett alternativ.",
+      "requiredValue": "Denna uppgift är obligatorisk."
     }
   }
 }
