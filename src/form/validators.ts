@@ -124,7 +124,10 @@ export const dateBeforeValidatorGenerator =
  */
 export const dateAfterOrEqualValidatorGenerator =
   (customError?: string) =>
-  (value: string, values: any): string | null => {
+  (
+    value: string,
+    values: { search: { start_date: string } },
+  ): string | null => {
     // values.search contains other fields defined in redux-form form
     if (value && values.search.start_date) {
       const valueDate = new Date(value);
@@ -147,7 +150,7 @@ export const dateAfterOrEqualValidatorGenerator =
  */
 export const dateBeforeOrEqualValidatorGenerator =
   (customError?: string) =>
-  (value: string, values: any): string | null => {
+  (value: string, values: { search: { end_date: string } }): string | null => {
     // values.search contains other fields defined in redux-form form
     if (value && values.search.end_date) {
       const valueDate = new Date(value);
@@ -165,28 +168,15 @@ export const dateBeforeOrEqualValidatorGenerator =
     return null;
   };
 
-export const nonEmptyMultiPolygonValidatorGenerator =
-  (customError?: string) =>
-  (value?: MultiPolygon | null): string | null => {
-    if (value && value.coordinates.length > 0) {
-      return null;
-    }
-
-    return (
-      customError ||
-      i18n.t(
-        'validation.errors.nonEmptyGeometry',
-        'No area has yet been selected.',
-      )
-    );
-  };
-
 /**
  * Generates a validator for redux-form Field component. Expects geometry Field to also exist.
  */
 export const eitherMultiPolygonOrRequiredValidatorGenerator =
   (customError?: string) =>
-  (value: string, values: any): string | null => {
+  (
+    value: string,
+    values: { search: { geometry?: { coordinates: Array<any> } } },
+  ): string | null => {
     // values.search contains other fields defined in redux-form form
     if (values.search.geometry && values.search.geometry.coordinates.length > 0)
       return null;
