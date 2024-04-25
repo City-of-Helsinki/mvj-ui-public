@@ -120,33 +120,39 @@ export const dateBeforeValidatorGenerator =
   };
 
 export const dateAfterOrEqualValidatorGenerator =
-  (comparisonValue?: string, customError?: string) =>
-  (value?: string): string | null => {
-    if (value && comparisonValue) {
+  (customError?: string) =>
+  (value: string, values: any): string | null => {
+    if (value && values.search.start_date) {
       const valueDate = new Date(value);
-      const comparisonDate = new Date(comparisonValue);
+      const comparisonDate = new Date(values.search.start_date);
 
       if (valueDate.valueOf() === comparisonDate.valueOf()) {
         return null;
       }
 
-      return dateAfterValidatorGenerator(comparisonValue, customError)(value);
+      return dateAfterValidatorGenerator(
+        values.search.start_date,
+        customError,
+      )(value);
     }
     return null;
   };
 
 export const dateBeforeOrEqualValidatorGenerator =
-  (comparisonValue?: string, customError?: string) =>
-  (value?: string): string | null => {
-    if (value && comparisonValue) {
+  (customError?: string) =>
+  (value: string, values: any): string | null => {
+    if (value && values.search.end_date) {
       const valueDate = new Date(value);
-      const comparisonDate = new Date(comparisonValue);
+      const comparisonDate = new Date(values.search.end_date);
 
       if (valueDate.valueOf() === comparisonDate.valueOf()) {
         return null;
       }
 
-      return dateBeforeValidatorGenerator(comparisonValue, customError)(value);
+      return dateBeforeValidatorGenerator(
+        values.search.end_date,
+        customError,
+      )(value);
     }
     return null;
   };
@@ -168,9 +174,10 @@ export const nonEmptyMultiPolygonValidatorGenerator =
   };
 
 export const eitherMultiPolygonOrRequiredValidatorGenerator =
-  (comparisonValue?: MultiPolygon | null, customError?: string) =>
-  (value?: string): string | null => {
-    if (comparisonValue) return null;
+  (customError?: string) =>
+  (value: string, values: any): string | null => {
+    if (values.search.geometry && values.search.geometry.coordinates.length > 0)
+      return null;
 
     if (!value)
       return (
