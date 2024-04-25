@@ -119,9 +119,13 @@ export const dateBeforeValidatorGenerator =
     return null;
   };
 
+/**
+ * Generates a validator for redux-form Field component. Expects start_date Field to also exist.
+ */
 export const dateAfterOrEqualValidatorGenerator =
   (customError?: string) =>
   (value: string, values: any): string | null => {
+    // values.search contains other fields defined in redux-form form
     if (value && values.search.start_date) {
       const valueDate = new Date(value);
       const comparisonDate = new Date(values.search.start_date);
@@ -138,9 +142,13 @@ export const dateAfterOrEqualValidatorGenerator =
     return null;
   };
 
+/**
+ * Generates a validator for redux-form Field component. Expects end_date Field to also exist.
+ */
 export const dateBeforeOrEqualValidatorGenerator =
   (customError?: string) =>
   (value: string, values: any): string | null => {
+    // values.search contains other fields defined in redux-form form
     if (value && values.search.end_date) {
       const valueDate = new Date(value);
       const comparisonDate = new Date(values.search.end_date);
@@ -173,9 +181,13 @@ export const nonEmptyMultiPolygonValidatorGenerator =
     );
   };
 
+/**
+ * Generates a validator for redux-form Field component. Expects geometry Field to also exist.
+ */
 export const eitherMultiPolygonOrRequiredValidatorGenerator =
   (customError?: string) =>
   (value: string, values: any): string | null => {
+    // values.search contains other fields defined in redux-form form
     if (values.search.geometry && values.search.geometry.coordinates.length > 0)
       return null;
 
