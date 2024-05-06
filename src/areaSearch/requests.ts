@@ -33,7 +33,7 @@ export const submitAreaSearchRequest = ({
 }: AreaSearchSubmission): Generator<Effect, ApiCallResult, Response> => {
   const payload = {
     area_search_attachments: area_search_attachments,
-    geometry: JSON.stringify(geometry),
+    geometry: geometry ? JSON.stringify(geometry) : null,
     ...rest,
   };
 

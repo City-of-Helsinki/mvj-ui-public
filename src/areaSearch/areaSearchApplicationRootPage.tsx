@@ -203,6 +203,7 @@ export default connect(
 )(
   reduxForm<unknown, Props>({
     form: AREA_SEARCH_FORM_NAME,
+    destroyOnUnmount: false,
     shouldError: (...args) =>
       shouldApplicationFormValidate<unknown, Props>(...args),
     validate: (values, props) =>

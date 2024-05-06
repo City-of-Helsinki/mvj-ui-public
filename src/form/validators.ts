@@ -119,58 +119,67 @@ export const dateBeforeValidatorGenerator =
     return null;
   };
 
+/**
+ * Generates a validator for redux-form Field component. Expects start_date Field to also exist.
+ */
 export const dateAfterOrEqualValidatorGenerator =
-  (comparisonValue?: string, customError?: string) =>
-  (value?: string): string | null => {
-    if (value && comparisonValue) {
-      const valueDate = new Date(value);
-      const comparisonDate = new Date(comparisonValue);
-
-      if (valueDate.valueOf() === comparisonDate.valueOf()) {
-        return null;
-      }
-
-      return dateAfterValidatorGenerator(comparisonValue, customError)(value);
-    }
-    return null;
-  };
-
-export const dateBeforeOrEqualValidatorGenerator =
-  (comparisonValue?: string, customError?: string) =>
-  (value?: string): string | null => {
-    if (value && comparisonValue) {
-      const valueDate = new Date(value);
-      const comparisonDate = new Date(comparisonValue);
-
-      if (valueDate.valueOf() === comparisonDate.valueOf()) {
-        return null;
-      }
-
-      return dateBeforeValidatorGenerator(comparisonValue, customError)(value);
-    }
-    return null;
-  };
-
-export const nonEmptyMultiPolygonValidatorGenerator =
   (customError?: string) =>
-  (value?: MultiPolygon | null): string | null => {
-    if (value && value.coordinates.length > 0) {
-      return null;
-    }
+  (
+    value: string,
+    values: { search: { start_date: string } },
+  ): string | null => {
+    // values.search contains other fields defined in redux-form form
+    if (value && values.search.start_date) {
+      const valueDate = new Date(value);
+      const comparisonDate = new Date(values.search.start_date);
 
-    return (
-      customError ||
-      i18n.t(
-        'validation.errors.nonEmptyGeometry',
-        'No area has yet been selected.',
-      )
-    );
+      if (valueDate.valueOf() === comparisonDate.valueOf()) {
+        return null;
+      }
+
+      return dateAfterValidatorGenerator(
+        values.search.start_date,
+        customError,
+      )(value);
+    }
+    return null;
   };
 
+/**
+ * Generates a validator for redux-form Field component. Expects end_date Field to also exist.
+ */
+export const dateBeforeOrEqualValidatorGenerator =
+  (customError?: string) =>
+  (value: string, values: { search: { end_date: string } }): string | null => {
+    // values.search contains other fields defined in redux-form form
+    if (value && values.search.end_date) {
+      const valueDate = new Date(value);
+      const comparisonDate = new Date(values.search.end_date);
+
+      if (valueDate.valueOf() === comparisonDate.valueOf()) {
+        return null;
+      }
+
+      return dateBeforeValidatorGenerator(
+        values.search.end_date,
+        customError,
+      )(value);
+    }
+    return null;
+  };
+
+/**
+ * Generates a validator for redux-form Field component. Expects geometry Field to also exist.
+ */
 export const eitherMultiPolygonOrRequiredValidatorGenerator =
-  (comparisonValue?: MultiPolygon | null, customError?: string) =>
-  (value?: string): string | null => {
-    if (comparisonValue) return null;
+  (customError?: string) =>
+  (
+    value: string,
+    values: { search: { geometry?: { coordinates: Array<any> } } },
+  ): string | null => {
+    // values.search contains other fields defined in redux-form form
+    if (values.search.geometry && values.search.geometry.coordinates.length > 0)
+      return null;
 
     if (!value)
       return (

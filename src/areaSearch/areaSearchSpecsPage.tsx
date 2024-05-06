@@ -29,7 +29,6 @@ import {
   dateAfterOrEqualValidatorGenerator,
   dateBeforeOrEqualValidatorGenerator,
   eitherMultiPolygonOrRequiredValidatorGenerator,
-  nonEmptyMultiPolygonValidatorGenerator,
   requiredValidatorGenerator,
 } from '../form/validators';
 import { RootState } from '../root/rootReducer';
@@ -134,50 +133,42 @@ const AreaSearchSpecsPage = ({
   const simpleRequiredValidator = useMemo<
     ReturnType<typeof requiredValidatorGenerator>
   >(() => requiredValidatorGenerator(), []);
-  const nonEmptyMultiPolygonValidator = useMemo<
-    ReturnType<typeof nonEmptyMultiPolygonValidatorGenerator>
-  >(() => nonEmptyMultiPolygonValidatorGenerator(), []);
-  const dateAfterPageLoadValidator = useMemo<
-    ReturnType<typeof dateAfterOrEqualValidatorGenerator>
-  >(() => dateAfterOrEqualValidatorGenerator(dateNow.toISOString()), []);
   const isBeforeEndDateValidator = useMemo<
     ReturnType<typeof dateBeforeOrEqualValidatorGenerator>
   >(
     () =>
       dateBeforeOrEqualValidatorGenerator(
-        endDate,
         t(
           'areaSearch.specs.errors.startDateBeforeEndDate',
           'Start date cannot be after end date.',
         ),
       ),
-    [startDate, endDate],
+    [],
   );
   const isAfterStartDateValidator = useMemo<
     ReturnType<typeof dateAfterOrEqualValidatorGenerator>
   >(
     () =>
       dateAfterOrEqualValidatorGenerator(
-        startDate,
         t(
           'areaSearch.specs.errors.endDateAfterStartDate',
           'End date cannot be before start date.',
         ),
       ),
-    [startDate, endDate],
+    [],
   );
+
   const polygonOrDescriptionRequired = useMemo<
     ReturnType<typeof eitherMultiPolygonOrRequiredValidatorGenerator>
   >(
     () =>
       eitherMultiPolygonOrRequiredValidatorGenerator(
-        geometry,
         t(
           'areaSearch.specs.errors.eitherPolygonOrDescription',
           'Select either polygon or description.',
         ),
       ),
-    [geometry, descriptionArea],
+    [],
   );
 
   useEffect(() => {
@@ -313,7 +304,6 @@ const AreaSearchSpecsPage = ({
                           maxDate={lastDate}
                           validate={[
                             simpleRequiredValidator,
-                            dateAfterPageLoadValidator,
                             isBeforeEndDateValidator,
                           ]}
                           placeholder={getCurrentDatePlaceholder()}
@@ -334,10 +324,7 @@ const AreaSearchSpecsPage = ({
                           )}
                           minDate={startDateObject || dateNow}
                           maxDate={lastDate}
-                          validate={[
-                            dateAfterPageLoadValidator,
-                            isAfterStartDateValidator,
-                          ]}
+                          validate={[isAfterStartDateValidator]}
                           initialMonth={startDateObject || dateNow}
                           placeholder={getCurrentDatePlaceholder()}
                         />
@@ -476,10 +463,6 @@ const AreaSearchSpecsPage = ({
                           id="geometry"
                           name="search.geometry"
                           component={AreaSearchMap}
-                          validate={[
-                            nonEmptyMultiPolygonValidator,
-                            polygonOrDescriptionRequired,
-                          ]}
                         />
                       </Col>
                     </Row>
