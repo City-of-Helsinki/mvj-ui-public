@@ -1,5 +1,4 @@
 import i18n from '../i18n';
-import { Point } from 'geojson';
 
 export enum MapLayer {
   generalMap = 'generalMap',
@@ -53,30 +52,51 @@ export const MapLayers: Record<MapLayer, MapLayerProperties> = {
     format: 'image/png',
     label: i18n.t(
       'map.mapLayers.helsinkiOwnedAreas',
-      'Areas owned by the City of Helsinki'
+      'Areas owned by the City of Helsinki',
     ),
   },
 };
 
-export type HelsinkiGeocoderResponse = {
-  meta: {
-    limit: number;
-    offset: number;
-    total_count: number;
-    previous: string | null;
-    next: string | null;
+export interface ServiceMapAddress {
+  object_type: 'address';
+  name: {
+    fi: string;
+    sv: string;
+    en: string;
   };
-  objects: Array<HelsinkiGeocoderResponseItem>;
-};
-
-export type HelsinkiGeocoderResponseItem = {
-  id: number;
-  location: Point;
-  name: string;
-  street: string;
-  number: number;
+  number: string;
+  number_end: string;
   letter: string;
-  number_end: string | null;
-  municipality: string;
-  resource_uri: string;
-};
+  modified_at: string;
+  municipality: {
+    id: string;
+    name: {
+      fi: string;
+      sv: string;
+    };
+  };
+  street: {
+    name: {
+      fi: string;
+      sv?: string;
+      en?: string;
+    };
+  };
+  location: {
+    type: 'Point';
+    coordinates: [number, number];
+  };
+}
+
+export interface ServiceMapResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Array<ServiceMapAddress>;
+}
+
+export interface AddressResult {
+  x: number;
+  y: number;
+  label: string;
+}
