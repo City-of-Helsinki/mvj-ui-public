@@ -1,20 +1,20 @@
-import AbstractProvider, {
+import { JsonProvider } from 'leaflet-geosearch';
+import type {
   EndpointArgument,
-  ParseArgument,
   SearchArgument,
   SearchResult,
+  ParseArgument,
+  ProviderParams,
 } from 'leaflet-geosearch/lib/providers/provider.js';
 
-import {
-  HelsinkiGeocoderResponse,
-  HelsinkiGeocoderResponseItem,
-} from './types';
+import type { ServiceMapResponse, ServiceMapAddress } from './types';
 
-export default class HelsinkiProvider extends AbstractProvider<
-  HelsinkiGeocoderResponse,
-  HelsinkiGeocoderResponseItem
+const SERVICE_MAP_URL = 'https://api.hel.fi/servicemap/v2';
+export default class HelsinkiProvider extends JsonProvider<
+  ServiceMapResponse,
+  ServiceMapAddress
 > {
-  getParamString(params: Record<string, string | number | boolean>): string {
+  getParamString(params: ProviderParams): string {
     return Object.keys(params)
       .map(
         (key) =>
@@ -27,32 +27,29 @@ export default class HelsinkiProvider extends AbstractProvider<
     const url = this.endpoint({ query });
 
     const request = await fetch(url);
-    const json = await request.json();
+    const json = (await request.json()) as ServiceMapResponse;
 
     return this.parse({ data: json });
   }
 
   endpoint({ query }: EndpointArgument = { query: '' }): string {
     const { params } = this.options;
-
     const paramString = this.getParamString({
       ...params,
-      name: query as string,
+      q: query as string,
     });
 
-    return `https://dev.hel.fi/geocoder/v1/address/?${paramString}&municipality=91`;
+    return `${SERVICE_MAP_URL}/search/?${paramString}&type=address&municipality=helsinki`;
   }
 
-  parse({
-    data: { objects },
-  }: ParseArgument<HelsinkiGeocoderResponse>): Array<SearchResult> {
-    return objects.map((r) => {
+  parse({ data }: ParseArgument<ServiceMapResponse>): Array<SearchResult> {
+    return data.results?.map((address) => {
       return {
-        x: r.location.coordinates[0],
-        y: r.location.coordinates[1],
-        label: r.name,
+        x: address.location?.coordinates[0] ?? 0,
+        y: address.location?.coordinates[1] ?? 0,
+        label: address.name?.fi ?? '',
         bounds: null,
-        raw: r,
+        raw: address,
       };
     });
   }
