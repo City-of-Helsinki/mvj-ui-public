@@ -70,5 +70,6 @@ body {
   overflow-y: auto;
   height: calc(100% - 60px);
   background-color: $body-background;
+  // Comes from hds-design-tokens
   font-family: $font-default;
 }
