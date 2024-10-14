@@ -1,12 +1,12 @@
 import { createRoot } from 'react-dom/client';
-import { OidcProvider } from './auth/components/oidcProvider';
+import { LoginProvider } from 'hds-react';
 import { Provider } from 'react-redux';
 
 import './i18n';
 import configureStore from './root/storeConfig';
 import reportWebVitals from './reportWebVitals';
 import SiteRoutes from './root/routes';
-import { userManager } from './auth/userManager';
+import { loginProviderProperties } from './auth/constants';
 import { MVJ_FAVOURITE } from './favourites/types';
 import { logError } from './root/helpers';
 
@@ -45,9 +45,9 @@ const root = createRoot(container as Element);
 
 root.render(
   <Provider store={store}>
-    <OidcProvider store={store} userManager={userManager}>
+    <LoginProvider {...loginProviderProperties}>
       <SiteRoutes />
-    </OidcProvider>
+    </LoginProvider>
   </Provider>,
 );
 

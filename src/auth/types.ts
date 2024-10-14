@@ -1,24 +1,11 @@
 import { Action } from 'redux-actions';
-import type { User } from 'oidc-client-ts';
+import type { User, TokenData } from 'hds-react';
 
-export const FETCH_API_TOKEN = 'auth/FETCH_API_TOKEN';
 export const RECEIVE_API_TOKEN = 'auth/RECEIVE_API_TOKEN';
-export const TOKEN_NOT_FOUND = 'auth/TOKEN_NOT_FOUND';
-export const USER_EXPIRED = 'auth/USER_EXPIRED';
-export const SILENT_RENEW_ERROR = 'auth/SILENT_RENEW_ERROR';
-export const SESSION_TERMINATED = 'auth/SESSION_TERMINATED';
-export const USER_EXPIRING = 'auth/USER_EXPIRING';
+export const CLEAR_API_TOKEN = 'auth/CLEAR_API_TOKEN';
+export const RENEW_API_TOKEN = 'auth/RENEW_API_TOKEN';
 export const USER_FOUND = 'auth/USER_FOUND';
-export const LOADING_USER = 'auth/LOADING_USER';
-export const USER_SIGNED_OUT = 'auth/USER_SIGNED_OUT';
-export const LOAD_USER_ERROR = 'auth/LOAD_USER_ERROR';
-
-export const fetchApiTokenActionType = (payload: string): Action<string> => {
-  return {
-    type: FETCH_API_TOKEN,
-    payload,
-  };
-};
+export const CLEAR_USER = 'auth/CLEAR_USER';
 
 export interface UserFoundAction {
   type: typeof USER_FOUND;
@@ -26,12 +13,12 @@ export interface UserFoundAction {
 }
 export interface ReceiveApiTokenAction {
   type: typeof RECEIVE_API_TOKEN;
-  payload: string;
+  payload: TokenData;
 }
 
 export const receiveApiTokenActionType = (
   payload: ReceiveApiTokenAction['payload'],
-): Action<string> => {
+): Action<TokenData> => {
   return {
     type: RECEIVE_API_TOKEN,
     payload,

@@ -1,34 +1,35 @@
 import { connect } from 'react-redux';
-import type { User } from 'oidc-client-ts';
+import type { User } from 'hds-react';
 
 import { RootState } from '../../root/rootReducer';
 import {
-  getIsFetchingApiToken,
-  getIsLoadingUser,
-  getUser,
+  getIsRenewingApiToken,
+  getLoggedInUser,
   hasApiToken,
 } from '../selectors';
 
 interface Props {
-  isLoadingUser: boolean;
-  isLoadingApiToken: boolean;
+  isRenewingApiToken: boolean;
   user: User | null;
   hasApiToken: boolean;
   children: (loading: boolean, loggedIn: boolean) => JSX.Element | null;
 }
 
 const AuthDependentContent = ({
-  isLoadingUser,
-  isLoadingApiToken,
+  isRenewingApiToken,
   user,
   hasApiToken,
   children,
-}: Props): JSX.Element | null =>
-  children(isLoadingUser || isLoadingApiToken, !!user && hasApiToken);
+}: Props): JSX.Element | null => {
+  // User exists and api token is not renewing
+  const isLoading = !user || isRenewingApiToken;
+  // User exists and has api token
+  const isLoggedIn = !!user && hasApiToken;
+  return children(isLoading, isLoggedIn);
+};
 
 export default connect((state: RootState) => ({
-  user: getUser(state),
-  isLoadingUser: getIsLoadingUser(state),
-  isLoadingApiToken: getIsFetchingApiToken(state),
+  user: getLoggedInUser(state),
+  isRenewingApiToken: getIsRenewingApiToken(state),
   hasApiToken: hasApiToken(state),
 }))(AuthDependentContent);

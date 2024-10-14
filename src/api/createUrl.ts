@@ -4,6 +4,6 @@ export const stringifyQuery = (query: { [key: string]: string }): string =>
     .join('&');
 
 export default (url: string, params?: Record<string, string>): string =>
-  `${import.meta.env.REACT_APP_API_URL || ''}/pub/${url}${
+  `${import.meta.env.VITE_APP_API_URL || ''}/pub/${url}${
     params ? `?${stringifyQuery(params)}` : ''
   }`;

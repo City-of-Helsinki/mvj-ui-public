@@ -1,70 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { User } from 'oidc-client-ts';
+import type { TokenData, User } from 'hds-react';
 
 import {
-  FETCH_API_TOKEN,
-  TOKEN_NOT_FOUND,
   RECEIVE_API_TOKEN,
+  CLEAR_API_TOKEN,
+  RENEW_API_TOKEN,
   ReceiveApiTokenAction,
-  USER_EXPIRED,
   USER_FOUND,
   UserFoundAction,
-  SILENT_RENEW_ERROR,
-  SESSION_TERMINATED,
-  LOADING_USER,
-  USER_SIGNED_OUT,
+  CLEAR_USER,
 } from './types';
 
-type OidcState = {
-  user: User | null;
-  isLoadingUser: boolean;
-};
-
 type CurrentAuthDisplayState = {
-  apiToken: string | null;
-  isFetching: boolean;
+  user: User | null;
+  apiToken: TokenData | null;
+  isRenewingApiToken: boolean;
 };
-
-const initialOidcState: OidcState = {
-  user: null,
-  isLoadingUser: false,
-};
-
-const oidcSlice = createSlice({
-  name: 'oidc',
-  initialState: initialOidcState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(USER_EXPIRED, (state) => {
-        state.user = null;
-        state.isLoadingUser = false;
-      })
-      .addCase(SILENT_RENEW_ERROR, (state) => {
-        state.user = null;
-        state.isLoadingUser = false;
-      })
-      .addCase(SESSION_TERMINATED, (state) => {
-        state.user = null;
-        state.isLoadingUser = false;
-      })
-      .addCase(USER_SIGNED_OUT, (state) => {
-        state.user = null;
-        state.isLoadingUser = false;
-      })
-      .addCase(USER_FOUND, (state, action: UserFoundAction) => {
-        state.user = action.payload;
-        state.isLoadingUser = false;
-      })
-      .addCase(LOADING_USER, (state) => {
-        state.isLoadingUser = true;
-      });
-  },
-});
 
 const initialAuthState: CurrentAuthDisplayState = {
+  user: null,
   apiToken: null,
-  isFetching: false,
+  isRenewingApiToken: false,
 };
 
 const authSlice = createSlice({
@@ -73,18 +29,24 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(FETCH_API_TOKEN, (state) => {
-        state.isFetching = true;
+      .addCase(USER_FOUND, (state, action: UserFoundAction) => {
+        state.user = action.payload;
       })
-      .addCase(TOKEN_NOT_FOUND, (state) => {
-        state.isFetching = false;
+      .addCase(CLEAR_USER, (state) => {
+        state.user = null;
       })
       .addCase(RECEIVE_API_TOKEN, (state, action: ReceiveApiTokenAction) => {
-        state.isFetching = false;
+        state.isRenewingApiToken = false;
         state.apiToken = action.payload;
+      })
+      .addCase(CLEAR_API_TOKEN, (state) => {
+        state.apiToken = null;
+        state.isRenewingApiToken = false;
+      })
+      .addCase(RENEW_API_TOKEN, (state) => {
+        state.isRenewingApiToken = true;
       });
   },
 });
 
-export const oidcReducer = oidcSlice.reducer;
 export const authReducer = authSlice.reducer;

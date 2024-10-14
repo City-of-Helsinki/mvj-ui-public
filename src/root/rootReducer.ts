@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { reducer as formReducer } from 'redux-form';
-import { authReducer, oidcReducer } from '../auth/reducer';
+import { authReducer } from '../auth/reducer';
 import loginReducer from '../login/reducer';
 import plotSearchReducer from '../plotSearch/reducer';
 import favouriteReducer from '../favourites/reducer';
@@ -19,7 +19,6 @@ const allReducers = {
   notifications: notificationReducer,
   application: applicationReducer,
   areaSearch: areaSearchReducer,
-  oidc: oidcReducer,
   form: formReducer,
   directReservation: directReservationReducer,
   faq: faqReducer,
