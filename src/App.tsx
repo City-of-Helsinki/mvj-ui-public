@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { User } from 'hds-react';
+import { connect } from 'react-redux';
 import { Log } from 'oidc-client-ts';
 import { setConfiguration as setGridSystemConfiguration } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
@@ -31,14 +30,9 @@ import type { Action } from 'redux';
 
 interface AppProps {
   children?: JSX.Element;
-  user: User | null;
   fetchFavourite: () => Action;
   isFetchingFavourite: boolean;
-  receiveApiToken: (apiToken: string) => void;
-  isFetchingApiToken: boolean;
-  isRenewingApiToken: boolean;
   hasApiToken: boolean;
-  getApiToken: string | null;
 }
 
 Log.setLogger(console);
@@ -49,13 +43,11 @@ const App = ({
   isFetchingFavourite,
   hasApiToken,
 }: AppProps): JSX.Element => {
-  const dispatch = useDispatch();
-
   useEffect(() => {
     if (!isFetchingFavourite && hasApiToken) {
-      dispatch(fetchFavourite());
+      fetchFavourite();
     }
-  }, [hasApiToken]);
+  }, [hasApiToken, fetchFavourite]);
 
   return (
     <div className="App">
