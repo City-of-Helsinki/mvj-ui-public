@@ -49,7 +49,7 @@ export const getRouteById = (id: string): string => {
     [AppRoutes.APPLICATIONS]: '/hakemukset',
     [AppRoutes.MESSAGES]: '/viestit',
     [AppRoutes.FAVOURITES]: '/suosikit',
-    [AppRoutes.OIDC_CALLBACK]: '/oidc/callback',
+    [AppRoutes.OIDC_CALLBACK]: '/callback',
     [AppRoutes.APPLICATION_ROOT]: '/hakemus',
     [AppRoutes.APPLICATION_FORM]: '/hakemus/tietojen-taytto',
     [AppRoutes.APPLICATION_PREVIEW]: '/hakemus/tietojen-tarkistus',

@@ -10,17 +10,15 @@ import {
 } from 'hds-react';
 import { useMatch } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import type { User } from 'oidc-client-ts';
 
 import { AppRoutes, getRouteById } from '../root/helpers';
 import { openLoginModal } from '../login/actions';
 import { Language } from '../i18n/types';
 import TopNavigationFavouritesIcon from './components/topNavigationFavouritesIcon';
 import { RootState } from '../root/rootReducer';
-import { getUser } from '../auth/selectors';
-import { userManager } from '../auth/userManager';
 import { MVJ_FAVOURITE } from '../favourites/types';
 import { getFavouriteCount } from '../favourites/selectors';
+import useAuth from '../auth/useAuth';
 
 interface Dispatch {
   openLoginModal: () => void;
@@ -28,12 +26,10 @@ interface Dispatch {
 
 interface TopNavigationProps {
   openLoginModal: () => void;
-  user: User | null;
   favouritesCount: number;
 }
 
 interface State {
-  user: User | null;
   favouritesCount: number;
 }
 
@@ -83,10 +79,10 @@ const TopNavigationLink = ({
 const TopNavigation = ({
   openLoginModal,
   favouritesCount,
-  user,
 }: TopNavigationProps): JSX.Element => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const { loggedIn, logout } = useAuth();
 
   const languages: LanguageOption[] = [
     {
@@ -155,24 +151,23 @@ const TopNavigation = ({
         />
         <Header.ActionBarItem
           label={
-            !user
+            !loggedIn
               ? t('header.actions.userManagement.logIn', 'Log in')
               : t('header.actions.userManagement.logOut', 'Log out')
           }
           fixedRightPosition
-          icon={!user ? <IconUser /> : <IconSignout />}
+          icon={!loggedIn ? <IconUser /> : <IconSignout />}
           id="action-bar-login"
           onClick={
-            !user
+            !loggedIn
               ? (e) => {
                   e.preventDefault();
                   openLoginModal();
                 }
               : (e) => {
                   e.preventDefault();
-                  userManager.signoutRedirect().then(() => {
-                    localStorage.removeItem(MVJ_FAVOURITE);
-                  });
+                  localStorage.removeItem(MVJ_FAVOURITE);
+                  logout();
                 }
           }
         />
@@ -196,7 +191,6 @@ const mapDispatchToProps: Dispatch = {
 
 export default connect(
   (state: RootState): State => ({
-    user: getUser(state),
     favouritesCount: getFavouriteCount(state),
   }),
   mapDispatchToProps,

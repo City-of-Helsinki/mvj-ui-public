@@ -1,31 +1,20 @@
 import { Selector } from 'react-redux';
 import type { User } from 'oidc-client-ts';
 import { RootState } from '../root/rootReducer';
+import { apiTokenKeyName } from './constants';
 
-export const getApiToken: Selector<RootState, string | null> = (
+export const getLoggedInUser: Selector<RootState, User | null> = (
   state: RootState,
-): string | null => state.auth.apiToken;
-
-export const getIdentityToken: Selector<RootState, string | null> = (
-  state: RootState,
-): string | null => state.oidc.user?.id_token || null;
-
-export const getAccessToken: Selector<RootState, string | null> = (
-  state: RootState,
-): string | null => state.oidc.user?.access_token || null;
-
-export const getUser: Selector<RootState, User | null> = (
-  state: RootState,
-): User | null => state.oidc.user || null;
+): User | null => state.auth.user || null;
 
 export const hasApiToken: Selector<RootState, boolean> = (
   state: RootState,
 ): boolean => !!state.auth.apiToken;
 
-export const getIsLoadingUser: Selector<RootState, boolean> = (
+export const getApiToken: Selector<RootState, string> = (
   state: RootState,
-): boolean => state.oidc.isLoadingUser;
+): string => (state.auth.apiToken ? state.auth.apiToken[apiTokenKeyName] : '');
 
-export const getIsFetchingApiToken: Selector<RootState, boolean> = (
+export const getIsRenewingApiToken: Selector<RootState, boolean> = (
   state: RootState,
-): boolean => state.auth.isFetching;
+): boolean => state.auth.isRenewingApiToken;

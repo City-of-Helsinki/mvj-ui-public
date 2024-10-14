@@ -341,9 +341,9 @@ export const getInitialAreaSearchApplicationForm = (
 export const generateAttachmentLink = (
   attachment: AreaSearchAttachment,
 ): string => {
-  return `${
-    import.meta.env.REACT_APP_API_URL || ''
-  }pub/area_search_attachment/${attachment.id}/download`;
+  return `${import.meta.env.VITE_APP_API_URL || ''}pub/area_search_attachment/${
+    attachment.id
+  }/download`;
 };
 
 export enum AreaSearchStepperPageIndex {

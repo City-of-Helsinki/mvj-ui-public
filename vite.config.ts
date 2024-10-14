@@ -49,7 +49,7 @@ export default defineConfig({
     }
   },
   envDir: './',
-  envPrefix: 'REACT_',
+  //envPrefix: 'REACT_',
   server: {
     host: 'localhost',
     port: 4000,

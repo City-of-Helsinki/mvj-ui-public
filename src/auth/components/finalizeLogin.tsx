@@ -1,41 +1,35 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LoginCallbackHandler } from 'hds-react';
+import type { OidcClientError, User } from 'hds-react';
 
-import { CallbackComponent } from './callbackComponent';
-import { userManager } from '../userManager';
 import BlockLoader from '../../loader/blockLoader';
 import { getRedirectUrlFromSessionStorage } from '../util';
 import { logError } from '../../root/helpers';
+import { AppRoutes, getRouteById } from '../../root/helpers';
 
 export const FinalizeLogin = (): JSX.Element | null => {
   const navigate = useNavigate();
-  const [redirectTarget, redirect] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (redirectTarget) {
-      navigate(redirectTarget);
+  const onSuccess = (_user: User) => {
+    navigate(
+      getRedirectUrlFromSessionStorage() || getRouteById(AppRoutes.HOME),
+    );
+  };
+  const onError = (error?: OidcClientError) => {
+    // "HANDLING_LOGIN_CALLBACK cannot be handled by a callback" is a known error in HDS
+    // https://hds.hel.fi/components/login/api/#logincallbackhandler
+    if (
+      error?.message ===
+      'Current state (HANDLING_LOGIN_CALLBACK) cannot be handled by a callback'
+    ) {
+      return;
     }
-  }, [redirectTarget]);
-
-  if (redirectTarget) {
-    // Callback component shouldn't be re-rendered when we're just about to leave.
-    return null;
-  }
-
-  const savedRedirectUrl = getRedirectUrlFromSessionStorage();
+    logError(`Login Callback Error: ${error}`);
+  };
 
   return (
-    <CallbackComponent
-      userManager={userManager}
-      successCallback={() => {
-        redirect(savedRedirectUrl);
-      }}
-      errorCallback={(e) => {
-        logError(e);
-        redirect(savedRedirectUrl);
-      }}
-    >
+    <LoginCallbackHandler onError={onError} onSuccess={onSuccess}>
       <BlockLoader />
-    </CallbackComponent>
+    </LoginCallbackHandler>
   );
 };

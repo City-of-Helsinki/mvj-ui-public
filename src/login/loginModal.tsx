@@ -5,10 +5,9 @@ import { useLocation } from 'react-router';
 
 import { RootState } from '../root/rootReducer';
 import { hideLoginModal } from './actions';
-// import LoginForm from './components/loginForm';
-import { userManager } from '../auth/userManager';
 import { getRouteById, AppRoutes } from '../root/helpers';
 import { setRedirectUrlToSessionStorage } from '../auth/util';
+import useAuth from '../auth/useAuth';
 
 interface State {
   isLoginModalOpen: boolean;
@@ -24,6 +23,7 @@ interface Props {
 }
 
 const LoginModal = (props: Props): JSX.Element => {
+  const { login } = useAuth();
   const { hideLoginModal, isLoginModalOpen } = props;
   const { t } = useTranslation();
   const { pathname, search } = useLocation();
@@ -32,11 +32,10 @@ const LoginModal = (props: Props): JSX.Element => {
   const descriptionId = 'LoginFormDescriptor';
 
   const loginRedirect = () => {
-    setRedirectUrlToSessionStorage(
-      `${pathname}${search}` || getRouteById(AppRoutes.HOME),
-    );
-
-    userManager.signinRedirect().then();
+    const redirecthPath =
+      `${pathname}${search}` || getRouteById(AppRoutes.HOME);
+    setRedirectUrlToSessionStorage(redirecthPath);
+    login(redirecthPath);
   };
 
   return (
