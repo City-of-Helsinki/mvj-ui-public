@@ -23,10 +23,6 @@ export default defineConfig({
           src: 'node_modules/leaflet-draw/dist/images/*',
           dest: 'assets/images/.'
         },
-        {
-          src: 'node_modules/oidc-client-ts/dist/browser/oidc-client-ts.min.js',
-          dest: 'assets/js/.'
-        }
       ]
     }),
     react(),
@@ -49,7 +45,6 @@ export default defineConfig({
     }
   },
   envDir: './',
-  //envPrefix: 'REACT_',
   server: {
     host: 'localhost',
     port: 4000,

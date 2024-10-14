@@ -1,5 +1,5 @@
 import { Selector } from 'react-redux';
-import type { User } from 'oidc-client-ts';
+import type { User } from 'hds-react';
 import { RootState } from '../root/rootReducer';
 import { apiTokenKeyName } from './constants';
 

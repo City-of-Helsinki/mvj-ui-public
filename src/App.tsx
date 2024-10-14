@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { User, Log } from 'oidc-client-ts';
+import { User } from 'hds-react';
+import { Log } from 'oidc-client-ts';
 import { setConfiguration as setGridSystemConfiguration } from 'react-grid-system';
 import { Helmet } from 'react-helmet';
 
