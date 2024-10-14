@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import type { Action } from 'redux';
-import type { User } from 'oidc-client-ts';
+import type { User } from 'hds-react';
 import type { TokenData } from 'hds-react';
 
 import {
