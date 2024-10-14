@@ -112,7 +112,7 @@ const TopNavigation = ({
 
   return (
     <Header
-      onDidChangeLanguage={(lang) => changeLanguage(lang)}
+      onDidChangeLanguage={changeLanguage}
       languages={languages}
       defaultLanguage={i18n.language}
       className="TopNavigation"
@@ -139,6 +139,7 @@ const TopNavigation = ({
       >
         <Header.LanguageSelector
           ariaLabel={t('language.languageSelection', 'Language')}
+          languageHeading={t('language.heading', 'Other languages')}
         />
         <Header.ActionBarItem
           label={t('header.actions.favourites.title', 'Favourites')}
