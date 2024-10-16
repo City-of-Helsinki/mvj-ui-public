@@ -21,8 +21,8 @@ const AuthDependentContent = ({
   hasApiToken,
   children,
 }: Props): JSX.Element | null => {
-  // User exists and api token is not renewing
-  const isLoading = !user || isRenewingApiToken;
+  // api token is renewing
+  const isLoading = isRenewingApiToken;
   // User exists and has api token
   const isLoggedIn = !!user && hasApiToken;
   return children(isLoading, isLoggedIn);
