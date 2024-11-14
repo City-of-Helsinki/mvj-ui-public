@@ -50,7 +50,7 @@ const FrontPage = ({
           <h1>
             {t(
               'frontPage.bannerText',
-              'Renting and selling of plots, land and water areas in the City of Helsinki',
+              'Renting and selling of plots, land and water areas from the City of Helsinki',
             )}
           </h1>
         </div>
