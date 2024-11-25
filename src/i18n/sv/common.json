@@ -337,12 +337,9 @@
       "alt": "Helsingfors logotyp"
     },
     "text": "Tomtansökan",
-    "customerService": "Stadsmiljösektorns kundservice",
-    "some": {
-      "facebook": "Helsingfors stad på Facebook",
-      "twitter": "Helsingfors stad på X",
-      "instagram": "Helsingfors stad på Instagram",
-      "linkedin": "Helsingfors stad på LinkedIn"
+    "customerService": {
+      "label": "Stadsmiljösektorns kundservice",
+      "url": "https://www.hel.fi/sv/stadsmiljo-och-trafik/stadsmiljosektorns-kundtjanst"
     },
     "moveToTop": "Gå upp",
     "accessabilityStatement": {

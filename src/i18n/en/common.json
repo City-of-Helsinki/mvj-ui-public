@@ -337,12 +337,9 @@
       "alt": "Helsinki logo"
     },
     "text": "Plot rental",
-    "customerService": "Urban Environment Division customer service",
-    "some": {
-      "facebook": "City of Helsinki on Facebook",
-      "twitter": "City of Helsinki on X",
-      "instagram": "City of Helsinki on Instagram",
-      "linkedin": "City of Helsinki on LinkedIn"
+    "customerService": {
+      "label": "Urban Environment Division Customer Service",
+      "url": "https://www.hel.fi/en/urban-environment-and-traffic/urban-environment-division-customer-services"
     },
     "moveToTop": "Move to top",
     "accessabilityStatement": {
