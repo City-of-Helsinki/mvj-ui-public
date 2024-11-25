@@ -401,7 +401,7 @@ const ApplicationFormSubsectionFieldArray = connect(null, {
             headerText = t(
               'application.arraySection.applicantHeader',
               'Details of applicant {{number}}',
-              { number: i + 1 },
+              { number: fields.length > 1 ? i + 1 : '' }, // If there are more applicants than one, show applicant numbering
             );
             break;
           case ApplicationFormTopLevelSectionFlavor.TARGET:
