@@ -57,13 +57,13 @@ const FooterComponent = (): JSX.Element => {
         <Footer.Link
           label={t('footer.dataProtection.label', 'Tietosuoja')}
           href={t(
-            'footer.accessabilityStatement.url',
+            'footer.dataProtection.url',
             'https://www.hel.fi/fi/paatoksenteko-ja-hallinto/tietoa-helsingista/tietosuoja-ja-tiedonhallinta/tietosuoja',
           )}
         />
         <Footer.Link
           label={t('footer.registerStatement.label', 'Rekisteriseloste')}
-          href={t('footer.accessabilityStatement.url', '#')}
+          href={t('footer.registerStatement.url', '#')}
         />
       </Footer.Base>
     </Footer>
