@@ -63,7 +63,10 @@ const FooterComponent = (): JSX.Element => {
         />
         <Footer.Link
           label={t('footer.registerStatement.label', 'Rekisteriseloste')}
-          href={t('footer.registerStatement.url', '#')}
+          href={t(
+            'footer.registerStatement.url',
+            'https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Tonttien%20hankinnan%20ja%20luovutuksen%20asiakasrekisteri.pdf',
+          )}
         />
       </Footer.Base>
     </Footer>
