@@ -18,13 +18,15 @@ export default defineConfig({
 
   // Reporter to use
   reporter: 'html',
-
+  timeout: 5 * 1000, // 5 seconds
   use: {
     // Base URL to use in actions like `await page.goto('/')`.
     baseURL: 'http://127.0.0.1:4000',
 
     // Collect trace when retrying the failed test.
     trace: 'on-first-retry',
+    // Set default locale to Finnish.
+    locale: 'fi',
   },
   // Configure projects for major browsers.
   projects: [
