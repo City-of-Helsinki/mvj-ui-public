@@ -341,7 +341,7 @@
       "url": "https://www.hel.fi/fi/kaupunkiymparisto-ja-liikenne/kaupunkiympariston-asiakaspalvelu"
     },
     "moveToTop": "Siirry ylös",
-    "accessabilityStatement": {
+    "accessibilityStatement": {
       "label": "Saavutettavuusseloste",
       "url": "https://www.hel.fi/saavutettavuus"
     },

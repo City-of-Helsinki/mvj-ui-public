@@ -46,11 +46,11 @@ const FooterComponent = (): JSX.Element => {
       >
         <Footer.Link
           label={t(
-            'footer.accessabilityStatement.label',
+            'footer.accessibilityStatement.label',
             'Saavutettavuusseloste',
           )}
           href={t(
-            'footer.accessabilityStatement.url',
+            'footer.accessibilityStatement.url',
             'https://www.hel.fi/saavutettavuus',
           )}
         />
