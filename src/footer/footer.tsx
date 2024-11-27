@@ -1,12 +1,4 @@
-import {
-  Footer,
-  Logo,
-  logoFiDark,
-  IconFacebook,
-  IconX,
-  IconInstagram,
-  IconLinkedin,
-} from 'hds-react';
+import { Footer, Logo, logoFiDark } from 'hds-react';
 import { useTranslation } from 'react-i18next';
 import { naviLinks } from '../topNavigation/topNavigation';
 import { getRouteById } from '../root/helpers';
@@ -29,44 +21,17 @@ const FooterComponent = (): JSX.Element => {
           />
         ))}
       </Footer.Navigation>
-      <Footer.Utilities
-        soMeLinks={[
-          <Footer.Link
-            href="https://www.facebook.com/kaupunkiymparisto"
-            title={t(
-              'footer.some.facebook',
-              'Helsingin kaupungin Facebook-tili',
-            )}
-            icon={<IconFacebook />}
-            key="facebook"
-          />,
-          <Footer.Link
-            href="https://twitter.com/HelsinkiKymp"
-            title={t('footer.some.twitter', 'Helsingin kaupungin Twitter-tili')}
-            icon={<IconX />}
-            key="twitter"
-          />,
-          <Footer.Link
-            href="https://www.instagram.com/kaupunkiymparisto"
-            title={t(
-              'footer.some.instagram',
-              'Helsingin kaupungin Instagram-tili',
-            )}
-            icon={<IconInstagram />}
-            key="instragram"
-          />,
-          <Footer.Link
-            href="https://www.linkedin.com/company/kaupunkiymparisto"
-            title={t(
-              'footer.some.linkedin',
-              'Helsingin kaupungin LinkedIn-tili',
-            )}
-            icon={<IconLinkedin />}
-            key="linkedin"
-          />,
-        ]}
-      >
-        {t('footer.customerService', 'Kaupunkiympäristön asiakaspalvelu')}
+      <Footer.Utilities>
+        <Footer.Link
+          label={t(
+            'footer.customerService.label',
+            'Kaupunkiympäristön asiakaspalvelu',
+          )}
+          href={t(
+            'footer.customerService.url',
+            'https://www.hel.fi/fi/kaupunkiymparisto-ja-liikenne/kaupunkiympariston-asiakaspalvelu',
+          )}
+        />
       </Footer.Utilities>
       <Footer.Base
         logo={
@@ -81,24 +46,27 @@ const FooterComponent = (): JSX.Element => {
       >
         <Footer.Link
           label={t(
-            'footer.accessabilityStatement.label',
+            'footer.accessibilityStatement.label',
             'Saavutettavuusseloste',
           )}
           href={t(
-            'footer.accessabilityStatement.url',
+            'footer.accessibilityStatement.url',
             'https://www.hel.fi/saavutettavuus',
           )}
         />
         <Footer.Link
           label={t('footer.dataProtection.label', 'Tietosuoja')}
           href={t(
-            'footer.accessabilityStatement.url',
+            'footer.dataProtection.url',
             'https://www.hel.fi/fi/paatoksenteko-ja-hallinto/tietoa-helsingista/tietosuoja-ja-tiedonhallinta/tietosuoja',
           )}
         />
         <Footer.Link
           label={t('footer.registerStatement.label', 'Rekisteriseloste')}
-          href={t('footer.accessabilityStatement.url', '#')}
+          href={t(
+            'footer.registerStatement.url',
+            'https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Tonttien%20hankinnan%20ja%20luovutuksen%20asiakasrekisteri.pdf',
+          )}
         />
       </Footer.Base>
     </Footer>

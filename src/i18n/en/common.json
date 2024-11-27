@@ -337,15 +337,12 @@
       "alt": "Helsinki logo"
     },
     "text": "Plot rental",
-    "customerService": "Urban Environment Division customer service",
-    "some": {
-      "facebook": "City of Helsinki on Facebook",
-      "twitter": "City of Helsinki on X",
-      "instagram": "City of Helsinki on Instagram",
-      "linkedin": "City of Helsinki on LinkedIn"
+    "customerService": {
+      "label": "Urban Environment Division Customer Service",
+      "url": "https://www.hel.fi/en/urban-environment-and-traffic/urban-environment-division-customer-services"
     },
     "moveToTop": "Move to top",
-    "accessabilityStatement": {
+    "accessibilityStatement": {
       "label": "Accessibility statement",
       "url": "https://www.hel.fi/en/decision-making/information-on-helsinki/statistics-and-life-in-helsinki/accessibility"
     },
@@ -355,7 +352,7 @@
     },
     "registerStatement": {
       "label": "Privacy statement",
-      "url": "#"
+      "url": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Tonttien%20hankinnan%20ja%20luovutuksen%20asiakasrekisteri.pdf"
     }
   },
   "frontPage": {
