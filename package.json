@@ -51,6 +51,7 @@
     "web-vitals": "^3.5.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.0",
     "@types/leaflet": "^1.9.8",
     "@types/leaflet-draw": "^1.0.10",
     "@types/leaflet-geosearch": "^3.0.0",
