@@ -4,8 +4,10 @@ import { RootState } from '../root/rootReducer';
 import {
   APPLICANT_MAIN_IDENTIFIERS,
   APPLICANT_SECTION_IDENTIFIER,
+  APPLICANT_TYPE_FIELD_IDENTIFIER,
   ApplicantTypes,
   ApplicationField,
+  ApplicationFormFieldChoice,
   ApplicationFormFields,
   ApplicationFormNode,
   ApplicationFormRoot,
@@ -19,7 +21,7 @@ import {
   SupportedFieldTypes,
   TARGET_SECTION_IDENTIFIER,
 } from './types';
-import { FormField, FormSection } from '../plotSearch/types';
+import { FormField, FormFieldChoice, FormSection } from '../plotSearch/types';
 import { store } from '../index';
 import { getPlotSearchFromFavourites } from '../favourites/helpers';
 import { FavouriteTarget } from '../favourites/types';
@@ -529,4 +531,23 @@ export const set = (obj: unknown, path: string, value: unknown): void => {
       }
     }
   }
+};
+
+/**
+ * Sorts the choices of a field based on the criteria specific to different field identifiers.
+ * @param {FormField} field
+ * @param {FormFieldChoice[]} choices
+ * @returns {FormFieldChoice[]}
+ */
+export const getFieldChoicesSorted = (
+  field: FormField,
+  choices: FormFieldChoice[],
+): FormFieldChoice[] => {
+  if (field.identifier === APPLICANT_TYPE_FIELD_IDENTIFIER) {
+    return choices.sort(
+      (a: FormFieldChoice, b: FormFieldChoice): number =>
+        parseInt(a.value) - parseInt(b.value) || 0,
+    );
+  }
+  return choices;
 };

@@ -217,6 +217,14 @@ export type ApplicationFormSections = Record<
 
 export type ApplicationFormFields = Record<string, ApplicationField>;
 
+export type ApplicationFormFieldChoice = {
+  id: number;
+  text: string;
+  value: string;
+  action?: string | null;
+  has_text_input: boolean;
+};
+
 export type ApplicationFormNode = {
   fields: ApplicationFormFields;
   sections: ApplicationFormSections;
