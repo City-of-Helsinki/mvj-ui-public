@@ -269,7 +269,7 @@ export const APPLICANT_MAIN_IDENTIFIERS: {
     DATA_SECTION: 'yrityksen-tiedot',
     IDENTIFIER_FIELD: 'y-tunnus',
     NAME_FIELDS: ['yrityksen-nimi'],
-    LABEL: 'Yritys',
+    LABEL: 'Yritys/yhteisö',
   },
   [ApplicantTypes.PERSON]: {
     DATA_SECTION: 'henkilon-tiedot',
