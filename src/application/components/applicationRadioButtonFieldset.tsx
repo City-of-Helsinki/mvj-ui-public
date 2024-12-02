@@ -3,11 +3,16 @@ import { FieldRendererProps, SupportedFieldTypes } from '../types';
 import ApplicationExtraTextField from './applicationExtraTextField';
 import ApplicationFieldsetHelperText from './applicationFieldsetHelperText';
 import classNames from 'classnames';
+import { getFieldChoicesSorted } from '../helpers';
 
 const ApplicationRadioButtonFieldset = (
   props: FieldRendererProps,
 ): JSX.Element => {
   const { id, input, meta, field, fieldType, setValues, displayError } = props;
+
+  const sortedFieldChoices = getFieldChoicesSorted({ ...field }, [
+    ...field.choices,
+  ]);
 
   const orientation =
     fieldType === SupportedFieldTypes.RadioButtonInline
@@ -25,7 +30,7 @@ const ApplicationRadioButtonFieldset = (
         name={input.name}
         errorText={displayError && meta.error?.value}
       >
-        {field.choices.map((option, index) => (
+        {sortedFieldChoices.map((option, index) => (
           <div
             className="ApplicationRadioButtonFieldset__option"
             id={`ApplicationRadioButtonFieldset_${input.name}_${index}_div`}

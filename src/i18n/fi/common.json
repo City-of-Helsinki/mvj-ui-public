@@ -336,15 +336,12 @@
       "alt": "Helsinki logo"
     },
     "text": "Tonttihaku",
-    "customerService": "Kaupunkiympäristön asiakaspalvelu",
-    "some": {
-      "facebook": "Helsingin kaupunki Facebookissa",
-      "twitter": "Helsingin kaupunki X:ssä",
-      "instagram": "Helsingin kaupunki Instagramissa",
-      "linkedin": "Helsingin kaupunki LinkedInissä"
+    "customerService": {
+      "label": "Kaupunkiympäristön asiakaspalvelu",
+      "url": "https://www.hel.fi/fi/kaupunkiymparisto-ja-liikenne/kaupunkiympariston-asiakaspalvelu"
     },
     "moveToTop": "Siirry ylös",
-    "accessabilityStatement": {
+    "accessibilityStatement": {
       "label": "Saavutettavuusseloste",
       "url": "https://www.hel.fi/saavutettavuus"
     },
@@ -354,7 +351,7 @@
     },
     "registerStatement": {
       "label": "Rekisteriseloste",
-      "url": "#"
+      "url": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Tonttien%20hankinnan%20ja%20luovutuksen%20asiakasrekisteri.pdf"
     }
   },
   "frontPage": {

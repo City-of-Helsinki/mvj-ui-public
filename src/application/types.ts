@@ -217,6 +217,14 @@ export type ApplicationFormSections = Record<
 
 export type ApplicationFormFields = Record<string, ApplicationField>;
 
+export type ApplicationFormFieldChoice = {
+  id: number;
+  text: string;
+  value: string;
+  action?: string | null;
+  has_text_input: boolean;
+};
+
 export type ApplicationFormNode = {
   fields: ApplicationFormFields;
   sections: ApplicationFormSections;
@@ -261,7 +269,7 @@ export const APPLICANT_MAIN_IDENTIFIERS: {
     DATA_SECTION: 'yrityksen-tiedot',
     IDENTIFIER_FIELD: 'y-tunnus',
     NAME_FIELDS: ['yrityksen-nimi'],
-    LABEL: 'Yritys',
+    LABEL: 'Yritys/yhteisö',
   },
   [ApplicantTypes.PERSON]: {
     DATA_SECTION: 'henkilon-tiedot',
