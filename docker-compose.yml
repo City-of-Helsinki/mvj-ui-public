@@ -1,3 +1,4 @@
+# This definition is for running a development container
 version: '3'
 services:
     app:

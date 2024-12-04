@@ -1,19 +1,37 @@
-FROM node:18-alpine
+FROM registry.access.redhat.com/ubi9/nodejs-18-minimal
 
 WORKDIR /app
 
 COPY package.json yarn.lock ./
 
 RUN node --version
-RUN apk update
-RUN apk add python3
-RUN yarn install && yarn cache clean --force
-RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
 
-COPY . .
+# Assume root for initial actions that require privileges
+USER root
+
+# Create a non-root user for non-privileged uses
+RUN adduser --system appuser
+
+# Install software
+RUN chown -R appuser:appuser /var/cache/yum /app /opt/app-root
+RUN microdnf update --setopt=cachedir=/tmp/yum-cache && \
+    microdnf install python3 -y --setopt install_weak_deps=0 && \
+    microdnf clean all
+RUN npm install yarn -g
+
+# Assume the non-root user
+USER appuser
+
+# Build the dependencies
+RUN yarn install && yarn cache clean --force
+RUN mkdir node_modules/.cache && chown -R appuser:appuser node_modules
+
+COPY --chown=appuser:appuser . .
 
 # RUN yarn prepare-renew-endpoint
 
 VOLUME [ "/app" ]
 
 CMD ["yarn", "start"]
+
+# TODO this completes but Vite doesn't have permissions to node_modules

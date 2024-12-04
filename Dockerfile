@@ -1,4 +1,7 @@
-FROM node:18-slim AS appbase
+# Should override BUILDER_REGISTRY in the pipeline build-config environment variable section.
+# Red Hat registry is used as a reasonably reliable backup.
+ARG BUILDER_REGISTRY=registry.access.redhat.com
+FROM ${BUILDER_REGISTRY}/ubi9/nodejs-18-minimal AS appbase
 
 COPY tools /tools
 COPY scripts /scripts
@@ -8,11 +11,11 @@ ENV PATH="/scripts:${PATH}"
 # Make bash the only shell
 RUN ["chmod", "+x", "/scripts/base_setup.sh"]
 RUN ["chmod", "+x", "/scripts/setup_bash.sh"]
-RUN ["chmod", "+x", "/scripts/setup_apt_packages.sh"]
+RUN ["chmod", "+x", "/scripts/setup_dnf_packages.sh"]
 RUN ["chmod", "+x", "/scripts/setup_user.sh"]
 RUN ["chmod", "+x", "/scripts/setup_app_folder.sh"]
-RUN ["chmod", "+x", "/tools/apt-install.sh"]
-RUN ["chmod", "+x", "/tools/apt-cleanup.sh"]
+RUN ["chmod", "+x", "/tools/dnf-install.sh"]
+RUN ["chmod", "+x", "/tools/dnf-cleanup.sh"]
 RUN /scripts/base_setup.sh
 
 WORKDIR /app
@@ -42,14 +45,14 @@ COPY package.json yarn.lock ./
 ENV PATH /app/node_modules/.bin:$PATH
 
 USER root
-RUN bash /tools/apt-install.sh build-essential
+RUN bash /tools/dnf-install.sh build-essential
 
 USER appuser
 RUN yarn config set network-timeout 300000
 RUN yarn && yarn cache clean --force
 
 USER root
-RUN bash /tools/apt-cleanup.sh build-essential
+RUN bash /tools/dnf-cleanup.sh build-essential
 
 # =============================
 FROM appbase as development
@@ -67,24 +70,24 @@ FROM appbase as staticbuilder
 # ===================================
 
 # Set NODE_ENV to production in the staticbuilder container
-ARG NODE_ENV=production
-ENV NODE_ENV $NODE_ENV
+# ARG NODE_ENV=production
+# ENV NODE_ENV $NODE_ENV
 
-COPY . /app
-RUN yarn build
+# COPY . /app
+# RUN yarn build
 
-FROM registry.access.redhat.com/ubi8/nginx-120 AS production
-USER root
+# FROM registry.access.redhat.com/ubi8/nginx-120 AS production
+# USER root
 
-RUN chgrp -R 0 /usr/share/nginx/html && \
-    chmod -R g=u /usr/share/nginx/html
+# RUN chgrp -R 0 /usr/share/nginx/html && \
+    # chmod -R g=u /usr/share/nginx/html
 
 # Copy static build
-COPY --from=staticbuilder /app/build /usr/share/nginx/html
+# COPY --from=staticbuilder /app/build /usr/share/nginx/html
 
 # Copy nginx config
-COPY /etc/nginx.conf  /etc/nginx/
+# COPY /etc/nginx.conf  /etc/nginx/
 
-EXPOSE 8080
+# EXPOSE 8080
 
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
