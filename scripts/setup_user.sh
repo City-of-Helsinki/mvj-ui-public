@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Creates a non-root user and group. IDs start from 5000 as recommended by Red Hat.
+
 existing_group=$(getent group 5000 | cut -d: -f1)
 if [[ -z "${existing_group}" ]]; then
     # Create appuser group
