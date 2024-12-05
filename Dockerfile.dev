@@ -9,29 +9,25 @@ RUN node --version
 # Assume root for initial actions that require privileges
 USER root
 
-# Create a non-root user for non-privileged uses
-RUN adduser --system appuser
+# Best practice for non-root users is to start the ID from 5000
+RUN adduser -u 5000 devuser
 
-# Install software
-RUN chown -R appuser:appuser /var/cache/yum /app /opt/app-root
-RUN microdnf update --setopt=cachedir=/tmp/yum-cache && \
-    microdnf install python3 -y --setopt install_weak_deps=0 && \
+# Install software, and provide necessary permissions for the non-root user
+RUN chown -R devuser:devuser /app && \
+    chmod -R 755 /app && \
+    curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
+    microdnf install yarn -y && \
     microdnf clean all
-RUN npm install yarn -g
 
-# Assume the non-root user
-USER appuser
+# Assume non-root user for rest of the operations, including running the app
+USER devuser
 
 # Build the dependencies
-RUN yarn install && yarn cache clean --force
-RUN mkdir node_modules/.cache && chown -R appuser:appuser node_modules
+RUN yarn && \
+    yarn cache clean --force
 
-COPY --chown=appuser:appuser . .
+COPY --chown=devuser:devuser . .
 
 # RUN yarn prepare-renew-endpoint
 
-VOLUME [ "/app" ]
-
-CMD ["yarn", "start"]
-
-# TODO this completes but Vite doesn't have permissions to node_modules
+CMD yarn start
