@@ -30,4 +30,6 @@ COPY --chown=devuser:devuser . .
 
 # RUN yarn prepare-renew-endpoint
 
+EXPOSE 4000
+
 CMD yarn start
