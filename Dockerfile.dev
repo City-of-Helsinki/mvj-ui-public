@@ -9,23 +9,25 @@ RUN node --version
 # Assume root for initial actions that require privileges
 USER root
 
-# Best practice for non-root users is to start the ID from 5000
+# Add a non-root user. Best practice for non-root users is to start the ID from 5000.
 RUN adduser -u 5000 devuser
 
-# Install software, and provide necessary permissions for the non-root user
-RUN chown -R devuser:devuser /app && \
-    chmod -R 755 /app && \
-    curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
+# Provide some necessary permissions for the non-root user
+RUN chown -R devuser:devuser /app
+
+# Install yarn
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
     microdnf install yarn -y && \
     microdnf clean all
 
-# Assume non-root user for rest of the operations, including running the app
+# Assume non-root user for rest of the operations, including running the app.
 USER devuser
 
 # Build the dependencies
 RUN yarn && \
     yarn cache clean --force
 
+# Copy over the rest of the built files, making sure the non-root user has access.
 COPY --chown=devuser:devuser . .
 
 # RUN yarn prepare-renew-endpoint
