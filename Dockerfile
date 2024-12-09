@@ -1,11 +1,13 @@
+# =============================
 FROM node:18-slim AS appbase
+# =============================
 
 COPY tools /tools
 COPY scripts /scripts
 ENV PATH="/tools:${PATH}"
 ENV PATH="/scripts:${PATH}"
 
-# Make bash the only shell
+# Prepare the container for build phase
 RUN ["chmod", "+x", "/scripts/base_setup.sh"]
 RUN ["chmod", "+x", "/scripts/setup_bash.sh"]
 RUN ["chmod", "+x", "/scripts/setup_apt_packages.sh"]
@@ -19,10 +21,10 @@ WORKDIR /app
 
 ENV NPM_CONFIG_LOGLEVEL warn
 
-# set node environment, either development or production
+# Set node environment, either development or production
 # use development to install devDependencies
 ARG NODE_ENV=development
-ENV NODE_ENV $NODE_ENV
+ENV NODE_ENV=$NODE_ENV
 
 # Global npm deps in a non-root user directory
 ENV NPM_CONFIG_PREFIX=/app/.npm-global
@@ -35,7 +37,7 @@ RUN yarn policies set-version $YARN_VERSION
 # Use non-root user
 USER appuser
 
-# Copy package.json and package-lock.json/yarn.lock files
+# Copy package and lock files
 COPY package.json yarn.lock ./
 
 # Install npm depepndencies
@@ -52,28 +54,31 @@ USER root
 RUN bash /tools/apt-cleanup.sh build-essential
 
 # =============================
-FROM appbase as development
+FROM appbase AS development
 # =============================
 
 # Set NODE_ENV to development in the development container
 ARG NODE_ENV=development
-ENV NODE_ENV $NODE_ENV
+ENV NODE_ENV=$NODE_ENV
 
 # copy in our source code last, as it changes the most
 COPY --chown=appuser:appuser . .
 
 # ===================================
-FROM appbase as staticbuilder
+FROM appbase AS staticbuilder
 # ===================================
 
 # Set NODE_ENV to production in the staticbuilder container
 ARG NODE_ENV=production
-ENV NODE_ENV $NODE_ENV
+ENV NODE_ENV=$NODE_ENV
 
 COPY . /app
 RUN yarn build
 
+# ===================================
 FROM registry.access.redhat.com/ubi8/nginx-120 AS production
+# ===================================
+
 USER root
 
 RUN chgrp -R 0 /usr/share/nginx/html && \
@@ -83,7 +88,7 @@ RUN chgrp -R 0 /usr/share/nginx/html && \
 COPY --from=staticbuilder /app/build /usr/share/nginx/html
 
 # Copy nginx config
-COPY /etc/nginx.conf  /etc/nginx/
+COPY /etc/nginx.conf /etc/nginx/
 
 EXPOSE 8080
 
