@@ -82,7 +82,7 @@ COPY . /app
 RUN yarn build
 
 # =================================
-FROM ${BUILDER_REGISTRY}/ubi8/nginx-120 AS production
+FROM ${BUILDER_REGISTRY}/ubi9/nginx-124 AS production
 # =================================
 
 USER root
