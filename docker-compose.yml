@@ -10,4 +10,4 @@ services:
             -   ./src:/app/src
         ports:
             - "4000:4000"
-        container_name: mvj-ui-public
+        container_name: mvj-ui-public-dev
