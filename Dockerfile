@@ -27,7 +27,7 @@ RUN chmod +x /scripts/base_setup.sh && \
 
 WORKDIR /app
 
-ENV NPM_CONFIG_LOGLEVEL warn
+ENV NPM_CONFIG_LOGLEVEL=warn
 
 # Set node environment, either development or production
 # Use development to install devDependencies
@@ -58,7 +58,7 @@ RUN yarn config set network-timeout 300000 && \
     yarn cache clean --force
 
 # =============================
-FROM appbase as development
+FROM appbase AS development
 # =============================
 
 # Set NODE_ENV to development in the development container
@@ -70,7 +70,7 @@ USER root
 COPY --chown=appuser:appuser . .
 
 # ===================================
-FROM appbase as staticbuilder
+FROM appbase AS staticbuilder
 # ===================================
 
 # Set NODE_ENV to production in the staticbuilder container
