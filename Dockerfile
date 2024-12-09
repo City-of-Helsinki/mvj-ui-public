@@ -1,7 +1,7 @@
-ARG BUILDER_REGISTRY=registry.access.redhat.com
+ARG CONTAINER_IMAGE_REGISTRY=registry.access.redhat.com
 
 # ===========================================================
-FROM ${BUILDER_REGISTRY}/ubi9/nodejs-18-minimal AS appbase
+FROM ${CONTAINER_IMAGE_REGISTRY}/ubi9/nodejs-18-minimal AS appbase
 # ===========================================================
 
 # Assume the root user for initial installations and setup
