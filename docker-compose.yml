@@ -8,5 +8,5 @@ services:
         volumes:
             -   ./src:/app/src
         ports:
-            - "3000:3000"
-        container_name: mvj-ui-public
+            - "4000:4000"
+        container_name: mvj-ui-public-dev
