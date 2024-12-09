@@ -1,4 +1,6 @@
+# =============================
 FROM registry.access.redhat.com/ubi9/nodejs-18-minimal
+# =============================
 
 WORKDIR /app
 
@@ -15,7 +17,7 @@ RUN adduser -u 5000 devuser
 # Provide some necessary permissions for the non-root user
 RUN chown -R devuser:devuser /app /opt/app-root
 
-# Install yarn
+# Install necessary build tools
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
     microdnf install yarn git -y && \
     microdnf clean all
@@ -30,6 +32,7 @@ RUN yarn && \
 # Copy over the rest of the built files, making sure the non-root user has access.
 COPY --chown=devuser:devuser . .
 
+# Uncomment the next line if you need to run the related script
 # RUN yarn prepare-renew-endpoint
 
 EXPOSE 4000
