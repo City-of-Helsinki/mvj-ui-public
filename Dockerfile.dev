@@ -13,11 +13,11 @@ USER root
 RUN adduser -u 5000 devuser
 
 # Provide some necessary permissions for the non-root user
-RUN chown -R devuser:devuser /app
+RUN chown -R devuser:devuser /app /opt/app-root
 
 # Install yarn
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
-    microdnf install yarn -y && \
+    microdnf install yarn git -y && \
     microdnf clean all
 
 # Assume non-root user for rest of the operations, including running the app.
@@ -34,4 +34,4 @@ COPY --chown=devuser:devuser . .
 
 EXPOSE 4000
 
-CMD yarn start
+CMD ["yarn", "start"]
