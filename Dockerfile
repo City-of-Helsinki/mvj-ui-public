@@ -1,5 +1,5 @@
 # =============================
-FROM node:18-slim AS appbase
+FROM container-registry.platta-net.hel.fi/devops/helsinkitest/node:18-slim AS appbase
 # =============================
 
 COPY tools /tools
