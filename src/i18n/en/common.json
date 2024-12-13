@@ -242,7 +242,7 @@
       "loginButton": "Log in",
       "notLoggedIn": "First, log in to see available area rentals.",
       "pageTitle": "Area rental",
-      "submitting": "Submitting..."
+      "saving": "Saving..."
     },
     "targetCard": {
       "showFullDesc": {
