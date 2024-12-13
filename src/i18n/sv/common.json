@@ -242,7 +242,7 @@
       "loginButton": "Logga in",
       "notLoggedIn": "För att ansöka om att hyra ett område ska du först logga in.",
       "pageTitle": "Ansökan om att hyra ett område",
-      "submitting": "Skickas..."
+      "saving": "Sparas..."
     },
     "targetCard": {
       "showFullDesc": {

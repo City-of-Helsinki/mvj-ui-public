@@ -241,7 +241,7 @@
       "loginButton": "Kirjaudu sisään",
       "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehaun.",
       "pageTitle": "Aluehaku",
-      "submitting": "Lähetetään..."
+      "saving": "Tallennetaan..."
     },
     "targetCard": {
       "showFullDesc": {

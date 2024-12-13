@@ -520,16 +520,10 @@ const AreaSearchSpecsPage = ({
                     variant="primary"
                     onClick={(e) => onSubmit(e)}
                     isLoading={isSubmittingAreaSearch}
-                    loadingText={t(
-                      'areaSearch.specs.submitting',
-                      'Submitting...',
-                    )}
+                    loadingText={t('areaSearch.specs.saving', 'Saving...')}
                     disabled={hasSubmitErrors && !valid}
                   >
-                    {t(
-                      'areaSearch.specs.continueButton',
-                      'Apply for this area',
-                    )}
+                    {t('areaSearch.specs.continueButton', 'Continue')}
                   </Button>
                   {lastSubmissionError && (
                     <Notification
