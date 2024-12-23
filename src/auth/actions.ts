@@ -6,7 +6,6 @@ import type { TokenData } from 'hds-react';
 import {
   RECEIVE_API_TOKEN,
   CLEAR_API_TOKEN,
-  RENEW_API_TOKEN,
   USER_FOUND,
   CLEAR_USER,
 } from './types';
@@ -16,9 +15,6 @@ export const receiveApiToken = (apiToken: TokenData): Action<string> =>
 
 export const clearApiToken = (): Action<string> =>
   createAction(CLEAR_API_TOKEN)();
-
-export const isRenewingApiToken = (): Action<string> =>
-  createAction(RENEW_API_TOKEN)();
 
 export const userFound = (user: User): Action<string> =>
   createAction(USER_FOUND)(user);
