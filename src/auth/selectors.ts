@@ -14,7 +14,3 @@ export const hasApiToken: Selector<RootState, boolean> = (
 export const getApiToken: Selector<RootState, string> = (
   state: RootState,
 ): string => (state.auth.apiToken ? state.auth.apiToken[apiTokenKeyName] : '');
-
-export const getIsRenewingApiToken: Selector<RootState, boolean> = (
-  state: RootState,
-): boolean => state.auth.isRenewingApiToken;
