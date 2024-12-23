@@ -1,69 +1,13 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  useApiTokens,
-  useOidcClient,
-  useApiTokensClientTracking,
-  isApiTokensUpdatedSignal,
-  isApiTokensRemovedSignal,
-  isApiTokensRenewalStartedSignal,
-  useAuthenticatedUser,
-} from 'hds-react';
+import { useOidcClient } from 'hds-react';
 import { setRedirectUrlToSessionStorage } from './util';
 import { AppRoutes, getRouteById } from '../root/helpers';
-import {
-  clearApiToken,
-  clearUser,
-  userFound,
-  receiveApiToken,
-  isRenewingApiToken,
-} from './actions';
+import { clearApiToken, clearUser } from './actions';
 
 const useAuth = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const {
-    login: oidcLogin,
-    logout: oidcLogout,
-    isRenewing: oidcIsRenewing,
-  } = useOidcClient();
-  const authenticatedUser = useAuthenticatedUser();
+  const { login: oidcLogin, logout: oidcLogout } = useOidcClient();
   const dispatch = useDispatch();
-  const [apiTokensClientSignal, apiTokensClientSignalReset, apiTokensClient] =
-    useApiTokensClientTracking();
-  const { getStoredApiTokens } = useApiTokens();
-
-  const setLoggedInIfApiTokenExists = useCallback(() => {
-    const [_error, apiToken] = getStoredApiTokens();
-    if (apiToken) {
-      dispatch(receiveApiToken(apiToken));
-      setLoggedIn(true);
-    }
-  }, [getStoredApiTokens, dispatch]);
-
-  useEffect(() => {
-    if (authenticatedUser) {
-      dispatch(userFound(authenticatedUser));
-      setLoggedInIfApiTokenExists();
-    } else {
-      dispatch(clearApiToken());
-      dispatch(clearUser());
-      setLoggedIn(false);
-    }
-  }, [authenticatedUser, dispatch, setLoggedInIfApiTokenExists]);
-
-  useEffect(() => {
-    if (isApiTokensUpdatedSignal(apiTokensClientSignal)) {
-      setLoggedInIfApiTokenExists();
-    }
-    if (isApiTokensRemovedSignal(apiTokensClientSignal)) {
-      dispatch(clearApiToken());
-    }
-    if (isApiTokensRenewalStartedSignal(apiTokensClientSignal)) {
-      dispatch(isRenewingApiToken());
-    }
-
-    return apiTokensClientSignalReset;
-  }, [apiTokensClientSignal, dispatch]);
 
   const determineRedirectPath = (redirectPath: string): string => {
     if (!redirectPath || redirectPath.startsWith('/callback')) {
@@ -86,19 +30,12 @@ const useAuth = () => {
   const logout = useCallback(() => {
     dispatch(clearApiToken());
     dispatch(clearUser());
-    setLoggedIn(false);
     oidcLogout();
   }, [oidcLogout, dispatch]);
 
-  const isRenewing = oidcIsRenewing() || apiTokensClient.isRenewing();
-
   return {
-    loggedIn,
-    authenticatedUser,
     login,
     logout,
-    isRenewing,
-    setLoggedInIfApiTokenExists,
   };
 };
 
