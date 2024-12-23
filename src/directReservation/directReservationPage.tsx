@@ -40,7 +40,7 @@ const DirectReservationPage = ({
 
   return (
     <AuthDependentContent>
-      {(loading, loggedIn) => {
+      {(hasApiToken, loggedIn) => {
         useEffect(() => {
           if (loggedIn && id && !isGeneratingFavourite) {
             generateFavourite(id);
@@ -61,7 +61,7 @@ const DirectReservationPage = ({
               </title>
             </Helmet>
             <Container className="DirectReservationPage__content">
-              {!loggedIn && !loading && (
+              {!loggedIn && !hasApiToken && (
                 <>
                   <p>
                     {t(
@@ -75,7 +75,7 @@ const DirectReservationPage = ({
                 </>
               )}
 
-              {loading || (isGeneratingFavourite && <BlockLoader />)}
+              {!hasApiToken || (isGeneratingFavourite && <BlockLoader />)}
               {generationFailed && (
                 <Notification type="error">
                   {t(

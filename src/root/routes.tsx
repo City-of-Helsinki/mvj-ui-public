@@ -24,8 +24,8 @@ const SiteRoutes = (): JSX.Element => {
     children: JSX.Element | null;
   }): JSX.Element | null => (
     <AuthDependentContent>
-      {(loading, loggedIn) => {
-        if (!loggedIn || !loading) {
+      {(hasApiToken, loggedIn) => {
+        if (!loggedIn || hasApiToken) {
           return children || null;
         }
 

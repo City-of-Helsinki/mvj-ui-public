@@ -103,7 +103,7 @@ const AreaSearchApplicationPreview = ({
     <>
       <ScrollToTop />
       <AuthDependentContent>
-        {(loading, loggedIn) => (
+        {(hasApiToken, loggedIn) => (
           <MainContentElement className="ApplicationPreviewPage">
             <Helmet>
               <title>
@@ -130,7 +130,7 @@ const AreaSearchApplicationPreview = ({
 
               <AreaSearchTargetSummary />
 
-              {loading ? (
+              {!hasApiToken ? (
                 <BlockLoader />
               ) : (
                 <div className="ApplicationPreviewPage__top-level-sections">

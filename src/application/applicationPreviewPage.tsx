@@ -90,7 +90,7 @@ const ApplicationPreviewPage = ({
 
   return (
     <AuthDependentContent>
-      {(loading: boolean, loggedIn: boolean) => (
+      {(hasApiToken: boolean, loggedIn: boolean) => (
         <MainContentElement className="ApplicationPreviewPage">
           <Helmet>
             <title>
@@ -104,7 +104,7 @@ const ApplicationPreviewPage = ({
               {t('application.preview.heading', 'Plot application preview')}
             </h1>
             <ApplicationTargetList />
-            {loading ? (
+            {!hasApiToken ? (
               <BlockLoader />
             ) : (
               <div className="ApplicationPreviewPage__top-level-sections">

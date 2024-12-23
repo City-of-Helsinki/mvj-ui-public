@@ -82,7 +82,7 @@ const ApplicationPage = ({
 
   return (
     <AuthDependentContent>
-      {(loading, loggedIn) => {
+      {(hasApiToken, loggedIn) => {
         useEffect(() => {
           if (loggedIn) {
             fetchPendingUploads();
@@ -105,7 +105,7 @@ const ApplicationPage = ({
               <div className="ApplicationPage__form-container">
                 {isFetchingPlotSearches ||
                 isFetchingFormAttributes ||
-                loading ? (
+                !hasApiToken ? (
                   <BlockLoader />
                 ) : (
                   <>

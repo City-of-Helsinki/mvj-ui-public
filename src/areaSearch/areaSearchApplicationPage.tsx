@@ -76,8 +76,8 @@ const AreaSearchApplicationPage = ({
     }
   }, []);
 
-  const renderApplicationForm = (loading: boolean, loggedIn: boolean) => {
-    if (loading || isSubmittingAreaSearch) {
+  const renderApplicationForm = (hasApiToken: boolean, loggedIn: boolean) => {
+    if (!hasApiToken || isSubmittingAreaSearch) {
       return <BlockLoader />;
     } else if (loggedIn) {
       if (lastSubmission?.form) {
@@ -149,7 +149,7 @@ const AreaSearchApplicationPage = ({
     <>
       <ScrollToTop />
       <AuthDependentContent>
-        {(loading, loggedIn) => {
+        {(hasApiToken, loggedIn) => {
           return (
             <>
               <MainContentElement className="ApplicationPage">
@@ -172,7 +172,7 @@ const AreaSearchApplicationPage = ({
                   </h1>
                   {lastSubmission && <AreaSearchTargetSummary />}
                   <div className="ApplicationPage__form-container">
-                    {renderApplicationForm(loading, loggedIn)}
+                    {renderApplicationForm(hasApiToken, loggedIn)}
                   </div>
                 </Container>
               </MainContentElement>
