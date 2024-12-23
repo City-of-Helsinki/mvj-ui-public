@@ -9,6 +9,7 @@ import SiteRoutes from './root/routes';
 import { loginProviderProperties } from './auth/constants';
 import { MVJ_FAVOURITE } from './favourites/types';
 import { logError } from './root/helpers';
+import AuthSync from './auth/components/AuthSync';
 
 const initialState = {};
 export const store = configureStore(initialState);
@@ -46,6 +47,7 @@ const root = createRoot(container as Element);
 root.render(
   <Provider store={store}>
     <LoginProvider {...loginProviderProperties}>
+      <AuthSync />
       <SiteRoutes />
     </LoginProvider>
   </Provider>,
