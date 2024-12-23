@@ -19,6 +19,7 @@ import { RootState } from '../root/rootReducer';
 import { MVJ_FAVOURITE } from '../favourites/types';
 import { getFavouriteCount } from '../favourites/selectors';
 import useAuth from '../auth/useAuth';
+import { getLoggedInUser } from '../auth/selectors';
 
 interface Dispatch {
   openLoginModal: () => void;
@@ -27,10 +28,12 @@ interface Dispatch {
 interface TopNavigationProps {
   openLoginModal: () => void;
   favouritesCount: number;
+  isLoggedIn: boolean;
 }
 
 interface State {
   favouritesCount: number;
+  isLoggedIn: boolean;
 }
 
 interface TopNavigationLinkProps {
@@ -79,10 +82,11 @@ const TopNavigationLink = ({
 const TopNavigation = ({
   openLoginModal,
   favouritesCount,
+  isLoggedIn,
 }: TopNavigationProps): JSX.Element => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const { loggedIn, logout } = useAuth();
+  const { logout } = useAuth();
 
   const languages: LanguageOption[] = [
     {
@@ -152,15 +156,15 @@ const TopNavigation = ({
         />
         <Header.ActionBarItem
           label={
-            !loggedIn
+            !isLoggedIn
               ? t('header.actions.userManagement.logIn', 'Log in')
               : t('header.actions.userManagement.logOut', 'Log out')
           }
           fixedRightPosition
-          icon={!loggedIn ? <IconUser /> : <IconSignout />}
+          icon={!isLoggedIn ? <IconUser /> : <IconSignout />}
           id="action-bar-login"
           onClick={
-            !loggedIn
+            !isLoggedIn
               ? (e) => {
                   e.preventDefault();
                   openLoginModal();
@@ -193,6 +197,7 @@ const mapDispatchToProps: Dispatch = {
 export default connect(
   (state: RootState): State => ({
     favouritesCount: getFavouriteCount(state),
+    isLoggedIn: !!getLoggedInUser(state),
   }),
   mapDispatchToProps,
 )(TopNavigation);
