@@ -2,34 +2,25 @@ import { connect } from 'react-redux';
 import type { User } from 'hds-react';
 
 import { RootState } from '../../root/rootReducer';
-import {
-  getIsRenewingApiToken,
-  getLoggedInUser,
-  hasApiToken,
-} from '../selectors';
+import { getLoggedInUser, hasApiToken } from '../selectors';
 
 interface Props {
-  isRenewingApiToken: boolean;
   user: User | null;
   hasApiToken: boolean;
-  children: (loading: boolean, loggedIn: boolean) => JSX.Element | null;
+  children: (hasApiToken: boolean, loggedIn: boolean) => JSX.Element | null;
 }
 
 const AuthDependentContent = ({
-  isRenewingApiToken,
   user,
   hasApiToken,
   children,
 }: Props): JSX.Element | null => {
-  // api token is renewing
-  const isLoading = isRenewingApiToken;
   // User exists and has api token
-  const isLoggedIn = !!user && hasApiToken;
-  return children(isLoading, isLoggedIn);
+  const isLoggedIn = !!user;
+  return children(hasApiToken, isLoggedIn);
 };
 
 export default connect((state: RootState) => ({
   user: getLoggedInUser(state),
-  isRenewingApiToken: getIsRenewingApiToken(state),
   hasApiToken: hasApiToken(state),
 }))(AuthDependentContent);

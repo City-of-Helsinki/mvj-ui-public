@@ -189,14 +189,14 @@ const AreaSearchSpecsPage = ({
     <>
       <ScrollToTop />
       <AuthDependentContent>
-        {(loading, loggedIn) => {
+        {(hasApiToken, loggedIn) => {
           useEffect(() => {
             fetchIntendedUses();
           }, []);
 
           const { files } = useFileUploads();
 
-          if (loading || !intendedUses) {
+          if ((!hasApiToken && !loggedIn) || !intendedUses) {
             return <BlockLoader />;
           }
 

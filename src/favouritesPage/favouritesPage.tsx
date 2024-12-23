@@ -15,7 +15,7 @@ import { PlotSearch } from '../plotSearch/types';
 import { fetchPlotSearches } from '../plotSearch/actions';
 import BlockLoader from '../loader/blockLoader';
 import { getRouteById, getPageTitle, AppRoutes } from '../root/helpers';
-import { getLoggedInUser, getIsRenewingApiToken } from '../auth/selectors';
+import { getLoggedInUser, hasApiToken } from '../auth/selectors';
 import { openLoginModal } from '../login/actions';
 import { getPageForCurrentPlotSearch } from '../plotSearch/helpers';
 import MainContentElement from '../a11y/MainContentElement';
@@ -25,7 +25,7 @@ interface State {
   plotSearches: PlotSearch[];
   isFetchingPlotSearches: boolean;
   user: User | null;
-  isRenewingApiToken: boolean;
+  hasApiToken: boolean;
   searchPageLink: string | null;
 }
 
@@ -36,7 +36,7 @@ interface Props {
   fetchPlotSearches: () => void;
   isFetchingPlotSearches: boolean;
   user: User | null;
-  isRenewingApiToken: boolean;
+  hasApiToken: boolean;
   openLoginModal: () => void;
   searchPageLink: string | null;
 }
@@ -153,7 +153,7 @@ const FavouritesPage = (props: Props): JSX.Element => {
               <Col xs={12}>
                 <Button
                   onClick={() => navigateToApplication()}
-                  disabled={props.isRenewingApiToken}
+                  disabled={!props.hasApiToken}
                 >
                   {t('favouritesPage.nextButton', 'Apply for these plots')}
                 </Button>
@@ -171,7 +171,7 @@ const mapStateToProps = (state: RootState): State => ({
   plotSearches: state.plotSearch.plotSearches,
   isFetchingPlotSearches: state.plotSearch.isFetchingPlotSearches,
   user: getLoggedInUser(state),
-  isRenewingApiToken: getIsRenewingApiToken(state),
+  hasApiToken: hasApiToken(state),
   searchPageLink: getPageForCurrentPlotSearch(state),
 });
 
