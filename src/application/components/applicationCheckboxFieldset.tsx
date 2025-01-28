@@ -70,13 +70,11 @@ const ApplicationCheckboxFieldset = (
             }
             required={field.required}
             errorText={displayError && meta.error?.value}
-            label={field.label}
+            label={field.required ? `* ${field.label}` : field.label}
             onChange={(e) => setValues({ value: e.target.checked })}
             onBlur={() => input.onBlur(input.value)}
+            helperText={field.hint_text}
           />
-          <ApplicationFieldsetHelperText>
-            {field.hint_text}
-          </ApplicationFieldsetHelperText>
         </>
       )}
     </div>
