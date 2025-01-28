@@ -363,7 +363,7 @@
     },
     "bannerText": "Helsingin kaupungin tonttien sekä maa- ja vesialueiden vuokraus ja myynti",
     "contentHeader": "Miten voimme auttaa vuokraustarpeissasi?",
-    "label": "Front page",
+    "label": "Etusivu",
     "otherCompetitionsAndSearches": {
       "counter_one": "Muut kilpailut ja haut: {{count}} kpl",
       "counter_other": "Muut kilpailut ja haut: {{count}} kpl",
