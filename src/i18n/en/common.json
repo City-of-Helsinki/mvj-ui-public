@@ -334,7 +334,8 @@
       "text": "All rights reserved"
     },
     "logo": {
-      "alt": "Helsinki logo"
+      "alt": "Helsinki logo",
+      "href": "https://www.hel.fi/en"
     },
     "text": "Plot rental",
     "customerService": {

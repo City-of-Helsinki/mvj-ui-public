@@ -41,6 +41,7 @@ const FooterComponent = (): JSX.Element => {
             alt={t('footer.logo.alt', 'Helsinki logo')}
           />
         }
+        logoHref={t('footer.logo.href', 'https://www.hel.fi')}
         copyrightHolder={t('footer.copyright.holder', 'Copyright')}
         backToTopLabel={t('footer.moveToTop', 'Siirry ylös')}
       >
