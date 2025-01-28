@@ -604,6 +604,12 @@
       "areaSearch": "Area rental",
       "otherCompetitionsAndSearches": "Other bids and rentals",
       "plotSearchAndCompetitions": "Plot rentals and bids"
+    },
+    "externalLinks": {
+      "helsinki": {
+        "label": "City of Helsinki",
+        "href": "https://www.hel.fi/en"
+      }
     }
   },
   "validation": {

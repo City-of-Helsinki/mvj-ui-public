@@ -604,6 +604,12 @@
       "areaSearch": "Områdesökning",
       "otherCompetitionsAndSearches": "Andra tävlingar och sökningar",
       "plotSearchAndCompetitions": "Plot sökningar och tävlingar"
+    },
+    "externalLinks": {
+      "helsinki": {
+        "label": "Helsingfors stad",
+        "href": "https://www.hel.fi/sv"
+      }
     }
   },
   "validation": {
