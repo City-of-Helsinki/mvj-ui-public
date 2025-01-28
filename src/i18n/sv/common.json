@@ -608,7 +608,8 @@
     "externalLinks": {
       "helsinki": {
         "label": "Helsingfors stad",
-        "href": "https://www.hel.fi/sv"
+        "href": "https://www.hel.fi/sv",
+        "openInExternalDomainAriaLabel": "Länk leder till extern tjänst."
       }
     }
   },
