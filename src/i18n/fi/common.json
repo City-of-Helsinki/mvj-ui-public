@@ -606,7 +606,8 @@
     "externalLinks": {
       "helsinki": {
         "label": "Helsingin kaupunki",
-        "href": "https://www.hel.fi/fi"
+        "href": "https://www.hel.fi/fi",
+        "openInExternalDomainAriaLabel": "Siirtyy toiseen sivustoon."
       }
     }
   },

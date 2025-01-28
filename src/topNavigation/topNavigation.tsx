@@ -191,6 +191,10 @@ const TopNavigation = ({
           label={t('topNavigation.externalLinks.helsinki.label')}
           href={t('topNavigation.externalLinks.helsinki.href')}
           external
+          openInExternalDomainAriaLabel={t(
+            'topNavigation.externalLinks.helsinki.openInExternalDomainAriaLabel',
+            'Avautuu uudessa välilehdessä.',
+          )}
           children={null}
         />
       </Header.NavigationMenu>
