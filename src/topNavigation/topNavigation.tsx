@@ -1,10 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   Header,
   IconSignout,
   IconUser,
   LanguageOption,
+  Link,
   Logo,
   logoFi,
 } from 'hds-react';
@@ -71,7 +72,7 @@ const TopNavigationLink = ({
   return (
     <Header.Link
       label={label}
-      as={Link}
+      as={RouterLink}
       to={to}
       active={match !== null}
       className={className}
@@ -185,6 +186,13 @@ const TopNavigation = ({
             label={t(link.label, link.default || '')}
           />
         ))}
+        <Header.Link
+          as={Link}
+          label={t('topNavigation.externalLinks.helsinki.label')}
+          href={t('topNavigation.externalLinks.helsinki.href')}
+          external
+          children={null}
+        />
       </Header.NavigationMenu>
     </Header>
   );

@@ -602,6 +602,12 @@
       "areaSearch": "Aluehaku",
       "otherCompetitionsAndSearches": "Muut kilpailut ja haut",
       "plotSearchAndCompetitions": "Tonttihaut ja -kilpailut"
+    },
+    "externalLinks": {
+      "helsinki": {
+        "label": "Helsingin kaupunki",
+        "href": "https://www.hel.fi/fi"
+      }
     }
   },
   "validation": {
