@@ -65,29 +65,40 @@ const FileInputFormField = ({
   touch,
   accept,
   ...rest
-}: WrappedFieldProps &
-  Props &
-  Omit<FileInputProps, 'onChange'>): JSX.Element => {
+}: WrappedFieldProps & Props & FileInputProps): JSX.Element => {
   const { i18n } = useTranslation();
   const { files, setFieldFiles } = useFileUploads();
-  const filesArray = files['search.attachments'];
+  const filesArray = files[input.name] || [];
 
-  const onChangeHandler = (files: Array<File>): void => {
+  const onChangeHandler: FileInputProps['onChange'] = (files) => {
     setFieldFiles(input.name, files);
+  };
+
+  const onBlurHandler: FileInputProps['onBlur'] = (_e) => {
+    const currentFilesArray = filesArray || [];
+    blur(meta.form, input.name, currentFilesArray.length);
+  };
+
+  const onFocusHandler: FileInputProps['onFocus'] = (_e) => {
     focus(meta.form, input.name);
+  };
+
+  const onTouchEndHandler: FileInputProps['onTouchEnd'] = (_e) => {
     touch(meta.form, input.name);
-    blur(meta.form, input.name, files.length);
   };
 
   return (
     <FileInput
       {...input}
-      onChange={onChangeHandler}
       language={i18n.language as Language}
       errorText={meta.touched && meta.error}
       defaultValue={filesArray}
       accept={accept || getAllowedFileTypes()}
       {...rest}
+      onChange={onChangeHandler}
+      onBlur={onBlurHandler}
+      onFocus={onFocusHandler}
+      onTouchEnd={onTouchEndHandler}
     />
   );
 };
