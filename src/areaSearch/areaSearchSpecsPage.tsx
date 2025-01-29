@@ -304,7 +304,7 @@ const AreaSearchSpecsPage = ({
                             '\n' +
                             t(
                               'areaSearch.specs.intendedUse.startDateHelpText',
-                              'Please note that applications will be processed in the order they were submitted.',
+                              'Press select to choose the date from the calendar. Please note that applications will be processed in the order they were submitted.',
                             )
                           }
                           minDate={dateNow}
