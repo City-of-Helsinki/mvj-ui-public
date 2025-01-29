@@ -507,10 +507,17 @@ const AreaSearchSpecsPage = ({
                       id="attachments"
                       name="search.attachments"
                       component={FileInputFormField}
-                      label={t(
-                        'areaSearch.specs.attachments.input',
-                        'You may also optionally include any relevant attachments here, such as photos of the area in question.',
-                      )}
+                      label={
+                        t(
+                          'areaSearch.specs.attachments.input',
+                          'You may also optionally include any relevant attachments here, such as photos of the area in question.',
+                        ) +
+                        // add a whitespace prefix if there is a help text
+                        (t('areaSearch.specs.attachments.inputHelpText', '')
+                          ? ' ' +
+                            t('areaSearch.specs.attachments.inputHelpText', '')
+                          : '')
+                      }
                       dragAndDrop
                       multiple
                       maxSize={20 * 1024 * 1024} // 20MB
