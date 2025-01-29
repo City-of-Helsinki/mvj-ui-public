@@ -35,7 +35,7 @@ const AreaSearchTargetSummary = ({
       key: t('areaSearch.application.target.area', 'Area (m²)'),
       value: lastSubmission?.geometry
         ? `${getAreaString(lastSubmission.geometry)}`
-        : '???',
+        : '-',
       fullDescOnly: false,
     },
     {
@@ -45,14 +45,14 @@ const AreaSearchTargetSummary = ({
         ' – ' +
         (lastSubmission?.end_date
           ? renderDate(new Date(lastSubmission?.end_date as string))
-          : '???'),
+          : ''),
       fullDescOnly: false,
     },
     {
       key: t('areaSearch.application.target.intendedUsage', 'Intended use'),
       value: lastSubmission?.intended_use
         ? lastSubmission.description_intended_use
-        : '???',
+        : '-',
       fullDescOnly: true,
     },
     {
