@@ -229,6 +229,7 @@
       "explanation": "Om du vill hyra ett område fortsätt genom att fylla i ansökningsblanketten. Berätta för oss om det önskade området, användningsändamålet och hyrestiden. Vi kontaktar dig så snart som möjligt. Fälten markerade med en asterisk är obligatoriska. ",
       "heading": "1. Val av område",
       "intendedUse": {
+        "dateFormat": "Använd formatet d.m.åååå",
         "endDate": "Slutdatum för hyrning",
         "endDateHelpText": "Om du inte vet slutdatumet för hyresperioden eller om du vill hyra ett område tills vidare, ange detta i en närmare beskrivning.",
         "heading": "Välj användningsändamål och önskad hyresperiod",

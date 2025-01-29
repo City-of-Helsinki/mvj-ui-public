@@ -228,6 +228,7 @@
       "explanation": "Jatka täyttämällä hakemuslomake, jos haluat vuokrata alueen. Kerro meille toiveesi alueesta, vuokrauksen käyttötarkoituksesta ja vuokra-ajasta. Olemme sinuun yhteydessä mahdollisimman pian. Tähdellä merkityt kentät ovat pakollisia. ",
       "heading": "1. Alueen valinta",
       "intendedUse": {
+        "dateFormat": "Käytä muotoa p.k.vvvv",
         "endDate": "Vuokrauksen päättymispäivämäärä",
         "endDateHelpText": "Jos et tiedä vuokrauksen päättymisajankohtaa tai haluat vuokrata alueen toistaiseksi, kuvaile asiaasi tarkemmassa kuvauksessa.",
         "heading": "Valitse käyttötarkoitus ja toivottu vuokra-aika",
