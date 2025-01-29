@@ -62,20 +62,18 @@ const ApplicationCheckboxFieldset = (
           </ApplicationFieldsetHelperText>
         </>
       ) : (
-        <>
-          <Checkbox
-            id={`ApplicationCheckboxFieldSet_${id}`}
-            checked={
-              input.value.value instanceof Array ? false : input.value.value
-            }
-            required={field.required}
-            errorText={displayError && meta.error?.value}
-            label={field.required ? `* ${field.label}` : field.label}
-            onChange={(e) => setValues({ value: e.target.checked })}
-            onBlur={() => input.onBlur(input.value)}
-            helperText={field.hint_text}
-          />
-        </>
+        <Checkbox
+          id={`ApplicationCheckboxFieldSet_${id}`}
+          checked={
+            input.value.value instanceof Array ? false : input.value.value
+          }
+          required={field.required}
+          errorText={displayError && meta.error?.value}
+          label={field.required ? `* ${field.label}` : field.label}
+          onChange={(e) => setValues({ value: e.target.checked })}
+          onBlur={() => input.onBlur(input.value)}
+          helperText={field.hint_text}
+        />
       )}
     </div>
   );
