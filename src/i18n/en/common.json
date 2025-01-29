@@ -214,8 +214,8 @@
       },
       "attachments": {
         "heading": "Appendices to the application",
-        "input": "Jos sinua on ohjeistettu liittämään liitteitä hakemukseen, esim. asemapiirros ja pohjapiirustus, liitä ne tässä. Voit myös lisätä vapaavalintaisia liitteitä.",
-        "inputHelpText": "Toivomme ensisijaisesti .pdf-muotoisia tiedostoja."
+        "input": "Add requested attachments here e.g. site plan and floorplan. You may also add other relevant attachments.",
+        "inputHelpText": "We prefer pdf files."
       },
       "continueButton": "Continue",
       "errors": {
