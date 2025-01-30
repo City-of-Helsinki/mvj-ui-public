@@ -238,7 +238,7 @@
         "projectDescription": "Detailed description of the intended use",
         "projectDescriptionHelpText": "Minkälaista toimintaa vuokrakohteessa on tarkoitus järjestää? Minkälaisia rakenteita vuokra-alueelle on tulossa? Kuvaile, ketkä käyttävät aluetta? Onko kyseessä jatkohakemus voimassa olevalle vuokraukselle (jos on, ilmoita vuokraustunnus)?",
         "startDate": "Start date for lease",
-        "startDateHelpText": "Please note that applications are processed on a first come, first served basis."
+        "startDateHelpText": "Press Select to choose a date from the calendar. Please note that applications are processed on a first come, first served basis."
       },
       "loginButton": "Log in",
       "notLoggedIn": "First, log in to see available area rentals.",

@@ -238,7 +238,7 @@
         "projectDescription": "Närmare beskrivning om hur området används",
         "projectDescriptionHelpText": "Vilken typ av verksamhet planerar du att ordna i hyresobjektet? Vilka typer av konstruktioner planerar du att bygga i hyresområdet? Beskriv vilka som använder området. Är det fråga om en ansökan om förlängning av befintliga hyrningen (om ja, ange hyresbeteckningen)?",
         "startDate": "Startdatum för hyresperioden",
-        "startDateHelpText": "Beakta att vi handlägger ansökningar i ankomstordning."
+        "startDateHelpText": "Tryck på Välj för att välja datum från kalendern. Beakta att vi handlägger ansökningar i ankomstordning."
       },
       "loginButton": "Logga in",
       "notLoggedIn": "För att ansöka om att hyra ett område ska du först logga in.",

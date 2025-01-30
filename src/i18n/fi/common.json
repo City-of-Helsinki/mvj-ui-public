@@ -238,7 +238,7 @@
         "projectDescription": "Tarkempi kuvaus käyttötarkoituksesta",
         "projectDescriptionHelpText": "Minkälaista toimintaa vuokrakohteessa on tarkoitus järjestää? Minkälaisia rakenteita vuokra-alueelle on tulossa? Kuvaile, ketkä käyttävät aluetta? Onko kyseessä jatkohakemus voimassa olevalle vuokraukselle (jos on, ilmoita vuokraustunnus)?",
         "startDate": "Vuokrauksen alkamispäivämäärä",
-        "startDateHelpText": "Huomioithan alkamispäivää merkitessäsi, että hakemukset käsitellään saapumisjärjestyksessä."
+        "startDateHelpText": "Muista painaa Valitse valitaksesi päivämäärän kalenterista. Huomioithan alkamispäivää merkitessäsi, että hakemukset käsitellään saapumisjärjestyksessä."
       },
       "loginButton": "Kirjaudu sisään",
       "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehaun.",
