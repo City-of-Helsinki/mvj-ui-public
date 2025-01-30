@@ -95,3 +95,10 @@ After this, all new messages as well as any old messages whose default translati
 will now have an empty string in each of the respective non-English locale files, which can
 then be translated. The English file will also be populated with the default values from the
 source code files.
+
+## Feature flags
+
+Feature flags are set from environment variables during build, and they are exported as variables
+from `./src/featureFlags.ts`.
+They are intended to be used to allow committing code that is not meant to be used in production yet,
+which should allow more continuous integration of code instead of long lived branches.
