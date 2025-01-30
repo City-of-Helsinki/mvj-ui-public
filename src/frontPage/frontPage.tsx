@@ -107,7 +107,9 @@ const FrontPage = ({
             }
             color="pink"
             image={<PlotSearchesImage />}
-            url={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
+            // TODO: Switch to this when feature enabled
+            // url={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
+            url={t('frontPage.plotSearchAndCompetitions.externalUrl')}
             headerComponent="h3"
           />
           <BoxGridBox
@@ -132,7 +134,9 @@ const FrontPage = ({
             }
             color="gray"
             image={<OtherSearchesImage />}
-            url={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
+            // TODO: Switch to this when feature enabled
+            // url={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
+            url={t('frontPage.otherCompetitionsAndSearches.externalUrl')}
             headerComponent="h3"
           />
           <BoxGridBox
