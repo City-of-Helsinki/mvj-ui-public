@@ -371,14 +371,16 @@
       "counter_other": "Andra tävlingar och sökningar: {{count}}",
       "counterFailed": "Övriga tävlingar och ansökningar",
       "explanation": "Övriga pågående tävlingar och ansökningar",
-      "label": "Jag vill delta i någon annan områdesansökan eller tävling"
+      "label": "Jag vill delta i någon annan områdesansökan eller tävling",
+      "externalUrl": "https://www.hel.fi/sv/stadsmiljo-och-trafik/tomter-och-bygglov/tomtansokning"
     },
     "plotSearchAndCompetitions": {
       "counter_one": "Plot sökningar och tävlingar: {{count}}",
       "counter_other": "Plot sökningar och tävlingar: {{count}}",
       "counterFailed": "Tomtansökningar och -tävlingar",
       "explanation": "Tomter för långtidsbostäder eller industriell verksamhet",
-      "label": "Jag vill delta i en tomtsökning eller tävling"
+      "label": "Jag vill delta i en tomtsökning eller tävling",
+      "externalUrl": "https://www.hel.fi/sv/stadsmiljo-och-trafik/tomter-och-bygglov/tomtansokning/tomtansokningar-och-tavlingar"
     }
   },
   "globalNotifications": {

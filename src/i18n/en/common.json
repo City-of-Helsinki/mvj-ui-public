@@ -371,14 +371,16 @@
       "counter_other": "Other bids and rentals: {{count}} pcs",
       "counterFailed": "Other bids and rentals",
       "explanation": "Other ongoing rentals and bids",
-      "label": "I want to participate in another area rental or bid"
+      "label": "I want to participate in another area rental or bid",
+      "externalUrl": "https://www.hel.fi/en/urban-environment-and-traffic/plots-and-building-permits/applying-for-a-plot"
     },
     "plotSearchAndCompetitions": {
       "counter_one": "Plot rentals and bids: {{count}} pcs",
       "counter_other": "Plot rentals and bids: {{count}} pcs",
       "counterFailed": "Plot rentals and bids",
       "explanation": "Plots for long-term housing or property development",
-      "label": "I want to participate in a plot rental or bid"
+      "label": "I want to participate in a plot rental or bid",
+      "externalUrl": "https://www.hel.fi/en/urban-environment-and-traffic/plots-and-building-permits/applying-for-a-plot/plot-draws-and-competitions"
     }
   },
   "globalNotifications": {
