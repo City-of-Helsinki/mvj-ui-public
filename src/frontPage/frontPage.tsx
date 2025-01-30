@@ -43,6 +43,27 @@ const FrontPage = ({
     fetchUiData();
   }, []);
 
+  const getTopLabelWithCount = ({
+    count,
+    successKey,
+    successDefault,
+    failedKey,
+    failedDefault,
+  }: {
+    count: number;
+    successKey: string;
+    successDefault: string;
+    failedKey: string;
+    failedDefault: string;
+  }) => {
+    if (isFetchingUiData || fetchingFailed || uiDataNotFound || count <= 0) {
+      // Return the label only
+      return t(failedKey, failedDefault);
+    }
+    // Return the label with the count
+    return t(successKey, successDefault, { count });
+  };
+
   return (
     <MainContentElement className="FrontPage">
       <div className="FrontPage__banner">
@@ -65,20 +86,13 @@ const FrontPage = ({
         </h2>
         <BoxGrid>
           <BoxGridBox
-            topLabel={
-              isFetchingUiData || fetchingFailed || uiDataNotFound
-                ? t(
-                    'frontPage.plotSearchAndCompetitions.counterFailed',
-                    'Plot search and competitions',
-                  )
-                : t(
-                    'frontPage.plotSearchAndCompetitions.counter',
-                    'Plot search and competitions: {{count}}',
-                    {
-                      count: uiData.plot_search,
-                    },
-                  )
-            }
+            topLabel={getTopLabelWithCount({
+              count: uiData.plot_search,
+              successKey: 'frontPage.plotSearchAndCompetitions.counter',
+              successDefault: 'Plot search and competitions: {{count}}',
+              failedKey: 'frontPage.plotSearchAndCompetitions.counterFailed',
+              failedDefault: 'Plot search and competitions',
+            })}
             label={t(
               'frontPage.plotSearchAndCompetitions.label',
               'I want to participate in a plot search or competition',
@@ -97,20 +111,13 @@ const FrontPage = ({
             headerComponent="h3"
           />
           <BoxGridBox
-            topLabel={
-              isFetchingUiData || fetchingFailed || uiDataNotFound
-                ? t(
-                    'frontPage.otherCompetitionsAndSearches.counterFailed',
-                    'Other competitions and searches',
-                  )
-                : t(
-                    'frontPage.otherCompetitionsAndSearches.counter',
-                    'Other competitions and searches: {{count}}',
-                    {
-                      count: uiData.other_search,
-                    },
-                  )
-            }
+            topLabel={getTopLabelWithCount({
+              count: uiData.other_search,
+              successKey: 'frontPage.otherCompetitionsAndSearches.counter',
+              successDefault: 'Other competitions and searches: {{count}}',
+              failedKey: 'frontPage.otherCompetitionsAndSearches.counterFailed',
+              failedDefault: 'Other competitions and searches',
+            })}
             label={t(
               'frontPage.otherCompetitionsAndSearches.label',
               'I want to participate in another area search or competition',
