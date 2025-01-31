@@ -10,36 +10,42 @@ import { loginProviderProperties } from './auth/constants';
 import { MVJ_FAVOURITE } from './favourites/types';
 import { logError } from './root/helpers';
 import AuthSync from './auth/components/AuthSync';
+import {
+  IS_FEATURE_OTHER_SEARCH_ENABLED,
+  IS_FEATURE_PLOT_SEARCH_ENABLED,
+} from './featureFlags';
 
 const initialState = {};
 export const store = configureStore(initialState);
 
-// save favourites into localstorage
-store.subscribe(() => {
-  try {
-    const { favourite } = store.getState();
-    const checkList = ['created_at', 'modified_at', 'targets'];
-    const propertyNames = Object.getOwnPropertyNames(favourite.favourite);
+if (IS_FEATURE_PLOT_SEARCH_ENABLED || IS_FEATURE_OTHER_SEARCH_ENABLED) {
+  // save favourites into localstorage
+  store.subscribe(() => {
+    try {
+      const { favourite } = store.getState();
+      const checkList = ['created_at', 'modified_at', 'targets'];
+      const propertyNames = Object.getOwnPropertyNames(favourite.favourite);
 
-    let checkIntegrity = true;
-    checkList.forEach((key) => {
-      if (propertyNames.some((fKey) => fKey === key)) {
-        return;
+      let checkIntegrity = true;
+      checkList.forEach((key) => {
+        if (propertyNames.some((fKey) => fKey === key)) {
+          return;
+        }
+        checkIntegrity = false;
+      });
+
+      if (!checkIntegrity) {
+        throw Error(
+          `Invalid object to save on mvj_favourite -localstorage item: ${favourite.favourite}`,
+        );
       }
-      checkIntegrity = false;
-    });
 
-    if (!checkIntegrity) {
-      throw Error(
-        `Invalid object to save on mvj_favourite -localstorage item: ${favourite.favourite}`,
-      );
+      localStorage.setItem(MVJ_FAVOURITE, JSON.stringify(favourite.favourite));
+    } catch (e) {
+      logError(e);
     }
-
-    localStorage.setItem(MVJ_FAVOURITE, JSON.stringify(favourite.favourite));
-  } catch (e) {
-    logError(e);
-  }
-});
+  });
+}
 
 const container = document.getElementById('root');
 const root = createRoot(container as Element);

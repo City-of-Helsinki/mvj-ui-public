@@ -10,12 +10,14 @@ import areaSearchReducer from '../areaSearch/reducer';
 import directReservationReducer from '../directReservation/reducer';
 import faqReducer from '../faq/reducer';
 import frontPageReducer from '../frontPage/reducer';
+import {
+  IS_FEATURE_OTHER_SEARCH_ENABLED,
+  IS_FEATURE_PLOT_SEARCH_ENABLED,
+} from '../featureFlags';
 
 const allReducers = {
   auth: authReducer,
   login: loginReducer,
-  plotSearch: plotSearchReducer,
-  favourite: favouriteReducer,
   notifications: notificationReducer,
   application: applicationReducer,
   areaSearch: areaSearchReducer,
@@ -23,6 +25,12 @@ const allReducers = {
   directReservation: directReservationReducer,
   faq: faqReducer,
   frontPage: frontPageReducer,
+  ...(IS_FEATURE_PLOT_SEARCH_ENABLED || IS_FEATURE_OTHER_SEARCH_ENABLED
+    ? {
+        plotSearch: plotSearchReducer,
+        favourite: favouriteReducer,
+      }
+    : {}),
 };
 
 export let rootReducer = combineReducers({

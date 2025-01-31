@@ -21,6 +21,10 @@ import { MVJ_FAVOURITE } from '../favourites/types';
 import { getFavouriteCount } from '../favourites/selectors';
 import useAuth from '../auth/useAuth';
 import { getLoggedInUser } from '../auth/selectors';
+import {
+  IS_FEATURE_OTHER_SEARCH_ENABLED,
+  IS_FEATURE_PLOT_SEARCH_ENABLED,
+} from '../featureFlags';
 
 interface Dispatch {
   openLoginModal: () => void;
@@ -44,17 +48,27 @@ interface TopNavigationLinkProps {
   className?: string;
 }
 
+/**
+ * Return a navigation link in an array if the condition is true.
+ */
+const addNaviLink = (
+  condition: boolean,
+  link: TopNavigationLinkProps,
+): Array<TopNavigationLinkProps> => {
+  return condition ? [link] : [];
+};
+
 export const naviLinks: TopNavigationLinkProps[] = [
-  {
+  ...addNaviLink(IS_FEATURE_PLOT_SEARCH_ENABLED, {
     to: AppRoutes.PLOT_SEARCH_AND_COMPETITIONS,
     label: 'topNavigation.tabs.plotSearchAndCompetitions',
     default: 'Plot search and competitions',
-  },
-  {
+  }),
+  ...addNaviLink(IS_FEATURE_OTHER_SEARCH_ENABLED, {
     to: AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES,
     label: 'topNavigation.tabs.otherCompetitionsAndSearches',
     default: 'Other competitions and searches',
-  },
+  }),
   {
     to: AppRoutes.AREA_SEARCH_LANDING,
     label: 'topNavigation.tabs.areaSearch',
@@ -146,15 +160,18 @@ const TopNavigation = ({
           ariaLabel={t('language.languageSelection', 'Language')}
           languageHeading={t('language.heading', 'Other languages')}
         />
-        <Header.ActionBarItem
-          label={t('header.actions.favourites.title', 'Favourites')}
-          id="action-bar-favourites"
-          icon={<TopNavigationFavouritesIcon count={favouritesCount} />}
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(getRouteById(AppRoutes.FAVOURITES));
-          }}
-        />
+        {(IS_FEATURE_PLOT_SEARCH_ENABLED ||
+          IS_FEATURE_OTHER_SEARCH_ENABLED) && (
+          <Header.ActionBarItem
+            label={t('header.actions.favourites.title', 'Favourites')}
+            id="action-bar-favourites"
+            icon={<TopNavigationFavouritesIcon count={favouritesCount} />}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(getRouteById(AppRoutes.FAVOURITES));
+            }}
+          />
+        )}
         <Header.ActionBarItem
           label={
             !isLoggedIn

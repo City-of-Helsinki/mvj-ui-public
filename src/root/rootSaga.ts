@@ -6,15 +6,21 @@ import areaSearchSaga from '../areaSearch/saga';
 import directReservationSaga from '../directReservation/saga';
 import faqSaqa from '../faq/saga';
 import frontPageSaga from '../frontPage/saga';
+import {
+  IS_FEATURE_OTHER_SEARCH_ENABLED,
+  IS_FEATURE_PLOT_SEARCH_ENABLED,
+} from '../featureFlags';
 
 export default function* rootSaga(): Generator {
-  yield all([
-    fork(plotSearchSaga),
-    fork(favouritesSaga),
-    fork(applicationSaga),
-    fork(areaSearchSaga),
-    fork(directReservationSaga),
-    fork(faqSaqa),
-    fork(frontPageSaga),
-  ]);
+  const sagas = [fork(areaSearchSaga), fork(faqSaqa), fork(frontPageSaga)];
+  if (IS_FEATURE_PLOT_SEARCH_ENABLED || IS_FEATURE_OTHER_SEARCH_ENABLED) {
+    const plotSearchSagas = [
+      fork(favouritesSaga),
+      fork(plotSearchSaga),
+      fork(applicationSaga),
+      fork(directReservationSaga),
+    ];
+    sagas.push(...plotSearchSagas);
+  }
+  yield all(sagas);
 }
