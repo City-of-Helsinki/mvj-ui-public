@@ -14,6 +14,10 @@ import { getRouteById, AppRoutes } from '../root/helpers';
 import { RootState } from '../root/rootReducer';
 import { fetchUiData } from './actions';
 import { UiData } from './types';
+import {
+  IS_FEATURE_PLOT_SEARCH_ENABLED,
+  IS_FEATURE_OTHER_SEARCH_ENABLED,
+} from '../featureFlags';
 
 interface State {
   uiData: UiData;
@@ -107,9 +111,11 @@ const FrontPage = ({
             }
             color="pink"
             image={<PlotSearchesImage />}
-            // TODO: Switch to this when feature enabled
-            // url={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
-            url={t('frontPage.plotSearchAndCompetitions.externalUrl')}
+            url={
+              IS_FEATURE_PLOT_SEARCH_ENABLED
+                ? getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)
+                : t('frontPage.plotSearchAndCompetitions.externalUrl')
+            }
             headerComponent="h3"
           />
           <BoxGridBox
@@ -134,9 +140,11 @@ const FrontPage = ({
             }
             color="gray"
             image={<OtherSearchesImage />}
-            // TODO: Switch to this when feature enabled
-            // url={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
-            url={t('frontPage.otherCompetitionsAndSearches.externalUrl')}
+            url={
+              IS_FEATURE_OTHER_SEARCH_ENABLED
+                ? getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)
+                : t('frontPage.otherCompetitionsAndSearches.externalUrl')
+            }
             headerComponent="h3"
           />
           <BoxGridBox

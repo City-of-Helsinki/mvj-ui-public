@@ -102,3 +102,5 @@ Feature flags are set from environment variables during build, and they are expo
 from `./src/featureFlags.ts`.
 They are intended to be used to allow committing code that is not meant to be used in production yet,
 which should allow more continuous integration of code instead of long lived branches.
+
+**Feature flags should be removed once they are no longer needed.**

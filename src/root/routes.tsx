@@ -16,6 +16,10 @@ import AreaSearchLandingPage from '../areaSearch/areaSearchLandingPage';
 import AreaSearchApplicationRootPage from '../areaSearch/areaSearchApplicationRootPage';
 import DirectReservationPage from '../directReservation/directReservationPage';
 import { getRouteById, getPartialRouteById, AppRoutes } from './helpers';
+import {
+  IS_FEATURE_PLOT_SEARCH_ENABLED,
+  IS_FEATURE_OTHER_SEARCH_ENABLED,
+} from '../featureFlags';
 
 const SiteRoutes = (): JSX.Element => {
   const RouteWithLoader = ({
@@ -50,82 +54,102 @@ const SiteRoutes = (): JSX.Element => {
               </RouteWithLoader>
             }
           />
-          <Route
-            path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
-            element={
-              <RouteWithLoader>
-                <MapSearchPage searchClass="plot_search" key="plot_search" />
-              </RouteWithLoader>
-            }
-          />
-          <Route
-            path={
-              getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET) +
-              ':id'
-            }
-            element={
-              <RouteWithLoader>
-                <MapSearchPage searchClass="plot_search" key="plot_search" />
-              </RouteWithLoader>
-            }
-          />
-          <Route
-            path={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
-            element={
-              <RouteWithLoader>
-                <MapSearchPage searchClass="other_search" key="other_search" />
-              </RouteWithLoader>
-            }
-          />
-          <Route
-            path={
-              getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES) + ':id'
-            }
-            element={
-              <RouteWithLoader>
-                <MapSearchPage searchClass="other_search" key="other_search" />
-              </RouteWithLoader>
-            }
-          />
-          <Route
-            path={getRouteById(AppRoutes.FAVOURITES)}
-            element={
-              <RouteWithLoader>
-                <FavouritesPage />
-              </RouteWithLoader>
-            }
-          />
-          <Route
-            path={getRouteById(AppRoutes.APPLICATION_ROOT) + '/*'}
-            element={
-              <ApplicationRootPage>
-                <Routes>
-                  <Route
-                    path={getPartialRouteById(
-                      AppRoutes.APPLICATION_FORM,
-                      AppRoutes.APPLICATION_ROOT,
-                    )}
-                    element={<ApplicationPage />}
+          {IS_FEATURE_PLOT_SEARCH_ENABLED && (
+            <Route
+              path={getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS)}
+              element={
+                <RouteWithLoader>
+                  <MapSearchPage searchClass="plot_search" key="plot_search" />
+                </RouteWithLoader>
+              }
+            />
+          )}
+          {IS_FEATURE_PLOT_SEARCH_ENABLED && (
+            <Route
+              path={
+                getRouteById(AppRoutes.PLOT_SEARCH_AND_COMPETITIONS_TARGET) +
+                ':id'
+              }
+              element={
+                <RouteWithLoader>
+                  <MapSearchPage searchClass="plot_search" key="plot_search" />
+                </RouteWithLoader>
+              }
+            />
+          )}
+          {IS_FEATURE_OTHER_SEARCH_ENABLED && (
+            <Route
+              path={getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES)}
+              element={
+                <RouteWithLoader>
+                  <MapSearchPage
+                    searchClass="other_search"
+                    key="other_search"
                   />
-                  <Route
-                    path={getPartialRouteById(
-                      AppRoutes.APPLICATION_PREVIEW,
-                      AppRoutes.APPLICATION_ROOT,
-                    )}
-                    element={<ApplicationPreviewPage />}
+                </RouteWithLoader>
+              }
+            />
+          )}
+          {IS_FEATURE_OTHER_SEARCH_ENABLED && (
+            <Route
+              path={
+                getRouteById(AppRoutes.OTHER_COMPETITIONS_AND_SEARCHES) + ':id'
+              }
+              element={
+                <RouteWithLoader>
+                  <MapSearchPage
+                    searchClass="other_search"
+                    key="other_search"
                   />
-                  <Route
-                    path={getPartialRouteById(
-                      AppRoutes.APPLICATION_SUBMIT,
-                      AppRoutes.APPLICATION_ROOT,
-                    )}
-                    element={<ApplicationSuccessPage />}
-                  />
-                  <Route path="*" element={<ErrorPage />} />
-                </Routes>
-              </ApplicationRootPage>
-            }
-          />
+                </RouteWithLoader>
+              }
+            />
+          )}
+          {(IS_FEATURE_PLOT_SEARCH_ENABLED ||
+            IS_FEATURE_OTHER_SEARCH_ENABLED) && (
+            <Route
+              path={getRouteById(AppRoutes.FAVOURITES)}
+              element={
+                <RouteWithLoader>
+                  <FavouritesPage />
+                </RouteWithLoader>
+              }
+            />
+          )}
+          {(IS_FEATURE_PLOT_SEARCH_ENABLED ||
+            IS_FEATURE_OTHER_SEARCH_ENABLED) && (
+            <Route
+              path={getRouteById(AppRoutes.APPLICATION_ROOT) + '/*'}
+              element={
+                <ApplicationRootPage>
+                  <Routes>
+                    <Route
+                      path={getPartialRouteById(
+                        AppRoutes.APPLICATION_FORM,
+                        AppRoutes.APPLICATION_ROOT,
+                      )}
+                      element={<ApplicationPage />}
+                    />
+                    <Route
+                      path={getPartialRouteById(
+                        AppRoutes.APPLICATION_PREVIEW,
+                        AppRoutes.APPLICATION_ROOT,
+                      )}
+                      element={<ApplicationPreviewPage />}
+                    />
+                    <Route
+                      path={getPartialRouteById(
+                        AppRoutes.APPLICATION_SUBMIT,
+                        AppRoutes.APPLICATION_ROOT,
+                      )}
+                      element={<ApplicationSuccessPage />}
+                    />
+                    <Route path="*" element={<ErrorPage />} />
+                  </Routes>
+                </ApplicationRootPage>
+              }
+            />
+          )}
           <Route
             path={getRouteById(AppRoutes.AREA_SEARCH_LANDING)}
             element={
@@ -138,14 +162,16 @@ const SiteRoutes = (): JSX.Element => {
             path={getRouteById(AppRoutes.AREA_SEARCH_APPLICATION_ROOT) + '/*'}
             element={<AreaSearchApplicationRootPage />}
           />
-          <Route
-            path={getRouteById(AppRoutes.DIRECT_RESERVATION) + ':id'}
-            element={
-              <RouteWithLoader>
-                <DirectReservationPage />
-              </RouteWithLoader>
-            }
-          />
+          {IS_FEATURE_PLOT_SEARCH_ENABLED && (
+            <Route
+              path={getRouteById(AppRoutes.DIRECT_RESERVATION) + ':id'}
+              element={
+                <RouteWithLoader>
+                  <DirectReservationPage />
+                </RouteWithLoader>
+              }
+            />
+          )}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </App>
