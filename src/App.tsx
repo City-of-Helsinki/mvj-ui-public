@@ -27,6 +27,10 @@ setGridSystemConfiguration({
 import 'hds-core';
 import './main.scss';
 import type { Action } from 'redux';
+import {
+  IS_FEATURE_OTHER_SEARCH_ENABLED,
+  IS_FEATURE_PLOT_SEARCH_ENABLED,
+} from './featureFlags';
 
 interface AppProps {
   children?: JSX.Element;
@@ -43,11 +47,13 @@ const App = ({
   isFetchingFavourite,
   hasApiToken,
 }: AppProps): JSX.Element => {
-  useEffect(() => {
-    if (!isFetchingFavourite && hasApiToken) {
-      fetchFavourite();
-    }
-  }, [hasApiToken, fetchFavourite]);
+  if (IS_FEATURE_PLOT_SEARCH_ENABLED || IS_FEATURE_OTHER_SEARCH_ENABLED) {
+    useEffect(() => {
+      if (!isFetchingFavourite && hasApiToken) {
+        fetchFavourite();
+      }
+    }, [hasApiToken, fetchFavourite]);
+  }
 
   return (
     <div className="App">
