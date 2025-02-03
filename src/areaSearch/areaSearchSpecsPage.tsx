@@ -191,8 +191,10 @@ const AreaSearchSpecsPage = ({
       <AuthDependentContent>
         {(hasApiToken, loggedIn) => {
           useEffect(() => {
-            fetchIntendedUses();
-          }, []);
+            if (hasApiToken) {
+              fetchIntendedUses();
+            }
+          }, [hasApiToken]);
 
           const { files } = useFileUploads();
 
