@@ -190,24 +190,24 @@
     "specs": {
       "area": {
         "areaDescription": "Detailed area description",
-        "areaDescriptionHelpText": "Vuokra-alue mahdollisimman tarkasti määriteltynä.",
+        "areaDescriptionHelpText": "Describe the rental area as precisely as possible.",
         "drawOnMap": {
           "explanation": "Your choice of area is the basis for the negotiation. The area you draw is for reference only. We will contact you regarding the detailed delineation during the application process.",
           "heading": "Draw the desired area on the map",
           "helpTexts": {
-            "label": "",
-            "phase1": "",
-            "phase2": "",
-            "phase3": "",
-            "phase4": "",
-            "zoomTools": "",
-            "zoomToolsAlt": "",
-            "drawTools": "",
-            "drawToolsAlt": "",
-            "editTools": "",
-            "editToolsAlt": "",
-            "mapLayers": "",
-            "mapLayersAlt": ""
+            "label": "Map tool",
+            "phase1": "Start by finding a location on the map using the address search or the zoom in and out tool.",
+            "phase2": "Draw the desired area on the map using the drawing tools. You can draw either polygonal or rectangular areas. Multiple areas can be drawn.",
+            "phase3": "The areas you draw are automatically saved on the map, and you can continue filling out the application.",
+            "phase4": "You can edit the area you have drawn by pressing the edit button. By pressing the delete button, you can remove one or multiple items.",
+            "zoomTools": "= zooming in and out",
+            "zoomToolsAlt": "Zoom in and out on the map",
+            "drawTools": "= drawing tools",
+            "drawToolsAlt": "Draw the area on the map",
+            "editTools": "= edit and delete",
+            "editToolsAlt": "Edit buttons",
+            "mapLayers": "= map layers",
+            "mapLayersAlt": "Map layers"
           }
         },
         "heading": "Tell us which area you'd like to lease"
@@ -224,7 +224,7 @@
         "other": "An unknown error occurred while saving the area rental. Please try again.",
         "startDateBeforeEndDate": "Start date cannot be after end date.",
         "validation": "Please check that the indicated fields are completed correctly.",
-        "eitherPolygonOrDescription": "Jatkaaksesi esikatseluun sinun tulee olla joko A) valinnut vuokra-alueen kartalla tai B) kuvaillut vuokra-aluetta sanallisesti."
+        "eitherPolygonOrDescription": "To proceed to the preview, you must either A) have selected the rental area on the map or B) have described the rental area verbally."
       },
       "explanation": "If you want to lease an area, continue by completing the application form. Tell us which area you require, your intended use, and the lease time. We will contact you as soon as possible. Fields marked with an asterisk are required. ",
       "heading": "1. Area selection",
@@ -236,7 +236,7 @@
         "mainType": "Intended use",
         "mainTypePlaceholder": "Choose intended use",
         "projectDescription": "Detailed description of the intended use",
-        "projectDescriptionHelpText": "Minkälaista toimintaa vuokrakohteessa on tarkoitus järjestää? Minkälaisia rakenteita vuokra-alueelle on tulossa? Kuvaile, ketkä käyttävät aluetta? Onko kyseessä jatkohakemus voimassa olevalle vuokraukselle (jos on, ilmoita vuokraustunnus)?",
+        "projectDescriptionHelpText": "What kind of activities are planned for the rental property? What kind of structures are going to be built in the rental area? Describe who will be using the area. Is this an application for an extension of an existing rental agreement (if so, please provide the rental ID)?",
         "startDate": "Start date for lease",
         "startDateHelpText": "Press Select to choose a date from the calendar. Please note that applications are processed on a first come, first served basis."
       },
