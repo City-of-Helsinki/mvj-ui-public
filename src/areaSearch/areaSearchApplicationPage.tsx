@@ -17,6 +17,7 @@ import AreaSearchTargetSummary from './components/areaSearchTargetSummary';
 import ApplicationForm from './components/applicationForm';
 import ScrollToTop from '../common/ScrollToTop';
 import ApplicationErrorsSummary from '../application/components/ApplicationErrorsSummary';
+import DataProtectionNotices from './components/dataProtectionNotices';
 import {
   AreaSearchStepperPageIndex,
   getInitialAreaSearchApplicationForm,
@@ -87,6 +88,7 @@ const AreaSearchApplicationPage = ({
               formName={AREA_SEARCH_FORM_NAME}
               baseForm={lastSubmission.form}
             />
+            <DataProtectionNotices />
             <Row className="ApplicationPage__notifications">
               <Col xs={12}>
                 <ApplicationErrorsSummary
