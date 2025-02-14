@@ -250,6 +250,24 @@
         "hide": "Piilota kohteen tarkemmat tiedot",
         "show": "Näytä kohteen tarkemmat tiedot"
       }
+    },
+    "dataProtectionNotices": {
+      "title": "Tietosuojaselosteet",
+      "tontit": {
+        "externalUrl": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Tonttien%20hankinnan%20ja%20luovutuksen%20asiakasrekisteri.pdf",
+        "ariaLabel": "Helsingin kaupungin tonttien hankinnan ja luovutuksen asiakasrekisterin tietosuojaseloste. Avaa ulkoisen sivun uuteen välilehteen",
+        "linkText": "Helsingin kaupungin tonttien hankinnan ja luovutuksen asiakasrekisteri"
+      },
+      "alueet": {
+        "externalUrl": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Alueiden%20k%C3%A4yt%C3%B6n%20lupa-%20ja%20vuokrausasioiden%20asiakasrekisteri.pdf",
+        "ariaLabel": "Alueiden käytön lupa- ja vuokrausasioiden asiakasrekisterin tietosuojaseloste. Avaa ulkoisen sivun uuteen välilehteen",
+        "linkText": "Alueiden käytön lupa- ja vuokrausasioiden asiakasrekisteri"
+      },
+      "liikuntapalvelut": {
+        "externalUrl": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kuva/Liikuntapalvelujen%20vuokrauksenhallintarekisteri.pdf",
+        "ariaLabel": "Liikuntapalvelujen vuokrauksenhallintarekisterin tietosuojaseloste. Avaa ulkoisen sivun uuteen välilehteen",
+        "linkText": "Liikuntapalvelujen vuokrauksenhallintarekisteri"
+      }
     }
   },
   "components": {
