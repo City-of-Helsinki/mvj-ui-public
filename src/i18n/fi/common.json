@@ -1,5 +1,9 @@
 {
   "application": {
+    "ariaLabels": {
+      "openInExternalDomain": "Siirtyy toiseen sivustoon.",
+      "openInNewTab": "Avautuu uudessa välilehdessä."
+    },
     "arraySection": {
       "applicantHeader": "Hakijan {{number}} tiedot",
       "add": {
@@ -255,17 +259,17 @@
       "title": "Tietosuojaselosteet",
       "tontit": {
         "externalUrl": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Tonttien%20hankinnan%20ja%20luovutuksen%20asiakasrekisteri.pdf",
-        "ariaLabel": "Helsingin kaupungin tonttien hankinnan ja luovutuksen asiakasrekisterin tietosuojaseloste. Avaa ulkoisen sivun uuteen välilehteen",
+        "ariaLabel": "Helsingin kaupungin tonttien hankinnan ja luovutuksen asiakasrekisterin tietosuojaseloste.",
         "linkText": "Helsingin kaupungin tonttien hankinnan ja luovutuksen asiakasrekisteri"
       },
       "alueet": {
         "externalUrl": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Alueiden%20k%C3%A4yt%C3%B6n%20lupa-%20ja%20vuokrausasioiden%20asiakasrekisteri.pdf",
-        "ariaLabel": "Alueiden käytön lupa- ja vuokrausasioiden asiakasrekisterin tietosuojaseloste. Avaa ulkoisen sivun uuteen välilehteen",
+        "ariaLabel": "Alueiden käytön lupa- ja vuokrausasioiden asiakasrekisterin tietosuojaseloste.",
         "linkText": "Alueiden käytön lupa- ja vuokrausasioiden asiakasrekisteri"
       },
       "liikuntapalvelut": {
         "externalUrl": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kuva/Liikuntapalvelujen%20vuokrauksenhallintarekisteri.pdf",
-        "ariaLabel": "Liikuntapalvelujen vuokrauksenhallintarekisterin tietosuojaseloste. Avaa ulkoisen sivun uuteen välilehteen",
+        "ariaLabel": "Liikuntapalvelujen vuokrauksenhallintarekisterin tietosuojaseloste.",
         "linkText": "Liikuntapalvelujen vuokrauksenhallintarekisteri"
       }
     }
@@ -629,8 +633,7 @@
     "externalLinks": {
       "helsinki": {
         "label": "Helsingin kaupunki",
-        "href": "https://www.hel.fi/fi",
-        "openInExternalDomainAriaLabel": "Siirtyy toiseen sivustoon."
+        "href": "https://www.hel.fi/fi"
       }
     }
   },

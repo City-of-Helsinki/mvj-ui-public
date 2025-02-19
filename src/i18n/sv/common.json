@@ -1,5 +1,9 @@
 {
   "application": {
+    "ariaLabels": {
+      "openInExternalDomain": "Länk leder till extern tjänst.",
+      "openInNewTab": "Öppnas i en ny flik."
+    },
     "arraySection": {
       "applicantHeader": "Uppgifter om sökande {{number}}",
       "add": {
@@ -255,17 +259,17 @@
       "title": "Integritetspolicyer",
       "tontit": {
         "externalUrl": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Kundregister%20f%C3%B6r%20anskaffning%20och%20%C3%B6verl%C3%A5telse%20av%20tomter.pdf",
-        "ariaLabel": "Integritetspolicy för Helsingfors stads kundregister för anskaffning och överlåtelse av tomter. Öppnar en annan webbplats i en ny flik",
+        "ariaLabel": "Integritetspolicy för Helsingfors stads kundregister för anskaffning och överlåtelse av tomter.",
         "linkText": "Helsingfors stads kundregister för anskaffning och överlåtelse av tomter"
       },
       "alueet": {
         "externalUrl": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kymp/Kundregister%20f%C3%B6r%20tillst%C3%A5nds-%20och%20uthyrnings%C3%A4renden%20inom%20omr%C3%A5desanv%C3%A4ndning.pdf",
-        "ariaLabel": "Integritetspolicy för Kundregister för tillstånds- och uthyrningsärenden inom områdesanvändning. Öppnar en annan webbplats i en ny flik",
+        "ariaLabel": "Integritetspolicy för Kundregister för tillstånds- och uthyrningsärenden inom områdesanvändning.",
         "linkText": "Kundregister för tillstånds- och uthyrningsärenden inom områdesanvändning"
       },
       "liikuntapalvelut": {
         "externalUrl": "https://www.hel.fi/static/liitteet-2019/Kaupunginkanslia/Rekisteriselosteet/Kuva/Idrottstj%C3%A4nsternas%20hyresf%C3%B6rvaltningsregister.pdf",
-        "ariaLabel": "integritetspolicy för Idrottstjänsternas hyresförvaltningsregister. Öppnar en annan webbplats i en ny flik",
+        "ariaLabel": "integritetspolicy för Idrottstjänsternas hyresförvaltningsregister.",
         "linkText": "Idrottstjänsternas hyresförvaltningsregister"
       }
     }
@@ -629,8 +633,7 @@
     "externalLinks": {
       "helsinki": {
         "label": "Helsingfors stad",
-        "href": "https://www.hel.fi/sv",
-        "openInExternalDomainAriaLabel": "Länk leder till extern tjänst."
+        "href": "https://www.hel.fi/sv"
       }
     }
   },
