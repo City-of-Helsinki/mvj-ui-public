@@ -209,7 +209,7 @@ const TopNavigation = ({
           href={t('topNavigation.externalLinks.helsinki.href')}
           external
           openInExternalDomainAriaLabel={t(
-            'topNavigation.externalLinks.helsinki.openInExternalDomainAriaLabel',
+            'application.ariaLabels.openInExternalDomain',
             'Avautuu uudessa välilehdessä.',
           )}
           children={null}
