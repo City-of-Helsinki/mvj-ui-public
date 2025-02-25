@@ -124,9 +124,11 @@
         "pageTitle": "Aluehaun hakemus"
       },
       "heading": "2. Hakemus",
+      "stepperHeading": "Hakemus",
       "loginButton": "Kirjaudu sisään",
       "preview": {
         "heading": "3. Esikatselu",
+        "stepperHeading": "Esikatselu",
         "pageTitle": "Aluehaun hakemus",
         "emailConfirmationNotice": "Saat vahvistuksen hakemuksen vastaanottamisesta ja kopion hakemuksesta sähköpostiisi."
       },
@@ -232,6 +234,7 @@
       },
       "explanation": "Jatka täyttämällä hakemuslomake, jos haluat vuokrata alueen. Kerro meille toiveesi alueesta, vuokrauksen käyttötarkoituksesta ja vuokra-ajasta. Olemme sinuun yhteydessä mahdollisimman pian. Tähdellä merkityt kentät ovat pakollisia. ",
       "heading": "1. Alueen valinta",
+      "stepperHeading": "Alueen valinta",
       "intendedUse": {
         "dateFormat": "Käytä muotoa p.k.vvvv",
         "endDate": "Vuokrauksen päättymispäivämäärä",
@@ -248,6 +251,9 @@
       "notLoggedIn": "Kirjaudu ensin sisään tehdäksesi aluehaun.",
       "pageTitle": "Aluehaku",
       "saving": "Tallennetaan..."
+    },
+    "success": {
+      "stepperHeading": "Lähetys"
     },
     "targetCard": {
       "showFullDesc": {

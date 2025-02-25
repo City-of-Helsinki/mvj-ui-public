@@ -124,9 +124,11 @@
         "pageTitle": "Area rental application"
       },
       "heading": "2. Application",
+      "stepperHeading": "Application",
       "loginButton": "Log in",
       "preview": {
         "heading": "3. Preview",
+        "stepperHeading": "Preview",
         "pageTitle": "Area rental application",
         "emailConfirmationNotice": "You will receive a confirmation of your application and a copy thereof by email."
       },
@@ -232,6 +234,7 @@
       },
       "explanation": "If you want to lease an area, continue by completing the application form. Tell us which area you require, your intended use, and the lease time. We will contact you as soon as possible. Fields marked with an asterisk are required. ",
       "heading": "1. Area selection",
+      "stepperHeading": "Area selection",
       "intendedUse": {
         "dateFormat": "Use format d.m.yyyy",
         "endDate": "End date for lease",
@@ -248,6 +251,9 @@
       "notLoggedIn": "First, log in to see available area rentals.",
       "pageTitle": "Area rental",
       "saving": "Saving..."
+    },
+    "success": {
+      "stepperHeading": "Submit"
     },
     "targetCard": {
       "showFullDesc": {

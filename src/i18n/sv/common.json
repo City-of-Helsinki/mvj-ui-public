@@ -124,9 +124,11 @@
         "pageTitle": "Ansökan om att hyra ett område"
       },
       "heading": "2. Ansökan",
+      "stepperHeading": "Ansökan",
       "loginButton": "Logga in",
       "preview": {
         "heading": "3. Förhandsgranskning",
+        "stepperHeading": "Förhandsgranskning",
         "pageTitle": "Ansökan om att hyra ett område",
         "emailConfirmationNotice": "Du får bekräftelse på att din ansökan har mottagits och en kopia av ansökan skickas till din e-post."
       },
@@ -232,6 +234,7 @@
       },
       "explanation": "Om du vill hyra ett område fortsätt genom att fylla i ansökningsblanketten. Berätta för oss om det önskade området, användningsändamålet och hyrestiden. Vi kontaktar dig så snart som möjligt. Fälten markerade med en asterisk är obligatoriska. ",
       "heading": "1. Val av område",
+      "stepperHeading": "Val av område",
       "intendedUse": {
         "dateFormat": "Använd formatet d.m.åååå",
         "endDate": "Slutdatum för hyrning",
@@ -248,6 +251,9 @@
       "notLoggedIn": "För att ansöka om att hyra ett område ska du först logga in.",
       "pageTitle": "Ansökan om att hyra ett område",
       "saving": "Sparas..."
+    },
+    "success": {
+      "stepperHeading": "Skickas"
     },
     "targetCard": {
       "showFullDesc": {
