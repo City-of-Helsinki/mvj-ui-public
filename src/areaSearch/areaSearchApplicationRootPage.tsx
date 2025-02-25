@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initialize, reduxForm, InjectedFormProps } from 'redux-form';
+import { useTranslation } from 'react-i18next';
 
+import i18n from '../i18n';
 import { fetchFormAttributes } from '../application/actions';
 import { AreaSearch, AREA_SEARCH_FORM_NAME } from './types';
 import { initializeAreaSearchForm } from './helpers';
@@ -18,7 +20,6 @@ import AreaSearchApplicationSuccessPage from './areaSearchApplicationSuccessPage
 import MainContentElement from '../a11y/MainContentElement';
 import { Helmet } from 'react-helmet';
 import { getPageTitle } from '../root/helpers';
-import { t } from 'i18next';
 import { Container } from 'react-grid-system';
 import AuthDependentContent from '../auth/components/authDependentContent';
 import { openLoginModal } from '../login/actions';
@@ -34,6 +35,7 @@ interface State {
 }
 
 interface Step {
+  order: number;
   label: string;
   state: number;
 }
@@ -56,34 +58,39 @@ const AreaSearchApplicationRootPage = ({
   resetAreaSearchState,
   lastSubmission,
 }: Props & InjectedFormProps<unknown, Props>): JSX.Element => {
+  const { t } = useTranslation();
   const [steps, setSteps] = useState<Step[]>([
     {
-      label: 'Alueen valinta',
+      order: 1,
+      label: t('areaSearch.specs.stepperHeading', 'Alueen valinta'),
       state: StepState.available,
     },
     {
-      label: 'Hakemuksen täyttö',
+      order: 2,
+      label: t('areaSearch.application.stepperHeading', 'Hakemuksen täyttö'),
       state: StepState.disabled,
     },
     {
-      label: 'Esikatselu',
+      order: 3,
+      label: t('areaSearch.application.preview.stepperHeading', 'Esikatselu'),
       state: StepState.disabled,
     },
     {
-      label: 'Lähetys',
+      order: 4,
+      label: t('areaSearch.success.stepperHeading', 'Lähetys'),
       state: StepState.disabled,
     },
   ]);
 
   const renderCurrentStep = () => {
-    switch (steps[currentStep].label) {
-      case 'Alueen valinta':
+    switch (steps[currentStep].order) {
+      case 1: // 'Alueen valinta'
         return <AreaSearchSpecsPage valid={valid} />;
-      case 'Hakemuksen täyttö':
+      case 2: // 'Hakemuksen täyttö'
         return <AreaSearchApplicationPage />;
-      case 'Esikatselu':
+      case 3: // 'Esikatselu'
         return <AreaSearchApplicationPreview />;
-      case 'Lähetys':
+      case 4: // 'Lähetys'
         return (
           <AreaSearchApplicationSuccessPage
             applicationIdentifiers={lastSubmission?.identifier || ''}
@@ -150,7 +157,7 @@ const AreaSearchApplicationRootPage = ({
                   <div className="AreaSearchStepperWrapper">
                     <Stepper
                       steps={steps}
-                      language="en"
+                      language={i18n.language}
                       selectedStep={currentStep}
                       onStepClick={(_, targetStepIndex) =>
                         setAreaSearchStep(targetStepIndex)
