@@ -1,5 +1,5 @@
 # =============================
-FROM registry.access.redhat.com/ubi9/nodejs-18 AS appbase
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS appbase
 # =============================
 
 WORKDIR /app
@@ -44,6 +44,8 @@ FROM appbase AS staticbuilder
 # Set NODE_ENV to production in the staticbuilder container
 ARG NODE_ENV=production
 ENV NODE_ENV=$NODE_ENV
+# Print Node.js version
+RUN node --version
 
 COPY . /app
 RUN yarn build

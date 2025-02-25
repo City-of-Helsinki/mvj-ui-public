@@ -18,7 +18,7 @@ To build up a development environment please follow these steps:
 ### Usage w/o docker
 
 1. Check requirements:
-   1. Project runs on node 18
+   1. Project runs on node 22
    2. Yarn needs to be installed
 2. On project root run `yarn` to install packages
 3. Run `yarn start` to run dev server
