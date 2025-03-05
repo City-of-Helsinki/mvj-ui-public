@@ -4,6 +4,7 @@ import { useOidcClient } from 'hds-react';
 import { setRedirectUrlToSessionStorage } from './util';
 import { AppRoutes, getRouteById } from '../root/helpers';
 import { clearApiToken, clearUser } from './actions';
+import i18n from '../i18n';
 
 const useAuth = () => {
   const { login: oidcLogin, logout: oidcLogout } = useOidcClient();
@@ -22,7 +23,7 @@ const useAuth = () => {
       // and user returns to the callback url with error, and then tries to log in again
       const finalRedirectPath = determineRedirectPath(redirectPath);
       setRedirectUrlToSessionStorage(finalRedirectPath);
-      oidcLogin();
+      oidcLogin({ language: i18n.language });
     },
     [oidcLogin],
   );
