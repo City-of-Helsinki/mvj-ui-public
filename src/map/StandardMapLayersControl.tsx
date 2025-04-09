@@ -36,5 +36,11 @@ export const StandardMapLayersControl = ({
         </LayersControl.BaseLayer>
       );
     })}
+    <LayersControl.Overlay
+      name={MapLayers[MapLayer.helsinkiOwnedAreas].label}
+      checked={true}
+    >
+      <StandardMapLayer layerData={MapLayers[MapLayer.helsinkiOwnedAreas]} />
+    </LayersControl.Overlay>
   </LayersControl>
 );

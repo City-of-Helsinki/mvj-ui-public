@@ -1,4 +1,5 @@
 import i18n from '../i18n';
+import createUrl from '../api/createUrl';
 
 export enum MapLayer {
   generalMap = 'generalMap',
@@ -47,8 +48,8 @@ export const MapLayers: Record<MapLayer, MapLayerProperties> = {
   },
   [MapLayer.helsinkiOwnedAreas]: {
     identifier: MapLayer.helsinkiOwnedAreas,
-    url: 'https://kartta.hel.fi/ws/geoserver/helsinki/wms?',
-    layers: 'Helsingin_maanomistus-_ja_vuokrausalueet',
+    url: createUrl('proxy/wms/helsinki_owned_areas/'),
+    layers: 'Maanomistus_vuokrausalueet',
     format: 'image/png',
     label: i18n.t(
       'map.mapLayers.helsinkiOwnedAreas',

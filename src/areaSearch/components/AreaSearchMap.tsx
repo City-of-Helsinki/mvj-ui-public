@@ -98,12 +98,7 @@ const AreaSearchMap = ({
         <MapReadyHandler whenCreated={attachMapResizeObserver} />
         <ZoomControl />
         <EventHandler />
-        <StandardMapLayersControl
-          enabledLayers={[
-            MapLayer.generalMap,
-            //MapLayer.helsinkiOwnedAreas
-          ]}
-        />
+        <StandardMapLayersControl enabledLayers={[MapLayer.generalMap]} />
         <GeoSearch />
         <FeatureGroup ref={featureGroupRef}>
           <DrawTools
