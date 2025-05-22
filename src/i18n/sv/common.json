@@ -557,7 +557,10 @@
       "cityPlan": "Detaljplan",
       "generalMap": "Kartserie",
       "helsinkiOwnedAreas": "Områden som ägs av Helsingfors",
-      "ortographic": "Ortoflygbild"
+      "ortographic": "Ortoflygbild",
+      "publicAreasInHelsinki": "Allmänna områden i Helsingfors",
+      "publicStreetAreas": "Gatuområden",
+      "publicGreenAreas": "Grönområden"
     },
     "zoomControl": {
       "zoomIn": "Zooma in",

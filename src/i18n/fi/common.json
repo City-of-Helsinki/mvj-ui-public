@@ -557,7 +557,10 @@
       "cityPlan": "Asemakaava",
       "generalMap": "Karttasarja",
       "helsinkiOwnedAreas": "Helsingin omistamat alueet",
-      "ortographic": "Ortoilmakuva"
+      "ortographic": "Ortoilmakuva",
+      "publicAreasInHelsinki": "Helsingin yleiset alueet",
+      "publicStreetAreas": "Kadut ja katualueet",
+      "publicGreenAreas": "Viheralueet"
     },
     "zoomControl": {
       "zoomIn": "Lähennä",
