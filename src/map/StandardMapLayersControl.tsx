@@ -16,6 +16,7 @@ export const StandardMapLayer = ({
     layers={layerData.layers}
     format={layerData.format}
     transparent={true}
+    opacity={layerData.opacity || 1}
   />
 );
 
@@ -41,6 +42,18 @@ export const StandardMapLayersControl = ({
       checked={true}
     >
       <StandardMapLayer layerData={MapLayers[MapLayer.helsinkiOwnedAreas]} />
+    </LayersControl.Overlay>
+    <LayersControl.Overlay
+      name={MapLayers[MapLayer.publicStreetAreas].label}
+      checked={true}
+    >
+      <StandardMapLayer layerData={MapLayers[MapLayer.publicStreetAreas]} />
+    </LayersControl.Overlay>
+    <LayersControl.Overlay
+      name={MapLayers[MapLayer.publicGreenAreas].label}
+      checked={true}
+    >
+      <StandardMapLayer layerData={MapLayers[MapLayer.publicGreenAreas]} />
     </LayersControl.Overlay>
   </LayersControl>
 );

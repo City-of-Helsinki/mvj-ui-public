@@ -557,7 +557,10 @@
       "cityPlan": "Detailed plan",
       "generalMap": "Map series",
       "helsinkiOwnedAreas": "Areas owned by the City of Helsinki",
-      "ortographic": "Orthophotograph"
+      "ortographic": "Orthophotograph",
+      "publicAreasInHelsinki": "Public areas in Helsinki",
+      "publicStreetAreas": "Street areas",
+      "publicGreenAreas": "Green areas"
     },
     "zoomControl": {
       "zoomIn": "Zoom in",

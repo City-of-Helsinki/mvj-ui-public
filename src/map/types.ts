@@ -7,6 +7,8 @@ export enum MapLayer {
   cityPlan = 'cityPlan',
   baseMap = 'baseMap',
   helsinkiOwnedAreas = 'helsinkiOwnedAreas',
+  publicStreetAreas = 'publicStreetAreas',
+  publicGreenAreas = 'publicGreenAreas',
 }
 
 export type MapLayerProperties = {
@@ -15,6 +17,7 @@ export type MapLayerProperties = {
   format: string;
   layers: string;
   label: string;
+  opacity?: number;
 };
 
 export const MapLayers: Record<MapLayer, MapLayerProperties> = {
@@ -55,6 +58,23 @@ export const MapLayers: Record<MapLayer, MapLayerProperties> = {
       'map.mapLayers.helsinkiOwnedAreas',
       'Areas owned by the City of Helsinki',
     ),
+    opacity: 0.5,
+  },
+  [MapLayer.publicStreetAreas]: {
+    identifier: MapLayer.publicStreetAreas,
+    url: 'https://kartta.hel.fi/ws/geoserver/avoindata/wms?',
+    layers: 'avoindata:YLRE_Katuosat_alue',
+    format: 'image/png',
+    label: i18n.t('map.mapLayers.publicStreetAreas', 'Street areas'),
+    opacity: 0.5,
+  },
+  [MapLayer.publicGreenAreas]: {
+    identifier: MapLayer.publicGreenAreas,
+    url: 'https://kartta.hel.fi/ws/geoserver/avoindata/wms?',
+    layers: 'avoindata:YLRE_Viherosat_alue',
+    format: 'image/png',
+    label: i18n.t('map.mapLayers.publicGreenAreas', 'Green areas'),
+    opacity: 0.5,
   },
 };
 
