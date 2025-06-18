@@ -206,6 +206,7 @@
             "phase2": "Rita det önskade området på kartan med hjälp av ritverktygen. Du kan rita områden i form av en polygon eller rektangulär. Det är möjligt att rita flera områden.",
             "phase3": "De områden du ritar sparas automatiskt på kartan och du kan fortsätta att fylla i ansökan.",
             "phase4": "Du kan ändra det ritade området genom att klicka på redigeringsknappen. Klicka på borttagningsknappen för att ta bort ett eller flera objekt.",
+            "phase5": "På kartan har stadens förvaltade tomter och allmänna områden markerats, till vilka man kan rikta en ansökan.",
             "zoomTools": "= zooma in och ut",
             "zoomToolsAlt": "Zooma in och ut på kartan",
             "drawTools": "= ritverktyg",

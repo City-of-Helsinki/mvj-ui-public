@@ -206,6 +206,7 @@
             "phase2": "Piirrä haluamasi alue kartalle käyttämällä piirtotyökaluja. Voit piirtää joko monikulmion tai suorakaiteen muotoisia alueita. Alueita voi piirtää useita.",
             "phase3": "Piirtämäsi alueet tallentuvat kartalle automaattisesti ja voit jatkaa hakemuksen täyttämistä.",
             "phase4": "Voit muokata piirtämääsi aluetta painamalla muokkauspainiketta. Poistonappia painamalla voit poistaa yhden tai useita kohteita.",
+            "phase5": "Kartalle on merkitty kaupungin hallinnoimat tontit ja yleiset alueet, joihin voi osoittaa hakemuksen.",
             "zoomTools": "= lähentäminen ja loitontaminen",
             "zoomToolsAlt": "Lähennä ja loitonna karttaa",
             "drawTools": "= piirtotyökalut",
