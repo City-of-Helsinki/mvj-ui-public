@@ -206,6 +206,7 @@
             "phase2": "Draw the desired area on the map using the drawing tools. You can draw either polygonal or rectangular areas. Multiple areas can be drawn.",
             "phase3": "The areas you draw are automatically saved on the map, and you can continue filling out the application.",
             "phase4": "You can edit the area you have drawn by pressing the edit button. By pressing the delete button, you can remove one or multiple items.",
+            "phase5": "The map shows the plots and public areas managed by the city, to which an application can be directed.",
             "zoomTools": "= zooming in and out",
             "zoomToolsAlt": "Zoom in and out on the map",
             "drawTools": "= drawing tools",

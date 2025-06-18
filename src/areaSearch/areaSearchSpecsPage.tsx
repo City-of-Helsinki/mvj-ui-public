@@ -399,6 +399,12 @@ const AreaSearchSpecsPage = ({
                                 'You can edit your drawing',
                               )}
                             </li>
+                            <li>
+                              {t(
+                                'areaSearch.specs.area.drawOnMap.helpTexts.phase5',
+                                'The map shows the plots and public areas managed by the city, to which an application can be directed.',
+                              )}
+                            </li>
                           </ol>
                           <div className="map-icon-container">
                             <div className="map-icon-container_column">
