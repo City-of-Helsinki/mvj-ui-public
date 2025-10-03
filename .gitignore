@@ -3,7 +3,6 @@
 # ide confs
 .idea
 .vscode
-.devcontainer/
 
 # dependencies
 /node_modules

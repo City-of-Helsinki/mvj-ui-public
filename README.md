@@ -15,6 +15,17 @@ To build up a development environment please follow these steps:
 1. Clone this repository from git: `git pull git@github.com:City-of-Helsinki/mvj-ui-public.git`
 2. Start the docker container: `docker-compose up`
 
+### Usage with devcontainer
+
+Open your editor, and then `Reopen in Container` (vscode).
+
+Run vite dev server and expose port:
+
+```
+yarn --frozen-lockfile
+yarn start --host
+```
+
 ### Usage w/o docker
 
 1. Check requirements:
@@ -28,11 +39,6 @@ To build up a development environment please follow these steps:
 Formatting wise, consistent code style is primarily enforced with [Prettier](https://prettier.io/)
 automatically when files are committed to the repository. Some code style guidelines should be
 followed manually by the developer as listed below.
-
-### Functional vs class-based components
-
-Prefer functional components, hooks, and other modern React concepts over the more traditional
-class and HOC based approaches.
 
 ### Style definitions and class names
 
