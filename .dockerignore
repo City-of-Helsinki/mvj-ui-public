@@ -1,12 +1,64 @@
-node_modules
-npm-debug.log
+# Dependencies (installed inside the container)
+node_modules/
+
+# Build artifacts
+build/
+dist/
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# Docker files (not needed inside the image)
 Dockerfile*
 docker-compose*
 .dockerignore
-.git
-.gitignore
+
+# Environment files
+# - Dev Container: .env is read directly from the workspace by Vite/Node; no Docker build involved.
+# - docker-compose: variables are injected at runtime via the env_file directive in docker-compose.yml.
+# - Manual docker build: pass VITE_* vars as --build-arg and runtime vars via docker run --env-file .env.
+.env
+.env.*
+
+# CI/CD and git hooks
+.github/
+.husky/
+azure-pipelines*.yml
+pipelines/
+
+# Dev container config
+.devcontainer/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+coverage/
+coverage.xml
+playwright-report/
+test-results/
+e2e/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Documentation
 README.md
 LICENSE
-.vscode
-build
-.env
+*.md
+
+# Misc
+.eslintcache
+.nvmrc
