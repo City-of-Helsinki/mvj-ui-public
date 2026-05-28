@@ -11,14 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [22]
+        node: [24]
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn install --frozen-lockfile --ignore-scripts
+      - run: corepack enable && corepack install
+      - run: yarn install --immutable
       - run: yarn coverage
       - name: Store coverage/lcov.info
         uses: actions/cache/save@v5

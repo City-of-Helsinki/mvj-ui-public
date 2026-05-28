@@ -93,5 +93,6 @@
     "src/**/*.{js,jsx,ts,tsx,json,scss,md}": [
       "prettier --write"
     ]
-  }
+  },
+  "packageManager": "yarn@4.15.0"
 }
