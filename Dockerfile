@@ -1,30 +1,24 @@
 # =============================
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS appbase
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS appbase
 # =============================
 
 WORKDIR /app
 # Copy package and lock files
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock .yarnrc.yml ./
 
-# Install yarn
+RUN npm install -g corepack
+# Set yarn version and fix /app ownership so default user can write
 USER root
 RUN chown -R default:root /app
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN dnf install -y yarn
+RUN corepack enable
 
-# Set Yarn version
-ENV YARN_VERSION=1.22.22
-RUN yarn policies set-version $YARN_VERSION
-
-# Use non-root user
 USER default
-# Set node environment, either development or production
-# use development to install devDependencies
-ARG NODE_ENV=development
-ENV NODE_ENV=$NODE_ENV
+# Yarn version is read from "packageManager" in package.json
+RUN corepack install
+RUN yarn --version
 
 # Install exact versions of dependencies and clean cache
-RUN yarn --frozen-lockfile && yarn cache clean --force
+RUN yarn install --immutable && yarn cache clean
 
 # =============================
 FROM appbase AS development

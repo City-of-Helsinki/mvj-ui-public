@@ -1,6 +1,9 @@
 # Dependencies (installed inside the container)
 node_modules/
 
+# Yarn state (created during docker build, must not be overwritten by COPY)
+.yarn
+
 # Build artifacts
 build/
 dist/
