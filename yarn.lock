@@ -1519,7 +1519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:^1.50.1":
+"@playwright/test@npm:1.50.1":
   version: 1.50.1
   resolution: "@playwright/test@npm:1.50.1"
   dependencies:
@@ -1607,7 +1607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-hook/throttle@npm:^2.2.0":
+"@react-hook/throttle@npm:2.2.0":
   version: 2.2.0
   resolution: "@react-hook/throttle@npm:2.2.0"
   dependencies:
@@ -1771,7 +1771,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reduxjs/toolkit@npm:^1.9.7":
+"@reduxjs/toolkit@npm:1.9.7":
   version: 1.9.7
   resolution: "@reduxjs/toolkit@npm:1.9.7"
   dependencies:
@@ -2375,7 +2375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/leaflet-draw@npm:^1.0.10":
+"@types/leaflet-draw@npm:1.0.10":
   version: 1.0.10
   resolution: "@types/leaflet-draw@npm:1.0.10"
   dependencies:
@@ -2384,7 +2384,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/leaflet-geosearch@npm:^3.0.0":
+"@types/leaflet-geosearch@npm:3.0.0":
   version: 3.0.0
   resolution: "@types/leaflet-geosearch@npm:3.0.0"
   dependencies:
@@ -2393,7 +2393,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/leaflet@npm:*, @types/leaflet@npm:^1.9.8":
+"@types/leaflet@npm:*, @types/leaflet@npm:1.9.8":
   version: 1.9.8
   resolution: "@types/leaflet@npm:1.9.8"
   dependencies:
@@ -2427,7 +2427,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/postcss-url@npm:^10.0.4":
+"@types/postcss-url@npm:10.0.4":
   version: 10.0.4
   resolution: "@types/postcss-url@npm:10.0.4"
   dependencies:
@@ -2437,14 +2437,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/proj4@npm:*, @types/proj4@npm:^2.5.5":
+"@types/proj4@npm:*, @types/proj4@npm:2.5.5":
   version: 2.5.5
   resolution: "@types/proj4@npm:2.5.5"
   checksum: 10c0/d8bf889945a7184c05a049e8125feaee9cf2d36c434435547653f3f2e29d581108b49b1b964452994277b45ef5415896defbe26e42ca647420e6d0aa60483f29
   languageName: node
   linkType: hard
 
-"@types/proj4leaflet@npm:^1.0.10":
+"@types/proj4leaflet@npm:1.0.10":
   version: 1.0.10
   resolution: "@types/proj4leaflet@npm:1.0.10"
   dependencies:
@@ -2462,16 +2462,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.2.7":
-  version: 18.2.15
-  resolution: "@types/react-dom@npm:18.2.15"
+"@types/react-dom@npm:18.2.7":
+  version: 18.2.7
+  resolution: "@types/react-dom@npm:18.2.7"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 10c0/70e86f15f69f89b8f179139ab2e8a8aa9765e742789f5dd5a46fec40d4300ada8fe3349cceda42b9964a018982d7ccb7d791b47f781966c992bfd37da909fbd3
+  checksum: 10c0/bd090f5e1b13765fbc191d9eb720dd152d26c20558221963009189c4636ce11e4c1c976e4cde4a74335f997a2be651af27d3727474a8091424101a83a71eebfb
   languageName: node
   linkType: hard
 
-"@types/react-helmet@npm:^6.1.9":
+"@types/react-helmet@npm:6.1.9":
   version: 6.1.9
   resolution: "@types/react-helmet@npm:6.1.9"
   dependencies:
@@ -2480,7 +2480,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.2.15":
+"@types/react@npm:*":
   version: 18.2.37
   resolution: "@types/react@npm:18.2.37"
   dependencies:
@@ -2491,14 +2491,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/redux-actions@npm:^2.6.5":
+"@types/react@npm:18.2.15":
+  version: 18.2.15
+  resolution: "@types/react@npm:18.2.15"
+  dependencies:
+    "@types/prop-types": "npm:*"
+    "@types/scheduler": "npm:*"
+    csstype: "npm:^3.0.2"
+  checksum: 10c0/d1999bd8a565704a9885e3b7a44d93d8d70beb0aae7b3c66139d98832b6dddf82da790519ac9c6502d57504af1cb729c6edb3bf506fe14386a364618884ed0a2
+  languageName: node
+  linkType: hard
+
+"@types/redux-actions@npm:2.6.5":
   version: 2.6.5
   resolution: "@types/redux-actions@npm:2.6.5"
   checksum: 10c0/0b1a4da8448f90b777c227a26a04864dda6fae5d31b627e01a51f36d0ab6e9aa17b6ac5fb12f9ad3bdf122303c9ecb6b7ea11952cff0aaa3456dd040e8401041
   languageName: node
   linkType: hard
 
-"@types/redux-form@npm:^8.3.9":
+"@types/redux-form@npm:8.3.9":
   version: 8.3.9
   resolution: "@types/redux-form@npm:8.3.9"
   dependencies:
@@ -2529,7 +2540,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^8.23.0":
+"@typescript-eslint/eslint-plugin@npm:8.23.0":
   version: 8.23.0
   resolution: "@typescript-eslint/eslint-plugin@npm:8.23.0"
   dependencies:
@@ -2550,6 +2561,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/parser@npm:8.23.0":
+  version: 8.23.0
+  resolution: "@typescript-eslint/parser@npm:8.23.0"
+  dependencies:
+    "@typescript-eslint/scope-manager": "npm:8.23.0"
+    "@typescript-eslint/types": "npm:8.23.0"
+    "@typescript-eslint/typescript-estree": "npm:8.23.0"
+    "@typescript-eslint/visitor-keys": "npm:8.23.0"
+    debug: "npm:^4.3.4"
+  peerDependencies:
+    eslint: ^8.57.0 || ^9.0.0
+    typescript: ">=4.8.4 <5.8.0"
+  checksum: 10c0/f9e0f83a6dd97a9049d4ce23d660a1d4d5f3c57be8efc68e2258e6b2d5b823086d188b534f791a3412ef10d211fe4916b378254728150094c4f8b0ab44aae2a7
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/parser@npm:^6.19.0":
   version: 6.21.0
   resolution: "@typescript-eslint/parser@npm:6.21.0"
@@ -2565,22 +2592,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/a8f99820679decd0d115c0af61903fb1de3b1b5bec412dc72b67670bf636de77ab07f2a68ee65d6da7976039bbf636907f9d5ca546db3f0b98a31ffbc225bc7d
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/parser@npm:^8.23.0":
-  version: 8.23.0
-  resolution: "@typescript-eslint/parser@npm:8.23.0"
-  dependencies:
-    "@typescript-eslint/scope-manager": "npm:8.23.0"
-    "@typescript-eslint/types": "npm:8.23.0"
-    "@typescript-eslint/typescript-estree": "npm:8.23.0"
-    "@typescript-eslint/visitor-keys": "npm:8.23.0"
-    debug: "npm:^4.3.4"
-  peerDependencies:
-    eslint: ^8.57.0 || ^9.0.0
-    typescript: ">=4.8.4 <5.8.0"
-  checksum: 10c0/f9e0f83a6dd97a9049d4ce23d660a1d4d5f3c57be8efc68e2258e6b2d5b823086d188b534f791a3412ef10d211fe4916b378254728150094c4f8b0ab44aae2a7
   languageName: node
   linkType: hard
 
@@ -2705,7 +2716,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^4.3.4":
+"@vitejs/plugin-react@npm:4.3.4":
   version: 4.3.4
   resolution: "@vitejs/plugin-react@npm:4.3.4"
   dependencies:
@@ -2720,7 +2731,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-v8@npm:^4.0.17":
+"@vitest/coverage-v8@npm:4.0.17":
   version: 4.0.17
   resolution: "@vitest/coverage-v8@npm:4.0.17"
   dependencies:
@@ -3464,7 +3475,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.3.2":
+"classnames@npm:2.3.2":
   version: 2.3.2
   resolution: "classnames@npm:2.3.2"
   checksum: 10c0/cd50ead57b4f97436aaa9f9885c6926323efc7c2bea8e3d4eb10e4e972aa6a1cfca1c7a0e06f8a199ca7498d4339e30bb6002e589e61c9f21248cbf3e8b0b18d
@@ -3585,7 +3596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"connected-react-router@npm:^6.9.3":
+"connected-react-router@npm:6.9.3":
   version: 6.9.3
   resolution: "connected-react-router@npm:6.9.3"
   dependencies:
@@ -4514,7 +4525,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.37.4":
+"eslint-plugin-react@npm:7.37.4":
   version: 7.37.4
   resolution: "eslint-plugin-react@npm:7.37.4"
   dependencies:
@@ -4566,7 +4577,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.19.0":
+"eslint@npm:9.19.0":
   version: 9.19.0
   resolution: "eslint@npm:9.19.0"
   dependencies:
@@ -5003,7 +5014,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"geojson@npm:^0.5.0":
+"geojson@npm:0.5.0":
   version: 0.5.0
   resolution: "geojson@npm:0.5.0"
   checksum: 10c0/d7fd376c201933dea1307b7c08032f249f73b9399d6287211f6a523d0efa9260caf2a38319f55075682d53dc4cb4c52b9f9c845f2fd03bef9832903f16177ab0
@@ -5349,13 +5360,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-core@npm:3.12.0":
-  version: 3.12.0
-  resolution: "hds-core@npm:3.12.0"
-  checksum: 10c0/6448e2e9a587970d6490535b17357b643ce73cedb821779ff87bad5d57d23233baa01041c8c2f8dabdab882f9425910702b23f33f775f8d27b391c4eead64390
-  languageName: node
-  linkType: hard
-
 "hds-design-tokens@npm:3.11.0":
   version: 3.11.0
   resolution: "hds-design-tokens@npm:3.11.0"
@@ -5363,9 +5367,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-react@npm:^3.11.0":
-  version: 3.12.0
-  resolution: "hds-react@npm:3.12.0"
+"hds-react@npm:3.11.0":
+  version: 3.11.0
+  resolution: "hds-react@npm:3.11.0"
   dependencies:
     "@apollo/client": "npm:^3.10.1"
     "@babel/runtime": "npm:7.17.9"
@@ -5383,7 +5387,7 @@ __metadata:
     date-fns: "npm:2.16.1"
     downshift: "npm:6.0.6"
     graphql: "npm:^16.8.1"
-    hds-core: "npm:3.12.0"
+    hds-core: "npm:3.11.0"
     jwt-decode: "npm:^3.1.2"
     kashe: "npm:1.0.4"
     lodash: "npm:^4.17.21"
@@ -5401,7 +5405,7 @@ __metadata:
     postcss: ^8.4.21
     react: ^16.8.0 || ^17
     react-dom: ^16.8.0 || ^17
-  checksum: 10c0/af56d7c5871634472e61087de83942dfb2f21eb9df12dc33cea3f755d43884cdda74e19814df83b05a8c083cd1b802b175085c5d72eef5c680a1b02bec6f0613
+  checksum: 10c0/e4913a2f44853fbadc8e26e33ac719d0dea712f28fe83cfc569be9bb4aaed0e7ee1cc155861125c3ebd996eeb996b1b23eac4211465af73b689f86f0338f11a0
   languageName: node
   linkType: hard
 
@@ -5433,7 +5437,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"history@npm:^5.3.0":
+"history@npm:5.3.0":
   version: 5.3.0
   resolution: "history@npm:5.3.0"
   dependencies:
@@ -5486,7 +5490,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^9.1.7":
+"husky@npm:9.1.7":
   version: 9.1.7
   resolution: "husky@npm:9.1.7"
   bin:
@@ -5495,7 +5499,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next-browser-languagedetector@npm:^7.1.0":
+"i18next-browser-languagedetector@npm:7.1.0":
   version: 7.1.0
   resolution: "i18next-browser-languagedetector@npm:7.1.0"
   dependencies:
@@ -5504,7 +5508,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next-parser@npm:^8.9.0":
+"i18next-parser@npm:8.9.0":
   version: 8.9.0
   resolution: "i18next-parser@npm:8.9.0"
   dependencies:
@@ -5528,6 +5532,15 @@ __metadata:
   bin:
     i18next: bin/cli.js
   checksum: 10c0/c8c650cfa672afc673daed92ecf6bfb28947c5663549f3dc4aa2e1b8d7949a9c93a09b9b1f7239576656b60b6fb9f9c86076a01d8d8c6fb967fda398653ebcda
+  languageName: node
+  linkType: hard
+
+"i18next@npm:23.5.1":
+  version: 23.5.1
+  resolution: "i18next@npm:23.5.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.22.5"
+  checksum: 10c0/af49c399a90505ae26c1a022d06c4a11c4adcde6524b31c315dcaa43443c85892adef6de934b2af737abbdd2ffa66449d2854f135af8691223a8bb4ffaf6e1af
   languageName: node
   linkType: hard
 
@@ -6278,14 +6291,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"leaflet-draw@npm:^1.0.4":
+"leaflet-draw@npm:1.0.4":
   version: 1.0.4
   resolution: "leaflet-draw@npm:1.0.4"
   checksum: 10c0/9e700b7e5e7d70c0f9d66efe2fec282f635eff63699e5f2f4eb733b140188058cc7cb2a5d3c6889c300958ec9e415fd5c0a02a08db0e1fc13a063d4710cff004
   languageName: node
   linkType: hard
 
-"leaflet-geosearch@npm:*, leaflet-geosearch@npm:^3.10.2":
+"leaflet-geosearch@npm:*, leaflet-geosearch@npm:3.10.2":
   version: 3.10.2
   resolution: "leaflet-geosearch@npm:3.10.2"
   dependencies:
@@ -6300,7 +6313,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"leaflet-measure-path@npm:^1.5.0":
+"leaflet-measure-path@npm:1.5.0":
   version: 1.5.0
   resolution: "leaflet-measure-path@npm:1.5.0"
   checksum: 10c0/d5087443147f66a5374888467a03e357f1dbfc276cb86095d1360c49de8fc3586e2a78e3174fe3a143390fe85398d9bc26c7f3215d776263946410432344bb9c
@@ -6345,7 +6358,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^15.4.3":
+"lint-staged@npm:15.4.3":
   version: 15.4.3
   resolution: "lint-staged@npm:15.4.3"
   dependencies:
@@ -6667,71 +6680,71 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mvj-ui-public@workspace:."
   dependencies:
-    "@playwright/test": "npm:^1.50.1"
-    "@react-hook/throttle": "npm:^2.2.0"
-    "@reduxjs/toolkit": "npm:^1.9.7"
-    "@types/leaflet": "npm:^1.9.8"
-    "@types/leaflet-draw": "npm:^1.0.10"
-    "@types/leaflet-geosearch": "npm:^3.0.0"
+    "@playwright/test": "npm:1.50.1"
+    "@react-hook/throttle": "npm:2.2.0"
+    "@reduxjs/toolkit": "npm:1.9.7"
+    "@types/leaflet": "npm:1.9.8"
+    "@types/leaflet-draw": "npm:1.0.10"
+    "@types/leaflet-geosearch": "npm:3.0.0"
     "@types/node": "npm:24.12.4"
-    "@types/postcss-url": "npm:^10.0.4"
-    "@types/proj4": "npm:^2.5.5"
-    "@types/proj4leaflet": "npm:^1.0.10"
-    "@types/react": "npm:^18.2.15"
-    "@types/react-dom": "npm:^18.2.7"
-    "@types/react-helmet": "npm:^6.1.9"
-    "@types/redux-actions": "npm:^2.6.5"
-    "@types/redux-form": "npm:^8.3.9"
-    "@typescript-eslint/eslint-plugin": "npm:^8.23.0"
-    "@typescript-eslint/parser": "npm:^8.23.0"
-    "@vitejs/plugin-react": "npm:^4.3.4"
-    "@vitest/coverage-v8": "npm:^4.0.17"
-    classnames: "npm:^2.3.2"
-    connected-react-router: "npm:^6.9.3"
-    eslint: "npm:^9.19.0"
-    eslint-plugin-react: "npm:^7.37.4"
-    geojson: "npm:^0.5.0"
+    "@types/postcss-url": "npm:10.0.4"
+    "@types/proj4": "npm:2.5.5"
+    "@types/proj4leaflet": "npm:1.0.10"
+    "@types/react": "npm:18.2.15"
+    "@types/react-dom": "npm:18.2.7"
+    "@types/react-helmet": "npm:6.1.9"
+    "@types/redux-actions": "npm:2.6.5"
+    "@types/redux-form": "npm:8.3.9"
+    "@typescript-eslint/eslint-plugin": "npm:8.23.0"
+    "@typescript-eslint/parser": "npm:8.23.0"
+    "@vitejs/plugin-react": "npm:4.3.4"
+    "@vitest/coverage-v8": "npm:4.0.17"
+    classnames: "npm:2.3.2"
+    connected-react-router: "npm:6.9.3"
+    eslint: "npm:9.19.0"
+    eslint-plugin-react: "npm:7.37.4"
+    geojson: "npm:0.5.0"
     hds-core: "npm:3.11.0"
     hds-design-tokens: "npm:3.11.0"
-    hds-react: "npm:^3.11.0"
-    history: "npm:^5.3.0"
-    husky: "npm:^9.1.7"
-    i18next: "npm:^23.5.1"
-    i18next-browser-languagedetector: "npm:^7.1.0"
-    i18next-parser: "npm:^8.9.0"
+    hds-react: "npm:3.11.0"
+    history: "npm:5.3.0"
+    husky: "npm:9.1.7"
+    i18next: "npm:23.5.1"
+    i18next-browser-languagedetector: "npm:7.1.0"
+    i18next-parser: "npm:8.9.0"
     leaflet: "npm:1.9.4"
-    leaflet-draw: "npm:^1.0.4"
-    leaflet-geosearch: "npm:^3.10.2"
-    leaflet-measure-path: "npm:^1.5.0"
-    lint-staged: "npm:^15.4.3"
-    playwright: "npm:^1.55.1"
-    postcss: "npm:^8.5.1"
-    postcss-url: "npm:^10.1.3"
-    prettier: "npm:^3.4.2"
-    proj4: "npm:^2.9.0"
-    proj4leaflet: "npm:^1.0.2"
-    react: "npm:^18.3.0"
-    react-dom: "npm:^18.3.0"
-    react-grid-system: "npm:^8.2.1"
-    react-helmet: "npm:^6.1.0"
-    react-i18next: "npm:^15.4.0"
-    react-leaflet: "npm:^4.2.1"
-    react-leaflet-draw: "npm:^0.20.4"
-    react-redux: "npm:^8.1.3"
-    react-router: "npm:^6.29.0"
-    react-router-dom: "npm:^6.29.0"
-    redux: "npm:^4.2.1"
-    redux-actions: "npm:^3.0.0"
-    redux-form: "npm:^8.3.10"
-    redux-injectors: "npm:^2.1.0"
-    redux-saga: "npm:^1.2.3"
-    sass: "npm:^1.84.0"
-    typescript: "npm:^5.7.3"
-    vite: "npm:^6.1.0"
-    vite-plugin-static-copy: "npm:^2.3.2"
-    vite-plugin-svgr: "npm:^4.3.0"
-    vitest: "npm:^4.0.17"
-    web-vitals: "npm:^3.5.0"
+    leaflet-draw: "npm:1.0.4"
+    leaflet-geosearch: "npm:3.10.2"
+    leaflet-measure-path: "npm:1.5.0"
+    lint-staged: "npm:15.4.3"
+    playwright: "npm:1.55.1"
+    postcss: "npm:8.5.1"
+    postcss-url: "npm:10.1.3"
+    prettier: "npm:3.4.2"
+    proj4: "npm:2.9.0"
+    proj4leaflet: "npm:1.0.2"
+    react: "npm:18.3.0"
+    react-dom: "npm:18.3.0"
+    react-grid-system: "npm:8.2.1"
+    react-helmet: "npm:6.1.0"
+    react-i18next: "npm:15.4.0"
+    react-leaflet: "npm:4.2.1"
+    react-leaflet-draw: "npm:0.20.4"
+    react-redux: "npm:8.1.3"
+    react-router: "npm:6.29.0"
+    react-router-dom: "npm:6.29.0"
+    redux: "npm:4.2.1"
+    redux-actions: "npm:3.0.0"
+    redux-form: "npm:8.3.10"
+    redux-injectors: "npm:2.1.0"
+    redux-saga: "npm:1.2.3"
+    sass: "npm:1.84.0"
+    typescript: "npm:5.7.3"
+    vite: "npm:6.1.0"
+    vite-plugin-static-copy: "npm:2.3.2"
+    vite-plugin-svgr: "npm:4.3.0"
+    vitest: "npm:4.0.17"
+    web-vitals: "npm:3.5.0"
   languageName: unknown
   linkType: soft
 
@@ -7246,7 +7259,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright@npm:^1.55.1":
+"playwright@npm:1.55.1":
   version: 1.55.1
   resolution: "playwright@npm:1.55.1"
   dependencies:
@@ -7268,7 +7281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-url@npm:^10.1.3":
+"postcss-url@npm:10.1.3":
   version: 10.1.3
   resolution: "postcss-url@npm:10.1.3"
   dependencies:
@@ -7279,6 +7292,17 @@ __metadata:
   peerDependencies:
     postcss: ^8.0.0
   checksum: 10c0/8ac985e58d544ce986cdbe41ecbe1c179b5ca3f71cf97179d02d019817d4a80aa3758ec5c9cc8343f95583682addf448ba6bcbc2d4f4c01b4fb269e217c4ef24
+  languageName: node
+  linkType: hard
+
+"postcss@npm:8.5.1, postcss@npm:^8.5.1":
+  version: 8.5.1
+  resolution: "postcss@npm:8.5.1"
+  dependencies:
+    nanoid: "npm:^3.3.8"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/c4d90c59c98e8a0c102b77d3f4cac190f883b42d63dc60e2f3ed840f16197c0c8e25a4327d2e9a847b45a985612317dc0534178feeebd0a1cf3eb0eecf75cae4
   languageName: node
   linkType: hard
 
@@ -7304,17 +7328,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.5.1":
-  version: 8.5.1
-  resolution: "postcss@npm:8.5.1"
-  dependencies:
-    nanoid: "npm:^3.3.8"
-    picocolors: "npm:^1.1.1"
-    source-map-js: "npm:^1.2.1"
-  checksum: 10c0/c4d90c59c98e8a0c102b77d3f4cac190f883b42d63dc60e2f3ed840f16197c0c8e25a4327d2e9a847b45a985612317dc0534178feeebd0a1cf3eb0eecf75cae4
-  languageName: node
-  linkType: hard
-
 "postcss@npm:^8.5.6":
   version: 8.5.6
   resolution: "postcss@npm:8.5.6"
@@ -7333,7 +7346,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.4.2":
+"prettier@npm:3.4.2":
   version: 3.4.2
   resolution: "prettier@npm:3.4.2"
   bin:
@@ -7365,7 +7378,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proj4@npm:^2.3.14, proj4@npm:^2.9.0":
+"proj4@npm:2.9.0":
+  version: 2.9.0
+  resolution: "proj4@npm:2.9.0"
+  dependencies:
+    mgrs: "npm:1.0.0"
+    wkt-parser: "npm:^1.3.1"
+  checksum: 10c0/888f92beb13c3ee0b1eb7db6b4a3f518ba064f36a3ab35948b200cdf4b770245557e6865a8b9e634877aa6133f92ed2a17d817e985f14ff3579a70095c47a6a8
+  languageName: node
+  linkType: hard
+
+"proj4@npm:^2.3.14":
   version: 2.9.2
   resolution: "proj4@npm:2.9.2"
   dependencies:
@@ -7375,7 +7398,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proj4leaflet@npm:^1.0.2":
+"proj4leaflet@npm:1.0.2":
   version: 1.0.2
   resolution: "proj4leaflet@npm:1.0.2"
   dependencies:
@@ -7441,15 +7464,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.3.0":
-  version: 18.3.1
-  resolution: "react-dom@npm:18.3.1"
+"react-dom@npm:18.3.0":
+  version: 18.3.0
+  resolution: "react-dom@npm:18.3.0"
   dependencies:
     loose-envify: "npm:^1.1.0"
-    scheduler: "npm:^0.23.2"
+    scheduler: "npm:^0.23.1"
   peerDependencies:
-    react: ^18.3.1
-  checksum: 10c0/a752496c1941f958f2e8ac56239172296fcddce1365ce45222d04a1947e0cc5547df3e8447f855a81d6d39f008d7c32eab43db3712077f09e3f67c4874973e85
+    react: ^18.3.0
+  checksum: 10c0/5072767a5d67e242579e5ed46094bf5665385fcfc50584e818273ba668f768348bfd9101841fa3986635635b1238a7a5b2d28b73b134ebbe58a415311afd60d4
   languageName: node
   linkType: hard
 
@@ -7460,7 +7483,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-grid-system@npm:^8.2.1":
+"react-grid-system@npm:8.2.1":
   version: 8.2.1
   resolution: "react-grid-system@npm:8.2.1"
   dependencies:
@@ -7471,7 +7494,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helmet@npm:^6.1.0":
+"react-helmet@npm:6.1.0":
   version: 6.1.0
   resolution: "react-helmet@npm:6.1.0"
   dependencies:
@@ -7494,7 +7517,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^15.4.0":
+"react-i18next@npm:15.4.0":
   version: 15.4.0
   resolution: "react-i18next@npm:15.4.0"
   dependencies:
@@ -7526,7 +7549,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-leaflet-draw@npm:^0.20.4":
+"react-leaflet-draw@npm:0.20.4":
   version: 0.20.4
   resolution: "react-leaflet-draw@npm:0.20.4"
   dependencies:
@@ -7542,7 +7565,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-leaflet@npm:^4.2.1":
+"react-leaflet@npm:4.2.1":
   version: 4.2.1
   resolution: "react-leaflet@npm:4.2.1"
   dependencies:
@@ -7575,7 +7598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-redux@npm:^8.1.3":
+"react-redux@npm:8.1.3":
   version: 8.1.3
   resolution: "react-redux@npm:8.1.3"
   dependencies:
@@ -7614,7 +7637,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.29.0":
+"react-router-dom@npm:6.29.0":
   version: 6.29.0
   resolution: "react-router-dom@npm:6.29.0"
   dependencies:
@@ -7627,7 +7650,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:6.29.0, react-router@npm:^6.29.0":
+"react-router@npm:6.29.0":
   version: 6.29.0
   resolution: "react-router@npm:6.29.0"
   dependencies:
@@ -7670,12 +7693,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.3.0":
-  version: 18.3.1
-  resolution: "react@npm:18.3.1"
+"react@npm:18.3.0":
+  version: 18.3.0
+  resolution: "react@npm:18.3.0"
   dependencies:
     loose-envify: "npm:^1.1.0"
-  checksum: 10c0/283e8c5efcf37802c9d1ce767f302dd569dd97a70d9bb8c7be79a789b9902451e0d16334b05d73299b20f048cbc3c7d288bbbde10b701fa194e2089c237dbea3
+  checksum: 10c0/ad87bbfdb0c5466148c657da18b0d5458e835389fc591d59840f0e6ec797a004073a01c8cdbff1767a8774c7219054a56f74dacd67bdbb849f1314e427999268
   languageName: node
   linkType: hard
 
@@ -7728,7 +7751,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux-actions@npm:^3.0.0":
+"redux-actions@npm:3.0.0":
   version: 3.0.0
   resolution: "redux-actions@npm:3.0.0"
   dependencies:
@@ -7738,7 +7761,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux-form@npm:^8.3.10":
+"redux-form@npm:8.3.10":
   version: 8.3.10
   resolution: "redux-form@npm:8.3.10"
   dependencies:
@@ -7762,7 +7785,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux-injectors@npm:^2.1.0":
+"redux-injectors@npm:2.1.0":
   version: 2.1.0
   resolution: "redux-injectors@npm:2.1.0"
   dependencies:
@@ -7778,7 +7801,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux-saga@npm:^1.2.3":
+"redux-saga@npm:1.2.3":
   version: 1.2.3
   resolution: "redux-saga@npm:1.2.3"
   dependencies:
@@ -7796,7 +7819,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux@npm:^3.6.0 || ^4.0.0, redux@npm:^4.0.4, redux@npm:^4.0.5, redux@npm:^4.2.1":
+"redux@npm:4.2.1, redux@npm:^3.6.0 || ^4.0.0, redux@npm:^4.0.4, redux@npm:^4.0.5, redux@npm:^4.2.1":
   version: 4.2.1
   resolution: "redux@npm:4.2.1"
   dependencies:
@@ -8254,7 +8277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.84.0":
+"sass@npm:1.84.0":
   version: 1.84.0
   resolution: "sass@npm:1.84.0"
   dependencies:
@@ -8271,7 +8294,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.23.2":
+"scheduler@npm:^0.23.1":
   version: 0.23.2
   resolution: "scheduler@npm:0.23.2"
   dependencies:
@@ -9084,6 +9107,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:5.7.3":
+  version: 5.7.3
+  resolution: "typescript@npm:5.7.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/b7580d716cf1824736cc6e628ab4cd8b51877408ba2be0869d2866da35ef8366dd6ae9eb9d0851470a39be17cbd61df1126f9e211d8799d764ea7431d5435afa
+  languageName: node
+  linkType: hard
+
 "typescript@npm:^5.0.4":
   version: 5.2.2
   resolution: "typescript@npm:5.2.2"
@@ -9094,13 +9127,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.7.3":
+"typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>":
   version: 5.7.3
-  resolution: "typescript@npm:5.7.3"
+  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/b7580d716cf1824736cc6e628ab4cd8b51877408ba2be0869d2866da35ef8366dd6ae9eb9d0851470a39be17cbd61df1126f9e211d8799d764ea7431d5435afa
+  checksum: 10c0/6fd7e0ed3bf23a81246878c613423730c40e8bdbfec4c6e4d7bf1b847cbb39076e56ad5f50aa9d7ebd89877999abaee216002d3f2818885e41c907caaa192cc4
   languageName: node
   linkType: hard
 
@@ -9111,16 +9144,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/062c1cee1990e6b9419ce8a55162b8dc917eb87f807e4de0327dbc1c2fa4e5f61bc0dd4e034d38ff541d1ed0479b53bcee8e4de3a4075c51a1724eb6216cb6f5
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A^5.7.3#optional!builtin<compat/typescript>":
-  version: 5.7.3
-  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/6fd7e0ed3bf23a81246878c613423730c40e8bdbfec4c6e4d7bf1b847cbb39076e56ad5f50aa9d7ebd89877999abaee216002d3f2818885e41c907caaa192cc4
   languageName: node
   linkType: hard
 
@@ -9328,7 +9351,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-static-copy@npm:^2.3.2":
+"vite-plugin-static-copy@npm:2.3.2":
   version: 2.3.2
   resolution: "vite-plugin-static-copy@npm:2.3.2"
   dependencies:
@@ -9343,7 +9366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-svgr@npm:^4.3.0":
+"vite-plugin-svgr@npm:4.3.0":
   version: 4.3.0
   resolution: "vite-plugin-svgr@npm:4.3.0"
   dependencies:
@@ -9353,6 +9376,58 @@ __metadata:
   peerDependencies:
     vite: ">=2.6.0"
   checksum: 10c0/a73f10d319f72cd8c16bf9701cf18170f2300f98c72c6bf939565de0b1e93916bd70c6f5a446dc034b4405c72d382655c7c16be4bd1cbf35bbcde5febf7aeffc
+  languageName: node
+  linkType: hard
+
+"vite@npm:6.1.0":
+  version: 6.1.0
+  resolution: "vite@npm:6.1.0"
+  dependencies:
+    esbuild: "npm:^0.24.2"
+    fsevents: "npm:~2.3.3"
+    postcss: "npm:^8.5.1"
+    rollup: "npm:^4.30.1"
+  peerDependencies:
+    "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
+    jiti: ">=1.21.0"
+    less: "*"
+    lightningcss: ^1.21.0
+    sass: "*"
+    sass-embedded: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    lightningcss:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10c0/e1cad1cfbd29923a37d2dbd60f7387901ed8356758073a0226cbe844fd032425ba3bf41651332cab4965d5c54d0b51d208889ff32ce81bd282d230c0c9f0f8f1
   languageName: node
   linkType: hard
 
@@ -9411,59 +9486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "vite@npm:6.1.0"
-  dependencies:
-    esbuild: "npm:^0.24.2"
-    fsevents: "npm:~2.3.3"
-    postcss: "npm:^8.5.1"
-    rollup: "npm:^4.30.1"
-  peerDependencies:
-    "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
-    jiti: ">=1.21.0"
-    less: "*"
-    lightningcss: ^1.21.0
-    sass: "*"
-    sass-embedded: "*"
-    stylus: "*"
-    sugarss: "*"
-    terser: ^5.16.0
-    tsx: ^4.8.1
-    yaml: ^2.4.2
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    jiti:
-      optional: true
-    less:
-      optional: true
-    lightningcss:
-      optional: true
-    sass:
-      optional: true
-    sass-embedded:
-      optional: true
-    stylus:
-      optional: true
-    sugarss:
-      optional: true
-    terser:
-      optional: true
-    tsx:
-      optional: true
-    yaml:
-      optional: true
-  bin:
-    vite: bin/vite.js
-  checksum: 10c0/e1cad1cfbd29923a37d2dbd60f7387901ed8356758073a0226cbe844fd032425ba3bf41651332cab4965d5c54d0b51d208889ff32ce81bd282d230c0c9f0f8f1
-  languageName: node
-  linkType: hard
-
-"vitest@npm:^4.0.17":
+"vitest@npm:4.0.17":
   version: 4.0.17
   resolution: "vitest@npm:4.0.17"
   dependencies:
@@ -9560,7 +9583,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:^3.5.0":
+"web-vitals@npm:3.5.0":
   version: 3.5.0
   resolution: "web-vitals@npm:3.5.0"
   checksum: 10c0/9409011cf6cf405796aba919cd0f6957eb59f1170481f948e4f70e34a0cc461103accc8ce80fa0ceaf3c68d4c8d2b92788454323cfda08722eaa1ec9c36159d5
@@ -9684,6 +9707,13 @@ __metadata:
   bin:
     why-is-node-running: cli.js
   checksum: 10c0/1cde0b01b827d2cf4cb11db962f3958b9175d5d9e7ac7361d1a7b0e2dc6069a263e69118bd974c4f6d0a890ef4eedfe34cf3d5167ec14203dbc9a18620537054
+  languageName: node
+  linkType: hard
+
+"wkt-parser@npm:^1.3.1":
+  version: 1.5.5
+  resolution: "wkt-parser@npm:1.5.5"
+  checksum: 10c0/4ed71c407a7f13b2ea49441f3e9607eb421fac513c384b71a52a33abbeafeeb67ab32ffce327894a2b276fadaa352f204c21d0a02e34183644fe41d3282fd735
   languageName: node
   linkType: hard
 
