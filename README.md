@@ -8,31 +8,16 @@ officials share the same MVJ-backend.
 Originally based on [React Boilerplate](https://github.com/nordsoftware/react-boilerplate)
 Later the now deprecated Create React App is replaced with [Vite](https://vitejs.dev/)
 
-## Development Environment
-
-To build up a development environment please follow these steps:
-
-1. Clone this repository from git: `git pull git@github.com:City-of-Helsinki/mvj-ui-public.git`
-2. Start the docker container: `docker-compose up`
-
-### Usage with devcontainer
+## Usage with devcontainer
 
 Open your editor, and then `Reopen in Container` (vscode).
 
 Run vite dev server and expose port:
 
 ```
-yarn --frozen-lockfile
+yarn --immutable
 yarn start --host
 ```
-
-### Usage w/o docker
-
-1. Check requirements:
-   1. Project runs on node 22
-   2. Yarn needs to be installed
-2. On project root run `yarn` to install packages
-3. Run `yarn start` to run dev server
 
 ## Code style
 
